@@ -1,4 +1,4 @@
-### Why would findViewById returns null
+### Why would findViewById return null
 
 https://stackoverflow.com/questions/3264610/findviewbyid-returns-null
 
