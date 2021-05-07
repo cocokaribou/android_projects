@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -62,10 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
                 //mAdapter.notifyDataSetChanged(); //화면이 다 바뀐다
                 //mAdapter.notifyItemChanged(1); //특정 뷰홀더만 바꾼다 이거 희한하게 동작하네!
-                //mAdapter.notifyItemInserted(count); //특정 뷰홀더 위치에 삽입한다. 이게 함수를 덜 불러내는데(성능상 좋겠지 당연히?)
+                mAdapter.notifyItemInserted(count); //특정 뷰홀더 위치에 삽입한다. 이게 함수를 덜 불러내는데(성능상 좋겠지 당연히?)
+
                 //mAdapter.notifyItemMoved(0, count); //negative delta라는 에러가 뜨면서 앱이 강제종료된다
                 //mAdapter.notifyItemMoved(0, count-1);
-                mAdapter.notifyItemRangeChanged(0, count); //itemChanged랑 하는 짓 생김새는 비슷함
+                //mAdapter.notifyItemRangeChanged(0, count); //itemChanged랑 하는 짓 생김새는 비슷함
 
 
                 if (count > 0) {
