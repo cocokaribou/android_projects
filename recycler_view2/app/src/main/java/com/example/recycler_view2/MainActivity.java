@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("⚠️MainActivity", this.toString());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         mArrayList = new ArrayList<>();
 
-        mAdapter = new CustomAdapter(mArrayList);
+        mAdapter = new CustomAdapter(this, mArrayList);
         recyclerView.setAdapter(mAdapter);
 
 
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // 화면 아래쪽 버튼을 클릭하면
-        Button buttonInsert = (Button) findViewById(R.id.button_main_insert);
+        Button buttonInsert = (Button)findViewById(R.id.button_main_insert);
         buttonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // ArrayList에 추가하고
                         Dictionary dic = new Dictionary(strID, strEnglish, strKorean);
+
                         mArrayList.add(0, dic); //첫번째 줄에 삽입
 
                         // Adapter에서 RecyclerView에 반영한다

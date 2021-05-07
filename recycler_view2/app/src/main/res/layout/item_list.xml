@@ -19,7 +19,6 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         android:padding="5dp"
         android:textAlignment="center"
-        android:text="123"
         android:textStyle="bold"/>
 
     <TextView
@@ -34,7 +33,6 @@
         android:padding="5dp"
         android:layout_margin="10dp"
         android:textAlignment="center"
-        android:text="english"
         android:textStyle="bold"/>
 
 
@@ -50,7 +48,6 @@
         android:padding="5dp"
         android:layout_margin="10dp"
         android:textAlignment="center"
-        android:text="phone"
         android:textStyle="bold" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,5 @@
 package com.example.recycler_view;
 
-//endless loading?
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView; //모듈 레벨 build.gradle에서 먼저 추가
 

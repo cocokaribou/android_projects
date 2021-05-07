@@ -26,11 +26,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     private Context mContext;
 
 
-
     // 수정하는 동작
     // 컨텍스트 메뉴를 사용하려면 RecyclerView.ViewHolder를 상속받은 클래스에서
     // OnCreateContextMenuListener를 구현
-    public class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
+    public class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
 
         protected TextView id;
         protected TextView english;
@@ -38,9 +37,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
         public CustomViewHolder(@NonNull View itemView) { //뷰 홀더 xml 정보를 전달받는다
             super(itemView); //RecyclerView.ViewHolder 생성
-            this.id = (TextView)itemView.findViewById(R.id.id_listitem);
-            this.english = (TextView)itemView.findViewById(R.id.english_listitem);
-            this.korean = (TextView)itemView.findViewById(R.id.korean_listitem);
+            this.id = (TextView) itemView.findViewById(R.id.id_listitem);
+            this.english = (TextView) itemView.findViewById(R.id.english_listitem);
+            this.korean = (TextView) itemView.findViewById(R.id.korean_listitem);
 
             // OnCreateContextMenuListener 현재 클래스에서 구현한다고 설
             itemView.setOnCreateContextMenuListener(this);
@@ -48,6 +47,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            Log.d("⚠️Custom onCreateMenu", v.getContext().toString());
+            Log.d("⚠️Custom onCreateMenu", this.toString());
+
+
             // 컨텍스트 메뉴를 생성하고 메뉴 항목선택시 호출되는 리스너. ID 1001, 1002로 어떤 메뉴 선택했는지 리스너에서 구분
 
             MenuItem Edit = menu.add(Menu.NONE, 1001, 1, "편집");
@@ -59,21 +62,24 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
         //리스너를 밖에서 구현중
         // 컨텍스트 메뉴에서 항목 클릭시 동작을 설정
-        private final MenuItem.OnMenuItemClickListener onEditMenu = new MenuItem.OnMenuItemClickListener(){
+        private final MenuItem.OnMenuItemClickListener onEditMenu = new MenuItem.OnMenuItemClickListener() {
 
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch(item.getItemId()){
-                    case 1001 : //편집
+                Log.d("⚠️Custom onMenuItemclck", mContext.toString());
+                switch (item.getItemId()) {
+                    case 1001: //편집
+
+                        //alertdialog는 builder 선언해줘야
                         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                         // 다이얼로그를 보여주기 위해 edit_box.xml 파일을 사용
                         View view = LayoutInflater.from(mContext).inflate(R.layout.edit_box, null, false);
                         builder.setView(view);
 
-                        final Button ButtonSubmit = (Button)view.findViewById(R.id.button_dialog_submit);
-                        final EditText editTextID = (EditText)view.findViewById(R.id.edittext_dialog_id);
-                        final EditText editTextEnglish = (EditText)view.findViewById(R.id.edittext_dialog_english);
-                        final EditText editTextKorean = (EditText)view.findViewById(R.id.edittext_dialog_korean);
+                        final Button ButtonSubmit = (Button) view.findViewById(R.id.button_dialog_submit);
+                        final EditText editTextID = (EditText) view.findViewById(R.id.edittext_dialog_id);
+                        final EditText editTextEnglish = (EditText) view.findViewById(R.id.edittext_dialog_english);
+                        final EditText editTextKorean = (EditText) view.findViewById(R.id.edittext_dialog_korean);
 
                         // 해당 줄에 입력되어있던 데이터를 불러와서 다이얼로그에 보여줌
                         editTextID.setText(mList.get(getAdapterPosition()).getId());
@@ -81,32 +87,32 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                         editTextKorean.setText(mList.get(getAdapterPosition()).getKorean());
 
                         final AlertDialog dialog = builder.create();
-                        ButtonSubmit.setOnClickListener(new View.OnClickListener(){
+                        ButtonSubmit.setOnClickListener(new View.OnClickListener() {
                             //편집 버튼을 누르면 현재 UI에 입력돼있는 내용으로
-                           public void onClick(View v){
-                               String strID = editTextID.getText().toString();
-                               String strEnglish = editTextEnglish.getText().toString();
-                               String strKorean = editTextKorean.getText().toString();
+                            public void onClick(View v) {
+                                String strID = editTextID.getText().toString();
+                                String strEnglish = editTextEnglish.getText().toString();
+                                String strKorean = editTextKorean.getText().toString();
 
-                               Dictionary dic = new Dictionary(strID, strEnglish, strKorean);
+                                Dictionary dic = new Dictionary(strID, strEnglish, strKorean);
 
-                               //ArrayList에 있는 데이터 변경
-                               mList.set(getAdapterPosition(), dic);
+                                //ArrayList에 있는 데이터 변경
+                                mList.set(getAdapterPosition(), dic);
 
-                               //어댑터에서 RecyclerView에 반영하도록 한다
-                               notifyItemChanged(getAdapterPosition());
+                                //어댑터에서 RecyclerView에 반영하도록 한다
+                                notifyItemChanged(getAdapterPosition());
 
-                               dialog.dismiss();
-                           }
+                                dialog.dismiss();
+                            }
                         });
                         dialog.show();
 
                         break;
 
-                    case 1002 : //삭제
+                    case 1002: //삭제
                         mList.remove(getAdapterPosition());
                         notifyItemRemoved(getAdapterPosition());
-                        notifyItemRangeChanged(getAdapterPosition(),mList.size());
+                        notifyItemRangeChanged(getAdapterPosition(), mList.size());
                         break;
                 }
                 return true;
@@ -114,17 +120,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         };
     }
 
-    public CustomAdapter(ArrayList<Dictionary> list){
-        //adapter의 필드에 vo(Dictionary) 객체를 담
+    public CustomAdapter(Context context, ArrayList<Dictionary> list) {
+        //adapter의 필드에 vo(Dictionary) 객체를 담는다
         this.mList = list;
+        this.mContext = context;
     }
 
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("tag1", "create");
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_list, parent, false);
+        Log.d("⚠️Custom onCreateHolder", view.getContext().toString());
 
         CustomViewHolder viewHolder = new CustomViewHolder(view);
 
@@ -135,7 +142,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-        Log.d("tag2", "bind");
+        Log.d("⚠️Custom onBindHolder", this.toString());
         holder.id.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
         holder.english.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
         holder.korean.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
@@ -152,6 +159,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     @Override
     public int getItemCount() {
-        return (null!=mList?mList.size() : 0);
+        return (null != mList ? mList.size() : 0);
     }
 }
