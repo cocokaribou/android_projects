@@ -21,4 +21,5 @@ public class ReceiveMessageActivity extends AppCompatActivity {
         messageView.setText(messageText);
 
     }
+
 }
