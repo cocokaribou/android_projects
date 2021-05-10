@@ -1,8 +1,10 @@
 package com.example.recycler_view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -15,6 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -48,6 +51,33 @@ public class MainActivity extends AppCompatActivity {
                 mLinearLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
+        //addOnItemTouchListener
+        mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), mRecyclerView, new ClickListener() {
+
+            @Override
+            public void onClick(View view, int position) {
+                Log.d("onClick😀", "called");
+                Dictionary dict = mArrayList.get(position);
+                Toast.makeText(getApplicationContext(), dict.getId() + ' ' + dict.getEnglish() + ' ' + dict.getKorean(), Toast.LENGTH_LONG).show();
+
+
+                // onClick()하면 ResultActivity에 전달할 데이터 intent에 설정
+                Intent intent = new Intent(getBaseContext(), ResultActivity.class); //getApplicationContext(), getBaseContext(), this, 무슨 차이?
+
+                intent.putExtra("id", dict.getId());
+                intent.putExtra("english", dict.getEnglish());
+                intent.putExtra("korean", dict.getKorean());
+
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                Log.d("onLongClick😀", "will it be called?");
+
+            }
+
+        }));
 
         //insert 버튼에 액티비티 달아주기
         Button buttonInsert = (Button) findViewById(R.id.button_main_insert);
@@ -72,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
 
                 if (count > 0) {
                     buttonDelete.setVisibility(View.VISIBLE);
-                } else if (count < 1) {
-                    buttonDelete.setVisibility(View.GONE);
                 }
             }
         });
@@ -95,5 +123,68 @@ public class MainActivity extends AppCompatActivity {
                 mAdapter.notifyItemChanged(count); //삭제된 데이터를 지우면서 bind create 호출 x
             }
         });
+    }
+
+
+    //커스텀 클릭 리스너를 밖에서 구현
+    public interface ClickListener {
+        void onClick(View view, int position);
+
+        void onLongClick(View view, int position);
+    }
+
+    //이걸 왜 static으로 해놨을까..? 어디서 부르게
+    public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+
+        //아 객체니까 final로 지정해도 되는구나
+        private final GestureDetector gestureDetector;
+        private final MainActivity.ClickListener clickListener;
+
+        //생성자
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final MainActivity.ClickListener clickListener) {
+            this.clickListener = clickListener;
+            this.gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+
+                    return true;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+                    //이 지점에서 mRecyclerView 의 onLongClick이 호출됨
+                    View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
+
+                    //여기가 뭘 하는 코드인질 모르겠네?
+                    if (child != null && clickListener != null) {
+                        clickListener.onLongClick(child, recyclerView.getChildAdapterPosition(child));
+                    }
+
+                    Toast toast = Toast.makeText(MainActivity.this, "stop pressing so hard", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            });
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
+                clickListener.onClick(child, rv.getChildAdapterPosition(child));
+            }
+
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+        }
     }
 }
