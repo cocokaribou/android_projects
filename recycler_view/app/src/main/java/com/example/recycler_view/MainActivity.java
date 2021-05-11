@@ -24,6 +24,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    //왜 touchListener랑 clickListener를 같이 쓰고 있을까?
+
     ArrayList<Dictionary> mArrayList;
     private CustomAdapter mAdapter;
     private int count = 0;
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //커스텀 클릭 리스너를 밖에서 구현
+    //커스텀 클릭 리스너를 밖에서 구현 testtest
     public interface ClickListener {
         void onClick(View view, int position);
 
