@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,13 +14,43 @@ public class StopwatchActivity extends AppCompatActivity {
 
     private int seconds = 0;
     private boolean running;
+    private boolean wasRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stopwatch);
+        if(savedInstanceState != null){
+            seconds = savedInstanceState.getInt("seconds"); //bundle에서 값을 얻어서 액티비티의 상태를 복원
+            running = savedInstanceState.getBoolean("running");
+            wasRunning = savedInstanceState.getBoolean("wasRunning");
+        }
         runTimer();
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState); //이거 책에는 없는 부분인데 super를 안 부르면 실행이 안되나..?
+        savedInstanceState.putInt("seconds", seconds);
+        savedInstanceState.putBoolean("running", running);
+        savedInstanceState.putBoolean("wasRunning", wasRunning);
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        wasRunning = running; //onStop()가 호출됐을 때 스톱워치가 실행중이었는지
+        running = false;
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        if(wasRunning){
+            running = true;
+        }
+    }
+
 
     //start 버튼을 클릭하면 스톱워치 시작
     public void onClickStart(View view){
@@ -37,12 +68,18 @@ public class StopwatchActivity extends AppCompatActivity {
         seconds = 0;
     }
 
+    //왜 버튼 onclick 메서드들은 public인데 runTimer는 private이지..?
     //runTimer()
     private void runTimer(){
         final TextView timeView = (TextView)findViewById(R.id.time_view);
+
+        //Handler 클래스의 객체 생성
         final Handler handler = new Handler();
 
+        //handler의 메서드를 이용하려면 runnable 객체로 감싸야한다
+        //handler.post()
         handler.post(new Runnable() {
+
             @Override
             public void run() {
                 int hours = seconds / 3600;
@@ -54,9 +91,11 @@ public class StopwatchActivity extends AppCompatActivity {
                 if (running) {
                     seconds++;
                 }
+
+                //handler.postDelayed()
+                //running이 false일때 실행
                 handler.postDelayed(this, 1000);
             }
         });
-
     }
 }
