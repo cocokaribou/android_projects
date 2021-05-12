@@ -18,19 +18,28 @@ public class StopwatchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("⚠️", "onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stopwatch);
-        if(savedInstanceState != null){
-            seconds = savedInstanceState.getInt("seconds"); //bundle에서 값을 얻어서 액티비티의 상태를 복원
-            running = savedInstanceState.getBoolean("running");
-            wasRunning = savedInstanceState.getBoolean("wasRunning");
-        }
+//        if(savedInstanceState != null){
+//            seconds = savedInstanceState.getInt("seconds"); //bundle에서 값을 얻어서 액티비티의 상태를 복원
+//            running = savedInstanceState.getBoolean("running");
+//            wasRunning = savedInstanceState.getBoolean("wasRunning");
+//        }
         runTimer();
     }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
+        Log.d("⚠️", "onSaveInstanceState()");
         super.onSaveInstanceState(savedInstanceState); //이거 책에는 없는 부분인데 super를 안 부르면 실행이 안되나..?
+
+        //Activity.java에는 @Callsuper 어노테이션이 없는데...
+
+        //bundle은 key-value 쌍의 데이터를 모아놓는 곳
+        //java의 map과 비슷하지만 안드로이드에 필요한 기능이 좀 더 많음
+        //put자료형()
+
         savedInstanceState.putInt("seconds", seconds);
         savedInstanceState.putBoolean("running", running);
         savedInstanceState.putBoolean("wasRunning", wasRunning);
@@ -38,19 +47,32 @@ public class StopwatchActivity extends AppCompatActivity {
 
     @Override
     protected void onStop(){
+        Log.d("⚠️", "onStop()");
         super.onStop();
-        wasRunning = running; //onStop()가 호출됐을 때 스톱워치가 실행중이었는지
+        wasRunning = running; //onStop()가 호출됐을 때 스톱워치가 실행중이었는지, running 여부 상태를 저장
         running = false;
     }
 
     @Override
     protected void onStart(){
+        Log.d("⚠️", "onStart()");
+
         super.onStart();
         if(wasRunning){
             running = true;
         }
     }
+    @Override
+    protected void onDestroy() {
+        Log.d("⚠️", "onDestroy()");
+        super.onDestroy();
+    }
 
+    @Override
+    protected void onResume() {
+        Log.d("⚠️", "onResume()");
+        super.onResume();
+    }
 
     //start 버튼을 클릭하면 스톱워치 시작
     public void onClickStart(View view){
