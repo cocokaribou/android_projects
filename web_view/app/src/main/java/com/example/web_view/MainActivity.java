@@ -12,7 +12,7 @@ import android.webkit.WebViewClient;
 public class MainActivity extends AppCompatActivity {
 
     private WebView webView;
-    //private String url = "https://www.naver.com";
+    //private String url = "https://youtube.com";
     private String url = "file:///android_asset/www/index.html"; //<script> alert("test"); </script>
 
     @Override
@@ -53,11 +53,11 @@ public class MainActivity extends AppCompatActivity {
 
     //커스텀 웹뷰클라이언트
     private class WebViewClientClass extends WebViewClient {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
-        }
+        //@Override
+//        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//            view.loadUrl(url);
+//            return true;
+//        }
 
         //webView로 구성된 화면에서 js로 alert띄울때, webViewClient로만 구성하면 alert창이 안 뜸
         @Override
