@@ -1,21 +1,21 @@
 package com.hfad.mymessenger;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.TextView;
 
-public class ReceiveMessageActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ReceiveMessageActivity2 extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "message";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("⚠️", "1 created");
+        Log.d("⚠️", "2 created");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_receive_message);
+        setContentView(R.layout.activity_receive_message2);
 
         Intent intent = getIntent(); //액티비티를 시작시킨 인텐트 반환. 인텐트에 포함된 추가정보 추출 가능, 즉 추출하려고 굳이굳이 get
         String messageText = intent.getStringExtra(EXTRA_MESSAGE);

@@ -11,9 +11,11 @@
         android:theme="@style/Theme.MyMessenger">
         <activity android:name="com.hfad.mymessenger.CreateMessageActivity">
             <intent-filter>
-<!--                <action android:name="android.intent.action.SEND" /> 안 써도된다.. 대박..-->
+                <!--<action android:name="android.intent.action.INSERT" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+                <!--공통 인텐트가 외부 앱을 실행시킬 경우엔 내부의 액티비티를 찾아가는 게 아니므로 필터 필요없이도 돌아가는듯..-->
 
-                <category android:name="android.intent.category.DEFAULT" />
+
                 <action android:name="android.intent.action.MAIN" /> <!--MAIN 꼭 있어야한다 -->
                 <category android:name="android.intent.category.LAUNCHER" /> <!--이걸로 실행-->
                 <!-- intro activity 의 경우 Main, launcher 있음 : 다음 화면에서 그려주는데 필요한 정보를 받아온다 api-->
