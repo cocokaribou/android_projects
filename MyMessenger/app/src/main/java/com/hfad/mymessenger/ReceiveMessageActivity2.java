@@ -17,7 +17,7 @@ public class ReceiveMessageActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receive_message2);
 
-        Intent intent = getIntent(); //액티비티를 시작시킨 인텐트 반환. 인텐트에 포함된 추가정보 추출 가능, 즉 추출하려고 굳이굳이 get
+        Intent intent = getIntent(); //액티비티를 시작시킨 인텐트 반환. 인텐트에 포함된 추가정보 추출 가능
         String messageText = intent.getStringExtra(EXTRA_MESSAGE);
         TextView messageView = (TextView) findViewById(R.id.message);
         messageView.setText(messageText);
