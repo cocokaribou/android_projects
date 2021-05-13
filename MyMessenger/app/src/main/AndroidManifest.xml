@@ -14,8 +14,8 @@
 <!--                <action android:name="android.intent.action.SEND" /> 안 써도된다.. 대박..-->
 
                 <category android:name="android.intent.category.DEFAULT" />
-                <action android:name="android.intent.action.MAIN" /> <!--MAIN 꼭 있어야한-->
-                <category android:name="android.intent.category.LAUNCHER" />다 <!--이걸로 실-->행
+                <action android:name="android.intent.action.MAIN" /> <!--MAIN 꼭 있어야한다 -->
+                <category android:name="android.intent.category.LAUNCHER" /> <!--이걸로 실행-->
                 <!-- intro activity 의 경우 Main, launcher 있음 : 다음 화면에서 그려주는데 필요한 정보를 받아온다 api-->
 
                 <data android:mimeType="text/plain" />
