@@ -9,16 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyMessenger">
-        <activity android:name=".CreateMessageActivity">
+        <activity android:name="com.hfad.mymessenger.CreateMessageActivity">
             <intent-filter>
-                <action android:name="android.intent.action.SEND" />
+<!--                <action android:name="android.intent.action.SEND" /> 안 써도된다.. 대박..-->
 
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                <data android:mimeType="text/plain"/>
+                <action android:name="android.intent.action.MAIN" /> <!--MAIN 꼭 있어야한-->
+                <category android:name="android.intent.category.LAUNCHER" />다 <!--이걸로 실-->행
+                <!-- intro activity 의 경우 Main, launcher 있음 : 다음 화면에서 그려주는데 필요한 정보를 받아온다 api-->
+
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity android:name=".ReceiveMessageActivity"></activity>
+        <activity android:name="com.hfad.mymessenger.ReceiveMessageActivity"/>
     </application>
 
 </manifest>
