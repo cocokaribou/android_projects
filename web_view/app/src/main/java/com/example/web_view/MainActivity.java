@@ -18,6 +18,7 @@ import android.webkit.WebViewClient;
 public class MainActivity extends AppCompatActivity {
 
     private WebView webView;
+    public WebView webViewPopup;
 
     private String url = "file:///android_asset/www/index.html";
     private boolean isOpen = false;
@@ -30,10 +31,14 @@ public class MainActivity extends AppCompatActivity {
         webView = (WebView) findViewById(R.id.webview);
 
         webView.getSettings().setJavaScriptEnabled(true); //이거 안 붙이면 사이트 다 망가지나? -> 똑같음
+        webView.getSettings().setSupportMultipleWindows(true);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.loadUrl(url);
+        webView.loadUrl("javascript:closeWin()");
 
-        webView.setWebViewClient(new WebViewClientClass());
-        webView.setWebChromeClient(new WebChromeClientClass());
+        WebViewClientClass webViewClient = new WebViewClientClass();
+        webView.setWebViewClient(webViewClient);
+        webView.setWebChromeClient(new WebChromeClientClass(webViewClient));
 
         //webview로 구성된 화면에서 js로 alert 메시지를 띄울때, WebViewClient로만 구성하면 메시지가 뜨지않는다
     }
@@ -67,15 +72,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //커스텀 웹크롬클라이언트
-    private class WebChromeClientClass extends WebChromeClient{
-        @Override
-        public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
-            return super.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
+    private class WebChromeClientClass extends WebChromeClient {
+        private WebViewClientClass webViewClient;
+
+        public WebChromeClientClass(WebViewClientClass webViewClient) {
+            this.webViewClient = webViewClient;
         }
 
         @Override
-        public void onCloseWindow(WebView window) {
-            super.onCloseWindow(window);
+        public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
+            webViewPopup = new WebView(MainActivity.this);
+            Log.e("hi️", "hi~");
+
+            webViewPopup.getSettings().setJavaScriptEnabled(true);
+            webViewPopup.setWebChromeClient(new WebChromeClient() {
+
+                @Override
+                public void onCloseWindow(WebView window) {
+                    super.onCloseWindow(window);
+                    Log.e("hi", "hi~2");
+                    window.setVisibility(View.GONE);
+                }
+            });
+
+            webView.addView(webViewPopup);
+
+            WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
+            transport.setWebView(webViewPopup);
+            resultMsg.sendToTarget();
+
+            return true;
         }
+
     }
 }
