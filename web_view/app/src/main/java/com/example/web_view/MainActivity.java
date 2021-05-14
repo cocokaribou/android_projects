@@ -30,15 +30,18 @@ public class MainActivity extends AppCompatActivity {
 
         webView = (WebView) findViewById(R.id.webview);
 
-        webView.getSettings().setJavaScriptEnabled(true); //이거 안 붙이면 사이트 다 망가지나? -> 똑같음
+        webView.getSettings().setJavaScriptEnabled(true);
+        //자바스크립트 실행 사용 여부
         webView.getSettings().setSupportMultipleWindows(true);
+        //새창 띄우기 허용 여부
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        //자바스크립트 새 창 띄우기 허용 여부
         webView.loadUrl(url);
-        webView.loadUrl("javascript:closeWin()");
+//        webView.loadUrl("javascript:closeWin()");
 
         WebViewClientClass webViewClient = new WebViewClientClass();
         webView.setWebViewClient(webViewClient);
-        webView.setWebChromeClient(new WebChromeClientClass(webViewClient));
+        webView.setWebChromeClient(new WebChromeClientClass());
 
         //webview로 구성된 화면에서 js로 alert 메시지를 띄울때, WebViewClient로만 구성하면 메시지가 뜨지않는다
     }
@@ -72,12 +75,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //커스텀 웹크롬클라이언트
+    //웹뷰클라이언트를 인자로 받아오지 않아도 ok
     private class WebChromeClientClass extends WebChromeClient {
-        private WebViewClientClass webViewClient;
-
-        public WebChromeClientClass(WebViewClientClass webViewClient) {
-            this.webViewClient = webViewClient;
-        }
 
         @Override
         public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
@@ -92,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     super.onCloseWindow(window);
                     Log.e("hi", "hi~2");
                     window.setVisibility(View.GONE);
+                    //window.destroy();
                 }
             });
 
