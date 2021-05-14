@@ -9,6 +9,8 @@ reference: [Udacity Git Commit Message Style Guide](https://udacity.github.io/gi
 - [FIX] : 버그 수정
 - [DOCS] : 문서 수정
 - [REFACTOR] : 코드 리팩토링
+- [UPDATE] : 수정사항
+- [ADD] : 새로운 프로젝트 
 
 #### 본문
 - 선택사항
