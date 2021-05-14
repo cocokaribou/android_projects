@@ -1,8 +1,11 @@
 package com.example.web_view;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
@@ -11,6 +14,7 @@ import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -64,6 +68,13 @@ public class MainActivity extends AppCompatActivity {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
             isOpen = true;
+
+            //웹뷰에서 링크를 수신하면 intent를 실행한다
+            if(url.startsWith("tel:")){
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(url));
+                MainActivity.this.startActivity(intent);
+            }
+
             return true;
         }
 
@@ -72,10 +83,17 @@ public class MainActivity extends AppCompatActivity {
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
             super.onReceivedError(view, errorCode, description, failingUrl);
         }
+
+        //웹뷰에서 form 데이터 받아오기
+        @Nullable
+        @Override
+        public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+            return super.shouldInterceptRequest(view, url);
+        }
     }
 
     //커스텀 웹크롬클라이언트
-    //웹뷰클라이언트를 인자로 받아오지 않아도 ok
+    //웹클라이언트를 인자로 받아오지 않아도 ok
     private class WebChromeClientClass extends WebChromeClient {
 
         @Override
@@ -103,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
         }
+
+        //winclose를 했을 때 새 창으로(webViewPopup) 뜬 애들은 한번에 다 닫히고 기존 창으로 바로 돌아가네(webView)
 
     }
 }
