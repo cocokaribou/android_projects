@@ -1,0 +1,51 @@
+
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+
+    <dimen name="gnb_menu_height">42dp</dimen>
+    <dimen name="head_title_height">44.65dp</dimen>
+    <dimen name="head_area_height">86.65dp</dimen>
+
+    <!-- 홈 -->
+    <dimen name="home_head_height">57.6dp</dimen>
+    <dimen name="home_head_padding">14.4dp</dimen>
+
+    <dimen name="scroll_top_btn">200dp</dimen>
+    <dimen name="title_height">50dp</dimen>
+    <dimen name="title_close_margin_right">13.33dp</dimen>
+    <dimen name="coachmark_btn_margin">389.66dp</dimen>
+    <dimen name="more_btn_height_margin">13.33dp</dimen>
+    <dimen name="home_lucky_content_margin_bottom_2nd">11.52dp</dimen>
+    <dimen name="home_lucky_content_margin_bottom">20dp</dimen>
+    <dimen name="home_lucky_content_margin_top">5dp</dimen>
+
+    <!-- popup-->
+    <dimen name="popup_margin_horizontal">28dp</dimen>
+    <dimen name="popup_padding_horizontal">57.33dp</dimen>
+    <dimen name="popup_padding_sub_horizontal">62.66dp</dimen>
+    <dimen name="popup_padding_top">25.33dp</dimen>
+    <dimen name="popup_padding_bottom">18dp</dimen>
+    <dimen name="popup_margin_btn_horizontal">11.33dp</dimen>
+    <dimen name="popup_btn_height">45.33dp</dimen>
+
+    <!-- 설정 -->
+    <dimen name="sett_left_margin">19.33dp</dimen>
+    <dimen name="sett_right_margin">13.33dp</dimen>
+    <dimen name="sett_height_margin">19.33dp</dimen>
+    <dimen name="sett_sub_height_margin">11.33dp</dimen>
+    <dimen name="sett_btn_width">81.33dp</dimen>
+    <dimen name="sett_btn_height">36dp</dimen>
+
+    <!-- bottom tab-->
+    <dimen name="bottom_height">58.66dp</dimen>
+
+    <!-- 알림메세지함 -->
+    <dimen name="alim_margin_width">6.66dp</dimen>
+    <dimen name="alim_padding">13.33dp</dimen>
+    <dimen name="alim_margin_height">9.33dp</dimen>
+
+
+</resources>
