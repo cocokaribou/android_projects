@@ -12,9 +12,9 @@
         android:id="@+id/row_1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="#ffffff"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="#ffffff">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/devmode"
@@ -57,9 +57,8 @@
         android:layout_width="match_parent"
         android:layout_height="0.33dp"
         android:background="#a4a4a4"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="0.33dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/row_1" />
 
     <!-- 로그인 정보 -->
@@ -67,13 +66,13 @@
         android:id="@+id/row_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#ffffff"
         android:paddingStart="19.33dp"
         android:paddingTop="9.33dp"
         android:paddingEnd="13.33dp"
         android:paddingBottom="9.33dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/row_1"
-        android:background="#ffffff">
+        app:layout_constraintTop_toBottomOf="@+id/line_1">
 
         <TextView
             style="@style/sett_left_title"
@@ -109,13 +108,13 @@
         android:id="@+id/row_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#ffffff"
         android:paddingStart="19.33dp"
-        android:paddingTop="9.33dp"
+        android:paddingTop="19.33dp"
         android:paddingEnd="13.33dp"
-        android:paddingBottom="9.33dp"
+        android:paddingBottom="19.33dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/row_2"
-        android:background="#ffffff">
+        app:layout_constraintTop_toBottomOf="@id/line_2">
 
         <TextView
             style="@style/sett_left_title"
@@ -137,23 +136,129 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- -->
     <View
+        android:id="@+id/line_3"
         android:layout_width="match_parent"
         android:layout_height="0.33dp"
-        app:layout_constraintTop_toBottomOf="@id/row_3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/color_line_2" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.33dp"
-        app:layout_constraintTop_toBottomOf=""
         android:background="@color/color_line_2"
-        android:layout_marginTop="6.66dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/row_3" />
+
+    <View
+        android:id="@+id/line_4"
+        android:layout_width="match_parent"
+        android:layout_height="0.33dp"
+        android:layout_marginTop="6.66dp"
+        android:background="@color/color_line_2"
+        app:layout_constraintTop_toBottomOf="@id/row_3" />
 
     <!-- 푸시 설정 알림 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/row_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:paddingStart="19.33dp"
+        android:paddingTop="19.33dp"
+        android:paddingEnd="13.33dp"
+        android:paddingBottom="19.33dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_4">
+
+        <TextView
+            android:id="@+id/txt_noti1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:text="쇼핑혜택 알림 메시지 수신"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/txt_noti2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/row_4" />
+
+        <TextView
+            android:id="@+id/txt_noti2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_push_noti_msg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_noti1" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_toggleoff_nor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- -->
+    <View
+        android:id="@+id/line_5"
+        android:layout_width="match_parent"
+        android:layout_height="0.33dp"
+        android:background="#a4a4a4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/row_4" />
 
     <!-- 고객센터 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/row_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:paddingStart="19.33dp"
+        android:paddingTop="19.33dp"
+        android:paddingEnd="13.33dp"
+        android:paddingBottom="19.33dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line_5">
+
+        <TextView
+            android:id="@+id/callcenter1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="고객센터 1899-9500"
+            app:layout_constraintBottom_toTopOf="@id/callcenter3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/callcenter3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_customer_remark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/callcenter1" />
+
+        <View
+            android:id="@+id/collumn_1"
+            android:layout_width="4dp"
+            android:layout_height="16dp"
+            android:background="#a4a4a4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/callcenter1" />
+
+        <TextView
+            android:id="@+id/callcenter2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="킴스클럽 1899-4222"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/collumn_1"
+            app:layout_constraintTop_toTopOf="@id/callcenter1" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- 버전정보 -->
 
