@@ -14,6 +14,7 @@ public class MyPagerAdapter extends PagerAdapter {
     private static int ITEM_NUM = 3;
     private Context mContext = null;
     private View[] ViewArr = new View[ITEM_NUM];
+    //ArrayList로 바꾸는게 나을까
     public MyPagerAdapter(){
     }
 
