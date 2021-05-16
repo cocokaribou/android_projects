@@ -225,7 +225,10 @@
             android:id="@+id/callcenter1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:paddingBottom="16dp"
             android:text="고객센터 1899-9500"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/callcenter3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -237,11 +240,12 @@
             android:text="@string/setting_customer_remark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/callcenter1" />
+            app:layout_constraintTop_toBottomOf="@id/callcenter1"
+            />
 
         <View
             android:id="@+id/collumn_1"
-            android:layout_width="4dp"
+            android:layout_width="0.33dp"
             android:layout_height="16dp"
             android:background="#a4a4a4"
             app:layout_constraintEnd_toEndOf="parent"
