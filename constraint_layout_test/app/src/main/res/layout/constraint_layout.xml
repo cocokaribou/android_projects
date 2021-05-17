@@ -37,14 +37,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/btn_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
+            android:layout_marginRight="16dp"
             android:src="@drawable/btn_xclose_nor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -84,8 +83,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="goLogin"
             android:text="로그인"
             android:textSize="14.66dp"
             android:textStyle="bold"
@@ -126,11 +127,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/txt_login_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="OFF"
             android:textSize="16.66dp"
-            android:textStyle="bold"
+            android:onClick="toggleLogin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -170,11 +172,11 @@
 
         <TextView
             android:id="@+id/txt_noti1"
+            style="@style/sett_left_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="16dp"
             android:text="쇼핑혜택 알림 메시지 수신"
-            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/txt_noti2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/row_4" />
@@ -188,13 +190,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_noti1" />
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/btn_setPush"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/btn_toggleoff_nor"
+            android:background="@drawable/btn_toggleoff_nor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="togglePush"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -223,15 +227,26 @@
 
         <TextView
             android:id="@+id/callcenter1"
+            style="@style/sett_left_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:paddingBottom="16dp"
-            android:text="고객센터 1899-9500"
-            android:textStyle="bold"
+            android:text="고객센터"
             app:layout_constraintBottom_toTopOf="@id/callcenter3"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/callcenter3"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/callcenter1Tel"
+            style="@style/sett_left_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="goDial"
+            android:paddingStart="8dp"
+            android:text="1899-9500"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/callcenter1"
+            app:layout_constraintTop_toTopOf="@id/callcenter1" />
 
         <TextView
             android:id="@+id/callcenter3"
@@ -240,11 +255,10 @@
             android:text="@string/setting_customer_remark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/callcenter1"
-            />
+            app:layout_constraintTop_toBottomOf="@id/callcenter1" />
 
         <View
-            android:id="@+id/collumn_1"
+            android:id="@+id/column_1"
             android:layout_width="0.33dp"
             android:layout_height="16dp"
             android:background="#a4a4a4"
@@ -254,17 +268,93 @@
 
         <TextView
             android:id="@+id/callcenter2"
+            style="@style/sett_left_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="킴스클럽 1899-4222"
+            android:text="킴스클럽"
+            app:layout_constraintEnd_toStartOf="@id/callcenter2Tel"
+            app:layout_constraintStart_toEndOf="@+id/column_1"
+            app:layout_constraintTop_toTopOf="@+id/callcenter1" />
+
+        <TextView
+            android:id="@+id/callcenter2Tel"
+            style="@style/sett_left_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1899-4222"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/collumn_1"
-            app:layout_constraintTop_toTopOf="@id/callcenter1" />
+            app:layout_constraintStart_toEndOf="@id/callcenter2"
+            app:layout_constraintTop_toTopOf="@id/callcenter2"
+            android:onClick="goDial"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- -->
+    <View
+        android:id="@+id/line_6"
+        android:layout_width="match_parent"
+        android:layout_height="0.33dp"
+        android:background="@color/color_line_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/row_5" />
+
     <!-- 버전정보 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:padding="19.33dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line_6">
+
+        <TextView
+            android:id="@+id/titleVersion"
+            style="@style/sett_left_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+
+            android:text="버전정보"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/currentVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="16dp"
+            android:text="현재 버전 2.5.0"
+            app:layout_constraintStart_toStartOf="@+id/titleVersion"
+            app:layout_constraintTop_toBottomOf="@id/titleVersion" />
+
+        <View
+            android:id="@+id/column_2"
+            android:layout_width="0.33dp"
+            android:layout_height="17dp"
+            android:background="#a4a4a4"
+            app:layout_constraintEnd_toStartOf="@id/latestVersion"
+            app:layout_constraintStart_toEndOf="@id/currentVersion"
+            app:layout_constraintTop_toTopOf="@id/currentVersion" />
+
+        <TextView
+            android:id="@+id/latestVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:text="최신 버전 1.6.0"
+            app:layout_constraintStart_toStartOf="@+id/column_2"
+            app:layout_constraintTop_toTopOf="@id/currentVersion" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="업데이트"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="goPlaystore"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

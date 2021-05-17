@@ -8,17 +8,25 @@
         android:label="constraint_layout_test"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Constraint_layout_test">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ConstraintActivity"/>
-        <activity android:name=".RelativeActivity"/>
-        <activity android:name=".NoActivity"/>
+        <activity
+            android:name=".ConstraintActivity"
+            android:configChanges="orientation"/>
+        <activity
+            android:name=".RelativeActivity"
+            android:configChanges="orientation"/>
+        <activity
+            android:name=".NoActivity"
+            android:configChanges="orientation"/>
     </application>
 
 </manifest>
