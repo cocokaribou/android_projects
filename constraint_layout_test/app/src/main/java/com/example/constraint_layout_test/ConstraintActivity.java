@@ -1,6 +1,7 @@
 package com.example.constraint_layout_test;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.constraint_layout_test.databinding.ConstraintLayoutBinding;
 
@@ -72,7 +74,7 @@ public class ConstraintActivity extends AppCompatActivity {
 
     public void goDial(View view) {
 
-        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Intent intent = new Intent(Intent.ACTION_CALL);
         int id = view.getId();
         String dialNum = "";
 
@@ -86,8 +88,16 @@ public class ConstraintActivity extends AppCompatActivity {
             dialNum = binding.callcenter2Tel.getText().toString();
         }
 
-        intent.setData(Uri.parse("tel:" + dialNum));
-        startActivity(intent);
+
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            // 퍼미션 요청
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.CALL_PHONE}, 100);
+        } else {
+            intent.setData(Uri.parse("tel:" + dialNum));
+            startActivity(intent);
+        }
 
     }
 
