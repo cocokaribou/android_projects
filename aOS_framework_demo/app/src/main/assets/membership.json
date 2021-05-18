@@ -1,0 +1,14 @@
+{
+  "memberInfo": {
+    "reviewCnt": 0,
+    "reviewPnt": 0,
+    "stampYn": "N",
+    "stampMaxStage": 0,
+    "stampRealSaveQty": 0,
+    "cpnCnt": 0
+  },
+  "bannerInfo": {
+    "bannerImgPath": "https://dev-img.sivillage.com/upload/C00001/dspl/banner/90/372/00/210300000095372.png",
+    "urlMove": "http://www.naver.com"
+  }
+}
