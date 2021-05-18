@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="587dp"
+    tools:context=".CustomDialogClass"
+    android:background="@drawable/rounded"
+    android:layout_gravity="center">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="16dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintCircleRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/PermissionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="24sp"
+            android:text="앱 권한 설정 안내"
+            android:textColor="#191919"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/PermissionTitle_desc"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/PermissionTitle_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="아트박스 앱에서 사용하는 접근권한을 안내 해 드립니다."
+            app:layout_constraintBottom_toTopOf="@+id/line_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/PermissionTitle" />
+
+        <View
+            android:id="@+id/line_1"
+            android:layout_width="268dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="#f1f1f5"
+            app:layout_constraintBottom_toTopOf="@+id/PermissionMust"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/PermissionTitle_desc" />
+
+        <TextView
+            android:id="@+id/PermissionMust"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="필수적 접근권한"
+            android:textColor="#191919"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_1" />
+
+        <TextView
+            android:id="@+id/PermissionMust_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="2017년 3월 23일부터 시행되는 정보통신망 법령에\n따라 서비스에 꼭 필요한 항목만 접근하고 있습니다"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/PermissionMust_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/PermissionMust" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/PermissionMust_box"
+            android:layout_width="268dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/PermissionMust_desc">
+
+            <View
+                android:id="@+id/circle_1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/PermissionMust_box_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/PermissionMust_box_icon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/icon_2"
+                app:layout_constraintBottom_toBottomOf="@id/circle_1"
+                app:layout_constraintEnd_toEndOf="@id/circle_1"
+                app:layout_constraintStart_toStartOf="@id/circle_1"
+                app:layout_constraintTop_toTopOf="@id/circle_1" />
+
+            <TextView
+                android:id="@+id/PermissionMust_box_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:lineSpacingExtra="32sp"
+                android:text="기기 및 앱 기록"
+                android:textColor="#191919"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/PermissionMust_box_des"
+                app:layout_constraintStart_toEndOf="@id/circle_1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/PermissionMust_box_des"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="앱 서비스 최적화 및 오류 확인"
+                android:textColor="#767676"
+                android:textSize="12sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/PermissionMust_box_title"
+                app:layout_constraintTop_toBottomOf="@id/PermissionMust_box_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/PermissionOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="선택적 접근권한"
+            android:textColor="#191919"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/PermissionOption_desc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/PermissionMust_box" />
+
+        <TextView
+            android:id="@+id/PermissionOption_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="선택적 접근권한은 해당 기능을 사용할 때 허용이 필요하며, 허용하지 않아도 해당 기능 외 서비스는 가능합니다."
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/PermissionOption" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/PermissionOption_box"
+            android:layout_width="268dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/PermissionOption_desc">
+
+            <View
+                android:id="@+id/circle_2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/PermissionOption_box_title1"/>
+
+            <ImageView
+                android:id="@+id/PermissionOption_box_icon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/icon_3"
+                app:layout_constraintBottom_toBottomOf="@id/circle_2"
+                app:layout_constraintEnd_toEndOf="@id/circle_2"
+                app:layout_constraintStart_toStartOf="@id/circle_2"
+                app:layout_constraintTop_toTopOf="@id/circle_2" />
+
+            <TextView
+                android:id="@+id/PermissionOption_box_title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:lineSpacingExtra="32sp"
+                android:text="사진/카메라"
+                android:textColor="#191919"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/PermissionOption_box_desc1"
+                app:layout_constraintStart_toEndOf="@id/circle_2"
+                app:layout_constraintTop_toTopOf="@id/circle_2" />
+
+            <TextView
+                android:id="@+id/PermissionOption_box_desc1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="상품후기, 이벤트후기, 1:1문의\n사진첨부"
+                android:textColor="#767676"
+                android:textSize="12sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@id/PermissionOption_box_title1"
+                app:layout_constraintTop_toBottomOf="@id/PermissionOption_box_title1" />
+
+            <View
+                android:id="@+id/circle_3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle"
+                app:layout_constraintTop_toTopOf="@id/PermissionOption_box_title2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/PermissionOption_box_title2"/>
+
+            <ImageView
+                android:id="@+id/PermissionOption_box_icon2"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/icon_4"
+                app:layout_constraintBottom_toBottomOf="@id/circle_3"
+                app:layout_constraintEnd_toEndOf="@id/circle_3"
+                app:layout_constraintStart_toStartOf="@id/circle_3"
+                app:layout_constraintTop_toTopOf="@id/circle_3" />
+
+            <TextView
+                android:id="@+id/PermissionOption_box_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:lineSpacingExtra="32sp"
+                android:text="전화"
+                android:textColor="#191919"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginTop="13dp"
+                app:layout_constraintStart_toEndOf="@id/circle_3"
+                app:layout_constraintTop_toBottomOf="@id/PermissionOption_box_desc1" />
+
+            <TextView
+                android:id="@+id/PermissionOption_box_desc2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="고객센터 전화 걸기"
+                android:textColor="#767676"
+                android:textSize="12sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@id/PermissionOption_box_title2"
+                app:layout_constraintTop_toBottomOf="@id/PermissionOption_box_title2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="#ff0000"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#ffffff"
+        android:onClick="onClick"/>
+
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:text="확인"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/btn_confirm"
+        app:layout_constraintEnd_toEndOf="@id/btn_confirm"
+        app:layout_constraintStart_toStartOf="@id/btn_confirm"
+        app:layout_constraintTop_toTopOf="@id/btn_confirm" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

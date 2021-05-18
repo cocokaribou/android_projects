@@ -15,7 +15,9 @@
         android:usesCleartextTraffic="true">
         <!-- cleartext 옵션을 설정하면 모든 http 주소에 접근할 수 있다 -->
         <!-- 근데 또 최소버전 api가 걸리네.. -->
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

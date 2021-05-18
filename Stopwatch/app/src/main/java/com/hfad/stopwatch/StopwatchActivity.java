@@ -92,6 +92,8 @@ public class StopwatchActivity extends AppCompatActivity {
 
     //왜 버튼 onclick 메서드들은 public인데 runTimer는 private이지..?
     //runTimer()
+
+    //handler 스레드랑 관련있는듯
     private void runTimer(){
         final TextView timeView = (TextView)findViewById(R.id.time_view);
 
