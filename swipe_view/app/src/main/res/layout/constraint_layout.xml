@@ -14,10 +14,10 @@
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@id/line_1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/line_1">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/devmode"
@@ -31,12 +31,12 @@
 
         <TextView
             android:id="@+id/setting_title"
-            android:textColor="#333333"
-            android:textSize="19.33dp"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="설정"
+            android:textColor="#333333"
+            android:textSize="19.33dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -58,10 +58,10 @@
         android:layout_width="match_parent"
         android:layout_height="0.33dp"
         android:background="#a4a4a4"
+        app:layout_constraintBottom_toTopOf="@id/row_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/row_1"
-        app:layout_constraintBottom_toTopOf="@id/row_2"/>
+        app:layout_constraintTop_toBottomOf="@id/row_1" />
 
     <!-- 로그인 정보 -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,18 +73,18 @@
         android:paddingTop="9.33dp"
         android:paddingEnd="13.33dp"
         android:paddingBottom="9.33dp"
+        app:layout_constraintBottom_toTopOf="@id/line_2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_1"
-        app:layout_constraintBottom_toTopOf="@id/line_2">
+        app:layout_constraintTop_toBottomOf="@+id/line_1">
 
         <TextView
-            android:textColor="#333333"
-            android:textSize="19.33dp"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="로그인 해주세요."
+            android:textColor="#333333"
+            android:textSize="19.33dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -93,7 +93,6 @@
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="goLogin"
             android:text="로그인"
             android:textSize="14.66dp"
             android:textStyle="bold"
@@ -108,10 +107,10 @@
         android:layout_width="match_parent"
         android:layout_height="0.33dp"
         android:background="#dddddd"
+        app:layout_constraintBottom_toTopOf="@id/row_3"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/row_2"
-        app:layout_constraintBottom_toTopOf="@id/row_3"/>
+        app:layout_constraintTop_toBottomOf="@id/row_2" />
 
     <!-- 자동 로그인 -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -123,17 +122,17 @@
         android:paddingTop="19.33dp"
         android:paddingEnd="13.33dp"
         android:paddingBottom="19.33dp"
+        app:layout_constraintBottom_toTopOf="@id/line_3"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line_2"
-        app:layout_constraintBottom_toTopOf="@id/line_3">
+        app:layout_constraintTop_toBottomOf="@id/line_2">
 
         <TextView
-            android:textColor="#333333"
-            android:textSize="19.33dp"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="자동 로그인 설정"
+            android:textColor="#333333"
+            android:textSize="19.33dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -144,7 +143,6 @@
             android:layout_height="wrap_content"
             android:text="OFF"
             android:textSize="16.66dp"
-            android:onClick="toggleLogin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -167,9 +165,9 @@
         android:layout_height="0.33dp"
         android:layout_marginTop="6.66dp"
         android:background="#dddddd"
-        app:layout_constraintTop_toBottomOf="@id/row_3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/row_3" />
 
     <!-- 푸시 설정 알림 -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -181,19 +179,19 @@
         android:paddingTop="19.33dp"
         android:paddingEnd="13.33dp"
         android:paddingBottom="19.33dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/line_5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_4"
-        app:layout_constraintBottom_toTopOf="@id/line_5">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_4">
 
         <TextView
             android:id="@+id/txt_noti1"
-            android:textColor="#333333"
-            android:textSize="19.33dp"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="쇼핑혜택 알림 메시지 수신"
+            android:textColor="#333333"
+            android:textSize="19.33dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/txt_noti2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -215,8 +213,7 @@
             android:background="@drawable/btn_toggleoff_nor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:onClick="togglePush"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -226,10 +223,10 @@
         android:layout_width="match_parent"
         android:layout_height="0.33dp"
         android:background="#a4a4a4"
+        app:layout_constraintBottom_toTopOf="@id/row_5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/row_4"
-        app:layout_constraintBottom_toTopOf="@id/row_5"/>
+        app:layout_constraintTop_toBottomOf="@id/row_4" />
 
     <!-- 고객센터 -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -240,34 +237,33 @@
         android:paddingStart="19.33dp"
         android:paddingTop="19.33dp"
         android:paddingBottom="19.33dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/line_6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line_5"
-        app:layout_constraintBottom_toTopOf="@id/line_6">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line_5">
 
         <TextView
             android:id="@+id/callcenter1"
-            android:textColor="#333333"
-            android:textSize="19.33dp"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="고객센터"
+            android:textColor="#333333"
+            android:textSize="19.33dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/callcenter3"
             app:layout_constraintStart_toStartOf="@id/callcenter3"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/callcenter1Tel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1899-9500"
             android:textColor="#333333"
             android:textSize="19.33dp"
             android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="goDial"
-            android:text="1899-9500"
-            app:layout_constraintStart_toEndOf="@id/callcenter1"
             app:layout_constraintEnd_toStartOf="@id/column_1"
+            app:layout_constraintStart_toEndOf="@id/callcenter1"
             app:layout_constraintTop_toTopOf="@id/callcenter1" />
 
         <TextView
@@ -283,36 +279,35 @@
         <View
             android:id="@+id/column_1"
             android:layout_width="0.33dp"
-            android:layout_height="16dp"
+            android:layout_height="19dp"
             android:background="#a4a4a4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/callcenter1" />
 
         <TextView
             android:id="@+id/callcenter2"
-            android:textColor="#333333"
-            android:textSize="19.33dp"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="킴스클럽"
+            android:textColor="#333333"
+            android:textSize="19.33dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/callcenter2Tel"
             app:layout_constraintStart_toEndOf="@+id/column_1"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/callcenter2Tel"
-            android:textColor="#333333"
-            android:textSize="19.33dp"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1899-4222"
+            android:textColor="#333333"
+            android:textSize="19.33dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/callcenter2"
-            app:layout_constraintTop_toTopOf="@id/callcenter2"
-            android:onClick="goDial"/>
+            app:layout_constraintTop_toTopOf="@id/callcenter2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -323,10 +318,10 @@
         android:layout_width="match_parent"
         android:layout_height="0.33dp"
         android:background="#dddddd"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/row_6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/row_5"
-        app:layout_constraintBottom_toTopOf="@id/row_6"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/row_5" />
 
     <!-- 버전정보 -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -338,21 +333,21 @@
         android:paddingTop="19.33dp"
         android:paddingEnd="13.33dp"
         android:paddingBottom="19.33dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/line_6">
 
         <TextView
             android:id="@+id/titleVersion"
-            android:textColor="#333333"
-            android:textSize="19.33dp"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="버전정보"
+            android:textColor="#333333"
+            android:textSize="19.33dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/currentVersion"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/currentVersion"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/currentVersion"
@@ -360,16 +355,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="현재 버전 2.5.0"
-            app:layout_constraintStart_toStartOf="@+id/titleVersion"
             app:layout_constraintEnd_toStartOf="@id/column_2"
+            app:layout_constraintStart_toStartOf="@+id/titleVersion"
             app:layout_constraintTop_toBottomOf="@id/titleVersion" />
 
         <View
             android:id="@+id/column_2"
             android:layout_width="0.33dp"
             android:layout_height="17dp"
-            android:background="#a4a4a4"
             android:layout_marginStart="16dp"
+            android:background="#a4a4a4"
             app:layout_constraintEnd_toStartOf="@id/latestVersion"
             app:layout_constraintStart_toEndOf="@id/currentVersion"
             app:layout_constraintTop_toTopOf="@id/currentVersion" />
@@ -378,8 +373,8 @@
             android:id="@+id/latestVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="최신 버전 1.6.0"
             android:layout_marginStart="16dp"
+            android:text="최신 버전 1.6.0"
             app:layout_constraintStart_toEndOf="@id/column_2"
             app:layout_constraintTop_toTopOf="@id/currentVersion" />
 
@@ -388,10 +383,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="업데이트"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:onClick="goPlaystore"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -1,6 +1,478 @@
 <resources>
     <string name="app_name">swipe_view</string>
-    <string name="setting_customer_remark">상담시간 : 오전 9시~ 오후 6시\n토요일, 공휴일은 휴무</string>
+    <string name="app_scheme">elandmall</string>
+    <string name="action_settings">Server_Settings</string>
+
+    <string name="action_upload">이미지 올리기</string>
+    <!-- Common -->
+    <string name="title_alert">알림</string>
+    <string name="alert_dialog_ok">확인</string>
+    <string name="alert_dialog_cancel">취소</string>
+
+    <string name="push_popup_close">닫기</string>
+    <string name="push_popup_detail">자세히 보기</string>
+    <string name="err_no_network">네트워크가 연결되어 있지 않습니다. 네트워크 연결상태를 확인 하신 후 다시 시도하여 주시기 바랍니다.</string>
+    <string name="err_network_error">네트워크 연결이 원활하지 않습니다.\n잠시 후 다시 시도해 주시기 바랍니다.</string>
+    <string name="err_network_data">데이터 처리 중 오류가 발생하였습니다.\n잠시 후 다시 시도해 주시기 바랍니다.</string>
+    <string name="err_image_download">공유하고자 하는 이미지를 다운받을 수 없어 인스타그램 공유하기를 진행할 수 없습니다. 불편을 드려 죄송합니다.</string>
+    <string name="network_data_fail">데이터를 가져오지 못하였습니다.\n잠시 후 다시 시도해 주시기 바랍니다.</string>
+
+    <string name="err_data_restart">데이터 처리 중 오류가 발생하였습니다.\n앱을 다시 시작합니다.</string>
+    <string name="err_data_elandmade">브랜드 검색에 시간이 소요되고있습니다.</string>
+
+    <string name="data_loading_txt">데이터를 로딩중입니다.</string>
+    <string name="alert_txt_parsing_err">데이터 처리 중 오류가 발생하였습니다.\n잠시 후 다시 시도해 주시기 바랍니다.</string>
+    <string name="alert_txt_data_error">데이터 수신 중 오류가 발생하였습니다.\n잠시 후 다시 시도해 주시기 바랍니다.</string>
+
+    <string name="guide_back_end">"이전" 버튼을 한 번 더 누르시면 앱이 종료됩니다.</string>
+    <string name="alert_txt_force_update">새 버전이 업데이트 되었습니다.\n원활한 서비스 이용을 위해\n업데이트를 꼭 진행해주세요.</string>
+    <string name="alert_txt_update">새 버전이 업데이트 되었습니다.\n지금 바로 업데이트 하시겠습니까?</string>
+    <string name="alert_txt_ssl_page">서비스 접속이 원활하지 않습니다. 다시 한번 시도해 주세요.</string>
+    <string name="alert_txt_err">"서명키가 변조되어 사용을 종료합니다."</string>
+    <string name="btn_not_approve">허용안함</string>
+    <string name="btn_approve">승인</string>
+    <string name="btn_retry">재시도</string>
+    <string name="btn_app_close">App 종료</string>
+    <string name="btn_update">업데이트</string>
+    <string name="alert_btn_close">종료</string>
+    <string name="alert_btn_later">나중에</string>
+    <string name="toast_push_accept">알림(PUSH)메세지 수신동의가 ‘수신‘으로 설정되었습니다\n%1$s(%2$s)</string>
+    <string name="toast_push_deny">알림(PUSH)메세지 수신동의가 ‘수신 안 함‘으로 설정되었습니다\n%1$s(%2$s)</string>
+    <string name="noti_image">두손가락을 이용해 아래로 당겨주세요.</string>
+    <string name="txt_not_again">오늘 하루 그만 보기</string>
+    <string name="alert_permission_denined">권한 설정이 제대로 이뤄지지 않았습니다.</string>
+    <string name="err_image_data">이미지 처리 중 오류가 발생하였습니다.\n다시 시도해 주세요.</string>
+    <string name="err_image_size_above_5m">5MB 이하의 이미지만 등록 가능합니다.</string>
+    <string name="loading_default">잠시만 기다려주세요.</string>
+    <string name="loading_custom">&lt;b&gt;%s&lt;/b&gt;님</string>
+    <string name="loading_modern_page">이랜드몰 통합 %s로 이동합니다.</string>
+    <string name="loading_my_page">마이페이지</string>
+    <string name="loading_cart">장바구니</string>
+    <string name="loading_cust_center">고객센터</string>
+
+    <string name="login_user_name">%s 님</string>
+
+    <string name="cate_total_plan_cnt">전체 : %s</string>
+
+    <string name="txt_get_data">정보를 받고 있습니다.</string>
+    <!-- Intro Activity -->
+    <string name="txt_push_approve">이랜드몰에서 쇼핑혜택 알림\n메시지(특가, 이벤트 등)를 보내고자 합니다.</string>
+    <string name="txt_push_approve_sub">‘카테고리 메뉴>설정>알림메시지 수신’\n에서 설정 변경 가능</string>
+
+    <string name="txt_dialog_turnoff">다시 보지 않기</string>
+
+    <!-- Bottom Tab -->
+    <string name="btn_home">홈</string>
+    <string name="btn_category">카테고리</string>
+    <string name="btn_delivery">주문조회</string>
+    <string name="btn_alim">쇼핑알림</string>
+    <string name="btn_more">더보기</string>
+    <string name="btn_recent">최근본상품</string>
+    <string name="btn_counsel">1:1문의</string>
+    <string name="btn_notice">공지사항</string>
+    <string name="btn_setting">설정</string>
+
+    <string name="tag_home">home</string>
+    <string name="tag_category">ctg</string>
+    <string name="tag_delivery">delivery</string>
+    <string name="tag_alim">alim</string>
+    <string name="tag_more">more</string>
+    <string name="tag_recent">lately_url</string>
+    <string name="tag_counsel">question_url</string>
+    <string name="tag_notice">notice_url</string>
+    <string name="tag_setting">set</string>
+
+    <!-- ShoppingAlarmActivity -->
+    <string name="title_alarm">알림 메세지 함</string>
+    <string name="alarm_guide_old_mesg">• 메세지 유효기간이 지나면 자동 삭제되며, 운영정책에 따라 예고 없이 삭제될 수 있습니다.</string>
+    <string name="alarm_guide_old_mesg2">• 과거 전송된 메시지는 현재 내용과 상이할 수 있습니다.</string>
+    <string name="no_alarm">최근에 받은 알림이 없습니다.</string>
+    <string name="txt_select_image">이미지를 선택하세요</string>
+    <string name="btn_back_list">목록으로</string>
+    <string-array name="attach_menu">
+        <item>갤러리 선택</item>
+        <item>카메라 선택</item>
+    </string-array>
+
+    <string-array name="attach_gallery">
+        <item>갤러리 선택</item>
+    </string-array>
+
+
+    <!-- Barcode -->
+    <string name="search_barcode_title">QR/바코드 검색</string>
+    <string name="search_barcode_msg">화면 중앙에 위치시키면 자동으로 인식합니다.</string>
+    <string name="result_err_barcode">검색한 상품이\n존재하지 않습니다.</string>
+    <!-- SettingActivity -->
+    <string name="setting_title">설정</string>
+    <string name="setting_logined_msg">님, 반갑습니다</string>
+    <string name="setting_login_msg">로그인 해주세요.</string>
+    <string name="setting_login_auto">자동 로그인 설정</string>
+    <string name="setting_auto_on">ON</string>
+    <string name="setting_auto_off">OFF</string>
+    <string name="setting_push_noti">쇼핑혜택 알림 메시지 수신</string>
     <string name="setting_push_noti_msg">본 설정은 해당 기기에서만 유효하며\n이벤트, 행사등의 다양한 쇼핑정보 및\n혜택관련 알림(Push)메시지를 받습니다.</string>
+    <string name="setting_push_mkt">광고성 알림(Push) 메세지 수신</string>
+    <string name="setting_push_mkt_msg">이벤트, 행사 등의 다양한 쇼핑정보 및 혜택 관련 알림 메시지를 받습니다.</string>
+    <string name="setting_ver_info">버전 정보</string>
+    <string name="setting_cur_version">현재버전 %s </string>
+    <string name="setting_new_version">최신버전 %s</string>
+    <string name="setting_customer">고객센터</string>
+    <string name="setting_customer_ekims">킴스클럽</string>
+    <string name="setting_customer_remark">상담시간 : 오전 9시~ 오후 6시\n토요일, 공휴일은 휴무</string>
+    <string name="setting_btn_login">로그인</string>
+    <string name="setting_btn_login_en">Login</string>
+    <string name="setting_btn_logout">로그아웃</string>
+    <string name="setting_btn_logout_en">Logout</string>
+    <string name="setting_btn_update">업데이트</string>
+    <string name="setting_dlg_logout_msg">로그아웃 하시겠습니까?</string>
+    <string name="setting_logout_done">로그아웃 되었습니다</string>
+    <string name="setting_login_done">로그인 되었습니다</string>
+    <string name="setting_push_delay">서버에서 응답이 지연되고 있습니다\n잠시 후 다시 확인 바랍니다.</string>
+
+    <!-- For Test-->
+    <string name="server_test_msg">서버가 변경되었습니다\n앱 종료 후 다시 시작해주세요</string>
+    <string-array name="server_type">
+        <item>상용서버</item>
+        <item>개발서버</item>
+        <item>QA서버</item>
+        <item>Stage서버</item>
+        <item>도메인입력</item>
+    </string-array>
+
+    <!-- native 추가 -->
+
+    <!--<string-array name="native_menu_list">
+        <item>홈</item>
+        <item>베스트</item>
+        <item>기획전</item>
+        <item>상설샵</item>
+        <item>지점관</item>
+        <item>럭키딜</item>
+    </string-array>-->
+
+    <string name="home_time_title">타임세일</string>
+    <string name="btn_brand">브랜드</string>
+    <string name="tab_han">ㄱㄴㄷ</string>
+    <string name="tab_abc">ABC</string>
+    <string name="search_hint">검색어를 입력해 주세요</string>
+    <string name="search_popular">인기 검색어</string>
+    <string name="search_recent">최근검색어</string>
+    <string name="search_event">추천기획전/이벤트</string>
+    <string name="search_plan">추천 기획전</string>
+    <string name="search_recommend_null">입력하신 단어가 들어가 있는 추천어가 없습니다.</string>
+    <string name="search_recent_null">최근 검색어 내역이 <b>없습니다.</b></string>
+    <string name="search_recent_goods_list_null">최근 본 상품 내역이 <b>없습니다.</b></string>
+    <string name="need_api">API 요청</string>
+    <string name="search_multi_select">*중복선택이 가능합니다.</string>
+    <string name="cart_success">선택한 상품이\n장바구니에 담겼습니다.</string>
+    <string name="cart_option">이 상품은 옵션이 있는\n상품입니다.</string>
+    <string name="cart_option_sub">상품 상세페이지에서\n옵션을 선택해 주세요.</string>
+    <string name="cart_option_coming_soon">%s년 %s월 %s일 %s시 %s분부터\n구매 가능한 커밍순 상품입니다.</string>
+    <string name="cart_option_coming_soon_reserve">%s년 %s월 %s일 %s시 %s분부터\n구매 가능한 예약 상품입니다.</string>
+    <string name="coming_soon_text">%s월 %s일 %s:%s 판매</string>
+    <string name="wish_success">찜 목록에\n추가되었습니다.</string>
+    <string name="wish_duple">찜 목록에 이미\n등록 되어있는 상품입니다.</string>
+    <string name="wish_corporate">구매에 불편을 드려 죄송합니다.\n\n본 상품은 브랜드와 협의 중인 상품으로,기업회원 대상으로 서비스를 확대할 예정입니다.</string>
+
+    <string name="txt_clipboard_copy">클립보드에 URL이 복사되었습니다.</string>
+       
+    <string name="txt_instagram_uninstall">인스타그램이 설치되어 있지 않습니다.</string>
+
+    <string name="go_cart">장바구니 가기</string>
+
+    <string name="benefit_freedeli">무료배송</string>
+    <string name="benefit_discount">즉시할인</string>
+    <string name="benefit_setdisc">세트할인</string>
+    <string name="benefit_gift">사은품</string>
+    <string name="benefit_onemore">하나더(+1)</string>
+
+    <string name="benefit_welfare">복지몰상품</string>
+    <string name="txt_search_null_key">에 대한 \n검색결과가 없습니다.</string>
+    <string name="txt_search_null_data">선택한 조건의 상품이 없습니다.\n다시 선택해주세요.</string>
+    <string name="txt_search_rise_rank_title">실시간 급상승 검색어</string>
+    <string name="txt_search_popular_rank_title">실시간 인기 검색어</string>
+    <string name="txt_search_none_rkeyword">추천 검색어가 없습니다.</string>
+    <string name="txt_search_null_msg1">검색어가 올바른지 다시 확인 후 정확하게 입력해 주세요.</string>
+    <string name="txt_search_null_msg2">상품명을 정확히 모르시면 상품과 관련된 단어를 입력해 보세요.</string>
+    <string name="txt_search_null_msg3">상품 카테고리, 제조사, 가격 등을 입력하시면 더 정확한 검색 결과를 확인하실 수 있습니다.</string>
+    <string name="txt_search_null_msg4">상품이 매진되거나, 품절 되었을 경우 검색 되지 않을 수 있습니다.</string>
+    <string name="txt_kakao_link_tit">바로가기</string>
+
+    <string name="category_title">CATEGORY</string>
+
+    <string name="lucky_buy_txt">%s개 구매</string>
+    <string name="lucky_buy_txt2">%s\n구매</string>
+
+    <string name="txt_pw_change_tit">장기간 비밀번호 미 변경 안내</string>
+    <string name="txt_pw_change_msg">90일 동안 비밀번호를 변경하지 않으셨습니다. 지금 변경하시겠습니까?</string>
+    <string name="txt_pw_change_msg2">비밀번호 변경 시 참조하세요.</string>
+    <string name="txt_pw_change_msg3">연속적인 숫자나 생일, 전화번호등 추측하기 쉬운 개인정보 및 아이디와 비슷한 비밀번호 사용을 피하시기 바랍니다.</string>
+    <string name="txt_pw_change_msg4">비밀번호는 영대문자, 영소문자, 숫자, 특수문자 중 3종류 이상을 조합하여, 총 8~16자리로 구성하셔야 합니다.</string>
+    <string name="txt_pw_change_btn_can">90일이후에변경</string>
+    <string name="txt_pw_change_btn_con">지금변경</string>
+
+    <string name="txt_pw_tmp_tit">임시 비밀번호 로그인 안내</string>
+    <string name="txt_pw_tmp_msg">고객님은 임시 발급된 비밀번호로 로그인 하셨습니다.</string>
+    <string name="txt_pw_tmp_msg2">안전한 개인정보 보호를 위해 임시비밀번호를 변경해 주세요.</string>
+    <string name="txt_pw_tmp_btn_can">다음에변경</string>
+    <string name="txt_pw_tmp_btn_con">지금변경</string>
+
+    <!-- 복지몰 포인트 기부 동의 -->
+    <string name="alert_txt_pointdonate">복지몰 운영 종료 후 잔여 포인트 기부에 동의하시겠습니까?\n동의 이후에는 취소 신청이 되지 않으니, 신중히 선택해 주세요</string>
+    <string name="alert_txt_pointdonate_success">감사합니다. 정상 신청되었습니다.\n기부된 포인트는 연말소득공제가 가능하며,\n연말정산 시 이랜드 복지 재단 홈페이지를 통해 기부금 영수증을 발급 받으실 수 있습니다.</string>
+    <string name="alert_txt_pointdonate_fail">이미 신청하셨습니다.</string>
+
+    <string name="alert_txt_contact_fail">유효하지 않은 번호입니다.</string>
+
+    <!--이랜드 개편-->
+    <string name="txt_header_title_luckdeal">럭키딜</string>
+    <string name="txt_header_title_luckdeal_today">오늘의 럭키딜</string>
+    <!--이랜드 개편-->
+
+    <string name="txt_buylist_empty">최근 6개월간\n구매하신 상품이 없습니다.</string>
+    <string-array name="items_array_expandable_level_one">
+        <item>Level 1.1</item>
+        <item>Level 1.2</item>
+        <item>Level 1.3</item>
+    </string-array>
+    <string-array name="items_array_expandable_level_one_one_child">
+        <item>Level 1.1.1</item>
+        <item>Level 1.1.2</item>
+    </string-array>
+    <string-array name="items_array_expandable_level_one_two_child">
+        <item>Level 1.2.1</item>
+    </string-array>
+    <string-array name="items_array_expandable_other_child">
+        <item>Second Level 01</item>
+        <item>Second Level 02</item>
+        <item>Second Level 03</item>
+    </string-array>
+    <string-array name="items_array_expandable_level_three">
+        <item>Child Level 01</item>
+        <item>Child Level 02</item>
+    </string-array>
+
+    <string-array name="login_check_url">
+        <item>/mypage/initMypageMain.action</item>
+        <item>/mypage/initMyOrderDeliList.action</item>
+        <item>/mypage/searchGoodListLately.action</item>
+        <item>/mypage/initMyCounsel.action</item>
+        <item>/mypage/initMyWishlist.action</item>
+        <item>/mypage/initMyCouponList.action</item>
+        <item>/app/initFavStoreLayer.action</item>`
+        <item>/mypage/searchBanJJakDlvpListLayer.action</item>
+    </string-array>
+
+    <string-array name="direct_check_url">
+        <item>saucelive.net</item>
+    </string-array>
+
+    <string-array name="no_header_url">
+        <item>m-nbkids.elandmall.com</item>
+        <item>m-recent.elandmall.com</item>
+        <item>m-shoopen.elandmall.com</item>
+        <item>m-modernhouse.elandmall.com</item>
+        <item>m-mixxo.elandmall.com</item>
+        <item>m-whoau.elandmall.com</item>
+        <item>m-ost.elandmall.com</item>
+        <item>m-spao.elandmall.com</item>
+        <item>m-elandkids.elandmall.com</item>
+        <item>m-folder.elandmall.com</item>
+        <item>m-nb.elandmall.com</item>
+        <item>m-clue.elandmall.com</item>
+        <item>m-roem.elandmall.com</item>
+        <item>m-eblin.elandmall.com</item>
+        <item>m-lloyd.elandmall.com</item>
+        <item>m-bahus.elandmall.com</item>
+        <item>m-kimsclub.elandmall.com</item>
+        <item>m-kizdom.elandmall.com</item>
+        <item>m-kinderleague.elandmall.com</item>
+        <item>elandretail.com</item>
+    </string-array>
+
+    <string-array name="stand_order_list">
+        <item>인기상품순</item>
+        <item>신상품순</item>
+        <item>낮은가격순</item>
+        <item>높은가격순</item>
+        <item>상품평순</item>
+        <item>할인율높은순</item>
+        <item>추천순</item>
+    </string-array>
+
+    <string-array name="stand_order_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>8</item>
+        <item>7</item>
+    </string-array>
+
+    <string-array name="search_order_list">
+        <item>추천순</item>
+        <item>인기상품순</item>
+        <item>신상품순</item>
+        <item>낮은가격순</item>
+        <item>높은가격순</item>
+        <item>상품평순</item>
+        <item>할인율높은순</item>
+    </string-array>
+
+    <string-array name="search_order_value">
+        <item>7</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>8</item>
+    </string-array>
+
+    <string-array name="search_order_list_today">
+        <item>인기상품순</item>
+        <item>신상품순</item>
+        <item>낮은가격순</item>
+        <item>높은가격순</item>
+        <item>상품평순</item>
+        <item>할인율높은순</item>
+    </string-array>
+
+    <string-array name="search_order_value_today">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>8</item>
+    </string-array>
+
+    <string-array name="search_detail_price_list">
+        <item>~5천원 이하</item>
+        <item>~1만원 이하</item>
+        <item>~3만원 이하</item>
+        <item>~5만원 이하</item>
+        <item>~7만원 이하</item>
+        <item>~10만원 이하</item>
+    </string-array>
+
+    <string-array name="search_detail_rate_list">
+        <item>60% 이상</item>
+        <item>70% 이상</item>
+        <item>80% 이상</item>
+        <item>90% 이상</item>
+    </string-array>
+    <string-array name="search_detail_rate_list2">
+        <item>30% 이상</item>
+        <item>50% 이상</item>
+        <item>70% 이상</item>
+        <item>90% 이상</item>
+    </string-array>
+
+    <!-- ElandMall_Android_Youtube_APIKey -->
+    <string name="youtube_api_key" translatable="false">AIzaSyCf7vXV_qM2faGUsldm3yZtDP-FidF7p70</string>
+    <string name="no_md_list">MD추천 상품이 <b>없습니다.</b></string>
+
+    <!-- GA Tagging -->
+    <string-array name="ga_title">
+        <item>거품없이 누리자, 이랜드몰 | Elandmall.com</item>
+        <item>E#NOW - 거품없이 누리자, 이랜드몰 | Elandmall.com</item>
+        <item>베스트 - 거품없이 누리자, 이랜드몰 | Elandmall.com</item>
+        <item>럭키딜 - 거품없이 누리자, 이랜드몰 | Elandmall.com</item>
+        <item>365아울렛 - 거품없이 누리자, 이랜드몰 | Elandmall.com</item>
+        <item>스토어쇼핑 - 거품없이 누리자, 이랜드몰 | Elandmall.com</item>
+        <item>KIM\'S 장보기 - 거품없이 누리자, 이랜드몰 | Elandmall.com</item>
+        <item>E키즈샵 - 거품없이 누리자, 이랜드몰 | Elandmall.com</item>
+        <item>글로벌샵 - 거품없이 누리자, 이랜드몰 | Elandmall.com</item>
+        <item>기획전 - 거품없이 누리자, 이랜드몰 | Elandmall.com</item>
+        <item>이벤트&amp;혜택- 거품없이 누리자, 이랜드몰 | Elandmall.com</item>
+        <item>기획전상세 - 거품없이 누리자, 이랜드몰 | Elandmall.com</item>
+        <item> - 이랜드몰닷컴 | Elandmall.com</item>
+    </string-array>
+
+    <string name="txt_searchBrand">브랜드 검색</string>
+    <string name="txt_ga_drawerMenu">APP_서랍식메뉴</string>
+    <string name="txt_ga_searchBrand">브랜드검색</string>
+    <string name="txt_ga_searchBrand2">브랜드검색_브랜드</string>
+    <string name="txt_ga_searchBrand_keyword">브랜드검색_검색어</string>
+    <string name="txt_ga_searchResult">APP_검색결과</string>
+    <string name="txt_ga_lucky">럭키딜추천상품</string>
+    <string name="txt_ga_recommend_plan">검색_추천기획전</string>
+    <string name="txt_ga_end_recommend">끝음절추천상품</string>
+    <string name="txt_ga_recommend_search">추천검색어</string>
+    <string name="txt_ga_search_result_category">검색결과카테고리</string>
+    <string name="txt_ga_search_order">상품정렬</string>
+    <string name="txt_ga_search_detail">상세검색</string>
+    <string name="txt_ga_search_result">검색결과</string>
+    <string name="txt_ga_fliter">검색필터</string>
+
+
+    <!--스토어쇼핑 개편-->
+    <string name="txt_banjjack_deli">반짝배송 가능지역을 확인하세요.</string>
+    <string name="txt_header_title_store_recommend">추천 지점</string>
+    <string name="txt_header_title_store_category">카테고리별 베스트 상품</string>
+    <string name="txt_regular_title">나의 단골매장</string>
+    <string name="txt_search_store">매장찾기</string>
+    <string name="txt_no_regular_store">등록된 단골매장이 없습니다.</string>
+    <string name="txt_no_regular_store2">단골매장을 등록하면\n해당 매장의 최신 상품을 확인할 수 있습니다.</string>
+    <string name="txt_no_regular_item">선택한 조건의 상품이 없습니다.\n다시 선택해주세요.</string>
+    <string name="txt_storepick_title">스토어픽 지점</string>
+    <string name="txt_storepick_subtitle">매장에서 직접 확인하고 픽업해보세요.</string>
+    <string name="txt_storepick_location">강남점</string>
+    <string name="txt_storepick_total">전체상품보기</string>
+    <!--스토어쇼핑 개편-->
+
+    <string name="txt_search_popular_brand">지금 인기있는 브랜드</string>
+    <string name="txt_search_result">\'%s\'</string>
+    <string name="txt_search_result_cnt">검색결과 총 %d건</string>
+    <string name="txt_search_result_prd_cnt">%s개 상품</string>
+    <string name="txt_search_luckydeal_title">#럭키딜 추천상품</string>
+    <string name="txt_search_filter">필터</string>
+    <string name="txt_plan">기획전</string>
+    <string name="txt_search_filter_more">전체보기 +</string>
+    <string name="txt_search_filter_close">접기</string>
+
+    <string name="txt_coupon_special_price">믿고사는 특가</string>
+
+    <string name="hint_brand_search">브랜드명을 입력하세요</string>
+
+    <!-- 푸터 영역 -->
+    <string name="footer_logout">로그아웃</string>
+    <string name="footer_mypage">마이페이지</string>
+    <string name="footer_cart">장바구니</string>
+    <string name="footer_call_center">고객센터</string>
+    <string name="footer_company">주식회사 이랜드리테일</string>
+    <string name="footer_center">고객센터 :</string>
+    <string name="footer_call_center_num"><u>1899-9500</u></string>
+    <string name="footer_owner">대표이사 : 김우섭</string>
+    <string name="footer_owner_txt">사업자 등록번호 : 114-81-01855</string>
+    <string name="footer_info"><u>사업자정보확인</u></string>
+    <string name="footer_selnumber">통신판매업 신고번호 : 제 2007-서울서초-09998호</string>
+    <string name="footer_addr">서울특별시 서초구 잠원동 70번지 2호</string>
+    <string name="footer_host">호스트 서비스 제공자 : (주)이랜드리테일</string>
+    <string name="footer_privateowner">개인정보 보호책임자 : 이동규</string>
+    <string name="footer_private">개인정보취급방침</string>
+    <string name="footer_provision">약관안내</string>
+    <string name="footer_copy">COPYRIGHT © ELAND RETAIL ALL RIGHT RESERVED.</string>
+    <string name="footer_law">Elandmall 내 판매 상품 중 일부는 개별 판매자의 상품이 포함되어 있고, 이 경우 이랜드리테일은 통신판매자의 당사자가 아니므로 해당 상품, 거래정보 및 거래에 대하여는 개별 판매자에 책임이 있습니다.</string>
+
+    <!-- 브레이즈 이벤트 로깅 -->
+    <string name="braze_product_view">상품 Viewed</string>
+    <string name="braze_product_cart">상품 Added to Cart</string>
+    <string name="braze_product_type">타입</string>
+    <string name="braze_product_brand_name">브랜드명</string>
+    <string name="braze_product_code">상품코드</string>
+    <string name="braze_product_name">상품명</string>
+    <string name="braze_product_brand_ctg">상품카테고리</string>
+    <string name="braze_product_brand_price">판매가</string>
+    <string name="braze_product_brand_salePrice">할인가</string>
+    <string name="braze_product_brand_quantity">상품수량</string>
+    <string name="braze_promotion_view">기획전 Viewed</string>
+    <string name="braze_promotion_name">프로모션명</string>
+    <string name="braze_promotion_endTime">프로모션종료일</string>
+    <string name="braze_review">상품평 Added</string>
+    <string name="braze_login">계정 Login</string>
 
 </resources>

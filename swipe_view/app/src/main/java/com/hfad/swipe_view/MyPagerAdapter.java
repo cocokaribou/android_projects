@@ -28,17 +28,17 @@ public class MyPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View constraint_view = null;
-        View relative_view = null;
+        View dialog_view = null;
         View intro_view = null;
 
         if(mContext!=null){
             LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             constraint_view = inflater.inflate(R.layout.constraint_layout, container, false);
-            relative_view = inflater.inflate(R.layout.relative_layout, container, false);
+            dialog_view = inflater.inflate(R.layout.dialog_intro, container, false);
             intro_view = inflater.inflate(R.layout.intro, container, false);
             ViewArr[0] = intro_view;
-            ViewArr[1] = relative_view;
-            ViewArr[2] = constraint_view;
+            ViewArr[1] = constraint_view;
+            ViewArr[2] = dialog_view;
 
         }
 

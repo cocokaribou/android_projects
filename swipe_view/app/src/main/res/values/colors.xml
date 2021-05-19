@@ -8,4 +8,52 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#a4a4a4</color>
+
+    <color name="colorPrimary">#a4a4a4</color>
+    <color name="colorPrimaryDark">#132447</color>
+    <color name="colorAccent">#132447</color>
+
+    <color name="intro_bg">#ffffff</color>
+    <color name="color_white">#ffffff</color>
+    <color name="color_popup_bg">#ffffff</color>
+    <color name="color_popup_msg">#333333</color>
+    <color name="color_popup_btn_cancel">#666666</color>
+    <color name="color_info_bg">#ededed</color>
+    <color name="color_autoLogin_text">#FF0000</color>
+    <color name="color_info_text">#666666</color>
+    <color name="more_bg">#70000000</color>
+
+    <color name="color_list_select">#ebeced</color>
+
+    <color name="color_line_1">#dddddd</color>
+    <color name="color_line_2">#dddddd</color>
+    <color name="color_sett_bg">#ededed</color>
+    <color name="color_vertical_line">#d1d1d1</color>
+    <color name="color_txt_logn">#242424</color>
+    <color name="color_title_disable">#ededed</color>
+    <color name="color_disable">#999999</color>
+    <color name="color_enable">#242424</color>
+
+    <color name="color_loading_bg">#ededed</color>
+
+    <color name= "color_c9000b">#c9000b</color>
+
+    <color name= "search_ctg">#99000000</color>
+
+    <drawable name="color_slide_eland_nor_bg">#f78429</drawable >
+    <drawable name="color_slide_eland_pre_bg">#d16c1d</drawable >
+    <drawable name="color_slide_mordern_nor_bg">#a58461</drawable >
+    <drawable name="color_slide_mordern_pre_bg">#81664a</drawable >
+    <drawable name="color_slide_kims_nor_bg">#000000</drawable >
+    <drawable name="color_slide_kims_pre_bg">#343333</drawable >
+
+    <drawable name="color_wpop_btn_nor_bg">#ffffff</drawable >
+    <drawable name="color_wpop_btn_pre_bg">#ededed</drawable >
+    <drawable name="color_bpop_btn_nor_bg">#000000</drawable >
+    <drawable name="color_bpop_btn_pre_bg">#666666</drawable >
+
+    <drawable name="color_pager_square_select">#000000</drawable>
+    <drawable name="color_pager_square_normal">#dedede</drawable>
+
+
 </resources>

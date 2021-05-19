@@ -1,6 +1,368 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ededed">
 
-</LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!-- title -->
+            <RelativeLayout
+                android:id="@+id/rlTitle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff">
+
+                <TextView
+                    android:id="@+id/developerMode"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="50dp"
+                    android:background="#ffffff"
+                    android:gravity="center"
+                    tools:text="DEV" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="설정"
+
+                    />
+
+                <ImageButton
+                    android:id="@+id/ibClose"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:onClick="goClose"
+                    android:src="@drawable/btn_xclose_nor" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.33dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#a4a4a4" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.33dp"
+                android:background="#132447" />
+            <!-- 로그인 정보 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="horizontal"
+                android:paddingLeft="19.33dp"
+                android:paddingTop="9.33dp"
+                android:paddingRight="13.33dp"
+                android:paddingBottom="9.33dp">
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#333333"
+                    android:textSize="19.33dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvNameMsg"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/setting_login_msg"
+                    android:textColor="#333333"
+                    android:textSize="19.33dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:layout_width="@dimen/sett_btn_width"
+                    android:layout_height="@dimen/sett_btn_height"
+                    android:gravity="center"
+                    android:onClick="goLogin"
+                    android:textSize="14.66dp"
+                    android:textStyle="bold"
+                    android:text="로그인"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.33dp"
+                android:background="@color/color_line_2" />
+            <!-- 자동로그인 -->
+            <RelativeLayout
+                android:id="@+id/lyAutoLogin"
+                style="@style/sett_item_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_login_auto"
+                    android:textColor="#333333"
+                    android:textSize="19.33dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvAutoLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/setting_auto_off"
+                    android:textColor="@color/color_txt_logn"
+                    android:textSize="16.66dp" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.33dp"
+                android:background="@color/color_line_2" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.33dp"
+                android:layout_marginTop="6.66dp"
+                android:background="@color/color_line_2" />
+            <!-- 푸시설정 알림 -->
+            <LinearLayout
+                style="@style/sett_item_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvPushTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting_push_noti"
+                        android:textColor="#333333"
+                        android:textSize="19.33dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/sett_left_msg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting_push_noti_msg" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btnPush"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="11.33dp"
+                    android:background="@drawable/toggle_selector"
+                    android:onClick="goPush"
+                    android:thumb="@null" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.33dp"
+                android:background="#d1d1d1" />
+            <!--  고객센터 -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    style="@style/sett_item_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/titleCustomer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting_customer"
+                        android:textColor="#333333"
+                        android:textSize="19.33dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvElandCallNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/titleCustomer"
+                        android:layout_marginLeft="6.66dp"
+                        android:layout_toRightOf="@+id/titleCustomer"
+                        android:text="1899-9500"
+                        android:textColor="#333333"
+                        android:textSize="19.33dp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0.33dp"
+                        android:layout_height="16.66dp"
+                        android:layout_alignTop="@+id/tvElandCallNumber"
+                        android:layout_alignBottom="@+id/tvElandCallNumber"
+
+                        android:layout_centerInParent="true"
+                        android:background="#d1d1d1" />
+
+                    <TextView
+                        android:id="@+id/tvCustomer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="33.65dp"
+                        android:layout_toLeftOf="@+id/tvKCallNumber"
+                        android:text="@string/setting_customer_ekims"
+                        android:textColor="#333333"
+                        android:textSize="19.33dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvKCallNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/tvCustomer"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="6.66dp"
+                        android:text="1899-4222"
+                        android:textColor="#333333"
+                        android:textSize="19.33dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvRemark"
+                        style="@style/sett_left_msg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/titleCustomer"
+                        android:text="@string/setting_customer_remark" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <View
+                        android:id="@+id/viewElandCustomer"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:background="#00ffffff" />
+
+                    <View
+                        android:id="@+id/viewEKimsCustomer"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:background="#00ffffff" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.33dp"
+                android:background="@color/color_line_2" />
+            <!--  버전 정보 -->
+            <RelativeLayout
+                style="@style/sett_item_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/titleVersion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting_ver_info"
+                        android:textColor="#333333"
+                        android:textSize="19.33dp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/sett_sub_height_margin"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvCurVersion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/setting_cur_version"
+                            android:textColor="@color/color_popup_btn_cancel"
+                            android:textSize="14dp" />
+
+                        <View
+                            android:layout_width="0.33dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="16.66dp"
+                            android:layout_marginRight="16.66dp"
+                            android:background="#d1d1d1" />
+
+                        <TextView
+                            android:id="@+id/tvNewVersion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/setting_new_version"
+                            android:textColor="#d2d2d2"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnUpdate"
+                    android:layout_width="@dimen/sett_btn_width"
+                    android:layout_height="@dimen/sett_btn_height"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/update_selector"
+                    android:gravity="center"
+                    android:text="@string/setting_btn_update"
+                    android:textColor="#666666"
+                    android:textSize="14dp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/llTestAction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/btnServerSet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/action_settings" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
