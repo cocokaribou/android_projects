@@ -21,6 +21,8 @@ data class SeoulVO(
         @field:SerializedName("cgg_code_nm") var cgg_code_nm: String,
         @field:SerializedName("crtfc_yn") var crtfc_yn: String,
         @field:SerializedName("rdn_code_nm") var rdn_code_nm: String,
-        @field:SerializedName("crt_time") var crt_time: String,
+        @field:SerializedName("crt_time") var crt_time: String?,
+        @field:SerializedName("upd_time") var upd_time: String?,
+
     )
 }

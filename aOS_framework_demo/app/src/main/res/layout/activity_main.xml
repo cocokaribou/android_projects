@@ -5,17 +5,185 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#efefef"
+    android:paddingStart="16dp"
     tools:context=".MainActivity">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/mViewPager"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:id="@+id/txt_businessExtension"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Business Extension"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.viewpager.widget.ViewPager>
+    <Button
+        android:id="@+id/btn_checkUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="checkUpdate"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toStartOf="@id/txtGroup_checkUpdate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_businessExtension" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/txtGroup_checkUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/btn_checkUpdate"
+        app:layout_constraintStart_toEndOf="@id/btn_checkUpdate"
+        app:layout_constraintTop_toTopOf="@id/btn_checkUpdate">
+
+        <TextView
+            android:id="@+id/txt_currVer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="현재버전: "
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@id/txt_checkResult"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_currVer_int"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/txt_currVer"
+            app:layout_constraintTop_toTopOf="@id/txt_currVer" />
+
+        <TextView
+            android:id="@+id/txt_checkResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_currVer" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_setSplashImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="setSplashImg"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_checkUpdate" />
+
+    <TextView
+        android:id="@+id/txt_splashImgResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:autoLink="web"
+        android:linksClickable="true"
+        app:layout_constraintBottom_toBottomOf="@id/btn_setSplashImg"
+        app:layout_constraintStart_toEndOf="@id/btn_setSplashImg"
+        app:layout_constraintTop_toTopOf="@id/btn_setSplashImg" />
+
+    <TextView
+        android:id="@+id/txt_jsonExtension"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="JsonExtension"
+        android:textSize="20sp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_setSplashImg" />
+
+    <Button
+        android:id="@+id/btn_getJson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="getJsonFileToString"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_jsonExtension" />
+
+    <TextView
+        android:id="@+id/txt_textExtension"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextExtension"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_getJson" />
+
+    <Button
+        android:id="@+id/btn_toSimpleStr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="toSimpleString"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_textExtension" />
+
+    <TextView
+        android:id="@+id/txt_simpleStrResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_toSimpleStr"
+        app:layout_constraintStart_toEndOf="@id/btn_toSimpleStr"
+        app:layout_constraintTop_toTopOf="@id/btn_toSimpleStr" />
+
+    <Button
+        android:id="@+id/btn_addDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="getaddDateString"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_toSimpleStr" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/txtGroup_addDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_addDate"
+        app:layout_constraintStart_toEndOf="@id/btn_addDate"
+        app:layout_constraintTop_toTopOf="@id/btn_addDate">
+
+        <EditText
+            android:id="@+id/editTxt_addDate"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="3dp"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:text="확인"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/editTxt_addDate"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/txt_addDateResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@id/btn_addDate"
+        app:layout_constraintTop_toTopOf="@id/btn_addDate" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_addDate" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
