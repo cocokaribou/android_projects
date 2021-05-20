@@ -2,12 +2,7 @@
   "DESCRIPTION": {
     "CGG_CODE": "자치구 코드",
     "CRTFC_YN": "인증여부",
-    "GNT_NO": "교부번호",
-    "Y_DNTS": "지도 Y좌표",
     "RDN_DETAIL_ADDR": "도로명상세주소",
-    "CRTFC_GBN_NM": "식품인증 구분명",
-    "CRTFC_SNO": "허가번호",
-    "MAP_INDICT_YN": "지도표시여부",
     "COB_CODE_NM": "업종 명",
     "BIZCND_CODE": "업태 코드",
     "CRTFC_GBN": "식품인증구분",

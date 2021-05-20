@@ -1,15 +1,8 @@
 package com.example.aos_framework_demo
 
-import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
-import com.bumptech.glide.Glide
 import com.example.aos_framework_demo.databinding.ActivityMainBinding
 import com.google.gson.Gson
 import com.pionnet.overpass.extension.*
@@ -20,24 +13,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val jsonTestString = "seoul.json"
-        Log.e("88", getJsonFileToString(jsonTestString, this))
+        val jsonTestString = getJsonFileToString("seoul.json", this)
+        var resultStr = getJsonFileToString("membership.json", this)
 
-        val jsonTestString2 = "서울시 지정·인증업소 현황.json"
-        Log.e("**", getJsonFileToString(jsonTestString2, this))
-
-
-        val jsonString = "membership.json" //new jaju 참고
-        var resultStr = getJsonFileToString(jsonString, this)
-
-
-        val gson = Gson() //gson: json을 보기좋게 해주는 라이브러리
+        val gson = Gson() //gson : json 오브젝트를 java 오브젝트로 바꿔줌(data model)
         try {
             val response = gson.fromJson(resultStr, MemberShip::class.java)
-            Log.e("test", response.bannerInfo.bannerImgPath) //setText로 화면에 띄우기
+            Log.e("test", response.bannerInfo.bannerImgPath) //화면에 setText로
+            val response2 = gson.fromJson(jsonTestString, SeoulVO::class.java)
+            Log.e("test2", response2.DESCRIPTION.UPSO_NM)
+            Log.e("test3", response2.DATA[0].cgg_code)
+
+            response2.DATA.forEachIndexed{ i, d ->
+                Log.e("tag $i", "자치구 코드 : ${d.cgg_code}, 자치구 이름: ${d.cgg_code_nm}", )
+            }
+
 
         } catch (e: Exception) {
-
+            Log.e("tag", e.toString())
         }
 
     }
