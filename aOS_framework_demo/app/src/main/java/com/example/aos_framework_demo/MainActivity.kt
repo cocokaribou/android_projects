@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,30 +28,36 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        /**
+         * gson 연습
+         */
         val jsonTestString = getJsonFileToString("seoul.json", this)
-        var resultStr = getJsonFileToString("membership.json", this)
 
-        val gson = Gson() //gson : json 오브젝트를 java 오브젝트로 바꿔줌(data model)
+        val gson = Gson() //gson : json 오브젝트를 java 오브젝트로 바꿔줌(data class)
         try {
-            val response = gson.fromJson(resultStr, MemberShip::class.java)
-            Log.e("test", response.bannerInfo.bannerImgPath) //화면에 setText로
             val response2 = gson.fromJson(jsonTestString, SeoulVO::class.java)
-            Log.e("test2", response2.DESCRIPTION.UPSO_NM)
-            Log.e("test3", response2.DATA[0].cgg_code)
+            Log.e("youngin", response2.DESCRIPTION.UPSO_NM)
+            Log.e("youngin", response2.DATA[0].cgg_code)
 
             response2.DATA.forEachIndexed { i, d ->
-                Log.e("tag $i", "자치구 코드 : ${d.cgg_code}, 자치구 이름: ${d.cgg_code_nm}")
+                Log.e("youngin", "자치구 코드 : ${d.cgg_code}, 자치구 이름: ${d.cgg_code_nm}")
 
                 //nullable로 선언된 데이터의 null check
                 if (d.upd_time != null) {
-                    Log.e("^^", d.upd_time.toString())
+                    Log.e("youngin", d.upd_time.toString())
                 }
             }
 
         } catch (e: Exception) {
-            Log.e("tag", e.toString())
+            Log.e("youngin", e.toString())
         }
-        binding.btnCheckUpdate.setOnClickListener {
+
+        /**
+         * getAppVersion(), isUpdate()
+         */
+
+        val btnCheckUpdate = binding.btnCheckUpdate
+        btnCheckUpdate.setOnClickListener {
             val txt_group = binding.txtGroupCheckUpdate
             txt_group.visibility = if (txt_group.visibility == View.INVISIBLE) {
                 View.VISIBLE
@@ -58,19 +65,24 @@ class MainActivity : AppCompatActivity() {
                 View.INVISIBLE
             }
 
-            val txt_currVer_int: TextView = findViewById(R.id.txt_currVer_int)
-            txt_currVer_int.setText(getAppVersion(applicationContext))
+            val txtCurrVerInt = binding.txtCurrVerInt
+            txtCurrVerInt.setText(getAppVersion(applicationContext))
 
-            val txt_checkResult: TextView = findViewById(R.id.txt_checkResult)
+            val txtCheckResult = binding.txtCheckResult
             val newVer = "2.5.0"
             val checker = isUpdate(getAppVersion(applicationContext), newVer)
             when (checker) {
-                true -> txt_checkResult.setText("업데이트가 필요합니다")
-                false -> txt_checkResult.setText("업데이트 완료됐습니다")
+                true -> txtCheckResult.setText("업데이트가 필요합니다")
+                false -> txtCheckResult.setText("업데이트 완료됐습니다")
             }
         }
 
-        binding.btnSetSplashImg.setOnClickListener {
+        /**
+         * setSplashImgURL()
+         */
+        val btnSetSplashImg = binding.btnSetSplashImg
+        val txtSplashImgResult = binding.txtSplashImgResult
+        btnSetSplashImg.setOnClickListener {
 //            val img1 =
 //                "https://postfiles.pstatic.net/MjAyMTA1MTRfMjg0/MDAxNjIwOTQxNjExNzUw.XqREuIKXmaaa4EuWZ_miZ1TjP8HvzqafMCatt4Ef5T0g.Tre7upXOfbn5CNaqRLKmolasay7hR0wCsnwaIMk5VpAg.JPEG.joyfuljuli/IMG_4531.jpg?type=w966"
 //            val img2 =
@@ -85,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                 "https://img5.png"
             )
             val splashImg = setSplashImgURL(arr, true)
-            binding.txtSplashImgResult.setText(splashImg)
+            txtSplashImgResult.setText(splashImg)
 
 //            val toast = Toast.makeText(applicationContext, splashImg, Toast.LENGTH_SHORT)
 //            toast.show()
@@ -96,33 +108,220 @@ class MainActivity : AppCompatActivity() {
 //                .into(imgView)
         }
 
+        /**
+         * getJsonFileToString()
+         */
         binding.btnGetJson.setOnClickListener {
             val jsonString = getJsonFileToString("membership.json", this)
             val toast = Toast.makeText(applicationContext, jsonString, Toast.LENGTH_SHORT)
             toast.show()
         }
 
+        /**
+         * toSimpleString()
+         */
         binding.btnToSimpleStr.setOnClickListener {
             val date = Date()
             binding.txtSimpleStrResult.setText(date.toSimpleString())
         }
 
+        /**
+         * getAddDateString()
+         */
+        val btnAddDate = binding.btnAddDate
+        val editTxtAddDate = binding.editTxtAddDate
+        val txtAddDateResult = binding.txtAddDateResult
+        btnAddDate.setOnClickListener {
+            editTxtAddDate.visibility = if (editTxtAddDate.visibility == View.INVISIBLE) {
+                View.VISIBLE
+            } else {
+                View.INVISIBLE
+            }
+            txtAddDateResult.visibility = if (txtAddDateResult.visibility == View.INVISIBLE) {
+                View.VISIBLE
+            } else {
+                View.INVISIBLE
+            }
 
-        binding.btnAddDate.setOnClickListener {
-            binding.txtGroupAddDate.visibility = View.VISIBLE
-
-            val dates = Integer.parseInt(binding.editTxtAddDate.getText().toString())
-
-            if (dates.toString().length == 0) {
-                val toast = Toast.makeText(applicationContext, "일수를 입력하세요", Toast.LENGTH_SHORT)
-                toast.show()
-            } else {}
+            editTxtAddDate.setOnKeyListener { v, keyCode, event ->
+                if (keyCode == KEYCODE_ENTER) {
+                    val dates = editTxtAddDate.getText().toString()
+                    val addDate = getAddDateString("dd/MM/yyyy", Integer.parseInt(dates))
+                    txtAddDateResult.setText("${dates}일 후 ${addDate}")
+                    txtAddDateResult.visibility = View.VISIBLE
+                    editTxtAddDate.visibility = View.INVISIBLE
+                    true
+                } else false
+            }
         }
 
 
-    val dates: Int = 10
-    Log.e("test", "현재 날짜: ${getCurrentTime()}")
-    Log.e("test", "현재 날짜로부터 ${dates}일 뒤는 ${getAddDateString("dd/MM/yyyy", dates)} 입니다")
+        /**
+         * getCurrentTime()
+         */
+        binding.btnGetCurrTime.setOnClickListener{
+            binding.txtGetCurrTime.setText(getCurrentTime())
+        }
+
+
+        /**
+         * Int.dpToPx
+         */
+        val btnDpToPx = binding.btnDpToPx
+        val editTxtDpToPx = binding.editTxtDpToPx
+        val txtDpToPx = binding.txtDpToPx
+        btnDpToPx.setOnClickListener {
+            editTxtDpToPx.visibility = if (editTxtDpToPx.visibility == View.INVISIBLE) {
+                View.VISIBLE
+            } else {
+                View.INVISIBLE
+            }
+            txtDpToPx.visibility = if (txtDpToPx.visibility == View.INVISIBLE) {
+                View.VISIBLE
+            } else {
+                View.INVISIBLE
+            }
+
+            editTxtDpToPx.setOnKeyListener { v, keyCode, event ->
+                if (keyCode == KEYCODE_ENTER) {
+                    val dp = Integer.parseInt(editTxtDpToPx.getText().toString())
+                    val pixel = dp.dpToPx(this)
+                    txtDpToPx.setText("${dp} dp -> ${pixel} pixel")
+                    txtDpToPx.visibility = View.VISIBLE
+                    editTxtDpToPx.visibility = View.INVISIBLE
+                    true
+                } else false
+            }
+        }
+
+
+        /**
+         * TextView.setBoldText()
+         */
+        val btnSetBold = binding.btnSetBold
+        val editTxtSetBold = binding.editTxtSetBold
+        val txtBeforeBold = binding.txtBeforeBold
+        val txtSetBold = binding.txtSetBold
+        btnSetBold.setOnClickListener {
+            editTxtSetBold.visibility = if (editTxtSetBold.visibility == View.INVISIBLE) {
+                View.VISIBLE
+            } else {
+                View.INVISIBLE
+            }
+            if (txtSetBold.visibility == View.INVISIBLE) {
+                txtBeforeBold.visibility = View.VISIBLE
+                txtSetBold.visibility = View.VISIBLE
+            } else {
+                txtBeforeBold.visibility = View.INVISIBLE
+                txtSetBold.visibility = View.INVISIBLE
+            }
+
+            editTxtSetBold.setOnKeyListener { v, keyCode, event ->
+                if (keyCode == KEYCODE_ENTER) {
+                    val txt = editTxtSetBold.getText().toString()
+                    txtBeforeBold.setText("${txt} -> ")
+                    txtSetBold.setText(txt)
+                    txtSetBold.setBoldText()
+
+                    txtBeforeBold.visibility = View.VISIBLE
+                    txtSetBold.visibility = View.VISIBLE
+                    editTxtSetBold.visibility = View.INVISIBLE
+                    true
+                } else false
+            }
+        }
+
+        /**
+         * TextView.setPriceStroke()
+         */
+        val btnSetStroke = binding.btnSetStroke
+        val editTxtSetStroke = binding.editTxtSetStroke
+        val txtSetStroke = binding.txtSetStroke
+        btnSetStroke.setOnClickListener{
+            editTxtSetStroke.visibility = if(editTxtSetStroke.visibility == View.INVISIBLE){
+                View.VISIBLE
+            }else{
+                View.INVISIBLE
+            }
+            txtSetStroke.visibility = if(txtSetStroke.visibility == View.INVISIBLE){
+                View.VISIBLE
+            }else{
+                View.INVISIBLE
+            }
+        }
+        editTxtSetStroke.setOnKeyListener{ v, keyCode, event ->
+            if(keyCode == KEYCODE_ENTER){
+                val txt = editTxtSetStroke.getText().toString()
+                txtSetStroke.setText(txt)
+                txtSetStroke.setPriceStroke()
+
+                txtSetStroke.visibility = View.VISIBLE
+                editTxtSetStroke.visibility = View.INVISIBLE
+                true
+            }else false
+        }
+
+
+        /**
+         * priceFormat()
+         */
+        val btnPriceFormat = binding.btnPriceFormat
+        val editTxtPriceFormat = binding.editTxtPriceFormat
+        val txtPriceFormat = binding.txtPriceFormat
+        btnPriceFormat.setOnClickListener{
+            if(editTxtPriceFormat.visibility == View.INVISIBLE){
+                editTxtPriceFormat.visibility = View.VISIBLE
+                editTxtPriceFormat.requestFocus()
+            }else{
+                editTxtPriceFormat.visibility = View.INVISIBLE
+            }
+            txtPriceFormat.visibility = if(txtPriceFormat.visibility == View.INVISIBLE){
+                View.VISIBLE
+            }else{
+                View.INVISIBLE
+            }
+        }
+        editTxtPriceFormat.setOnKeyListener{ v, keyCode, event ->
+            if(keyCode == KEYCODE_ENTER){
+                val digit = editTxtPriceFormat.getText().toString()
+                txtPriceFormat.setText(priceFormat(digit))
+
+                txtPriceFormat.visibility = View.VISIBLE
+                editTxtPriceFormat.visibility = View.INVISIBLE
+                true
+            }else false
+        }
+
+        /**
+         * productCnt()
+         */
+        val btnProductCnt = binding.btnProductCnt
+        val editTxtProductCnt = binding.editTxtProductCnt
+        val txtProductCnt = binding.txtProductCnt
+        btnProductCnt.setOnClickListener{
+            if(editTxtProductCnt.visibility == View.INVISIBLE){
+                editTxtProductCnt.visibility = View.VISIBLE
+                editTxtProductCnt.requestFocus()
+            }else{
+                editTxtProductCnt.visibility = View.INVISIBLE
+            }
+            txtProductCnt.visibility = if(txtProductCnt.visibility == View.INVISIBLE){
+                View.VISIBLE
+            }else{
+                View.INVISIBLE
+            }
+        }
+        editTxtProductCnt.setOnKeyListener{ v, keyCode, event ->
+            if(keyCode == KEYCODE_ENTER){
+                val digit = editTxtProductCnt.getText().toString().toLong()
+                txtProductCnt.setText(productCnt(digit))
+
+                txtProductCnt.visibility = View.VISIBLE
+                editTxtProductCnt.visibility = View.INVISIBLE
+                true
+            }else false
+        }
+
     }
 
 

@@ -133,57 +133,227 @@
         app:layout_constraintTop_toTopOf="@id/btn_toSimpleStr" />
 
     <Button
+        android:id="@+id/btn_getCurrTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="getCurrentTime"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/btn_addDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_toSimpleStr" />
+
+    <TextView
+        android:id="@+id/txt_getCurrTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_getCurrTime"
+        app:layout_constraintStart_toEndOf="@id/btn_getCurrTime"
+        app:layout_constraintTop_toTopOf="@id/btn_getCurrTime" />
+
+    <Button
         android:id="@+id/btn_addDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="getaddDateString"
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_toSimpleStr" />
+        app:layout_constraintTop_toBottomOf="@id/btn_getCurrTime" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/txtGroup_addDate"
-        android:layout_width="wrap_content"
+
+    <EditText
+        android:id="@+id/editTxt_addDate"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:hint="일수를 입력하세요"
+        android:inputType="phone"
+        android:textSize="15sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/btn_addDate"
         app:layout_constraintStart_toEndOf="@id/btn_addDate"
-        app:layout_constraintTop_toTopOf="@id/btn_addDate">
-
-        <EditText
-            android:id="@+id/editTxt_addDate"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="3dp"
-            android:inputType="number"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="35dp"
-            android:text="확인"
-            android:textSize="11sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/editTxt_addDate"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        app:layout_constraintTop_toTopOf="@id/btn_addDate" />
 
     <TextView
         android:id="@+id/txt_addDateResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/btn_addDate"
         app:layout_constraintStart_toEndOf="@id/btn_addDate"
         app:layout_constraintTop_toTopOf="@id/btn_addDate" />
 
     <Button
+        android:id="@+id/btn_dpToPx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Int.dpToPx"
+        android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_addDate" />
 
+    <EditText
+        android:id="@+id/editTxt_dpToPx"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:hint="dp값을 입력하세요"
+
+        android:inputType="phone"
+        android:textSize="15sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/btn_dpToPx"
+        app:layout_constraintStart_toEndOf="@id/btn_dpToPx"
+        app:layout_constraintTop_toTopOf="@id/btn_dpToPx" />
+
+    <TextView
+        android:id="@+id/txt_dpToPx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_dpToPx"
+        app:layout_constraintStart_toEndOf="@id/btn_dpToPx"
+        app:layout_constraintTop_toTopOf="@id/btn_dpToPx" />
+
+    <Button
+        android:id="@+id/btn_setBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView.setBoldText"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_dpToPx" />
+
+    <EditText
+        android:id="@+id/editTxt_setBold"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:hint="text를 입력하세요"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/btn_setBold"
+        app:layout_constraintStart_toEndOf="@id/btn_setBold"
+        app:layout_constraintTop_toTopOf="@id/btn_setBold" />
+
+    <TextView
+        android:id="@+id/txt_beforeBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_setBold"
+        app:layout_constraintStart_toEndOf="@id/btn_setBold"
+        app:layout_constraintTop_toTopOf="@id/btn_setBold" />
+
+    <TextView
+        android:id="@+id/txt_setBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_setBold"
+        app:layout_constraintStart_toEndOf="@id/txt_beforeBold"
+        app:layout_constraintTop_toTopOf="@id/btn_setBold" />
+
+    <Button
+        android:id="@+id/btn_setStroke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView.setPriceStroke"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_setBold" />
+
+    <EditText
+        android:id="@+id/editTxt_setStroke"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:hint="text를 입력하세요"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/btn_setStroke"
+        app:layout_constraintStart_toEndOf="@id/btn_setStroke"
+        app:layout_constraintTop_toTopOf="@id/btn_setStroke" />
+
+    <TextView
+        android:id="@+id/txt_setStroke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:inputType="phone"
+        app:layout_constraintBottom_toBottomOf="@id/btn_setStroke"
+        app:layout_constraintStart_toEndOf="@id/btn_setStroke"
+        app:layout_constraintTop_toTopOf="@id/btn_setStroke" />
+
+    <Button
+        android:id="@+id/btn_priceFormat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="priceFormat"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_setStroke" />
+
+    <EditText
+        android:id="@+id/editTxt_priceFormat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:hint="액수를 입력하세요"
+        android:inputType="phone"
+        android:textSize="15sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/btn_priceFormat"
+        app:layout_constraintStart_toEndOf="@id/btn_priceFormat"
+        app:layout_constraintTop_toTopOf="@id/btn_priceFormat" />
+
+    <TextView
+        android:id="@+id/txt_priceFormat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_priceFormat"
+        app:layout_constraintStart_toEndOf="@id/btn_priceFormat"
+        app:layout_constraintTop_toTopOf="@id/btn_priceFormat" />
+
+    <Button
+        android:id="@+id/btn_productCnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="productCnt"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_priceFormat" />
+
+    <EditText
+        android:id="@+id/editTxt_productCnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:hint="만 단위를 입력하세요"
+        android:inputType="phone"
+        android:textSize="15sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/btn_productCnt"
+        app:layout_constraintStart_toEndOf="@id/btn_productCnt"
+        app:layout_constraintTop_toTopOf="@id/btn_productCnt" />
+
+    <TextView
+        android:id="@+id/txt_productCnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="@id/btn_productCnt"
+        app:layout_constraintBottom_toBottomOf="@id/btn_productCnt"
+        app:layout_constraintStart_toEndOf="@id/btn_productCnt"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
