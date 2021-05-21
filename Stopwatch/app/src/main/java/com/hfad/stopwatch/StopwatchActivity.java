@@ -21,11 +21,11 @@ public class StopwatchActivity extends AppCompatActivity {
         Log.d("⚠️", "onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stopwatch);
-//        if(savedInstanceState != null){
-//            seconds = savedInstanceState.getInt("seconds"); //bundle에서 값을 얻어서 액티비티의 상태를 복원
-//            running = savedInstanceState.getBoolean("running");
-//            wasRunning = savedInstanceState.getBoolean("wasRunning");
-//        }
+        if(savedInstanceState != null){
+            seconds = savedInstanceState.getInt("seconds"); //bundle에서 값을 얻어서 액티비티의 상태를 복원
+            running = savedInstanceState.getBoolean("running");
+            wasRunning = savedInstanceState.getBoolean("wasRunning");
+        }
         runTimer();
     }
 
