@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.example.aos_framework_demo.databinding.ActivityMainBinding
@@ -132,10 +133,11 @@ class MainActivity : AppCompatActivity() {
         val editTxtAddDate = binding.editTxtAddDate
         val txtAddDateResult = binding.txtAddDateResult
         btnAddDate.setOnClickListener {
-            editTxtAddDate.visibility = if (editTxtAddDate.visibility == View.INVISIBLE) {
-                View.VISIBLE
+            if (editTxtAddDate.visibility == View.INVISIBLE) {
+                editTxtAddDate.visibility = View.VISIBLE
+                editTxtAddDate.requestFocus()
             } else {
-                View.INVISIBLE
+                editTxtAddDate.visibility = View.INVISIBLE
             }
             txtAddDateResult.visibility = if (txtAddDateResult.visibility == View.INVISIBLE) {
                 View.VISIBLE
@@ -159,7 +161,7 @@ class MainActivity : AppCompatActivity() {
         /**
          * getCurrentTime()
          */
-        binding.btnGetCurrTime.setOnClickListener{
+        binding.btnGetCurrTime.setOnClickListener {
             binding.txtGetCurrTime.setText(getCurrentTime())
         }
 
@@ -171,10 +173,11 @@ class MainActivity : AppCompatActivity() {
         val editTxtDpToPx = binding.editTxtDpToPx
         val txtDpToPx = binding.txtDpToPx
         btnDpToPx.setOnClickListener {
-            editTxtDpToPx.visibility = if (editTxtDpToPx.visibility == View.INVISIBLE) {
-                View.VISIBLE
+            if (editTxtDpToPx.visibility == View.INVISIBLE) {
+                editTxtDpToPx.visibility = View.VISIBLE
+                editTxtDpToPx.requestFocus()
             } else {
-                View.INVISIBLE
+                editTxtDpToPx.visibility = View.INVISIBLE
             }
             txtDpToPx.visibility = if (txtDpToPx.visibility == View.INVISIBLE) {
                 View.VISIBLE
@@ -203,10 +206,11 @@ class MainActivity : AppCompatActivity() {
         val txtBeforeBold = binding.txtBeforeBold
         val txtSetBold = binding.txtSetBold
         btnSetBold.setOnClickListener {
-            editTxtSetBold.visibility = if (editTxtSetBold.visibility == View.INVISIBLE) {
-                View.VISIBLE
+            if (editTxtSetBold.visibility == View.INVISIBLE) {
+                editTxtSetBold.visibility = View.VISIBLE
+                editTxtSetBold.requestFocus()
             } else {
-                View.INVISIBLE
+                editTxtSetBold.visibility = View.INVISIBLE
             }
             if (txtSetBold.visibility == View.INVISIBLE) {
                 txtBeforeBold.visibility = View.VISIBLE
@@ -237,20 +241,21 @@ class MainActivity : AppCompatActivity() {
         val btnSetStroke = binding.btnSetStroke
         val editTxtSetStroke = binding.editTxtSetStroke
         val txtSetStroke = binding.txtSetStroke
-        btnSetStroke.setOnClickListener{
-            editTxtSetStroke.visibility = if(editTxtSetStroke.visibility == View.INVISIBLE){
-                View.VISIBLE
-            }else{
-                View.INVISIBLE
+        btnSetStroke.setOnClickListener {
+            if (editTxtSetStroke.visibility == View.INVISIBLE) {
+                editTxtSetStroke.visibility = View.VISIBLE
+                editTxtSetStroke.requestFocus()
+            } else {
+                editTxtSetStroke.visibility = View.INVISIBLE
             }
-            txtSetStroke.visibility = if(txtSetStroke.visibility == View.INVISIBLE){
+            txtSetStroke.visibility = if (txtSetStroke.visibility == View.INVISIBLE) {
                 View.VISIBLE
-            }else{
+            } else {
                 View.INVISIBLE
             }
         }
-        editTxtSetStroke.setOnKeyListener{ v, keyCode, event ->
-            if(keyCode == KEYCODE_ENTER){
+        editTxtSetStroke.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KEYCODE_ENTER) {
                 val txt = editTxtSetStroke.getText().toString()
                 txtSetStroke.setText(txt)
                 txtSetStroke.setPriceStroke()
@@ -258,7 +263,7 @@ class MainActivity : AppCompatActivity() {
                 txtSetStroke.visibility = View.VISIBLE
                 editTxtSetStroke.visibility = View.INVISIBLE
                 true
-            }else false
+            } else false
         }
 
 
@@ -268,28 +273,28 @@ class MainActivity : AppCompatActivity() {
         val btnPriceFormat = binding.btnPriceFormat
         val editTxtPriceFormat = binding.editTxtPriceFormat
         val txtPriceFormat = binding.txtPriceFormat
-        btnPriceFormat.setOnClickListener{
-            if(editTxtPriceFormat.visibility == View.INVISIBLE){
+        btnPriceFormat.setOnClickListener {
+            if (editTxtPriceFormat.visibility == View.INVISIBLE) {
                 editTxtPriceFormat.visibility = View.VISIBLE
                 editTxtPriceFormat.requestFocus()
-            }else{
+            } else {
                 editTxtPriceFormat.visibility = View.INVISIBLE
             }
-            txtPriceFormat.visibility = if(txtPriceFormat.visibility == View.INVISIBLE){
+            txtPriceFormat.visibility = if (txtPriceFormat.visibility == View.INVISIBLE) {
                 View.VISIBLE
-            }else{
+            } else {
                 View.INVISIBLE
             }
         }
-        editTxtPriceFormat.setOnKeyListener{ v, keyCode, event ->
-            if(keyCode == KEYCODE_ENTER){
+        editTxtPriceFormat.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KEYCODE_ENTER) {
                 val digit = editTxtPriceFormat.getText().toString()
                 txtPriceFormat.setText(priceFormat(digit))
 
                 txtPriceFormat.visibility = View.VISIBLE
                 editTxtPriceFormat.visibility = View.INVISIBLE
                 true
-            }else false
+            } else false
         }
 
         /**
@@ -298,28 +303,28 @@ class MainActivity : AppCompatActivity() {
         val btnProductCnt = binding.btnProductCnt
         val editTxtProductCnt = binding.editTxtProductCnt
         val txtProductCnt = binding.txtProductCnt
-        btnProductCnt.setOnClickListener{
-            if(editTxtProductCnt.visibility == View.INVISIBLE){
+        btnProductCnt.setOnClickListener {
+            if (editTxtProductCnt.visibility == View.INVISIBLE) {
                 editTxtProductCnt.visibility = View.VISIBLE
                 editTxtProductCnt.requestFocus()
-            }else{
+            } else {
                 editTxtProductCnt.visibility = View.INVISIBLE
             }
-            txtProductCnt.visibility = if(txtProductCnt.visibility == View.INVISIBLE){
+            txtProductCnt.visibility = if (txtProductCnt.visibility == View.INVISIBLE) {
                 View.VISIBLE
-            }else{
+            } else {
                 View.INVISIBLE
             }
         }
-        editTxtProductCnt.setOnKeyListener{ v, keyCode, event ->
-            if(keyCode == KEYCODE_ENTER){
+        editTxtProductCnt.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KEYCODE_ENTER) {
                 val digit = editTxtProductCnt.getText().toString().toLong()
                 txtProductCnt.setText(productCnt(digit))
 
                 txtProductCnt.visibility = View.VISIBLE
                 editTxtProductCnt.visibility = View.INVISIBLE
                 true
-            }else false
+            } else false
         }
 
     }
