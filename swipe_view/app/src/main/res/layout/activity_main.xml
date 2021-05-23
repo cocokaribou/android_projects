@@ -15,4 +15,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/viewPager"/>
 
+    <View
+        android:id="@+id/click_view"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

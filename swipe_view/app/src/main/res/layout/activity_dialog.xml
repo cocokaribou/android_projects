@@ -261,29 +261,17 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:id="@+id/btn_confirm"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="52dp"
+        android:text="확인"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="#ff0000"
         android:textStyle="bold"
         android:textSize="16sp"
         android:textColor="#ffffff"
-        android:onClick="onClick"/>
-
-    <TextView
-        android:layout_width="30dp"
-        android:layout_height="20dp"
-        android:text="확인"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/btn_confirm"
-        app:layout_constraintEnd_toEndOf="@id/btn_confirm"
-        app:layout_constraintStart_toStartOf="@id/btn_confirm"
-        app:layout_constraintTop_toTopOf="@id/btn_confirm" />
+        android:gravity="center"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
