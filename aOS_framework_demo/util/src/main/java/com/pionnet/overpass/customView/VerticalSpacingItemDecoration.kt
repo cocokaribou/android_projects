@@ -5,14 +5,14 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * Linearlayout 데코레이션
+ * Vertical 데코레이션
  * @param spacing : 간격
- * @param edgeSpacing : 처음과 끝 간격
- * @param includeEdge : 처음과 끝 포함시킬지 유무
+ * @param firstEndSpacing : 첫번째 마지막 간격
+ * @param includeTopBottom : 첫번째 마지막 간격 포함여부
  */
-class LinearSpacingItemDecoration(private val spacing: Int,
-                                  private val edgeSpacing: Int,
-                                  private val includeEdge: Boolean)
+class VerticalSpacingItemDecoration(private val spacing: Int,
+                                      private val firstEndSpacing: Int,
+                                      private val includeTopBottom: Boolean)
     : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(
         outRect: Rect,
@@ -26,22 +26,22 @@ class LinearSpacingItemDecoration(private val spacing: Int,
         }
         val itemCount = state.itemCount
 
-        if (includeEdge) {
-            when {
-                itemCount == 0 -> {
-                    outRect.left = edgeSpacing
-                    outRect.right = spacing
+        if (includeTopBottom) {
+            when (position) {
+                0 -> {
+                    outRect.top = firstEndSpacing
+                    outRect.bottom = spacing
                 }
-                position == itemCount - 1 -> {
-                    outRect.right = edgeSpacing
+                itemCount - 1 -> {
+                    outRect.bottom = firstEndSpacing
                 }
                 else -> {
-                    outRect.right = spacing
+                    outRect.bottom = spacing
                 }
             }
         } else {
             if (position != itemCount - 1) {
-                outRect.right = spacing
+                outRect.bottom = spacing
             }
         }
     }

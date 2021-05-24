@@ -1,24 +1,19 @@
 package com.example.aos_framework_demo
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
-import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.isVisible
-import androidx.fragment.app.FragmentManager
-import com.bumptech.glide.Glide
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.solver.state.State
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.aos_framework_demo.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.gson.Gson
-import com.pionnet.overpass.customView.Dialog
 import com.pionnet.overpass.extension.*
 import java.util.*
 
@@ -56,7 +51,6 @@ class MainActivity : AppCompatActivity() {
         /**
          * getAppVersion(), isUpdate()
          */
-
         val btnCheckUpdate = binding.btnCheckUpdate
         btnCheckUpdate.setOnClickListener {
             val txt_group = binding.txtGroupCheckUpdate
@@ -157,14 +151,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
         /**
          * getCurrentTime()
          */
         binding.btnGetCurrTime.setOnClickListener {
             binding.txtGetCurrTime.setText(getCurrentTime())
         }
-
 
         /**
          * Int.dpToPx
@@ -196,7 +188,6 @@ class MainActivity : AppCompatActivity() {
                 } else false
             }
         }
-
 
         /**
          * TextView.setBoldText()
@@ -266,7 +257,6 @@ class MainActivity : AppCompatActivity() {
             } else false
         }
 
-
         /**
          * priceFormat()
          */
@@ -327,8 +317,31 @@ class MainActivity : AppCompatActivity() {
             } else false
         }
 
-    }
+//        addView는 리사이클러 쓸 때 쓰고,, 지금은 intent를 달아줘야겠다
+//        val test_btn = binding.testBtn
+//        test_btn.setOnClickListener {
+//            val lp = ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+//            this.addContentView(binding2.root, lp)
+//        }
 
+        val test_btn = binding.testBtn
+        test_btn.setOnTouchListener{ v: View, event: MotionEvent ->
+            when(event.action){
+                MotionEvent.ACTION_DOWN -> {
+                    test_btn.setTextColor(Color.parseColor("#4287f5"))
+                    val intent = Intent(this, ExtensionActivity::class.java)
+                    startActivity(intent)
+                }
+                MotionEvent.ACTION_CANCEL->{}
+                MotionEvent.ACTION_UP -> {
+                    test_btn.setTextColor(Color.parseColor("#666666"))
+                }
+                else->{}
+            }
+            true
+        }
+
+    }
 
 }
 

@@ -3,8 +3,10 @@ package com.hfad.swipe_view;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -22,7 +24,7 @@ public class CustomDialog extends Dialog implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_dialog);
-        btn_confirm = (View) findViewById(R.id.btn_confirm);
+        btn_confirm = (TextView) findViewById(R.id.btn_confirm);
         btn_confirm.setOnClickListener(this);
     }
 

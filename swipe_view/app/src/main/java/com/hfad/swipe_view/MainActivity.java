@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.e("로그 찍히긴 하지?","당근이지머..");
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         View view = findViewById(R.id.click_view);
         myPagerAdapter = new MyPagerAdapter(this);
@@ -25,13 +29,14 @@ public class MainActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                Log.e("tag", "scrolled");
             }
 
             @Override
             public void onPageSelected(int position) {
                 if (position == myPagerAdapter.getCount() - 1) {
                     view.setVisibility(View.VISIBLE);
+                    Log.e("youngin", "⚠️");
                 } else {
                     view.setVisibility(View.GONE);
                 }
@@ -50,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setView(R.layout.activity_dialog);
 
                 AlertDialog alertDialog = builder.create();
-
+                Log.e("showmethe", "log");
                 alertDialog.show();
             }
         });

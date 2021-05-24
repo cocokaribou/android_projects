@@ -1,6 +1,7 @@
 package com.pionnet.overpass.extension
 
 import android.content.Context
+import android.graphics.Paint
 import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableString
@@ -10,6 +11,7 @@ import android.text.style.StrikethroughSpan
 import android.text.style.StyleSpan
 import android.util.TypedValue
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -24,9 +26,9 @@ fun Date.toSimpleString(): String {
 }
 
 /**
- * 현재 시간에서 addDate 만큼 더하기
+ * 현재 시간에서 addDate 만큼 계산하기
  * @param format : 데이터 형태
- * @param addDate : 더할 날짜
+ * @param addDate : 더할 날짜(1일)
  */
 fun getAddDateString(format: String, addDate: Int): String {
     val simpleDate = SimpleDateFormat(format)
@@ -63,13 +65,14 @@ fun TextView.setBoldText() {
 
 /**
  * text 가운데 줄 처리
+ * "원" 있을 때 원은 글자크기 조절 가능
  */
-fun TextView.setPriceStroke() {
+fun TextView.setPriceStroke(size: Int) {
     val resultText: String = this.text.toString()
     val ssb = SpannableStringBuilder(resultText)
     val start = resultText.indexOf("원")
     if (start >= 0) {
-        ssb.setSpan(AbsoluteSizeSpan(10, true), start, start + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        ssb.setSpan(AbsoluteSizeSpan(size, true), start, start + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
     ssb.setSpan(StrikethroughSpan(), 0, ssb.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     this.text = ssb
@@ -97,4 +100,23 @@ fun productCnt(value: Long): String {
 
     val cnt = (value / 10000).toInt()
     return cnt.toString() + "만+"
+}
+
+/**
+ * 텍스트 아래 밑줄 긋기
+ *
+ */
+fun TextView.setUnderLine() {
+    this.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+}
+
+/**
+ * 왼쪽 마진 주기
+ * @param leftMargin_dp : 왼쪽 마진 값
+ */
+fun TextView.setDynamicLeftMargin(leftMargin_dp: Int) {
+    val context = this.context
+    (this.layoutParams as ConstraintLayout.LayoutParams).apply {
+        this.leftMargin = leftMargin_dp.dpToPx(context)
+    }
 }

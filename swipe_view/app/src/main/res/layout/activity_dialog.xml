@@ -262,6 +262,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
+        android:id="@+id/btn_confirm"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:text="확인"

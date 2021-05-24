@@ -32,16 +32,12 @@ fun isUpdate(appVer: String, newVer: String) : Boolean {
  * @param imgList : 이미지 데이터 값들
  * @param isRandom : 이미지 데이터 중 랜덤으로 출력할지 말지에 대한 플래그
  */
-fun setSplashImgURL(imgList: Array<String>, isRandom: Boolean): String {
+fun setSplashImgURL(imgList: List<String>, isRandom: Boolean): String {
     if (imgList.isEmpty()) return ""
 
     var index = 0
     if (isRandom) {
         index = Random().nextInt(imgList.size)
-    }
-
-    if (!imgList[index].startsWith("http")) {
-        return "https:" + imgList[index]
     }
 
     return imgList[index]

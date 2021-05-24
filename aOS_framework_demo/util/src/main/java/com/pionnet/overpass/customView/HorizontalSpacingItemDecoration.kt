@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Horizontal 데코레이션
  * @param spacing : 간격
- * @param firstEndSpacing : 첫번째 마지막 간격
- * @param includeTopBottom : 첫번째 마지막 간격 포함여부
+ * @param edgeSpacing : 처음과 끝 간격
+ * @param includeEdge : 처음과 끝 포함시킬지 유무
  */
 class HorizontalSpacingItemDecoration(private val spacing: Int,
-                                      private val firstEndSpacing: Int,
-                                      private val includeTopBottom: Boolean)
+                                  private val edgeSpacing: Int,
+                                  private val includeEdge: Boolean)
     : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(
         outRect: Rect,
@@ -26,22 +26,22 @@ class HorizontalSpacingItemDecoration(private val spacing: Int,
         }
         val itemCount = state.itemCount
 
-        if (includeTopBottom) {
-            when (position) {
-                0 -> {
-                    outRect.top = firstEndSpacing
-                    outRect.bottom = spacing
+        if (includeEdge) {
+            when {
+                itemCount == 0 -> {
+                    outRect.left = edgeSpacing
+                    outRect.right = spacing
                 }
-                itemCount - 1 -> {
-                    outRect.bottom = firstEndSpacing
+                position == itemCount - 1 -> {
+                    outRect.right = edgeSpacing
                 }
                 else -> {
-                    outRect.bottom = spacing
+                    outRect.right = spacing
                 }
             }
         } else {
             if (position != itemCount - 1) {
-                outRect.bottom = spacing
+                outRect.right = spacing
             }
         }
     }
