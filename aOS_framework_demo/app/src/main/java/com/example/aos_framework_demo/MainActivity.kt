@@ -1,5 +1,6 @@
 package com.example.aos_framework_demo
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -150,8 +151,8 @@ class MainActivity : AppCompatActivity() {
 
         val test_btn = binding.testBtn
         test_btn.setOnClickListener {
-            val dlg = CustomDialog(this)
-            dlg.start("시작", false, test_btn.id)
+            val intent = Intent(applicationContext, ExtensionActivity::class.java)
+            startActivity(intent)
         }
     }
 

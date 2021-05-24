@@ -7,12 +7,11 @@ import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.Window
 import android.widget.EditText
 import android.widget.TextView
-import com.example.aos_framework_demo.App.Companion.context
-import com.pionnet.overpass.extension.dpToPx
-import com.pionnet.overpass.extension.getAddDateString
+import com.pionnet.overpass.extension.*
 
 class CustomDialog(context: Context) {
     private val dialog = Dialog(context) //부모 액티비티의 context
+    private val context = context
 
     private lateinit var btn_confirm: TextView
     private lateinit var txt_result: TextView
@@ -28,29 +27,73 @@ class CustomDialog(context: Context) {
         dialog.show()
 
         val edit_input = dialog.findViewById<EditText>(R.id.editTxt_input)
-        edit_input.setHint(content)
+        edit_input.hint = content
         if (txtResize) {
-            edit_input.setTextSize(15.toFloat())
+            edit_input.textSize = 15.toFloat()
         }
 
         txt_result = dialog.findViewById<TextView>(R.id.txt_result)
         edit_input.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
-                val result:String = when (btn) {
+                when (btn) {
                     R.id.btn_addDate -> {
-                        val date = Integer.parseInt(edit_input.getText().toString())
-                        getAddDateString("yyyy:MM:dd", date)
+                        try {
+                            val date = Integer.parseInt(edit_input.text.toString())
+                            val txt = "$date 일 후: ${getAddDateString("yyyy/MM/dd", date)}"
+                            txt_result.text = txt
+
+                        } catch (e: Exception) {
+                            txt_result.text = "숫자를 입력하세요"
+                        }
                     }
                     R.id.btn_dpToPx -> {
-                        val dp = Integer.parseInt(edit_input.getText().toString())
-                        dp.dpToPx(context()).toString()
+                        try {
+                            val num = Integer.parseInt(edit_input.getText().toString())
+                            num.dpToPx(context)
+
+                        } catch (e: Exception) {
+                            txt_result.text = "숫자를 입력하세요"
+                        }
                     }
-                    else -> {"No Result"}
+
+                    R.id.btn_setBold -> {
+                        val txt = edit_input.text.toString()
+                        txt_result.text = txt
+                        txt_result.setBoldText()
+                    }
+                    R.id.btn_setStroke -> {
+                        val txt = edit_input.text.toString()
+                        txt_result.text = txt
+                        txt_result.setPriceStroke(16)
+                    }
+                    R.id.btn_priceFormat -> {
+                        try {
+                            val num = edit_input.text.toString()
+                            val txt = priceFormat(num)
+                            txt_result.text = txt
+                        } catch(e:Exception){
+                            txt_result.text = "숫자를 입력하세요"
+                        }
+
+                    }
+                    R.id.btn_productCnt -> {
+                        try {
+                            val num = Integer.parseInt(edit_input.getText().toString())
+                            val txt = productCnt(num.toLong())
+                            txt_result.text = txt
+
+                        } catch (e: Exception) {
+                            txt_result.text = "숫자를 입력하세요"
+                        }
+                    }
+
+                    else -> {
+                        "No Result"
+                    }
                 }
 
-                txt_result.setText(result)
             }
-        true
+            true
         }
     }
 }
