@@ -61,7 +61,6 @@
         android:id="@+id/imgView"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_margin="20dp"
         android:background="@drawable/imgview_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

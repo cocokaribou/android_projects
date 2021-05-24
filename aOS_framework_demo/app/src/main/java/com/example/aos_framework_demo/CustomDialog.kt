@@ -49,7 +49,7 @@ class CustomDialog(context: Context) {
                     R.id.btn_dpToPx -> {
                         try {
                             val num = Integer.parseInt(edit_input.getText().toString())
-                            num.dpToPx(context)
+                            txt_result.text="$num dp -> ${num.dpToPx(context).toString()} px"
 
                         } catch (e: Exception) {
                             txt_result.text = "숫자를 입력하세요"
