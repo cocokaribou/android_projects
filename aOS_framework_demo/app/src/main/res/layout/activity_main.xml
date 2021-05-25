@@ -41,15 +41,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_checkUpdate" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/txt_jsonExtension"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="JsonExtension"-->
-<!--        android:textSize="27sp"-->
+    <TextView
+        android:id="@+id/txt_jsonExtension"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="JsonExtension"
+        android:textSize="27sp"
 
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/btn_setSplashImg" />-->
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_setSplashImg" />
 
     <Button
         android:id="@+id/btn_getJson"
@@ -59,7 +59,7 @@
         android:textAllCaps="false"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_setSplashImg" />
+        app:layout_constraintTop_toBottomOf="@id/txt_jsonExtension" />
 
     <TextView
         android:id="@+id/txt_textExtension"
@@ -153,12 +153,21 @@
         app:layout_constraintTop_toBottomOf="@id/btn_priceFormat" />
 
     <TextView
-        android:id="@+id/test_btn"
+        android:id="@+id/btn_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ViewExtension"
+        android:text="ViewExtension▶"
         android:textSize="27sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_productCnt" />
+
+    <TextView
+        android:id="@+id/sticky_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sticky▶"
+        android:textSize="27sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

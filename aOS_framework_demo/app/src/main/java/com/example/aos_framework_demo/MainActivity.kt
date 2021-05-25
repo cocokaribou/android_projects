@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         /**
-         * Int.dpToPx
+         * Int.dpToPx()
          */
         val btnDpToPx = binding.btnDpToPx
         btnDpToPx.setOnClickListener {
@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity() {
         val btnPriceFormat = binding.btnPriceFormat
         btnPriceFormat.setOnClickListener {
             val dlg = CustomDialog(this)
-            dlg.start("액수를 입력하세요", true, btnPriceFormat.id)
+            dlg.start("천 단위 수를 입력하세요", true, btnPriceFormat.id)
         }
 
         /**
@@ -149,9 +149,17 @@ class MainActivity : AppCompatActivity() {
             dlg.start("만 단위 수를 입력하세요", true, btnProductCnt.id)
         }
 
-        val test_btn = binding.testBtn
-        test_btn.setOnClickListener {
+        val btnLayout = binding.btnLayout
+        btnLayout.setOnClickListener {
             val intent = Intent(applicationContext, ExtensionActivity::class.java)
+            startActivity(intent)
+        }
+
+        /**
+         * sticky activity
+         */
+        binding.stickyBtn.setOnClickListener {
+            val intent = Intent(this@MainActivity, StickyActivity::class.java)
             startActivity(intent)
         }
     }

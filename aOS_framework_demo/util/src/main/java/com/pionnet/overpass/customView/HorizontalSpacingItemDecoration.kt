@@ -27,12 +27,12 @@ class HorizontalSpacingItemDecoration(private val spacing: Int,
         val itemCount = state.itemCount
 
         if (includeEdge) {
-            when {
-                itemCount == 0 -> {
+            when (position) {
+                0 -> {
                     outRect.left = edgeSpacing
                     outRect.right = spacing
                 }
-                position == itemCount - 1 -> {
+                itemCount - 1 -> {
                     outRect.right = edgeSpacing
                 }
                 else -> {
