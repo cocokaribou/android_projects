@@ -59,8 +59,8 @@
 
     <ImageView
         android:id="@+id/imgView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_margin="20dp"
         android:background="@drawable/imgview_style"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,10 +115,11 @@
 
         <EditText
             android:id="@+id/edit_bias"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="#dddddd"
             android:text="0.5"
+            android:padding="5dp"
             android:gravity="center"
             android:textSize="20sp"
             android:singleLine="true"
@@ -127,16 +128,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/btn_customView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CustomView▶"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraint_outer"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -65,16 +65,26 @@ fun TextView.setBoldText() {
 
 /**
  * text 가운데 줄 처리
- * "원" 있을 때 원은 글자크기 조절 가능
+ * @param size : "원" 있을 때 원은 글자크기 조절 가능
+ * @param isExist : "원" 포함유무
  */
-fun TextView.setPriceStroke(size: Int) {
+fun TextView.setPriceStroke(size: Int, isExist: Boolean) {
     val resultText: String = this.text.toString()
     val ssb = SpannableStringBuilder(resultText)
     val start = resultText.indexOf("원")
     if (start >= 0) {
         ssb.setSpan(AbsoluteSizeSpan(size, true), start, start + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
-    ssb.setSpan(StrikethroughSpan(), 0, ssb.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    if (isExist) {
+        ssb.setSpan(StrikethroughSpan(), 0, ssb.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    } else {
+        if (start >= 0) {
+            ssb.setSpan(StrikethroughSpan(), 0, ssb.length - 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        } else {
+            ssb.setSpan(StrikethroughSpan(), 0, ssb.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+    }
+
     this.text = ssb
 }
 

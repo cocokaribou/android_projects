@@ -1,14 +1,15 @@
 package com.example.aos_framework_demo
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.aos_framework_demo.adapter.CustomAdapter
 import com.example.aos_framework_demo.databinding.ActivityRecylcerBinding
+import com.pionnet.overpass.customView.GridDividerItemDecoration
 import com.pionnet.overpass.customView.GridSpacingItemDecoration
 import com.pionnet.overpass.customView.HorizontalSpacingItemDecoration
-import com.pionnet.overpass.extension.collapse
-import com.pionnet.overpass.extension.expand
 
 class RecyclerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecylcerBinding
@@ -17,6 +18,7 @@ class RecyclerActivity : AppCompatActivity() {
     private lateinit var gridManager: GridLayoutManager
     private lateinit var horizontalDeco: HorizontalSpacingItemDecoration
     private lateinit var gridDeco: GridSpacingItemDecoration
+    private lateinit var gridDeco2: GridDividerItemDecoration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +76,11 @@ class RecyclerActivity : AppCompatActivity() {
         recyclerGrid.layoutManager = gridManager
         recyclerGrid.adapter = mAdapter
 
+        gridDeco = GridSpacingItemDecoration(4, 0, false)
         binding.btnAddDeco2.setOnClickListener {
+            if (gridDeco2 != null) {
+                recyclerGrid.removeItemDecoration(gridDeco2)
+            }
             val editGridSpacing = binding.editGridSpacing
             val switchGridEdge = binding.switchGridEdge
 
@@ -98,26 +104,54 @@ class RecyclerActivity : AppCompatActivity() {
 
 
         /**
-         * AnimationExtension
+         * GridDividerItemDecoration
          */
-        val expand = binding.txtExpand
-        val expanded = binding.txtExpanded
+        gridDeco2 = GridDividerItemDecoration(0, Color.parseColor("#b2b2b2"))
+        binding.btnAddDeco3.setOnClickListener {
+            if (gridDeco != null) {
+                recyclerGrid.removeItemDecoration(gridDeco)
+            }
+            val editGridSpacing = binding.editGridSpacing2
+            var gridSpacing = 0;
 
-        var switch = false
-        expand.setOnClickListener {
-            when (switch) {
-                true -> {
-                    expand.text = "collapse"
-                    expand(expanded)
-                    switch = !switch
-                }
-                false -> {
-                    expand.text = "expand"
-                    collapse(expanded)
-                    switch = !switch
-                }
+            try {
+                gridSpacing = Integer.parseInt(editGridSpacing.text.toString())
+            } catch (e: Exception) {
             }
 
+            if (recyclerGrid.itemDecorationCount > 0) {
+                recyclerGrid.removeItemDecoration(gridDeco2)
+            }
+
+            gridDeco2 = GridDividerItemDecoration(gridSpacing, Color.parseColor("#b2b2b2"))
+            recyclerGrid.addItemDecoration(gridDeco2)
+            mAdapter.notifyDataSetChanged()
         }
+
+//        Paint class : 컬러와 스타일 정보
+
+//
+//        /**
+//         * AnimationExtension
+//         */
+//        val expand = binding.txtExpand
+//        val expanded = binding.txtExpanded
+//
+//        var switch = false
+//        expand.setOnClickListener {
+//            when (switch) {
+//                true -> {
+//                    expand.text = "collapse"
+//                    expand(expanded)
+//                    switch = !switch
+//                }
+//                false -> {
+//                    expand.text = "expand"
+//                    collapse(expanded)
+//                    switch = !switch
+//                }
+//            }
+//
+//        }
     }
 }

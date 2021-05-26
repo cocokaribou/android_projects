@@ -1,4 +1,4 @@
-package com.example.aos_framework_demo
+package com.example.aos_framework_demo.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.aos_framework_demo.databinding.ItemListBinding
+import com.example.aos_framework_demo.R
 
 class CustomAdapter : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
 

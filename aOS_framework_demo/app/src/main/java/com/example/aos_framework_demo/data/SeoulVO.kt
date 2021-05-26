@@ -1,4 +1,4 @@
-package com.example.aos_framework_demo
+package com.example.aos_framework_demo.data
 
 import com.google.gson.annotations.SerializedName
 

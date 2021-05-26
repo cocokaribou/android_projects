@@ -1,6 +1,7 @@
 package com.example.aos_framework_demo
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +20,6 @@ class StickyActivity: AppCompatActivity() {
     val testList: List<String> = listOf(
         "1",
         "2",
-        "STICKY",
         "3",
         "4",
         "5",
@@ -67,7 +67,7 @@ class StickyActivity: AppCompatActivity() {
         }
 
         override fun isHeader(itemPosition: Int): Boolean {
-            return itemPosition < 2
+            return itemPosition != 2
         }
 
         override fun hideHeader() {

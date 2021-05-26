@@ -1,167 +1,132 @@
 package com.example.aos_framework_demo
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.Gravity
+import android.view.KeyEvent
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.aos_framework_demo.databinding.ActivityMainBinding
-import com.google.gson.Gson
+import com.example.aos_framework_demo.dialog.CustomDialog
 import com.pionnet.overpass.extension.*
-import okhttp3.internal.Internal.instance
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var toast: Toast
+    private val tempArr = listOf(
+        "https://img1.png",
+        "https://img2.png",
+        "https://img3.png",
+        "https://img4.png",
+        "https://img5.png"
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         /**
-         * gson 연습
+         * 토스트 띄우는 클릭리스너
          */
-        val jsonTestString = getJsonFileToString("seoul.json", this)
-        val gson = Gson() //gson : json 오브젝트를 java 오브젝트로 바꿔줌(data class)
-        try {
-            val response2 = gson.fromJson(jsonTestString, SeoulVO::class.java)
-            response2.DATA.forEachIndexed { i, d ->
-                Log.e("youngin", "자치구 코드 : ${d.cgg_code}, 자치구 이름: ${d.cgg_code_nm}")
+        val toastClickListener: View.OnClickListener = View.OnClickListener {
+            val toastMessage = when (it.id) {
 
-                //nullable로 선언된 데이터의 null check
-                if (d.upd_time != null) {
-                    Log.e("youngin", d.upd_time.toString())
+                binding.btnSetSplashImg.id -> {
+                    setSplashImgURL(this.tempArr, true)
                 }
+
+                binding.btnCheckUpdate.id -> {
+                    val newVer = "2.5.0"
+                    val checker = isUpdate(getAppVersion(applicationContext), newVer)
+                    when (checker) {
+                        true -> "업데이트가 필요합니다"
+                        false -> "업데이트가 완료됐습니다"
+                    }
+                }
+
+                binding.btnGetJson.id -> {
+                    getJsonFileToString("membership.json", this@MainActivity)
+                }
+
+                binding.btnToSimpleStr.id -> {
+                    Date().toSimpleString()
+                }
+
+                binding.btnGetCurrTime.id -> {
+                    getCurrentTime()
+                }
+
+                else -> {
+                    ""
+                }
+
             }
-        } catch (e: Exception) {
-            Log.e("youngin", e.toString())
+            toast = Toast.makeText(this@MainActivity, toastMessage, Toast.LENGTH_SHORT)
+            toast.show()
         }
 
+        binding.btnCheckUpdate.setOnClickListener(toastClickListener)
+        binding.btnSetSplashImg.setOnClickListener(toastClickListener)
+        binding.btnGetJson.setOnClickListener(toastClickListener)
+        binding.btnToSimpleStr.setOnClickListener(toastClickListener)
+        binding.btnGetCurrTime.setOnClickListener(toastClickListener)
+
         /**
-         * getAppVersion(), isUpdate()
+         * 다이얼로그 띄우는 클릭리스너
          */
-        val btnCheckUpdate = binding.btnCheckUpdate
-        btnCheckUpdate.setOnClickListener {
-            val newVer = "2.5.0"
-            val checker = isUpdate(getAppVersion(applicationContext), newVer)
-            toast = when (checker) {
-                true -> Toast.makeText(applicationContext, "업데이트가 필요합니다", Toast.LENGTH_SHORT)
-                false -> Toast.makeText(applicationContext, "업데이트가 완료되었습니다", Toast.LENGTH_SHORT)
+        val dialogClickListener: View.OnClickListener = View.OnClickListener {
+            val dlg = CustomDialog(this@MainActivity)
+            dlg.start(viewId = it.id)
+        }
+
+        binding.btnAddDate.setOnClickListener(dialogClickListener)
+        binding.btnDpToPx.setOnClickListener(dialogClickListener)
+        binding.btnPriceFormat.setOnClickListener(dialogClickListener)
+        binding.btnProductCnt.setOnClickListener(dialogClickListener)
+
+
+        /**
+         * 입력창 키 리스너
+         */
+        val txtBold = binding.txtBold
+        val txtUnderLine = binding.txtUnderLine
+        val txtStroke = binding.txtStroke
+
+        val mOnKeyListener = View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+
+                /**
+                 * Text 입력
+                 */
+                val input = binding.editTextView.text.toString()
+                txtBold.text = input
+                txtUnderLine.text = input
+                txtStroke.text = input
+
+                txtBold.setBoldText()
+                txtUnderLine.setUnderLine()
+                txtStroke.setPriceStroke(size = binding.txtStroke.length(), isExist = true)
+
+                /**
+                 * Margin 입력
+                 */
+                val marginStr = binding.editTextViewMargin.text.toString()
+                var margin = 0
+                try {
+                    margin = Integer.parseInt(marginStr)
+                } catch (e: Exception) {
+                }
+                txtBold.setDynamicLeftMargin(margin)
+                txtUnderLine.setDynamicLeftMargin(margin)
+                txtStroke.setDynamicLeftMargin(margin)
             }
-            toast.show()
+            false
         }
 
-        /**
-         * setSplashImgURL()
-         */
-        val btnSetSplashImg = binding.btnSetSplashImg
-        btnSetSplashImg.setOnClickListener {
-            val arr = listOf(
-                "https://img1.png",
-                "https://img2.png",
-                "https://img3.png",
-                "https://img4.png",
-                "https://img5.png"
-            )
-            val splashImg = setSplashImgURL(arr, true)
-            toast = Toast.makeText(applicationContext, splashImg, Toast.LENGTH_SHORT)
-            toast.show()
-        }
+        binding.editTextView.setOnKeyListener(mOnKeyListener)
+        binding.editTextViewMargin.setOnKeyListener(mOnKeyListener)
 
-        /**
-         * getJsonFileToString()
-         */
-        binding.btnGetJson.setOnClickListener {
-            val jsonString = getJsonFileToString("membership.json", this)
-            toast = Toast.makeText(applicationContext, jsonString, Toast.LENGTH_SHORT)
-            toast.show()
-        }
-
-        /**
-         * toSimpleString()
-         */
-        binding.btnToSimpleStr.setOnClickListener {
-            val date = Date()
-            toast = Toast.makeText(applicationContext, date.toSimpleString(), Toast.LENGTH_SHORT)
-            toast.show()
-        }
-
-        /**
-         * getAddDateString()
-         */
-        val btnAddDate = binding.btnAddDate
-        btnAddDate.setOnClickListener {
-            val dlg = CustomDialog(this)
-            dlg.start("일수를 입력하세요", false, btnAddDate.id)
-        }
-
-        /**
-         * getCurrentTime()
-         */
-        binding.btnGetCurrTime.setOnClickListener {
-            toast = Toast.makeText(applicationContext, getCurrentTime(), Toast.LENGTH_SHORT)
-            toast.show()
-        }
-
-        /**
-         * Int.dpToPx()
-         */
-        val btnDpToPx = binding.btnDpToPx
-        btnDpToPx.setOnClickListener {
-            val dlg = CustomDialog(this)
-            dlg.start("dp 값을 입력하세요", false, btnDpToPx.id)
-        }
-
-        /**
-         * TextView.setBoldText()
-         */
-        val btnSetBold = binding.btnSetBold
-        btnSetBold.setOnClickListener {
-            val dlg = CustomDialog(this)
-            dlg.start("굵게 처리할 텍스트를 입력하세요", true, btnSetBold.id)
-        }
-
-        /**
-         * TextView.setPriceStroke()
-         */
-        val btnSetStroke = binding.btnSetStroke
-        btnSetStroke.setOnClickListener {
-            val dlg = CustomDialog(this)
-            dlg.start("취소선 처리할 텍스트를 입력하세요", true, btnSetStroke.id)
-        }
-
-        /**
-         * priceFormat()
-         */
-        val btnPriceFormat = binding.btnPriceFormat
-        btnPriceFormat.setOnClickListener {
-            val dlg = CustomDialog(this)
-            dlg.start("천 단위 수를 입력하세요", true, btnPriceFormat.id)
-        }
-
-        /**
-         * productCnt()
-         */
-        val btnProductCnt = binding.btnProductCnt
-        btnProductCnt.setOnClickListener {
-            val dlg = CustomDialog(this)
-            dlg.start("만 단위 수를 입력하세요", true, btnProductCnt.id)
-        }
-
-        val btnLayout = binding.btnLayout
-        btnLayout.setOnClickListener {
-            val intent = Intent(applicationContext, ExtensionActivity::class.java)
-            startActivity(intent)
-        }
-
-        /**
-         * sticky activity
-         */
-        binding.stickyBtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, StickyActivity::class.java)
-            startActivity(intent)
-        }
     }
-
 }

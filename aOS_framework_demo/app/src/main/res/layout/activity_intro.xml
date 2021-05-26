@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IntroActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="aOS_pion_framework"
+        android:textSize="27sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1.0.0"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        />
+
+    <TextView
+        android:id="@+id/txt_overpass1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="48dp"
+        android:text="com.pionnet.overpass."
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/txt_extension"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/version" />
+
+    <TextView
+        android:id="@+id/txt_extension"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="extension"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/txt_overpass1"
+        app:layout_constraintStart_toEndOf="@id/txt_overpass1"
+        app:layout_constraintTop_toTopOf="@id/txt_overpass1" />
+
+    <TextView
+        android:id="@+id/demo1_extension"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:text="demo 1"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:layout_margin="20dp"
+        android:background="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_overpass1" />
+
+    <TextView
+        android:id="@+id/demo2_extension"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:text="demo 2"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:layout_margin="20dp"
+        android:background="@color/blue"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/demo1_extension" />
+
+    <TextView
+        android:id="@+id/txt_overpass2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="25dp"
+        android:text="com.pionnet.overpass."
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/txt_customView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/demo2_extension" />
+
+    <TextView
+        android:id="@+id/txt_customView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="customView"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/txt_overpass2"
+        app:layout_constraintTop_toTopOf="@id/txt_overpass2"
+        app:layout_constraintBottom_toBottomOf="@id/txt_overpass2"/>
+
+    <TextView
+        android:id="@+id/demo1_customView"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:text="demo 1"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:layout_margin="20dp"
+        android:background="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_overpass2" />
+
+    <TextView
+        android:id="@+id/demo2_customView"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:text="demo 2"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:layout_margin="20dp"
+        android:background="@color/blue"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/demo1_customView" />
+</androidx.constraintlayout.widget.ConstraintLayout>
