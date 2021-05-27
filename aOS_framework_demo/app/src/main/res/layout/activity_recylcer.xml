@@ -12,16 +12,47 @@
         android:layout_height="match_parent"
         android:padding="16dp">
 
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RecyclerView"
+            android:textSize="27sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LinearLayoutManager"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_horizontal"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:background="@color/blue"
             android:orientation="horizontal"
             android:scrollbars="horizontal"
-            android:background="@color/blue"
+            app:layout_constraintBottom_toBottomOf="@id/recycler_vertical"
+            app:layout_constraintEnd_toStartOf="@id/recycler_vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/recycler_vertical"
+            app:layout_constraintVertical_bias="0.545" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            android:scrollbars="vertical"
+            android:background="@color/blue"
+            app:layout_constraintStart_toEndOf="@id/recycler_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title2" />
 
         <EditText
             android:id="@+id/edit_spacing"
@@ -33,7 +64,7 @@
             android:singleLine="true"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recycler_horizontal" />
+            app:layout_constraintTop_toBottomOf="@id/recycler_vertical" />
 
         <EditText
             android:id="@+id/edit_edge"
@@ -69,6 +100,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/edit_spacing" />
 
+        <TextView
+            android:id="@+id/title3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GridLayoutManager"
+            android:textSize="24sp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_spacing"/>
+            />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_grid"
             android:layout_width="wrap_content"
@@ -78,60 +119,53 @@
             android:background="@color/blue"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_spacing" />
+            app:layout_constraintTop_toBottomOf="@id/title3" />
 
         <EditText
             android:id="@+id/edit_grid_spacing"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:hint="간격"
             android:inputType="phone"
             android:singleLine="true"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recycler_grid" />
+            app:layout_constraintEnd_toStartOf="@id/switch_grid_edge"
+            app:layout_constraintTop_toTopOf="@id/line"
+            app:layout_constraintBottom_toBottomOf="@id/line"/>
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_grid_edge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             app:layout_constraintBottom_toBottomOf="@id/edit_grid_spacing"
-            app:layout_constraintStart_toEndOf="@id/edit_spacing"
+            app:layout_constraintStart_toEndOf="@id/edit_grid_spacing"
+            app:layout_constraintEnd_toStartOf="@id/line"
             app:layout_constraintTop_toTopOf="@id/edit_grid_spacing" />
 
-        <Button
-            android:id="@+id/btn_addDeco2"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:text="GO"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/edit_grid_spacing"
+        <View
+            android:id="@+id/line"
+            android:layout_width="0.33dp"
+            android:layout_height="30dp"
+            android:background="@color/darkgray"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/edit_grid_spacing" />
+            app:layout_constraintTop_toBottomOf="@id/recycler_grid"
+            app:layout_constraintBottom_toBottomOf="@id/switch_grid_edge"/>
 
         <EditText
             android:id="@+id/edit_grid_spacing2"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:hint="선 굵기"
             android:inputType="phone"
             android:singleLine="true"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_grid_spacing" />
-
-        <Button
-            android:id="@+id/btn_addDeco3"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:text="GO"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/edit_grid_spacing2"
+            app:layout_constraintStart_toEndOf="@+id/line"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/edit_grid_spacing2" />
+            app:layout_constraintTop_toTopOf="@id/edit_grid_spacing"
+            app:layout_constraintBottom_toBottomOf="@id/edit_grid_spacing"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

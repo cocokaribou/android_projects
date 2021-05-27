@@ -18,14 +18,25 @@
 
     <TextView
         android:id="@+id/txt_result"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/btn_confirm"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/switch_stroke"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTxt_input" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_stroke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@id/txt_result"
+        app:layout_constraintTop_toTopOf="@id/txt_result"
+        app:layout_constraintBottom_toBottomOf="@id/txt_result"
+        />
 
     <TextView
         android:id="@+id/btn_confirm"

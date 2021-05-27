@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
                 binding.btnCheckUpdate.id -> {
                     val newVer = "2.5.0"
-                    val checker = isUpdate(getAppVersion(applicationContext), newVer)
+                    val checker = isUpdate(getAppVersion(this@MainActivity), newVer)
                     when (checker) {
                         true -> "업데이트가 필요합니다"
                         false -> "업데이트가 완료됐습니다"
@@ -85,6 +85,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnDpToPx.setOnClickListener(dialogClickListener)
         binding.btnPriceFormat.setOnClickListener(dialogClickListener)
         binding.btnProductCnt.setOnClickListener(dialogClickListener)
+        binding.btnSetStroke.setOnClickListener(dialogClickListener)
 
 
         /**
@@ -92,7 +93,6 @@ class MainActivity : AppCompatActivity() {
          */
         val txtBold = binding.txtBold
         val txtUnderLine = binding.txtUnderLine
-        val txtStroke = binding.txtStroke
 
         val mOnKeyListener = View.OnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
@@ -103,11 +103,9 @@ class MainActivity : AppCompatActivity() {
                 val input = binding.editTextView.text.toString()
                 txtBold.text = input
                 txtUnderLine.text = input
-                txtStroke.text = input
 
                 txtBold.setBoldText()
                 txtUnderLine.setUnderLine()
-                txtStroke.setPriceStroke(size = binding.txtStroke.length(), isExist = true)
 
                 /**
                  * Margin 입력
@@ -120,7 +118,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 txtBold.setDynamicLeftMargin(margin)
                 txtUnderLine.setDynamicLeftMargin(margin)
-                txtStroke.setDynamicLeftMargin(margin)
             }
             false
         }

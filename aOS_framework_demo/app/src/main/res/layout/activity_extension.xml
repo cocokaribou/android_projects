@@ -10,6 +10,7 @@
         android:id="@+id/txt_imgView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="ImageView Extensions"
         android:textSize="27sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,15 +58,24 @@
         app:layout_constraintStart_toEndOf="@id/btn_preload"
         app:layout_constraintTop_toTopOf="@id/btn_preload" />
 
-    <ImageView
-        android:id="@+id/imgView"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+    <View
+        android:id="@+id/view_background"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_margin="20dp"
         android:background="@drawable/imgview_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_preload" />
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:layout_constraintEnd_toEndOf="@id/view_background"
+        app:layout_constraintStart_toStartOf="@id/view_background"
+        app:layout_constraintTop_toTopOf="@id/view_background"
+        app:layout_constraintBottom_toBottomOf="@id/view_background"/>
 
     <TextView
         android:id="@+id/txt_view"
@@ -75,7 +85,7 @@
         android:text="Layout Extensions"
         android:textSize="27sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgView"
+        app:layout_constraintTop_toBottomOf="@id/view_background"
         app:layout_constraintBottom_toTopOf="@id/linear_outer"/>
 
     <LinearLayout
@@ -128,5 +138,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/txt_animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Animation Extension"
+        android:layout_marginTop="20dp"
+        android:textSize="27sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraint_outer"/>
+
+    <ImageView
+        android:id="@+id/img_animation"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/thinking"
+        android:visibility="invisible"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintStart_toEndOf="@id/txt_animation"
+        app:layout_constraintTop_toTopOf="@id/txt_animation"
+        app:layout_constraintBottom_toBottomOf="@id/txt_animation"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
