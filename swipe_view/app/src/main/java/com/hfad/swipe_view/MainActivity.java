@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         view = (View) findViewById(R.id.click_view);
         myPagerAdapter = new MyPagerAdapter(this);
         viewPager.setAdapter(myPagerAdapter);
+//        viewPager.setCurrentItem(1); //시작점 설정 가능
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -37,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 if (position == myPagerAdapter.getCount() - 1) {
                     view.setVisibility(View.VISIBLE);
+                    view.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            CustomDialog dialog = new CustomDialog(MainActivity.this);
+                            dialog.start();
+                        }
+                    });
                     Log.e("youngin", "⚠️");
                 } else {
                     view.setVisibility(View.GONE);
@@ -49,13 +57,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CustomDialog dialog = new CustomDialog(MainActivity.this);
-                dialog.start();
-            }
-        });
 
     }
 }
