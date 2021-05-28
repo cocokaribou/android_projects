@@ -13,6 +13,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
+    private View view;
     private MyPagerAdapter myPagerAdapter;
 
     @Override
@@ -20,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.e("로그 찍히긴 하지?","당근이지머..");
+        Log.e("로그 찍히긴 하지?", "당근이지머..");
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-        View view = findViewById(R.id.click_view);
+        view = (View) findViewById(R.id.click_view);
         myPagerAdapter = new MyPagerAdapter(this);
         viewPager.setAdapter(myPagerAdapter);
 
@@ -51,13 +52,10 @@ public class MainActivity extends AppCompatActivity {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setView(R.layout.activity_dialog);
-
-                AlertDialog alertDialog = builder.create();
-                Log.e("showmethe", "log");
-                alertDialog.show();
+                CustomDialog dialog = new CustomDialog(MainActivity.this);
+                dialog.start();
             }
         });
+
     }
 }

@@ -9,14 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyPagerAdapter extends PagerAdapter {
 
     private static int ITEM_NUM = 3;
     private Context mContext = null;
-    private View[] ViewArr = new View[ITEM_NUM];
-    //ArrayList로 바꾸는게 나을까
-    public MyPagerAdapter(){
-    }
+    private List<View> ViewList = new ArrayList<>();
+    //ArrayList로 바꾸는게 나을까 -> 바꿈
 
     //Context를 전달받아 mContext에 저장하는 생성자 추가.
     public MyPagerAdapter(Context context){
@@ -36,16 +37,16 @@ public class MyPagerAdapter extends PagerAdapter {
             constraint_view = inflater.inflate(R.layout.constraint_layout, container, false);
             dialog_view = inflater.inflate(R.layout.dialog_intro, container, false);
             intro_view = inflater.inflate(R.layout.intro, container, false);
-            ViewArr[0] = intro_view;
-            ViewArr[1] = constraint_view;
-            ViewArr[2] = dialog_view;
+            ViewList.add(intro_view);
+            ViewList.add(constraint_view);
+            ViewList.add(dialog_view);
 
         }
 
         //뷰페이저에 추가.
-        container.addView(ViewArr[position]);
+        container.addView(ViewList.get(position));
 
-        return ViewArr[position];
+        return ViewList.get(position);
     }
 
     @Override
