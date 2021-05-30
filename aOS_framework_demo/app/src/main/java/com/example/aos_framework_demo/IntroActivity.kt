@@ -28,5 +28,9 @@ class IntroActivity : AppCompatActivity() {
             val intent = Intent(this@IntroActivity, StickyActivity::class.java)
             startActivity(intent)
         }
+        binding.demo3CustomView.setOnClickListener {
+            val intent = Intent(this@IntroActivity, ElandActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

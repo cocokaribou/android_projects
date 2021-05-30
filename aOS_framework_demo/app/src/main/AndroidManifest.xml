@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AOS_framework_demo">
+        <activity android:name=".ElandActivity"></activity>
         <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +23,6 @@
         <activity android:name=".ExtensionActivity" />
         <activity android:name=".RecyclerActivity" />
         <activity android:name=".StickyActivity" />
-
     </application>
 
 </manifest>

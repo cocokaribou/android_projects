@@ -126,4 +126,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/demo1_customView" />
+
+
+    <TextView
+        android:id="@+id/demo3_customView"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:text="demo 3"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:layout_margin="20dp"
+        android:background="@color/blue"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/demo2_customView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

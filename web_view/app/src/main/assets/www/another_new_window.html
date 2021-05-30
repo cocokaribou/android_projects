@@ -10,16 +10,30 @@
 	function closeWin(){
 		window.close();
 	}
+
+	function submitPhone(){
+	    alert("너는 뜨냐고");
+        var phoneNum = document.getElementById("phoneNum");
+        var url = "tel:"+phoneNum;
+        console.log(url);
+        console.log("되니?");
+
+        var form = document.getElementById("myForm");
+        form.action = url;
+        return false;
+	}
+
 </script>
 
-<h1>하위~2</h1>
+<h1>Hi again!</h1>
 <input type="button" value="창 닫기" onclick="javascript:closeWin();">
 <br><br>
-전화 걸기:
-<form>
-    <input type="text">
+<form id="myForm" method="post" onsubmit="submitPhone">
+    <label>전화걸기 </label>
+    <input id="phoneNum" type="text" placeholder="전화번호를 입력하세요">
+    <button type="submit">call</button>
 </form>
-<br><br>
-<a href="tel:010-3455-2971">☎️</a>
+<br>
+<a href="010-3455-2971">☎️</a>
 </body>
 </html>

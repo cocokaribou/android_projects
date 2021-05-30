@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         //자바스크립트 새 창 띄우기 허용 여부
         webView.loadUrl(url);
+        Log.e("⚠️", url);
 //        webView.loadUrl("javascript:closeWin()");
 
         WebViewClientClass webViewClient = new WebViewClientClass();
@@ -70,10 +71,10 @@ public class MainActivity extends AppCompatActivity {
             isOpen = true;
 
             //웹뷰에서 링크를 수신하면 intent를 실행한다
-            if(url.startsWith("tel:")){
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(url));
-                MainActivity.this.startActivity(intent);
-            }
+//            if(url.startsWith("tel:")){
+//                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(url));
+//                MainActivity.this.startActivity(intent);
+//            }
 
             return true;
         }
@@ -125,4 +126,5 @@ public class MainActivity extends AppCompatActivity {
         //winclose를 했을 때 새 창으로(webViewPopup) 뜬 애들은 한번에 다 닫히고 기존 창으로 바로 돌아가네(webView)
 
     }
+
 }
