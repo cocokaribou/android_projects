@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="14dp">
+
+
+    <ImageView
+        android:id="@+id/img_productImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_zzimIcon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/btn_heart"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintEnd_toEndOf="@id/img_productImg"
+        app:layout_constraintTop_toTopOf="@id/img_productImg" />
+    <ImageView
+        android:id="@+id/img_storePick"
+        android:layout_width="67dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="4dp"
+        android:background="@drawable/invalid_name"
+        app:layout_constraintBottom_toBottomOf="@id/img_productImg"
+        app:layout_constraintStart_toStartOf="@id/img_productImg"
+        />
+
+    <TextView
+        android:id="@+id/txt_brandNm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="브랜드 이름"
+        android:textColor="#8e8e8e"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_productImg" />
+
+    <TextView
+        android:id="@+id/txt_productNm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="상품명 길게 길게 들어가도 어떻게 뜨나 보기"
+        android:textColor="#3e3e3e"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_brandNm" />
+
+    <TextView
+        android:id="@+id/txt_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:layout_marginBottom="20dp"
+        android:text="152,000원"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/txt_saleRate"
+        app:layout_constraintTop_toBottomOf="@id/txt_productNm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.3"/>
+
+    <TextView
+        android:id="@+id/txt_saleRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:paddingEnd="6dp"
+        android:text="24%"
+        android:textColor="#c9000b"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/txt_price"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_marketPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="200,000원"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@id/txt_price"
+        app:layout_constraintStart_toStartOf="@id/txt_price" />
+
+    <!-- 별점리뷰 row -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_reviewRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_price">
+
+        <ImageView
+            android:id="@+id/img_star1"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/icon_star_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_star2"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/icon_star_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_star1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_star3"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/icon_star_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_star2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_star4"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/icon_star_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_star3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_star5"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/icon_star_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_star4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_reviewCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:text="(51)"
+            android:textColor="#3e3e3e"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_star5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/txt_freeShipping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:text="무료배송"
+        android:textColor="#4e9bd5"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_price" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
