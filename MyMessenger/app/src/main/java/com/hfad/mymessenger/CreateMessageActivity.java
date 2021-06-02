@@ -30,10 +30,14 @@ public class CreateMessageActivity extends AppCompatActivity {
 //        startActivity(intent);
 
 //        암시적으로 intent 생성, 안드로이드가 제공하는 표준 액션
-//        Intent intent = new Intent(Intent.ACTION_SEND);
-//        intent.setType("text/plain");
-//        intent.putExtra(Intent.EXTRA_TEXT, messageText);
-//        startActivity(intent);
+//        createChooser()
+//        인텐트를 수신할 수 없는 상황도 처리 (근데 디바이스마다 다이얼로그가 좀 다르게 생겼나?)
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, messageText);
+        String chooserTitle = getString(R.string.chooser);
+        Intent chosenIntent = Intent.createChooser(intent, chooserTitle);
+        startActivity(chosenIntent);
 
 //        달력
 //        Intent intent = new Intent(Intent.ACTION_INSERT);
@@ -43,18 +47,18 @@ public class CreateMessageActivity extends AppCompatActivity {
 
 //        인텐트를 수신할 수 있는 앱이 없는 상황 처리
 //        혹은 인텐트를 처리할 수 있는 특정 앱을 다운로드하도록 링크 제공
-        Intent intent = new Intent(Intent.ACTION_INSERT);
+//        Intent intent = new Intent(Intent.ACTION_INSERT);
 //        intent.setType("vnd.android.cursor.dir/event"); //타입 지정해주면 외부앱으로 잘 이동
-
-        try {
-            startActivity(intent);
-        } catch (ActivityNotFoundException e) {
-            intent = new Intent(this, ActivityNotFound.class);
-            intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_TEXT, e.toString());
-            intent.putExtra("input", messageText);
-            startActivity(intent);
-        }
+//
+//        try {
+//            startActivity(intent);
+//        } catch (ActivityNotFoundException e) {
+//            intent = new Intent(this, ActivityNotFound.class);
+//            intent.setType("text/plain");
+//            intent.putExtra(Intent.EXTRA_TEXT, e.toString());
+//            intent.putExtra("input", messageText);
+//            startActivity(intent);
+//        }
 
 //        developer.android.com에서 공통인텐트 항목 참고
 
