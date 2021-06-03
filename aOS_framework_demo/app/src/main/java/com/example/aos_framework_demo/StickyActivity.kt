@@ -1,7 +1,6 @@
 package com.example.aos_framework_demo
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -9,13 +8,13 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aos_framework_demo.databinding.ActivityStickyBinding
-import com.example.aos_framework_demo.databinding.RecyclerItemBinding
-import com.example.aos_framework_demo.databinding.StickyItemBinding
+import com.example.aos_framework_demo.databinding.ItemRecyclerBinding
+import com.example.aos_framework_demo.databinding.ItemStickyBinding
 import com.pionnet.overpass.customView.StickyHeaderItemDecoration
 
 class StickyActivity: AppCompatActivity() {
     private lateinit var binding: ActivityStickyBinding
-    private lateinit var headerBinding: StickyItemBinding
+    private lateinit var headerBinding: ItemStickyBinding
 
     val testList: List<String> = listOf(
         "1",
@@ -51,7 +50,7 @@ class StickyActivity: AppCompatActivity() {
         )
 
         //sticky header 생성
-        headerBinding = StickyItemBinding.inflate(layoutInflater, binding.stickyHolder, false)
+        headerBinding = ItemStickyBinding.inflate(layoutInflater, binding.stickyHolder, false)
         binding.stickyHolder.addView(headerBinding.root)
         binding.stickyHolder.isVisible = false
 
@@ -63,7 +62,7 @@ class StickyActivity: AppCompatActivity() {
         }
 
         override fun getHeaderLayout(headerPosition: Int): Int {
-            return R.layout.sticky_item
+            return R.layout.item_sticky
         }
 
         override fun isHeader(itemPosition: Int): Boolean {
@@ -83,7 +82,7 @@ class StickyActivity: AppCompatActivity() {
         RecyclerView.Adapter<TestAdapter.ItemHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
-            val itemBinding = RecyclerItemBinding.inflate(
+            val itemBinding = ItemRecyclerBinding.inflate(
                 LayoutInflater.from(
                     parent.context
                 ), parent, false
@@ -101,7 +100,7 @@ class StickyActivity: AppCompatActivity() {
             return testList.size
         }
 
-        class ItemHolder(private val itemBinding: RecyclerItemBinding) :
+        class ItemHolder(private val itemBinding: ItemRecyclerBinding) :
             RecyclerView.ViewHolder(itemBinding.root) {
 
             fun bind(item: String) {

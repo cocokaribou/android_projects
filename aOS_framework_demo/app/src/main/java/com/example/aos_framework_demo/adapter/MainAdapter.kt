@@ -1,60 +1,78 @@
 package com.example.aos_framework_demo.adapter
 
-import android.icu.text.CaseMap
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aos_framework_demo.R
 import com.example.aos_framework_demo.data.TestVO
+import com.example.aos_framework_demo.data.UiModel
 import com.example.aos_framework_demo.databinding.*
+import com.pionnet.overpass.customView.GridDividerItemDecoration
+import com.pionnet.overpass.customView.HorizontalSpacingItemDecoration
 
-class MainAdapter(private val mainData: TestVO.Data, private val list: ArrayList<String>) :
+class MainAdapter(
+    private val mainData: TestVO.Data,
+    private val list: ArrayList<UiModel>
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val FIRST = 1
-    val SECOND = 2
-    val THIRD = 3
-    val FOURTH = 4
-    val FIFTH = 5
-    val SIXTH = 6
-    val SEVENTH = 7
+    private val FIRST = 1
+    private val SECOND = 2
+    private val THIRD = 3
+    private val FOURTH = 4
+    private val FIFTH = 5
+    private val SIXTH = 6
+
+    private var index = 0
+
+    lateinit var recommendDeco: HorizontalSpacingItemDecoration
+    lateinit var iconDeco: HorizontalSpacingItemDecoration
+    lateinit var gridDeco: GridDividerItemDecoration
+
+    private var viewCount = 0
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             FIRST ->
                 TitleHolder(
-                    LayoutInflater.from(parent.context).inflate(R.layout.title, parent, false)
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.row_title, parent, false)
                 )
             SECOND ->
-                ListHolder(
-                    LayoutInflater.from(parent.context).inflate(R.layout.list, parent, false)
+                StoreHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.list_store, parent, false)
                 )
             THIRD ->
-                CategoryBestTitleHolder(
+                CategoryBestHolder(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.category_best_title, parent, false)
+                        .inflate(R.layout.row_category_best, parent, false)
                 )
             FOURTH ->
-                CategoryBestListHolder(
+                CategoryListHolder(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.category_best_list, parent, false)
+                        .inflate(R.layout.list_category, parent, false)
                 )
 
             FIFTH ->
                 CategoryTitleHolder(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.category_title, parent, false)
+                        .inflate(R.layout.row_category_title, parent, false)
                 )
             SIXTH ->
-                ProductHolder(
-                    LayoutInflater.from(parent.context).inflate(R.layout.product, parent, false)
+                GoodsHolder(
+                    LayoutInflater.from(parent.context).inflate(R.layout.list_goods, parent, false)
                 )
             else ->
                 TitleHolder(
-                    LayoutInflater.from(parent.context).inflate(R.layout.title, parent, false)
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.row_title, parent, false)
                 )
         }
     }
@@ -63,30 +81,51 @@ class MainAdapter(private val mainData: TestVO.Data, private val list: ArrayList
         when (holder.itemViewType) {
             FIRST -> {
                 val titleHolder = holder as TitleHolder
-                titleHolder.binding.title.text = "추천 지점"
             }
             SECOND -> {
-                mainData.recommend.forEach {
-                    Log.e("2️⃣", it.imgUrl + " " + it.storeName)
+                val listHolder = holder as StoreHolder
+                listHolder.recyclerStore.apply {
+                    adapter = RecommendAdapter(mainData.recommend)
+                    layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                    if (!this@MainAdapter::recommendDeco.isInitialized) {
+                        recommendDeco = HorizontalSpacingItemDecoration(40, 60, true)
+                        addItemDecoration(recommendDeco)
+                    }
                 }
             }
             THIRD -> {
-                Log.e("3️⃣", "카테고리별 베스트 상품")
+                val categoryBestHolder = holder as CategoryBestHolder
             }
             FOURTH -> {
-                mainData.category.forEach {
-                    Log.e("4️⃣️", it.dactiveImgUrl + " " + it.ctgNm)
+                val iconHolder = holder as CategoryListHolder
+                iconHolder.iconList.apply {
+                    adapter = CategoryIconAdapter(mainData.category)
+                    layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                    if (!this@MainAdapter::iconDeco.isInitialized) {
+                        iconDeco = HorizontalSpacingItemDecoration(70, 55, true)
+                        addItemDecoration(iconDeco)
+                    }
                 }
             }
             FIFTH -> {
-                Log.e("5️⃣", mainData.category[position-1].ctgNm)
+                val categoryTitleHolder = holder as CategoryTitleHolder
+                categoryTitleHolder.categoryTitle.text = mainData.category[index].ctgNm
             }
             SIXTH -> {
-                mainData.category[position-1].goodsList.forEach {
-                    Log.e("6️⃣", it.goodsNm)
+                val productHolder = holder as GoodsHolder
+                productHolder.goodsList.apply {
+                    adapter = CategoryProdAdapter(mainData.category[index].goodsList)
+                    layoutManager = GridLayoutManager(context, 2)
+
+                    if (!this@MainAdapter::gridDeco.isInitialized) {
+                        gridDeco = GridDividerItemDecoration(1, Color.parseColor("#d4d4d4"))
+                        addItemDecoration(gridDeco)
+                    }
+
                 }
             }
-            else -> {Log.e("⚠️", "else")}
+            else -> {
+            }
         }
     }
 
@@ -99,42 +138,51 @@ class MainAdapter(private val mainData: TestVO.Data, private val list: ArrayList
         var tag: String = ""
 
         if (list.size > position)
-            tag = list[position]
+            tag = list[position].tag
 
         return when (tag) {
             "recommend_title" -> FIRST
             "recommend_list" -> SECOND
             "category_best_title" -> THIRD
             "category_best_list" -> FOURTH
-            "category_title" -> FIFTH
-            "category_list" -> SIXTH
+            "category_title" -> {
+                index = list[position].position
+                FIFTH
+            }
+            "category_list" -> {
+                index = list[position].position
+                SIXTH
+            }
             else -> 0
         }
     }
 
     class TitleHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = TitleBinding.bind(view)
+        val binding = RowTitleBinding.bind(view)
     }
 
-    class ListHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = ListBinding.bind(view)
-        val list = binding.listRecommendstore
+    class StoreHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val binding = ListStoreBinding.bind(view)
+        val recyclerStore = binding.recyclerStore
     }
 
-    class CategoryBestTitleHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = CategoryBestTitleBinding.bind(view)
+    class CategoryBestHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val binding = RowCategoryBestBinding.bind(view)
     }
 
-    class CategoryBestListHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = CategoryBestListBinding.bind(view)
+    class CategoryListHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val binding = ListCategoryBinding.bind(view)
+        val iconList = binding.recyclerIcon
     }
 
     class CategoryTitleHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = CategoryTitleBinding.bind(view)
+        val binding = RowCategoryTitleBinding.bind(view)
+        val categoryTitle = binding.txtTitle
     }
 
-    class ProductHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = ProductBinding.bind(view)
+    class GoodsHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val binding = ListGoodsBinding.bind(view)
+        val goodsList = binding.listGoods
 
     }
 }

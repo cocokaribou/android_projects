@@ -1,6 +1,5 @@
 package com.example.aos_framework_demo.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aos_framework_demo.R
 import com.example.aos_framework_demo.data.TestVO
-import com.example.aos_framework_demo.databinding.ItemCategoryBinding
-import com.example.aos_framework_demo.databinding.ItemCategoryProductBinding
+import com.example.aos_framework_demo.databinding.ItemGoodsBinding
 import com.pionnet.overpass.extension.*
 
 class CategoryProdAdapter(private val prodList: ArrayList<TestVO.Data.Category.Goods>) :
     RecyclerView.Adapter<CategoryProdAdapter.CategoryHolder>() {
     class CategoryHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemCategoryProductBinding.bind(view)
+        private val binding = ItemGoodsBinding.bind(view)
         val imgProductImg: ImageView = binding.imgProductImg
         val imgStorePick = binding.imgStorePick
         val txtBrandNm: TextView = binding.txtBrandNm
@@ -40,7 +38,7 @@ class CategoryProdAdapter(private val prodList: ArrayList<TestVO.Data.Category.G
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_category_product, parent, false)
+            .inflate(R.layout.item_goods, parent, false)
         return CategoryHolder(view)
     }
 
@@ -57,8 +55,8 @@ class CategoryProdAdapter(private val prodList: ArrayList<TestVO.Data.Category.G
             }
             holder.txtSaleRate.text = saleRate.toString()+"%"
             holder.txtPrice.text = priceFormat(custSalePrice.toString())+"원"
-            //https://860709.tistory.com/59
             //TODO '원'만 글자크기 줄이기
+
             holder.txtMarketPrice.text = priceFormat(marketPrice.toString())+"원"
             holder.txtMarketPrice.setPriceStroke(10, true)
 
@@ -73,15 +71,10 @@ class CategoryProdAdapter(private val prodList: ArrayList<TestVO.Data.Category.G
             if(fieldRecevPossYn == "N"){
                 holder.imgStorePick.visibility = View.GONE
             }
-
         }
-        with(holder) {
-        }
-
     }
 
     override fun getItemCount(): Int {
-        Log.e("⚠️", prodList.size.toString())
         return prodList.size
     }
 }
