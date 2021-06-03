@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment; //안드로이드 지원 라이브러리 fragment 클래스
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ public class WorkoutDetailFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private long workoutId;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -55,10 +58,24 @@ public class WorkoutDetailFragment extends Fragment {
         }
     }
 
+    //안드로이드가 프래그먼트 레이아웃을 필요로 할 때 호출됨
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //ViewGroup fragment를 담는 activity의 레이아웃
+        //Bundle fragment 상태 저장했다 다시 살려낼때
+
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_workout_detail, container, false);
+        //View라는 건 inflate된 자바 객체
+        //R에 들어가는 리소스 값은 다 int
     }
+    //fragment의 onCreateView는 activity의 setContentView에 해당한다
+
+
+    public void setWorkout(long id){
+        this.workoutId = id;
+    }
+
 }
