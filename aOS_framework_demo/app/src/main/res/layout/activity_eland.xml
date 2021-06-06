@@ -11,134 +11,18 @@
         android:id="@+id/main_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
+    <LinearLayout
+        android:id="@+id/sticky_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
-<!--            &lt;!&ndash; 추천 지점 row &ndash;&gt;-->
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:id="@+id/row_recommendstore"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@color/white"-->
-<!--                android:paddingTop="20dp"-->
-<!--                android:paddingBottom="20dp"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent">-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/txt_recommendStore"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="12dp"-->
-<!--                    android:text="추천 지점"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="20sp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:id="@+id/list_recommendstore"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="16dp"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/txt_recommendStore" />-->
-
-
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--            &lt;!&ndash;&ndash;&gt;-->
-<!--            <View-->
-<!--                android:id="@+id/line1"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="0.33dp"-->
-<!--                android:background="#bdbdbd"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/row_recommendstore" />-->
-
-<!--            &lt;!&ndash; 카테고리별 베스트 상품 row &ndash;&gt;-->
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:id="@+id/row_bestProduct"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:background="@color/white"-->
-<!--                android:paddingTop="20dp"-->
-<!--                android:paddingBottom="20dp"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/line1">-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/txt_bestProduct"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="12dp"-->
-<!--                    android:letterSpacing="-0.03"-->
-<!--                    android:text="카테고리별 베스트 상품"-->
-<!--                    android:textColor="#2f2f2f"-->
-<!--                    android:textSize="20sp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:id="@+id/list_ctgIcons"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/txt_bestProduct">-->
-
-<!--                </androidx.recyclerview.widget.RecyclerView>-->
-
-<!--                <View-->
-<!--                    android:id="@+id/line2"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="0.33dp"-->
-<!--                    android:layout_marginTop="10dp"-->
-<!--                    android:background="#bdbdbd"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/list_ctgIcons" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/txt_categoryName"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:gravity="center"-->
-<!--                    android:letterSpacing="-0.03"-->
-<!--                    android:paddingTop="24dp"-->
-<!--                    android:paddingBottom="24dp"-->
-<!--                    android:text="카테고리 이름"-->
-<!--                    android:textColor="#363636"-->
-<!--                    android:textSize="17sp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/line2" />-->
-<!--                <View-->
-<!--                    android:id="@+id/line3"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="0.5dp"-->
-<!--                    android:background="#bdbdbd"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/txt_categoryName" />-->
-
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:id="@+id/list_ctgProd"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/txt_categoryName" />-->
-
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
-<!--    </ScrollView>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
