@@ -1,5 +1,6 @@
 package com.example.aos_framework_demo.adapter
 
+import android.content.Context
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,7 +26,9 @@ import com.pionnet.overpass.extension.setPriceStroke
 
 class MainAdapter(
     private val mainData: TestVO.Data,
-    private val list: ArrayList<UiModel>
+    private val list: ArrayList<UiModel>,
+    mainContext: Context,
+    elandActivity: ElandActivity
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -38,6 +41,9 @@ class MainAdapter(
 
     private var ctgIndex = 0
     private var goodsIndex = 0
+
+    val context = mainContext
+    val activity = elandActivity
 
     lateinit var recommendDeco: HorizontalSpacingItemDecoration
     lateinit var iconDeco: HorizontalSpacingItemDecoration
@@ -59,13 +65,11 @@ class MainAdapter(
                     LayoutInflater.from(parent.context)
                         .inflate(R.layout.row_category_best, parent, false)
                 )
-            FOURTH -> {
-                CategoryListHolder(
+            FOURTH ->
+                CategoryIconHolder(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.list_category, parent, false)
+                        .inflate(R.layout.list_icon, parent, false)
                 )
-            }
-
             FIFTH ->
                 CategoryTitleHolder(
                     LayoutInflater.from(parent.context)
@@ -91,7 +95,7 @@ class MainAdapter(
             SECOND -> {
                 holder as StoreHolder
                 holder.recyclerStore.apply {
-                    adapter = RecommendAdapter(mainData.recommend)
+                    adapter = RecommendAdapter(mainData.recommend, context, activity)
                     layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                     if (!this@MainAdapter::recommendDeco.isInitialized) {
                         recommendDeco = HorizontalSpacingItemDecoration(40, 60, true)
@@ -103,7 +107,7 @@ class MainAdapter(
                 holder as CategoryBestHolder
             }
             FOURTH -> {
-                holder as CategoryListHolder
+                holder as CategoryIconHolder
                 holder.iconList.apply {
                     adapter = CategoryIconAdapter(mainData.category)
                     layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
@@ -115,52 +119,11 @@ class MainAdapter(
             }
             FIFTH -> {
                 holder as CategoryTitleHolder
-                val title = mainData.category[ctgIndex].ctgNm
-                holder.categoryTitle.text = title
+                holder.bind(mainData.category[ctgIndex].ctgNm)
             }
             SIXTH -> {
                 holder as GoodsHolder
-                with(mainData.category[ctgIndex].goodsList[goodsIndex]) {
-                    var imgUrl = "http:" + imageUrl
-                    holder.imgProductImg.loadImageWithScale(imgUrl, 450, 450)
-
-                    holder.txtBrandNm.text = brandNm
-                    holder.txtProductNm.text = goodsNm
-
-                    if (saleRate == 0) {
-                        holder.txtSaleRate.visibility = View.GONE
-                    }
-                    holder.txtSaleRate.text = saleRate.toString() + "%"
-                    holder.txtPrice.text = priceFormat(custSalePrice.toString()) + "원"
-
-                    if (marketPrice == 0) {
-                        holder.txtMarketPrice.visibility = View.GONE
-                    }
-                    holder.txtMarketPrice.text = priceFormat(marketPrice.toString()) + "원"
-                    holder.txtMarketPrice.setPriceStroke(10, true)
-
-                    if (goodsCommentCount == 0) {
-                        holder.reviewRow.visibility = View.GONE
-                    }
-                    holder.txtReviewCount.text = "리뷰 (" + goodsCommentCount.toString() + ")"
-
-                    if (iconView.isEmpty()) {
-                        holder.txtFreeShipping.visibility = View.GONE
-                    }
-                    if (fieldRecevPossYn == "N") {
-                        holder.imgStorePick.visibility = View.GONE
-                    }
-                }
-//                holder.goodsList.apply {
-//                    adapter = CategoryProdAdapter(mainData.category[ctgIndex].goodsList)
-//                    layoutManager = GridLayoutManager(context, 2)
-//
-//                    if (!this@MainAdapter::gridDeco.isInitialized) {
-//                        gridDeco = GridDividerItemDecoration(1, Color.parseColor("#d4d4d4"))
-//                        addItemDecoration(gridDeco)
-//                    }
-//
-//                }
+                holder.bind(mainData.category[ctgIndex].goodsList[goodsIndex])
             }
             else -> {
             }
@@ -173,7 +136,7 @@ class MainAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        var tag: String = ""
+        var tag = ""
 
         if (list.size > position)
             tag = list[position].tag
@@ -209,34 +172,66 @@ class MainAdapter(
         val binding = RowCategoryBestBinding.bind(view)
     }
 
-    class CategoryListHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = ListCategoryBinding.bind(view)
+    class CategoryIconHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val binding = ListIconBinding.bind(view)
         val iconList = binding.recyclerIcon
+
     }
 
     class CategoryTitleHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = RowCategoryTitleBinding.bind(view)
-        val categoryTitle = binding.txtTitle
+        private val binding = RowCategoryTitleBinding.bind(view)
+        private val categoryTitle = binding.txtTitle
+        fun bind(title: String) {
+            categoryTitle.text = title
+        }
     }
-
-//    class GoodsHolder(view: View) : RecyclerView.ViewHolder(view) {
-//        val binding = ListGoodsBinding.bind(view)
-//        val goodsList = binding.listGoods
-//
-//    }
 
     class GoodsHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemGoodsBinding.bind(view)
-        val imgProductImg: ImageView = binding.imgProductImg
-        val imgStorePick = binding.imgStorePick
-        val txtBrandNm: TextView = binding.txtBrandNm
-        val txtProductNm: TextView = binding.txtProductNm
-        val txtPrice: TextView = binding.txtPrice
-        val txtSaleRate: TextView = binding.txtSaleRate
-        val txtMarketPrice: TextView = binding.txtMarketPrice
+        private val imgProductImg: ImageView = binding.imgProductImg
+        private val imgStorePick = binding.imgStorePick
+        private val txtBrandNm: TextView = binding.txtBrandNm
+        private val txtProductNm: TextView = binding.txtProductNm
+        private val txtPrice: TextView = binding.txtPrice
+        private val txtSaleRate: TextView = binding.txtSaleRate
+        private val txtMarketPrice: TextView = binding.txtMarketPrice
 
-        val reviewRow = binding.layoutReviewRow
-        val txtReviewCount: TextView = binding.txtReviewCount
-        val txtFreeShipping: TextView = binding.txtFreeShipping
+        private val reviewRow = binding.layoutReviewRow
+        private val txtReviewCount: TextView = binding.txtReviewCount
+        private val txtFreeShipping: TextView = binding.txtFreeShipping
+
+        fun bind(item: TestVO.Data.Category.Goods) {
+            with(item) {
+                var imgUrl = "http:" + imageUrl
+                imgProductImg.loadImageWithScale(imgUrl, 450, 450)
+
+                txtBrandNm.text = brandNm
+                txtProductNm.text = goodsNm
+
+                if (saleRate == 0) {
+                    txtSaleRate.visibility = View.GONE
+                }
+                txtSaleRate.text = saleRate.toString() + "%"
+                txtPrice.text = priceFormat(custSalePrice.toString()) + "원"
+
+                if (marketPrice == 0) {
+                    txtMarketPrice.visibility = View.GONE
+                }
+                txtMarketPrice.text = priceFormat(marketPrice.toString()) + "원"
+                txtMarketPrice.setPriceStroke(10, true)
+
+                if (goodsCommentCount == 0) {
+                    reviewRow.visibility = View.GONE
+                }
+                txtReviewCount.text = "리뷰 (" + goodsCommentCount.toString() + ")"
+
+                if (iconView.isEmpty()) {
+                    txtFreeShipping.visibility = View.GONE
+                }
+                if (fieldRecevPossYn == "N") {
+                    imgStorePick.visibility = View.GONE
+                }
+            }
+        }
     }
 }

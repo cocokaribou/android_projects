@@ -116,8 +116,6 @@ class MainActivity : AppCompatActivity() {
                     margin = Integer.parseInt(marginStr)
                 } catch (e: Exception) {
                 }
-                txtBold.setDynamicLeftMargin(margin)
-                txtUnderLine.setDynamicLeftMargin(margin)
             }
             false
         }

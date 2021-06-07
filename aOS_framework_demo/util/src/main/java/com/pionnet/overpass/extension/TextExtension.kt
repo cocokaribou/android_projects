@@ -10,6 +10,7 @@ import android.text.style.AbsoluteSizeSpan
 import android.text.style.StrikethroughSpan
 import android.text.style.StyleSpan
 import android.util.TypedValue
+import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import java.text.DecimalFormat
@@ -48,11 +49,10 @@ fun getCurrentTime(): String {
 }
 
 /**
- * dp -> px
+ * dp -> px  코틀린 ViewUtil 에 존재함
  */
-fun Int.dpToPx(context: Context):Int = TypedValue.applyDimension(
-        TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), context.resources.displayMetrics
-).toInt()
+fun View.dpToPx(dp: Float): Int = context.dpToPx(dp)
+fun Context.dpToPx(dp: Float): Int = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics).toInt()
 
 /**
  * text bold 처리
@@ -118,15 +118,4 @@ fun productCnt(value: Long): String {
  */
 fun TextView.setUnderLine() {
     this.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-}
-
-/**
- * 왼쪽 마진 주기
- * @param leftMargin_dp : 왼쪽 마진 값
- */
-fun TextView.setDynamicLeftMargin(leftMargin_dp: Int) {
-    val context = this.context
-    (this.layoutParams as ConstraintLayout.LayoutParams).apply {
-        this.leftMargin = leftMargin_dp.dpToPx(context)
-    }
 }

@@ -25,6 +25,7 @@ data class TestVO(
             @field:SerializedName("ctg_nm") var ctgNm: String,
             @field:SerializedName("active_img_url") var activeImgUrl: String,
             @field:SerializedName("dactive_img_url") var dactiveImgUrl: String,
+            var checker: Boolean
         ) {
             data class Goods(
                 @field:SerializedName("flag_img_path") var flagImgPath: String,

@@ -62,8 +62,8 @@ class CustomDialog(context: Context) {
                                 "$inputNum 일 후: ${getAddDateString("yyyy/MM/dd", inputNum)}"
                         }
                         R.id.btn_dpToPx -> {
-                            txtResult.text =
-                                "$inputNum dp -> ${inputNum.dpToPx(mContext)} px"
+//                            txtResult.text =
+//                                "$inputNum dp -> ${inputNum.dpToPx(mContext, 15)} px"
                         }
                         R.id.btn_priceFormat -> {
                             txtResult.text =

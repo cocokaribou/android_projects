@@ -1,7 +1,10 @@
 package com.example.aos_framework_demo
 
+import android.app.Activity
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,7 +14,7 @@ import com.example.aos_framework_demo.adapter.MainAdapter
 import com.example.aos_framework_demo.data.TestVO
 import com.example.aos_framework_demo.data.UiModel
 import com.example.aos_framework_demo.databinding.ActivityElandBinding
-import com.example.aos_framework_demo.databinding.ListCategoryBinding
+import com.example.aos_framework_demo.databinding.ListIconBinding
 import com.google.gson.Gson
 import com.pionnet.overpass.customView.StickyHeaderItemDecoration
 import com.pionnet.overpass.extension.getJsonFileToString
@@ -20,7 +23,7 @@ import kotlin.collections.ArrayList
 
 class ElandActivity : AppCompatActivity() {
     private lateinit var binding: ActivityElandBinding
-    private lateinit var headerBinding: ListCategoryBinding
+    private lateinit var headerBinding: ListIconBinding
 
     private lateinit var mainData: TestVO
     private var list: ArrayList<UiModel> = arrayListOf()
@@ -37,7 +40,7 @@ class ElandActivity : AppCompatActivity() {
         val jsonString: String = getJsonFileToString("test.json", this@ElandActivity)
         mainData = Gson().fromJson(jsonString, TestVO::class.java)
 
-        headerBinding = ListCategoryBinding.inflate(layoutInflater, binding.stickyHeader, false)
+        headerBinding = ListIconBinding.inflate(layoutInflater, binding.stickyHeader, false)
         headerBinding.recyclerIcon.apply {
             adapter = CategoryIconAdapter(mainData.data.category)
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
@@ -51,7 +54,6 @@ class ElandActivity : AppCompatActivity() {
         //todo adapter는 그리는 용도로만! data는 다른 곳에서 처리해서 넘겨준다, 클릭 이벤트 리스너도 여기서 넘겨주기
         requestApi()
         setUI()
-
 
     }
 
@@ -83,8 +85,10 @@ class ElandActivity : AppCompatActivity() {
      * 화면 그리는 MainAdapter
      */
     private fun setUI() {
-        mainAdapter = MainAdapter(mainData.data, list)
-        gridManager = GridLayoutManager(this@ElandActivity, 2)
+        val context:Context = this@ElandActivity
+        val activity: ElandActivity = this
+        mainAdapter = MainAdapter(mainData.data, list, context, activity)
+        gridManager = GridLayoutManager(context, 2)
         gridManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 if (list[position].tag == "category_list") {
@@ -97,6 +101,12 @@ class ElandActivity : AppCompatActivity() {
             adapter = mainAdapter
             layoutManager = gridManager
         }
+
+//        val webView = WebviewStoreBinding.bind(
+//            LayoutInflater
+//                .from(this@ElandActivity)
+//                .inflate(R.layout.webview_store, this, false)
+//        )
     }
 
     private var stickyHeaderInterface: StickyHeaderItemDecoration.StickyHeaderInterface =
@@ -106,7 +116,7 @@ class ElandActivity : AppCompatActivity() {
             }
 
             override fun getHeaderLayout(headerPosition: Int): Int {
-                return R.layout.list_category
+                return R.layout.list_icon
             }
 
             override fun isHeader(itemPosition: Int): Boolean {
