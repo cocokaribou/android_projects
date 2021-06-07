@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,6 +70,22 @@ public class WorkoutDetailFragment extends Fragment {
     }
     //fragment의 onCreateView는 activity의 setContentView에 해당한다
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        View view = getView(); //getView() 프래그먼트의 루트 뷰 반환, 여기서는 fragment_workout_detail.xml
+        if(view != null){
+            Workout workout = Workout.workouts[(int) workoutId];
+
+            TextView title = (TextView) view.findViewById(R.id.textTitle);
+            title.setText(workout.getName());
+            TextView description = (TextView) view.findViewById(R.id.textDescription);
+            description.setText(workout.getDescription());
+        }
+    }
+
+    //왜 fragment는 findViewById()를 제공하지 않는지? -> 프래그먼트는 뷰도 액티비티도 아니기 때문.
+    //대신 getView()로 프래그먼트의 루트 뷰 레퍼런스 얻어서 뷰의 findViewById()로 루트 뷰의 자식에 접근 可
 
     public void setWorkout(long id){
         this.workoutId = id;
