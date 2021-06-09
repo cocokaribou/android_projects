@@ -1,25 +1,17 @@
 package com.example.aos_framework_demo.adapter
 
-import android.content.Context
-import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.isVisible
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.aos_framework_demo.ElandActivity
 import com.example.aos_framework_demo.R
 import com.example.aos_framework_demo.data.TestVO
 import com.example.aos_framework_demo.data.UiModel
 import com.example.aos_framework_demo.databinding.*
-import com.pionnet.overpass.customView.GridDividerItemDecoration
 import com.pionnet.overpass.customView.HorizontalSpacingItemDecoration
-import com.pionnet.overpass.customView.StickyHeaderItemDecoration
 import com.pionnet.overpass.extension.loadImageWithScale
 import com.pionnet.overpass.extension.priceFormat
 import com.pionnet.overpass.extension.setPriceStroke
@@ -27,8 +19,6 @@ import com.pionnet.overpass.extension.setPriceStroke
 class MainAdapter(
     private val mainData: TestVO.Data,
     private val list: ArrayList<UiModel>,
-    mainContext: Context,
-    elandActivity: ElandActivity
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -42,11 +32,13 @@ class MainAdapter(
     private var ctgIndex = 0
     private var goodsIndex = 0
 
-    val context = mainContext
-    val activity = elandActivity
-
     lateinit var recommendDeco: HorizontalSpacingItemDecoration
     lateinit var iconDeco: HorizontalSpacingItemDecoration
+
+    private lateinit var categoryIconAdapter: CategoryIconAdapter
+    private lateinit var itemCategoryLinear: LinearLayoutManager
+    lateinit var onItemClickListener: (Any, Int, Int) -> Unit
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -95,10 +87,10 @@ class MainAdapter(
             SECOND -> {
                 holder as StoreHolder
                 holder.recyclerStore.apply {
-                    adapter = RecommendAdapter(mainData.recommend, context, activity)
+                    adapter = RecommendAdapter(mainData.recommend, context)
                     layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                     if (!this@MainAdapter::recommendDeco.isInitialized) {
-                        recommendDeco = HorizontalSpacingItemDecoration(40, 60, true)
+                        recommendDeco = HorizontalSpacingItemDecoration(40, 55, true)
                         addItemDecoration(recommendDeco)
                     }
                 }
@@ -108,14 +100,23 @@ class MainAdapter(
             }
             FOURTH -> {
                 holder as CategoryIconHolder
+                categoryIconAdapter = CategoryIconAdapter(mainData.category, onItemClickListener)
+                itemCategoryLinear = LinearLayoutManager(
+                    holder.itemView.context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
                 holder.iconList.apply {
-                    adapter = CategoryIconAdapter(mainData.category)
-                    layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                    adapter = categoryIconAdapter
+                    layoutManager = itemCategoryLinear
+
                     if (!this@MainAdapter::iconDeco.isInitialized) {
                         iconDeco = HorizontalSpacingItemDecoration(70, 55, true)
                         addItemDecoration(iconDeco)
                     }
                 }
+
+                categoryIconAdapter.selected(0)
             }
             FIFTH -> {
                 holder as CategoryTitleHolder
@@ -202,36 +203,37 @@ class MainAdapter(
 
         fun bind(item: TestVO.Data.Category.Goods) {
             with(item) {
-                var imgUrl = "http:" + imageUrl
+                var imgUrl = "http:${imageUrl}"
                 imgProductImg.loadImageWithScale(imgUrl, 450, 450)
 
                 txtBrandNm.text = brandNm
                 txtProductNm.text = goodsNm
 
-                if (saleRate == 0) {
-                    txtSaleRate.visibility = View.GONE
-                }
-                txtSaleRate.text = saleRate.toString() + "%"
-                txtPrice.text = priceFormat(custSalePrice.toString()) + "원"
+                txtSaleRate.visibility = if (saleRate == 0) View.GONE else View.VISIBLE
+                txtSaleRate.text = "${saleRate}%"
 
-                if (marketPrice == 0) {
-                    txtMarketPrice.visibility = View.GONE
-                }
-                txtMarketPrice.text = priceFormat(marketPrice.toString()) + "원"
+                txtPrice.text = "${priceFormat(custSalePrice.toString())}원"
+
+                txtMarketPrice.visibility = if (marketPrice == 0) View.GONE else View.VISIBLE
+                txtMarketPrice.text = "${priceFormat(marketPrice.toString())}원"
                 txtMarketPrice.setPriceStroke(10, true)
 
-                if (goodsCommentCount == 0) {
-                    reviewRow.visibility = View.GONE
-                }
-                txtReviewCount.text = "리뷰 (" + goodsCommentCount.toString() + ")"
+                reviewRow.visibility = if (goodsCommentCount == 0) View.GONE else View.VISIBLE
 
-                if (iconView.isEmpty()) {
-                    txtFreeShipping.visibility = View.GONE
-                }
-                if (fieldRecevPossYn == "N") {
-                    imgStorePick.visibility = View.GONE
-                }
+                txtReviewCount.text = "리뷰 (${goodsCommentCount})"
+
+                txtFreeShipping.visibility = if (iconView.isEmpty()) View.GONE else View.VISIBLE
+                imgStorePick.visibility = if (fieldRecevPossYn == "N") View.GONE else View.VISIBLE
+
             }
         }
+    }
+
+    fun setListener(onItemClickListener: (Any, Int, Int) -> Unit) {
+        this.onItemClickListener = onItemClickListener
+    }
+
+    fun setCategoryDataSetChanged() {
+        categoryIconAdapter.notifyDataSetChanged()
     }
 }

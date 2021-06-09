@@ -23,14 +23,12 @@ import kotlin.collections.ArrayList
 class RecommendAdapter(
     private val recList: ArrayList<TestVO.Data.Recommend>,
     mainContext: Context,
-    activity: ElandActivity
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val TYPE_LIST = 0
     private val TYPE_END = 1
 
     val context = mainContext
-    val activity = activity
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -51,6 +49,7 @@ class RecommendAdapter(
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder.itemViewType) {
             TYPE_END -> {

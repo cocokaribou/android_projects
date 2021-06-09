@@ -66,7 +66,7 @@ class StickyActivity: AppCompatActivity() {
         }
 
         override fun isHeader(itemPosition: Int): Boolean {
-            return itemPosition != 2
+            return itemPosition < 2
         }
 
         override fun hideHeader() {

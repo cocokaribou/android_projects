@@ -10,14 +10,27 @@
     android:paddingBottom="7dp"
     android:background="@drawable/outerline">
 
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:id="@+id/scalable_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:scale_base_width="100"
+        app:scale_base_height="100"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
     <ImageView
         android:id="@+id/img_productImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitXY"
+        />
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 
     <ImageView
         android:id="@+id/img_zzimIcon"
@@ -26,16 +39,16 @@
         android:src="@drawable/btn_heart"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
-        app:layout_constraintEnd_toEndOf="@id/img_productImg"
-        app:layout_constraintTop_toTopOf="@id/img_productImg" />
+        app:layout_constraintEnd_toEndOf="@id/scalable_layout"
+        app:layout_constraintTop_toTopOf="@id/scalable_layout" />
     <ImageView
         android:id="@+id/img_storePick"
         android:layout_width="67dp"
         android:layout_height="20dp"
         android:layout_marginLeft="4dp"
         android:background="@drawable/invalid_name"
-        app:layout_constraintBottom_toBottomOf="@id/img_productImg"
-        app:layout_constraintStart_toStartOf="@id/img_productImg"
+        app:layout_constraintBottom_toBottomOf="@id/scalable_layout"
+        app:layout_constraintStart_toStartOf="@id/scalable_layout"
         />
 
     <TextView
@@ -48,7 +61,7 @@
         android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_productImg" />
+        app:layout_constraintTop_toBottomOf="@id/scalable_layout" />
 
     <TextView
         android:id="@+id/txt_productNm"

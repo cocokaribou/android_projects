@@ -54,4 +54,5 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:2.7.2"
 
     implementation project(':util')
+    implementation 'com.ssomai:android.scalablelayout:2.1.6'
 }
