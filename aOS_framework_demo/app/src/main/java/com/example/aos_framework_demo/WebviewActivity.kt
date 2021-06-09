@@ -13,6 +13,8 @@ class WebviewActivity : AppCompatActivity() {
 
         val url = intent.getStringExtra("url").toString()
 
+        //여기서 url 검사해서 분기처리 해줄 수 있음 url.contains("domain")
+
         with(binding) {
             webviewStore.settings.javaScriptEnabled = true
             if (!url.isNullOrEmpty()) {

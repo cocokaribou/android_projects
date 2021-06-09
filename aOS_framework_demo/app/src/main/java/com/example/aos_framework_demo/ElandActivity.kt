@@ -25,11 +25,11 @@ class ElandActivity : AppCompatActivity() {
     private lateinit var headerBinding: ListIconBinding
 
     private lateinit var mainData: TestVO
-    private var list: ArrayList<UiModel> = arrayListOf()
-    private var titleList: ArrayList<Int> = arrayListOf()
+    private var list: ArrayList<UiModel> = arrayListOf() //전체 그리드의 값을 tag와 매치
+    private var titleList: ArrayList<Int> = arrayListOf() //전체 그리드 중 category_title의 index 값을 저장
 
-    private lateinit var mainAdapter: MainAdapter
-    private lateinit var categoryAdapter: CategoryIconAdapter
+    private lateinit var mainAdapter: MainAdapter //전체 화면을 그리는 어댑터
+    private lateinit var categoryAdapter: CategoryIconAdapter //스티키헤더의 리사이클러를 그리는 어댑터
 
     private lateinit var gridManager: GridLayoutManager
     private lateinit var linearManager: LinearLayoutManager
@@ -54,6 +54,9 @@ class ElandActivity : AppCompatActivity() {
         val jsonString: String = getJsonFileToString("test.json", this@ElandActivity)
         mainData = Gson().fromJson(jsonString, TestVO::class.java)
 
+        /*
+        mainAdapter가 그리는 전체 그리드의 index에 tag 부여
+         */
         list.add(UiModel("recommend_title"))
         list.add(UiModel("recommend_list"))
         list.add(UiModel("category_best_title"))
@@ -66,30 +69,38 @@ class ElandActivity : AppCompatActivity() {
 
             }
         }
-
-        for (i in 0 until list.size) {
-            if (list[i].tag == "category_title") {
+        /*
+        전체 index 중 stickyHeader가 scrollTo할 category_title의 index를 저장
+         */
+        list.forEachIndexed{ i, _ ->
+            if(list[i].tag == "category_title"){
                 titleList.add(i)
             }
         }
     }
 
+    /**
+     * 버튼을 누르면 CategoryHolder ->
+     * ElandActivity <-> CategoryIconAdapter <-> CategoryHolder
+     */
     private val onItemClickListener: (Any, Int, Int) -> Unit = { item, position, holderWidth ->
         if (item is TestVO.Data.Category) {
             categoryAdapter.selected(position)
             mainAdapter.setCategoryDataSetChanged()
 
+            /*
+            * categoryAdapter
+            * */
             val width = getDisplaySize(this).widthPixels
-
-            val index = titleList[position]
             linearManager.scrollToPositionWithOffset(position, width/2 - holderWidth/2)
 
+            val index = titleList[position]
             gridManager.scrollToPositionWithOffset(index, 0)
         }
     }
 
     /**
-     * 화면 그리는 MainAdapter
+     * 전체 화면 그리는 MainAdapter, StickyHeader그리는 CategoryIconAdapter
      */
     private fun setUI() {
         mainAdapter = MainAdapter(mainData.data, list)
@@ -104,6 +115,7 @@ class ElandActivity : AppCompatActivity() {
         }
         mainAdapter.setListener(onItemClickListener)
 
+        // stickyHeaderDeco를 mainRecycler에 주고 있네...?
         binding.mainRecycler.apply {
             adapter = mainAdapter
             layoutManager = gridManager
@@ -111,6 +123,9 @@ class ElandActivity : AppCompatActivity() {
 
         }
 
+        /**
+         * stickyHeader로 쓸 LinearLayout inflate
+         */
         headerBinding = ListIconBinding.inflate(layoutInflater, binding.stickyHeader, false)
         binding.stickyHeader.addView(headerBinding.root)
         binding.stickyHeader.isVisible = false
