@@ -70,5 +70,12 @@
 
 
 #### `lateinit` vs `companion object`
+<br><br>
 
 #### kotlin에는 static method가 없다?
+<br><br>
+
+#### Handler란?
+- work thread에서 main thread로 메시지를 전달해주는 역할을 하는 클래스.
+- 핸들러는 핸들러 객체를 만든 스레드와 해당 스레드의 message queue에 바인딩된다.
+<br><br>
