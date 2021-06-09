@@ -37,6 +37,11 @@
 
 #### view를 `findViewById`로 inflate해서 생성하는 것과 생성자로 생성하는 것의 차이는? 그냥 view 커스텀 클래스가 있으면 생성자로 만들 수 있는건가.
 - 솔직히 질문이 잘 이해가 안 된다. 다음에 다시 정리
+- LayoutInflater: Instantiates a layout xml file into its corresponding `View` objects.
+- `LayoutInflater(Context context)` Create a new LayoutInflater instance associated with a particular Context.
+
+- `from(Context context)` Obtains the LayoutInflater from the given context.
+- `inflate(int resource, ViewGroup root, boolean attachToRoot)` Inflate a new view hierarchy from the specified xml resource.
 <br><br>
 
 #### 안드로이드는 프레임워크인가, os인가?
@@ -56,3 +61,8 @@
 <category android:name="android.intent.category.LAUNCHER"/>
 ```
 <br><br>
+
+#### 왜 뷰 홀더에서 어댑터를 참조하지 못하는지?
+- 뷰 홀더는 화면에 표시될 아이템 뷰를 저장하는 객체. 어댑터에 의해 관리되고 필요에 따라 어댑터에서 생성된다. 미리 생성된 뷰홀더 객체가 있는 경우에는 단순히 데이터가 뷰 홀더의 아이템 뷰에 바인딩됨.
+[reference](https://recipes4dev.tistory.com/154)
+- 이유가 딱히 있는걸까..?
