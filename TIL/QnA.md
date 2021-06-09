@@ -66,3 +66,9 @@
 - 뷰 홀더는 화면에 표시될 아이템 뷰를 저장하는 객체. 어댑터에 의해 관리되고 필요에 따라 어댑터에서 생성된다. 미리 생성된 뷰홀더 객체가 있는 경우에는 단순히 데이터가 뷰 홀더의 아이템 뷰에 바인딩됨.
 [reference](https://recipes4dev.tistory.com/154)
 - 이유가 딱히 있는걸까..?
+<br><br>
+
+
+#### `lateinit` vs `companion object`
+
+#### kotlin에는 static method가 없다?
