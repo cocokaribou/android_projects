@@ -40,9 +40,11 @@
 - LayoutInflater: Instantiates a layout xml file into its corresponding `View` objects.
 - `LayoutInflater(Context context)` Create a new LayoutInflater instance associated with a particular Context.
 
-- `from(Context context)` Obtains the LayoutInflater from the given context.
-- `inflate(int resource, ViewGroup root, boolean attachToRoot)` Inflate a new view hierarchy from the specified xml resource.
-<br><br>
+|method|description|
+|:---|:---|
+|`from(Context context)`|Obtains the LayoutInflater from the given context.|
+|`inflate(int resource, ViewGroup root, boolean attachToRoot)`|Inflate a new view hierarchy from the specified xml resource.|
+
 
 #### 안드로이드는 프레임워크인가, os인가?
 - Android is an open-source software stack for mobile devices that includes an operating system, middleware and key applications. So you are partially correct in considering it as a framework. - [reference](https://softwareengineering.stackexchange.com/questions/51769/is-android-a-language-or-a-framework-platform)
@@ -78,4 +80,7 @@
 #### Handler란?
 - work thread에서 main thread로 메시지를 전달해주는 역할을 하는 클래스.
 - 핸들러는 핸들러 객체를 만든 스레드와 해당 스레드의 message queue에 바인딩된다.
+<br><br>
+
+#### `adapterPostion` vs `layoutPosition`
 <br><br>
