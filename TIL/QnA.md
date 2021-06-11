@@ -72,9 +72,31 @@
 
 
 #### `lateinit` vs `companion object`
+- lateinit은 초기화가 나중에 되는 인스턴스 변수이다.<br>
+- `lateinit` non-null type, properties can be initialized through dependency injection. 
+- checking whether a lateinit var is initialized
+```kotlin
+if(foo::bar.isInitialized){
+  println(foo.bar)
+}
+```
+- companion object는 클래스 내부에 정의되는 object(싱글턴 객체 하나 있는 클래스)이다. 클래스가 메모리에 적재될 때 함께 생성된다
+- `companion object` if you declare a variable or a function `companion obejct` inside your class, you can access its members using only the class name as a qualifier.
+
+```kotlin
+MyClass.Companion.myProp
+MyClass.myProp
+
+//companion object는 객체이다. 
+//클래스명으로도 접근 가능한 건 축약 표현이지, java의 static과 혼동말것!
+```
+
 <br><br>
 
 #### kotlin에는 static method가 없다?
+- 없음
+> Note that, even though the members of companion objects look like static members in other languages, at runtime those are still instance members of real objects, and can, for example, implement interfaces. - [reference](https://kotlinlang.org/docs/object-declarations.html#companion-objects)
+
 <br><br>
 
 #### Handler란?
