@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.openapi_test.Data.DataVO
 import com.example.openapi_test.databinding.ItemBakeryBinding
 
-class mAdapter(private val list: ArrayList<String>) : RecyclerView.Adapter<mAdapter.mViewHolder>() {
+class mAdapter(private val list: ArrayList<DataVO.VoObject.Bakery>) : RecyclerView.Adapter<mAdapter.mViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): mAdapter.mViewHolder {
         return mViewHolder(
