@@ -106,3 +106,11 @@ MyClass.myProp
 
 #### `adapterPostion` vs `layoutPosition`
 <br><br>
+
+
+#### 왜 네트워크 통신을 main thread에서 못하는지
+- API level 11부터 deprecated됨
+- Main thread는 UI thread라고도 불림, 뷰와 위젯에 이벤트를 적용시키는 스레드.
+- 버튼을 스크린에서 터치 -> UI thread가 터치 이벤트를 뷰에 dispatch(다중 프로그래밍 시스템에서 다음에 처리될 작업을 선택하여 실행시키는것) -> 터치 상태를 설정하고 이벤트 큐에 요청 포스트 -> UI thread가 이 요청을 큐에서 해제(dequeue)한뒤 뷰에 그리도록 함 - [reference](https://www.androiddesignpatterns.com/2012/06/app-force-close-honeycomb-ics.html)
+- Main thread에서는 긴 작업을 지양하고 Worker thread에서는 UI작업을 하지 않아야 한다
+- 왜냐하면 화면을 그리는 시간이 늦어지니까 - [reference](https://holika.tistory.com/entry/%EB%82%B4-%EB%A7%98%EB%8C%80%EB%A1%9C-%EC%A0%95%EB%A6%AC%ED%95%9C-%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%EC%99%9C-UI-Thread%EC%97%90%EC%84%9C%EB%8A%94-%EA%B8%B4-%EC%9E%91%EC%97%85%EC%9D%84-%ED%95%98%EB%A9%B4-%EC%95%88-%EB%90%98%EB%8A%94-%EA%B1%B8%EA%B9%8C)
