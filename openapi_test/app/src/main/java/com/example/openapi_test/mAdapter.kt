@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.openapi_test.Data.DataVO
 import com.example.openapi_test.databinding.ItemBakeryBinding
+import java.util.*
 
-class mAdapter(private val list: ArrayList<DataVO.VoObject.Bakery>) :
+class mAdapter(private val list: Vector<DataVO.VoObject.Bakery>) :
     RecyclerView.Adapter<mAdapter.mViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): mAdapter.mViewHolder {
@@ -24,21 +25,16 @@ class mAdapter(private val list: ArrayList<DataVO.VoObject.Bakery>) :
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return 8
     }
 
     class mViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemBakeryBinding.bind(view)
 
-        fun bind(list: ArrayList<DataVO.VoObject.Bakery>) {
-            binding.txtStoreNm.text = "되긴 되냐고"
-            binding.txtAddress.text = "왜 바인딩이 안되냐고"
+        fun bind(list: Vector<DataVO.VoObject.Bakery>) {
             Log.e("adapter", "listSize: ${list.size}")
-
-            for (i in 0..10) {
-                binding.txtStoreNm.text = list[i].storeNm
-                binding.txtAddress.text = list[i].storeAdr
-            }
+            binding.txtStoreNm.text = list[adapterPosition].storeNm
+            binding.txtAddress.text = list[adapterPosition].storeAdr
         }
     }
 }

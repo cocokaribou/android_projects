@@ -10,24 +10,27 @@
         android:id="@+id/txt_mainTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="강서구의 베이커리 리스트"
-        android:textStyle="bold"
-        android:textColor="#2f2f2f"
         android:background="#fefe"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:gravity="center"
         android:padding="16dp"
-        />
+        android:text="강서구의 베이커리 리스트"
+        android:textColor="#2f2f2f"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_mainList"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_mainTitle"
-        />
+        app:layout_constraintTop_toBottomOf="@id/txt_mainTitle">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_mainList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
