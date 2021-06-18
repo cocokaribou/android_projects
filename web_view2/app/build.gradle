@@ -48,4 +48,22 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+
+    implementation group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.9.0' //a type-safe http client for android
+    implementation group: 'com.squareup.retrofit2', name: 'converter-gson', version: '2.9.0'
+
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.1' //http client for java & kotlin
+    implementation group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: '4.9.1'
+
+    implementation group: 'com.facebook.stetho', name: 'stetho', version: '1.6.0' //debugging platform for android
+    implementation group: 'com.facebook.stetho', name: 'stetho-okhttp3', version: '1.6.0'
+
+    runtimeOnly group: 'androidx.multidex', name: 'multidex', version: '2.0.1' //allows your app to build and read multiple DEX files
+
+    implementation 'com.google.firebase:firebase-messaging:21.1.0'
+    implementation 'com.google.firebase:firebase-core:18.0.3'
+
 }
+
+//apply plugin: 'com.google.gms.google-services'
