@@ -2,5 +2,5 @@ package com.example.web_view2
 
 import androidx.appcompat.app.AppCompatActivity
 
-class PushActivity : AppCompatActivity() {
+class SettingActivity : AppCompatActivity() {
 }
