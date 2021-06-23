@@ -1,6 +1,5 @@
 package com.example.openapi_test
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.openapi_test.Data.DataVO
 import com.example.openapi_test.databinding.ItemBakeryBinding
 import java.util.*
+import kotlin.collections.ArrayList
 
-class mAdapter(private val list: Vector<DataVO.VoObject.Bakery>) :
+class mAdapter() :
     RecyclerView.Adapter<mAdapter.mViewHolder>() {
+//    private lateinit var list : ArrayList<DataVO.VoObject.Bakery>
+    private val list = listOf(1,2,3,4,5,6,7,8)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): mAdapter.mViewHolder {
         return mViewHolder(
@@ -31,10 +33,17 @@ class mAdapter(private val list: Vector<DataVO.VoObject.Bakery>) :
     class mViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemBakeryBinding.bind(view)
 
-        fun bind(list: Vector<DataVO.VoObject.Bakery>) {
-            Log.e("adapter", "listSize: ${list.size}")
+        fun bind(list: ArrayList<DataVO.VoObject.Bakery>) {
             binding.txtStoreNm.text = list[adapterPosition].storeNm
             binding.txtAddress.text = list[adapterPosition].storeAdr
         }
+        fun bind(list: List<Int>){
+            binding.txtAddress.text = list[adapterPosition].toString()
+        }
+    }
+
+    fun setData(dataList: ArrayList<DataVO.VoObject.Bakery>) {
+//        this.list = dataList
+        notifyDataSetChanged()
     }
 }

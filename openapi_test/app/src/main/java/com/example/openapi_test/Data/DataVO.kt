@@ -23,6 +23,13 @@ data class DataVO(
         )
 
     }
+    companion object{
+        private var dataVO: DataVO ?= null
+
+        fun setDataVO(dataVO: DataVO){
+            this.dataVO = dataVO
+        }
+    }
 
 
 }
