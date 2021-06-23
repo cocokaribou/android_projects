@@ -1,31 +1,55 @@
 package com.example.web_view2.webview
 
-import android.content.pm.PackageManager
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import android.util.Log
 import android.webkit.URLUtil
-import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.core.app.ActivityCompat
-import java.util.jar.Manifest
+import com.example.web_view2.activity.SettingActivity
 
-class MyWebViewClient : WebViewClient() {
+class MyWebViewClient() : WebViewClient() {
 
     override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+        val context = view.context
+
         val uri: Uri = Uri.parse(url)
         val scheme = uri.scheme
-        val path = uri.path
-        val query = uri.query
+        val host = uri.host
+
+        val queryMap = mutableMapOf<String, String>()
+        if (!uri.query.isNullOrEmpty()) {
+            uri.queryParameterNames.forEach { queryName ->
+                val queryParam = uri.getQueryParameter(queryName) ?: ""
+                queryMap[queryName] = queryParam
+            }
+        }
 
         if (URLUtil.isNetworkUrl(url)) {
             view.loadUrl(url)
         }
-        if (scheme.equals("tel:")) {
-
+        lateinit var intent: Intent
+        when (scheme) {
+            "tel" -> {
+                intent = Intent(Intent.ACTION_DIAL, Uri.parse(url))
+            }
         }
+        when (host) {
+            "setting" -> {
+                intent = Intent(context.applicationContext, SettingActivity::class.java)
+            }
+            "external_browser" -> {
+                if (!queryMap["link"].isNullOrEmpty()) {
+                    //외부 브라우저 새 창으로
+                    intent = Intent(Intent.ACTION_VIEW, Uri.parse(queryMap["link"]))
 
+                    //외부 브라우저 웹뷰로
+//                    view.loadUrl(queryMap["link"]!!)
+                }
+            }
+        }
+        context.startActivity(intent)
         return true
     }
 

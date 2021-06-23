@@ -1,22 +1,19 @@
-package com.example.web_view2
+package com.example.web_view2.activity
 
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Message
-import android.util.Log
 import android.webkit.*
 import androidx.core.app.ActivityCompat
-import androidx.databinding.DataBindingUtil
+import com.example.web_view2.R
 import com.example.web_view2.base.BaseApplication
 import com.example.web_view2.databinding.ActivityMainBinding
+import com.example.web_view2.fragment.SplashFragment
 import com.example.web_view2.webview.MyWebViewClient
+import com.example.web_view2.webview.MyWebChromeClient
 import com.pionnet.overpass.extension.getAppVersion
-import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
     private val tag = javaClass.simpleName //log 찍을 때
@@ -31,9 +28,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        addSplashFragment()
+
         instance = this
 
         BaseApplication.isAppRunning = true
+
+        //frame layout
+        //binding.imageview.loadImageCircle("https://postfiles.pstatic.net/MjAyMTA2MjJfMjkg/MDAxNjI0MzY2NDg2NDk1.tn4jXdVbTjFHpdgGEuAPaflQu62tcijfvyUFa1XRg_0g.fCr7IccRvu9Ykf_6Un5ZhiHKey-lOGn7RZ-5VKmYb7gg.JPEG.joyfuljuli/IMG_4903.JPG?type=w966", 400, 400)
 
         //web settings
         val settings = binding.myWebView.settings
@@ -65,19 +67,12 @@ class MainActivity : AppCompatActivity() {
         binding.myWebView.webChromeClient = MyWebChromeClient()
 
     }
-
-
-    private inner class MyWebChromeClient : WebChromeClient() {
-        override fun onCreateWindow(
-            view: WebView?,
-            isDialog: Boolean,
-            isUserGesture: Boolean,
-            resultMsg: Message?
-        ): Boolean {
-            super.onCreateWindow(view, isDialog, isUserGesture, resultMsg)
-            return false
-        }
+    fun addSplashFragment(){
+        val splashFragment = SplashFragment()
+        val ft = supportFragmentManager.beginTransaction()
+        ft.add(R.id.frameLayout_splash, splashFragment, splashFragment.javaClass.simpleName).commit()
     }
+
 
     //뒤로가기
     override fun onBackPressed() {
