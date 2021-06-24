@@ -14,7 +14,7 @@ import kotlin.collections.ArrayList
 class mAdapter() :
 //    RecyclerView.Adapter<mAdapter.mViewHolder>() {
     ListAdapter<DataVO.VoObject.Bakery, mAdapter.mViewHolder>(diffUtil) {
-    private lateinit var bakeryList: MutableList<DataVO.VoObject.Bakery>
+    private var bakeryList= emptyList<DataVO.VoObject.Bakery>() //여기를
     private val list = listOf(1, 2, 3, 4, 5, 6, 7, 8)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): mAdapter.mViewHolder {
@@ -29,7 +29,7 @@ class mAdapter() :
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return bakeryList.size
     }
 
     class mViewHolder(view: View) : RecyclerView.ViewHolder(view) {

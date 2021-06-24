@@ -36,6 +36,13 @@ interface BakeryAPI {
                 .addInterceptor(headerInterceptor)
                 .addInterceptor(httpLoggingInterceptor)
                 .build()
+            //OkHttp: Interceptor 지원
+            // 1) Application Interceptor: OkHttpClient.Builder().addInterceptor
+            // 2) Network Interceptor: OkHttpClient.Builder().addNetworkInterceptor
+
+
+
+            //TODO 오브젝트 구조 파싱해서 바꿔야함
 
             return Retrofit.Builder()
                 .baseUrl("http://openapi.seoul.go.kr:8088/")
@@ -43,6 +50,11 @@ interface BakeryAPI {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(BakeryAPI::class.java)
+
+
+            //Retrofit: OkHttp를 네트워킹 계층으로 활용하며 그 위에 구축된다.
+            //JSON 응답을 사전에 정의된 POJO를 통해 직렬화 할 수 있다.
+
         }
     }
 }
