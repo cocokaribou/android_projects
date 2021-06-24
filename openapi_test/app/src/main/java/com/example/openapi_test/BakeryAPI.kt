@@ -1,6 +1,7 @@
 package com.example.openapi_test
 
 import com.example.openapi_test.Data.DataVO
+import okhttp3.Dispatcher
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -32,6 +33,9 @@ interface BakeryAPI {
                 return@Interceptor it.proceed((request))
             }
 
+            val test = Dispatcher()
+
+
             val client = OkHttpClient.Builder()
                 .addInterceptor(headerInterceptor)
                 .addInterceptor(httpLoggingInterceptor)
@@ -50,6 +54,7 @@ interface BakeryAPI {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(BakeryAPI::class.java)
+
 
 
             //Retrofit: OkHttp를 네트워킹 계층으로 활용하며 그 위에 구축된다.

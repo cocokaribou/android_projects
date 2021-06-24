@@ -41,11 +41,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.recyclerViewMainList.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+
         }
 
         initAdapter()
-        val api = BakeryAPI.create()
-        api.getBakery(page = "1", total = "10").enqueue(object : Callback<DataVO> {
+        val bakeryApi = BakeryAPI.create()
+        bakeryApi.getBakery(page = "1", total = "10").enqueue(object : Callback<DataVO> {
             override fun onResponse(call: Call<DataVO>, response: Response<DataVO>) {
                 Log.e("Success!", "${response.code()}")
 

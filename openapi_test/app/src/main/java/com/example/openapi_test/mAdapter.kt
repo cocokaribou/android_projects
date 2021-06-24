@@ -14,8 +14,8 @@ import kotlin.collections.ArrayList
 class mAdapter() :
 //    RecyclerView.Adapter<mAdapter.mViewHolder>() {
     ListAdapter<DataVO.VoObject.Bakery, mAdapter.mViewHolder>(diffUtil) {
-    private var bakeryList= emptyList<DataVO.VoObject.Bakery>() //여기를
-    private val list = listOf(1, 2, 3, 4, 5, 6, 7, 8)
+//    private var bakeryList= emptyList<DataVO.VoObject.Bakery>()
+    private var bakeryList : MutableList<DataVO.VoObject.Bakery> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): mAdapter.mViewHolder {
         return mViewHolder(
@@ -33,8 +33,7 @@ class mAdapter() :
     }
 
     class mViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = ItemBakeryBinding.bind(view)
-
+        private val binding = ItemBakeryBinding.bind(view)
 
         fun bind(data: DataVO.VoObject.Bakery) {
             binding.txtStoreNm.text = data.storeNm
