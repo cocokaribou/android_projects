@@ -3,6 +3,8 @@ package com.example.openapi_test
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.openapi_test.Data.DataVO
 import com.example.openapi_test.databinding.ItemBakeryBinding
@@ -10,9 +12,10 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class mAdapter() :
-    RecyclerView.Adapter<mAdapter.mViewHolder>() {
-//    private lateinit var list : ArrayList<DataVO.VoObject.Bakery>
-    private val list = listOf(1,2,3,4,5,6,7,8)
+//    RecyclerView.Adapter<mAdapter.mViewHolder>() {
+    ListAdapter<DataVO.VoObject.Bakery, mAdapter.mViewHolder>(diffUtil) {
+    private lateinit var bakeryList: MutableList<DataVO.VoObject.Bakery>
+    private val list = listOf(1, 2, 3, 4, 5, 6, 7, 8)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): mAdapter.mViewHolder {
         return mViewHolder(
@@ -22,28 +25,49 @@ class mAdapter() :
     }
 
     override fun onBindViewHolder(holder: mViewHolder, position: Int) {
-        holder.bind(list)
-        //do something with list
+        holder.bind(bakeryList[position])
     }
 
     override fun getItemCount(): Int {
-        return 8
+        return 10
     }
 
     class mViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemBakeryBinding.bind(view)
 
-        fun bind(list: ArrayList<DataVO.VoObject.Bakery>) {
-            binding.txtStoreNm.text = list[adapterPosition].storeNm
-            binding.txtAddress.text = list[adapterPosition].storeAdr
+
+        fun bind(data: DataVO.VoObject.Bakery) {
+            binding.txtStoreNm.text = data.storeNm
+            binding.txtAddress.text = data.storeAdr
         }
-        fun bind(list: List<Int>){
+
+        fun bind(list: List<Int>) {
             binding.txtAddress.text = list[adapterPosition].toString()
         }
     }
 
-    fun setData(dataList: ArrayList<DataVO.VoObject.Bakery>) {
-//        this.list = dataList
-        notifyDataSetChanged()
+
+    override fun submitList(list: MutableList<DataVO.VoObject.Bakery>?) {
+        bakeryList = list!!
+        super.submitList(list)
+    }
+
+    companion object {
+        val diffUtil = object : DiffUtil.ItemCallback<DataVO.VoObject.Bakery>() {
+            override fun areContentsTheSame(
+                oldItem: DataVO.VoObject.Bakery,
+                newItem: DataVO.VoObject.Bakery
+            ): Boolean {
+                return oldItem.storeNm == newItem.storeNm
+                        || oldItem.storeAdr == newItem.storeAdr
+            }
+
+            override fun areItemsTheSame(
+                oldItem: DataVO.VoObject.Bakery,
+                newItem: DataVO.VoObject.Bakery
+            ): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }

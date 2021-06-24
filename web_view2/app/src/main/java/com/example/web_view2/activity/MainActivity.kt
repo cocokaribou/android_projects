@@ -67,6 +67,8 @@ class MainActivity : AppCompatActivity() {
         binding.myWebView.webChromeClient = MyWebChromeClient()
 
     }
+
+    //main activity에서 스플래시 fragment 불러오기
     fun addSplashFragment(){
         val splashFragment = SplashFragment()
         val ft = supportFragmentManager.beginTransaction()
@@ -80,6 +82,7 @@ class MainActivity : AppCompatActivity() {
             binding.myWebView.goBack()
         }
     }
+
 
     fun startCallIntent(tel: String) {
         if (ActivityCompat.checkSelfPermission(

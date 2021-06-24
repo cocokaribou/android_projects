@@ -1,11 +1,15 @@
 package com.example.openapi_test
 
 import android.net.Uri
+import android.os.AsyncTask
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.NetworkOnMainThreadException
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.openapi_test.Data.DataVO
 //import com.example.openapi_test.Data.Bakery
 import com.example.openapi_test.databinding.ActivityMainBinding
@@ -26,28 +30,32 @@ import java.net.URL
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    private lateinit var youngAdapter: mAdapter
-    val bakeryList = arrayListOf<DataVO.VoObject.Bakery>()
+    private lateinit var myAdapter: mAdapter
+    private var bakeryList = arrayListOf<DataVO.VoObject.Bakery>()
 
+
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initAdapter()
+        binding.recyclerViewMainList.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+        }
+
+
+        myAdapter = mAdapter()
         val api = BakeryAPI.create()
-        api.getBakery(page = "1", total = "100").enqueue(object : Callback<DataVO> {
+        api.getBakery(page = "1", total = "10").enqueue(object : Callback<DataVO> {
             override fun onResponse(call: Call<DataVO>, response: Response<DataVO>) {
 
-                Log.e("success!", "yay")
+                Log.e("Success!", "${response.code()}")
 
-                //Gson Convert
-                if (response.isSuccessful) {
-                    Gson().fromJson(
-                        response.body()!!.toString(),
-                        DataVO::class.java
-                    )
+                response.body()!!.voObject.bakeries.forEach {
+                    bakeryList.add(it)
+                    myAdapter.submitList(bakeryList)
                 }
+
             }
 
             override fun onFailure(call: Call<DataVO>, t: Throwable) {
@@ -55,12 +63,9 @@ class MainActivity : AppCompatActivity() {
                 Log.e("Fail!", "Fail")
             }
         })
-    }
 
-    private fun initAdapter() {
-        youngAdapter = mAdapter()
-        binding.recyclerViewMainList.apply {
-            adapter = youngAdapter
+        binding.recyclerViewMainList.apply{
+            adapter = myAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
