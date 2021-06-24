@@ -14,6 +14,7 @@ import com.example.web_view2.fragment.SplashFragment
 import com.example.web_view2.webview.MyWebViewClient
 import com.example.web_view2.webview.MyWebChromeClient
 import com.pionnet.overpass.extension.getAppVersion
+import com.pionnet.overpass.extension.loadImageCircle
 
 class MainActivity : AppCompatActivity() {
     private val tag = javaClass.simpleName //log 찍을 때
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         BaseApplication.isAppRunning = true
 
         //frame layout
-        //binding.imageview.loadImageCircle("https://postfiles.pstatic.net/MjAyMTA2MjJfMjkg/MDAxNjI0MzY2NDg2NDk1.tn4jXdVbTjFHpdgGEuAPaflQu62tcijfvyUFa1XRg_0g.fCr7IccRvu9Ykf_6Un5ZhiHKey-lOGn7RZ-5VKmYb7gg.JPEG.joyfuljuli/IMG_4903.JPG?type=w966", 400, 400)
+        binding.imageview.loadImageCircle("https://postfiles.pstatic.net/MjAyMTA2MjJfMjkg/MDAxNjI0MzY2NDg2NDk1.tn4jXdVbTjFHpdgGEuAPaflQu62tcijfvyUFa1XRg_0g.fCr7IccRvu9Ykf_6Un5ZhiHKey-lOGn7RZ-5VKmYb7gg.JPEG.joyfuljuli/IMG_4903.JPG?type=w966", 400, 400)
 
         //web settings
         val settings = binding.myWebView.settings

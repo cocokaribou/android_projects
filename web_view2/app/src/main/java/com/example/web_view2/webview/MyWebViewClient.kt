@@ -29,27 +29,28 @@ class MyWebViewClient() : WebViewClient() {
         if (URLUtil.isNetworkUrl(url)) {
             view.loadUrl(url)
         }
-        lateinit var intent: Intent
         when (scheme) {
             "tel" -> {
-                intent = Intent(Intent.ACTION_DIAL, Uri.parse(url))
+                val intent = Intent(Intent.ACTION_DIAL, Uri.parse(url))
+                context.startActivity(intent)
             }
         }
         when (host) {
             "setting" -> {
-                intent = Intent(context.applicationContext, SettingActivity::class.java)
+                val intent = Intent(context.applicationContext, SettingActivity::class.java)
+                context.startActivity(intent)
             }
             "external_browser" -> {
                 if (!queryMap["link"].isNullOrEmpty()) {
                     //외부 브라우저 새 창으로
-                    intent = Intent(Intent.ACTION_VIEW, Uri.parse(queryMap["link"]))
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(queryMap["link"]))
+                    context.startActivity(intent)
 
                     //외부 브라우저 웹뷰로
 //                    view.loadUrl(queryMap["link"]!!)
                 }
             }
         }
-        context.startActivity(intent)
         return true
     }
 
