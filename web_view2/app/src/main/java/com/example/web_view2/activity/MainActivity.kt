@@ -14,6 +14,7 @@ import com.example.web_view2.fragment.SplashFragment
 import com.example.web_view2.webview.MyWebViewClient
 import com.example.web_view2.webview.MyWebChromeClient
 import com.pionnet.overpass.extension.getAppVersion
+import com.pionnet.overpass.extension.loadImage
 import com.pionnet.overpass.extension.loadImageCircle
 
 class MainActivity : AppCompatActivity() {
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         BaseApplication.isAppRunning = true
 
         //frame layout
-        binding.imageview.loadImageCircle("https://postfiles.pstatic.net/MjAyMTA2MjJfMjkg/MDAxNjI0MzY2NDg2NDk1.tn4jXdVbTjFHpdgGEuAPaflQu62tcijfvyUFa1XRg_0g.fCr7IccRvu9Ykf_6Un5ZhiHKey-lOGn7RZ-5VKmYb7gg.JPEG.joyfuljuli/IMG_4903.JPG?type=w966", 400, 400)
+        binding.imageview.setBackgroundResource(R.drawable.webview)
 
         //web settings
         val settings = binding.myWebView.settings
@@ -64,16 +65,18 @@ class MainActivity : AppCompatActivity() {
         binding.myWebView.loadUrl(url)
 
         //webview client / webchrome client
-        binding.myWebView.webViewClient = MyWebViewClient()
+        binding.myWebView.webViewClient =
+            MyWebViewClient(this@MainActivity, binding.myWebView)
         binding.myWebView.webChromeClient = MyWebChromeClient()
 
     }
 
     //main activity에서 스플래시 fragment 불러오기
-    fun addSplashFragment(){
+    fun addSplashFragment() {
         val splashFragment = SplashFragment()
         val ft = supportFragmentManager.beginTransaction()
-        ft.add(R.id.frameLayout_splash, splashFragment, splashFragment.javaClass.simpleName).commit()
+        ft.add(R.id.frameLayout_splash, splashFragment, splashFragment.javaClass.simpleName)
+            .commit()
     }
 
 
@@ -84,20 +87,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //chrome client의 file chooser
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+//        REQUEST_FI
+//        https://www.blueswt.com/118
+    }
 
     fun startCallIntent(tel: String) {
         if (ActivityCompat.checkSelfPermission(
                 this,
                 android.Manifest.permission.CALL_PHONE
             ) != PackageManager.PERMISSION_GRANTED
-        ){
+        ) {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(android.Manifest.permission.CALL_PHONE),
                 100 //permission call
             )
-        }else{
-            if(tel.isNotEmpty()){
+        } else {
+            if (tel.isNotEmpty()) {
                 val intent = Intent(Intent.ACTION_DIAL, Uri.parse(tel))
                 startActivity(intent)
             }

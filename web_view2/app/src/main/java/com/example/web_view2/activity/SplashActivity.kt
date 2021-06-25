@@ -4,11 +4,12 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.example.web_view2.R
 
 class SplashActivity : AppCompatActivity() {
-    val handler = Handler()
+    val handler = Handler(Looper.getMainLooper()) //Handler() <- deprecated
 
     /**
      * splash activity에 theme 적용해서 splash 올리기
@@ -23,11 +24,9 @@ class SplashActivity : AppCompatActivity() {
         //안되나봄^^ 그냥 fragment로 가자
 
         handler.postDelayed(Runnable() {
-            kotlin.run {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }, 2000)
     }
 

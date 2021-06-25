@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.NetworkOnMainThreadException
 import android.util.Log
+import android.widget.AbsListView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,9 +31,30 @@ import java.net.URL
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    private lateinit var myAdapter: mAdapter
     private var bakeryList = arrayListOf<DataVO.VoObject.Bakery>()
+    private val myAdapter = mAdapter()
 
+    private var lastScrollY = 0
+    private var mTotalScrolled = 0
+    private var page = 0
+
+    private val myListener = object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            mTotalScrolled += dy
+
+            if(mTotalScrolled<0){
+                mTotalScrolled = 0
+            }
+            Log.e("늘어나나 봅세", "$mTotalScrolled")
+            Log.e("dy", "$dy")
+        }
+
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            Log.e("newState", "$newState")
+        }
+    }
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,35 +62,40 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.recyclerViewMainList.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-
-        }
-
         initAdapter()
-        val bakeryApi = BakeryAPI.create()
-        bakeryApi.getBakery(page = "1", total = "10").enqueue(object : Callback<DataVO> {
-            override fun onResponse(call: Call<DataVO>, response: Response<DataVO>) {
-                Log.e("Success!", "${response.code()}")
+        requestBakery(page)
 
-                response.body()!!.voObject.bakeries.forEach {
-                    bakeryList.add(it)
-                    myAdapter.submitList(bakeryList)
-                }
-
-            }
-
-            override fun onFailure(call: Call<DataVO>, t: Throwable) {
-                Log.e("Fail!", "Fail")
-            }
-        })
+//        binding.recyclerViewMainList.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+//
+//        }
 
     }
-    fun initAdapter(){
-        myAdapter = mAdapter()
-        binding.recyclerViewMainList.apply{
+
+    private fun initAdapter() {
+        binding.recyclerViewMainList.apply {
             adapter = myAdapter
             layoutManager = LinearLayoutManager(context)
+            addOnScrollListener(myListener)
         }
+    }
+
+    private fun requestBakery(scrollY: Int) {
+        val bakeryApi = BakeryAPI.create()
+        bakeryApi.getBakery(page = scrollY.toString(), total = "20")
+            .enqueue(object : Callback<DataVO> {
+                override fun onFailure(call: Call<DataVO>, t: Throwable) {
+                    Log.e("Fail!", "Fail")
+                }
+
+                override fun onResponse(call: Call<DataVO>, response: Response<DataVO>) {
+                    Log.e("Success!", "${response.code()}")
+
+                    response.body()!!.voObject.bakeries.forEach {
+                        bakeryList.add(it)
+                        myAdapter.submitList(bakeryList)
+                    }
+                }
+            })
     }
 
     /*
@@ -91,5 +118,7 @@ class MainActivity : AppCompatActivity() {
 //    }
 
 }
+
+
 
 

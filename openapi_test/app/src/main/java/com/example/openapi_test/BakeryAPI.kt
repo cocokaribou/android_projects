@@ -20,8 +20,11 @@ interface BakeryAPI {
         @Path("total") total : String? = "100"
     ):Call<DataVO>
 
+    //retrofit annotation -> http method를 이용
+
+
     companion object {
-        private const val KEY = BuildConfig.API_KEY
+        private const val KEY = BuildConfig.API_KEY //local properties
         fun create(): BakeryAPI {
             val httpLoggingInterceptor = HttpLoggingInterceptor()
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY

@@ -58,7 +58,7 @@ class mAdapter() :
                 newItem: DataVO.VoObject.Bakery
             ): Boolean {
                 return oldItem.storeNm == newItem.storeNm
-                        || oldItem.storeAdr == newItem.storeAdr
+                        && oldItem.storeAdr == newItem.storeAdr
             }
 
             override fun areItemsTheSame(
