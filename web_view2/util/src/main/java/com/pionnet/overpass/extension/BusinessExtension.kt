@@ -2,6 +2,7 @@ package com.pionnet.overpass.extension
 
 import android.content.Context
 import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
 import java.util.*
 
 /**
@@ -55,4 +56,47 @@ fun getAppVersion(context: Context): String {
         e.printStackTrace()
     }
     return versionName
+}
+
+/**
+ * permission 체크
+ */
+fun hasPermission(context: Context, permission: String): Boolean {
+    return ActivityCompat.checkSelfPermission(
+        context,
+        permission
+    ) != PackageManager.PERMISSION_GRANTED
+}
+
+
+/**
+ * byte -> Hex(String)
+ */
+fun bytesToHex(bytes: ByteArray): String {
+    val hexArray = charArrayOf(
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F'
+    )
+    val hexChars = CharArray(bytes.size * 2)
+    var v: Int
+    for (j in bytes.indices) {
+        v = bytes[j].toInt() and 0xff
+        hexChars[j * 2] = hexArray[v.ushr(4)]
+        hexChars[j * 2 + 1] = hexArray[v and 0x0f]
+    }
+    return hexChars.toString()
 }

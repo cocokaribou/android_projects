@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.example.web_view2.R
 import com.example.web_view2.databinding.FragmentSplashBinding
 
 class SplashFragment : Fragment(){
@@ -19,12 +20,21 @@ class SplashFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        return inflater.inflate(R.layout.fragment_splash, container, false)
+
 //        binding = DataBindingUtil.inflate(
-//            layoutInflater,
+//            LayoutInflater.from(context),
 //            R.layout.fragment_splash,
-//            null,
+//            container,
 //            false
 //        )
-        return super.onCreateView(inflater, container, savedInstanceState)
+//        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
 }
+

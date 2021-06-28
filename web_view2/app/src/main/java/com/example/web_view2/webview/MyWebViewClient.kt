@@ -1,28 +1,25 @@
 package com.example.web_view2.webview
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
 import android.webkit.URLUtil
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.core.app.ActivityCompat
 import com.example.web_view2.activity.SettingActivity
 import com.example.web_view2.common.CommonConst
+import com.pionnet.overpass.extension.hasPermission
+import java.util.jar.Manifest
 
-class MyWebViewClient() : WebViewClient() {
-    private var paymentModule: PaymentModule? = null
-    private var context: Context? = null
-
-    constructor(context: Context, webView: WebView) : this() {
-        paymentModule = PaymentModule(context)
-        this.context = context
-    }
+class MyWebViewClient(private val context: Context) : WebViewClient() {
+    private var paymentModule = PaymentModule(context)
 
     override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-        Log.e("checker", "$url")
-
         val uri: Uri = Uri.parse(url)
         val scheme = uri.scheme
         val host = uri.host
@@ -38,14 +35,24 @@ class MyWebViewClient() : WebViewClient() {
         if (URLUtil.isNetworkUrl(url)) { //http, https
             view.loadUrl(url)
         }
+        if (paymentModule != null && paymentModule!!.processPaymentQuery(view, url))
+            return true
         when (scheme) {
             "tel" -> {
-                val intent = Intent(Intent.ACTION_DIAL, Uri.parse(url))
-                context!!.startActivity(intent)
+                val permission = android.Manifest.permission.CALL_PHONE
+                if (hasPermission(context, permission)) {
+                    ActivityCompat.requestPermissions(
+                        context as Activity,
+                        arrayOf(permission),
+                        100
+                    )
+                } else {
+                    val intent = Intent(Intent.ACTION_DIAL, Uri.parse(url))
+                    context!!.startActivity(intent)
+                }
+
             }
             "intent" -> {
-                if (paymentModule != null && paymentModule!!.processPaymentQuery(view, url))
-                    return true
             }
             "mailto" -> {
                 val intent = Intent(Intent.ACTION_SENDTO, Uri.parse(url))
@@ -72,9 +79,6 @@ class MyWebViewClient() : WebViewClient() {
             }
 
         }
-
-
-
         return true
     }
 
@@ -85,5 +89,6 @@ class MyWebViewClient() : WebViewClient() {
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
     }
+
 
 }

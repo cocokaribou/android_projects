@@ -22,7 +22,7 @@ interface BakeryAPI {
 
     //retrofit annotation -> http method를 이용
 
-
+x
     companion object {
         private const val KEY = BuildConfig.API_KEY //local properties
         fun create(): BakeryAPI {

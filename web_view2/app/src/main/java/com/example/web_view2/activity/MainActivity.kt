@@ -3,8 +3,10 @@ package com.example.web_view2.activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.*
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import android.view.View
 import android.webkit.*
 import androidx.core.app.ActivityCompat
 import com.example.web_view2.R
@@ -14,8 +16,11 @@ import com.example.web_view2.fragment.SplashFragment
 import com.example.web_view2.webview.MyWebViewClient
 import com.example.web_view2.webview.MyWebChromeClient
 import com.pionnet.overpass.extension.getAppVersion
+import com.pionnet.overpass.extension.bytesToHex
 import com.pionnet.overpass.extension.loadImage
 import com.pionnet.overpass.extension.loadImageCircle
+import java.security.MessageDigest
+import java.security.cert.CertificateException
 
 class MainActivity : AppCompatActivity() {
     private val tag = javaClass.simpleName //log 찍을 때
@@ -30,14 +35,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        addSplashFragment()
-
         instance = this
 
-        BaseApplication.isAppRunning = true
+        val hashArray = getApplicationSignature(this.packageName)
+        if(hashArray.isNotEmpty()){
+            hash = hashArray[0]
+        }else{
+            hash = "1234"
+        }
 
-        //frame layout
-        binding.imageview.setBackgroundResource(R.drawable.webview)
+        addSplashFragment()
+        removeSplashFragment()
+
+        BaseApplication.isAppRunning = true
 
         //web settings
         val settings = binding.myWebView.settings
@@ -50,7 +60,8 @@ class MainActivity : AppCompatActivity() {
             } + ": AOS:"
 
         )
-        settings.apply {
+
+        binding.myWebView.settings.apply {
             javaScriptEnabled = true
             javaScriptCanOpenWindowsAutomatically = true
 
@@ -63,31 +74,37 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.myWebView.loadUrl(url)
-
-        //webview client / webchrome client
-        binding.myWebView.webViewClient =
-            MyWebViewClient(this@MainActivity, binding.myWebView)
-        binding.myWebView.webChromeClient = MyWebChromeClient()
+        binding.myWebView.apply {
+            webViewClient = MyWebViewClient(this@MainActivity)
+            webChromeClient = MyWebChromeClient(this@MainActivity)
+        }
 
     }
 
-    //main activity에서 스플래시 fragment 불러오기
-    fun addSplashFragment() {
-        val splashFragment = SplashFragment()
+    private fun addSplashFragment() {
+        splashFragment = SplashFragment()
         val ft = supportFragmentManager.beginTransaction()
         ft.add(R.id.frameLayout_splash, splashFragment, splashFragment.javaClass.simpleName)
             .commit()
     }
 
+    private fun removeSplashFragment() {
+        binding.imageview.visibility = View.GONE
+        Handler(Looper.getMainLooper()).postDelayed({
+            val ft = supportFragmentManager.beginTransaction()
+            ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+            ft.remove(splashFragment).commitAllowingStateLoss()
 
-    //뒤로가기
+        }, 2000)
+    }
+
     override fun onBackPressed() {
         if (binding.myWebView.canGoBack()) {
             binding.myWebView.goBack()
         }
     }
 
-    //chrome client의 file chooser
+    //webChromeClient filechooser
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -95,26 +112,52 @@ class MainActivity : AppCompatActivity() {
 //        https://www.blueswt.com/118
     }
 
-    fun startCallIntent(tel: String) {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.CALL_PHONE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(android.Manifest.permission.CALL_PHONE),
-                100 //permission call
-            )
-        } else {
-            if (tel.isNotEmpty()) {
-                val intent = Intent(Intent.ACTION_DIAL, Uri.parse(tel))
-                startActivity(intent)
+    //api 요청시 post 필드에 넣을 appHash
+    private fun getApplicationSignature(packageName: String = this.packageName): List<String> {
+        val signatureList: List<String>
+
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                val signature = this.packageManager.getPackageInfo(
+                    packageName,
+                    PackageManager.GET_SIGNING_CERTIFICATES
+                ).signingInfo
+
+                signatureList = if (signature.hasMultipleSigners()) {
+                    signature.apkContentsSigners.map {
+                        val digest = MessageDigest.getInstance("SHA")
+                        digest.update(it.toByteArray())
+                        bytesToHex(digest.digest())
+                    }
+                } else {
+                    signature.signingCertificateHistory.map {
+                        val digest = MessageDigest.getInstance("SHA")
+                        digest.update(it.toByteArray())
+                        bytesToHex(digest.digest())
+                    }
+                }
+            } else {
+                val signature = this.packageManager.getPackageInfo(
+                    packageName,
+                    PackageManager.GET_SIGNATURES
+                ).signatures
+                signatureList = signature.map{
+                    val digest = MessageDigest.getInstance("SHA")
+                    digest.update(it.toByteArray())
+                    bytesToHex(digest.digest())
+                }
             }
+            return signatureList
+        } catch (e: CertificateException) {
+
         }
+        return emptyList()
     }
+
+
 
     companion object {
         lateinit var instance: MainActivity
+        lateinit var splashFragment: SplashFragment
     }
 }
