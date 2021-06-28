@@ -1,6 +1,7 @@
 package com.cocokaribou.thread_1
 
 import android.os.Bundle
+import android.os.Looper
 import android.os.SystemClock
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,8 @@ class MainActivity3 : AppCompatActivity() {
         binding.btn1.setOnClickListener {
             Thread {
                 run {
+                    Looper.prepare()
+                    Looper.loop()
                     for (i in binding.seekbar1.progress until 100 step 2) {
                         runOnUiThread {
                             run {

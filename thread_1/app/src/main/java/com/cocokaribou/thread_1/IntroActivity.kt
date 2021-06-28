@@ -33,6 +33,9 @@ class IntroActivity : AppCompatActivity() {
                 binding.btn3.id -> {
                     Intent(this, MainActivity3::class.java)
                 }
+                binding.btn4.id -> {
+                    Intent(this, CoroutineActivity::class.java)
+                }
                 else -> {
                     Intent(this, MainActivity3::class.java)
                 }
