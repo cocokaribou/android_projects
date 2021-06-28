@@ -25,10 +25,7 @@ import java.security.cert.CertificateException
 class MainActivity : AppCompatActivity() {
     private val tag = javaClass.simpleName //log 찍을 때
     private var hash: String? = null //hash
-    private var mCurUrl = "" //url을 비워놓네..
     private lateinit var binding: ActivityMainBinding
-
-    private val url = "https://m.sivillage.com/dispctg/initBeautyMain.siv"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,9 +35,9 @@ class MainActivity : AppCompatActivity() {
         instance = this
 
         val hashArray = getApplicationSignature(this.packageName)
-        if(hashArray.isNotEmpty()){
+        if (hashArray.isNotEmpty()) {
             hash = hashArray[0]
-        }else{
+        } else {
             hash = "1234"
         }
 
@@ -141,7 +138,7 @@ class MainActivity : AppCompatActivity() {
                     packageName,
                     PackageManager.GET_SIGNATURES
                 ).signatures
-                signatureList = signature.map{
+                signatureList = signature.map {
                     val digest = MessageDigest.getInstance("SHA")
                     digest.update(it.toByteArray())
                     bytesToHex(digest.digest())
@@ -155,9 +152,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     companion object {
         lateinit var instance: MainActivity
         lateinit var splashFragment: SplashFragment
+        private const val url = "https://m.sivillage.com/dispctg/initBeautyMain.siv"
+
     }
 }
