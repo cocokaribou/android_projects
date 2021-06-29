@@ -1,25 +1,25 @@
-package com.example.web_view2.webview
+package com.sivillage.beauty.webview
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.text.TextUtils
 import android.webkit.WebView
 import android.widget.Toast
 import com.example.web_view2.common.CommonConst
-import com.example.web_view2.common.RequestCode
 import java.io.UnsupportedEncodingException
 import java.net.URISyntaxException
 import java.net.URLDecoder
 import java.net.URLEncoder
-import java.util.HashMap
+import java.util.*
 
 class PaymentModule() {
-    private val PLAY_STOER_PATH = "market://search?q=pname:"
     private val ORDER_COMPLETE_URL = "http://m.sivillage.com/order/orderCompleteData"
     private val ENCODER_EUC_KR = "euc-kr"
     private val ENCODER_UTF_8 = "utf-8"
@@ -72,104 +72,44 @@ class PaymentModule() {
     private val SAFE_CLICK_S_CARD_CERI_APP = "scardcertiapp://"
     private val SAFE_CLICK_CLOUD_PAY = "cloudpay://"
     private val SAFE_CLICK_KB_ACP = "kb-acp://"
+    private val SAFE_CLICK_NAVER = "nidlogin://"
 
     private var context: Context? = null
+    private lateinit var webview: WebView
 
     constructor(context: Context) : this() {
         this.context = context
     }
 
     fun processPaymentQuery(wv: WebView, url: String?): Boolean {
+        webview = wv
+        url ?: return true
         return paymentLogic(wv, url)
     }
 
 
-    private fun paymentLogic(wv: WebView, url: String?): Boolean {
-        var intent: Intent
-        if (url!!.startsWith(RUN_ISP_MOBILE)) {
-            // 웹뷰에서 ispmobile 실행한 경우...
-            return if (isPackageInstalled(NAME_ISP_PKG, context!!)) {
-                intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                context!!.startActivity(intent)
-                true
-            } else {
-                installISP(wv)
-                true
-            }
-        } else if (url.startsWith(RUN_KFTC_BANKPAY)) {
-            // 웹뷰에서 계좌이체를 실행한 경우...
-            return if (isPackageInstalled(NAME_KFTC_PKG, context!!)) {
-                val requestInfo = "requestInfo"
-                var reqParam = url.substring(SCHEME_KFTC.length)
-                try {
-                    reqParam = URLDecoder.decode(reqParam, ENCODER_UTF_8)
-                } catch (e: UnsupportedEncodingException) {
-                    e.printStackTrace()
-                }
-                reqParam = makeBankPayData(reqParam)
-                intent = Intent(Intent.ACTION_MAIN)
-                intent.component = ComponentName(NAME_KFTC_PKG, NAME_KFTC_CLS)
-                intent.putExtra(requestInfo, reqParam)
-                (context as Activity?)!!.startActivityForResult(intent, RequestCode.KTFC_REQUEST_BANK)
-                true
-            } else {
-                installKFTC(wv)
-                true
-            }
-        } else if (url != null && isSafeClickScheme(url)) {
-            // 웹뷰에서 안심클릭을 실행한 경우...
-            try {
-                intent = try {
-                    Intent.parseUri(url, Intent.URI_INTENT_SCHEME)
-                } catch (ex: URISyntaxException) {
-                    return false
-                }
-                /*
-                롯데앱카드 : intent://lottecard/data?acctid=120160628150229605882165497397&apptid=964241&IOS_RETURN_APP=#Intent;scheme=lotteappcard;package=com.lcacApp;end
-                현대앱카드 : intent:hdcardappcardansimclick://appcard?acctid=201606281503270019917080296121#Intent;package=com.hyundaicard.appcard;end;
-                삼성앱카드 : intent://xid=4752902#Intent;scheme=mpocket.online.ansimclick;package=kr.co.samsungcard.mpocket;end;
-                NH 앱카드 : intent://appcard?ACCTID=201606281507175365309074630161&P1=1532151#Intent;scheme=nhappcardansimclick;package=nh.smart.mobilecard;end;
-                KB 앱카드  : intent://pay?srCode=0613325&kb-acp://#Intent;scheme=kb-acp;package=com.kbcard.cxh.appcard;end;
-                하나(모비페이) : intent://?tid=2238606309025172#Intent;scheme=cloudpay;package=com.hanaskcard.paycla;end;*/
-                if (url.startsWith(SAFE_CLICK_INTENT) || url.startsWith(SAFE_CLICK_INTENT_HYUNDAE)) { //현대카드는 스킴구조가 다르다보니 따로 예외처리
-                    // chrome 버젼 방식
-                    if (context!!.packageManager.resolveActivity(intent, 0) == null) {
-                        val packageName = intent.getPackage()
-                        if (packageName != null) {
-                            val uri = Uri.parse(PLAY_STOER_PATH + packageName)
-                            intent = Intent(Intent.ACTION_VIEW, uri)
-                            context!!.startActivity(intent)
-                            return true
-                        }
-                    }
-                    val uri = Uri.parse(intent.dataString)
-                    intent = Intent(Intent.ACTION_VIEW, uri)
-                    context!!.startActivity(intent)
-                    return true
-                } else {
-                    // 구 방식
-                    intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                    context!!.startActivity(intent)
-                }
-            } catch (e: Exception) {
-                return false
-            }
+    private fun paymentLogic(wv: WebView, url: String): Boolean {
+        if (url.startsWith(RUN_ISP_MOBILE) || url.startsWith(RUN_KFTC_BANKPAY)) {
+            gotoAppPackage(context, url)
+            return true
+        } else if (isSafeClickScheme(url)) {
+            gotoAppPackage(context, url)
+            return true
         } else if (url.startsWith(CommonConst.SCHEME_BRIDGE)) {
             // ispmobile에서 결제 완료후 스마트주문 앱을 호출하여 결제결과를 전달하는 경우
             val thisUrl: String = url.substring(CommonConst.SCHEME_BRIDGE.length)
             wv.clearView()
             wv.loadUrl(thisUrl)
             return true
-        } else {
-            return false
         }
-        return true
+
+        return false
     }
 
     /**
      * ISP 설치 진행 안내
      */
-    private fun installISP(wv: WebView) {
+    private fun installISP() {
         val d = AlertDialog.Builder(context)
         d.setMessage("ISP결제를 하기 위해서는 ISP앱이 필요합니다.\n설치 페이지로  진행하시겠습니까?")
         d.setTitle("ISP 설치")
@@ -177,12 +117,12 @@ class PaymentModule() {
 
         d.setPositiveButton("확인") { dialog, which ->
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(LINK_ISP_STORE))
-            context!!.startActivity(intent)
+            context?.startActivity(intent)
         }
         d.setNegativeButton("아니요") { dialog, which ->
             dialog.cancel()
             // 결제 초기 화면을 요청합니다.
-            wv.postUrl(ORDER_COMPLETE_URL, postData.toByteArray())
+            webview.postUrl(ORDER_COMPLETE_URL, postData.toByteArray())
         }
         d.show()
     }
@@ -214,7 +154,7 @@ class PaymentModule() {
     /**
      * 계좌이체 BANKPAY 설치 진행 안내
      */
-    private fun installKFTC(wv: WebView) {
+    private fun installKFTC() {
         val d = AlertDialog.Builder(context)
         d.setMessage("계좌이체 결제를 하기 위해서는 BANKPAY 앱이 필요합니다.\n설치 페이지로  진행하시겠습니까?")
         d.setTitle("계좌이체 BANKPAY 설치")
@@ -227,7 +167,7 @@ class PaymentModule() {
         }
         d.setNegativeButton("아니요") { dialog, which ->
             dialog.cancel()
-            wv.postUrl(ORDER_COMPLETE_URL, postData.toByteArray())
+            webview.postUrl(ORDER_COMPLETE_URL, postData.toByteArray())
         }
         d.show()
     }
@@ -260,6 +200,7 @@ class PaymentModule() {
                 || scheme.contains(SAFE_CLICK_S_CARD_CERI_APP)
                 || scheme.contains(SAFE_CLICK_CLOUD_PAY)
                 || scheme.contains(SAFE_CLICK_KB_ACP))
+                || scheme.contains(SAFE_CLICK_NAVER)
     }
 
     /**
@@ -294,16 +235,89 @@ class PaymentModule() {
                 }
             }
         }
-        toast.show()
     }
 
-    private fun isPackageInstalled(packageName: String, context: Context): Boolean {
-        val pm: PackageManager = context.packageManager
-        return try {
-            pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
-            true
-        } catch (e: PackageManager.NameNotFoundException) {
-            false
+    private fun gotoAppPackage(context: Context?, url: String) {
+        var intent: Intent? = null
+
+        try {
+            intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME)
+        } catch (e: URISyntaxException) {
+            return
         }
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            if (context?.packageManager?.resolveActivity(intent, 0) == null) {
+                if (url.startsWith(RUN_ISP_MOBILE)) {
+                    installISP()
+                    return
+                }
+
+                if (url.startsWith(RUN_KFTC_BANKPAY)) {
+                    installKFTC()
+                    return
+                }
+
+                val pkgName = intent.`package`
+                if (pkgName != null) {
+                    goMarket(pkgName)
+                }
+            } else {
+                if (url.startsWith(RUN_KFTC_BANKPAY)) {
+                    goBankPay(url)
+                    return
+                }
+
+                val uri = Uri.parse(intent?.dataString)
+                intent = Intent(Intent.ACTION_VIEW, uri)
+                context.startActivity(intent)
+            }
+        } else {
+            try {
+                if (url.startsWith(RUN_KFTC_BANKPAY)) {
+                    goBankPay(url)
+                    return
+                }
+
+                context?.startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                if (url.startsWith(RUN_ISP_MOBILE)) {
+                    installISP()
+                    return
+                }
+
+                if (url.startsWith(RUN_KFTC_BANKPAY)) {
+                    installKFTC()
+                    return
+                }
+
+                val pkgName = intent?.`package`
+                if (pkgName != null) {
+                    goMarket(pkgName)
+                }
+            }
+        }
+    }
+
+    private fun goMarket(packageName: String) {
+        val uri = Uri.parse("market://details?id=$packageName")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        context?.startActivity(intent)
+    }
+
+    private fun goBankPay(url: String) {
+        val requestInfo = "requestInfo"
+        var reqParam = url.substring(SCHEME_KFTC.length)
+        try {
+            reqParam = URLDecoder.decode(reqParam, ENCODER_UTF_8)
+        } catch (e: UnsupportedEncodingException) {
+            e.printStackTrace()
+        }
+        reqParam = makeBankPayData(reqParam)
+
+        val intent = Intent(Intent.ACTION_MAIN)
+        intent.component = ComponentName(NAME_KFTC_PKG, NAME_KFTC_CLS)
+        intent.putExtra(requestInfo, reqParam)
+        (context as Activity?)!!.startActivityForResult(intent, 10008)
     }
 }

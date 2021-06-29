@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.web_view2">
 
-    <queries>
+    <!--queries>
         <package android:name="kr.co.samsungcard.mpocket" />
         <package android:name="kvp.jjy.MispAndroid320" />
         <package android:name="com.kbcard.cxh.appcard" />
@@ -29,7 +29,7 @@
         <package android:name="kr.co.hanamembers.hmscustomer" />
         <package android:name="com.ahnlab.v3mobileplus" />
         <package android:name="kr.co.citibank.citimobile" />
-    </queries>
+    </queries>-->
 
     <!--network-->
     <uses-permission android:name="android.permission.INTERNET" />

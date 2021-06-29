@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat
 import com.example.web_view2.activity.SettingActivity
 import com.example.web_view2.common.CommonConst
 import com.pionnet.overpass.extension.hasPermission
+import com.sivillage.beauty.webview.PaymentModule
 import java.util.jar.Manifest
 
 class MyWebViewClient(private val context: Context) : WebViewClient() {

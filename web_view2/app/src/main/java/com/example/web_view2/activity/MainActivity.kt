@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.webkit.*
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.web_view2.R
 import com.example.web_view2.base.BaseApplication
@@ -105,6 +106,14 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        when (requestCode) {
+            12 -> {
+                Log.e("로그나 찍어", "냠냠")
+            }
+            10008 -> {
+                Log.e("$tag","메인으로 잘 빠집니다")
+            }
+        }
 //        REQUEST_FI
 //        https://www.blueswt.com/118
     }

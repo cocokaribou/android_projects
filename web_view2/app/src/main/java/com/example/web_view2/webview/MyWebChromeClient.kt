@@ -84,10 +84,10 @@ class MyWebChromeClient(private val context: Context) : WebChromeClient() {
 
     }
     fun fileChooser() {
-        val i = Intent(Intent.ACTION_GET_CONTENT)
-        i.addCategory(Intent.CATEGORY_OPENABLE)
-        i.type = "image/*"
-        (context as Activity).startActivityForResult(Intent.createChooser(i, "File Chooser"), 1002)
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        intent.type = "image/*"
+        (context as Activity).startActivityForResult(intent, 12)
 
     }
 

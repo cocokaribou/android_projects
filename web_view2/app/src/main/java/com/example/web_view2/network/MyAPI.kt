@@ -9,7 +9,8 @@ import retrofit2.http.POST
 interface MyAPI {
     @FormUrlEncoded
     @POST("/app/intro_beauty.siv")
-    fun getIntro(@Field("appHash") appHash: String): Call<ResponseBody>
+    fun getIntro(@FielappHash") appHash: String): Call<ResponseBody>
+    d("appHash") appHash: String): Call<ResponseBody>
 
 
 }
