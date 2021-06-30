@@ -1,7 +1,6 @@
-package com.example.web_view2.base
+package com.example.youngin.base
 
 import android.app.Application
-import android.app.Dialog
 import android.content.pm.ApplicationInfo
 import androidx.appcompat.app.AppCompatDialog
 import com.facebook.stetho.Stetho

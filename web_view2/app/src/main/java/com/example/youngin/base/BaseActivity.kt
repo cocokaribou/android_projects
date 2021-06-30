@@ -1,4 +1,4 @@
-package com.example.web_view2.base
+package com.example.youngin.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

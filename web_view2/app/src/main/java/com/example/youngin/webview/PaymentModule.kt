@@ -6,13 +6,12 @@ import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.text.TextUtils
 import android.webkit.WebView
 import android.widget.Toast
-import com.example.web_view2.common.CommonConst
+import com.example.youngin.common.CommonConst
 import java.io.UnsupportedEncodingException
 import java.net.URISyntaxException
 import java.net.URLDecoder
@@ -209,13 +208,23 @@ class PaymentModule() {
     fun ktfcPaymentResultProcess(wv: WebView, data: Intent) {
         val resVal = data.extras!!.getString(TAG_BANKPAY_VAL)
         val resCode = data.extras!!.getString(TAG_BANKPAY_CODE) ?: return
-        lateinit var toast:Toast
+        lateinit var toast: Toast
         when (resCode) {
-            KFTC_CD_CANCELED_BANKPAY -> {toast= Toast.makeText(context!!, "인증 오류\n계좌이체 결제를 취소하였습니다.", Toast.LENGTH_LONG)}
-            KFTC_CD_TIME_OUT -> {toast= Toast.makeText(context!!, "인증 오류\n타임아웃", Toast.LENGTH_LONG)}
-            KFTC_CD_SIGN_FAILED -> {toast= Toast.makeText(context!!, "인증 오류\n전자서명 실패", Toast.LENGTH_LONG)}
-            KFTC_CD_OTP_FAILED -> {toast= Toast.makeText(context!!, "인증 오류\nOTP/보안카드 처리 실패", Toast.LENGTH_LONG)}
-            KFTC_CD_INIT_ERROR -> {toast= Toast.makeText(context!!, "인증 오류\n인증모듈 초기화 오류", Toast.LENGTH_LONG)}
+            KFTC_CD_CANCELED_BANKPAY -> {
+                toast = Toast.makeText(context!!, "인증 오류\n계좌이체 결제를 취소하였습니다.", Toast.LENGTH_LONG)
+            }
+            KFTC_CD_TIME_OUT -> {
+                toast = Toast.makeText(context!!, "인증 오류\n타임아웃", Toast.LENGTH_LONG)
+            }
+            KFTC_CD_SIGN_FAILED -> {
+                toast = Toast.makeText(context!!, "인증 오류\n전자서명 실패", Toast.LENGTH_LONG)
+            }
+            KFTC_CD_OTP_FAILED -> {
+                toast = Toast.makeText(context!!, "인증 오류\nOTP/보안카드 처리 실패", Toast.LENGTH_LONG)
+            }
+            KFTC_CD_INIT_ERROR -> {
+                toast = Toast.makeText(context!!, "인증 오류\n인증모듈 초기화 오류", Toast.LENGTH_LONG)
+            }
             KFTC_CD_SUCCESS -> {
                 var postData: String? = null
                 val param1: String
@@ -235,6 +244,7 @@ class PaymentModule() {
                 }
             }
         }
+        toast.show()
     }
 
     private fun gotoAppPackage(context: Context?, url: String) {

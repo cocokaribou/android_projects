@@ -1,4 +1,4 @@
-package com.example.web_view2.activity
+package com.example.youngin.activity
 
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.example.web_view2.R
+import com.example.youngin.R
 
 class SplashActivity : AppCompatActivity() {
     val handler = Handler(Looper.getMainLooper()) //Handler() <- deprecated

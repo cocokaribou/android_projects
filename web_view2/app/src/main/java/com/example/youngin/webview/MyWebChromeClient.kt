@@ -1,4 +1,4 @@
-package com.example.web_view2.webview
+package com.example.youngin.webview
 
 import android.annotation.TargetApi
 import android.app.Activity
@@ -12,9 +12,6 @@ import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.example.web_view2.activity.MainActivity
-import java.util.jar.Manifest
 
 class MyWebChromeClient(private val context: Context) : WebChromeClient() {
     private val PHOTO_PERMISSION_RESULT_CODE = 1138
@@ -87,7 +84,7 @@ class MyWebChromeClient(private val context: Context) : WebChromeClient() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.type = "image/*"
-        (context as Activity).startActivityForResult(intent, 12)
+        (context as Activity).startActivityForResult(intent, 12) //전달받은 context의 activity로 이동, MyChromeClient를 여러군데서 부르지 않는 이상...
 
     }
 

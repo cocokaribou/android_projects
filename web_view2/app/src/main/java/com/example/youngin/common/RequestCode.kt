@@ -1,5 +1,7 @@
-package com.example.web_view2.common
+package com.example.youngin.common
 
+
+//MainActivity::onActivityResult()
 object RequestCode {
     const val REQUEST_ERR = 9999
     const val CALLED_SORT_POP = 10000

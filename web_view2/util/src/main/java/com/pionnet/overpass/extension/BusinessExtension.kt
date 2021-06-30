@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import java.util.*
+import kotlin.jvm.Throws
 
 /**
  * 업데이트 유무
@@ -11,7 +12,7 @@ import java.util.*
  * @param newVer : 서버에서 받는 앱 버전
  * @return true : 업데이트 진행, false : 업데이트 무시
  */
-fun isUpdate(appVer: String, newVer: String) : Boolean {
+fun isUpdate(appVer: String, newVer: String): Boolean {
     if (newVer == null) return false
 
     var mAppVer = appVer
@@ -49,12 +50,9 @@ fun setSplashImgURL(imgList: List<String>, isRandom: Boolean): String {
  */
 fun getAppVersion(context: Context): String {
     var versionName = ""
-    try {
-        versionName =
-            context.packageManager.getPackageInfo(context.packageName, 0).versionName
-    } catch (e: PackageManager.NameNotFoundException) {
-        e.printStackTrace()
-    }
+    @Throws(PackageManager.NameNotFoundException::class)
+    versionName =
+        context.packageManager.getPackageInfo(context.packageName, 0).versionName
     return versionName
 }
 

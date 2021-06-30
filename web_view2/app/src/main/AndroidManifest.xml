@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.web_view2">
+    package="com.example.youngin">
 
-    <!--queries>
+    <!--<queries>
         <package android:name="kr.co.samsungcard.mpocket" />
         <package android:name="kvp.jjy.MispAndroid320" />
         <package android:name="com.kbcard.cxh.appcard" />
@@ -68,13 +68,14 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".activity.SplashActivity"
-            android:theme="@style/SplashTheme">
-        </activity>
+<!--        <activity-->
+<!--            android:name=".activity.SplashActivity"-->
+<!--            android:theme="@style/SplashTheme">-->
+<!--        </activity>-->
 
         <activity android:name=".activity.SettingActivity">
-
+        </activity>
+        <activity android:name=".activity.LandingActivity">
 
         </activity>
     </application>

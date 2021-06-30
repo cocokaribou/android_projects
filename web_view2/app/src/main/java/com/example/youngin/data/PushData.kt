@@ -1,4 +1,4 @@
-package com.example.web_view2.data
+package com.example.youngin.data
 
 import com.google.gson.annotations.SerializedName
 

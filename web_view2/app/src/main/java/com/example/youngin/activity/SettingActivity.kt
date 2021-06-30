@@ -1,13 +1,10 @@
-package com.example.web_view2.activity
+package com.example.youngin.activity
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
-import com.example.web_view2.databinding.ActivitySettingBinding
+import com.example.youngin.databinding.ActivitySettingBinding
 import com.pionnet.overpass.extension.getAppVersion
 
 class SettingActivity : AppCompatActivity() {
@@ -31,6 +28,12 @@ class SettingActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 e.stackTrace
             }
+        }
+
+        binding.txtTitle.setOnLongClickListener {
+            val toast = Toast.makeText(this, "ta-da", Toast.LENGTH_LONG)
+            toast.show()
+            true
         }
 
     }

@@ -1,9 +1,8 @@
-package com.example.web_view2.webview
+package com.example.youngin.webview
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
@@ -11,11 +10,9 @@ import android.webkit.URLUtil
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.app.ActivityCompat
-import com.example.web_view2.activity.SettingActivity
-import com.example.web_view2.common.CommonConst
+import com.example.youngin.activity.SettingActivity
 import com.pionnet.overpass.extension.hasPermission
 import com.sivillage.beauty.webview.PaymentModule
-import java.util.jar.Manifest
 
 class MyWebViewClient(private val context: Context) : WebViewClient() {
     private var paymentModule = PaymentModule(context)
@@ -33,11 +30,6 @@ class MyWebViewClient(private val context: Context) : WebViewClient() {
             }
         }
 
-        if (URLUtil.isNetworkUrl(url)) { //http, https
-            view.loadUrl(url)
-        }
-        if (paymentModule != null && paymentModule!!.processPaymentQuery(view, url))
-            return true
         when (scheme) {
             "tel" -> {
                 val permission = android.Manifest.permission.CALL_PHONE
@@ -51,36 +43,48 @@ class MyWebViewClient(private val context: Context) : WebViewClient() {
                     val intent = Intent(Intent.ACTION_DIAL, Uri.parse(url))
                     context!!.startActivity(intent)
                 }
-
-            }
-            "intent" -> {
+                return true
             }
             "mailto" -> {
                 val intent = Intent(Intent.ACTION_SENDTO, Uri.parse(url))
-                context!!.startActivity(intent)
+                context.startActivity(intent)
+                return true
+
+            }
+            "intent"->{
+                Log.e("intent", "카톡이라고 혀라 또")
             }
             "siecbeauty" -> {
                 when (host) {
                     "setting" -> {
                         val intent =
-                            Intent(context!!.applicationContext, SettingActivity::class.java)
-                        context!!.startActivity(intent)
+                            Intent(context.applicationContext, SettingActivity::class.java)
+                        context.startActivity(intent)
+                        return true
+
                     }
                     "external_browser" -> {
                         if (!queryMap["link"].isNullOrEmpty()) {
                             //외부 브라우저 새 창으로
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(queryMap["link"]))
-                            context!!.startActivity(intent)
+                            context.startActivity(intent)
 
                             //외부 브라우저 웹뷰로
 //                    view.loadUrl(queryMap["link"]!!)
+                            return true
                         }
                     }
                 }
             }
-
         }
-        return true
+        if (paymentModule != null && paymentModule!!.processPaymentQuery(view, url)) {
+            return true
+        }
+        if (URLUtil.isNetworkUrl(url)) { //http, https
+            view.loadUrl(url)
+            return true
+        }
+        return false
     }
 
     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
