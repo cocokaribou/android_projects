@@ -1,6 +1,13 @@
 package com.example.youngin.activity
 
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.example.youngin.base.BaseActivity
 
-class LandingActivity: AppCompatActivity() {
+class LandingActivity: BaseActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        intent ?: return
+    }
+
 }

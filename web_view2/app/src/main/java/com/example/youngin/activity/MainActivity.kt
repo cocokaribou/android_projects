@@ -9,6 +9,7 @@ import android.view.View
 import android.webkit.*
 import android.widget.Toast
 import com.example.youngin.R
+import com.example.youngin.base.BaseActivity
 import com.example.youngin.base.BaseApplication
 import com.example.youngin.data.SplashResponse
 import com.example.youngin.databinding.ActivityMainBinding
@@ -33,8 +34,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
-class MainActivity : AppCompatActivity() {
-    private val tag = javaClass.simpleName //log 찍을 때
+class MainActivity : BaseActivity() {
+//    private val tag = javaClass.simpleName //log 찍을 때
 
     //    private var hash: String? = null //hash
     private lateinit var binding: ActivityMainBinding
@@ -44,25 +45,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        instance = this
-
-        /*val hashArray = getApplicationSignature(this.packageName)
-        if (hashArray.isNotEmpty()) {
-            hash = hashArray[0]
-        } else {
-            hash = "1234"
-        }*/
-
         requestSplash()
         BaseApplication.isAppRunning = true
+
 
         //web settings
         val settings = binding.myWebView.settings
         val userAgent = String.format(
             "%s SIV_SEARCH: %s %s",
             settings.userAgentString,
-            instance?.let { it.getString(R.string.user_agent) },
-            instance?.let {
+            this.getString(R.string.user_agent),
+            this?.let {
                 getAppVersion(it)
             } + ": AOS:"
 
@@ -85,6 +78,7 @@ class MainActivity : AppCompatActivity() {
             webViewClient = MyWebViewClient(this@MainActivity)
             webChromeClient = MyWebChromeClient(this@MainActivity)
         }
+
 
     }
 
@@ -141,53 +135,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //webChromeClient filechooser
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            12 -> {
-                Log.e("로그나 찍어", "냠냠")
-            }
-            10008 -> {
-                Log.e("$tag", "메인으로 잘 빠집니다")
-            }
-        }
-//        https://www.blueswt.com/118
-    }
-
-
-    private fun getAPIService(): MyAPI {
-        val okBuilder = OkHttpClient.Builder()
-
-        //dispatcher는 뭔가 요청 횟수를 제어하는 것과 관련있는가본가
-        val myDispatcher = Dispatcher()
-        myDispatcher.maxRequests = 8
-        myDispatcher.maxRequestsPerHost = 8
-
-        val headerInterceptor = CustomHeaderInterceptor(this)
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-
-        okBuilder.apply {
-            dispatcher(myDispatcher)
-
-            addInterceptor(headerInterceptor)
-            addInterceptor(loggingInterceptor)
-            addNetworkInterceptor(StethoInterceptor())
-
-            connectTimeout(10, TimeUnit.SECONDS)
-            readTimeout(10, TimeUnit.SECONDS)
-        }
-
-        val builder = Retrofit.Builder()
-        builder.baseUrl(HttpUrl.serverUrl)
-        builder.addConverterFactory(GsonConverterFactory.create())
-            .client(okBuilder.build())
-
-        val retrofit: Retrofit = builder.build()
-        return retrofit.create(MyAPI::class.java)
-    }
-
     /*//api 요청시 post 필드에 넣을 appHash
     private fun getApplicationSignature(packageName: String = this.packageName): List<String> {
         val signatureList: List<String>
@@ -232,9 +179,7 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
-        lateinit var instance: MainActivity
         lateinit var splashFragment: SplashFragment
         private const val url = "https://m.sivillage.com/dispctg/initBeautyMain.siv"
-
     }
 }

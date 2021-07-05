@@ -1,4 +1,27 @@
 <resources>
     <string name="app_name">youngin</string>
+
     <string name="user_agent">BEAUTY_MOBILE</string>
+    <string name="main">/dispctg/initBeautyMain.siv</string>
+    <string name="siv_main">/main/initMain.siv</string>
+
+    <string-array name="server_type">
+        <item>상용서버</item>
+        <item>개발서버</item>
+        <item>개발서버02</item>
+        <item>개발서버03</item>
+        <item>개발서버04</item>
+        <item>개발서버05</item>
+        <item>개발서버06</item>
+        <item>개발서버07</item>
+        <item>개발서버08</item>
+        <item>개발서버09</item>
+        <item>개발서버10</item>
+        <item>로컬서버</item>
+        <item>CRM-STG</item>
+        <item>CRM-DEV</item>
+        <item>코딩리스트 페이지</item>
+    </string-array>
+
+    <string name="server_change.msg">서버가 변경되었습니다.\n앱 종료 후 다시 시작해주세요</string>
 </resources>

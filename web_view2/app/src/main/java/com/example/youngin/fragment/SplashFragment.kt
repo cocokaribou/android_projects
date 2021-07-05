@@ -53,7 +53,7 @@ class SplashFragment : Fragment() {
 
     private fun checkUpdate(appTp: String?){
         if(!appTp.isNullOrEmpty()){
-            MainActivity.instance.removeSplashFragment()
+            (context as MainActivity).removeSplashFragment()
         }
     }
 }

@@ -3,6 +3,7 @@ package com.example.youngin.data
 import com.google.gson.annotations.SerializedName
 
 data class SplashResponse(
+
     @field:SerializedName("introImgs") var splashImgList: ArrayList<SplashImg>,
     @field:SerializedName("header") var header: HeaderInfo? = null,
     @field:SerializedName("verInfo") var verInfo: VerInfo? = null,
@@ -10,6 +11,7 @@ data class SplashResponse(
 
 
     ) {
+
     inner class SplashImg(
         @field:SerializedName("imgPath") var imageUrl: String
     )

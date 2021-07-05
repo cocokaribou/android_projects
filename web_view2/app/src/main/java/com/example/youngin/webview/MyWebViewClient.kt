@@ -11,6 +11,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.app.ActivityCompat
 import com.example.youngin.activity.SettingActivity
+import com.example.youngin.base.BaseActivity
 import com.pionnet.overpass.extension.hasPermission
 import com.sivillage.beauty.webview.PaymentModule
 
@@ -40,8 +41,7 @@ class MyWebViewClient(private val context: Context) : WebViewClient() {
                         100
                     )
                 } else {
-                    val intent = Intent(Intent.ACTION_DIAL, Uri.parse(url))
-                    context!!.startActivity(intent)
+                    (context as BaseActivity).callIntent(url)
                 }
                 return true
             }
@@ -50,9 +50,6 @@ class MyWebViewClient(private val context: Context) : WebViewClient() {
                 context.startActivity(intent)
                 return true
 
-            }
-            "intent"->{
-                Log.e("intent", "카톡이라고 혀라 또")
             }
             "siecbeauty" -> {
                 when (host) {
