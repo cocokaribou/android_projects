@@ -24,7 +24,7 @@ class BaseApplication : Application() {
         private lateinit var progressDialog: AppCompatDialog
         var isReceivingPush = false
         var isProgressOn = false
-        var isShowingFlash = true
+        var showSplash = true
 
         fun getServerType():Int{ //타입을 int로 리턴, 네트워크
             return 0
