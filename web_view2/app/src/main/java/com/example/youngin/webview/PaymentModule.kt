@@ -11,6 +11,7 @@ import android.os.Build
 import android.text.TextUtils
 import android.webkit.WebView
 import android.widget.Toast
+import com.example.youngin.activity.MainActivity
 import com.example.youngin.common.CommonConst
 import java.io.UnsupportedEncodingException
 import java.net.URISyntaxException
@@ -328,6 +329,6 @@ class PaymentModule() {
         val intent = Intent(Intent.ACTION_MAIN)
         intent.component = ComponentName(NAME_KFTC_PKG, NAME_KFTC_CLS)
         intent.putExtra(requestInfo, reqParam)
-        (context as Activity?)!!.startActivityForResult(intent, 10008)
+        (context as MainActivity?)!!.startActivityForResultBankPay(intent)
     }
 }

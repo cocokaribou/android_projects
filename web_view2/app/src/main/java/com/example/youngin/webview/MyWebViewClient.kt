@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
 import android.webkit.URLUtil
+import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.app.ActivityCompat
@@ -17,6 +18,10 @@ import com.sivillage.beauty.webview.PaymentModule
 
 class MyWebViewClient(private val context: Context) : WebViewClient() {
     private var paymentModule = PaymentModule(context)
+
+    init {
+        var chromeClient = MyWebChromeClient(context)
+    }
 
     override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
         val uri: Uri = Uri.parse(url)

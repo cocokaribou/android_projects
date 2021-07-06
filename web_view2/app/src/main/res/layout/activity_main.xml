@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+<!--    <com.example.youngin.webview.MyWebView-->
     <WebView
         android:id="@+id/myWebView"
         android:layout_width="match_parent"
@@ -22,13 +23,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-
-        <ImageView
-            android:id="@+id/imageview"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"/>
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent"/>
+    <View
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

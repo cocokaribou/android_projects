@@ -23,7 +23,6 @@ import com.pionnet.overpass.extension.getAppVersion
 import java.util.prefs.PreferenceChangeEvent
 
 class SettingActivity : BaseActivity() {
-
     private lateinit var binding: ActivitySettingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,14 +45,9 @@ class SettingActivity : BaseActivity() {
 
     private fun initDeleteCache() {
         binding.txtDeleteCache.setOnClickListener {
-            try {
-                val dir = this.cacheDir
-                val result = dir.deleteRecursively()
-                val toast = Toast.makeText(this, "삭제 성공여부 ${result}", Toast.LENGTH_SHORT)
-                toast.show()
-            } catch (e: Exception) {
-                e.stackTrace
-            }
+            val dir = this.cacheDir
+            val result = dir.deleteRecursively()
+            Toast.makeText(this, "삭제 성공여부 ${result}", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -92,6 +86,7 @@ class SettingActivity : BaseActivity() {
                     innerBuilder.setTitle("변경할 서버를 선택하세요")
                     innerBuilder.setAdapter(adapter) { dialog, itemIndex ->
                         Log.e("check", "$itemIndex")
+
                     }
                     innerBuilder.show()
                 }

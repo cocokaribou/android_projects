@@ -2,6 +2,7 @@ package com.example.youngin.webview
 
 import android.annotation.TargetApi
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -12,15 +13,13 @@ import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import androidx.core.app.ActivityCompat
+import com.example.youngin.activity.MainActivity
 
 class MyWebChromeClient(private val context: Context) : WebChromeClient() {
     private val PHOTO_PERMISSION_RESULT_CODE = 1138
     val permissions: Array<String> = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-
-
     var filePathCallbackNormal: ValueCallback<Uri>? = null
     var filePathCallbackLollipop: ValueCallback<Array<Uri>>? = null
-
 
     override fun onCreateWindow(
         view: WebView?,
@@ -52,39 +51,34 @@ class MyWebChromeClient(private val context: Context) : WebChromeClient() {
 
         if (fileChooserParams != null) {
 
-            if(!hasPermission()){
-                ActivityCompat.requestPermissions((context as Activity), permissions, PHOTO_PERMISSION_RESULT_CODE)
-            }else{
+            if (!hasPermission()) {
+                ActivityCompat.requestPermissions(
+                    (context as MainActivity),
+                    permissions,
+                    PHOTO_PERMISSION_RESULT_CODE
+                )
+            } else {
                 fileChooser()
             }
-
-
-//            var uploadMessage: ValueCallback<Array<Uri>>? = null //이미지 업로드시 사용
-//
-//            val acceptType = fileChooserParams!!.acceptTypes[0].toString() //
-//
-//            if (uploadMessage != null) {
-//                uploadMessage!!.onReceiveValue(null)
-//            }
-//
-//            uploadMessage = filePathCallback
-//
-//            val contentSelectionIntent = Intent()
-//
-//            contentSelectionIntent.action = Intent.ACTION_GET_CONTENT
-//            contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE)
-//            contentSelectionIntent.type = "image/*"
-//            webView!!.context.startActivity(contentSelectionIntent)
-//            (context as MainActivity).startActivityForResult(contentSelectionIntent, REQUEST_FILE_UPLOAD)
         }
         return true
 
     }
-    fun fileChooser() {
+
+    private fun fileChooser() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.type = "image/*"
-        (context as Activity).startActivityForResult(intent, 12) //전달받은 context의 activity로 이동, MyChromeClient를 여러군데서 부르지 않는 이상...
+        try {
+            (context as MainActivity).startActivityForResultFileChooser(
+                Intent.createChooser(
+                    intent,
+                    "File Chooser"
+                )
+            )
+        } catch (e: ActivityNotFoundException) {
+
+        }
 
     }
 

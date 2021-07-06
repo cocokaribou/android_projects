@@ -16,9 +16,6 @@ import com.pionnet.overpass.extension.loadImagePreLoad
 import java.util.*
 
 class SplashFragment : Fragment() {
-    /**
-     * splash fragment 설정해서 main activity에 올리기
-     */
     private lateinit var binding: FragmentSplashBinding
     private lateinit var splashResponse: SplashResponse
 

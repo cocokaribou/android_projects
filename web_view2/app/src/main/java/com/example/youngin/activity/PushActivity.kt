@@ -1,7 +1,8 @@
 package com.example.youngin.activity
 
 import androidx.appcompat.app.AppCompatActivity
+import com.example.youngin.databinding.ActivityPushBinding
 
-//push 화면 띄우는 곳
 class PushActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityPushBinding
 }

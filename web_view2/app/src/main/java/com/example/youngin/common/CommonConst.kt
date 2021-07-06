@@ -1,8 +1,6 @@
 package com.example.youngin.common
 
 object CommonConst {
-    const val IS_DEBUG = true
-
     const val SCHEME_BRIDGE = "siecbeauty"
 
     const val PARAM_LANDING_INFO = "landing_info"

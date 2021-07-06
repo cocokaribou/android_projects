@@ -1,13 +1,16 @@
 package com.example.youngin.activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.*
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.webkit.*
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.example.youngin.R
 import com.example.youngin.base.BaseActivity
 import com.example.youngin.base.BaseApplication
@@ -31,15 +34,18 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 class MainActivity : BaseActivity() {
-//    private val tag = javaClass.simpleName //log 찍을 때
 
-    //    private var hash: String? = null //hash
     private lateinit var binding: ActivityMainBinding
+//    private var hash: String? = null //app signature
 
+    /**
+     * init activity, web settings
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -48,17 +54,15 @@ class MainActivity : BaseActivity() {
         requestSplash()
         BaseApplication.isAppRunning = true
 
-
-        //web settings
+        /* web settings */
         val settings = binding.myWebView.settings
         val userAgent = String.format(
             "%s SIV_SEARCH: %s %s",
             settings.userAgentString,
-            this.getString(R.string.user_agent),
+            (this as Activity).getString(R.string.user_agent),
             this?.let {
                 getAppVersion(it)
             } + ": AOS:"
-
         )
 
         binding.myWebView.settings.apply {
@@ -73,15 +77,59 @@ class MainActivity : BaseActivity() {
             userAgentString = userAgent
         }
 
-        binding.myWebView.loadUrl(url)
+
+        /* webview client && web chrome client */
+        binding.myWebView.loadUrl(MainActivity.url)
         binding.myWebView.apply {
             webViewClient = MyWebViewClient(this@MainActivity)
             webChromeClient = MyWebChromeClient(this@MainActivity)
         }
 
-
     }
 
+    /**
+     * return API interface
+     */
+    private fun getAPIService(): MyAPI {
+        val okBuilder = OkHttpClient.Builder()
+
+        val myDispatcher = Dispatcher()
+        myDispatcher.maxRequests = 8
+        myDispatcher.maxRequestsPerHost = 8
+
+        val headerInterceptor = CustomHeaderInterceptor(this)
+        val loggingInterceptor = HttpLoggingInterceptor()
+        if (com.example.youngin.BuildConfig.DEBUG) {
+            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        } else {
+            loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
+        }
+
+        okBuilder.apply {
+            dispatcher(myDispatcher)
+
+            addInterceptor(headerInterceptor)
+            addInterceptor(loggingInterceptor)
+            if (com.example.youngin.BuildConfig.DEBUG) {
+                addNetworkInterceptor(StethoInterceptor())
+            }
+
+            connectTimeout(10, TimeUnit.SECONDS)
+            readTimeout(10, TimeUnit.SECONDS)
+        }
+
+        val builder = Retrofit.Builder()
+        builder.baseUrl(HttpUrl.serverUrl)
+        builder.addConverterFactory(GsonConverterFactory.create())
+            .client(okBuilder.build())
+
+        val retrofit: Retrofit = builder.build()
+        return retrofit.create(MyAPI::class.java)
+    }
+
+    /**
+     * request API, add Splash Fragment
+     */
     private fun requestSplash() {
         val service: MyAPI = getAPIService()
         val callSplash: Call<ResponseBody> = service.getIntro()
@@ -98,21 +146,22 @@ class MainActivity : BaseActivity() {
                                 response.body()!!.string(),
                                 SplashResponse::class.java
                             )
-                        SplashResponse.setSplashResponse(splashResponse) //이거 안 해도 gson으로 초기화되지 않나..?
+                        SplashResponse.setSplashResponse(splashResponse)
                         addSplashFragment()
                     } catch (e: Exception) {
-                        val toast =
-                            Toast.makeText(this@MainActivity, "Network Err!", Toast.LENGTH_LONG)
-                        toast.show()
+                        Toast.makeText(this@MainActivity, "Network Err!", Toast.LENGTH_LONG).show()
                         e.stackTrace
                     }
                 }
             }
         })
-
     }
 
+    /**
+     * Splash Fragment
+     */
     fun addSplashFragment() {
+        binding.background.visibility = View.GONE
         splashFragment = SplashFragment()
         val ft = supportFragmentManager.beginTransaction()
         ft.add(R.id.frameLayout_splash, splashFragment, splashFragment.javaClass.simpleName)
@@ -120,7 +169,6 @@ class MainActivity : BaseActivity() {
     }
 
     fun removeSplashFragment() {
-        binding.imageview.visibility = View.GONE
         Handler(Looper.getMainLooper()).postDelayed({
             val ft = supportFragmentManager.beginTransaction()
             ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
@@ -129,15 +177,53 @@ class MainActivity : BaseActivity() {
         }, 2000)
     }
 
+    /**
+     * onBackPressed()
+     */
     override fun onBackPressed() {
         if (binding.myWebView.canGoBack()) {
             binding.myWebView.goBack()
         }
     }
 
-    /*//api 요청시 post 필드에 넣을 appHash
+    /**
+     * goBankPay() activity result
+     */
+    fun startActivityForResultBankPay(intent: Intent) {
+
+    }
+
+    /**
+     * onShowFileChooser() activity result
+     */
+//    @RequiresApi(Build.VERSION_CODES.O)
+    fun startActivityForResultFileChooser(intent: Intent) {
+        if (Build.VERSION.SDK_INT >= 21) {
+            val results: Array<Uri?>
+
+            try {
+                if (intent != null) {
+                    val dataString = intent.dataString
+                    val clipData = intent.clipData
+                    if (dataString != null) {
+                        results = arrayOf(Uri.parse(dataString))
+                        //콜백.onReceiveValue(results) 이렇게 넘겨주기만 하면 되는데...!!
+                        Log.e("filechooser checker!", "$results")
+                    }
+                }
+
+            } catch (e: IOException) {
+                Toast.makeText(this, "업로드 아 실패요~", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    /**
+     * get app signature(hash)
+     */
+    /*
     private fun getApplicationSignature(packageName: String = this.packageName): List<String> {
-        val signatureList: List<String>
+        al signatureList: List<String>
 
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -180,6 +266,6 @@ class MainActivity : BaseActivity() {
 
     companion object {
         lateinit var splashFragment: SplashFragment
-        private const val url = "https://m.sivillage.com/dispctg/initBeautyMain.siv"
+        private var url = HttpUrl.serverUrl + "/dispctg/initBeautyMain.siv"
     }
 }
