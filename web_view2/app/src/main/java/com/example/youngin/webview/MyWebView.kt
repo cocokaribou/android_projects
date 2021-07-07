@@ -1,25 +1,72 @@
 package com.example.youngin.webview
 
-import android.annotation.SuppressLint
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
+import android.content.res.Configuration
+import android.os.Build
+import android.util.AttributeSet
 import android.webkit.WebSettings
 import android.webkit.WebView
 import com.example.youngin.R
-import com.example.youngin.activity.MainActivity
 import com.example.youngin.databinding.ActivityMainBinding
 import com.pionnet.overpass.extension.getAppVersion
 
 class MyWebView : WebView {
 
-    private lateinit var binding:ActivityMainBinding
-    var chromeClient: MyWebChromeClient
+    private lateinit var binding: ActivityMainBinding
+    var chromeClient: MyWebChromeClient = MyWebChromeClient(context)
 
-    constructor(context:Context) : super(context){
-
+    /*커스텀 웹뷰 사용하기 위해 웹뷰 생성자를 모두 재정의한다*/
+    constructor(context: Context) : super(context){
+        initView(context)
+    }
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs){
+        initView(context)
     }
 
-    init{
-        chromeClient = MyWebChromeClient(context)
+    private fun initView(context: Context) {
+        /* user agent */
+        val userAgent = String.format(
+            "%s SIV_SEARCH: %s %s",
+            settings.userAgentString,
+            context.getString(R.string.user_agent),
+            context.let {
+                getAppVersion(it)
+            } + ": AOS:"
+        )
+
+        settings.apply {
+            javaScriptEnabled = true
+            domStorageEnabled = true
+            javaScriptCanOpenWindowsAutomatically = true
+
+            cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
+
+            setSupportZoom(true)
+            builtInZoomControls = true
+            displayZoomControls = false
+            userAgentString = userAgent
+        }
+
+        if(com.example.youngin.BuildConfig.DEBUG){
+            setWebContentsDebuggingEnabled(true)
+        }
+
+
+        webViewClient = MyWebViewClient(context)
+        val mWebChromeClient = MyWebChromeClient(context, this)
+        webChromeClient = mWebChromeClient
     }
+
+
+
+    /*companion object {
+        private fun getFixedContext(context: Context): Context {
+            return if (Build.VERSION.SDK_INT in 21..22) context.createConfigurationContext(
+                Configuration()
+            ) else context
+        }
+    }*/
+
 }

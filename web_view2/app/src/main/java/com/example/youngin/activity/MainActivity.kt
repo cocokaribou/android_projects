@@ -22,6 +22,7 @@ import com.example.youngin.network.HttpUrl
 import com.example.youngin.network.MyAPI
 import com.example.youngin.webview.MyWebViewClient
 import com.example.youngin.webview.MyWebChromeClient
+import com.example.youngin.webview.MyWebView
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import com.pionnet.overpass.extension.getAppVersion
@@ -44,7 +45,7 @@ class MainActivity : BaseActivity() {
 //    private var hash: String? = null //app signature
 
     /**
-     * init activity, web settings
+     * init activity
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,33 +55,9 @@ class MainActivity : BaseActivity() {
         requestSplash()
         BaseApplication.isAppRunning = true
 
-        /* web settings */
-        val settings = binding.myWebView.settings
-        val userAgent = String.format(
-            "%s SIV_SEARCH: %s %s",
-            settings.userAgentString,
-            (this as Activity).getString(R.string.user_agent),
-            this?.let {
-                getAppVersion(it)
-            } + ": AOS:"
-        )
-
-        binding.myWebView.settings.apply {
-            javaScriptEnabled = true
-            javaScriptCanOpenWindowsAutomatically = true
-
-            cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
-
-            setSupportZoom(true)
-            builtInZoomControls = true
-            displayZoomControls = false
-            userAgentString = userAgent
-        }
-
-
         /* webview client && web chrome client */
-        binding.myWebView.loadUrl(MainActivity.url)
-        binding.myWebView.apply {
+        binding.webView.loadUrl(MainActivity.url)
+        binding.webView.apply {
             webViewClient = MyWebViewClient(this@MainActivity)
             webChromeClient = MyWebChromeClient(this@MainActivity)
         }
@@ -128,7 +105,8 @@ class MainActivity : BaseActivity() {
     }
 
     /**
-     * request API, add Splash Fragment
+     * request API
+     * add Splash Fragment
      */
     private fun requestSplash() {
         val service: MyAPI = getAPIService()
@@ -136,6 +114,7 @@ class MainActivity : BaseActivity() {
         callSplash.enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("$tag", "Fail")
+                Log.e("error", "unknown host exception")
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -161,7 +140,9 @@ class MainActivity : BaseActivity() {
      * Splash Fragment
      */
     fun addSplashFragment() {
+        //activity에 하얀 배경 제거
         binding.background.visibility = View.GONE
+
         splashFragment = SplashFragment()
         val ft = supportFragmentManager.beginTransaction()
         ft.add(R.id.frameLayout_splash, splashFragment, splashFragment.javaClass.simpleName)
@@ -181,8 +162,8 @@ class MainActivity : BaseActivity() {
      * onBackPressed()
      */
     override fun onBackPressed() {
-        if (binding.myWebView.canGoBack()) {
-            binding.myWebView.goBack()
+        if (binding.webView.canGoBack()) {
+            binding.webView.goBack()
         }
     }
 
@@ -199,16 +180,19 @@ class MainActivity : BaseActivity() {
 //    @RequiresApi(Build.VERSION_CODES.O)
     fun startActivityForResultFileChooser(intent: Intent) {
         if (Build.VERSION.SDK_INT >= 21) {
-            val results: Array<Uri?>
+            val results: Array<Uri>
 
             try {
+                if(binding.webView.chromeClient.filePathCallbackLollipop == null){
+                    return
+                }
                 if (intent != null) {
                     val dataString = intent.dataString
                     val clipData = intent.clipData
                     if (dataString != null) {
                         results = arrayOf(Uri.parse(dataString))
-                        //콜백.onReceiveValue(results) 이렇게 넘겨주기만 하면 되는데...!!
-                        Log.e("filechooser checker!", "$results")
+                        binding.webView.chromeClient.filePathCallbackLollipop!!.onReceiveValue(results)
+                        binding.webView.chromeClient.filePathCallbackLollipop = null
                     }
                 }
 

@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-<!--    <com.example.youngin.webview.MyWebView-->
-    <WebView
-        android:id="@+id/myWebView"
+    <com.example.youngin.webview.MyWebView
+        android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,11 +22,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
     <View
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff"/>
+        android:background="#fff" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
