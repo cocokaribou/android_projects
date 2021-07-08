@@ -66,7 +66,7 @@ dependencies {
     runtimeOnly group: 'com.github.bumptech.glide', name: 'compiler', version: '4.12.0' //Glide's annotation processor
 
 
-    runtimeOnly group: 'androidx.multidex', name: 'multidex', version: '2.0.1' //allows your app to build and read multiple DEX files
+    /*runtimeOnly group: 'androidx.multidex', name: 'multidex', version: '2.0.1' //allows your app to build and read multiple DEX files*/
 
     implementation 'com.google.firebase:firebase-messaging:22.0.0'
     implementation 'com.google.firebase:firebase-core:19.0.0'

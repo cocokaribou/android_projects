@@ -1,8 +1,11 @@
 package com.example.youngin.activity
 
+import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.*
 import android.util.Log
@@ -10,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.webkit.*
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import com.example.youngin.R
 import com.example.youngin.base.BaseActivity
@@ -39,9 +44,17 @@ import java.io.IOException
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
+/**
+ * 앱 진입점
+ * - 웹뷰 로드, 스플래시 프래그먼트 생성 onCreate()
+ * - Api 인터페이스 생성 getAPIService()
+ * - Api 요청결과로 스플래시 데이터 초기화 requestSplash()
+ * - startActivityForResultBankPay()
+ * - startActivityForResultFileChooser()
+ */
 class MainActivity : BaseActivity() {
-
     private lateinit var binding: ActivityMainBinding
+    private lateinit var url: String
 //    private var hash: String? = null //app signature
 
     /**
@@ -55,12 +68,8 @@ class MainActivity : BaseActivity() {
         requestSplash()
         BaseApplication.isAppRunning = true
 
-        /* webview client && web chrome client */
-        binding.webView.loadUrl(MainActivity.url)
-        binding.webView.apply {
-            webViewClient = MyWebViewClient(this@MainActivity)
-            webChromeClient = MyWebChromeClient(this@MainActivity)
-        }
+        url = HttpUrl.serverUrl + getString(R.string.main)
+        binding.webView.loadUrl(url)
 
     }
 
@@ -113,8 +122,7 @@ class MainActivity : BaseActivity() {
         val callSplash: Call<ResponseBody> = service.getIntro()
         callSplash.enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.e("$tag", "Fail")
-                Log.e("error", "unknown host exception")
+                Log.e("$tag checker!", "failed to receive response")
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -128,8 +136,9 @@ class MainActivity : BaseActivity() {
                         SplashResponse.setSplashResponse(splashResponse)
                         addSplashFragment()
                     } catch (e: Exception) {
-                        Toast.makeText(this@MainActivity, "Network Err!", Toast.LENGTH_LONG).show()
-                        e.stackTrace
+                        val dialog = AlertDialog.Builder(this@MainActivity)
+                        dialog.setMessage("Network Err!")
+                        dialog.show()
                     }
                 }
             }
@@ -137,9 +146,9 @@ class MainActivity : BaseActivity() {
     }
 
     /**
-     * Splash Fragment
+     * add splash fragment
      */
-    fun addSplashFragment() {
+    private fun addSplashFragment() {
         //activity에 하얀 배경 제거
         binding.background.visibility = View.GONE
 
@@ -149,6 +158,10 @@ class MainActivity : BaseActivity() {
             .commit()
     }
 
+    /**
+     * remove splash fragment
+     *
+     */
     fun removeSplashFragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             val ft = supportFragmentManager.beginTransaction()
@@ -174,32 +187,76 @@ class MainActivity : BaseActivity() {
 
     }
 
-    /**
-     * onShowFileChooser() activity result
-     */
-//    @RequiresApi(Build.VERSION_CODES.O)
-    fun startActivityForResultFileChooser(intent: Intent) {
+    /*fun startActivityForResultFileChooser(intent: Intent) {
         if (Build.VERSION.SDK_INT >= 21) {
             val results: Array<Uri>
 
             try {
-                if(binding.webView.chromeClient.filePathCallbackLollipop == null){
+                if(binding.webView.mChromeClient?.filePathCallbackLollipop == null){
+//                if (MyWebChromeClient.filePathCallbackLollipop == null) {
+                    Log.e("$tag checker!", "file path callback null")
                     return
                 }
-                if (intent != null) {
-                    val dataString = intent.dataString
-                    val clipData = intent.clipData
-                    if (dataString != null) {
-                        results = arrayOf(Uri.parse(dataString))
-                        binding.webView.chromeClient.filePathCallbackLollipop!!.onReceiveValue(results)
-                        binding.webView.chromeClient.filePathCallbackLollipop = null
-                    }
+                val data = intent.data
+                Log.e("$tag checker!", "intent.data: $data")
+                Log.e("$tag checker!", "intent: $intent")
+                val dataArr: Array<Uri>?
+                if (data != null) {
+                    dataArr = arrayOf(Uri.parse(data.toString()))
+                    binding.webView.mChromeClient?.filePathCallbackLollipop!!.onReceiveValue(
+                        dataArr
+                    )
                 }
+                //onReceiveValue() 처리하고 비워주기
+            binding.webView.mChromeClient?.filePathCallbackLollipop = null
 
             } catch (e: IOException) {
-                Toast.makeText(this, "업로드 아 실패요~", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "upload failed", Toast.LENGTH_LONG).show()
             }
         }
+    }*/
+
+    val startForResultUpload = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result: ActivityResult ->
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val results: Array<Uri>?
+
+            //activity result에 따라 처리해줌
+            if (result.resultCode == Activity.RESULT_OK) {
+                try {
+                    if (binding.webView.mChromeClient?.filePathCallbackLollipop == null) {
+                        return@registerForActivityResult
+                    }
+                    val resultData = result.data?.data
+                    if (resultData != null) {
+                        results = arrayOf(Uri.parse(resultData.toString()))
+
+                        binding.webView.mChromeClient?.filePathCallbackLollipop!!.onReceiveValue(results)
+                        binding.webView.mChromeClient?.filePathCallbackLollipop = null
+                    }
+                } catch(e:Exception) {
+                    Toast.makeText(this, "업로드실패 ", Toast.LENGTH_SHORT).show()
+                }
+            } else { //cancel 등등처리
+                if (binding.webView.mChromeClient?.filePathCallbackLollipop == null) return@registerForActivityResult
+                binding.webView.mChromeClient?.filePathCallbackLollipop!!.onReceiveValue(null)
+                binding.webView.mChromeClient?.filePathCallbackLollipop = null
+            }
+        }
+    }
+
+    fun checkPermission(): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(
+                    arrayOf(
+                        Manifest.permission.CAMERA
+                    ), 1001
+                )
+                return false
+            }
+        }
+        return true
     }
 
     /**
@@ -250,6 +307,5 @@ class MainActivity : BaseActivity() {
 
     companion object {
         lateinit var splashFragment: SplashFragment
-        private var url = HttpUrl.serverUrl + "/dispctg/initBeautyMain.siv"
     }
 }

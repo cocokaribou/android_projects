@@ -11,25 +11,26 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.app.ActivityCompat
+import com.example.youngin.activity.MainActivity
 import com.example.youngin.activity.SettingActivity
-import com.example.youngin.base.BaseActivity
 import com.example.youngin.common.CommonConst
 import com.pionnet.overpass.extension.hasPermission
 import com.sivillage.beauty.webview.PaymentModule
 
+/**
+ * 커스텀 웹뷰 클라이언트
+ * - url 처리 shouldOverrideUrlLoading()
+ */
 class MyWebViewClient(private val context: Context) : WebViewClient() {
+    private val tag = javaClass.simpleName
     private var paymentModule = PaymentModule(context)
 
-    init {
-        var chromeClient = MyWebChromeClient(context)
-    }
-
     override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-        Log.e("url", url)
+        Log.e("$tag checker!", "url: $url")
         val uri: Uri = Uri.parse(url)
         val scheme = uri.scheme
         val host = uri.host
-        Log.e("scheme", "$scheme")
+        Log.e("$tag checker!", "scheme: $scheme")
 
         when (scheme) {
             /* scheme이 siecbeauty:// 일 때 */
@@ -73,7 +74,7 @@ class MyWebViewClient(private val context: Context) : WebViewClient() {
                         100
                     )
                 } else {
-                    (context as BaseActivity).callIntent(url)
+                    (context as MainActivity).callIntent(url)
                 }
                 return true
             }
@@ -120,7 +121,7 @@ class MyWebViewClient(private val context: Context) : WebViewClient() {
             view.loadUrl(url)
             return true
         }
-        Log.e("checker!", "fail to load url")
+        Log.e("$tag checker!", "failed to load url")
         return false
     }
 

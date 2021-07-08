@@ -22,6 +22,9 @@ import com.example.youngin.databinding.ActivitySettingBinding
 import com.pionnet.overpass.extension.getAppVersion
 import java.util.prefs.PreferenceChangeEvent
 
+/**
+ * 웹뷰에서 설정화면 스킴(setting://) 받아서 띄우는 네이티브 화면
+ */
 class SettingActivity : BaseActivity() {
     private lateinit var binding: ActivitySettingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +36,7 @@ class SettingActivity : BaseActivity() {
         initAppVersion()
         initCsTel()
         initDeveloperMode()
-        Log.e("checker!", "${intent.data?.scheme}")
+        Log.e("$tag checker!", "intent.data.scheme: ${intent.data?.scheme}")
 
     }
 
@@ -85,7 +88,7 @@ class SettingActivity : BaseActivity() {
                     val innerBuilder = AlertDialog.Builder(this)
                     innerBuilder.setTitle("변경할 서버를 선택하세요")
                     innerBuilder.setAdapter(adapter) { dialog, itemIndex ->
-                        Log.e("check", "$itemIndex")
+                        Log.e("$tag checker!", "adapter index: $itemIndex")
 
                     }
                     innerBuilder.show()

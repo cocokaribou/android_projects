@@ -15,9 +15,14 @@ import com.example.youngin.databinding.FragmentSplashBinding
 import com.pionnet.overpass.extension.loadImagePreLoad
 import java.util.*
 
+/**
+ * 스플래시 화면 프래그먼트
+ * api 요청결과
+ * MainActivity의 frame layout에 띄움
+ */
 class SplashFragment : Fragment() {
-    private lateinit var binding: FragmentSplashBinding
-    private lateinit var splashResponse: SplashResponse
+    private lateinit var binding: FragmentSplashBinding //view
+    private lateinit var splashResponse: SplashResponse //model
 
     override fun onCreateView(
         inflater: LayoutInflater,

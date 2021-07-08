@@ -12,10 +12,12 @@ import com.example.youngin.R
 import com.example.youngin.databinding.ActivityMainBinding
 import com.pionnet.overpass.extension.getAppVersion
 
+/**
+ * 커스텀 웹뷰 세팅
+ */
 class MyWebView : WebView {
-
-    private lateinit var binding: ActivityMainBinding
-    var chromeClient: MyWebChromeClient = MyWebChromeClient(context)
+    lateinit var mWebViewClient: MyWebViewClient
+    lateinit var mChromeClient: MyWebChromeClient
 
     /*커스텀 웹뷰 사용하기 위해 웹뷰 생성자를 모두 재정의한다*/
     constructor(context: Context) : super(context){
@@ -53,10 +55,10 @@ class MyWebView : WebView {
             setWebContentsDebuggingEnabled(true)
         }
 
-
-        webViewClient = MyWebViewClient(context)
-        val mWebChromeClient = MyWebChromeClient(context, this)
-        webChromeClient = mWebChromeClient
+        mWebViewClient = MyWebViewClient(context)
+        mChromeClient = MyWebChromeClient(context, this)
+        webViewClient = mWebViewClient
+        webChromeClient = mChromeClient
     }
 
 
