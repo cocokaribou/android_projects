@@ -1,5 +1,6 @@
 package com.example.youngin.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.example.youngin.R
 import com.example.youngin.activity.MainActivity
 import com.example.youngin.data.SplashResponse
 import com.example.youngin.databinding.FragmentSplashBinding
+import com.example.youngin.dialog.BasicDialog
 import com.pionnet.overpass.extension.loadImagePreLoad
 import java.util.*
 
@@ -50,12 +52,41 @@ class SplashFragment : Fragment() {
             }
         } else {
         }
-        checkUpdate(splashResponse.verInfo?.appTp)
+        checkUpdate(
+            splashResponse.verInfo?.appTp,
+            splashResponse.verInfo?.msg
+        )
     }
 
-    private fun checkUpdate(appTp: String?){
-        if(!appTp.isNullOrEmpty()){
-            (context as MainActivity).removeSplashFragment()
+    private fun checkUpdate(appTp: String?, msg: String?) {
+        val mainActivity = context as MainActivity
+        val alertDialog = AlertDialog.Builder(mainActivity)
+        if (!appTp.isNullOrEmpty()) {
+            when (appTp) {
+                //앱 업데이트 권장
+                "2" -> {
+                    mainActivity.showDialog(
+                        BasicDialog.create(BasicDialog.Param.TYPE_UPDATE)
+                    )
+                }
+                //앱 업데이트 강제
+                "3" -> {
+                    mainActivity.showDialog(
+                        BasicDialog.create(BasicDialog.Param.TYPE_FORCE_UPDATE)
+                    )
+                }
+                //점검
+                "9" -> {
+                    var message = getString(R.string.sys_check)
+
+                    if (msg != null) {
+                        message = msg //?
+                    }
+                    alertDialog.setMessage(message)
+                }
+                else -> mainActivity.removeSplashFragment()
+            }
+            mainActivity.removeSplashFragment()
         }
     }
 }

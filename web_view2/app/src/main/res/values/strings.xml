@@ -1,5 +1,18 @@
 <resources>
-    <string name="app_name">youngin</string>
+    <string name="app_name">S.I.Beauty</string>
+
+    <!-- common -->
+    <string name="rooting_app">루팅된 폰에서는 앱을 실행할 수 없습니다.</string>
+    <string name="app_close">종료 하시겠습니까?</string>
+    <string name="app_unavailable">유효하지 않은 앱입니다.</string>
+    <string name="meg_network_err">네트워크에 접속할 수 없습니다. 잠시 후에 다시 시도해 주십시오.</string>
+    <string name="app_update">새로운 업데이트 버전이 있습니다. \n업데이트 후 사용하시겠습니까?</string>
+    <string name="app_force_update">새로운 업데이트 버전이 있습니다. \n업데이트 후 사용 바랍니다</string>
+    <string name="sys_check">뷰티 시스템 점검시간입니다.</string>
+    <string name="ok">확인</string>
+    <string name="cancel">취소</string>
+    <string name="image">이미지</string>
+
 
     <string name="user_agent">BEAUTY_MOBILE</string>
     <string name="main">/dispctg/initBeautyMain.siv</string>
@@ -27,4 +40,5 @@
 
     <string name="design_overpass">http://siv-mo.design.overpass.co.kr</string>
     <string name="coding_list_page">http://siv-mo.design.overpass.co.kr/coding_list.html</string>
+    <string name="server_test_msg">서버가 변경되었습니다\n앱 종료 후 다시 시작해주세요</string>
 </resources>

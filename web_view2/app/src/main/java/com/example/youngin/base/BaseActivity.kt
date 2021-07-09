@@ -25,6 +25,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import android.Manifest
+import com.example.youngin.dialog.BasicDialog
 
 /**
  * 액티비티 공통기능 구현
@@ -78,6 +79,7 @@ open class BaseActivity : AppCompatActivity() {
         return true
     }
 
+    //아아... 이거구나
     val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
@@ -119,4 +121,11 @@ open class BaseActivity : AppCompatActivity() {
         )
     }
 
+    fun showDialog(fragment: BasicDialog) {
+        val tag = fragment.javaClass.simpleName
+        val manager = supportFragmentManager
+
+        fragment.isCancelable = false
+        fragment.show(manager, tag)
+    }
 }

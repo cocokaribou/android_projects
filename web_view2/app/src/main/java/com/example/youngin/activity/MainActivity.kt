@@ -21,6 +21,7 @@ import com.example.youngin.base.BaseActivity
 import com.example.youngin.base.BaseApplication
 import com.example.youngin.data.SplashResponse
 import com.example.youngin.databinding.ActivityMainBinding
+import com.example.youngin.dialog.BasicDialog
 import com.example.youngin.fragment.SplashFragment
 import com.example.youngin.network.CustomHeaderInterceptor
 import com.example.youngin.network.HttpUrl
@@ -65,8 +66,8 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        requestSplash()
         BaseApplication.isAppRunning = true
+        requestSplash()
 
         url = HttpUrl.serverUrl + getString(R.string.main)
         binding.webView.loadUrl(url)
@@ -133,12 +134,16 @@ class MainActivity : BaseActivity() {
                                 response.body()!!.string(),
                                 SplashResponse::class.java
                             )
+                        if(!splashResponse.header?.rCode.isNullOrEmpty()){
+                            if(splashResponse.header?.rCode == "9999") {
+                                showDialog(BasicDialog.create(BasicDialog.Param.TYPE_NOT_APP))
+                                return
+                            }
+                        }
                         SplashResponse.setSplashResponse(splashResponse)
                         addSplashFragment()
                     } catch (e: Exception) {
-                        val dialog = AlertDialog.Builder(this@MainActivity)
-                        dialog.setMessage("Network Err!")
-                        dialog.show()
+                        e.printStackTrace()
                     }
                 }
             }
@@ -175,6 +180,11 @@ class MainActivity : BaseActivity() {
      * onBackPressed()
      */
     override fun onBackPressed() {
+        //웹뷰 내에서 새 창 켜져있을 경우
+        if(binding.webView.mChromeClient.isChildOpen()){
+            binding.webView.mChromeClient.closeChild()
+        }
+        //웹뷰 뒤로가기 지원될 경우
         if (binding.webView.canGoBack()) {
             binding.webView.goBack()
         }
@@ -216,34 +226,36 @@ class MainActivity : BaseActivity() {
         }
     }*/
 
-    val startForResultUpload = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result: ActivityResult ->
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val results: Array<Uri>?
+    val startForResultUpload =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                val results: Array<Uri>?
 
-            //activity result에 따라 처리해줌
-            if (result.resultCode == Activity.RESULT_OK) {
-                try {
-                    if (binding.webView.mChromeClient?.filePathCallbackLollipop == null) {
-                        return@registerForActivityResult
-                    }
-                    val resultData = result.data?.data
-                    if (resultData != null) {
-                        results = arrayOf(Uri.parse(resultData.toString()))
+                //activity result에 따라 처리해줌
+                if (result.resultCode == Activity.RESULT_OK) {
+                    try {
+                        if (binding.webView.mChromeClient?.filePathCallbackLollipop == null) {
+                            return@registerForActivityResult
+                        }
+                        val resultData = result.data?.data
+                        if (resultData != null) {
+                            results = arrayOf(Uri.parse(resultData.toString()))
 
-                        binding.webView.mChromeClient?.filePathCallbackLollipop!!.onReceiveValue(results)
-                        binding.webView.mChromeClient?.filePathCallbackLollipop = null
+                            binding.webView.mChromeClient?.filePathCallbackLollipop!!.onReceiveValue(
+                                results
+                            )
+                            binding.webView.mChromeClient?.filePathCallbackLollipop = null
+                        }
+                    } catch (e: Exception) {
+                        Toast.makeText(this, "업로드실패 ", Toast.LENGTH_SHORT).show()
                     }
-                } catch(e:Exception) {
-                    Toast.makeText(this, "업로드실패 ", Toast.LENGTH_SHORT).show()
+                } else { //cancel 등등처리
+                    if (binding.webView.mChromeClient?.filePathCallbackLollipop == null) return@registerForActivityResult
+                    binding.webView.mChromeClient?.filePathCallbackLollipop!!.onReceiveValue(null)
+                    binding.webView.mChromeClient?.filePathCallbackLollipop = null
                 }
-            } else { //cancel 등등처리
-                if (binding.webView.mChromeClient?.filePathCallbackLollipop == null) return@registerForActivityResult
-                binding.webView.mChromeClient?.filePathCallbackLollipop!!.onReceiveValue(null)
-                binding.webView.mChromeClient?.filePathCallbackLollipop = null
             }
         }
-    }
 
     fun checkPermission(): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -257,6 +269,15 @@ class MainActivity : BaseActivity() {
             }
         }
         return true
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun askPermissions(){
+        requestPermissions(
+            arrayOf(
+                Manifest.permission.CAMERA
+            ), 1001
+        )
     }
 
     /**

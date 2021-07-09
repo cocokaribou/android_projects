@@ -6,11 +6,13 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
 import android.util.AttributeSet
+import android.webkit.CookieManager
 import android.webkit.WebSettings
 import android.webkit.WebView
 import com.example.youngin.R
 import com.example.youngin.databinding.ActivityMainBinding
 import com.pionnet.overpass.extension.getAppVersion
+import okhttp3.internal.http.BridgeInterceptor
 
 /**
  * 커스텀 웹뷰 세팅
@@ -20,10 +22,11 @@ class MyWebView : WebView {
     lateinit var mChromeClient: MyWebChromeClient
 
     /*커스텀 웹뷰 사용하기 위해 웹뷰 생성자를 모두 재정의한다*/
-    constructor(context: Context) : super(context){
+    constructor(context: Context) : super(context) {
         initView(context)
     }
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs){
+
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         initView(context)
     }
 
@@ -49,18 +52,27 @@ class MyWebView : WebView {
             builtInZoomControls = true
             displayZoomControls = false
             userAgentString = userAgent
+            textZoom = 100
         }
 
-        if(com.example.youngin.BuildConfig.DEBUG){
+        if (com.example.youngin.BuildConfig.DEBUG) {
             setWebContentsDebuggingEnabled(true)
+        }
+
+        val cookieManager = CookieManager.getInstance()
+        cookieManager.setAcceptCookie(true)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+            cookieManager.setAcceptThirdPartyCookies(this, true)
         }
 
         mWebViewClient = MyWebViewClient(context)
         mChromeClient = MyWebChromeClient(context, this)
         webViewClient = mWebViewClient
         webChromeClient = mChromeClient
-    }
 
+    }
 
 
     /*companion object {

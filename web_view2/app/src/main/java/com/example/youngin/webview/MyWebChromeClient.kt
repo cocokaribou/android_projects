@@ -27,9 +27,12 @@ import com.example.youngin.common.CommonConst
 class MyWebChromeClient() : WebChromeClient() {
     private val tag = javaClass.simpleName
     val permissions: Array<String> = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+
+    /* API 수준별로 파일 경로 다르게 처리 */
     var filePathCallbackLollipop: ValueCallback<Array<Uri>>? = null
 
     private var context: Context? = null
+
     private var isChildOpen = false
     private lateinit var childWebView: MyWebView
     private lateinit var mWebView: MyWebView
@@ -38,12 +41,6 @@ class MyWebChromeClient() : WebChromeClient() {
     constructor(context: Context, webView: MyWebView) : this() {
         this.context = context
         mWebView = webView
-    }
-
-    /* API 수준별로 파일 경로 다르게 처리 */
-    companion object {
-        var filePathCallbackNormal: ValueCallback<Uri>? = null
-//        var filePathCallbackLollipop: ValueCallback<Array<Uri>>? = null
     }
 
     override fun onCreateWindow(
@@ -111,6 +108,11 @@ class MyWebChromeClient() : WebChromeClient() {
     fun isChildOpen(): Boolean {
         return isChildOpen
     }
+    fun closeChild() {
+        isChildOpen = false
+        mWebView.removeView(childWebView)
+        childWebView.destroy()
+    }
 
     /* For Android 5.0+ */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -127,12 +129,13 @@ class MyWebChromeClient() : WebChromeClient() {
         filePathCallbackLollipop = filePathCallback
 
         //권한 체크
+        //TODO 권한체크 granted되면 바로 filechooser 띄우기
         when ((context as MainActivity).checkPermission()) {
             true -> {
                 var intent = fileChooserParams?.createIntent()
 
                 try {
-//                    (context as MainActivity).startActivityForResultFileChooser.launch(intent)
+//                    (context as MainActivity).startActivityForResultFileChooser(intent)
                     (context as MainActivity).startForResultUpload.launch(intent)
                 } catch (e: ActivityNotFoundException) {
                     filePathCallbackLollipop = null
@@ -150,5 +153,7 @@ class MyWebChromeClient() : WebChromeClient() {
         }
         return true
     }
+
+
 }
 
