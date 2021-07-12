@@ -39,6 +39,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_goBack" />
 
+    <!-- 2) 알림 설정 row -->
+
+
+
     <!-- 2) 검색내역 삭제 row -->
     <FrameLayout
         android:id="@+id/title1_row"

@@ -2,7 +2,10 @@ package com.pionnet.overpass.extension
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.util.Log
+import android.webkit.CookieManager
 import androidx.core.app.ActivityCompat
+import java.lang.Exception
 import java.util.*
 import kotlin.jvm.Throws
 
@@ -59,12 +62,6 @@ fun getAppVersion(context: Context): String {
 /**
  * permission 체크
  */
-fun hasPermission(context: Context, permission: String): Boolean {
-    return ActivityCompat.checkSelfPermission(
-        context,
-        permission
-    ) != PackageManager.PERMISSION_GRANTED
-}
 
 
 /**
@@ -97,4 +94,52 @@ fun bytesToHex(bytes: ByteArray): String {
         hexChars[j * 2 + 1] = hexArray[v and 0x0f]
     }
     return hexChars.toString()
+}
+
+fun getCookies(url: String): String {
+    val cookieManager = CookieManager.getInstance()
+    var cookies: String? = null
+
+    try {
+        cookies = cookieManager.getCookie(url)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+    if (cookies.isNullOrEmpty()) cookies = ""
+    return cookies
+}
+
+/**
+ * cookie 확인
+ * 입력받은 name을 key 값으로 갖는 value가 있는지
+ */
+
+fun getCookiesForName(domain: String, name: String?): String? {
+    val cookieManager = CookieManager.getInstance()
+    cookieManager.setAcceptCookie(true)
+    val cookies = cookieManager.getCookie(domain)
+    var cookieVal: String? = null
+    if (cookies.isNullOrEmpty()) {
+        return null
+    }
+
+    var cookieArr = cookies.split(";".toRegex()).toTypedArray()
+    for(cookie in cookieArr){
+        if(cookie.contains(name!!)){
+            cookieArr = cookie.split("=".toRegex(), 2).toTypedArray()
+            cookieVal = if(cookieArr.size >1){
+                cookieArr[1]
+            }else{
+                ""
+            }
+            break
+        }
+    }
+    return cookieVal
+
+    //쿠키는 키 밸류 값, 그리고 '; '로 구분됨
+    //아이디저장
+    //id_save=Y||N
+    //AUTO_LOGIN_YN=Y||N
+
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.youngin">
+    package="com.siv.du">
 
     <!--<queries>
         <package android:name="kr.co.samsungcard.mpocket" />
@@ -42,12 +42,11 @@
     <!--image upload-->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
     <application
-        android:name=".base.BaseApplication"
-        android:allowBackup="true"
+        android:name="com.siv.du.base.BaseApplication"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
@@ -56,7 +55,7 @@
         android:theme="@style/Theme.Web_view2"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.siv.du.activity.MainActivity"
             android:configChanges="orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
@@ -74,7 +73,7 @@
         <!--        </activity>-->
 
         <activity
-            android:name=".activity.LandingActivity"
+            android:name="com.siv.du.activity.LandingActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -85,8 +84,9 @@
                 <data android:scheme="siecbeauty" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".base.BaseActivity" />
+        <activity android:name="com.siv.du.activity.SettingActivity" />
+        <activity android:name="com.siv.du.activity.PushActivity" />
+        <activity android:name="com.siv.du.base.BaseActivity" />
     </application>
 
 </manifest>

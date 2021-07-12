@@ -1,0 +1,37 @@
+package com.siv.du.activity
+
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import com.siv.du.base.BaseActivity
+import com.siv.du.base.BaseApplication
+
+class LandingActivity : BaseActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        intent ?: return
+        processData(intent.data)
+    }
+
+    private fun processData(data: Uri?) {
+        data ?: data.toString()
+        goLanding()
+    }
+
+    private fun goLanding() {
+        var i: Intent? = null
+        i = Intent(this, MainActivity::class.java)
+        if (!BaseApplication.isAppRunning) {
+            BaseApplication.showSplash = true
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        } else {
+            BaseApplication.showSplash = false
+            i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            overridePendingTransition(0, 0)
+        }
+        startActivity(i)
+        finish()
+    }
+
+}
