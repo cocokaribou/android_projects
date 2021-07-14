@@ -10,7 +10,8 @@ import android.webkit.WebView
 import com.siv.du.R
 import com.pionnet.overpass.extension.getAppVersion
 import com.pionnet.overpass.extension.getCookies
-import com.pionnet.overpass.extension.getCookiesForName
+import com.pionnet.overpass.extension.getCookieForName
+import com.pionnet.overpass.extension.logout
 
 /**
  * 커스텀 웹뷰 세팅
@@ -28,7 +29,7 @@ class MyWebView : WebView {
         initView(context)
     }
 
-    interface WebViewScrollListener{
+    interface WebViewScrollListener {
         fun onScrollTop(top: Int)
         fun onScrollDown(top: Int)
         fun onBottomReached()
@@ -40,9 +41,7 @@ class MyWebView : WebView {
             "%s SIV_SEARCH: %s %s",
             settings.userAgentString,
             context.getString(R.string.user_agent),
-            context.let {
-                getAppVersion(it)
-            } + ": AOS:"
+            getAppVersion(context) + ": AOS:"
         )
 
         settings.apply {
@@ -80,23 +79,13 @@ class MyWebView : WebView {
 
     override fun loadUrl(url: String) {
         val extraHeaders: MutableMap<String, String> = HashMap()
-        var autoLogin = getCookies(url)
-        getCookiesForName(url, "")
+        var autoLogin = getCookieForName("https://.sivillage.com", "AUTO_LOGIN_YN")
+        Log.e("$tag checker!!!", "$autoLogin")
 
-
-
-        super.loadUrl(url)
-
-
-
-    }
-
-    /*companion object {
-        private fun getFixedContext(context: Context): Context {
-            return if (Build.VERSION.SDK_INT in 21..22) context.createConfigurationContext(
-                Configuration()
-            ) else context
+        if (autoLogin != "Y") {
+            logout()
         }
-    }*/
+        loadUrl(url, extraHeaders)
+    }
 
 }

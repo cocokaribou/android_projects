@@ -3,6 +3,9 @@ package com.siv.du.common
 object CommonConst {
     const val SCHEME_BRIDGE = "siecbeauty"
 
+    const val PREF_KEY_IS_LAUNCHED = "launched"
+    const val PREF_KEY_TEST_SERVER = "test_server"
+
     const val PARAM_LANDING_INFO = "landing_info"
     const val PARAM_LANDING_TYPE = "landing_type"
 

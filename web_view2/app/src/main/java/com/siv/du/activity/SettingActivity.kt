@@ -1,5 +1,8 @@
 package com.siv.du.activity
 
+/*
+설정화면 네이티브 아닌 웹으로 제작
+
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
@@ -12,9 +15,11 @@ import com.siv.du.data.SplashResponse
 import com.siv.du.databinding.ActivitySettingBinding
 import com.pionnet.overpass.extension.getAppVersion
 
+*/
 /**
  * 웹뷰에서 설정화면 스킴(setting://) 받아서 띄우는 네이티브 화면
- */
+ *//*
+
 class SettingActivity : BaseActivity() {
     private lateinit var binding: ActivitySettingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +29,7 @@ class SettingActivity : BaseActivity() {
         initGoBack()
         initDeleteCache()
         initAppVersion()
-        initCsTel()
+//        initCsTel()
         initDeveloperMode()
         Log.e("$tag checker!", "intent.data.scheme: ${intent.data?.scheme}")
 
@@ -48,15 +53,15 @@ class SettingActivity : BaseActivity() {
         binding.txtAppVersion.text = getAppVersion(this)
     }
 
-    private fun initCsTel() {
-        val csTelNo = SplashResponse.getSplashResponse()?.settingInfo?.csTelno ?: null
-        if (!csTelNo.isNullOrEmpty()) {
-            binding.txtCallNumber.text = "전화연결: $csTelNo"
-            binding.txtCallNumber.setOnClickListener {
-                callIntent("tel:$csTelNo")
-            }
-        }
-    }
+//    private fun initCsTel() {
+//        val csTelNo = SplashResponse.getSplashResponse()?.settingInfo?.csTelno ?: null
+//        if (!csTelNo.isNullOrEmpty()) {
+//            binding.txtCallNumber.text = "전화연결: $csTelNo"
+//            binding.txtCallNumber.setOnClickListener {
+//                callIntent("tel:$csTelNo")
+//            }
+//        }
+//    }
 
     private fun initDeveloperMode() {
         binding.txtTitle.setOnLongClickListener {
@@ -92,4 +97,4 @@ class SettingActivity : BaseActivity() {
         }
     }
 
-}
+}*/

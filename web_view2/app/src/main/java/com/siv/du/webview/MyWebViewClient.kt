@@ -8,13 +8,11 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
-import android.webkit.URLUtil
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.siv.du.activity.MainActivity
-import com.siv.du.activity.SettingActivity
 import com.siv.du.common.CommonConst
 import com.sivillage.beauty.webview.PaymentModule
 
@@ -26,13 +24,16 @@ class MyWebViewClient(private val context: Context) : WebViewClient() {
     private val tag = javaClass.simpleName
     private var paymentModule = PaymentModule(context)
 
-    interface WebViewListener{
+    interface WebViewListener {
         fun onPageStarted(url: String)
         fun onPageShouldOverride(url: String)
-        fun onPageFinished(url:String)
-        fun call(tel:String)
+        fun onPageFinished(webView:WebView, url: String)
+        fun call(tel: String)
     }
+
     override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+
+        //TODO 배송조회 login 정보 받아오기
         Log.e("$tag checker!", "url: $url")
         val uri: Uri = Uri.parse(url)
         val scheme = uri.scheme
@@ -43,13 +44,7 @@ class MyWebViewClient(private val context: Context) : WebViewClient() {
             /* scheme이 siecbeauty:// 일 때 */
             CommonConst.SCHEME_BRIDGE -> {
                 when (host) {
-                    "setting" -> {
-                        val intent =
-                            Intent(context.applicationContext, SettingActivity::class.java)
-                        context.startActivity(intent)
-                        return true
-
-                    }
+                    //체크박스 체크됐을때 -> {}
                     "external_browser" -> {
                         val queryMap = mutableMapOf<String, String>()
                         if (!uri.query.isNullOrEmpty()) {
@@ -73,7 +68,8 @@ class MyWebViewClient(private val context: Context) : WebViewClient() {
 
             /* scheme이 tel:// 일 때 */
             "tel" -> {
-                (context as MainActivity).callIntent(url)
+                val telNo = url.split(":")[1]
+                (context as MainActivity).callIntent(telNo)
                 return true
             }
 
@@ -82,8 +78,21 @@ class MyWebViewClient(private val context: Context) : WebViewClient() {
                 val intent = Intent(Intent.ACTION_SENDTO, Uri.parse(url))
                 context.startActivity(intent)
                 return true
+            }
+            "설정 캐시삭제" -> {
+                val dir = (context as Activity).cacheDir
+                val result = dir.deleteRecursively()
+                if (result) {
+                    Toast.makeText(context, "캐시 삭제 성공", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(context, "캐시 삭제 실패", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            "설정 푸시알림" -> {
 
             }
+            //TODO 설정화면의 알림설정과 캐시삭제 스킴 정의
         }
 
         /* scheme이 intent:// 일 때 */
@@ -127,8 +136,18 @@ class MyWebViewClient(private val context: Context) : WebViewClient() {
         super.onPageStarted(view, url, favicon)
     }
 
-    override fun onPageFinished(view: WebView?, url: String?) { //마이페이지가 여길 타는게 아니라 로그인 정보를 못 받아오는듯.. 쿠키 관련인가......
+    override fun onPageFinished(
+        view: WebView?,
+        url: String?
+    ) { //마이페이지가 여길 타는게 아니라 로그인 정보를 못 받아오는듯.. 쿠키 관련인가......
         super.onPageFinished(view, url)
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            CookieManager.getInstance().flush()
+        } else {
+            CookieSyncManager.getInstance().sync()
+        }
+
+        //자동로그인
     }
 
     private fun checkPermissionCall(): Boolean {

@@ -2,6 +2,7 @@ package com.pionnet.overpass.extension
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import android.util.Log
 import android.webkit.CookieManager
 import androidx.core.app.ActivityCompat
@@ -114,7 +115,7 @@ fun getCookies(url: String): String {
  * 입력받은 name을 key 값으로 갖는 value가 있는지
  */
 
-fun getCookiesForName(domain: String, name: String?): String? {
+fun getCookieForName(domain: String, name: String?): String? {
     val cookieManager = CookieManager.getInstance()
     cookieManager.setAcceptCookie(true)
     val cookies = cookieManager.getCookie(domain)
@@ -142,4 +143,35 @@ fun getCookiesForName(domain: String, name: String?): String? {
     //id_save=Y||N
     //AUTO_LOGIN_YN=Y||N
 
+}
+
+fun logout() {
+    Log.e("hyuk", "logout")
+    var userId = getCookieForName("https://.sivillage.com", "userInputId")
+    userId = userId ?: ""
+
+    var saveId = getCookieForName("https://.sivillage.com", "id_save")
+    saveId = saveId ?: ""
+
+    var pcKey = getCookieForName("https://.sivillage.com", "pckey")
+    pcKey = pcKey ?: ""
+
+    Log.d("allCookie", getCookies("https://.sivillage.com"))
+    if (Build.VERSION.SDK_INT >= 21) {
+        CookieManager.getInstance().removeAllCookies(null);
+    } else {
+        CookieManager.getInstance().removeAllCookie();
+    }
+
+    if (!userId.isNullOrEmpty()) {
+        CookieManager.getInstance().setCookie("https://.sivillage.com", "userInputId=$userId")
+    }
+
+    if (!saveId.isNullOrEmpty()) {
+        CookieManager.getInstance().setCookie("https://.sivillage.com", "id_save=$saveId")
+    }
+
+    if (!pcKey.isNullOrEmpty()) {
+        CookieManager.getInstance().setCookie("https://.sivillage.com", "pckey=$pcKey")
+    }
 }

@@ -1,15 +1,18 @@
 package com.siv.du.webview
 
+import android.Manifest
 import android.annotation.TargetApi
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Message
 import android.util.Log
 import android.webkit.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import com.siv.du.R
 import com.siv.du.activity.MainActivity
 import com.siv.du.common.CommonConst
@@ -21,9 +24,9 @@ import com.siv.du.common.CommonConst
  */
 class MyWebChromeClient() : WebChromeClient() {
     private val tag = javaClass.simpleName
-    val permissions: Array<String> = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
     var filePathCallbackLollipop: ValueCallback<Array<Uri>>? = null
+    var mFileChooserParam: FileChooserParams? = null
 
     private var context: Context? = null
 
@@ -35,6 +38,18 @@ class MyWebChromeClient() : WebChromeClient() {
     constructor(context: Context, webView: MyWebView) : this() {
         this.context = context
         mWebView = webView
+    }
+
+    override fun onJsAlert(
+        view: WebView?,
+        url: String?,
+        message: String?,
+        result: JsResult?
+    ): Boolean {
+        Log.e("checker!", "will it be invoked?")
+        return super.onJsAlert(view, url, message, result)
+
+
     }
 
     override fun onCreateWindow(
@@ -102,6 +117,7 @@ class MyWebChromeClient() : WebChromeClient() {
     fun isChildOpen(): Boolean {
         return isChildOpen
     }
+
     fun closeChild() {
         isChildOpen = false
         mWebView.removeView(childWebView)
@@ -116,29 +132,23 @@ class MyWebChromeClient() : WebChromeClient() {
         fileChooserParams: FileChooserParams?
     ): Boolean {
 
-        //callback 은 한번 오픈할때마다 초기화
+        val main = context as MainActivity
+
         if (filePathCallbackLollipop != null) {
             filePathCallbackLollipop!!.onReceiveValue(null)
         }
         filePathCallbackLollipop = filePathCallback
+        mFileChooserParam = fileChooserParams
 
         //권한 체크
-        //TODO 권한체크 granted되면 바로 filechooser 띄우기
-        when ((context as MainActivity).checkPermission()) {
+        when (main.checkPermission(Manifest.permission.CAMERA)) {
             true -> {
-                var intent = fileChooserParams?.createIntent()
-
-                try {
-//                    (context as MainActivity).startActivityForResultFileChooser(intent)
-                    (context as MainActivity).startForResultUpload.launch(intent)
-                } catch (e: ActivityNotFoundException) {
-                    filePathCallbackLollipop = null
-                    return false
-                }
+                fileUpload()
             }
             false -> {
-//                (context as MainActivity).showRequestPermission()
-                //callback 은 한번 오픈할때마다 초기화
+                //권한 요청
+                main.askPermissions(Manifest.permission.CAMERA)
+
                 if (filePathCallbackLollipop != null) {
                     filePathCallbackLollipop?.onReceiveValue(null)
                 }
@@ -148,6 +158,16 @@ class MyWebChromeClient() : WebChromeClient() {
         return true
     }
 
+    fun fileUpload():Boolean{
+        val intent = mFileChooserParam?.createIntent()
+        return try {
+            (context as MainActivity).startForResultUpload.launch(intent)
+            true
+        } catch (e: ActivityNotFoundException) {
+            filePathCallbackLollipop = null
+            false
+        }
+    }
 
 }
 

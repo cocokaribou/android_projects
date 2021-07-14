@@ -1,5 +1,6 @@
 package com.siv.du.network
 
+import android.app.AlertDialog
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -19,6 +20,8 @@ class NetworkManager private constructor(private val context: Context) {
     fun checkNetworkAvailable(listener: OnNetworkListener) {
         if (isNetworkAvailable(context)) {
             listener.networkAvailable()
+        }else{
+            AlertDialog.Builder(context)
         }
     }
 

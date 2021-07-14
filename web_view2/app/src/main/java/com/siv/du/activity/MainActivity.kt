@@ -2,6 +2,9 @@ package com.siv.du.activity
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -13,6 +16,8 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.net.toUri
 import com.siv.du.R
 import com.siv.du.base.BaseActivity
 import com.siv.du.base.BaseApplication
@@ -25,7 +30,10 @@ import com.siv.du.network.HttpUrl
 import com.siv.du.network.MyAPI
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
+import com.siv.du.common.RequestCode
+import com.siv.du.network.NetworkManager
 import com.siv.du.webview.MyWebView
+import com.siv.du.webview.MyWebViewClient
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
@@ -43,12 +51,22 @@ import java.util.concurrent.TimeUnit
  * - 웹뷰 로드, 스플래시 프래그먼트 생성 onCreate()
  * - Api 인터페이스 생성 getAPIService()
  * - Api 요청결과로 스플래시 데이터 초기화 requestSplash()
+ *
+ * - 권한 체크
  * - startActivityForResultBankPay()
  * - startActivityForResultFileChooser()
  */
-class MainActivity : BaseActivity(), MyWebView.WebViewScrollListener {
+class MainActivity : BaseActivity(), MyWebView.WebViewScrollListener, MyWebViewClient.WebViewListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var url: String
+    private lateinit var telNo: String
+
+    private val permissionCall = Manifest.permission.CALL_PHONE
+    private val permissionCamera = Manifest.permission.CAMERA
+    private val permissionPush = arrayOf<String>(
+
+    )
+
 //    private var hash: String? = null //app signature
 
     /**
@@ -64,11 +82,45 @@ class MainActivity : BaseActivity(), MyWebView.WebViewScrollListener {
 
         url = HttpUrl.serverUrl + getString(R.string.main)
         binding.webView.loadUrl(url)
+//        binding.webView.loadUrl("http://m.sivillage.cttd.co.kr/html/ko/disp/brand_main7.html")
+//        binding.webView.loadUrl("http://m.sivillage.cttd.co.kr/html/ko/disp/search_result_v2.html")
+//        binding.webView.loadUrl("http://m.sivillage.cttd.co.kr/html/ko/etc/etc_setApp.html")
+//        binding.webView.loadUrl("file:///android_asset/test.html")
 
         initTestButton()
+
+        val script = "javascript:document.getElementById('checker').checked"
+        binding.webView.evaluateJavascript(script
+        ) {Log.e("do","something") } //그냥 바로 뜨네
+
+        binding.webView.addJavascriptInterface(AndroidBridge(), "test")
+
+    }
+    inner class AndroidBridge{
+        @JavascriptInterface
+        fun showToast(){
+            Toast.makeText(context as MainActivity, "tester", Toast.LENGTH_SHORT).show()
+        }
     }
 
-    private fun initTestButton(){
+    interface An
+
+    override fun onResume() {
+        super.onResume()
+
+        NetworkManager.getInstance(this)
+            .checkNetworkAvailable(object : NetworkManager.OnNetworkListener{
+                override fun networkAvailable() {
+                }
+
+                override fun finishApp() {
+                    BasicDialog.create(BasicDialog.Param.TYPE_NETWORK_ERR)
+                    Log.e("여기를 타니", "i wanna know")
+                }
+            })
+    }
+
+    private fun initTestButton() {
         binding.btnTest.setOnClickListener {
             startActivity(Intent(this, PushActivity::class.java))
         }
@@ -123,7 +175,8 @@ class MainActivity : BaseActivity(), MyWebView.WebViewScrollListener {
         val callSplash: Call<ResponseBody> = service.getIntro()
         callSplash.enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.e("$tag checker!", "failed to receive response")
+                //자꾸 여길 타네....
+                Log.e("$tag checker!", "failed to receive intro response")
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -134,8 +187,8 @@ class MainActivity : BaseActivity(), MyWebView.WebViewScrollListener {
                                 response.body()!!.string(),
                                 SplashResponse::class.java
                             )
-                        if(!splashResponse.header?.rCode.isNullOrEmpty()){
-                            if(splashResponse.header?.rCode == "9999") {
+                        if (!splashResponse.header?.rCode.isNullOrEmpty()) {
+                            if (splashResponse.header?.rCode == "9999") {
                                 showDialog(BasicDialog.create(BasicDialog.Param.TYPE_NOT_APP))
                                 return
                             }
@@ -182,13 +235,14 @@ class MainActivity : BaseActivity(), MyWebView.WebViewScrollListener {
      */
     override fun onBackPressed() {
         //웹뷰 내에서 새 창 켜져있을 경우
-        if(binding.webView.mChromeClient.isChildOpen()){
+        if (binding.webView.mChromeClient.isChildOpen()) {
             binding.webView.mChromeClient.closeChild()
         }
         //웹뷰 뒤로가기 지원될 경우
         if (binding.webView.canGoBack()) {
             binding.webView.goBack()
         }
+        super.onBackPressed()
         return
 
     }
@@ -200,88 +254,138 @@ class MainActivity : BaseActivity(), MyWebView.WebViewScrollListener {
 
     }
 
-    /*fun startActivityForResultFileChooser(intent: Intent) {
-        if (Build.VERSION.SDK_INT >= 21) {
-            val results: Array<Uri>
-
-            try {
-                if(binding.webView.mChromeClient?.filePathCallbackLollipop == null){
-//                if (MyWebChromeClient.filePathCallbackLollipop == null) {
-                    Log.e("$tag checker!", "file path callback null")
-                    return
+    /* 전화걸기 */
+    fun callIntent(tel: String) {
+        telNo = tel
+        when (checkPermission(permissionCall)) {
+            true -> {
+                if (telNo.isNotEmpty()) {
+                    startActivity(Intent(Intent.ACTION_DIAL, "tel:$telNo".toUri()))
                 }
-                val data = intent.data
-                Log.e("$tag checker!", "intent.data: $data")
-                Log.e("$tag checker!", "intent: $intent")
-                val dataArr: Array<Uri>?
-                if (data != null) {
-                    dataArr = arrayOf(Uri.parse(data.toString()))
-                    binding.webView.mChromeClient?.filePathCallbackLollipop!!.onReceiveValue(
-                        dataArr
-                    )
-                }
-                //onReceiveValue() 처리하고 비워주기
-            binding.webView.mChromeClient?.filePathCallbackLollipop = null
-
-            } catch (e: IOException) {
-                Toast.makeText(this, "upload failed", Toast.LENGTH_LONG).show()
+            }
+            false -> {
+                askPermissions(permissionCall)
             }
         }
-    }*/
+    }
 
+
+    /**
+     * file path 콜백 받아와서 파일 업로드
+     */
     val startForResultUpload =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult: ActivityResult ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 val results: Array<Uri>?
+                val chromeClient = binding.webView.mChromeClient
 
                 //activity result에 따라 처리해줌
-                if (result.resultCode == Activity.RESULT_OK) {
+                if (activityResult.resultCode == Activity.RESULT_OK) {
                     try {
-                        if (binding.webView.mChromeClient?.filePathCallbackLollipop == null) {
+                        if (chromeClient.filePathCallbackLollipop == null) {
                             return@registerForActivityResult
                         }
-                        val resultData = result.data?.data
+                        val resultData = activityResult.data?.data
                         if (resultData != null) {
                             results = arrayOf(Uri.parse(resultData.toString()))
 
-                            binding.webView.mChromeClient?.filePathCallbackLollipop!!.onReceiveValue(
+                            chromeClient.filePathCallbackLollipop!!.onReceiveValue(
                                 results
                             )
-                            binding.webView.mChromeClient?.filePathCallbackLollipop = null
+                            chromeClient.filePathCallbackLollipop = null
                         }
                     } catch (e: Exception) {
                         Toast.makeText(this, "업로드실패 ", Toast.LENGTH_SHORT).show()
                     }
                 } else { //cancel 등등처리
-                    if (binding.webView.mChromeClient?.filePathCallbackLollipop == null) return@registerForActivityResult
-                    binding.webView.mChromeClient?.filePathCallbackLollipop!!.onReceiveValue(null)
-                    binding.webView.mChromeClient?.filePathCallbackLollipop = null
+                    if (chromeClient.filePathCallbackLollipop == null) return@registerForActivityResult
+                    chromeClient.filePathCallbackLollipop!!.onReceiveValue(null)
+                    chromeClient.filePathCallbackLollipop = null
                 }
             }
         }
 
-    fun checkPermission(): Boolean {
+    /**
+     * permission 마시멜로우 미만은 승인돼있음
+     */
+    fun checkPermission(permission: String): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(
-                    arrayOf(
-                        Manifest.permission.CAMERA
-                    ), 1001
-                )
+            if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
                 return false
             }
         }
         return true
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    fun askPermissions(){
-        requestPermissions(
-            arrayOf(
-                Manifest.permission.CAMERA
-            ), 1001
-        )
+    fun askPermissions(permission: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            var permissionCode = when (permission) {
+                permissionCall -> {
+                    RequestCode.permissionCallCode
+                }
+                permissionCamera -> {
+                    RequestCode.permissionCameraCode
+                }
+                else -> {
+                    10000
+                }
+            }
+
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(permission),
+                permissionCode
+            )
+        }
     }
+
+    /**
+     * ActivityCompat.requestPermissions의 결과를 처리
+     */
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            RequestCode.permissionCameraCode -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    showFileChooser()
+                } else {
+                    Log.e("$tag checker!", "camera permission denied")
+                    val alert = AlertDialog.Builder(this)
+                    alert.setMessage("권한설정을 거부했습니다.").setNegativeButton("확인") { _, _ ->
+                    }.show()
+                }
+                return
+            }
+            RequestCode.permissionCallCode -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    startActivity(Intent(Intent.ACTION_DIAL, "tel:$telNo".toUri()))
+                } else {
+                    Log.e("$tag checker!", "call permission denied")
+                    val alert = AlertDialog.Builder(this)
+                    alert.setMessage("권한설정을 거부했습니다.").setNegativeButton("확인") { _, _ ->
+                    }.show()
+                }
+            }
+
+            RequestCode.permissionPushCode -> {
+
+            }
+            else -> {
+
+            }
+        }
+        Log.e("$tag checker!", "requestCode: $requestCode")
+    }
+
+    private fun showFileChooser(){
+        binding.webView.mChromeClient.fileUpload()
+    }
+
 
     /**
      * get app signature(hash)
@@ -331,17 +435,30 @@ class MainActivity : BaseActivity(), MyWebView.WebViewScrollListener {
 
     companion object {
         lateinit var splashFragment: SplashFragment
+        val context = MainActivity
     }
 
     override fun onScrollTop(top: Int) {
-        TODO("Not yet implemented")
     }
 
     override fun onScrollDown(top: Int) {
-        TODO("Not yet implemented")
     }
 
     override fun onBottomReached() {
+    }
+
+    override fun onPageStarted(url: String) {
+    }
+
+    override fun onPageShouldOverride(url: String) {
+    }
+
+    override fun onPageFinished(webView:WebView, url: String) {
+        Log.e("$tag checker!", "webViewClient: onPageFinished")
+    }
+
+    override fun call(tel: String) {
         TODO("Not yet implemented")
     }
+
 }

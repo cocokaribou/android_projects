@@ -11,5 +11,7 @@ class PushActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPushBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //TODO 로그인여부 체크
     }
 }

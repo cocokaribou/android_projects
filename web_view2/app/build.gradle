@@ -17,6 +17,14 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+    signingConfigs{
+        test{
+            storeFile file("Untitled")
+            storePassword "test098"
+            keyAlias "testKey"
+            keyPassword "test098"
+        }
+    }
 
     buildTypes {
         release {

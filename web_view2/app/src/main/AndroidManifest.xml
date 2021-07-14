@@ -2,34 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.siv.du">
 
-    <!--<queries>
-        <package android:name="kr.co.samsungcard.mpocket" />
-        <package android:name="kvp.jjy.MispAndroid320" />
-        <package android:name="com.kbcard.cxh.appcard" />
-        <package android:name="com.shcard.smartpay" />
-        <package android:name="com.hyundaicard.appcard" />
-        <package android:name="com.mysmilepay.app" />
-        <package android:name="com.ssg.serviceapp.android.egiftcertificate" />
-        <package android:name="com.lcacApp" />
-        <package android:name="com.lotte.lpay" />
-        <package android:name="com.nhnent.payapp" />
-        <package android:name="com.wooricard.wpay" />
-        <package android:name="nh.smart.nhallonepay" />
-        <package android:name="com.hanaskcard.paycla" />
-        <package android:name="com.samsung.android.spay" />
-        <package android:name="com.kakao.talk" />
-        <package android:name="com.kftc.bankpay.android" />
-        <package android:name="com.kt.ktauth" />
-        <package android:name="com.sktelecom.tauth" />
-        <package android:name="com.lguplus.smartotp" />
-        <package android:name="com.wooricard.smartapp" />
-        <package android:name="com.google.android.gms" />
-        <package android:name="kr.co.shiftworks.vguardweb" />
-        <package android:name="com.TouchEn.mVaccine.webs" />
-        <package android:name="kr.co.hanamembers.hmscustomer" />
-        <package android:name="com.ahnlab.v3mobileplus" />
-        <package android:name="kr.co.citibank.citimobile" />
-    </queries>-->
+    <!--push-->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <!--network-->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -41,7 +21,6 @@
 
     <!--image upload-->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 
     <application
@@ -84,7 +63,7 @@
                 <data android:scheme="siecbeauty" />
             </intent-filter>
         </activity>
-        <activity android:name="com.siv.du.activity.SettingActivity" />
+<!--        <activity android:name="com.siv.du.activity.SettingActivity" />-->
         <activity android:name="com.siv.du.activity.PushActivity" />
         <activity android:name="com.siv.du.base.BaseActivity" />
     </application>
