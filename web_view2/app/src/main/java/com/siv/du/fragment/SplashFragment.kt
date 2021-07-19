@@ -19,26 +19,17 @@ import java.util.*
  * api 요청결과
  * MainActivity의 frame layout에 띄움
  */
-class SplashFragment : Fragment() {
+class SplashFragment : Fragment(R.layout.fragment_splash) {
     private lateinit var binding: FragmentSplashBinding //view
-    private lateinit var splashResponse: SplashResponse //model
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSplashBinding.inflate(
-            LayoutInflater.from(context)
-        )
-        splashResponse = SplashResponse.getSplashResponse()!!
-        return binding.root
-    }
 
-    //onActivityCreated deprecated!
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val splashImgArr = splashResponse.getSplashImage()
+
+        binding = FragmentSplashBinding.bind(view)
+        val splashResponse = SplashResponse.getSplashResponse()
+
+        var splashImgArr = splashResponse?.getSplashImage()
 
         if (!splashImgArr.isNullOrEmpty()) {
             val random = Random()
@@ -50,8 +41,8 @@ class SplashFragment : Fragment() {
         } else {
         }
         checkUpdate(
-            splashResponse.verInfo?.appTp,
-            splashResponse.verInfo?.msg
+            splashResponse?.verInfo?.appTp,
+            splashResponse?.verInfo?.msg
         )
     }
 

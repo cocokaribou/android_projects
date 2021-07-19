@@ -7,6 +7,7 @@ import android.util.Log
 import android.webkit.CookieManager
 import android.webkit.WebSettings
 import android.webkit.WebView
+import androidx.databinding.library.BuildConfig
 import com.siv.du.R
 import com.pionnet.overpass.extension.getAppVersion
 import com.pionnet.overpass.extension.getCookies
@@ -58,7 +59,7 @@ class MyWebView : WebView {
             textZoom = 100
         }
 
-        if (com.siv.du.BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             setWebContentsDebuggingEnabled(true)
         }
 
@@ -80,7 +81,6 @@ class MyWebView : WebView {
     override fun loadUrl(url: String) {
         val extraHeaders: MutableMap<String, String> = HashMap()
         var autoLogin = getCookieForName("https://.sivillage.com", "AUTO_LOGIN_YN")
-        Log.e("$tag checker!!!", "$autoLogin")
 
         if (autoLogin != "Y") {
             logout()

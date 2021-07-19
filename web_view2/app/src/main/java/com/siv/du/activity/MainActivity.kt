@@ -3,7 +3,6 @@ package com.siv.du.activity
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -18,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import com.siv.du.R
 import com.siv.du.base.BaseActivity
 import com.siv.du.base.BaseApplication
@@ -80,6 +80,9 @@ class MainActivity : BaseActivity(), MyWebView.WebViewScrollListener, MyWebViewC
         BaseApplication.isAppRunning = true
         requestSplash()
 
+        binding.background.bringToFront()
+        binding.frameLayoutSplash.bringToFront()
+
         url = HttpUrl.serverUrl + getString(R.string.main)
         binding.webView.loadUrl(url)
 //        binding.webView.loadUrl("http://m.sivillage.cttd.co.kr/html/ko/disp/brand_main7.html")
@@ -88,22 +91,7 @@ class MainActivity : BaseActivity(), MyWebView.WebViewScrollListener, MyWebViewC
 //        binding.webView.loadUrl("file:///android_asset/test.html")
 
         initTestButton()
-
-        val script = "javascript:document.getElementById('checker').checked"
-        binding.webView.evaluateJavascript(script
-        ) {Log.e("do","something") } //그냥 바로 뜨네
-
-        binding.webView.addJavascriptInterface(AndroidBridge(), "test")
-
     }
-    inner class AndroidBridge{
-        @JavascriptInterface
-        fun showToast(){
-            Toast.makeText(context as MainActivity, "tester", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    interface An
 
     override fun onResume() {
         super.onResume()
@@ -211,9 +199,11 @@ class MainActivity : BaseActivity(), MyWebView.WebViewScrollListener, MyWebViewC
         binding.background.visibility = View.GONE
 
         splashFragment = SplashFragment()
-        val ft = supportFragmentManager.beginTransaction()
-        ft.add(R.id.frameLayout_splash, splashFragment, splashFragment.javaClass.simpleName)
-            .commit()
+        supportFragmentManager.beginTransaction()
+            .apply {
+                replace(R.id.frameLayout_splash, splashFragment)
+                commit()
+            }
     }
 
     /**
@@ -435,7 +425,6 @@ class MainActivity : BaseActivity(), MyWebView.WebViewScrollListener, MyWebViewC
 
     companion object {
         lateinit var splashFragment: SplashFragment
-        val context = MainActivity
     }
 
     override fun onScrollTop(top: Int) {
