@@ -7,12 +7,12 @@ import android.util.Log
 import android.webkit.CookieManager
 import android.webkit.WebSettings
 import android.webkit.WebView
-import androidx.databinding.library.BuildConfig
 import com.siv.du.R
 import com.pionnet.overpass.extension.getAppVersion
 import com.pionnet.overpass.extension.getCookies
 import com.pionnet.overpass.extension.getCookieForName
 import com.pionnet.overpass.extension.logout
+import com.siv.du.BuildConfig
 
 /**
  * 커스텀 웹뷰 세팅

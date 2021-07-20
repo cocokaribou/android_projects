@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -99,8 +101,11 @@ dependencies {
 
     /*runtimeOnly group: 'androidx.multidex', name: 'multidex', version: '2.0.1' //allows your app to build and read multiple DEX files*/
 
-    implementation 'com.google.firebase:firebase-messaging:22.0.0'
-    implementation 'com.google.firebase:firebase-core:19.0.0'
+    implementation platform('com.google.firebase:firebase-bom:28.2.1')
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-core-ktx'
 
     implementation 'android.arch.navigation:navigation-fragment:1.0.0'
     implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0'
@@ -108,5 +113,3 @@ dependencies {
     implementation project(':util')
 
 }
-
-//apply plugin: 'com.google.gms.google-services'

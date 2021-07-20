@@ -44,6 +44,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.Exception
+import java.lang.RuntimeException
 import java.util.concurrent.TimeUnit
 
 /**
@@ -110,7 +111,7 @@ class MainActivity : BaseActivity(), MyWebView.WebViewScrollListener, MyWebViewC
 
     private fun initTestButton() {
         binding.btnTest.setOnClickListener {
-            startActivity(Intent(this, PushActivity::class.java))
+            throw RuntimeException("test crash")
         }
     }
 
