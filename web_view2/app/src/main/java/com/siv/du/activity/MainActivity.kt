@@ -127,20 +127,19 @@ class MainActivity : BaseActivity(), MyWebView.WebViewScrollListener, MyWebViewC
 
         val headerInterceptor = CustomHeaderInterceptor(this)
         val loggingInterceptor = HttpLoggingInterceptor()
-        if (com.siv.du.BuildConfig.DEBUG) {
-            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        } else {
-            loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
-        }
-
+//        if (com.siv.du.BuildConfig.DEBUG) {
+//            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+//        } else {
+//            loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
+//        }
         okBuilder.apply {
             dispatcher(myDispatcher)
 
             addInterceptor(headerInterceptor)
             addInterceptor(loggingInterceptor)
-            if (com.siv.du.BuildConfig.DEBUG) {
-                addNetworkInterceptor(StethoInterceptor())
-            }
+//            if (com.siv.du.BuildConfig.DEBUG) {
+//                addNetworkInterceptor(StethoInterceptor())
+//            }
 
             connectTimeout(10, TimeUnit.SECONDS)
             readTimeout(10, TimeUnit.SECONDS)

@@ -19,32 +19,3 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-
-# Prevent R8 from leaving Data object members always null
--keepclassmembers,allowobfuscation class * {
-  @com.google.gson.annotations.SerializedName <fields>;
-}
-
-# For FingerPush SDK
--dontwarn com.fingerpush.**
-
-# For retrofit2
--dontwarn retrofit2.**
--keep class retrofit2.** { *; }
--keep interface retrofit2.** { *; }
-
--keep class com.google.android.material.** { *; }
-
--dontwarn com.google.android.material.**
--dontnote com.google.android.material.**
-
--dontwarn androidx.**
--keep class androidx.** { *; }
--keep interface androidx.** { *; }
-
-#---
-# OKhttp
-#---
--keep class okhttp3.** { *; }
--keep interface okhttp3.** { *; }
--dontwarn okhttp3.**
