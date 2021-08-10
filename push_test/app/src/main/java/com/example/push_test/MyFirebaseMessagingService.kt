@@ -7,9 +7,12 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder
 import android.media.RingtoneManager
 import android.os.Build
+import android.provider.MediaStore
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -23,6 +26,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         Log.e("FCM Log", "Refreshed token: $token")
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onMessageReceived(rMessage: RemoteMessage) {
         // custom 설정은 data에 넣어보내서 처리해주는구나..
 
@@ -50,8 +54,21 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             val pendingIntent =
                 PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
             val channelId = "Test Channel Id"
-            val bmp = BitmapFactory.decodeResource(resources, R.mipmap.sym_def_app_icon)
-//            if(rMessage.notification?.imageUrl)
+            var bmp = BitmapFactory.decodeResource(resources, R.mipmap.sym_def_app_icon)
+
+            // RemoteMessage.data.imageUrl있을 경우
+            if(!rMessage.data.getValue("imageUrl").isNullOrEmpty()){
+                val source = ImageDecoder.createSource(contentResolver, rMessage.notification?.imageUrl!!)
+                bmp = ImageDecoder.decodeBitmap(source)
+            }
+
+            // RemoteMessage.notification.imageUrl 있을 경우
+            if(rMessage.notification?.imageUrl.toString().isNotEmpty()){
+                val source = ImageDecoder.createSource(contentResolver, rMessage.notification?.imageUrl!!)
+                bmp = ImageDecoder.decodeBitmap(source)
+            }
+
+            // NotificationCompat
             val notiStyle = NotificationCompat.BigPictureStyle()
                 .bigPicture(bmp)
             // BigPicture
@@ -59,6 +76,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             // Inbox
             // Messaging
             // Decorated Custom View Style
+
+            // NotificationCompat.Builder
             val notiBuilder = NotificationCompat.Builder(this, channelId)
                 .setContentTitle(msgTitle)
                 .setContentText(msgBody)
