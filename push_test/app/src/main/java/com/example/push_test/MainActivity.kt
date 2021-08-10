@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
                 Log.w("FCM Log", "getInstance failed: ${it.exception}")
             } else {
                 val token = it.result?.token
+                Log.e("FCM token", "$token")
                 Toast.makeText(this, token, Toast.LENGTH_SHORT).show()
             }
         }

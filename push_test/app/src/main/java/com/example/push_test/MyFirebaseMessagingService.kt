@@ -17,25 +17,30 @@ import com.google.firebase.messaging.RemoteMessage
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
+
+
     override fun onNewToken(token: String) {
         Log.e("FCM Log", "Refreshed token: $token")
     }
 
     override fun onMessageReceived(rMessage: RemoteMessage) {
+        // custom 설정은 data에 넣어보내서 처리해주는구나..
+
         Log.e("FCM Log", "----------------")
-        Log.e("message", "data: ${rMessage.data}")
-        Log.e("message", "type: ${rMessage.messageType}")
-        Log.e("message", "from: ${rMessage.from}")
-        Log.e("message", "to: ${rMessage.to}")
-        Log.e("message.notification", "body: ${rMessage.notification?.body}")
-        Log.e("message.notification", "imageUrl: ${rMessage.notification?.imageUrl}")
-        Log.e("message.notification", "title: ${rMessage.notification?.title}")
-        Log.e("message.notification", "tag: ${rMessage.notification?.tag}")
-        Log.e("message.notification", "channelId: ${rMessage.notification?.channelId}")
+        Log.e("message", "data:\t${rMessage.data}")
+        Log.e("message", "type:\t${rMessage.messageType}")
+        Log.e("message", "from:\t${rMessage.from}")
+        Log.e("message", "to:\t${rMessage.to}")
+        Log.e("message.notification", "title:\t${rMessage.notification?.title}")
+        Log.e("message.notification", "body:\t\t${rMessage.notification?.body}")
+        Log.e("message.notification", "image:\t${rMessage.notification?.imageUrl}")
+        Log.e("message.notification", "tag:\t\t${rMessage.notification?.tag}")
+        Log.e("message.notification", "chnl:\t${rMessage.notification?.channelId}")
         Log.e(
             "message.notification",
-            "notiPriority: ${rMessage.notification?.notificationPriority}"
+            "notiPriority:\t${rMessage.notification?.notificationPriority}"
         )
+        Log.e("message.notification", "clickAction:\t${rMessage.notification?.clickAction}")
 
         rMessage.notification?.let {
             val msgBody = rMessage.notification!!.body
@@ -46,14 +51,24 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
             val channelId = "Test Channel Id"
             val bmp = BitmapFactory.decodeResource(resources, R.mipmap.sym_def_app_icon)
+//            if(rMessage.notification?.imageUrl)
+            val notiStyle = NotificationCompat.BigPictureStyle()
+                .bigPicture(bmp)
+            // BigPicture
+            // BigText
+            // Inbox
+            // Messaging
+            // Decorated Custom View Style
             val notiBuilder = NotificationCompat.Builder(this, channelId)
                 .setContentTitle(msgTitle)
                 .setContentText(msgBody)
                 .setAutoCancel(true)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setContentIntent(pendingIntent)
-//                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.sym_def_app_icon)
                 .setLargeIcon(bmp)
+                .setStyle(notiStyle)
+
             val notiManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
             // 오레오 이상은 알림채널 생성
@@ -64,6 +79,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                     channelName,
                     NotificationManager.IMPORTANCE_DEFAULT
                 )
+                channel.description = "Test Channel 입니다. 여기로 지정하지 않으면 기타로 날아옵니다."
                 notiManager.createNotificationChannel(channel)
             }
             notiManager.notify(0, notiBuilder.build())
