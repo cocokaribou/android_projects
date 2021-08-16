@@ -75,3 +75,12 @@ public boolean shouldOverrideUrlLoading(WebView view, String url) {
 }
 
 ```
+
+
+## `android.webkit`
+- Provide tools for browsing the web.
+
+
+## Chromium
+- a free and open-source codebase for a web browser
+- Microsoft Edge, Opera and many other browsers are based on the Chromium code
