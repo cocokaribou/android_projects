@@ -36,7 +36,7 @@ AndroidManifest.xml
 ### WebViewClient
 - WebView 를 통해 html 링크를 클릭하거나 링크에 따른 내용, 에러, 폼 등록의 렌더링
 <br>
-[reference](https://m.blog.naver.com/PostView.nhn?blogId=credenda&logNo=80120157762&proxyReferer=https:%2F%2Fwww.google.com%2F)
+![reference](https://m.blog.naver.com/PostView.nhn?blogId=credenda&logNo=80120157762&proxyReferer=https:%2F%2Fwww.google.com%2F)
 
 
 ### Hybrid App
@@ -44,7 +44,7 @@ AndroidManifest.xml
 - 1세대: Native App, 앱 안에 WebView를 띄운다. Javascript와 Java/Kotlin의 메소드를 연결해서 핸드폰의 기능을 사용.
 - 2세대: React Native, PWA앱
 <br>
-[reference](https://lcw126.tistory.com/218)
+![reference](https://lcw126.tistory.com/218)
 
 
 ## 웹에서 데이터 받아오기

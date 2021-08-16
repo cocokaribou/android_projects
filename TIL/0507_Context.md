@@ -8,13 +8,4 @@
 `this`는 activity context를 가리킴
 
 ## Context type
-|Application|Activity|Service|ContentProvider|BroadcastReceiver|
-|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
-|Show a Dialog|x|o|x|x|x|
-|Start an Activity|x|o|x|x|x|
-|Layout Inflation|x|o|x|x|x|
-|Start a Service|o|o|o|o|o|
-|Bind to a Service|o|o|o|o|x|
-|Send a Broadcast|o|o|o|o|o|
-|Register BroadcastReceiver|o|o|o|o|x|
-|Load Resource Values|o|o|o|o|o|
+![image](/TIL/resources/context.png)
