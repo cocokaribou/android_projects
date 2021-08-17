@@ -20,8 +20,6 @@ import com.google.firebase.messaging.RemoteMessage
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-
-
     override fun onNewToken(token: String) {
         Log.e("FCM Log", "Refreshed token: $token")
     }

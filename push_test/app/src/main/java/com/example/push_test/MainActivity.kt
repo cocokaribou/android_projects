@@ -3,7 +3,7 @@ package com.example.push_test
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import android.webkit.WebView
 import com.google.firebase.installations.FirebaseInstallations
 import com.google.firebase.messaging.FirebaseMessaging
 
@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener {
-
         }
         FirebaseInstallations.getInstance().getToken(true).addOnCompleteListener {
             if (!it.isSuccessful) {
@@ -21,8 +20,11 @@ class MainActivity : AppCompatActivity() {
             } else {
                 val token = it.result?.token
                 Log.e("FCM token", "$token")
-                Toast.makeText(this, token, Toast.LENGTH_SHORT).show()
+                val myAPI = MyAPI.getAPIService()
+                myAPI.saveToken(token!!)
             }
         }
+
+
     }
 }

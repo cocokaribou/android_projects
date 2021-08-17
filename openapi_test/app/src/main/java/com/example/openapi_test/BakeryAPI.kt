@@ -22,7 +22,7 @@ interface BakeryAPI {
 
     //retrofit annotation -> http method를 이용
 
-x
+
     companion object {
         private const val KEY = BuildConfig.API_KEY //local properties
         fun create(): BakeryAPI {
@@ -42,6 +42,7 @@ x
             val client = OkHttpClient.Builder()
                 .addInterceptor(headerInterceptor)
                 .addInterceptor(httpLoggingInterceptor)
+                .dispatcher(test)
                 .build()
             //OkHttp: Interceptor 지원
             // 1) Application Interceptor: OkHttpClient.Builder().addInterceptor
