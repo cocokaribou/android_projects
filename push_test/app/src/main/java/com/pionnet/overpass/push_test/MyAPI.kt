@@ -1,4 +1,4 @@
-package com.example.push_test
+package com.pionnet.overpass.push_test
 
 import okhttp3.Dispatcher
 import okhttp3.Interceptor
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 
 interface MyAPI {
     @GET("token/regist")
-    fun saveToken(
+    fun registerToken(
         @Query("t") token: String
     ): Call<ResponseBody>
 

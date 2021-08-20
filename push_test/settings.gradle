@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "push_test"
+rootProject.name = "pionnet_push"
