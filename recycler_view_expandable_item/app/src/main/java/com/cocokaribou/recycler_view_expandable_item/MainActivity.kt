@@ -5,15 +5,17 @@ import android.content.Intent
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cocokaribou.recycler_view_expandable_item.databinding.ActivityMainBinding
-import com.cocokaribou.recycler_view_expandable_item.databinding.ItemGoodsDetailBinding
 import com.google.gson.Gson
 import com.skydoves.transformationlayout.TransformationCompat
 import com.skydoves.transformationlayout.TransformationLayout
+import com.skydoves.transformationlayout.onTransformationStartContainer
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -22,17 +24,11 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    lateinit var transformationLayout: ItemGoodsDetailBinding
     lateinit var itemDeco: RecyclerView.ItemDecoration
-
-    val myClickListener: (BestVO.Goods) -> Unit = { item ->
-        Log.e("item clicked", "click!")
-        transformationLayout = ItemGoodsDetailBinding.inflate(layoutInflater)
-        startTransformActivity(this, transformationLayout.root)
-    }
-    var mAdapter = MyAdapter(myClickListener)
+    var mAdapter = MyAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        onTransformationStartContainer()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -43,8 +39,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun getList() {
         val myApi = MyApi.getApiService()
-        // 패션의류
-        val callBack: Call<ResponseBody> = myApi.getBestProducts("1703314378")
+        // 잡화 슈즈
+        val callBack: Call<ResponseBody> = myApi.getBestProducts("1607006212")
         callBack.enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("onFailure!", "통신실패")
@@ -52,12 +48,17 @@ class MainActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 Log.e("onResponse", "통신성공")
-                val jsonString = response.body()?.string()
-                val jsonObj = JSONObject(jsonString)
-                val goodsArrayString =
-                    jsonObj.getJSONObject("data").getJSONObject("goods_info").toString()
-                val bestVo = Gson().fromJson(goodsArrayString, BestVO::class.java)
-                mAdapter.submitList(bestVo.goodsList)
+                val handler = Handler(Looper.getMainLooper())
+                handler.postDelayed(Runnable {
+                    kotlin.run {
+                        val jsonString = response.body()?.string()
+                        val jsonObj = JSONObject(jsonString)
+                        val goodsArrayString =
+                            jsonObj.getJSONObject("data").getJSONObject("goods_info").toString()
+                        val bestVo = Gson().fromJson(goodsArrayString, BestVO::class.java)
+                        mAdapter.submitList(bestVo.goodsList)
+                    }
+                }, 300)
             }
 
         })
@@ -65,28 +66,34 @@ class MainActivity : AppCompatActivity() {
 
     private fun initAdapter() {
         binding.rvGoods.adapter = mAdapter
-        if(!this@MainActivity::itemDeco.isInitialized){
+        binding.rvGoods.layoutManager = GridLayoutManager(this, 2)
+        if (binding.rvGoods.itemDecorationCount > 0) {
+            binding.rvGoods.removeItemDecoration(itemDeco)
+        } else {
             itemDeco = GridSpacingItemDecoration(2, 0, false)
             binding.rvGoods.addItemDecoration(itemDeco)
-        }else{
-            binding.rvGoods.removeItemDecoration(itemDeco)
         }
+
+        // veil recycler
+        binding.veilRecyclerView.setAdapter(mAdapter)
+        binding.veilRecyclerView.setLayoutManager(GridLayoutManager(this, 2))
+        binding.veilRecyclerView.addVeiledItems(6)
+        binding.veilRecyclerView.veil()
+
     }
 
-    companion object {
-        fun startTransformActivity(
-            context: Context,
-            transformationLayout: TransformationLayout
+    class GridSpacingItemDecoration(
+        private val spanCount: Int,
+        private val spacing: Int,
+        private val includeEdge: Boolean
+    ) : RecyclerView.ItemDecoration() {
+
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
         ) {
-            val intent = Intent(context, DetailActivity::class.java)
-            TransformationCompat.startActivity(transformationLayout, intent)
-        }
-    }
-
-
-    class GridSpacingItemDecoration(private val spanCount: Int, private val spacing: Int, private val includeEdge: Boolean) : RecyclerView.ItemDecoration() {
-
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
             val position = parent.getChildAdapterPosition(view) // item position
             val column = position % spanCount // item column
 

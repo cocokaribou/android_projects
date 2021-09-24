@@ -6,14 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_goods"
+    <com.skydoves.androidveil.VeilRecyclerFrameView
+        android:id="@+id/veilRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        tools:listitem="@layout/item_goods_preview"/>
+        android:layout_height="match_parent"
+        app:veilFrame_layout="@layout/item_goods_preview"
+        app:veilFrame_veiled="true"
+        app:veilFrame_shimmerEnable="true"
+        app:veilFrame_baseColor="#aaaaaa"
+        app:veilFrame_highlightColor="#eeeeee"
+        app:veilFrame_radius="3dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_goods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </com.skydoves.androidveil.VeilRecyclerFrameView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

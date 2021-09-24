@@ -1,82 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.skydoves.transformationlayout.TransformationLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_transformationLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="20dp">
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    app:transformation_duration="500"
+    app:transformation_fitMode="auto"
+    app:transformation_pathMode="arc">
 
-    <com.ssomai.android.scalablelayout.ScalableLayout
-        android:id="@+id/scalable_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:scale_base_height="100"
-        app:scale_base_width="100">
+        android:padding="20dp">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_goodsImg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#aaaaaa"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </com.ssomai.android.scalablelayout.ScalableLayout>
 
-    <TextView
-        android:id="@+id/tv_brandName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textColor="#7b7b7b"
-        android:textSize="17sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scalable_layout"
-        tools:text="에블린" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/row_goodsInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_goodsImg">
 
-    <TextView
-        android:id="@+id/tv_goodsName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColor="#3b3b3b"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_brandName"
-        tools:text="더끌리는-브라(더블볼륨)(4colors) EBBRB2305M"
-        />
+            <TextView
+                android:id="@+id/tv_brandName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="#7b7b7b"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="에블린" />
 
-    <TextView
-        android:id="@+id/tv_salesRate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/tv_salesPrice"
-        app:layout_constraintBaseline_toBaselineOf="@id/tv_salesPrice"
-        android:paddingRight="10dp"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:textColor="#df0000"
-        tools:text="30%"/>
+            <TextView
+                android:id="@+id/tv_goodsName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="#3b3b3b"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_brandName"
+                tools:text="더끌리는-브라(더블볼륨)(4colors) EBBRB2305M" />
 
-    <TextView
-        android:id="@+id/tv_salesPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/tv_salesRate"
-        app:layout_constraintTop_toBottomOf="@id/tv_goodsName"
-        android:layout_marginTop="20dp"
-        android:textColor="#010101"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        tools:text="25,130원"/>
-    <TextView
-        android:id="@+id/tv_originPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/tv_salesPrice"
-        app:layout_constraintBottom_toTopOf="@id/tv_salesPrice"
-        android:layout_marginBottom="-5dp"
-        tools:text="35,900원"/>
+            <TextView
+                android:id="@+id/tv_salesRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#df0000"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_salesPrice"
+                app:layout_constraintEnd_toStartOf="@id/tv_salesPrice"
+                tools:text="30%" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_salesPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="#010101"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/tv_salesRate"
+                app:layout_constraintTop_toBottomOf="@id/tv_goodsName"
+                tools:text="25,130원" />
+
+            <TextView
+                android:id="@+id/tv_originPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-5dp"
+                app:layout_constraintBottom_toTopOf="@id/tv_salesPrice"
+                app:layout_constraintStart_toStartOf="@id/tv_salesPrice"
+                tools:text="35,900원" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.skydoves.transformationlayout.TransformationLayout>
