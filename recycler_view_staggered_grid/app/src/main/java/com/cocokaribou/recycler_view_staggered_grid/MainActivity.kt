@@ -1,7 +1,5 @@
-package com.cocokaribou.recycler_view_expandable_item
+package com.cocokaribou.recycler_view_staggered_grid
 
-import android.content.Context
-import android.content.Intent
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,11 +8,11 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.cocokaribou.recycler_view_expandable_item.databinding.ActivityMainBinding
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.cocokaribou.recycler_view_staggered_grid.databinding.ActivityMainBinding
 import com.google.gson.Gson
-import com.skydoves.transformationlayout.TransformationCompat
-import com.skydoves.transformationlayout.TransformationLayout
 import com.skydoves.transformationlayout.onTransformationStartContainer
 import okhttp3.ResponseBody
 import org.json.JSONObject
@@ -49,38 +47,26 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 Log.e("onResponse", "통신성공")
                 val handler = Handler(Looper.getMainLooper())
-                handler.postDelayed(Runnable {
-                    kotlin.run {
-                        val jsonString = response.body()?.string()
-                        val jsonObj = JSONObject(jsonString)
-                        val goodsArrayString =
-                            jsonObj.getJSONObject("data").getJSONObject("goods_info").toString()
-                        val bestVo = Gson().fromJson(goodsArrayString, BestVO::class.java)
-                        mAdapter.submitList(bestVo.goodsList)
-                        binding.veilRecyclerView.unVeil()
-                        binding.rvGoods.visibility = View.INVISIBLE
-                    }
-                }, 400)
+                val jsonString = response.body()?.string()
+                val jsonObj = JSONObject(jsonString)
+                val goodsArrayString =
+                    jsonObj.getJSONObject("data").getJSONObject("goods_info").toString()
+                val bestVo = Gson().fromJson(goodsArrayString, BestVO::class.java)
+                mAdapter.submitList(bestVo.goodsList)
             }
-
         })
     }
 
     private fun initAdapter() {
-        binding.rvGoods.adapter = mAdapter
-        binding.rvGoods.layoutManager = GridLayoutManager(this, 2)
-        if (binding.rvGoods.itemDecorationCount > 0) {
-            binding.rvGoods.removeItemDecoration(itemDeco)
-        } else {
-            itemDeco = GridSpacingItemDecoration(2, 0, false)
-            binding.rvGoods.addItemDecoration(itemDeco)
-        }
 
-        // veil recycler
-        binding.veilRecyclerView.setAdapter(mAdapter)
-        binding.veilRecyclerView.setLayoutManager(GridLayoutManager(this, 2))
-        binding.veilRecyclerView.addVeiledItems(6)
-        binding.veilRecyclerView.veil()
+        // pinterest ui
+        val staggeredLayout = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+        val itemDeco = GridSpacingItemDecoration(2, 30, false)
+
+        binding.rvGoods.layoutManager = staggeredLayout
+        binding.rvGoods.adapter = mAdapter
+        binding.rvGoods.addItemDecoration(itemDeco)
+
 
     }
 

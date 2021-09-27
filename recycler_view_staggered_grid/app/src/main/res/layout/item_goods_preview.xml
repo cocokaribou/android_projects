@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.skydoves.transformationlayout.TransformationLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_transformationLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    app:transformation_duration="500"
+    app:transformation_fitMode="auto"
+    app:transformation_pathMode="arc">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_goodsImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</com.skydoves.transformationlayout.TransformationLayout>
