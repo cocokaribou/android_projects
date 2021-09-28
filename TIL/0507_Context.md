@@ -9,3 +9,5 @@
 
 ## Context type
 ![image](/TIL/resources/context.png)
+
+[reference](https://stackoverflow.com/questions/3572463/what-is-context-on-android)

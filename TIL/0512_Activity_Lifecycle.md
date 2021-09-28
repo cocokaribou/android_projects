@@ -40,3 +40,16 @@
 ### onPause()
 - 액티비티가 포커스를 잃었을 때 호출됨
 - 유지하고 싶은 데이터를 여기서 저장. 
+
+
+## Q. Application lifecycle vs Activity lifecycle
+- `android.app.Application`
+- 앱 가동시 Application 클래스가 가장 먼저 초기화됨
+- 어플리케이션 상태에 반응하는 함수들
+	- onCreate()
+	- onLowMemory()
+	- onTrimMemory()
+	- onConfigurationChanged()
+	- etc
+
+- You have to override `Activity::onPause()`, `Activity::onResume()`and save/restore your data there. Application will never restore on its own if there is an activity killed. [reference](https://stackoverflow.com/questions/8092956/android-application-lifecycle-and-activities) 

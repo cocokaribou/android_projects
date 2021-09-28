@@ -8,3 +8,10 @@
 - 어댑터를 사용하는 대표적인 컴포넌트는 ListView, RecyclerView etc
 <br>
 - sdk에서 제공하는 모든 어댑터 클래스의 구현과정이 동일한 것은 아님
+
+
+## ViewPager2
+- 2019 androidx에 배포됨
+- RecyclerView 기반
+- RTL(Right To Left) 레이아웃, 수직 스크롤링 지원
+- 페이지 변경 이벤트 처리하는 `OnPageChangeCallback`
