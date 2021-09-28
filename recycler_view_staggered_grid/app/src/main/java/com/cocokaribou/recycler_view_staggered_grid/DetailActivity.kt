@@ -9,34 +9,33 @@ import com.cocokaribou.recycler_view_staggered_grid.databinding.ActivityDetailBi
 import com.skydoves.transformationlayout.*
 
 class DetailActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        onTransformationEndContainer(intent.getParcelableExtra("com.skydoves.transformationlayout"))
-        super.onCreate(savedInstanceState)
-
-        val binding = ActivityDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        intent.getParcelableExtra<BestVO.Goods>("goods")?.let{ goods ->
-            var imageUrl = goods.imgUrl.substring(2, goods.imgUrl.length)
-            imageUrl = "http://$imageUrl"
-            Glide.with(binding.ivGoodsImgDetail.context)
-                .load(imageUrl)
-                .into(binding.ivGoodsImgDetail)
-            binding.tvBrandNameDetail.text = goods.brandNm
-            binding.tvGoodsNameDetail.text = goods.goodsNm
-            binding.tvGoodsPrice.text = "${goods.salePrice}원"
-        }
-    }
-
-    companion object {
-        fun startActivity(
-            context: Context,
-            transformationLayout: TransformationLayout,
-            goods: BestVO.Goods
-        ) {
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra("goods", goods)
-            TransformationCompat.startActivity(transformationLayout, intent)
-        }
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+//        val binding = ActivityDetailBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
+//
+//        intent.getParcelableExtra<PhotoVO.Goods>("goods")?.let{ goods ->
+//            var imageUrl = goods.imgUrl.substring(2, goods.imgUrl.length)
+//            imageUrl = "http://$imageUrl"
+//            Glide.with(binding.ivGoodsImgDetail.context)
+//                .load(imageUrl)
+//                .into(binding.ivGoodsImgDetail)
+//            binding.tvBrandNameDetail.text = goods.brandNm
+//            binding.tvGoodsNameDetail.text = goods.goodsNm
+//            binding.tvGoodsPrice.text = "${goods.salePrice}원"
+//        }
+//    }
+//
+//    companion object {
+//        fun startActivity(
+//            context: Context,
+//            transformationLayout: TransformationLayout,
+//            goods: PhotoVO.Goods
+//        ) {
+//            val intent = Intent(context, DetailActivity::class.java)
+//            intent.putExtra("goods", goods)
+//            TransformationCompat.startActivity(transformationLayout, intent)
+//        }
+//    }
 }

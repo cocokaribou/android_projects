@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.cocokaribou.recycler_view_staggered_grid.databinding.ActivityMainBinding
 import com.google.gson.Gson
-import com.skydoves.transformationlayout.onTransformationStartContainer
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import okhttp3.ResponseBody
+import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,22 +25,20 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var itemDeco: RecyclerView.ItemDecoration
-    var mAdapter = MyAdapter()
+    lateinit var mAdapter: MyAdapter
+    var photoList = mutableListOf<PhotoVO>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        onTransformationStartContainer()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initAdapter()
         getList()
     }
 
     private fun getList() {
         val myApi = MyApi.getApiService()
-        // 잡화 슈즈
-        val callBack: Call<ResponseBody> = myApi.getBestProducts("1607006212")
+        val callBack: Call<ResponseBody> = myApi.getRandomPhotos()
         callBack.enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("onFailure!", "통신실패")
@@ -48,25 +48,33 @@ class MainActivity : AppCompatActivity() {
                 Log.e("onResponse", "통신성공")
                 val handler = Handler(Looper.getMainLooper())
                 val jsonString = response.body()?.string()
-                val jsonObj = JSONObject(jsonString)
-                val goodsArrayString =
-                    jsonObj.getJSONObject("data").getJSONObject("goods_info").toString()
-                val bestVo = Gson().fromJson(goodsArrayString, BestVO::class.java)
-                mAdapter.submitList(bestVo.goodsList)
+                val jsonArray = JSONArray(jsonString)
+                for (i in jsonArray.length()-1 downTo 0) {
+                    val photo = Gson().fromJson(jsonArray[i].toString(), PhotoVO::class.java)
+                    photoList.add(photo as PhotoVO)
+                }
+
+//                val goodsArrayString =
+//                    jsonObj.getJSONObject("data").getJSONObject("goods_info").toString()
+//                val bestVo = Gson().fromJson(goodsArrayString, PhotoVO::class.java)
+//                initAdapter(bestVo.goodsList)
+//                bestVo.goodsList.forEach {
+//                }
+                initAdapter(photoList)
             }
         })
     }
 
-    private fun initAdapter() {
+    private fun initAdapter(list: MutableList<PhotoVO>) {
 
         // pinterest ui
         val staggeredLayout = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
-        val itemDeco = GridSpacingItemDecoration(2, 30, false)
+        staggeredLayout.gapStrategy =
+            StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
 
         binding.rvGoods.layoutManager = staggeredLayout
-        binding.rvGoods.adapter = mAdapter
-        binding.rvGoods.addItemDecoration(itemDeco)
-
+//        binding.rvGoods.recycledViewPool.setMaxRecycledViews(9)
+        binding.rvGoods.adapter = MyAdapter(list)
 
     }
 

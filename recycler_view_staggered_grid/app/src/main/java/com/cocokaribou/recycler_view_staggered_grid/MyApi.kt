@@ -14,9 +14,8 @@ import java.util.concurrent.TimeUnit
 
 interface MyApi {
 
-    @GET("/api/shop/initShopBest100Json.action")
-    fun getBestProducts(
-        @Query("ldisp_ctg_no") ctg: String
+    @GET("/v2/list?page=1&limit=100")
+    fun getRandomPhotos(
     ): Call<ResponseBody>
 
 
@@ -34,7 +33,7 @@ interface MyApi {
                 .readTimeout(10, TimeUnit.SECONDS)
 
             return Retrofit.Builder()
-                .baseUrl("http://m.elandmall.com")
+                .baseUrl("https://picsum.photos")
                 .client(okBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
