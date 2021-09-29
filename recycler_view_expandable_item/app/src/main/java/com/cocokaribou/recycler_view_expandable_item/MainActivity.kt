@@ -36,11 +36,12 @@ class MainActivity : AppCompatActivity() {
         initAdapter()
         getList()
 
-//        binding.btnToFragment.setOnClickListener {
-//            val frag = TransformFragment()
-//
-//
-//        }
+        binding.btnToView.setOnClickListener {
+            binding.btnTransformationLayout.startTransform()
+        }
+        binding.cardviewPopup.setOnClickListener {
+            binding.btnTransformationLayout.finishTransform()
+        }
     }
 
     private fun getList() {

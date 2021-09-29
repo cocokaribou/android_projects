@@ -50,12 +50,6 @@ class MainActivity : AppCompatActivity() {
                     photoList.add(photo as PhotoVO)
                 }
 
-//                val goodsArrayString =
-//                    jsonObj.getJSONObject("data").getJSONObject("goods_info").toString()
-//                val bestVo = Gson().fromJson(goodsArrayString, PhotoVO::class.java)
-//                initAdapter(bestVo.goodsList)
-//                bestVo.goodsList.forEach {
-//                }
                 initAdapter(photoList)
             }
         })
