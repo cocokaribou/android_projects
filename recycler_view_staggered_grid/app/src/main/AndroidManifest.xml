@@ -11,9 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
+        android:hardwareAccelerated="true"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.Recycler_view_staggered_grid">
-        <activity android:name="com.cocokaribou.recycler_view_staggered_grid.DetailActivity"/>
+        <activity android:name="com.cocokaribou.recycler_view_staggered_grid.DetailActivity"
+            android:theme="@style/Theme.Transparent"
+            />
         <activity android:name="com.cocokaribou.recycler_view_staggered_grid.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

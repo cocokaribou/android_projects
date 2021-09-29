@@ -7,17 +7,13 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.cocokaribou.recycler_view_staggered_grid.databinding.ActivityMainBinding
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
 import okhttp3.ResponseBody
 import org.json.JSONArray
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -69,13 +65,24 @@ class MainActivity : AppCompatActivity() {
 
         // pinterest ui
         val staggeredLayout = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
-        staggeredLayout.gapStrategy =
-            StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+        staggeredLayout.gapStrategy= StaggeredGridLayoutManager.GAP_HANDLING_NONE
 
         binding.rvGoods.layoutManager = staggeredLayout
-//        binding.rvGoods.recycledViewPool.setMaxRecycledViews(9)
-        binding.rvGoods.adapter = MyAdapter(list)
+        binding.rvGoods.adapter = MyAdapter(list, this)
+        binding.rvGoods.addOnScrollListener(ScrollListener(binding.rvGoods))
 
+    }
+
+    class ScrollListener(val rvGoods: RecyclerView) :RecyclerView.OnScrollListener(){
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            Log.e("onScrollStateChanged", "called")
+        }
+
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            Log.e("onScrolled", "called")
+        }
     }
 
     class GridSpacingItemDecoration(

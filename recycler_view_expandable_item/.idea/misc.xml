@@ -5,7 +5,8 @@
       <map>
         <entry key="app/src/main/res/drawable/item_layout_shape.xml" value="0.26458333333333334" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_transform.xml" value="0.19739583333333333" />
         <entry key="app/src/main/res/layout/item_goods.xml" value="0.2760416666666667" />
         <entry key="app/src/main/res/layout/item_goods_detail.xml" value="0.2760416666666667" />
         <entry key="app/src/main/res/layout/item_goods_preview.xml" value="0.22" />

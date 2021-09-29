@@ -1,118 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="#ffffff"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/item_layout_shape">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_goodsImgDetail"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#aaaaaa"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/iv_photoImgDetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/row_brandName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_goodsImgDetail">
-
-        <TextView
-            android:id="@+id/tv_brandNameDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#232323"
-            android:textStyle="bold"
-            android:textSize="17sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="후아유" />
-
-        <TextView
-            android:id="@+id/tv_goodsNameDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="#565656"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_brandNameDetail"
-            tools:text="시그니처 패치 후드집업" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:id="@+id/horizontal_line1"
-        android:layout_width="match_parent"
-        android:layout_height="0.3dp"
-        android:background="#787878"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/row_brandName" />
-
-    <View
-        android:id="@+id/fillin"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="#eeeeee"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/horizontal_line1" />
-
-    <View
-        android:id="@+id/horizontal_line2"
-        android:layout_width="match_parent"
-        android:layout_height="0.3dp"
-        android:background="#787878"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fillin" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/row_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="8dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/horizontal_line2">
-
-        <TextView
-            android:id="@+id/tv_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="판매가"
-            android:textSize="11sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <TextView
-            android:id="@+id/tv_goodsPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/tv_price"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="60dp"
-            tools:text="59900원"
-            android:textStyle="bold"
-            android:textColor="#676767"
-            android:textSize="16sp"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <View
-        android:id="@+id/horizontal_line3"
-        android:layout_width="match_parent"
-        android:layout_height="0.3dp"
-        android:background="#787878"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/row_price" />
 </androidx.constraintlayout.widget.ConstraintLayout>

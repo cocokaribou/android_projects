@@ -35,6 +35,12 @@ class MainActivity : AppCompatActivity() {
 
         initAdapter()
         getList()
+
+//        binding.btnToFragment.setOnClickListener {
+//            val frag = TransformFragment()
+//
+//
+//        }
     }
 
     private fun getList() {
@@ -48,19 +54,12 @@ class MainActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 Log.e("onResponse", "통신성공")
-                val handler = Handler(Looper.getMainLooper())
-                handler.postDelayed(Runnable {
-                    kotlin.run {
-                        val jsonString = response.body()?.string()
-                        val jsonObj = JSONObject(jsonString)
-                        val goodsArrayString =
-                            jsonObj.getJSONObject("data").getJSONObject("goods_info").toString()
-                        val bestVo = Gson().fromJson(goodsArrayString, BestVO::class.java)
-                        mAdapter.submitList(bestVo.goodsList)
-                        binding.veilRecyclerView.unVeil()
-                        binding.rvGoods.visibility = View.INVISIBLE
-                    }
-                }, 400)
+                val jsonString = response.body()?.string()
+                val jsonObj = JSONObject(jsonString)
+                val goodsArrayString =
+                    jsonObj.getJSONObject("data").getJSONObject("goods_info").toString()
+                val bestVo = Gson().fromJson(goodsArrayString, BestVO::class.java)
+                mAdapter.submitList(bestVo.goodsList)
             }
 
         })
@@ -69,6 +68,7 @@ class MainActivity : AppCompatActivity() {
     private fun initAdapter() {
         binding.rvGoods.adapter = mAdapter
         binding.rvGoods.layoutManager = GridLayoutManager(this, 2)
+        Log.e("layout param", "${binding.rvGoods.layoutParams}")
         if (binding.rvGoods.itemDecorationCount > 0) {
             binding.rvGoods.removeItemDecoration(itemDeco)
         } else {
@@ -76,11 +76,12 @@ class MainActivity : AppCompatActivity() {
             binding.rvGoods.addItemDecoration(itemDeco)
         }
 
+
         // veil recycler
-        binding.veilRecyclerView.setAdapter(mAdapter)
-        binding.veilRecyclerView.setLayoutManager(GridLayoutManager(this, 2))
-        binding.veilRecyclerView.addVeiledItems(6)
-        binding.veilRecyclerView.veil()
+//        binding.veilRecyclerView.setAdapter(mAdapter)
+//        binding.veilRecyclerView.setLayoutManager(GridLayoutManager(this, 2))
+//        binding.veilRecyclerView.addVeiledItems(6)
+//        binding.veilRecyclerView.veil()
 
     }
 
