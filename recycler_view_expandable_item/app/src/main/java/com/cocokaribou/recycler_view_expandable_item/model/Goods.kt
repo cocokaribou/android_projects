@@ -1,10 +1,10 @@
-package com.cocokaribou.recycler_view_expandable_item
+package com.cocokaribou.recycler_view_expandable_item.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-data class BestVO(
+data class Goods(
     @field:SerializedName("goods_list") var goodsList: MutableList<Goods>
 ) {
     constructor() : this(mutableListOf<Goods>())
