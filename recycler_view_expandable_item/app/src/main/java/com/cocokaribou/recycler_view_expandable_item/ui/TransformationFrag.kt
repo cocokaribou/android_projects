@@ -3,6 +3,8 @@ package com.cocokaribou.recycler_view_expandable_item.ui
 import android.graphics.Paint
 import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
@@ -59,12 +61,19 @@ class TransformationFrag : Fragment() {
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 Log.e("onResponse", "통신성공")
-                val jsonString = response.body()?.string()
-                val jsonObj = JSONObject(jsonString)
-                val goodsArrayString =
-                    jsonObj.getJSONObject("data").getJSONObject("goods_info").toString()
-                val bestVo = Gson().fromJson(goodsArrayString, Goods::class.java)
-                mAdapter.submitList(bestVo.goodsList)
+
+                val handler = Handler(Looper.getMainLooper())
+                handler.postDelayed(Runnable {
+                    run {
+                        val jsonString = response.body()?.string()
+                        val jsonObj = JSONObject(jsonString)
+                        val goodsArrayString =
+                            jsonObj.getJSONObject("data").getJSONObject("goods_info").toString()
+                        val bestVo = Gson().fromJson(goodsArrayString, Goods::class.java)
+                        mAdapter.submitList(bestVo.goodsList)
+                    }
+                }, 400)
+
             }
 
         })
@@ -89,10 +98,10 @@ class TransformationFrag : Fragment() {
         }
 
         // veil recycler
-//        binding.veilRecyclerView.setAdapter(mAdapter)
-//        binding.veilRecyclerView.setLayoutManager(GridLayoutManager(this, 2))
-//        binding.veilRecyclerView.addVeiledItems(6)
-//        binding.veilRecyclerView.veil()
+        binding.veilRecyclerView.setAdapter(mAdapter)
+        binding.veilRecyclerView.setLayoutManager(GridLayoutManager(requireContext(), 2))
+        binding.veilRecyclerView.addVeiledItems(6)
+        binding.veilRecyclerView.veil()
 
     }
 
@@ -156,7 +165,8 @@ class TransformationFrag : Fragment() {
                     } else {
                         tvOriginPrice.visibility = View.VISIBLE
                         tvOriginPrice.text = "${goods.marketPrice}원"
-                        tvOriginPrice.paintFlags = tvSalesRate.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                        tvOriginPrice.paintFlags =
+                            tvSalesRate.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                     }
                     tvSalesPrice.text = "${goods.salePrice}원"
                     if (goods.saleRate == 0) {
@@ -176,7 +186,11 @@ class TransformationFrag : Fragment() {
                     root.setOnClickListener {
                         val now = SystemClock.elapsedRealtime()
                         if (now - previousTime >= itemTransformationLayout.duration) {
-                            DetailActivity.startActivity(root.context, itemTransformationLayout, goods)
+                            DetailActivity.startActivity(
+                                root.context,
+                                itemTransformationLayout,
+                                goods
+                            )
                             previousTime = now
                         }
                     }

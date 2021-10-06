@@ -4,12 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.skydoves.androidveil.VeilRecyclerFrameView
+        android:id="@+id/veilRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:veilFrame_layout="@layout/item_goods_preview"
+        app:veilFrame_shimmerEnable="true"
+        app:veilFrame_veiled="true"
+        app:veilFrame_baseColor="#bbbbbb"
+        app:veilFrame_highlightColor="#ffffff">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_goods"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#ffffff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    </com.skydoves.androidveil.VeilRecyclerFrameView>
 
     <com.skydoves.transformationlayout.TransformationLayout
         android:id="@+id/btn_transformationLayout"

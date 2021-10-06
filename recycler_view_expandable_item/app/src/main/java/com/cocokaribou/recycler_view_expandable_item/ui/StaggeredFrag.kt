@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.cocokaribou.recycler_view_expandable_item.R
 import com.cocokaribou.recycler_view_expandable_item.api.MyApi
@@ -125,6 +126,7 @@ class StaggeredFrag : Fragment() {
                 var imageUrl = photo.photoUrl
                 Glide.with(itemBinding.ivGoodsImg.context)
                     .load(imageUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .transition(DrawableTransitionOptions().crossFade())
                     .into(itemBinding.ivGoodsImg)
 

@@ -15,12 +15,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cocokaribou.recycler_view_expandable_item.R
 import com.cocokaribou.recycler_view_expandable_item.databinding.FragmentScrollBinding
 import com.cocokaribou.recycler_view_expandable_item.databinding.ItemScrollBinding
-import com.skydoves.indicatorscrollview.IndicatorItem
-import com.skydoves.indicatorscrollview.IndicatorView
+import com.skydoves.indicatorscrollview.*
 import java.util.*
 
 class ScrollFrag : Fragment() {
     lateinit var binding: FragmentScrollBinding
+
+    companion object {
+        var itemHeight: Int = 0
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,28 +36,103 @@ class ScrollFrag : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initLinear()
         initAdapter()
         initScrollIndicator()
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun initAdapter(){
+    private fun initLinear() {
+    }
+
+    private fun initAdapter() {
         binding.recyclerview.adapter = MyAdapter()
         binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    @RequiresApi(Build.VERSION_CODES.P)
-    private fun initScrollIndicator(){
-        val indicatorView = IndicatorView.Builder(requireContext())
-            .setIndicatorItemPadding(10)
-            .setExpandingRatio(0.2f)
-            .setExpandingAllItemRatio(1.0f)
-            .build()
+    private fun initScrollIndicator() {
 
 //        val indicatorItem = IndicatorItem.Builder(requireActivity().requireViewById(R.layout.item_indicator))
 //        indicatorView.addIndicatorItem(indicatorItem)
 
-        binding.recylcerScroll.bindIndicatorView(indicatorView)
+        with(binding) {
+            indicatorScrollview.bindIndicatorView(indicatorView)
+
+            indicatorView.addIndicatorItem(
+                IndicatorItem.Builder(section1)
+                    .setItemColor(Color.parseColor("#777777"))
+                    .setIndicatorAnimation(IndicatorAnimation.BOUNCE)
+                    .setExpandedSize(itemHeight)
+                    .build()
+            )
+            indicatorView.addIndicatorItem(
+                IndicatorItem.Builder(section2)
+                    .setItemColor(Color.parseColor("#888888"))
+                    .setIndicatorAnimation(IndicatorAnimation.ACCELERATE)
+                    .setExpandedSize(itemHeight)
+                    .build()
+            )
+
+//            indicatorView.addIndicatorItem(
+//                IndicatorItem.Builder(section3)
+//                    .setItemColor(Color.parseColor("#999999"))
+//                    .setIndicatorAnimation(IndicatorAnimation.BOUNCE)
+//                    .setExpandedSize(400)
+//                    .build()
+//            )
+//
+//            indicatorView.addIndicatorItem(
+//                IndicatorItem.Builder(section4)
+//                    .setItemColor(Color.parseColor("#aaaaaa"))
+//                    .setIndicatorAnimation(IndicatorAnimation.BOUNCE)
+//                    .setExpandedSize(400)
+//                    .build()
+//            )
+//            indicatorView.addIndicatorItem(
+//                IndicatorItem.Builder(section5)
+//                    .setItemColor(Color.parseColor("#bbbbbb"))
+//                    .setIndicatorAnimation(IndicatorAnimation.BOUNCE)
+//                    .setExpandedSize(400)
+//                    .build()
+//            )
+//            indicatorView.addIndicatorItem(
+//                IndicatorItem.Builder(section6)
+//                    .setItemColor(Color.parseColor("#cccccc"))
+//                    .setIndicatorAnimation(IndicatorAnimation.BOUNCE)
+//                    .setExpandedSize(400)
+//                    .build()
+//            )
+//            indicatorView.addIndicatorItem(
+//                IndicatorItem.Builder(section7)
+//                    .setItemColor(Color.parseColor("#dddddd"))
+//                    .setIndicatorAnimation(IndicatorAnimation.BOUNCE)
+//                    .setExpandedSize(400)
+//                    .build()
+//            )
+//
+//            indicatorView.addIndicatorItem(
+//                IndicatorItem.Builder(section8)
+//                    .setItemColor(Color.parseColor("#dedede"))
+//                    .setIndicatorAnimation(IndicatorAnimation.BOUNCE)
+//                    .setExpandedSize(400)
+//                    .build()
+//            )
+//            indicatorView.addIndicatorItem(
+//                IndicatorItem.Builder(section9)
+//                    .setItemColor(Color.parseColor("#eeeeee"))
+//                    .setIndicatorAnimation(IndicatorAnimation.BOUNCE)
+//                    .setExpandedSize(400)
+//                    .build()
+//            )
+//            indicatorView.addIndicatorItem(
+//                IndicatorItem.Builder(section10)
+//                    .setItemColor(Color.parseColor("#efefef"))
+//                    .setIndicatorAnimation(IndicatorAnimation.ACCELERATE)
+//                    .setExpandedSize(400)
+//                    .build()
+//            )
+
+        }
     }
 
     class MyAdapter :
@@ -62,53 +141,19 @@ class ScrollFrag : Fragment() {
             mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NumberHolder {
-            return NumberHolder(
+            val holderLayout = NumberHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_scroll, parent, false)
             )
+            itemHeight = holderLayout.itemBinding.itemLayout.height
+            return holderLayout
         }
 
         override fun onBindViewHolder(holder: NumberHolder, position: Int) {
             holder.itemBinding.txtArray.text = list[position].toString()
-            val rand = Random().nextInt(list.size) - 1
-            when (rand) {
-                0 -> {
-                    holder.itemBinding.txtArray.setBackgroundColor(Color.parseColor("#7A942E"))
-                }
-                1 -> {
-                    holder.itemBinding.txtArray.setBackgroundColor(Color.parseColor("#6B9362"))
-                }
-                2 -> {
-                    holder.itemBinding.txtArray.setBackgroundColor(Color.parseColor("#049372"))
-                }
-                3 -> {
-                    holder.itemBinding.txtArray.setBackgroundColor(Color.parseColor("#006442"))
-                }
-                4 -> {
-                    holder.itemBinding.txtArray.setBackgroundColor(Color.parseColor("#26A65B"))
-                }
-                5 -> {
-                    holder.itemBinding.txtArray.setBackgroundColor(Color.parseColor("#87D37C"))
-                }
-                6 -> {
-                    holder.itemBinding.txtArray.setBackgroundColor(Color.parseColor("#2ABB9B"))
-                }
-                7 -> {
-                    holder.itemBinding.txtArray.setBackgroundColor(Color.parseColor("#4DAF7C"))
-                }
-                8 -> {
-                    holder.itemBinding.txtArray.setBackgroundColor(Color.parseColor("#8DB255"))
-                }
-                9 -> {
-                    holder.itemBinding.txtArray.setBackgroundColor(Color.parseColor("#407A52"))
-                }
-                10 -> {
-                    holder.itemBinding.txtArray.setBackgroundColor(Color.parseColor("#5B8930"))
-                }
-                else -> {
-                    holder.itemBinding.txtArray.setBackgroundColor(Color.parseColor("#f0f7f0"))
-                }
-            }
+            holder.itemBinding.txtArray.setBackgroundColor(Color.parseColor("#f0f7f0"))
+            itemHeight = holder.itemBinding.itemLayout.height
+
         }
 
 
