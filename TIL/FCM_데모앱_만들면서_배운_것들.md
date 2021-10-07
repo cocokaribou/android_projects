@@ -38,3 +38,4 @@
 ## 참고 사이트
 - [안드로이드 앱 FCM 푸시 알림 예제](https://blog.naver.com/PostView.naver?blogId=ndb796&logNo=221553341369&redirect=Dlog&widgetTypeCall=true&directAccess=false)
 - [Firebase 메시지 전송](https://team-platform.tistory.com/23)
+- [다수의 Notification channel 관리시 주의사항](https://dev3m.tistory.com/entry/%EB%8B%A4%EC%88%98%EC%9D%98-Notification-channel-%EA%B4%80%EB%A6%AC%EC%8B%9C-%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD)
