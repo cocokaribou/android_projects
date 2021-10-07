@@ -82,4 +82,9 @@ dependencies {
     //indicator scrollview
     implementation "com.github.skydoves:indicatorscrollview:1.0.4"
 
+    //dragview
+    implementation 'com.github.tuanhav95:DragView:1.1.0'
+    //exoplayer
+    implementation 'com.google.android.exoplayer:exoplayer:2.15.1'
+
 }

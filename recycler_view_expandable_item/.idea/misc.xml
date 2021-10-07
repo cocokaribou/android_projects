@@ -7,9 +7,14 @@
         <entry key="app/src/main/res/drawable/item_layout_shape.xml" value="0.26458333333333334" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_dragview.xml" value="0.303125" />
+        <entry key="app/src/main/res/layout/fragment_frame_bottom.xml" value="0.303125" />
+        <entry key="app/src/main/res/layout/fragment_frame_top_exoplayer.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_intro.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_root.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_scroll.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_staggered.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_top.xml" value="0.303125" />
         <entry key="app/src/main/res/layout/fragment_transform.xml" value="0.19739583333333333" />
         <entry key="app/src/main/res/layout/fragment_transformation.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/item_goods.xml" value="0.2760416666666667" />
