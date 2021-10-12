@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "zara_clone_coding"
