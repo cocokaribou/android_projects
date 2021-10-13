@@ -31,13 +31,12 @@
         android:id="@+id/dragview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:height_when_max="1920dp"
         app:height_when_min="100dp"
         app:layout_constraintTop_toBottomOf="@id/btn1"
         app:layout_constraintEnd_toEndOf="parent"
         app:margin_bottom_when_min="8dp"
         app:margin_edge_when_min="8dp"
-        app:state="MIN">
+        app:state="MAX">
 
     </com.tuanhav95.drag.DragView>
 </androidx.constraintlayout.widget.ConstraintLayout>

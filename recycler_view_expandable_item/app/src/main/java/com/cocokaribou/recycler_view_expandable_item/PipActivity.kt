@@ -1,4 +1,6 @@
 package com.cocokaribou.recycler_view_expandable_item
 
-class PipActivity {
+import androidx.appcompat.app.AppCompatActivity
+
+class PipActivity:AppCompatActivity() {
 }

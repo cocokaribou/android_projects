@@ -17,4 +17,10 @@ class TopFrag: Fragment() {
         binding = FragmentFrameTopBinding.inflate(inflater)
         return binding.root
     }
+    fun expandedTextview(){
+        binding.textview.text = "줄이기"
+    }
+    fun shrunkTexttview(){
+        binding.textview.text = "늘이기"
+    }
 }

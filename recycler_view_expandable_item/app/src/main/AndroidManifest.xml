@@ -15,7 +15,8 @@
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.Recycler_view_expandable_item">
         <activity android:name=".DetailActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:supportsPictureInPicture="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

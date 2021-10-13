@@ -38,16 +38,16 @@ class MainActivity : AppCompatActivity() {
                     IntroFrag()
                 }
                 1 -> {
-                    TransformationFrag()
-                }
-                2->{
-                    StaggeredFrag()
-                }
-                3 -> {
                     ScrollFrag()
                 }
-                else -> {
+                2->{
                     DragViewFrag()
+                }
+                3 -> {
+                    TransformationFrag()
+                }
+                else -> {
+                    StaggeredFrag()
                 }
             }
         }
