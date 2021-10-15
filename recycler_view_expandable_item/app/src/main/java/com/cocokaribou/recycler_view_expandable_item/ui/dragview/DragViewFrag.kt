@@ -30,18 +30,6 @@ class DragViewFrag : Fragment() {
             override fun onChangeState(state: DragView.State) {
             }
             override fun onChangePercent(percent: Float) {
-                when(percent){
-                    1.0f -> {
-                        Toast.makeText(requireContext(), "shrunk", Toast.LENGTH_SHORT).show()
-                        val layout = requireActivity().supportFragmentManager.findFragmentById(R.id.frameFirst)
-                        (layout as TopFrag).expandedTextview()
-                    }
-                    0.0f -> {
-                        Toast.makeText(requireContext(), "expanded", Toast.LENGTH_SHORT).show()
-                        val layout = requireActivity().supportFragmentManager.findFragmentById(R.id.frameFirst)
-                        (layout as TopFrag).shrunkTexttview()
-                    }
-                }
             }
         })
 
