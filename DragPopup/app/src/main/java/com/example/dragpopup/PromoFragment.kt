@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.dragpopup.databinding.FragmentPromoBinding
+import com.tuanhav95.drag.DragView
 
-class PromoFragment : Fragment() {
+class PromoFragment(val url: String, val dragview: DragView) : Fragment() {
     lateinit var binding: FragmentPromoBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,7 +23,7 @@ class PromoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.webviewPromo.loadUrl("https://m-kimsclub.elandmall.com/event/initEventDtl.action?event_no=E210912890")
+        binding.webviewPromo.loadUrl(url)
     }
 
     override fun onAttach(context: Context) {
@@ -37,6 +38,7 @@ class PromoFragment : Fragment() {
                         .remove(frag)
                         .commit()
                 }
+                dragview.close()
             }
 
         }

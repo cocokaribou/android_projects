@@ -15,9 +15,8 @@ import com.bumptech.glide.GlideBuilder
 import com.example.dragpopup.data.Promotion
 import com.example.dragpopup.databinding.LayoutPopupBinding
 
-class PopupLayout(dataList: MutableList<Promotion>) : Fragment() {
+class PopupLayout(private val mDataList: MutableList<Promotion>) : Fragment() {
     lateinit var binding: LayoutPopupBinding
-    var mDataList = dataList
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,9 +34,6 @@ class PopupLayout(dataList: MutableList<Promotion>) : Fragment() {
     fun initFlipper() {
         mDataList.forEach { promotion ->
             val imgUrl = promotion.imgUrl
-            if (!promotion.promoUrl.isNullOrEmpty()) {
-                val promoUrl = "https://m-kimsclub.elandmall.com" + promotion.promoUrl
-            }
 
             val imgTest = ImageView(context)
             imgTest.layoutParams = LinearLayout.LayoutParams(
@@ -58,5 +54,8 @@ class PopupLayout(dataList: MutableList<Promotion>) : Fragment() {
             outAnimation = outMotion
             startFlipping()
         }
+    }
+    fun getChildIndex():Int{
+        return binding.flipperPopupImageRow.displayedChild
     }
 }

@@ -13,6 +13,7 @@ import org.jsoup.nodes.Document
 
 class MainActivity : AppCompatActivity(), MyWebViewClient.WebViewClientListener {
     lateinit var binding: ActivityMainBinding
+    var list = mutableListOf<Promotion>()
 
     lateinit var popUpFrag: PopupLayout
     lateinit var promoFrag: PromoFragment
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity(), MyWebViewClient.WebViewClientListener 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // data를 어디서 불러오면 좋을까..
         Thread {
             setPopupUi(getDataList())
         }.start()
@@ -28,7 +30,13 @@ class MainActivity : AppCompatActivity(), MyWebViewClient.WebViewClientListener 
 
     fun setPopupUi(dataList: MutableList<Promotion>) {
         popUpFrag = PopupLayout(dataList)
-        promoFrag = PromoFragment()
+
+//        val promoUrl:String = if (dataList[popUpFrag.getChildIndex()].promoUrl.isEmpty()) {
+//            "https://m-kimsclub.elandmall.com/event/initEventDtl.action?event_no=E210912890"
+//        } else {
+//            dataList[popUpFrag.getChildIndex()].promoUrl
+//        }
+//        promoFrag = PromoFragment(promoUrl, binding.dragview)
 
         supportFragmentManager.beginTransaction()
             .add(R.id.frameFirst, popUpFrag)
@@ -37,17 +45,16 @@ class MainActivity : AppCompatActivity(), MyWebViewClient.WebViewClientListener 
             override fun onChangeState(state: DragView.State) {
                 when (state) {
                     DragView.State.MAX -> {
-                        Log.e("max", "when is this")
                         binding.background.visibility = View.GONE
                         supportFragmentManager.beginTransaction()
                             .add(R.id.container, promoFrag)
                             .commit()
                     }
                     DragView.State.CLOSE -> {
+                        // 이걸 못 읽는데..?
                         binding.dragview.close()
                     }
                     DragView.State.MIN -> {
-                        Log.e("min", "when is this")
                     }
                 }
                 super.onChangeState(state)
@@ -69,7 +76,7 @@ class MainActivity : AppCompatActivity(), MyWebViewClient.WebViewClientListener 
 
         listContents.forEach { content ->
             val promotion = Promotion(
-                imgUrl = "https:"+content.select("img").attr("src"),
+                imgUrl = "https:" + content.select("img").attr("src"),
                 promoUrl = content.select("a").attr("onclick").split("url:'")[1].split("'")[0]
             )
             promotionList.add(promotion)
