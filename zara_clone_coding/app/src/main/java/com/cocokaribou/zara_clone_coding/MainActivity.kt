@@ -8,18 +8,19 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding : ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         Thread {
             testFun()
         }.start()
     }
-    fun testFun(){
-        val doc: Document = Jsoup.connect("https://www.zara.com/kr/ko/man-trend-1-l835.html?v1=1886232").get()
+
+    fun testFun() {
+        val doc: Document =
+            Jsoup.connect("https://www.zara.com/kr/ko/man-trend-1-l835.html?v1=1886232").get()
         val title = doc.title()
         Log.e("document title", "$title")
     }
