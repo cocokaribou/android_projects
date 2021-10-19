@@ -31,12 +31,9 @@ class MainActivity : AppCompatActivity(), MyWebViewClient.WebViewClientListener 
     fun setPopupUi(dataList: MutableList<Promotion>) {
         popUpFrag = PopupLayout(dataList)
 
-//        val promoUrl:String = if (dataList[popUpFrag.getChildIndex()].promoUrl.isEmpty()) {
-//            "https://m-kimsclub.elandmall.com/event/initEventDtl.action?event_no=E210912890"
-//        } else {
-//            dataList[popUpFrag.getChildIndex()].promoUrl
-//        }
-//        promoFrag = PromoFragment(promoUrl, binding.dragview)
+        //getChildIndex()말고 다른 방법
+        val promoUrl = "https://m-kimsclub.elandmall.com"+dataList[7].promoUrl
+        promoFrag = PromoFragment(promoUrl, binding.dragview)
 
         supportFragmentManager.beginTransaction()
             .add(R.id.frameFirst, popUpFrag)
@@ -80,6 +77,7 @@ class MainActivity : AppCompatActivity(), MyWebViewClient.WebViewClientListener 
                 promoUrl = content.select("a").attr("onclick").split("url:'")[1].split("'")[0]
             )
             promotionList.add(promotion)
+            Log.e("promotion info", "$promotion")
         }
         return promotionList
     }

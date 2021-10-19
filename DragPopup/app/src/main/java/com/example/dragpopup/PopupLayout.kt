@@ -55,7 +55,7 @@ class PopupLayout(private val mDataList: MutableList<Promotion>) : Fragment() {
             startFlipping()
         }
     }
-    fun getChildIndex():Int{
-        return binding.flipperPopupImageRow.displayedChild
-    }
+//    fun getChildIndex():Int{
+//        return binding.flipperPopupImageRow.displayedChild
+//    }
 }
