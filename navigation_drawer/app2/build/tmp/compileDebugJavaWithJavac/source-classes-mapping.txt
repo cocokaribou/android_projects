@@ -1,0 +1,16 @@
+com/example/navigation_drawer/databinding/ActivityMainBinding.java
+ com.example.navigation_drawer.databinding.ActivityMainBinding
+com/example/navigation_drawer/databinding/FragmentGalleryBinding.java
+ com.example.navigation_drawer.databinding.FragmentGalleryBinding
+com/example/navigation_drawer/databinding/FragmentSlideshowBinding.java
+ com.example.navigation_drawer.databinding.FragmentSlideshowBinding
+com/example/navigation_drawer/databinding/ContentMainBinding.java
+ com.example.navigation_drawer.databinding.ContentMainBinding
+com/example/navigation_drawer/BuildConfig.java
+ com.example.navigation_drawer.BuildConfig
+com/example/navigation_drawer/databinding/AppBarMainBinding.java
+ com.example.navigation_drawer.databinding.AppBarMainBinding
+com/example/navigation_drawer/databinding/NavHeaderMainBinding.java
+ com.example.navigation_drawer.databinding.NavHeaderMainBinding
+com/example/navigation_drawer/databinding/FragmentHomeBinding.java
+ com.example.navigation_drawer.databinding.FragmentHomeBinding
