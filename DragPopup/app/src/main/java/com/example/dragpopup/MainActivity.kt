@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), MyWebViewClient.WebViewClientListener 
         popUpFrag = PopupLayout(dataList)
 
         //getChildIndex()말고 다른 방법
-        val promoUrl = "https://m-kimsclub.elandmall.com"+dataList[7].promoUrl
+        val promoUrl = "https://m-kimsclub.elandmall.com"+dataList[6].promoUrl
         promoFrag = PromoFragment(promoUrl, binding.dragview)
 
         supportFragmentManager.beginTransaction()
