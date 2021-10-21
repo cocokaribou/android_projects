@@ -15,7 +15,7 @@ interface BakeryAPI {
 
     @GET("{key}/json/LOCALDATA_072218_GS/{page}/{total}")
     fun getBakery(
-        @Path("key") key:String = KEY,
+        @Path("key") key:String = BuildConfig.API_KEY,
         @Path("page") page : String? = "1",
         @Path("total") total : String? = "100"
     ):Call<DataVO>
@@ -24,7 +24,6 @@ interface BakeryAPI {
 
 
     companion object {
-        private const val KEY = BuildConfig.API_KEY //local properties
         fun create(): BakeryAPI {
             val httpLoggingInterceptor = HttpLoggingInterceptor()
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY

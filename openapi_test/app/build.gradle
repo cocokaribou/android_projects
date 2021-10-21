@@ -31,11 +31,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    dataBinding{
+    viewBinding {
         enabled = true
     }
-    viewBinding{
-        enabled = true
+    testOptions {
+        unitTests.includeAndroidResources = true
     }
 }
 
@@ -46,13 +46,22 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+    //junit
     testImplementation 'junit:junit:4.+'
+    testImplementation 'androidx.test:core:1.4.0'
+    testImplementation 'org.mockito:mockito-core:1.10.19'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.2.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'com.google.code.gson:gson:2.8.6'
 
+    implementation 'com.google.code.gson:gson:2.8.6'
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.1'
-    implementation group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: '4.9.1' //반환된 모든 응답에 대해 로그 문자열 생성
+    implementation group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: '4.9.1'
+    //반환된 모든 응답에 대해 로그 문자열 생성
 
     implementation group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.9.0'
     implementation group: 'com.squareup.retrofit2', name: 'converter-gson', version: '2.9.0'
@@ -60,5 +69,9 @@ dependencies {
     //live data 구현
     runtimeOnly group: 'androidx.lifecycle', name: 'lifecycle-extensions', version: '2.2.0'
 
+    //rx java
+    implementation group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: '2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
 
 }
