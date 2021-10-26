@@ -13,5 +13,13 @@ class Logger {
                 )
             }
         }
+
+        fun i(message: String){
+            if (BuildConfig.DEBUG) {
+                Log.println(
+                    Log.INFO, "youngin", message
+                )
+            }
+        }
     }
 }

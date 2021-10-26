@@ -1,8 +1,5 @@
 package com.example.sampleapp
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +7,7 @@ import com.example.sampleapp.databinding.ItemTest2Binding
 import com.example.sampleapp.databinding.ItemTestBinding
 
 class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var dataList = listOf<Int>()
+    var dataList = mutableListOf<String>()
     private var mItemViewType = 0
 
     companion object {
@@ -61,7 +58,7 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return mItemViewType
     }
 
-    fun submitList(mList: List<Int>) {
+    fun submitList(mList: MutableList<String>) {
         dataList = mList
     }
 
@@ -70,14 +67,12 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     class TestHolder(private val itemBinding: ItemTestBinding) : RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(dataList: List<Int>, position: Int) {
-            itemBinding.text.text = dataList[position].toString()
+        fun bind(dataList: MutableList<String>, position: Int) {
         }
     }
 
     class TestHolder2(private val itemBinding: ItemTest2Binding) : RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(dataList: List<Int>, position: Int) {
-            itemBinding.text.text = dataList[position].toString()
+        fun bind(dataList: MutableList<String>, position: Int) {
         }
     }
 

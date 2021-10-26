@@ -51,4 +51,7 @@ dependencies {
     //jsoup webcrawling
     implementation 'org.jsoup:jsoup:1.14.3'
 
+    //glide
+    implementation group: 'com.github.bumptech.glide', name: 'glide', version: '4.12.0'
+    implementation "com.github.bumptech.glide:okhttp3-integration:4.12.0" // http 통신
 }

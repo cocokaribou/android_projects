@@ -1,8 +1,5 @@
 package com.example.sampleapp
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,6 +15,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainAdapter: MainAdapter
 
+    val imgUrlList = mutableListOf<String>()
+
     private val linearManager = LinearLayoutManager(this)
     private val grid2Manager = GridLayoutManager(this, 2)
     private val grid4Manager = GridLayoutManager(this, 4)
@@ -30,35 +29,39 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initAdapter()
+
         Thread {
             initData()
         }.start()
 
         initSliderListener()
-        initAdapter()
     }
 
     fun initData() {
         val doc: Document =
-            Jsoup.connect("https://www.zara.com/kr/ko/woman-new-in-l1180.html?v1=1881787").get()
-        val selected = doc.body().select("#app-root").select(".theme").select("#theme-app")
-            .select("div").select(".layout").select(".layout__content").select("main")
-            .select("article").select(".product-groups").select(".product-grid")
-            .select(".product-grid__product-list")
+            Jsoup.connect("https://store.musinsa.com/app/styles/lists").get()
 
         // filter
-        selected.filter(object:NodeFilter{
+        doc.body().filter(object : NodeFilter {
             override fun head(node: Node, depth: Int): NodeFilter.FilterResult {
-                TODO("Not yet implemented")
+                val mChildNode = node.childNodes()
+                for (i in mChildNode) {
+                    if (i.attr("class") == "style-list-thumbnail") {
+                        val link = "https"+i.childNode(1).attr("src")
+                        imgUrlList.add(link)
+                        mainAdapter.submitList(imgUrlList)
+                    }
+                }
+                return NodeFilter.FilterResult.CONTINUE
             }
 
             override fun tail(node: Node, depth: Int): NodeFilter.FilterResult {
-                TODO("Not yet implemented")
+                return NodeFilter.FilterResult.CONTINUE
+
             }
 
         })
-
-        Logger.e("doc title $selected")
     }
 
     fun initSliderListener() {
@@ -92,8 +95,6 @@ class MainActivity : AppCompatActivity() {
 
     fun initAdapter() {
         mainAdapter = MainAdapter()
-
-        mainAdapter.submitList(dataList)
 
         binding.recyclerview.adapter = mainAdapter
         binding.recyclerview.layoutManager = linearManager
