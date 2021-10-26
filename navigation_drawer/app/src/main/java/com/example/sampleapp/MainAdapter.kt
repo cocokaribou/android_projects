@@ -3,8 +3,8 @@ package com.example.sampleapp
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sampleapp.databinding.ItemTest2Binding
-import com.example.sampleapp.databinding.ItemTestBinding
+import com.bumptech.glide.Glide
+import com.example.sampleapp.databinding.ItemNormalBinding
 
 class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var dataList = mutableListOf<String>()
@@ -22,28 +22,22 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        mItemViewType = viewType
         when (mItemViewType) {
             VIEWTYPE_BIGHOLDER -> {
-                val itemTestBinding = ItemTestBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return TestHolder(itemTestBinding)
-            }
-            VIEWTYPE_GRID2HOLDER -> {
-                val itemTest2Binding = ItemTest2Binding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return TestHolder2(itemTest2Binding)
+                val itemTestBinding = ItemNormalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                return NormalHolder(itemTestBinding)
             }
             else -> {
-                val itemTestBinding = ItemTestBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return TestHolder(itemTestBinding)
+                val itemTestBinding = ItemNormalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                return NormalHolder(itemTestBinding)
             }
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is TestHolder -> {
-                holder.bind(dataList, position)
-            }
-            is TestHolder2 -> {
+            is NormalHolder -> {
                 holder.bind(dataList, position)
             }
         }
@@ -62,27 +56,14 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         dataList = mList
     }
 
-    fun willItBeCalled() {
-
-    }
-
-    class TestHolder(private val itemBinding: ItemTestBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+    class NormalHolder(private val itemBinding: ItemNormalBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(dataList: MutableList<String>, position: Int) {
+            with(itemBinding) {
+                Glide.with(root.context)
+                    .load(dataList[position])
+                    .into(img)
+            }
         }
     }
-
-    class TestHolder2(private val itemBinding: ItemTest2Binding) : RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(dataList: MutableList<String>, position: Int) {
-        }
-    }
-
-
-    class BigHolder {}
-
-    class BiasedHolder {}
-
-    class Grid2Holder {}
-
-    class Grid4Holder {}
 
 }

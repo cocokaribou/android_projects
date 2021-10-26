@@ -21,8 +21,6 @@ class MainActivity : AppCompatActivity() {
     private val grid2Manager = GridLayoutManager(this, 2)
     private val grid4Manager = GridLayoutManager(this, 4)
 
-    val dataList = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         initSliderListener()
     }
 
-    fun initData() {
+    private fun initData() {
         val doc: Document =
             Jsoup.connect("https://store.musinsa.com/app/styles/lists").get()
 
@@ -48,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                 val mChildNode = node.childNodes()
                 for (i in mChildNode) {
                     if (i.attr("class") == "style-list-thumbnail") {
-                        val link = "https"+i.childNode(1).attr("src")
+                        val link = "https:" + i.childNode(1).attr("src")
                         imgUrlList.add(link)
                         mainAdapter.submitList(imgUrlList)
                     }
@@ -64,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    fun initSliderListener() {
+    private fun initSliderListener() {
 
         val touchListener = object : Slider.OnSliderTouchListener {
 
@@ -73,18 +71,15 @@ class MainActivity : AppCompatActivity() {
 
             // notify data change
             override fun onStopTrackingTouch(slider: Slider) {
-                if (slider.value < 0.35) {
+                if (slider.value < 0.25) {
                     binding.slider.value = 0.1f
-                    binding.recyclerview.layoutManager = linearManager
-                    mainAdapter.setItemViewType(MainAdapter.VIEWTYPE_BIGHOLDER)
-                } else if (slider.value in 0.35..0.55) {
+                    setAdapter(MainAdapter.VIEWTYPE_BIGHOLDER)
+                } else if (slider.value in 0.25..0.75) {
                     binding.slider.value = 0.5f
-                    binding.recyclerview.layoutManager = grid2Manager
-                    mainAdapter.setItemViewType(MainAdapter.VIEWTYPE_GRID2HOLDER)
+                    setAdapter(MainAdapter.VIEWTYPE_GRID2HOLDER)
                 } else {
                     binding.slider.value = 0.9f
-                    binding.recyclerview.layoutManager = grid4Manager
-                    mainAdapter.setItemViewType(MainAdapter.VIEWTYPE_GRID4HOLDER)
+                    setAdapter(MainAdapter.VIEWTYPE_GRID4HOLDER)
                 }
             }
 
@@ -93,11 +88,24 @@ class MainActivity : AppCompatActivity() {
         binding.slider.addOnSliderTouchListener(touchListener)
     }
 
-    fun initAdapter() {
+    private fun initAdapter() {
         mainAdapter = MainAdapter()
-
         binding.recyclerview.adapter = mainAdapter
         binding.recyclerview.layoutManager = linearManager
+    }
 
+    private fun setAdapter(viewType: Int) {
+        mainAdapter.setItemViewType(viewType)
+        when (viewType) {
+            MainAdapter.VIEWTYPE_BIGHOLDER -> {
+                binding.recyclerview.layoutManager = linearManager
+            }
+            MainAdapter.VIEWTYPE_GRID2HOLDER -> {
+                binding.recyclerview.layoutManager = grid2Manager
+            }
+            MainAdapter.VIEWTYPE_GRID4HOLDER -> {
+                binding.recyclerview.layoutManager = grid4Manager
+            }
+        }
     }
 }

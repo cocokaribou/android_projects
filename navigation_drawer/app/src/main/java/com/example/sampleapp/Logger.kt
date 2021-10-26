@@ -9,7 +9,7 @@ class Logger {
         fun e(message: String) {
             if (BuildConfig.DEBUG) {
                 Log.println(
-                    Log.ERROR, "yougnin", message
+                    Log.ERROR, "youngin", message
                 )
             }
         }
