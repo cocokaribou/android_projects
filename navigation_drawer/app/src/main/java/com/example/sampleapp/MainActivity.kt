@@ -1,15 +1,20 @@
 package com.example.sampleapp
 
 import android.os.Bundle
+import android.view.MotionEvent
+import android.widget.AbsListView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.sampleapp.databinding.ActivityMainBinding
 import com.google.android.material.slider.Slider
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Node
 import org.jsoup.select.NodeFilter
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -21,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private val grid2Manager = GridLayoutManager(this, 2)
     private val grid4Manager = GridLayoutManager(this, 4)
 
+    var page = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initAdapter()
+        initScrollView()
 
         Thread {
             initData()
@@ -36,9 +44,29 @@ class MainActivity : AppCompatActivity() {
         initSliderListener()
     }
 
+    // 나중에
+//    fun onInterceptorTouchEvent(event:MotionEvent): Boolean {
+//        when(event){
+//
+//        }
+//    }
+
+    private fun initScrollView() {
+        binding.main.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
+//            Logger.e("oldScrollY=$oldScrollY || scrollY=$scrollY ")
+//            Logger.e("v height? ${v.height}")
+//            Logger.e("v maxScrollAmount ${v.maxScrollAmount}")
+//            Logger.e("v rootView ${v.rootView}")
+
+        })
+    }
+
     private fun initData() {
         val doc: Document =
-            Jsoup.connect("https://store.musinsa.com/app/styles/lists").get()
+            Jsoup.connect("https://store.musinsa.com/app/styles/lists?use_yn_360=&style_type=&brand=&model=&tag_no=&max_rt=&min_rt=&display_cnt=60&list_kind=big&sort=date&page=$page")
+                .get()
+
+        //TODO paging 처리해서 무한스크롤 리사이클러뷰 만들기
 
         // filter
         doc.body().filter(object : NodeFilter {
@@ -71,15 +99,20 @@ class MainActivity : AppCompatActivity() {
 
             // notify data change
             override fun onStopTrackingTouch(slider: Slider) {
+                if (!slider.isFocused) {
+                    setHolder(MainAdapter.VIEWTYPE_BIGHOLDER)
+                }
                 if (slider.value < 0.25) {
                     binding.slider.value = 0.1f
-                    setAdapter(MainAdapter.VIEWTYPE_BIGHOLDER)
+                    setHolder(MainAdapter.VIEWTYPE_BIGHOLDER)
+
                 } else if (slider.value in 0.25..0.75) {
                     binding.slider.value = 0.5f
-                    setAdapter(MainAdapter.VIEWTYPE_GRID2HOLDER)
+                    setHolder(MainAdapter.VIEWTYPE_GRID2HOLDER)
+
                 } else {
                     binding.slider.value = 0.9f
-                    setAdapter(MainAdapter.VIEWTYPE_GRID4HOLDER)
+                    setHolder(MainAdapter.VIEWTYPE_GRID4HOLDER)
                 }
             }
 
@@ -90,11 +123,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun initAdapter() {
         mainAdapter = MainAdapter()
+        setHolder(MainAdapter.VIEWTYPE_BIGHOLDER)
+
         binding.recyclerview.adapter = mainAdapter
         binding.recyclerview.layoutManager = linearManager
+        binding.recyclerview.addOnScrollListener(adapterScrollListener)
     }
 
-    private fun setAdapter(viewType: Int) {
+    private fun setHolder(viewType: Int) {
         mainAdapter.setItemViewType(viewType)
         when (viewType) {
             MainAdapter.VIEWTYPE_BIGHOLDER -> {
@@ -108,4 +144,26 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private val adapterScrollListener = object : RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            when (newState) {
+                RecyclerView.SCROLL_STATE_IDLE -> {
+                    Logger.e("idle")
+                }
+                RecyclerView.SCROLL_STATE_DRAGGING -> {
+                    Logger.e("dragged")
+                }
+                RecyclerView.SCROLL_STATE_SETTLING -> {
+                    Logger.e("settled")
+                }
+            }
+            super.onScrollStateChanged(recyclerView, newState)
+        }
+
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+        }
+    }
+
 }

@@ -2,9 +2,12 @@ package com.example.sampleapp
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.sampleapp.databinding.ItemBiasedBinding
 import com.example.sampleapp.databinding.ItemNormalBinding
+import java.util.*
 
 class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var dataList = mutableListOf<String>()
@@ -19,19 +22,24 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun setItemViewType(viewType: Int) {
         mItemViewType = viewType
         notifyDataSetChanged()
+//        notifyItemMoved() //인자로 뭘 넣어줘야,,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        mItemViewType = viewType
-        when (mItemViewType) {
-            VIEWTYPE_BIGHOLDER -> {
+        // BIGHOLDER일 때는 viewType(index)마다 다른 홀더를 붙여준다
+        if (mItemViewType == VIEWTYPE_BIGHOLDER) {
+            // 3개마다 하나씩
+            if (viewType != 1 && viewType % 3 == 1) {
+                val itemBiasedBinding = ItemBiasedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                return BiasedHolder(itemBiasedBinding)
+            } else {
                 val itemTestBinding = ItemNormalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 return NormalHolder(itemTestBinding)
             }
-            else -> {
-                val itemTestBinding = ItemNormalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return NormalHolder(itemTestBinding)
-            }
+            //BIGHOLDER 아닐 때는 그냥 홀더 하나로 퉁친다
+        } else {
+            val itemTestBinding = ItemNormalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            return NormalHolder(itemTestBinding)
         }
     }
 
@@ -63,6 +71,16 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     .load(dataList[position])
                     .into(img)
             }
+        }
+    }
+    class BiasedHolder(private val itemBinding: ItemBiasedBinding) : RecyclerView.ViewHolder(itemBinding.root){
+        fun bind(dataList: MutableList<String>, position: Int) {
+            with(itemBinding) {
+                Glide.with(root.context)
+                    .load(dataList[position])
+                    .into(img)
+            }
+
         }
     }
 
