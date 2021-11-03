@@ -1,5 +1,10 @@
 package com.example.sampleapp
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.os.AsyncTask
 import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.AbsListView
@@ -16,12 +21,12 @@ import org.jsoup.nodes.Node
 import org.jsoup.select.NodeFilter
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AsyncTask<Void, Void, Void> {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var mainAdapter: MainAdapter
 
     val imgUrlList = mutableListOf<String>()
 
+    private var mainAdapter = MainAdapter()
     private val linearManager = LinearLayoutManager(this)
     private val grid2Manager = GridLayoutManager(this, 2)
     private val grid4Manager = GridLayoutManager(this, 4)
@@ -69,14 +74,14 @@ class MainActivity : AppCompatActivity() {
         //TODO paging 처리해서 무한스크롤 리사이클러뷰 만들기
 
         // filter
-        doc.body().filter(object : NodeFilter {
+        doc.filter(object : NodeFilter {
             override fun head(node: Node, depth: Int): NodeFilter.FilterResult {
+                Logger.e("node $node")
                 val mChildNode = node.childNodes()
                 for (i in mChildNode) {
                     if (i.attr("class") == "style-list-thumbnail") {
                         val link = "https:" + i.childNode(1).attr("src")
                         imgUrlList.add(link)
-                        mainAdapter.submitList(imgUrlList)
                     }
                 }
                 return NodeFilter.FilterResult.CONTINUE
@@ -88,6 +93,8 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+        mainAdapter.submitList(imgUrlList)
     }
 
     private fun initSliderListener() {
@@ -122,18 +129,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initAdapter() {
-        mainAdapter = MainAdapter()
-        setHolder(MainAdapter.VIEWTYPE_BIGHOLDER)
+//        setHolder(MainAdapter.VIEWTYPE_BIGHOLDER)
 
-        binding.recyclerview.adapter = mainAdapter
-        binding.recyclerview.layoutManager = linearManager
-        binding.recyclerview.addOnScrollListener(adapterScrollListener)
+        binding.recyclerview.apply {
+            adapter = mainAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            addOnScrollListener(adapterScrollListener)
+        }
     }
 
     private fun setHolder(viewType: Int) {
         mainAdapter.setItemViewType(viewType)
         when (viewType) {
             MainAdapter.VIEWTYPE_BIGHOLDER -> {
+
                 binding.recyclerview.layoutManager = linearManager
             }
             MainAdapter.VIEWTYPE_GRID2HOLDER -> {
@@ -164,6 +173,17 @@ class MainActivity : AppCompatActivity() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
         }
+    }
+
+    val asyncTest = object:AsyncTask<Void,Void, Void>{
+        override fun doInBackground(vararg p0: Void?): Void {
+            TODO("Not yet implemented")
+        }
+
+    }
+
+    override fun doInBackground(vararg p0: Void?): Void {
+        TODO("Not yet implemented")
     }
 
 }

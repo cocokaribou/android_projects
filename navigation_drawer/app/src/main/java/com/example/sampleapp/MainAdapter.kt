@@ -9,7 +9,7 @@ import com.example.sampleapp.databinding.ItemBiasedBinding
 import com.example.sampleapp.databinding.ItemNormalBinding
 import java.util.*
 
-class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MainAdapter : RecyclerView.Adapter<MainAdapter.NormalHolder>() {
     var dataList = mutableListOf<String>()
     private var mItemViewType = 0
 
@@ -25,35 +25,34 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 //        notifyItemMoved() //인자로 뭘 넣어줘야,,
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NormalHolder {
+        Logger.e("oncreate")
         // BIGHOLDER일 때는 viewType(index)마다 다른 홀더를 붙여준다
-        if (mItemViewType == VIEWTYPE_BIGHOLDER) {
-            // 3개마다 하나씩
-            if (viewType != 1 && viewType % 3 == 1) {
-                val itemBiasedBinding = ItemBiasedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return BiasedHolder(itemBiasedBinding)
-            } else {
-                val itemTestBinding = ItemNormalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return NormalHolder(itemTestBinding)
-            }
-            //BIGHOLDER 아닐 때는 그냥 홀더 하나로 퉁친다
-        } else {
-            val itemTestBinding = ItemNormalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            return NormalHolder(itemTestBinding)
-        }
+//        if (mItemViewType == VIEWTYPE_BIGHOLDER) {
+        // 3개마다 하나씩
+//            if (viewType != 0 && viewType % 3 == 1) {
+//                val itemBiasedBinding = ItemBiasedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+//                return BiasedHolder(itemBiasedBinding)
+//            } else {
+//                val itemTestBinding = ItemNormalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+//                return NormalHolder(itemTestBinding)
+//            }
+        //BIGHOLDER 아닐 때는 그냥 홀더 하나로 퉁친다
+//        } else {
+        val itemTestBinding = ItemNormalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return NormalHolder(itemTestBinding)
+//        }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is NormalHolder -> {
-                holder.bind(dataList, position)
-            }
-        }
+    override fun onBindViewHolder(holder: NormalHolder, position: Int) {
+        Logger.e("onbind")
+        holder.bind(dataList, position)
+//            is BiasedHolder -> {
+//                holder.bind(dataList, position)
+//            }
+//    }
     }
 
-    override fun getItemCount(): Int {
-        return dataList.size
-    }
 
 
     override fun getItemViewType(position: Int): Int {
@@ -62,9 +61,14 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun submitList(mList: MutableList<String>) {
         dataList = mList
+        Logger.e("mList size ${mList.size}")
+    }
+    override fun getItemCount(): Int {
+        Logger.e("dataList size ${dataList.size}")
+        return dataList.size //여기가 0을 뱉고 있었군
     }
 
-    class NormalHolder(private val itemBinding: ItemNormalBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+    class NormalHolder(private var itemBinding: ItemNormalBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(dataList: MutableList<String>, position: Int) {
             with(itemBinding) {
                 Glide.with(root.context)
@@ -73,7 +77,8 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
         }
     }
-    class BiasedHolder(private val itemBinding: ItemBiasedBinding) : RecyclerView.ViewHolder(itemBinding.root){
+
+    class BiasedHolder(private val itemBinding: ItemBiasedBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(dataList: MutableList<String>, position: Int) {
             with(itemBinding) {
                 Glide.with(root.context)
