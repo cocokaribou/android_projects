@@ -45,7 +45,6 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.NormalHolder>() {
     }
 
     override fun onBindViewHolder(holder: NormalHolder, position: Int) {
-        Logger.e("onbind")
         holder.bind(dataList, position)
 //            is BiasedHolder -> {
 //                holder.bind(dataList, position)
@@ -61,10 +60,8 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.NormalHolder>() {
 
     fun submitList(mList: MutableList<String>) {
         dataList = mList
-        Logger.e("mList size ${mList.size}")
     }
     override fun getItemCount(): Int {
-        Logger.e("dataList size ${dataList.size}")
         return dataList.size //여기가 0을 뱉고 있었군
     }
 

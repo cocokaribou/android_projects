@@ -21,7 +21,7 @@ import org.jsoup.nodes.Node
 import org.jsoup.select.NodeFilter
 import java.util.*
 
-class MainActivity : AppCompatActivity(), AsyncTask<Void, Void, Void> {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     val imgUrlList = mutableListOf<String>()
@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity(), AsyncTask<Void, Void, Void> {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initAdapter()
         initScrollView()
 
         Thread {
@@ -47,6 +46,7 @@ class MainActivity : AppCompatActivity(), AsyncTask<Void, Void, Void> {
         }.start()
 
         initSliderListener()
+
     }
 
     // 나중에
@@ -76,7 +76,6 @@ class MainActivity : AppCompatActivity(), AsyncTask<Void, Void, Void> {
         // filter
         doc.filter(object : NodeFilter {
             override fun head(node: Node, depth: Int): NodeFilter.FilterResult {
-                Logger.e("node $node")
                 val mChildNode = node.childNodes()
                 for (i in mChildNode) {
                     if (i.attr("class") == "style-list-thumbnail") {
@@ -94,6 +93,9 @@ class MainActivity : AppCompatActivity(), AsyncTask<Void, Void, Void> {
 
         })
 
+        runOnUiThread {
+            initAdapter()
+        }
         mainAdapter.submitList(imgUrlList)
     }
 
@@ -173,17 +175,6 @@ class MainActivity : AppCompatActivity(), AsyncTask<Void, Void, Void> {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
         }
-    }
-
-    val asyncTest = object:AsyncTask<Void,Void, Void>{
-        override fun doInBackground(vararg p0: Void?): Void {
-            TODO("Not yet implemented")
-        }
-
-    }
-
-    override fun doInBackground(vararg p0: Void?): Void {
-        TODO("Not yet implemented")
     }
 
 }
