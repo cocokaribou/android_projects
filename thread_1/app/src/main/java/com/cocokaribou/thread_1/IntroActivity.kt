@@ -2,6 +2,7 @@ package com.cocokaribou.thread_1
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.cocokaribou.thread_1.databinding.ActivityIntroBinding
@@ -19,6 +20,7 @@ class IntroActivity : AppCompatActivity() {
         binding.btn1.setOnClickListener(btnListener)
         binding.btn2.setOnClickListener(btnListener)
         binding.btn3.setOnClickListener(btnListener)
+        binding.btn4.setOnClickListener(btnListener)
     }
 
     private val btnListener = View.OnClickListener { view ->
@@ -31,16 +33,18 @@ class IntroActivity : AppCompatActivity() {
                     Intent(this, MainActivity2::class.java)
                 }
                 binding.btn3.id -> {
+                    Log.e("youngin", "clicked")
                     Intent(this, MainActivity3::class.java)
                 }
                 binding.btn4.id -> {
+                    Log.e("youngin", "clicked")
                     Intent(this, CoroutineActivity::class.java)
                 }
                 else -> {
-                    Intent(this, MainActivity3::class.java)
+                    Intent(this, CoroutineActivity::class.java)
                 }
             }
-        this.startActivity(intent)
+        startActivity(intent)
     }
 
     companion object {
