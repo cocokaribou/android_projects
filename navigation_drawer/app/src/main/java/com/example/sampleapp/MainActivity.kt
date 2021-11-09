@@ -108,20 +108,17 @@ class MainActivity : AppCompatActivity() {
 
             // notify data change
             override fun onStopTrackingTouch(slider: Slider) {
-                if (!slider.isFocused) {
-                    setHolder(MainAdapter.VIEWTYPE_BIGHOLDER)
-                }
                 if (slider.value < 0.25) {
                     binding.slider.value = 0.1f
-                    setHolder(MainAdapter.VIEWTYPE_BIGHOLDER)
+                    setGridCount(1)
 
                 } else if (slider.value in 0.25..0.75) {
                     binding.slider.value = 0.5f
-                    setHolder(MainAdapter.VIEWTYPE_GRID2HOLDER)
+                    setGridCount(2)
 
                 } else {
                     binding.slider.value = 0.9f
-                    setHolder(MainAdapter.VIEWTYPE_GRID4HOLDER)
+                    setGridCount(4)
                 }
             }
 
@@ -131,7 +128,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initAdapter() {
-//        setHolder(MainAdapter.VIEWTYPE_BIGHOLDER)
+        setGridCount(1)
 
         binding.recyclerview.apply {
             adapter = mainAdapter
@@ -140,18 +137,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setHolder(viewType: Int) {
-        mainAdapter.setItemViewType(viewType)
-        when (viewType) {
-            MainAdapter.VIEWTYPE_BIGHOLDER -> {
-
+    private fun setGridCount(gridCount: Int) {
+        when (gridCount) {
+            1 -> {
                 binding.recyclerview.layoutManager = linearManager
+                mainAdapter.setGridCount(gridCount)
             }
-            MainAdapter.VIEWTYPE_GRID2HOLDER -> {
+            2 -> {
                 binding.recyclerview.layoutManager = grid2Manager
+                mainAdapter.setGridCount(gridCount)
             }
-            MainAdapter.VIEWTYPE_GRID4HOLDER -> {
+            4 -> {
                 binding.recyclerview.layoutManager = grid4Manager
+                mainAdapter.setGridCount(gridCount)
             }
         }
     }
@@ -160,13 +158,10 @@ class MainActivity : AppCompatActivity() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             when (newState) {
                 RecyclerView.SCROLL_STATE_IDLE -> {
-                    Logger.e("idle")
                 }
                 RecyclerView.SCROLL_STATE_DRAGGING -> {
-                    Logger.e("dragged")
                 }
                 RecyclerView.SCROLL_STATE_SETTLING -> {
-                    Logger.e("settled")
                 }
             }
             super.onScrollStateChanged(recyclerView, newState)
