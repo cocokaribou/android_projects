@@ -1,13 +1,7 @@
 package com.example.sampleapp
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.os.AsyncTask
 import android.os.Bundle
-import android.view.MotionEvent
-import android.widget.AbsListView
+import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.GridLayoutManager
@@ -27,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     val imgUrlList = mutableListOf<String>()
 
     private var mainAdapter = MainAdapter()
+    private var biasedAdapter = BiasedAdapter()
     private val linearManager = LinearLayoutManager(this)
     private val grid2Manager = GridLayoutManager(this, 2)
     private val grid4Manager = GridLayoutManager(this, 4)
@@ -57,7 +52,20 @@ class MainActivity : AppCompatActivity() {
 //    }
 
     private fun initScrollView() {
+        binding.main.viewTreeObserver.addOnScrollChangedListener {object:ViewTreeObserver.OnScrollChangedListener{
+            override fun onScrollChanged() {
+                val view = binding.main.getChildAt(binding.main.childCount-1)
+                val diff = view.bottom - binding.main.height + binding.main.scrollY
+
+                if(diff == 0){
+                    Logger.e("end of scroll")
+                }
+            }
+
+        } }
         binding.main.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
+            if(scrollY == v.measuredHeight - v.getChildAt(0).measuredHeight){
+            }
 //            Logger.e("oldScrollY=$oldScrollY || scrollY=$scrollY ")
 //            Logger.e("v height? ${v.height}")
 //            Logger.e("v maxScrollAmount ${v.maxScrollAmount}")
@@ -97,6 +105,7 @@ class MainActivity : AppCompatActivity() {
             initAdapter()
         }
         mainAdapter.submitList(imgUrlList)
+        biasedAdapter.submitList(imgUrlList)
     }
 
     private fun initSliderListener() {
@@ -131,7 +140,7 @@ class MainActivity : AppCompatActivity() {
         setGridCount(1)
 
         binding.recyclerview.apply {
-            adapter = mainAdapter
+            adapter = biasedAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)
             addOnScrollListener(adapterScrollListener)
         }
@@ -140,35 +149,47 @@ class MainActivity : AppCompatActivity() {
     private fun setGridCount(gridCount: Int) {
         when (gridCount) {
             1 -> {
+                binding.recyclerview.adapter = biasedAdapter
                 binding.recyclerview.layoutManager = linearManager
-                mainAdapter.setGridCount(gridCount)
+                mainAdapter.notifyAdapter()
             }
             2 -> {
+                binding.recyclerview.adapter = mainAdapter
                 binding.recyclerview.layoutManager = grid2Manager
-                mainAdapter.setGridCount(gridCount)
+                mainAdapter.notifyAdapter()
             }
             4 -> {
+                binding.recyclerview.adapter = mainAdapter
                 binding.recyclerview.layoutManager = grid4Manager
-                mainAdapter.setGridCount(gridCount)
+                mainAdapter.notifyAdapter()
             }
         }
     }
 
     private val adapterScrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            when (newState) {
-                RecyclerView.SCROLL_STATE_IDLE -> {
-                }
-                RecyclerView.SCROLL_STATE_DRAGGING -> {
-                }
-                RecyclerView.SCROLL_STATE_SETTLING -> {
-                }
-            }
             super.onScrollStateChanged(recyclerView, newState)
         }
 
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
+
+            val lastVisiblePosition = (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+            val itemTotalCount = recyclerView.adapter!!.itemCount -1
+
+            // 스크롤이 끝에 도달했는지 확인
+            // 최상단 -1, 최하단 1
+            if(recyclerView.canScrollVertically(1)){
+                Logger.e("reached the end")
+                // load new item
+
+            } else if(recyclerView.canScrollVertically(-1)){
+                // reload page
+            }
+
+            // visible item position이 마지막 데이터 인덱스일때
+            if(lastVisiblePosition == itemTotalCount){
+            }
         }
     }
 

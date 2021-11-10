@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/layout/content_main.xml" value="0.1503623188405797" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.17552083333333332" />
         <entry key="app/src/main/res/layout/item_biased.xml" value="0.17074275362318841" />
+        <entry key="app/src/main/res/layout/item_biased_right.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/layout/item_loading.xml" value="0.303125" />
         <entry key="app/src/main/res/layout/item_normal.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/item_test.xml" value="0.16197916666666667" />
