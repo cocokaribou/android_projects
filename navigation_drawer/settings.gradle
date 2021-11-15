@@ -9,4 +9,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "navigation_drawer"
-include ':app', ':app2'
+include ':app', ':app2', ':app3'
