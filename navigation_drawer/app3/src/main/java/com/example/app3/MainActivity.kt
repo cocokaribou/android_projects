@@ -1,6 +1,10 @@
 package com.example.app3
 
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.ViewTreeObserver
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.app3.databinding.ActivityMainBinding
 import com.kcrimi.tooltipdialog.ToolTipDialog
@@ -12,42 +16,54 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initTooltipView()
+
+
+        binding.root.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener,
+            ViewTreeObserver.OnGlobalFocusChangeListener {
+            override fun onGlobalLayout() {
+                initTooltipView()
+            }
+
+            override fun onGlobalFocusChanged(p0: View?, p1: View?) {
+            }
+
+        })
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     private fun initTooltipView() {
         binding.tv1.setOnClickListener {
             val location = intArrayOf(0, 0)
+//            it.getLocationInSurface(location)
+//            it.getLocationOnScreen(location)
             it.getLocationInWindow(location)
-            Logger.e("x=${location[0]}, y=${location[1]}")
 
             ToolTipDialog(this, this)
-                .title("tooltip dialog")
-                .content("tis a content")
-                .subtitle("subtitle")
+                .content("arrow pointing up")
                 .setToolTipListener(object : ToolTipDialog.ToolTipListener {
                     override fun onClickToolTip() {
                     }
 
                 })
-                .pointTo(location[0], location[1])
+//                .pointTo(it.left, it.bottom)
+//                .pointTo(0, 0)
+                .pointTo(location[0]+it.width/2, location[1])
                 .show()
         }
+
         binding.tv2.setOnClickListener {
             val location = intArrayOf(0, 0)
             it.getLocationInWindow(location)
             Logger.e("x=${location[0]}, y=${location[1]}")
 
             ToolTipDialog(this, this)
-                .title("tooltip dialog")
-                .content("tis a content")
-                .subtitle("subtitle")
+                .content("arrow pointing down")
                 .setToolTipListener(object : ToolTipDialog.ToolTipListener {
                     override fun onClickToolTip() {
                     }
 
                 })
-                .pointTo(location[0], location[1])
+                .pointTo(location[0] + it.width / 2, location[1])
                 .show()
         }
         binding.tv3.setOnClickListener {
@@ -56,9 +72,7 @@ class MainActivity : AppCompatActivity() {
             Logger.e("x=${location[0]}, y=${location[1]}")
 
             ToolTipDialog(this, this)
-                .title("tooltip dialog")
-                .content("tis a content")
-                .subtitle("subtitle")
+                .content("pointing down")
                 .setToolTipListener(object : ToolTipDialog.ToolTipListener {
                     override fun onClickToolTip() {
                     }
@@ -70,12 +84,9 @@ class MainActivity : AppCompatActivity() {
         binding.iv.setOnClickListener {
             val location = intArrayOf(0, 0)
             it.getLocationInWindow(location)
-            Logger.e("x=${location[0]}, y=${location[1]}")
 
             ToolTipDialog(this, this)
-                .title("tooltip dialog")
-                .content("tis a content")
-                .subtitle("subtitle")
+                .content("pointing down a view")
                 .setToolTipListener(object : ToolTipDialog.ToolTipListener {
                     override fun onClickToolTip() {
                     }
@@ -88,20 +99,11 @@ class MainActivity : AppCompatActivity() {
         binding.btn.setOnClickListener {
             val location = intArrayOf(0, 0)
             it.getLocationInWindow(location)
-            Logger.e("x=${location[0]}, y=${location[1]}")
 
             ToolTipDialog(this, this)
-                .title("tooltip dialog")
-                .content("tis a content")
-                .subtitle("subtitle")
-                .setToolTipListener(object : ToolTipDialog.ToolTipListener {
-                    override fun onClickToolTip() {
-                    }
-
-                })
+                .content("peek view")
+                .pointTo(location[0] + it.width / 2, location[1] - it.height)
                 .addPeekThroughView(it)
-                .setYPosition(location[1] + it.height)
-                .pointTo(location[0], location[1]+it.height)
                 .show()
         }
     }
