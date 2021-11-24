@@ -1,15 +1,20 @@
 package com.example.fragment_2.ui
 
+import LogHelper
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.example.fragment_2.R
+import toSimpleString
+import java.util.*
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // setReorderingAllowed : 트랜잭션과 관련된 프래그먼트의 상태변경 최적화
 
         // 1.
         // fragment add 코드상 하지 않고 xml 상 하기
@@ -30,14 +35,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         // 3.
         // fragment 초기화할때 데이터 넘겨줄 수 있음
         if(savedInstanceState == null){
-            val bundle = bundleOf("some_string" to "frag data init!")
+            val bundle = bundleOf("some_string" to Date().toSimpleString("지금은 yyyy년 MM월 dd일"))
             supportFragmentManager.commit{
                 setReorderingAllowed(true)
                 add<ExampleFragment>(R.id.fragment_container_view, args=bundle)
             }
         }
-
-
-
     }
 }

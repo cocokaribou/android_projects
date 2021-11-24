@@ -2,6 +2,7 @@ package com.example.app3
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.annotation.RequiresApi
@@ -12,22 +13,27 @@ import com.kcrimi.tooltipdialog.ToolTipDialog
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val splittable = "httsp://domain?split=this"
+        val splitted = splittable.split("splt")[1]
+        Log.e("splitted", splitted)
 
         binding.root.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener,
             ViewTreeObserver.OnGlobalFocusChangeListener {
             override fun onGlobalLayout() {
-                initTooltipView()
+//                initTooltipView()
             }
 
             override fun onGlobalFocusChanged(p0: View?, p1: View?) {
             }
 
         })
+        initTooltipView()
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
@@ -45,27 +51,10 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 })
-//                .pointTo(it.left, it.bottom)
-//                .pointTo(0, 0)
-                .pointTo(location[0]+it.width/2, location[1])
+                .pointTo(location[0] + it.width / 2, location[1] + it.height)
                 .show()
         }
 
-        binding.tv2.setOnClickListener {
-            val location = intArrayOf(0, 0)
-            it.getLocationInWindow(location)
-            Logger.e("x=${location[0]}, y=${location[1]}")
-
-            ToolTipDialog(this, this)
-                .content("arrow pointing down")
-                .setToolTipListener(object : ToolTipDialog.ToolTipListener {
-                    override fun onClickToolTip() {
-                    }
-
-                })
-                .pointTo(location[0] + it.width / 2, location[1])
-                .show()
-        }
         binding.tv3.setOnClickListener {
             val location = intArrayOf(0, 0)
             it.getLocationInWindow(location)
@@ -78,31 +67,35 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 })
-                .pointTo(location[0], location[1])
+                .pointTo(location[0], location[1] - (it.height)*2)
                 .show()
         }
-        binding.iv.setOnClickListener {
+        val function: (View) -> Unit = {
             val location = intArrayOf(0, 0)
-            it.getLocationInWindow(location)
+//            it.getLocationInWindow(location)
+//            it.getLocationOnScreen(location)
+            it.getLocationInSurface(location)
 
             ToolTipDialog(this, this)
-                .content("pointing down a view")
+                .content("pointing down an image view")
                 .setToolTipListener(object : ToolTipDialog.ToolTipListener {
                     override fun onClickToolTip() {
                     }
 
                 })
-                .setYPosition(location[1])
-                .pointTo(location[0], location[1])
+                .setYPosition(location[1] - (it.height) * 2)
+                .pointTo(location[0] + it.width / 2, location[1] - (it.height) * 2)
                 .show()
         }
+        binding.iv.setOnClickListener(function)
         binding.btn.setOnClickListener {
             val location = intArrayOf(0, 0)
             it.getLocationInWindow(location)
 
             ToolTipDialog(this, this)
                 .content("peek view")
-                .pointTo(location[0] + it.width / 2, location[1] - it.height)
+                .pointTo(location[0] + it.width / 2, location[1] + it.height)
+//                .setYPosition(location[1] + it.height)
                 .addPeekThroughView(it)
                 .show()
         }

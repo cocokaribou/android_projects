@@ -38,11 +38,9 @@ class ExampleUnitTest {
 
         val source = bakeryService.getBakery()
         source.doOnNext {
-//            System.out.println("source왔는가"+it)
         }.test()
             .awaitDone(1, TimeUnit.MILLISECONDS)
             .assertValue{ data ->
-//                System.out.println("data왔는가"+data)
                 data.voObject.listCount > 0
             }
             .assertComplete()

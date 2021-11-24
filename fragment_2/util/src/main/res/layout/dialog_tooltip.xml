@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tooltip_dialog_content_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/tooltip_dialog_box"
+                android:gravity="left"
+                android:orientation="vertical"
+                android:layout_marginTop="3.8dp"
+                android:background="@drawable/border_rounded_gray"
+
+                app:strokeColor="#dddddd"
+                app:strokeWidth="1dp"
+                app:cardElevation="4.5dp"
+                app:cardUseCompatPadding="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tooltip_content"
+                    android:textSize="13dp"
+                    android:textColor="#222222"
+                    android:lineSpacingExtra="6dp"
+                    tools:text="베스트순은 전일기준 상품 매출, 구매 수량, 조회 수를 반영하여 선정된 상품의 순위입니다"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="50dp"
+                    android:paddingBottom="20dp"/>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/tooltip_top_arrow"
+            android:visibility="visible"
+            app:srcCompat="@drawable/ico_tooltip_triangle"
+            android:layout_width="11dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_height="5dp"/>
+
+        <ImageView
+            android:id="@+id/tooltip_close"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:visibility="visible"
+            android:layout_marginTop="22dp"
+            android:layout_marginRight="17dp"
+            app:srcCompat="@drawable/ico_tooltip_delete"
+            android:layout_gravity="right"/>
+
+
+
+    </FrameLayout>
+
+</RelativeLayout>

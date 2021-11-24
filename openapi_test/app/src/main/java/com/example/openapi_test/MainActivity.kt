@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun requestBakery(scrollY: Int) {
         val bakeryApi = BakeryAPI.create()
-        bakeryApi.getBakery(page = scrollY.toString(), total = "20")
+        bakeryApi.getBakery(page = scrollY.toString(), total = "100")
             .enqueue(object : Callback<DataVO> {
                 override fun onFailure(call: Call<DataVO>, t: Throwable) {
                     Log.e("Fail!", "Fail")

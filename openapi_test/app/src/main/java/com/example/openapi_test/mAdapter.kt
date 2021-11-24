@@ -1,5 +1,6 @@
 package com.example.openapi_test
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ class mAdapter() :
     private var bakeryList : MutableList<DataVO.VoObject.Bakery> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): mAdapter.mViewHolder {
+        Log.e("생성됨", "$viewType")
         return mViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_bakery, parent, false)
@@ -25,6 +27,7 @@ class mAdapter() :
     }
 
     override fun onBindViewHolder(holder: mViewHolder, position: Int) {
+        Log.e("그려짐", "$position")
         holder.bind(bakeryList[position])
     }
 

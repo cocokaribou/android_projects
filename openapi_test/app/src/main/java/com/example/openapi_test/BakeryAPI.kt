@@ -15,7 +15,7 @@ interface BakeryAPI {
 
     @GET("{key}/json/LOCALDATA_072218_GS/{page}/{total}")
     fun getBakery(
-        @Path("key") key:String = BuildConfig.API_KEY,
+        @Path("key") key:String = "524d4b724e6a6f79313037777a6e6377",
         @Path("page") page : String? = "1",
         @Path("total") total : String? = "100"
     ):Call<DataVO>
