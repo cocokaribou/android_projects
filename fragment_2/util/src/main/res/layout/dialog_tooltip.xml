@@ -51,7 +51,15 @@
         <ImageView
             android:id="@+id/tooltip_top_arrow"
             android:visibility="visible"
-            app:srcCompat="@drawable/ico_tooltip_triangle"
+            app:srcCompat="@drawable/ico_tooltip_triangle_up"
+            android:layout_width="11dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_height="5dp"/>
+
+        <ImageView
+            android:id="@+id/tooltip_bottom_arrow"
+            android:visibility="visible"
+            app:srcCompat="@drawable/ico_tooltip_triangle_down"
             android:layout_width="11dp"
             android:layout_marginTop="7.5dp"
             android:layout_height="5dp"/>

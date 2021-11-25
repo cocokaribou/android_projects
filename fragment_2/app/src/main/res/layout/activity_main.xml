@@ -5,7 +5,7 @@
     android:id="@+id/fragment_container_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    tools:context=".MainActivity">
 
     <!--android:name="프래그먼트 클래스 이름" 넣으면 xml 단에서 자동초기화-->
     <!--activity 레이아웃 inflate될 때, 프래그먼트의 onInflate() 호출됨-->

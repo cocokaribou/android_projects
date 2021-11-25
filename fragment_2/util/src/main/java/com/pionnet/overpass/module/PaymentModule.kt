@@ -78,7 +78,7 @@ object PaymentModule {
     private var context: Context? = null
     private lateinit var webview: WebView
 
-    fun init(context:Context){
+    fun init(context: Context) {
         this.context = context
     }
 
@@ -337,7 +337,6 @@ object PaymentModule {
         val intent = Intent(Intent.ACTION_MAIN)
         intent.component = ComponentName(NAME_KFTC_PKG, NAME_KFTC_CLS)
         intent.putExtra(requestInfo, reqParam)
-
 
 
         // TODO intent 안에 결제결과 데이터 담겨있으니 Fragment나 Activity에서 result 처리

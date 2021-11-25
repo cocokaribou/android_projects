@@ -21,6 +21,7 @@ class ToolTipDialog(
     private var contentView : RelativeLayout
     private var container : ViewGroup
     private var upArrow : ImageView
+    private var downArrow : ImageView
     private var contentText : TextView
     private var windowHeight: Int
     private var windowWidth: Int
@@ -32,6 +33,7 @@ class ToolTipDialog(
         contentView = findViewById(R.id.tooltip_dialog_content_view)
         container = findViewById(R.id.fl_container)
         upArrow = findViewById(R.id.tooltip_top_arrow)
+        downArrow = findViewById(R.id.tooltip_top_arrow)
 
         contentText = findViewById(R.id.tooltip_content)
 

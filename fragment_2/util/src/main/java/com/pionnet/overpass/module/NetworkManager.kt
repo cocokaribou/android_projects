@@ -1,26 +1,25 @@
-package com.pionnet.overpass.module
-
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 
-class NetworkManager private constructor(private val context: Context) {
+object NetworkManager {
+    private var context: Context? = null
+    fun init(context:Context){
+        this.context = context
+    }
+
     interface OnNetworkListener {
         fun networkAvailable()
         fun finishApp()
     }
-    companion object {
-        fun getInstance(context: Context): NetworkManager {
-            return NetworkManager(context)
-        }
-    }
-
     fun checkNetworkAvailable(listener: OnNetworkListener) {
-        if (isNetworkAvailable(context)) {
-            listener.networkAvailable()
-        }else{
-            listener.finishApp()
+        context?.let{ context_ ->
+            if(isNetworkAvailable(context_)){
+                listener.networkAvailable()
+            }else{
+                listener.finishApp()
+            }
         }
     }
 

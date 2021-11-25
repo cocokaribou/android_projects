@@ -13,22 +13,24 @@ fun Date.toSimpleString(format: String): String {
 
 /**
  * 현재 시간에서 addDate 만큼 계산하기
- * @param format : 날짜 포맷
- * @param addDate : 계산할 일수
- * @param oldDate : 계산전 날짜
- * @return String : 날짜 문자열
+ * @param format : 계산전 날짜 포맷 (ex: "yyyyMMdd")
+ * @param oldDate : 계산전 날짜 String (ex: "20211125") // 입력안할시 현재 날짜 디폴트
+ * @param addDate : 계산할 일수 Int
+ *
+ * @return String : 계산된 날짜 문자열
  */
-fun getAddDateString(format: String, addDate: Int, oldDate: String? = null): String {
-    val simpleDate = SimpleDateFormat(format)
+fun getAddDateString(format: String, oldDate: String? = null, addDate: Int): String {
+    val formatter = SimpleDateFormat(format)
     val cal = Calendar.getInstance()
-    oldDate?.let {
-        try {
-            cal.time = simpleDate.parse(it)
-        } catch (e: Exception) {
-        }
+
+    if(oldDate != null){
+        try { cal.time = formatter.parse(oldDate) }
+        catch (e: Exception) {}
+    }else{
+        cal.time = Date()
     }
     cal.add(Calendar.DATE, addDate)
-    return simpleDate.format(cal.time)
+    return formatter.format(cal.time)
 }
 
 /**
@@ -37,8 +39,8 @@ fun getAddDateString(format: String, addDate: Int, oldDate: String? = null): Str
 fun getCurrentTime(): String {
     val now: Long = System.currentTimeMillis()
     val date = Date(now)
-    val dateFormat = SimpleDateFormat("yyyy년 M월 dd일 H시 mm분 ss초", Locale("ko", "KR"))
-    return dateFormat.format(date)
+    val formatter = SimpleDateFormat("yyyy년 M월 dd일 H시 mm분 ss초", Locale("ko", "KR"))
+    return formatter.format(date)
 }
 
 /**
@@ -64,7 +66,5 @@ fun productCnt(value: Long): String {
         value < 0 -> ""
         value < 1000 -> value.toString()
         else -> (value/10000).toInt().toString() + "만+"
-
     }
-
 }

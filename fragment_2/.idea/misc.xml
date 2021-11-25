@@ -5,9 +5,11 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14447463768115942" />
         <entry key="app/src/main/res/layout/fragment_example.xml" value="0.14447463768115942" />
+        <entry key="app/src/main/res/layout/fragment_web.xml" value="0.21197916666666666" />
         <entry key="util/src/main/res/drawable/border_rounded_black.xml" value="0.3921875" />
+        <entry key="util/src/main/res/drawable/border_rounded_gray.xml" value="0.1796875" />
         <entry key="util/src/main/res/layout/dialog_custom.xml" value="0.21197916666666666" />
-        <entry key="util/src/main/res/layout/dialog_tooltip.xml" value="0.21197916666666666" />
+        <entry key="util/src/main/res/layout/dialog_tooltip.xml" value="0.67" />
       </map>
     </option>
   </component>

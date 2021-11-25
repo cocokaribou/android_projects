@@ -10,12 +10,10 @@ import android.widget.LinearLayout
  * linear layout에서 weight 값 적용
  * @param weight : 가중치
  */
-fun View.setLayoutWeight(weight: Float?) {
+fun View.setLayoutWeight(weight: Float) {
     val lp = layoutParams as LinearLayout.LayoutParams
-    weight?.let{
-        lp.weight = weight
-        layoutParams = lp
-    }
+    lp.weight = weight
+    layoutParams = lp
 }
 
 /**
@@ -39,10 +37,9 @@ inline fun <reified T : ViewGroup.LayoutParams> View.layoutParams(block: T.() ->
  */
 fun View.setDynamicHeight(value: Float) {
     val lp = layoutParams
-    lp?.let {
-        lp.height = dpToPx(value)
-        layoutParams = lp
-    }
+    lp.height = dpToPx(value)
+    layoutParams = lp
+    LogHelper.e("not null")
 }
 
 /**
@@ -50,10 +47,8 @@ fun View.setDynamicHeight(value: Float) {
  */
 fun View.setDynamicWidth(value: Float) {
     val lp = layoutParams
-    lp?.let {
-        lp.width = dpToPx(value)
-        layoutParams = lp
-    }
+    lp.width = dpToPx(value)
+    layoutParams = lp
 }
 
 /**
@@ -96,12 +91,12 @@ fun View.expand() {
  * 레이아웃 확장된 것 닫기
  */
 fun View.collapse() {
-    val initialHeight : Int = this.measuredHeight
-    val a : Animation = object : Animation(){
+    val initialHeight: Int = this.measuredHeight
+    val a: Animation = object : Animation() {
         override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
-            if (interpolatedTime == 1f){
+            if (interpolatedTime == 1f) {
                 this@collapse.visibility = View.GONE
-            }else{
+            } else {
                 this@collapse.layoutParams.height = initialHeight - (initialHeight * interpolatedTime).toInt()
                 this@collapse.requestLayout()
             }

@@ -1,14 +1,12 @@
-package com.example.fragment_2.ui
+package com.example.fragment_2
 
-import LogHelper
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
-import com.example.fragment_2.R
-import toSimpleString
-import java.util.*
+import getAddDateString
+import getDisplaySize
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,10 +33,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         // 3.
         // fragment 초기화할때 데이터 넘겨줄 수 있음
         if(savedInstanceState == null){
-            val bundle = bundleOf("some_string" to Date().toSimpleString("지금은 yyyy년 MM월 dd일"))
+
+            val metrics = getDisplaySize(context=this)
+
+            val bundle = bundleOf("some_string" to getAddDateString("yyyyMM", addDate=60))
             supportFragmentManager.commit{
                 setReorderingAllowed(true)
-                add<ExampleFragment>(R.id.fragment_container_view, args=bundle)
+                add<RootFragment>(R.id.fragment_container_view, args=bundle)
             }
         }
     }
