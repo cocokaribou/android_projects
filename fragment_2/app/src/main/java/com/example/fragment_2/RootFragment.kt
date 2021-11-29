@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.fragment_2.databinding.FragmentExampleBinding
 import com.example.fragment_2.ui.WebFragment
 import com.pionnet.overpass.customView.dialog.ToolTipDialog
+import com.pionnet.overpass.module.LogHelper
 import dpToPx
 
 class RootFragment : Fragment(R.layout.fragment_example) {
@@ -46,6 +47,7 @@ class RootFragment : Fragment(R.layout.fragment_example) {
         }
 
         binding.button.setOnClickListener {
+            LogHelper.e("clicked!")
             childFragmentManager.beginTransaction().add(WebFragment(), "webfragment").commit()
         }
 

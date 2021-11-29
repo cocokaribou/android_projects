@@ -1,10 +1,13 @@
+package com.pionnet.overpass.module
+
+
 import android.util.Log
 import com.pionnet.overpass.BuildConfig
 
 /**
- * 로그 Log
+ * 로그 프린터 모듈
  * - 디버그에서만 출력됨
- * - application 단에서 tag 초기화
+ * - application 단에서 initTag()로 디폴트 태그 초기화
  */
 object LogHelper {
     private var TAG = "LogHelper"
@@ -13,7 +16,7 @@ object LogHelper {
     /**
      * Tag Init
      */
-    fun initLogTag(tag: String) {
+    fun initTag(tag: String) {
         TAG = tag
     }
 

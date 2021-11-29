@@ -1,16 +1,22 @@
 package com.example.fragment_2
 
+import com.pionnet.overpass.module.LogHelper
+import com.pionnet.overpass.module.PaymentModule
+import com.pionnet.overpass.module.NetworkManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
-import getAddDateString
 import getDisplaySize
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
+        LogHelper.initTag("youngin")
         super.onCreate(savedInstanceState)
+
+        NetworkManager.init(this)
 
         // setReorderingAllowed : 트랜잭션과 관련된 프래그먼트의 상태변경 최적화
 
@@ -36,11 +42,25 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
             val metrics = getDisplaySize(context=this)
 
-            val bundle = bundleOf("some_string" to getAddDateString("yyyyMM", addDate=60))
+            var comment = ""
+
+            NetworkManager.checkNetworkAvailable(object: NetworkManager.OnNetworkListener{
+                override fun networkAvailable() {
+                    comment = "network available"
+                }
+
+                override fun finishApp() {
+                    comment = "network not available"
+                }
+
+            })
+            val bundle = bundleOf("some_string" to comment)
             supportFragmentManager.commit{
                 setReorderingAllowed(true)
                 add<RootFragment>(R.id.fragment_container_view, args=bundle)
             }
         }
+
+
     }
 }

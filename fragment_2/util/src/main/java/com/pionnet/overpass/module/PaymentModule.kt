@@ -1,3 +1,5 @@
+package com.pionnet.overpass.module
+
 import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Context
@@ -16,64 +18,66 @@ import java.net.URLEncoder
 import java.util.*
 
 /**
- * 결제모듈
+ * 결제 모듈
  * - 파일째로 사용하기 위해 문자열 하드코딩
  * - TODO 사용시 입력해야될 사항 [paymentLogic], [goBankPay]
  */
 object PaymentModule {
-    private val ORDER_COMPLETE_URL = "http://m.sivillage.com/order/orderCompleteData"
-    private val ENCODER_EUC_KR = "euc-kr"
-    private val ENCODER_UTF_8 = "utf-8"
+    private const val ENCODER_EUC_KR = "euc-kr"
+    private const val ENCODER_UTF_8 = "utf-8"
 
-    private val RUN_ISP_MOBILE = "ispmobile"
-    private val NAME_ISP_PKG = "kvp.jjy.MispAndroid320"
-    private val LINK_ISP_STORE = "market://details?id=kvp.jjy.MispAndroid320" // ISP 설치 링크
+    // ISP
+    private const val RUN_ISP_MOBILE = "ispmobile"
+    private const val NAME_ISP_PKG = "kvp.jjy.MispAndroid320"
+    private const val LINK_ISP_STORE = "market://details?id=kvp.jjy.MispAndroid320" // ISP 설치 링크
 
-
-    private val RUN_KFTC_BANKPAY = "kftc-bankpay"
-    private val NAME_KFTC_PKG = "com.kftc.bankpay.android"
-    private val NAME_KFTC_CLS = "com.kftc.bankpay.android.activity.MainActivity"
-    private val SCHEME_KFTC = "kftc-bankpay://eftpay?"
-    private val LINK_KFTC_STORE = "market://details?id=com.kftc.bankpay.android" //금융결제원 설치 링크
+    // KTFC
+    private const val RUN_KFTC_BANKPAY = "kftc-bankpay"
+    private const val NAME_KFTC_PKG = "com.kftc.bankpay.android"
+    private const val NAME_KFTC_CLS = "com.kftc.bankpay.android.activity.MainActivity"
+    private const val SCHEME_KFTC = "kftc-bankpay://eftpay?"
+    private const val LINK_KFTC_STORE = "market://details?id=com.kftc.bankpay.android" //금융결제원 설치 링크
 
     private var KFTC_NICE_BANK_URL: String? = "" // 계좌이체  인증후 거래 요청 URL
-
     private var KFTC_BANK_TID: String? = ""
-    val TAG_BANKPAY_VAL = "bankpay_value"
-    val TAG_BANKPAY_CODE = "bankpay_code"
-    val KFTC_CD_CANCELED_BANKPAY = "091"
-    val KFTC_CD_TIME_OUT = "060"
-    val KFTC_CD_SIGN_FAILED = "050"
-    val KFTC_CD_OTP_FAILED = "040"
-    val KFTC_CD_INIT_ERROR = "030"
-    val KFTC_CD_SUCCESS = "000"
+    private var KTFC_RESULT_INTENT: Intent? = null // 계좌이체 성공후 데이터
 
-    private val SAFE_CLICK_V_GUARD = "vguard"
-    private val SAFE_CLICK_DROID_ANTI = "droidxantivirus"
-    private val SAFE_CLICK_LOTTE_SMART = "lottesmartpay"
-    private val SAFE_CLICK_SHINHAN_USIM = "smshinhancardusim://"
-    private val SAFE_CLICK_SHINHAN_ANSIM = "shinhan-sr-ansimclick"
-    private val SAFE_CLICK_INTENT_HYUNDAE = "intent:hdcardappcardansimclick://"
-    private val SAFE_CLICK_V3_MOBILE = "v3mobile"
-    private val SAFE_CLICK_APK = ".apk"
-    private val SAFE_CLICK_SMART_WALL = "smartwall://"
-    private val SAFE_CLICK_APP_FREE = "appfree://"
-    private val SAFE_CLICK_MARKET_SCHEME = "market://"
-    private val SAFE_CLICK_ANSIM_CLICK = "ansimclick://"
-    private val SAFE_CLICK_ANSIM_CLICK_S_CARD = "ansimclickscard"
-    private val SAFE_CLICK_ANSIM = "ansim://"
-    private val SAFE_CLICK_M_POCKET = "mpocket"
-    private val SAFE_CLICK_MVACCINE = "mvaccine"
-    private val SAFE_CLICK_MARKET_PKG = "market.android.com"
-    private val SAFE_CLICK_INTENT = "intent://"
-    private val SAFE_CLICK_SAMSUNG_PAY = "samsungpay"
-    private val SAFE_CLICK_DROID_3_WEB = "droidx3web://"
-    private val SAFE_CLICK_KAKAO_PAY = "kakaopay"
-    private val SAFE_CLICK_AHNLAB = "http://m.ahnlab.com/kr/site/download"
-    private val SAFE_CLICK_S_CARD_CERI_APP = "scardcertiapp://"
-    private val SAFE_CLICK_CLOUD_PAY = "cloudpay://"
-    private val SAFE_CLICK_KB_ACP = "kb-acp://"
-    private val SAFE_CLICK_NAVER = "nidlogin://"
+    private const val TAG_BANKPAY_VAL = "bankpay_value"
+    private const val TAG_BANKPAY_CODE = "bankpay_code"
+    private const val KFTC_CD_CANCELED_BANKPAY = "091"
+    private const val KFTC_CD_TIME_OUT = "060"
+    private const val KFTC_CD_SIGN_FAILED = "050"
+    private const val KFTC_CD_OTP_FAILED = "040"
+    private const val KFTC_CD_INIT_ERROR = "030"
+    private const val KFTC_CD_SUCCESS = "000"
+
+    // safe click(백신)
+    private const val SAFE_CLICK_V_GUARD = "vguard"
+    private const val SAFE_CLICK_DROID_ANTI = "droidxantivirus"
+    private const val SAFE_CLICK_LOTTE_SMART = "lottesmartpay"
+    private const val SAFE_CLICK_SHINHAN_USIM = "smshinhancardusim://"
+    private const val SAFE_CLICK_SHINHAN_ANSIM = "shinhan-sr-ansimclick"
+    private const val SAFE_CLICK_INTENT_HYUNDAE = "intent:hdcardappcardansimclick://"
+    private const val SAFE_CLICK_V3_MOBILE = "v3mobile"
+    private const val SAFE_CLICK_APK = ".apk"
+    private const val SAFE_CLICK_SMART_WALL = "smartwall://"
+    private const val SAFE_CLICK_APP_FREE = "appfree://"
+    private const val SAFE_CLICK_MARKET_SCHEME = "market://"
+    private const val SAFE_CLICK_ANSIM_CLICK = "ansimclick://"
+    private const val SAFE_CLICK_ANSIM_CLICK_S_CARD = "ansimclickscard"
+    private const val SAFE_CLICK_ANSIM = "ansim://"
+    private const val SAFE_CLICK_M_POCKET = "mpocket"
+    private const val SAFE_CLICK_MVACCINE = "mvaccine"
+    private const val SAFE_CLICK_MARKET_PKG = "market.android.com"
+    private const val SAFE_CLICK_INTENT = "intent://"
+    private const val SAFE_CLICK_SAMSUNG_PAY = "samsungpay"
+    private const val SAFE_CLICK_DROID_3_WEB = "droidx3web://"
+    private const val SAFE_CLICK_KAKAO_PAY = "kakaopay"
+    private const val SAFE_CLICK_AHNLAB = "http://m.ahnlab.com/kr/site/download"
+    private const val SAFE_CLICK_S_CARD_CERI_APP = "scardcertiapp://"
+    private const val SAFE_CLICK_CLOUD_PAY = "cloudpay://"
+    private const val SAFE_CLICK_KB_ACP = "kb-acp://"
+    private const val SAFE_CLICK_NAVER = "nidlogin://"
 
     private var context: Context? = null
     private lateinit var webview: WebView
@@ -110,7 +114,6 @@ object PaymentModule {
      * ISP 설치 진행 안내
      */
     private fun installISP() {
-        val postData = ""
         CustomDialog.CustomDialogBuilder()
             .setDescription("ISP결제를 하기 위해서는 ISP앱이 필요합니다.\n설치 페이지로  진행하시겠습니까?")
             .setTitle("ISP 설치")
@@ -154,7 +157,6 @@ object PaymentModule {
      * 계좌이체 BANKPAY 설치 진행 안내
      */
     private fun installKFTC() {
-        val postData = ""
         CustomDialog.CustomDialogBuilder()
             .setDescription("계좌이체 결제를 하기 위해서는 BANKPAY 앱이 필요합니다.\n설치 페이지로  진행하시겠습니까?")
             .setTitle("계좌이체 BANKPAY 설치")
@@ -273,7 +275,7 @@ object PaymentModule {
                 activityNotFoundProcess(intent, wv)
             } else {
                 if (url.startsWith(RUN_KFTC_BANKPAY)) {
-                    goBankPay(url)
+                    processBankPayData(url)
                     return
                 }
                 context.startActivity(intent)
@@ -281,7 +283,7 @@ object PaymentModule {
         } else {
             try {
                 if (url.startsWith(RUN_KFTC_BANKPAY)) {
-                    goBankPay(url)
+                    processBankPayData(url)
                     return
                 }
 
@@ -324,7 +326,7 @@ object PaymentModule {
         context?.startActivity(intent)
     }
 
-    private fun goBankPay(url: String) {
+    private fun processBankPayData(url: String) {
         val requestInfo = "requestInfo"
         var reqParam = url.substring(SCHEME_KFTC.length)
         try {
@@ -338,15 +340,16 @@ object PaymentModule {
         intent.component = ComponentName(NAME_KFTC_PKG, NAME_KFTC_CLS)
         intent.putExtra(requestInfo, reqParam)
 
+        if(KTFC_RESULT_INTENT == null){
+            KTFC_RESULT_INTENT = intent
+        }
+    }
 
-        // TODO intent 안에 결제결과 데이터 담겨있으니 Fragment나 Activity에서 result 처리
-        // Fragment
-//        val webFrag =
-//            (context as FragmentActivity).supportFragmentManager.findFragmentByTag("webfragment") as WebFragment
-//        webFrag.startForResultKftcBank.launch(intent)
-
-        // Activity
-//        (context as MainActivity?)!!.startForResultKftcBank.launch(intent)
-
+    fun getBankPayData():Intent {
+        return if(KTFC_RESULT_INTENT != null){
+            KTFC_RESULT_INTENT!!
+        } else {
+            Intent()
+        }
     }
 }

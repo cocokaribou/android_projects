@@ -39,7 +39,6 @@ fun View.setDynamicHeight(value: Float) {
     val lp = layoutParams
     lp.height = dpToPx(value)
     layoutParams = lp
-    LogHelper.e("not null")
 }
 
 /**

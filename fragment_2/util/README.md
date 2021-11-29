@@ -41,7 +41,7 @@ com.pionnet.overpass
 - `PaymentModule.kt`
 	- 결제모듈
 	- 입력해야될 부분 TODO로 표기
-- `NetworkManager.kt`
+- `com.pionnet.overpass.module.NetworkManager.kt`
 	- 네트워크 연결 관리자
 
 ### util

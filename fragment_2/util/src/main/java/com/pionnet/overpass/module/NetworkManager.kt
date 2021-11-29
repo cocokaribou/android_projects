@@ -1,8 +1,14 @@
+package com.pionnet.overpass.module
+
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 
+/**
+ * 네트워크 관리자 모듈
+ * - application 단에서 init(context)로 먼저 초기화할것
+ */
 object NetworkManager {
     private var context: Context? = null
     fun init(context:Context){
@@ -25,17 +31,23 @@ object NetworkManager {
 
     private fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val nw    = connectivityManager.activeNetwork ?: return false
-            val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
-            return when {
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                else -> false
+        when{
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> {
+                LogHelper.e("is or higher than 29")
+                val nw    = connectivityManager.activeNetwork ?: return false
+                val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
+                return when {
+                    actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                    actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                    else -> false
+                }
             }
-        } else {
-            val nwInfo = connectivityManager.activeNetworkInfo ?: return false
-            return nwInfo.isConnected
+            else ->{
+                LogHelper.e("lower than 29")
+                // deprecated by api 29
+                val nwInfo = connectivityManager.activeNetworkInfo ?: return false
+                return nwInfo.isConnected
+            }
         }
     }
 
@@ -44,8 +56,9 @@ object NetworkManager {
         var result = false
         val cm =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             if (cm != null) {
+                LogHelper.e("over 29")
                 val capabilities = cm.getNetworkCapabilities(cm.activeNetwork)
                 if (capabilities != null) {
                     if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
@@ -57,6 +70,7 @@ object NetworkManager {
             }
         } else {
             if (cm != null) {
+                LogHelper.e("under 29")
                 val activeNetwork = cm.activeNetworkInfo
                 if (activeNetwork != null) {
                     // connected to the internet
@@ -74,7 +88,7 @@ object NetworkManager {
     fun isMOBILEConnected(context: Context): Boolean {
         var result = false
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             if (cm != null) {
                 val capabilities = cm.getNetworkCapabilities(cm.activeNetwork)
                 if (capabilities != null) {
