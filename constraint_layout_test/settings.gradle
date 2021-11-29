@@ -1,2 +1,0 @@
-include ':app'
-rootProject.name = "constraint_layout_test"
