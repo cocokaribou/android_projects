@@ -17,11 +17,11 @@ public class FindBeerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_find_beer);
     }
 
-    private BeerExpert expert = new BeerExpert();
+    private final BeerExpert expert = new BeerExpert();
 
     public void onClickFindBeer(View view) {
-        TextView brands = (TextView) findViewById(R.id.brands); //xml의 TextView 요소를 가져온다 returns View, 적절한 view 유형으로 형변환해
-        Spinner color = (Spinner) findViewById(R.id.color); //xml의 Spinner 요소를 가져온다
+        TextView brands = findViewById(R.id.brands); //xml의 TextView 요소를 가져온다 returns View, 적절한 view 유형으로 형변환해
+        Spinner color = findViewById(R.id.color); //xml의 Spinner 요소를 가져온다
         String beerType = String.valueOf(color.getSelectedItem()); //Spinner의 선택된 요소를 문자열 변수에 대입 getSelectedItem() returns Object
         List<String> brandList = expert.getBrands(beerType);
 
