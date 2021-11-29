@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="beeradvisor/src/main/res/layout/activity_find_beer.xml" value="0.1" />
+        <entry key="my_messenger/src/main/res/layout/activity_create_message.xml" value="0.1" />
       </map>
     </option>
   </component>

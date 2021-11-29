@@ -7,4 +7,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "HeadfirstAndroid"
-include ':beeradvisor'
+include ':beer_advisor'
+include ':my_messenger'
