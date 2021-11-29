@@ -1,2 +1,0 @@
-include ':app', ':util'
-rootProject.name = "aOS_framework_demo"
