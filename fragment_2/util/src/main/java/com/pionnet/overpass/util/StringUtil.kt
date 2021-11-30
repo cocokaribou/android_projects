@@ -1,3 +1,5 @@
+package com.pionnet.overpass.util
+
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -7,7 +9,7 @@ import java.util.*
  * 날짜 포맷 출력
  * @param format : 날짜 포맷
  */
-fun Date.toSimpleString(format: String): String {
+fun Date.getFormattedDate(format: String): String {
     return SimpleDateFormat(format).format(this)
 }
 
@@ -19,7 +21,7 @@ fun Date.toSimpleString(format: String): String {
  *
  * @return String : 계산된 날짜 문자열
  */
-fun getAddDateString(format: String, oldDate: String? = null, addDate: Int): String {
+fun getAddedDate(format: String, oldDate: String? = null, addDate: Int): String {
     val formatter = SimpleDateFormat(format)
     val cal = Calendar.getInstance()
 
@@ -48,7 +50,7 @@ fun getCurrentTime(): String {
  * @param value : 물건 가격
  * @return ex) value : 10000 -> 출력값 : 10,000
  */
-fun priceFormat(value: String): String {
+fun getFormattedPrice(value: String): String {
     if (value.isEmpty()) return ""
 
     val formatter: NumberFormat = DecimalFormat("###,###")
@@ -61,7 +63,7 @@ fun priceFormat(value: String): String {
  * @param value : Long
  * @return ex) value : 23400 -> 출력값 : 2만+
  */
-fun productCnt(value: Long): String {
+fun getFormattedProductCnt(value: Long): String {
     return when {
         value < 0 -> ""
         value < 1000 -> value.toString()

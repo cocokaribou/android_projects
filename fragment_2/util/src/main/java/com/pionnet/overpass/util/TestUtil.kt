@@ -1,3 +1,5 @@
+package com.pionnet.overpass.util
+
 import android.content.Context
 import android.content.res.AssetManager
 import java.io.BufferedReader

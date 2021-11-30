@@ -7,7 +7,7 @@ import android.os.Build
 
 /**
  * 네트워크 관리자 모듈
- * - application 단에서 init(context)로 먼저 초기화할것
+ * - application 단에서 init(context)로 초기화
  */
 object NetworkManager {
     private var context: Context? = null
@@ -85,7 +85,7 @@ object NetworkManager {
         return result
     }
 
-    fun isMOBILEConnected(context: Context): Boolean {
+    fun isMoblieConnected(context: Context): Boolean {
         var result = false
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

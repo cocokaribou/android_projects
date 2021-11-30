@@ -20,7 +20,6 @@ import java.util.*
 /**
  * 결제 모듈
  * - 파일째로 사용하기 위해 문자열 하드코딩
- * - TODO 사용시 입력해야될 사항 [paymentLogic], [goBankPay]
  */
 object PaymentModule {
     private const val ENCODER_EUC_KR = "euc-kr"
@@ -36,9 +35,9 @@ object PaymentModule {
     private const val NAME_KFTC_PKG = "com.kftc.bankpay.android"
     private const val NAME_KFTC_CLS = "com.kftc.bankpay.android.activity.MainActivity"
     private const val SCHEME_KFTC = "kftc-bankpay://eftpay?"
-    private const val LINK_KFTC_STORE = "market://details?id=com.kftc.bankpay.android" //금융결제원 설치 링크
+    private const val LINK_KFTC_STORE = "market://details?id=com.kftc.bankpay.android" // 금융결제원 설치 링크
 
-    private var KFTC_NICE_BANK_URL: String? = "" // 계좌이체  인증후 거래 요청 URL
+    private var KFTC_NICE_BANK_URL: String? = "" // 계좌이체 인증후 거래 요청 URL
     private var KFTC_BANK_TID: String? = ""
     private var KTFC_RESULT_INTENT: Intent? = null // 계좌이체 성공후 데이터
 
@@ -81,27 +80,36 @@ object PaymentModule {
 
     private var context: Context? = null
     private lateinit var webview: WebView
+    private lateinit var listener: OnKtfcListener
+
+    interface OnKtfcListener {
+        fun onResultReady()
+    }
+
+    private fun setOnKtfcListener(listener:OnKtfcListener){
+        this.listener = listener
+    }
 
     fun init(context: Context) {
         this.context = context
     }
 
-    fun processPaymentQuery(wv: WebView, url: String?): Boolean {
+    fun processPaymentQuery(wv: WebView, url: String?, schemeBridge:String): Boolean {
         webview = wv
         url ?: return true
-        return paymentLogic(wv, url)
+        return paymentLogic(wv, url, schemeBridge)
     }
 
-    private fun paymentLogic(wv: WebView, url: String): Boolean {
+    private fun paymentLogic(wv: WebView, url: String, schemeBridge:String): Boolean {
         if (url.startsWith(RUN_ISP_MOBILE) || url.startsWith(RUN_KFTC_BANKPAY)) {
             gotoAppPackage(wv, url)
             return true
         } else if (isSafeClickScheme(url)) {
             gotoAppPackage(wv, url)
             return true
-        } else if (url.startsWith("schemeBridge")) { //TODO schemeBridge 입력
+        } else if (url.startsWith(schemeBridge)) {
             // ispmobile에서 결제 완료후 스마트주문 앱을 호출하여 결제결과를 전달하는 경우
-            val thisUrl: String = url.substring("schemeBridge".length)
+            val thisUrl: String = url.substring(schemeBridge.length)
             wv.clearView()
             wv.loadUrl(thisUrl)
             return true
@@ -341,6 +349,7 @@ object PaymentModule {
         intent.putExtra(requestInfo, reqParam)
 
         if(KTFC_RESULT_INTENT == null){
+            listener.onResultReady()
             KTFC_RESULT_INTENT = intent
         }
     }

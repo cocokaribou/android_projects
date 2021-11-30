@@ -7,15 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.fragment_2.databinding.FragmentExampleBinding
+import com.example.fragment_2.databinding.FragmentRootBinding
 import com.example.fragment_2.ui.WebFragment
-import com.pionnet.overpass.customView.dialog.ToolTipDialog
 import com.pionnet.overpass.module.LogHelper
-import dpToPx
 
-class RootFragment : Fragment(R.layout.fragment_example) {
+class RootFragment : Fragment(R.layout.fragment_root) {
 
-    private lateinit var binding: FragmentExampleBinding
+    private lateinit var binding: FragmentRootBinding
     private var initString = ""
 
     // onInflate -> onCreateView
@@ -31,18 +29,13 @@ class RootFragment : Fragment(R.layout.fragment_example) {
         // 이렇게 못 꺼내옴
 //        initString = savedInstanceState!!.getString("some_string") ?: "no init data"
 
-        binding = FragmentExampleBinding.inflate(layoutInflater)
+        binding = FragmentRootBinding.inflate(layoutInflater)
         binding.tvInit.text = initString
 
         binding.clickable.setOnClickListener {
             binding.clickable.let{ view ->
                 val location = intArrayOf(0,0)
                 it.getLocationInWindow(location)
-                ToolTipDialog(view.context, requireActivity())
-                    .pointTo(location[0]+view.width/2, location[1]+context!!.dpToPx(10F))
-                    .content("pointing the box").also{
-                        it.show()
-                    }
             }
         }
 
