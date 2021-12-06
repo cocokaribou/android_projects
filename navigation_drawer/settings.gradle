@@ -6,7 +6,11 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
+
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 rootProject.name = "navigation_drawer"
-include ':app', ':app2', ':app3'
+include ':app', ':app2', ':app3', ':app4', ':app5'

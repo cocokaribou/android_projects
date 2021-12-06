@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">app5</string>
+    <string name="tv_title">Native Login</string>
+    <string name="tv_id">ID</string>
+    <string name="tv_pw">PW</string>
+    <string name="facebook_login">Facebook</string>
+    <string name="google_login">Google</string>
+</resources>
