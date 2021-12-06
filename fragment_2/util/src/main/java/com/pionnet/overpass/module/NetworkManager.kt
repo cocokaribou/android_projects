@@ -10,22 +10,15 @@ import android.os.Build
  * - application 단에서 init(context)로 초기화
  */
 object NetworkManager {
-    private var context: Context? = null
-    fun init(context:Context){
-        this.context = context
-    }
-
     interface OnNetworkListener {
         fun networkAvailable()
         fun finishApp()
     }
-    fun checkNetworkAvailable(listener: OnNetworkListener) {
-        context?.let{ context_ ->
-            if(isNetworkAvailable(context_)){
-                listener.networkAvailable()
-            }else{
-                listener.finishApp()
-            }
+    fun checkNetworkAvailable(context: Context,listener: OnNetworkListener) {
+        if(isNetworkAvailable(context)){
+            listener.networkAvailable()
+        }else{
+            listener.finishApp()
         }
     }
 

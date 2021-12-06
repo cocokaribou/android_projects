@@ -9,14 +9,11 @@ import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
-import getDisplaySize
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         LogHelper.initTag("youngin")
         super.onCreate(savedInstanceState)
-
-        NetworkManager.init(this)
 
         // setReorderingAllowed : 트랜잭션과 관련된 프래그먼트의 상태변경 최적화
 
@@ -40,11 +37,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         // fragment 초기화할때 데이터 넘겨줄 수 있음
         if(savedInstanceState == null){
 
-            val metrics = getDisplaySize(context=this)
 
             var comment = ""
 
-            NetworkManager.checkNetworkAvailable(object: NetworkManager.OnNetworkListener{
+            NetworkManager.checkNetworkAvailable(this, object: NetworkManager.OnNetworkListener{
                 override fun networkAvailable() {
                     comment = "network available"
                 }

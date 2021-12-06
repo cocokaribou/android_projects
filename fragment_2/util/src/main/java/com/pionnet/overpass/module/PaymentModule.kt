@@ -283,7 +283,7 @@ object PaymentModule {
                 activityNotFoundProcess(intent, wv)
             } else {
                 if (url.startsWith(RUN_KFTC_BANKPAY)) {
-                    processBankPayData(url)
+                    processBankPayData(url, listener)
                     return
                 }
                 context.startActivity(intent)
@@ -291,7 +291,7 @@ object PaymentModule {
         } else {
             try {
                 if (url.startsWith(RUN_KFTC_BANKPAY)) {
-                    processBankPayData(url)
+                    processBankPayData(url, listener)
                     return
                 }
 
@@ -334,7 +334,7 @@ object PaymentModule {
         context?.startActivity(intent)
     }
 
-    private fun processBankPayData(url: String) {
+    private fun processBankPayData(url: String, listener:OnKtfcListener) {
         val requestInfo = "requestInfo"
         var reqParam = url.substring(SCHEME_KFTC.length)
         try {
@@ -348,10 +348,12 @@ object PaymentModule {
         intent.component = ComponentName(NAME_KFTC_PKG, NAME_KFTC_CLS)
         intent.putExtra(requestInfo, reqParam)
 
-        if(KTFC_RESULT_INTENT == null){
-            listener.onResultReady()
-            KTFC_RESULT_INTENT = intent
-        }
+        //intent 이동
+//
+//        if(KTFC_RESULT_INTENT == null){
+//            KTFC_RESULT_INTENT = intent
+//            listener.onResultReady()
+//        }
     }
 
     fun getBankPayData():Intent {
