@@ -1,101 +1,150 @@
 package com.pionnet.overpass.push_test
 
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
-import android.view.View
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.NotificationManagerCompat
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.messaging.FirebaseMessaging
 import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Converter
 import retrofit2.Response
 import java.net.URLDecoder
 
 class MainActivity : AppCompatActivity() {
-    private var token: String = ""
+    lateinit var myAPI: MyAPI
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        myAPI = MyAPI.getAPIService()
+
+        // fcm 토큰 -> 내부 서버로 전송
+        registerTokenAPI()
+
+        // message.data payload -> intent.extra 처리
+        processLink()
+        requestPushOpenCount()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // 시스템 알림 허용여부 체크
+        checkSystemNoti()
+    }
+
+    // fcm 토큰 -> 내부 서버로 전송
+    private fun registerTokenAPI() {
+        var token: String
+        val firebaseMessaging = FirebaseMessaging.getInstance()
+        firebaseMessaging.token.addOnCompleteListener {
+            when {
+                !it.isSuccessful -> {
+                    Logger.e("instance 초기화 실패")
+                    Logger.e("exception: ${it.exception}")
+                    Logger.e("result: ${it.result}")
+                }
+                it.isSuccessful -> {
+                    Logger.e("token: ${it.result}")
+                    token = it.result!!
+                    val callBack = myAPI.registerTokenApi(token, CommonConst.target_app)
+                    callBack.enqueue(object : Callback<ResponseBody> {
+                        override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                            if (response.isSuccessful) {
+                                Logger.e("code: ${response.code()}\t${response.body()?.string()}")
+                            } else {
+                                Logger.e("code: ${response.code()}\t${JSONObject(response.errorBody()?.string()).get("error_message")}")
+                            }
+                            return
+                        }
+                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                            Logger.e("t: $t")
+                        }
+                    })
+                }
+            }
+        }
+    }
+
+    // 시스템 알림 허용여부 체크
+    private fun checkSystemNoti() {
         val mainLayout = findViewById<ConstraintLayout>(R.id.mainLayout)
         val mNotificationManagerCompat = NotificationManagerCompat.from(applicationContext)
 
-        // 알림 수신 여부 체크
-        val areNotificationsEnabled: Boolean = mNotificationManagerCompat.areNotificationsEnabled()
+        val areNotificationsEnabled: Boolean =
+            mNotificationManagerCompat.areNotificationsEnabled()
         if (!areNotificationsEnabled) {
             val snackbar = Snackbar
-                    .make(
-                            mainLayout,
-                            "알림을 활성화해주세요",
-                            Snackbar.LENGTH_LONG
-                    )
-                    .setAction("설정") {
-                        openNotificationSettings()
-                    }
+                .make(
+                    mainLayout,
+                    getString(R.string.msg_system_noti),
+                    Snackbar.LENGTH_LONG
+                )
+                .setAction(getString(R.string.setting)) {
+                    openNotificationSettings()
+                }
             snackbar.show()
             return
         }
-
-        // 토큰 전송
-        val firebaseMessaging = FirebaseMessaging.getInstance()
-        firebaseMessaging.token.addOnCompleteListener {
-            if (!it.isSuccessful) {
-                Log.e("FCM Log", "instance 초기화 실패")
-                Log.e("FCM Log", "exception: ${it.exception}")
-                Log.e("FCM Log", "result: ${it.result}")
-            } else {
-                Log.e("FCM messaging token", "${it.result}")
-                Log.e("FCM messaging token", "isString = ${it.result is String}")
-                token = it.result!!
-                registerTokenAPI()
-            }
-        }
-
-        // 구독
-        firebaseMessaging.subscribeToTopic("testTopic")
     }
 
     private fun openNotificationSettings() {
         // Links to this app's notification settings.
         val intent = Intent()
-        intent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
-        intent.putExtra("app_package", packageName)
-        intent.putExtra("app_uid", applicationInfo.uid)
+        intent.action = getString(R.string.intent_action_notification)
+        intent.putExtra(getString(R.string.intent_extra_package), packageName)
+        intent.putExtra(getString(R.string.intent_extra_uid), applicationInfo.uid)
 
         // for Android 8 and above
-        intent.putExtra("android.provider.extra.APP_PACKAGE", packageName)
+        intent.putExtra(getString(R.string.intent_extra_package_8), packageName)
 
         startActivity(intent)
     }
 
-    private fun registerTokenAPI() {
-        val myAPI = MyAPI.getAPIService()
-        val callBack: Call<ResponseBody> = myAPI.registerToken(token)
-        callBack.enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                if (response.isSuccessful) {
-                    val resultBody = URLDecoder.decode(response.body()?.string(), "utf-8")
-                    Log.e("요청결과 헤더", "${response.raw().headers}")
-                    AlertDialog.Builder(this@MainActivity).setMessage("요청결과: $resultBody")
-                            .setPositiveButton("확인") { _, _ ->
-                            }.show()
-                }
-                return
-            }
+    // message.data["link_url"] 페이로드 처리
+    private fun processLink() {
+        val webView = findViewById<WebView>(R.id.webview)
+        webView.settings.javaScriptEnabled = true
+        webView.settings.javaScriptCanOpenWindowsAutomatically = true
+        webView.webViewClient = WebViewClient()
 
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.e("Throwable", "$t")
-                AlertDialog.Builder(this@MainActivity).setMessage("요청결과: 실패")
-                        .setPositiveButton("확인") { _, _ ->
-                        }.show()
-            }
-        })
+        val linkUrl = intent.getStringExtra(CommonConst.link_url)
+        linkUrl?.let { url ->
+            webView.loadUrl(url)
+        }
+    }
+
+    // message.data["transaction_id"] 페이로드 처리
+    // message 읽음 처리
+    private fun requestPushOpenCount() {
+        val transactionId = intent.getStringExtra(CommonConst.transaction_id)
+
+        transactionId?.let { id ->
+            val callBack = myAPI.checkPushOpen(id)
+            callBack.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    if (response.isSuccessful) {
+                        Logger.e("code: ${response.code()}\t${response.body()?.string()}")
+                    } else {
+                        Logger.e("code: ${response.code()}\t${JSONObject(response.errorBody()?.string()).get("error_message")}")
+                    }
+                    return
+                }
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        Logger.e("t: $t")
+                }
+            })
+        }
     }
 }

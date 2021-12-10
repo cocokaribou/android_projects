@@ -23,120 +23,88 @@ import java.net.URL
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     lateinit var msgTitle: String
     lateinit var msgBody: String
+    lateinit var msgImage: String
 
     override fun onNewToken(token: String) {
-        Log.e("FCM log", "Refreshed Token: $token")
+        Logger.e("Refreshed Token: $token")
     }
 
-    // firebase console로 보낼 경우 앱이 foreground 일 때만 호출
+    // noti message일 경우 앱이 foreground 일 때만 호출
     override fun onMessageReceived(rMessage: RemoteMessage) {
-        Log.e("FCM Log", "----------------------------------------------------------")
-        Log.e("message", "data:\t${rMessage.data}")
-        Log.e("message", "noti.channelId:\t${rMessage.notification?.channelId}")
-        Log.e("message", "from:\t${rMessage.from}")
-        Log.e("message", "to:\t${rMessage.to}")
-        Log.e("message", "type:\t${rMessage.messageType}")
-        Log.e("FCM Log", "----------------------------------------------------------")
+        super.onMessageReceived(rMessage)
+
+        Log.e("message", "----------------------------------------------------------")
+        Log.e("message", "data       : ${rMessage.data}")
+        Log.e("message", "noti.title : ${rMessage.notification?.title}")
+        Log.e("message", "noti.body  : ${rMessage.notification?.body}")
+        Log.e("message", "noti.img   : ${rMessage.notification?.imageUrl}")
+        Log.e("message", "from       : ${rMessage.from}")
+        Log.e("message", "to         : ${rMessage.to}")
+        Log.e("message", "----------------------------------------------------------")
 
         val intent = Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtra(CommonConst.transaction_id, rMessage.data[CommonConst.transaction_id])
+        intent.putExtra(CommonConst.link_url, rMessage.data[CommonConst.link_url])
+
         val pendingIntent =
             PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
 
-        // data payload
-        msgTitle = try {
-            rMessage.data.getValue("title")
-        } catch (e: Exception) {
-            "default title"
-        }
-        msgBody = try {
-            rMessage.data.getValue("body")
-        } catch (e: Exception) {
-            "default body message"
-        }
+        // notification title, body
+        msgTitle = rMessage.notification?.title.toString()
+        msgBody = rMessage.notification?.body.toString()
+        msgImage = rMessage.notification?.imageUrl.toString()
 
         // 오레오 이상은 알림채널 생성
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
             // BigPicture 이미지 처리
-            var bigBmp = BitmapFactory.decodeResource(resources, R.drawable.icon)
-            try {
-                val imageUrl = rMessage.data.getValue("imageUrl")
-                bigBmp = if (URLUtil.isNetworkUrl(imageUrl)) {
-                    val bigIcon: Bitmap = getBitmapFromURL(imageUrl)!!
-                    bigIcon
+            val bigBmp = if (URLUtil.isNetworkUrl(msgImage)) getBitmapFromURL(msgImage)!! else null
 
-                } else {
-                    BitmapFactory.decodeResource(resources, R.drawable.icon)
-                }
-            } catch (e: Exception) {
-            }
-
-            val channelId = try {
-                rMessage.data.getValue("channelId")
-            } catch (e: Exception) {
-                "Default"
-            }
-
-            val notiBuilder = NotificationCompat.Builder(this, channelId)
+            // 알림메시지 빌더
+            val notiBuilder = NotificationCompat.Builder(this, CommonConst.noti_channelId)
                 .setContentTitle(msgTitle)
                 .setContentText(msgBody)
                 .setAutoCancel(true)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.drawable.icon)
-                .setLargeIcon(bigBmp)
 
-            notiBuilder.apply {
-                when (channelId) {
-                    "BigPictureStyle" -> {
+            // 알림메시지에 이미지링크 있으면 BigPictureStyle 적용
+            notiBuilder.apply{
+                when{
+                    bigBmp != null -> {
                         setStyle(
                             NotificationCompat
                                 .BigPictureStyle()
                                 .bigLargeIcon(bigBmp)
                                 .bigPicture(bigBmp)
-                                .setBigContentTitle("big content title")
-                                .setSummaryText("summary text")
                         )
-                    }
-                    "BigTextStyle" -> {
-                        setStyle(
-                            NotificationCompat
-                                .BigTextStyle()
-                                .bigText(msgBody)
-                                .setBigContentTitle("big content title")
-                                .setSummaryText("summary text")
-                        )
-                    }
-                    "InboxStyle" -> {
-                        setStyle(
-                            NotificationCompat
-                                .InboxStyle()
-                                .addLine("add line")
-                                .setBigContentTitle("big content title")
-                                .setSummaryText("summary text")
-                        )
+                        setLargeIcon(bigBmp)
                     }
                 }
             }
-            val notiManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+            // 알림채널 빌더
             val channel = NotificationChannel(
-                channelId, // channel id
-                channelId, // channel name
+                CommonConst.noti_channelId,
+                CommonConst.noti_channelNm,
                 NotificationManager.IMPORTANCE_DEFAULT
             )
+
+            // 알림채널과 알림메시지 등록
+            val notiManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notiManager.createNotificationChannel(channel)
             notiManager.notify(0, notiBuilder.build())
         }
-        super.onMessageReceived(rMessage)
     }
 
     private fun getBitmapFromURL(src: String?): Bitmap? {
         return try {
             val url = URL(src)
             val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
-            connection.setDoInput(true)
+            connection.doInput = true
             connection.connect()
-            val input: InputStream = connection.getInputStream()
+            val input: InputStream = connection.inputStream
             BitmapFactory.decodeStream(input)
         } catch (e: IOException) {
             // Log exception
