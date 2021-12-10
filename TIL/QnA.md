@@ -3,33 +3,63 @@
 > 사소한 거라도 일단 적어두기
 
 #### `android`와 `androidx`의 차이점은?
+- `android` : original android support library, ships separately from android os
+- `androidx` : major improvement to the android library, jetpack 을 구현한 것
+- jetpack : set of libraries, tools and architectural guidance for building android apps
 <br><br>
+
 #### `android.support.v7.widget.RecyclerView`와 `androidx.recyclerview.widget.RecyclerView`의 차이점은?
+- migrated into the androidx library
 <br><br>
 
 #### payload란?
 - 특정 position의 holder를 업데이트할 때 payload값으로 구분할 수 있다.
+- CS: the part of transmitted data that is the actual intended message. [reference](https://en.wikipedia.org/wiki/Payload_(computing))
 <br><br>
 
 #### 인자에 @NonNull을 붙이는 경우는?
+- java 문법, kotlin 은 nullable 자료형이 존재
 <br><br>
+
 #### 왜 안드로이드의 리소스들은 Int값인지?
+- R.java 파일에 int로 존재
+- `gradle 7.0`, AndroidStudio@ArcticFox 에서 R.java 위치
+```
+app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar
+```
 <br><br>
+
 #### RecyclerView의 Adapter에서 `onCreate()`와`onBind()`는 언제 호출되는지?
 - `onCreate`는 ViewHolder(RecyclerView의 아이템)을 생성해서 return.<br>
 - `onBind`는 data와 ViewHolder를 연결해서 화면에 실질적으로 그려줌.
 <br><br>
+
 #### ViewHolder란?
 - ListView / RecyclerView는 inflate를 최소화하기 위해서 뷰를 재활용함. 각 뷰의 내용을 업데이트 할 때마다 `findViewById`를 호출하면 성능이 떨어지기 때문에 ItemView의 각 요소를 바로 액세스할 수 있도록 저장해두고 사용하기 위한 객체.
 <br><br>
+
 #### inflate란?
 - xml로 쓰여있는 view의 정의를 실제 view 객체로 만드는 것
 <br><br>
 
 #### coroutine이란?
+- [reference](https://kotlinlang.org/docs/coroutines-overview.html)
+- for asynchronous or non-blocking programming
+- **an instance of suspendable computation**
+- 경량 스레드
 <br><br>
 
 #### 프로세스와 스레드의 관계는?
+- Threads are tasks that share same resources. Processes are tasks which have independent resources.
+- a process can have multiple threads
+- [reference](https://stackoverflow.com/questions/44651226/difference-between-process-activity-threads-and-tasks-in-android#:~:text=Threads%20are%20tasks%20that%20share,are%20the%20instructions%20being%20executed)
+<br>
+
+- the Android system starts a new Linux process with a single thread of execution.
+- by default all components run in the same process and thread("main" thread)
+- if an application component starts and there already exists process for that application, then the component is started *within* that process and uses the same thread of execution
+- however you can arrange for different components in your application to run in separate processes
+- [reference](https://developer.android.com/guide/components/processes-and-threads)
 <br><br>
 
 #### surfaceView란?
@@ -43,11 +73,12 @@
 |method|description|
 |:---|:---|
 |`from(Context context)`|Obtains the LayoutInflater from the given context.|
-|`inflate(int resource, ViewGroup root, boolean attachToRoot)`|Inflate a new view hierarchy from the specified xml resource.|
-
+|`inflate(int resource, ViewGroup root, boolean attachToRoot)`|Inflate a new view hierarchy from the specified xml resource.
+<br><br>
 
 #### 안드로이드는 프레임워크인가, os인가?
-- Android is an open-source software stack for mobile devices that includes an operating system, middleware and key applications. So you are partially correct in considering it as a framework. - [reference](https://softwareengineering.stackexchange.com/questions/51769/is-android-a-language-or-a-framework-platform)
+- Android is an open-source software stack for mobile devices that includes an operating system, middleware and key applications. So you are partially correct in considering it as a framework.
+- [reference](https://softwareengineering.stackexchange.com/questions/51769/is-android-a-language-or-a-framework-platform)
 <br><br>
 
 #### 왜 `onStart()`없이 `onCreate()`만 있어도 잘 돌아갈까?
@@ -90,13 +121,11 @@ MyClass.myProp
 //companion object는 객체이다. 
 //클래스명으로도 접근 가능한 건 축약 표현이지, java의 static과 혼동말것!
 ```
-
 <br><br>
 
 #### kotlin에는 static method가 없다?
 - 없음
 > Note that, even though the members of companion objects look like static members in other languages, at runtime those are still instance members of real objects, and can, for example, implement interfaces. - [reference](https://kotlinlang.org/docs/object-declarations.html#companion-objects)
-
 <br><br>
 
 #### Handler란?

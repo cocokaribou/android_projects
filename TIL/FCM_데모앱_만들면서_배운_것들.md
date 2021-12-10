@@ -29,6 +29,11 @@
 - 콘솔로 메시지를 발송하면 `FirebaseMessagingService::onMessageReceived()`가 호출 안됨
 	- 콘솔로 메시지 전송할 경우, `message.notification` 값이 있는 notification message로 분류됨
 	- notification message는 *앱이 포그라운드에 있을 때만* `onMessageReceived()`를 호출
+	
+- notification과 data payload를 같이 사용할 때
+	- notification 키값이 있으면 백그라운드에서 `onMessageRecevied()` 호출 안돼서 data payload 처리 못함
+	- 해결: data payload를 intent.putExtra()에 넣어서 activity 단에서 처리
+	- reference [🔗](https://royzero.tistory.com/61)
 
 - 알림메시지 스타일 커스텀하기
 	- data message로 데이터 payload에 따라서 알림채널 생성
