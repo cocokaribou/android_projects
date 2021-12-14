@@ -8,8 +8,9 @@ import com.pionnet.overpass.R
 import com.pionnet.overpass.databinding.DialogCustomBinding
 
 /**
- * - 커스텀 다이얼로그뷰
- * - 웹 알럿, 네이티브 알럿
+ * CustomDialog
+ * - 자주, SIV, DU와 동일한 UI의 커스텀 다이얼로그
+ * - 빌더패턴 적용
  */
 class CustomDialog : DialogFragment(R.layout.dialog_custom) {
 

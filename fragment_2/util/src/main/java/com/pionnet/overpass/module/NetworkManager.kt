@@ -7,7 +7,7 @@ import android.os.Build
 
 /**
  * 네트워크 관리자 모듈
- * - application 단에서 init(context)로 초기화
+ * - checkNetworkAvailable 함수 인자로 OnNetworkListener 구현해서 네트워크 연결여부 확인
  */
 object NetworkManager {
     interface OnNetworkListener {

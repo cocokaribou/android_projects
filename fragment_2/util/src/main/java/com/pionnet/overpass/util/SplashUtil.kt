@@ -9,11 +9,11 @@ import java.io.File
 import java.security.MessageDigest
 
 /**
- * Splash에서 쓰이는 함수들
- * - TODO 사용시 입력해야될 사항, [checkWhiteLink], [checkBlockLink]
-
-
- * 화이트링크 처리
+ * checkWhiteLink
+ * - 화이트링크 체크
+ * @param url : 검사대상이 되는 url
+ * @param whiteList : 화이트링크 리스트
+ * @return true -> url로 이동 || false -> url로 이동안함
  */
 fun checkWhiteLink(url: String, whiteList: List<String>): Boolean {
     var isWhiteDomain = false
@@ -28,7 +28,11 @@ fun checkWhiteLink(url: String, whiteList: List<String>): Boolean {
 }
 
 /**
- * 블락링크 처리
+ * checkBlockLink
+ * - 블락링크 체크
+ * @param url : 검사대상이 되는 url
+ * @param blockList : 블락링크 리스트
+ * @return false -> url로 이동 || true -> url로 이동안함
  */
 fun checkBlockLink(url: String, blockList: List<String>): Boolean {
     var isBlockDomain = false
@@ -43,7 +47,7 @@ fun checkBlockLink(url: String, blockList: List<String>): Boolean {
 }
 
 /**
- * 루팅 체크
+ * checkRooting
  * @return false -> 앱 실행시키기 || true -> 앱 종료시키기
  */
 fun checkRooting(): Boolean {
@@ -75,7 +79,11 @@ fun checkRooting(): Boolean {
 }
 
 /**
- * 해시코드 생성
+ * getApplicationSignature
+ * - 해시코드 생성
+ * @param context : 앱 컨텍스트
+ * @param packageName : 앱 패키지명
+ * @return List<String> : 해시 리스트, 비어있지 않을시 0번째 인덱스값 사용
  */
 fun getApplicationSignature(context: Context, packageName: String): List<String> {
     val signatureList: List<String>
@@ -148,7 +156,9 @@ private fun bytesToHex(bytes: ByteArray): String {
 
 
 /**
- * 프로젝트 앱 버전
+ * getAppVersion
+ * @param context : 앱 컨텍스트
+ * @return String : 앱 versionName
  */
 @Throws(PackageManager.NameNotFoundException::class)
 fun getAppVersion(context: Context): String {

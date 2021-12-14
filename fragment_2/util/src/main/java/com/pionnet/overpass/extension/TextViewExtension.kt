@@ -22,7 +22,7 @@ fun TextView.setBoldText() {
 
 /**
  * TextView 가운데 줄 처리
- * @param size : "원" 있을 때 원은 글자크기 조절 가능
+ * @param size : 문자열에 "원" 있을 때 원은 글자크기 조절 가능
  * @param isExist : "원" 포함유무
  */
 fun TextView.setCancelStroke(size: Int, isExist: Boolean) {

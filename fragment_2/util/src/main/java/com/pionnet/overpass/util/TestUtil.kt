@@ -7,8 +7,11 @@ import java.io.IOException
 import java.io.InputStreamReader
 
 /**
- * Test Util
- * - 테스트시 사용하는 유틸
+ * getJsonFileToString
+ * - api 없이 테스트시 사용
+ * @param filePath : 하드코딩된 .json 파일
+ * @param context : 앱 컨텍스트
+ * @return String : 문자열화된 json
  */
 
 fun getJsonFileToString(filePath: String, context: Context): String {

@@ -5,17 +5,15 @@ import android.util.Log
 import com.pionnet.overpass.BuildConfig
 
 /**
- * 로그 프린터 모듈
+ * LogHelper
  * - 디버그에서만 출력됨
- * - application 단에서 initTag(tagString)로 디폴트 태그 초기화
+ * - 단일 인자로도 사용가능
+ * - application 단에서 initTag(tag : String)로 디폴트 태그 초기화
  */
 object LogHelper {
     private var TAG = "LogHelper"
     private val isDebug = BuildConfig.DEBUG
 
-    /**
-     * Tag Init
-     */
     fun initTag(tag: String) {
         TAG = tag
     }

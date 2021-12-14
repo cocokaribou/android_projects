@@ -4,6 +4,11 @@ import android.app.Activity
 import android.content.Context
 import android.util.DisplayMetrics
 
+/**
+ * getDisplaySize
+ * @param context : 앱 컨텍스트
+ * @return DisplayMetrics
+ */
 fun getDisplaySize(context: Context):DisplayMetrics{
     var displayMetrics = DisplayMetrics()
     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {

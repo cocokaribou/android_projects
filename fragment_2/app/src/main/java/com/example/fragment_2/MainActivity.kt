@@ -1,9 +1,7 @@
 package com.example.fragment_2
 
 import com.pionnet.overpass.module.LogHelper
-import com.pionnet.overpass.module.PaymentModule
 import com.pionnet.overpass.module.NetworkManager
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.os.bundleOf

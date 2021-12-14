@@ -9,7 +9,8 @@ import android.view.animation.Transformation
 import android.widget.LinearLayout
 
 /**
- * linear layout에서 weight 값 적용
+ * setLayoutWeight
+ * - LinearLayout에서 weight 값 적용
  * @param weight : 가중치
  */
 fun View.setLayoutWeight(weight: Float) {
@@ -19,7 +20,8 @@ fun View.setLayoutWeight(weight: Float) {
 }
 
 /**
- * 상, 하, 좌, 우 마진
+ * setMargin
+ * - View의 상, 하, 좌, 우 마진
  */
 fun View.setMargin(left: Float? = null, top: Float? = null, right: Float? = null, bottom: Float? = null) {
     layoutParams<ViewGroup.MarginLayoutParams> {
@@ -35,7 +37,9 @@ inline fun <reified T : ViewGroup.LayoutParams> View.layoutParams(block: T.() ->
 }
 
 /**
- * 뷰 높이값 지정하기
+ * setDynamicHeight
+ * - View 높이값 코드로 지정
+ * @param value : height (dp)
  */
 fun View.setDynamicHeight(value: Float) {
     val lp = layoutParams
@@ -44,7 +48,9 @@ fun View.setDynamicHeight(value: Float) {
 }
 
 /**
- * 뷰 너비값 지정하기
+ * setDynamicWidth
+ * - View 너비값 코드로 지정
+ * @param value : width (dp)
  */
 fun View.setDynamicWidth(value: Float) {
     val lp = layoutParams
@@ -53,14 +59,16 @@ fun View.setDynamicWidth(value: Float) {
 }
 
 /**
- * dp -> px  코틀린 ViewUtil 에 존재함
+ * dpToPx
+ * - dp -> px  코틀린 ViewUtil 에 존재함
  */
 fun View.dpToPx(dp: Float): Int = context.dpToPx(dp)
 fun Context.dpToPx(dp: Float): Int = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics).toInt()
 
 
 /**
- * 레이아웃 확장
+ * expand
+ * - View 확장
  */
 fun View.expand() {
     this.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
@@ -89,7 +97,8 @@ fun View.expand() {
 }
 
 /**
- * 레이아웃 확장된 것 닫기
+ * collapse
+ * - 확장된 View 축소
  */
 fun View.collapse() {
     val initialHeight: Int = this.measuredHeight

@@ -8,6 +8,7 @@ import java.util.*
 /**
  * 날짜 포맷 출력
  * @param format : 날짜 포맷
+ * @return String: 포맷된 현재 날짜
  */
 fun Date.getFormattedDate(format: String): String {
     return SimpleDateFormat(format).format(this)
@@ -19,7 +20,7 @@ fun Date.getFormattedDate(format: String): String {
  * @param oldDate : 계산전 날짜 String (ex: "20211125") // 입력안할시 현재 날짜 디폴트
  * @param addDate : 계산할 일수 Int
  *
- * @return String : 계산된 날짜 문자열
+ * @return String : 포맷된 날짜 문자열
  */
 fun getAddedDate(format: String, oldDate: String? = null, addDate: Int): String {
     val formatter = SimpleDateFormat(format)
@@ -37,6 +38,7 @@ fun getAddedDate(format: String, oldDate: String? = null, addDate: Int): String 
 
 /**
  * 현재 시간 반환
+ * @return : 포맷된 현재 날짜 문자열
  */
 fun getCurrentTime(): String {
     val now: Long = System.currentTimeMillis()
@@ -48,7 +50,7 @@ fun getCurrentTime(): String {
 /**
  * 가격에 천 단위로 반점
  * @param value : 물건 가격
- * @return ex) value : 10000 -> 출력값 : 10,000
+ * @return ex) 포맷된 가격 문자열 value : 10000 -> 출력값 : 10,000
  */
 fun getFormattedPrice(value: String): String {
     if (value.isEmpty()) return ""
@@ -61,7 +63,7 @@ fun getFormattedPrice(value: String): String {
 /**
  * 숫자를 만 단위 문자열로 출력
  * @param value : Long
- * @return ex) value : 23400 -> 출력값 : 2만+
+ * @return ex) 문자열 숫자 문자열 value : 23400 -> 출력값 : 2만+
  */
 fun getFormattedProductCnt(value: Long): String {
     return when {
