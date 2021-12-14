@@ -3,6 +3,22 @@
     <string name="tv_title">Native Login</string>
     <string name="tv_id">ID</string>
     <string name="tv_pw">PW</string>
-    <string name="facebook_login">Facebook</string>
-    <string name="google_login">Google</string>
+
+    <!-- login page -->
+    <string name="et_id_hint">아이디</string>
+    <string name="et_pw_hint">비밀번호</string>
+    <string name="autologin">자동로그인</string>
+    <string name="saveid">아이디 저장</string>
+    <string name="signin">회원가입</string>
+    <string name="login">로그인</string>
+
+    <!-- 다이얼로그 -->
+    <string name="confirm">확인</string>
+    <string name="alert_empty_input">ID와 패스워드를 입력하세요</string>
+
+    <!-- facebook app id -->
+    <string name="facebook_app_id">1026368557920890</string>
+    <string name="fb_login_protocol_scheme">fb1026368557920890</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

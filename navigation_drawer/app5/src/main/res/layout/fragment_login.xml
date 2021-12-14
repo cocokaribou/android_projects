@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fdffde"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="#fdffde">
+
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
@@ -17,90 +19,165 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/view_login"
         android:layout_width="350dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="60dp"
+        android:layout_height="450dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/border_rounded"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title">
 
-    <TextView
-        android:id="@+id/tv_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
-        android:text="@string/tv_id"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="@id/view_login"
-        app:layout_constraintTop_toTopOf="@id/view_login" />
+        <EditText
+            android:id="@+id/et_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_gray"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="@string/et_id_hint"
+            android:inputType="textVisiblePassword"
+            android:maxLines="1"
+            android:paddingVertical="10dp"
+            android:paddingStart="10dp"
+            android:textColor="#6d6d6d"
+            android:textCursorDrawable="@drawable/cursor"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/et_id"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:maxLines="1"
-        app:layout_constraintBottom_toBottomOf="@id/tv_id"
-        app:layout_constraintStart_toEndOf="@id/tv_id"
-        app:layout_constraintEnd_toStartOf="@id/btn_login"/>
+        <ImageView
+            android:id="@+id/iv_id_delete"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/et_icon_delete"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/et_id"
+            app:layout_constraintEnd_toEndOf="@id/et_id"
+            app:layout_constraintTop_toTopOf="@id/et_id" />
 
-    <TextView
-        android:id="@+id/tv_pw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tv_pw"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="@id/tv_id"
-        app:layout_constraintTop_toBottomOf="@id/tv_id"
-        android:layout_marginTop="20dp"/>
+        <EditText
+            android:id="@+id/et_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_gray2"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="@string/et_pw_hint"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingVertical="10dp"
+            android:paddingStart="10dp"
+            android:textColor="#6d6d6d"
+            android:textCursorDrawable="@drawable/cursor"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/et_id" />
 
-    <EditText
-        android:id="@+id/et_pw"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="@id/tv_pw"
-        app:layout_constraintStart_toStartOf="@id/et_id" />
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:backgroundTint="#c9bb73"
-        android:text="@string/login"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@id/et_id"
-        app:layout_constraintEnd_toEndOf="@id/view_login"
-        app:layout_constraintTop_toTopOf="@id/et_id" />
+        <ImageView
+            android:id="@+id/iv_pw_delete"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/et_icon_delete"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/et_pw"
+            app:layout_constraintEnd_toEndOf="@id/et_pw"
+            app:layout_constraintTop_toTopOf="@id/et_pw" />
 
-    <Button
-        android:id="@+id/btn_facebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/facebook_login"
-        android:textAllCaps="false"
-        android:backgroundTint="@color/com_facebook_blue"
-        app:layout_constraintStart_toStartOf="@id/view_login"
-        app:layout_constraintEnd_toStartOf="@id/btn_google"
-        app:layout_constraintTop_toBottomOf="@id/tv_pw"
-        app:layout_constraintBottom_toBottomOf="@id/view_login"
-        />
 
-    <Button
-        android:id="@+id/btn_google"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/google_login"
-        android:textAllCaps="false"
-        android:backgroundTint="@color/google_plus_brand_color"
-        app:layout_constraintEnd_toEndOf="@id/view_login"
-        app:layout_constraintStart_toEndOf="@id/btn_facebook"
-        app:layout_constraintBottom_toBottomOf="@id/btn_facebook" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/row_autologin_saveid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/et_pw">
+
+            <CheckBox
+                android:id="@+id/cb_autologin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/selector_checkbox"
+                android:buttonTint="#2b2b2b"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_autologin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/autologin"
+                android:textColor="#2b2b2b"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cb_autologin"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/cb_saveid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:button="@drawable/selector_checkbox"
+                android:buttonTint="#2b2b2b"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                app:layout_constraintStart_toEndOf="@id/tv_autologin"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_saveid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/saveid"
+                android:textColor="#2b2b2b"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cb_saveid"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#2b2b2b"
+            android:text="@string/login"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/row_autologin_saveid"
+            tools:layout_editor_absoluteX="20dp" />
+
+        <TextView
+            android:id="@+id/tv_signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signin"
+            android:textColor="#6d6d6d"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_login" />
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/btn_facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/view_login"
+            app:layout_constraintEnd_toEndOf="@id/view_login"
+            app:layout_constraintStart_toStartOf="@id/view_login" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
