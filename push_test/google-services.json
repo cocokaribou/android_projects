@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "443046272165",
+    "project_id": "pionnet-test",
+    "storage_bucket": "pionnet-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443046272165:android:b7fcc5ca7b076b6d3e814c",
+        "android_client_info": {
+          "package_name": "kr.co.pionnet.SampleProject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443046272165-8rmja939dndc30712jgkhg0pun8p5hso.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAavl08CON79AbAJBESSeeQKOM5RrLZ9kQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443046272165-8rmja939dndc30712jgkhg0pun8p5hso.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "443046272165-9beka07r9ugnb3238l5i9kckvca6t9st.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "kr.co.pionnet.SampleProject"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
