@@ -150,3 +150,16 @@ MyClass.myProp
 - Android SDK : Android Development, Necessary for Android, Android Studio
 - React Native : Learn once write everywhere, Cross platform, Javascript
 - Both : Frameworks(Full Stack), Cross-Platform Mobile Development
+
+
+#### add fragment on activity VS add fragment on another fragment
+
+- utilize one fragment container
+```kotlin
+//fragment
+(activity as MainActivity).supportFragmentManager.commit {
+	setReorderingAllowed(true)
+    add<StoreListFragment>(R.id.container, getString(R.string.storeListFragment))
+    addToBackStack(null) // add to stack
+}
+```

@@ -1,8 +1,20 @@
 ## Fragment Lifecycle
+```
+Activity.onCreate()
+Fragment.onInflate()
+Fragment.onAttach()
+Activity.onAttachFragment()
+Fragment.onCreate()
+Fragment.onCreateView()
+Fragment.onActivityCreated()
+Fragment.onViewStateRestored()
+
+// onViewCreated()는 어디에?
+```
+
+
+### `addonBackStackChangedListener`
 a listener for changes to the fragment back stack.
-
-
-### 등록해서 사용하기
 ```
 supportFragmentManager.addOnBackStackChangedListener {
             val fragmentsize = supportFragmentManager.fragments.size

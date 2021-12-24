@@ -2,7 +2,7 @@
 `android.webkit.WebView`<br>
 웹페이지를 보여주는 뷰. 
 
-### Manifest
+### AndroidManifest
 - 매니페스트에 인터넷 권한 추가
 `<use-permission android:name="android.permission.INTERNET" />`
 - `http` 프로토콜에 접속하기 위해 매니페스트의 `<application>` 에 `android:usesCleartextTraffic="true"`로 설정
@@ -35,9 +35,11 @@ AndroidManifest.xml
 
 ### WebViewClient
 - WebView 를 통해 html 링크를 클릭하거나 링크에 따른 내용, 에러, 폼 등록의 렌더링
-<br>
-
-[reference](https://m.blog.naver.com/PostView.nhn?blogId=credenda&logNo=80120157762&proxyReferer=https:%2F%2Fwww.google.com%2F)
+- webview에서 웹뷰클라이언트를 등록해줘야 외부 브라우저로 뜨지 않음
+- [reference](https://m.blog.naver.com/PostView.nhn?blogId=credenda&logNo=80120157762&proxyReferer=https:%2F%2Fwww.google.com%2F)
+- `shouldOverrideUrlLoading()`
+	- return true : 내부처리 진행하고 url 로드를 *중단함*
+	- return false : 평소처럼 url을 로드함
 
 
 ### Hybrid App

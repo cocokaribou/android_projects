@@ -7,7 +7,19 @@
 - Acticity Context : Activity 생명주기<br>
 `this`는 activity context를 가리킴
 
+
+|:------|:---|
+| `this` | activity context |
+|`getContext()`| activity context |
+| `getApplication()` | application context |
+| `getApplicationContext()` | application context |
+
 ## Context type
 ![image](/TIL/resources/context.png)
 
 [reference](https://stackoverflow.com/questions/3572463/what-is-context-on-android)
+
+## Application Context는 잘 쓰이지 않는다?
+- 액티비티가 수행하는 모든 걸 지원하는 완전한 컨텍스트가 아님
+- 이 컨텍스트로 수행하려는 작업은 대부분 GUI 관련된 에러로 실패한다
+- [reference](https://onlyfor-me-blog.tistory.com/235)
