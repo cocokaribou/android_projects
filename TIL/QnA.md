@@ -73,7 +73,7 @@ app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.j
 |method|description|
 |:---|:---|
 |`from(Context context)`|Obtains the LayoutInflater from the given context.|
-|`inflate(int resource, ViewGroup root, boolean attachToRoot)`|Inflate a new view hierarchy from the specified xml resource.
+|`inflate(int resource, ViewGroup root, boolean attachToRoot)`|Inflate a new view hierarchy from the specified xml resource.|
 <br><br>
 
 #### 안드로이드는 프레임워크인가, os인가?

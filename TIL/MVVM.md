@@ -16,4 +16,4 @@
 ## structure
 ![image](/TIL/resources/mvvm-architecture.png)
 
-#### see also: [ListAdapter](""), [LiveData]("") etc.
+#### see also: [ListAdapter](recycler_view.md#listAdapter) , [LiveData]("") etc.

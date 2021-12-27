@@ -26,12 +26,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button testBtn = (Button)findViewById(R.id.btn);
     btn.setOnClickListener(this);
 
-	@Override
-	public void onClick(View v){
-		if(v.getId == R.id.btn){
-			/* logic here */
-		}
-	}
+    @Override
+    public void onClick(View v){
+        if(v.getId == R.id.btn){
+        /* logic here */
+        }
+    }
 }
 ```
 
@@ -47,11 +47,12 @@ Button.onClickListener myListener = new View.OnClickListener(){
 }
 findViewById(R.id.btn).setOnClickListener(myListener);
 
-Button testBtn = (Button)findViewById(R.id.btn);
-testBtn.setOnClickListener(new View.OnClickListener(){
-
-
 ```
 
+### 5?. lambda
+```kotlin
+Button.onClickListener {
+	/* logic here */
+}
 ```
 

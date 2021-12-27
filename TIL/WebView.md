@@ -52,6 +52,7 @@ AndroidManifest.xml
 
 
 ## 웹에서 데이터 받아오기
+함수의 실행 후 결과값을 받을 방법이 파편화되어있다.<br>
 
 ### Android Bridge
 - `@JavascriptInterface` 어노테이션을 붙인 뒤 함수 생성

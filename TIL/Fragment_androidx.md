@@ -33,6 +33,21 @@ supportFragmentManager.beginTransaction()
 	- 인터페이스 생성
 	- 전달하는 곳에 리스너 초기화하고 메서드 선언만 함
 	- 전달 받는 곳에서 리스너 구현하고 implements 메서드 구현함
+- bundle
+```kotlin
+// fragment a
+val payload = "test"
+val bundle = bundleOf("bundle_key" to payload)
+supportFragmentManager.commit{
+    setReorderingAllowed(true)
+    add<RootFragment>(R.id.fragment_container_view, args=bundle)
+}
+
+// fragment b
+val initString = requireArguments().getString("bundle_key")
+
+``` 
+
 - RxJava2 이용한 이벤트 버스
 - 액티비티 단에서 데이터 저장
 - [reference](https://www.charlezz.com/?p=1062)
