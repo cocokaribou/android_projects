@@ -56,3 +56,7 @@ Button.onClickListener {
 }
 ```
 
+## onClickListener vs onTouchListener
+|onClickListener|onTouchListener|
+|:---|:---|
+|ex: Button, ImageButton|ex: get coordinates of screen where you touch exactly|

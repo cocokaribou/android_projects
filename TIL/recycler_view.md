@@ -8,6 +8,30 @@ provides reusable viewHolder to display data <br>
 	- `onCreateViewHolder()` : 뷰홀더 생성
 	- `onBindViewHolder()` : 뷰홀더 그려줌
 
+### notify methods
+
+```
+void notifyDataSetChanged()
+// 모든 자료를 다시 바인딩, 모든 View를 다시 그림
+// bad practice!
+
+void notifyItemChanged(int position, Object payload)
+// position : 변경된 아이템의 위치
+// payload : (optional) null일 경우 모든 업데이트로 식별
+// 아이템이 삽입,삭제되는 이벤트에는 반응하지 않음
+
+
+void notifyItemInserted(int position)
+// position : data set에 새로 삽입된 아이템 위치
+// 구조변경되는 이벤트
+
+
+void notifyItemMoved(int fromPosition, int toPosition)
+// fromPosition : 아이템의 이전 위치값
+// toPositino : 아이템의 새로운 위치값
+// 구조변경되는 이벤트 (ex: drag & drop)
+```
+
 ### RecyclerView vs ListView
 ||RecyclerView|ListView|
 |:---|:------|:------|
@@ -19,7 +43,7 @@ provides reusable viewHolder to display data <br>
 |ClickDetection|개별 터ㅣ 이벤트 관리하지만 기능 내장 x|`AdapterView.OnItemClickListener` 목록의 개별 항목에 대한 클릭이벤트 처리하는 인터페이스|
 
 
-### RecyclerView.Adapter vs ListAdapter
+### RecyclerView.Adapter vs <a href="listAdapter">ListAdapter</a>
 - ListAdapter is a extension of RecyclerView.Adapter
 - ListAdapter offers `DiffUtil`, `submitList(list)`
 - 
