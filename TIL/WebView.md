@@ -57,10 +57,21 @@ AndroidManifest.xml
 ### Android Bridge
 - `@JavascriptInterface` 어노테이션을 붙인 뒤 함수 생성
 - 웹에서 협약된 이름의 자바스크립트 함수를 실행하면 호출됨
-```javascript
-window.location = “sample://action?argument1=2&argument2=2”
+```kotlin
+// custom Webview class
+settings.javaScriptEnabled = true
+addJavascriptInterface(JsInterface(), "jsInterface") // 사전에 협약된 이름
 ```
-
+```kotlin
+// javascript interface class
+class JsInterface {
+	@JavascriptInterface
+	@Throws(UnsupportedEncodingException::class)
+	fun loginAuth(mbrNo: String, encMbrNo: String) {
+		// called from web
+	}
+}
+```
 
 ### scheme
 - 웹단 `<a>`태그의 `href` 요소를 처리
@@ -80,6 +91,16 @@ public boolean shouldOverrideUrlLoading(WebView view, String url) {
 }
 
 ```
+## 웹으로 데이터 보내기
+### `WebView.loadUrl()`
+- 웹뷰에서 javascript 로드
+- 안드로이드에서 자바스크립트 호출할 때 *비UI스레드*에서 호출됨 -> `View.post(Runnable)`로 UI 도구키트를 UI 스레드에서
+```kotlin
+val receiveAccessAuthUrl = String.format("javascript:com.my.page.receiveAccessAuth('%s)", accessYn)
+webview.post(Runnable { webview.loadUrl(receiveAccessAuthUrl) })
+```
+- [reference](http://zeany.net/10)
+- [reference](https://aorica.tistory.com/106)
 
 
 ## `android.webkit`

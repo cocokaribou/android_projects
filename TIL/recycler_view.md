@@ -50,3 +50,7 @@ void notifyItemMoved(int fromPosition, int toPosition)
 |Recycler Adapter| ListAdapter|
 |:---|:---|
 |best for displaying static list|best for displaying dynamic list|
+
+### RecyclerView within ConstraintLayout does not scroll
+1. `android:layout_height:0dp`
+2. set `app:layout_constraintBottom_toBottomOf="parent"`
