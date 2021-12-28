@@ -10,7 +10,7 @@ provides reusable viewHolder to display data <br>
 
 ### notify methods
 
-```
+```kotlin
 void notifyDataSetChanged()
 // 모든 자료를 다시 바인딩, 모든 View를 다시 그림
 // bad practice!
