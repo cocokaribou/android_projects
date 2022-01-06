@@ -10,10 +10,19 @@ object Homework {
      * fib(n) = fib(n-2) + fib(n-1)
      */
     fun fib(n: Int): Long {
-        if (n <= 1) {
+        if(n == 0 || n ==1) {
             return n.toLong()
         }
-        return fib(n - 1) + fib(n - 2)
+        var a = 0L
+        var b = 1L
+        var c = 1L
+
+        (1..n-1).forEach { _ ->
+            c = a+b
+            a = b
+            c = a
+        }
+        return c
     }
 
     /**
