@@ -29,7 +29,8 @@ class UdpClientThread(
 
             socket?.let { socket ->
                 // send request
-                var buffer = byteArrayOf()
+                var buffer = ByteArray(256)
+                Logger("$buffer")
                 var packet = DatagramPacket(buffer, buffer.size, address, dstPort)
                 socket.send(packet)
 
@@ -38,8 +39,8 @@ class UdpClientThread(
                 // get response
                 packet = DatagramPacket(buffer, buffer.size)
                 socket.receive(packet)
-                val msg = "${packet.data}"
 
+                val msg = String(packet.data)
                 handler.sendMessage(Message.obtain(handler, UdpClientHandler.UPDATE_MSG, msg))
             }
 

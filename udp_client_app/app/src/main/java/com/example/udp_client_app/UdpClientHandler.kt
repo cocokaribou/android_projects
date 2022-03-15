@@ -16,10 +16,10 @@ class UdpClientHandler : Handler(Looper.myLooper()!!) {
     override fun handleMessage(msg: Message) {
         when (msg.what) {
             UPDATE_STATE -> {
-                MainActivity.instance.updateState(msg.obj as String)
+                MainActivity.instance.updateState(msg.obj.toString())
             }
             UPDATE_MSG -> {
-                MainActivity.instance.updateReceivedMsg(msg.obj as String)
+                MainActivity.instance.updateReceivedMsg(msg.obj.toString())
             }
             UPDATE_END -> {
                 MainActivity.instance.clientEnd()

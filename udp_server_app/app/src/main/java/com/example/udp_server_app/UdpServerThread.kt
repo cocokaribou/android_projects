@@ -2,6 +2,7 @@ package com.example.udp_server_app
 
 import java.io.IOException
 import java.net.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class UdpServerThread(private val serverPort: Int) : Thread() {
@@ -19,7 +20,7 @@ class UdpServerThread(private val serverPort: Int) : Thread() {
             MainActivity.instance.updateState("UDP Server now running")
 
             while (running) {
-                var buffer = byteArrayOf()
+                var buffer = ByteArray(256)
 
                 // receive request
                 socket?.let { socket ->
@@ -27,13 +28,13 @@ class UdpServerThread(private val serverPort: Int) : Thread() {
                     socket.receive(packet) // block the program flow
 
                     // send the response to the client at "address" and "port"
-                    val address: InetAddress = packet.address
+                    val address = packet.address
                     val port = packet.port
 
                     MainActivity.instance.updatePrompt("Request from $address:$port\n")
 
-                    val date = Date().toString()
-                    buffer = date.toByteArray()
+                    val date = "${SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(Date())}"
+                    buffer = date.toByteArray(Charsets.UTF_8) // java String.getBytes()
                     packet = DatagramPacket(buffer, buffer.size, address, port)
                     socket.send(packet)
                 }
