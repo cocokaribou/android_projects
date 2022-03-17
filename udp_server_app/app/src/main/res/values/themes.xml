@@ -13,4 +13,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    
+    <style name="default_button" parent="TextAppearance.AppCompat.Button">
+        <item name="backgroundTint">#2b2b2b</item>
+        <item name="android:textColor">#fff</item>
+    </style>
 </resources>

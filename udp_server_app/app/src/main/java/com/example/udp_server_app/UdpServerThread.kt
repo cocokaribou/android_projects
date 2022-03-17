@@ -1,5 +1,6 @@
 package com.example.udp_server_app
 
+import kotlinx.coroutines.*
 import java.io.IOException
 import java.net.*
 import java.text.SimpleDateFormat
@@ -14,10 +15,10 @@ class UdpServerThread(private val serverPort: Int) : Thread() {
         running = true
 
         try {
-            MainActivity.instance.updateState("Starting UDP Server")
+            ServerActivity.instance.updateState("Starting UDP Server")
             socket = DatagramSocket(serverPort)
 
-            MainActivity.instance.updateState("UDP Server now running")
+            ServerActivity.instance.updateState("UDP Server now running")
 
             while (running) {
                 var buffer = ByteArray(256)
@@ -31,7 +32,7 @@ class UdpServerThread(private val serverPort: Int) : Thread() {
                     val address = packet.address
                     val port = packet.port
 
-                    MainActivity.instance.updatePrompt("Request from $address:$port\n")
+                    ServerActivity.instance.updatePrompt("Request from $address:$port\n")
 
                     val date = "${SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(Date())}"
                     buffer = date.toByteArray(Charsets.UTF_8) // java String.getBytes()
@@ -47,8 +48,14 @@ class UdpServerThread(private val serverPort: Int) : Thread() {
             Logger("IOException ${e.stackTrace}")
         } finally {
             socket?.let {
+//                GlobalScope.launch(Dispatchers.IO) {
+//                    coroutineScope {
+//                        delay(4000L)
+//                        it.close()
+//                        Logger("socket closed after 4 sec")
+//                    }
+//                }
                 it.close()
-                Logger("Socket closed")
             }
         }
     }

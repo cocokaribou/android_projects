@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">udp_server_app</string>
+    
+    <string name="home">다수결 데스게임</string>
+    <string name="set_profile">프로필 만들기</string>
+    <string name="make_room">방 만들기</string>
+    <string name="enter_room">방 입장하기</string>
 </resources>
