@@ -1,8 +1,10 @@
-package com.example.udp_server_app
+package com.example.udp_server_app.ui.server
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import com.example.udp_server_app.Logger
+import com.example.udp_server_app.R
 import java.net.*
 
 class ServerActivity : AppCompatActivity() {
@@ -102,6 +104,11 @@ class ServerActivity : AppCompatActivity() {
         } catch (e: UnknownHostException) {
             false
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Logger("ServerActivity destroyed!")
     }
 }
 

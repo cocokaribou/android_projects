@@ -1,6 +1,6 @@
-package com.example.udp_server_app
+package com.example.udp_server_app.ui.server
 
-import kotlinx.coroutines.*
+import com.example.udp_server_app.Logger
 import java.io.IOException
 import java.net.*
 import java.text.SimpleDateFormat

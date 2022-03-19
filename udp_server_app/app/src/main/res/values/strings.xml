@@ -1,8 +1,18 @@
 <resources>
     <string name="app_name">udp_server_app</string>
-    
+
+    <!--home-->
     <string name="home">다수결 데스게임</string>
     <string name="set_profile">프로필 만들기</string>
     <string name="make_room">방 만들기</string>
     <string name="enter_room">방 입장하기</string>
+
+    <!--profile-->
+    <string name="save">저장</string>
+    <string name="profile_saved">프로필이 저장되었습니다.</string>
+
+    <!--server-->
+
+    <!--client-->
+    <string name="connect">연결</string>
 </resources>

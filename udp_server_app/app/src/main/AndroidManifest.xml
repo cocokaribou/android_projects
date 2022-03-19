@@ -12,14 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Udp_server_app">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".ServerActivity"/>
+        <activity android:name=".ui.server.ServerActivity"/>
+        <activity android:name=".ui.client.ClientActivity"/>
     </application>
 
 </manifest>
