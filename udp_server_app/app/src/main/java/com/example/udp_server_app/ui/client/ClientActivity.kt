@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.example.udp_server_app.Logger
 import com.example.udp_server_app.R
 
@@ -68,5 +69,13 @@ class ClientActivity : AppCompatActivity() {
     override fun onDestroy() {
         Logger("ClientActivity destroyed!")
         super.onDestroy()
+    }
+
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+            .setMessage(getString(R.string.confirm_leave_room))
+            .setPositiveButton(getString(R.string.confirm)) { _, _ -> super.onBackPressed() }
+            .setNegativeButton(getString(R.string.cancel)) { _, _ -> }
+            .show()
     }
 }

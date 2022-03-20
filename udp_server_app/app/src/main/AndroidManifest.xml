@@ -3,7 +3,7 @@
     package="com.example.udp_server_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!--app running in the background for long time-->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,6 +21,9 @@
         </activity>
         <activity android:name=".ui.server.ServerActivity"/>
         <activity android:name=".ui.client.ClientActivity"/>
+        <service android:name=".ui.server.TcpServerService"
+            android:enabled="true"
+            android:exported="false"/>
     </application>
 
 </manifest>

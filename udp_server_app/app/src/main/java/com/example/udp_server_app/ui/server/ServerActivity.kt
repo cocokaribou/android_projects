@@ -1,8 +1,12 @@
 package com.example.udp_server_app.ui.server
 
+import android.content.DialogInterface
+import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.example.udp_server_app.Logger
 import com.example.udp_server_app.R
 import java.net.*
@@ -18,7 +22,7 @@ class ServerActivity : AppCompatActivity() {
     lateinit var tvPrompt: TextView
 
     companion object {
-        const val UdpServerPort = 4445
+        const val PORT = 4445
         lateinit var instance: ServerActivity
     }
 
@@ -28,17 +32,23 @@ class ServerActivity : AppCompatActivity() {
 
         instance = this
 
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(Intent(applicationContext, TcpServerService::class.java))
+        } else {
+            startService(Intent(applicationContext, TcpServerService::class.java))
+        }
+
         tvIp = findViewById(R.id.tv_ip)
         tvPort = findViewById(R.id.tv_port)
         tvState = findViewById(R.id.tv_state)
         tvPrompt = findViewById(R.id.tv_prompt)
 
         tvIp.text = getIpAddress()
-        tvPrompt.text = UdpServerPort.toString()
+        tvPrompt.text = PORT.toString()
     }
 
     override fun onStart() {
-        udpServerThread = UdpServerThread(UdpServerPort)
+        udpServerThread = UdpServerThread(PORT)
         udpServerThread?.start()
         super.onStart()
     }
@@ -106,8 +116,17 @@ class ServerActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+            .setMessage(getString(R.string.confirm_remove_room))
+            .setPositiveButton(getString(R.string.confirm)) { _, _ -> super.onBackPressed() }
+            .setNegativeButton(getString(R.string.cancel)) { _, _ -> }
+            .show()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        stopService(Intent(applicationContext, TcpServerService::class.java))
         Logger("ServerActivity destroyed!")
     }
 }
