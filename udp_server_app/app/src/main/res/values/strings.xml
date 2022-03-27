@@ -9,7 +9,7 @@
 
     <!--profile-->
     <string name="real_name">실명</string>
-    <string name="save">저장</string>
+    <string name="save">프로필 저장</string>
     <string name="profile_saved">프로필이 저장되었습니다.</string>
 
     <!--server-->
