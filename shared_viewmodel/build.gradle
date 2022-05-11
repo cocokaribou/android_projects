@@ -3,8 +3,20 @@ plugins {
     id 'com.android.application' version '7.1.0' apply false
     id 'com.android.library' version '7.1.0' apply false
     id 'org.jetbrains.kotlin.android' version '1.5.30' apply false
+    id 'checkstyle'
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+task checkstyle(type: Checkstyle) {
+    description 'Check code convention'
+    group 'verification'
+    configFile file("${rootDir}/tools/sun_checks.xml")		//sun_checks.xml의 경로
+    source 'src/main/java/'                             	//검사 대상 디렉토리
+    showViolations true
+    include '**/*.kt'
+    classpath = files()
+    ignoreFailures = false
 }

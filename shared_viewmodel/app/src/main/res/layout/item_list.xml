@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="itemContent"
             type="java.lang.String" />
@@ -12,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:background="#fff">
 
         <ImageView
             android:id="@+id/iv"
@@ -27,8 +29,26 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@{itemContent}"
+            android:textColor="#000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RatingBar
+            android:id="@+id/rb"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:progressBackgroundTint="#666666"
+            android:progressTint="#FDC034"
+            android:rating="1.5"
+            android:secondaryProgressTint="#00000000"
+            android:stepSize="0.1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

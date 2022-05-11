@@ -1,4 +1,4 @@
-package com.example.shared_viewmodel
+package com.example.shared_viewmodel.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -35,6 +35,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ItemHolder>() {
                     it(item)
                 }
             }
+            itemBinding.rb.rating = 100f
         }
     }
 

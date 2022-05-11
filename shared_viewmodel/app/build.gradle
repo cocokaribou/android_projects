@@ -2,7 +2,9 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'checkstyle'
 }
+println checkstyle.toolVersion
 
 android {
     compileSdk 31
@@ -34,6 +36,13 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    lintOptions {
+        // Turns off checks for the issue IDs you specify.
+        disable 'ContentDescription', 'HardcodedText', 'GradleDependency'
+        // if set to true (default), stops the build if errors are found.
+        abortOnError false
     }
 }
 

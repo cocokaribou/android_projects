@@ -6,16 +6,17 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.shared_viewmodel.model.BaseViewModel" />
+            type="com.example.shared_viewmodel.ui.StoreSharedViewModel" />
 
         <variable
             name="listFragment"
-            type="com.example.shared_viewmodel.ListFragment" />
+            type="com.example.shared_viewmodel.ui.ListFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#fff">
 
         <EditText
             android:id="@+id/et"
@@ -23,6 +24,9 @@
             android:layout_height="50dp"
             android:maxLines="1"
             android:inputType="text"
+            android:hint="input text here"
+            android:textColorHint="#ccc"
+            android:textColor="#000"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

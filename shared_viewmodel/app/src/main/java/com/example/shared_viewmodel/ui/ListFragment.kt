@@ -1,8 +1,7 @@
-package com.example.shared_viewmodel
+package com.example.shared_viewmodel.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -10,23 +9,16 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.shared_viewmodel.R
 import com.example.shared_viewmodel.databinding.FragmentListBinding
-import com.example.shared_viewmodel.databinding.ItemListBinding
-import com.example.shared_viewmodel.model.BaseViewModel
-import com.example.shared_viewmodel.model.SubViewModel
 
 class ListFragment : Fragment() {
 
     private var binding: FragmentListBinding? = null
 
-    private val sharedViewModel: BaseViewModel by activityViewModels()
-    private val subViewModel: SubViewModel by viewModels()
+    private val storeSharedViewModel: StoreSharedViewModel by activityViewModels()
 
     private val _adapter: ListAdapter by lazy { ListAdapter() }
 
@@ -40,8 +32,10 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        storeSharedViewModel.initPageCount()
+
         binding?.apply {
-            viewModel = sharedViewModel
+            viewModel = storeSharedViewModel
             lifecycleOwner = viewLifecycleOwner
             listFragment = this@ListFragment
 
@@ -59,7 +53,7 @@ class ListFragment : Fragment() {
 
                         // set livedata
                         val inputString = et.text.toString()
-                        sharedViewModel.setStoList(inputString.split(" ").toTypedArray())
+                        storeSharedViewModel.setStoList(inputString.split(" ").toTypedArray())
 
                         return@setOnKeyListener true
                     }
@@ -68,13 +62,13 @@ class ListFragment : Fragment() {
             }
 
             // observe store list
-            sharedViewModel.stoList.observe(viewLifecycleOwner) { list ->
+            storeSharedViewModel.stoList.observe(viewLifecycleOwner) { list ->
                 _adapter.differ.submitList(list.toList())
             }
         }
 
         val clickListener : (String) -> Unit = { item ->
-            sharedViewModel.setStoContent(item)
+            storeSharedViewModel.setStoContent(item)
             goDetailFrag()
         }
         _adapter.setOnItemClickListener(clickListener)
