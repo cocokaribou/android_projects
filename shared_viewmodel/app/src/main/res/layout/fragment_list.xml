@@ -10,13 +10,21 @@
 
         <variable
             name="listFragment"
-            type="com.example.shared_viewmodel.ui.ListFragment" />
+            type="com.example.shared_viewmodel.ui.list.ListFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fff">
+
+        <ImageView
+            android:id="@+id/iv_refresh"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/refresh"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <EditText
             android:id="@+id/et"
@@ -28,7 +36,7 @@
             android:textColorHint="#ccc"
             android:textColor="#000"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/iv_refresh" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
@@ -37,8 +45,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et"
-            tools:listitem="@layout/item_list" />
+            app:layout_constraintTop_toBottomOf="@id/et" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,4 +1,4 @@
-package com.example.shared_viewmodel.ui
+package com.example.shared_viewmodel.ui.list
 
 import android.content.Context
 import android.os.Bundle
@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shared_viewmodel.R
 import com.example.shared_viewmodel.databinding.FragmentListBinding
+import com.example.shared_viewmodel.ui.StoreSharedViewModel
 
 class ListFragment : Fragment() {
 
@@ -20,7 +21,7 @@ class ListFragment : Fragment() {
 
     private val storeSharedViewModel: StoreSharedViewModel by activityViewModels()
 
-    private val _adapter: ListAdapter by lazy { ListAdapter() }
+    private val _adapter: ModulesAdapter by lazy { ModulesAdapter() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragmentBinding = FragmentListBinding.inflate(inflater, container, false)

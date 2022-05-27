@@ -6,7 +6,7 @@
     <data>
         <variable
             name="detailFragment"
-            type="com.example.shared_viewmodel.ui.DetailFragment" />
+            type="com.example.shared_viewmodel.ui.detail.DetailFragment" />
         <variable
             name="receivedString"
             type="java.lang.String" />

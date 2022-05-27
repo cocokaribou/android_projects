@@ -1,4 +1,4 @@
-package com.example.shared_viewmodel.ui
+package com.example.shared_viewmodel.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.shared_viewmodel.databinding.FragmentHomeBinding
+import com.example.shared_viewmodel.ui.MemberSharedViewModel
+import com.example.shared_viewmodel.ui.StoreSharedViewModel
 
 class HomeFragment: Fragment() {
 

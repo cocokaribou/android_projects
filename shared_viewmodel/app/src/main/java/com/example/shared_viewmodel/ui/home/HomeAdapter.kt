@@ -1,4 +1,4 @@
-package com.example.shared_viewmodel.ui
+package com.example.shared_viewmodel.ui.home
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer

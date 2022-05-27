@@ -1,4 +1,4 @@
-package com.example.shared_viewmodel.ui
+package com.example.shared_viewmodel.ui.home
 
 import androidx.lifecycle.ViewModel
 

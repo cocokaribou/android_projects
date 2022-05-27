@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.shared_viewmodel.ui.HomeFragment"
+        android:name="com.example.shared_viewmodel.ui.home.HomeFragment"
         android:label="home"
         tools:layout="@layout/fragment_home">
         <action
@@ -23,13 +23,13 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.shared_viewmodel.ui.LoginFragment"
+        android:name="com.example.shared_viewmodel.ui.login.LoginFragment"
         android:label="login"
         tools:layout="@layout/fragment_login" />
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.shared_viewmodel.ui.ListFragment"
+        android:name="com.example.shared_viewmodel.ui.list.ListFragment"
         android:label="list"
         tools:layout="@layout/fragment_list">
         <action
@@ -39,7 +39,7 @@
 
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.shared_viewmodel.ui.DetailFragment"
+        android:name="com.example.shared_viewmodel.ui.detail.DetailFragment"
         android:label="detail"
         tools:layout="@layout/fragment_detail">
         <action

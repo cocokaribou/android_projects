@@ -1,4 +1,4 @@
-package com.example.shared_viewmodel.ui
+package com.example.shared_viewmodel.ui.detail
 
 import android.content.Context
 import android.os.Bundle
@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.shared_viewmodel.MainActivity
 import com.example.shared_viewmodel.R
 import com.example.shared_viewmodel.databinding.FragmentDetailBinding
+import com.example.shared_viewmodel.ui.StoreSharedViewModel
 
 class DetailFragment : Fragment() {
 
