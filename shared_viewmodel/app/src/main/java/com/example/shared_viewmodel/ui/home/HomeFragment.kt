@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.example.shared_viewmodel.R
 import com.example.shared_viewmodel.databinding.FragmentHomeBinding
 import com.example.shared_viewmodel.ui.MemberSharedViewModel
 import com.example.shared_viewmodel.ui.StoreSharedViewModel
@@ -25,5 +27,8 @@ class HomeFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.btnGoList.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_listFragment)
+        }
     }
 }

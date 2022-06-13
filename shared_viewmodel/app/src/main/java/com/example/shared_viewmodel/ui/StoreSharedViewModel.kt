@@ -3,15 +3,21 @@ package com.example.shared_viewmodel.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.shared_viewmodel.model.MainData
 
 /**
  */
 class StoreSharedViewModel: ViewModel() {
+    private val _mainList = MutableLiveData<List<MainData>>()
+    val mainList : LiveData<List<MainData>> = _mainList
 
-    private val _stoList = MutableLiveData<Array<String>>()
-    val stoList : LiveData<Array<String>> = _stoList
+    fun setMainList(mainList: List<MainData>) {
+        _mainList.value = mainList
+    }
+    private val _stoList = MutableLiveData<List<String>>()
+    val stoList : LiveData<List<String>> = _stoList
 
-    fun setStoList(stoList: Array<String>) {
+    fun setStoList(stoList: List<String>) {
         _stoList.value = stoList
     }
 

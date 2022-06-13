@@ -7,6 +7,8 @@ object EventBus {
     private const val MIN_CLICK_INTERVAL : Long = 200
     private var lastEventTime: Long = 0
 
+    val clickEvent: MutableLiveData<SingleLiveEvent<ClickEvent>> = MutableLiveData()
+
     val linkEvent: MutableLiveData<SingleLiveEvent<LinkEvent>> = MutableLiveData()
     val pickEvent: MutableLiveData<SingleLiveEvent<PickEvent>> = MutableLiveData()
     val holderEvent: MutableLiveData<SingleLiveEvent<HolderEvent>> = MutableLiveData()
@@ -36,6 +38,9 @@ object EventBus {
         return elapsedTime <= MIN_CLICK_INTERVAL
     }
 }
+class ClickEvent(
+    val stoName: String,
+)
 class LinkEvent(
     val type: LinkEventType,
     val bindPosition: Int

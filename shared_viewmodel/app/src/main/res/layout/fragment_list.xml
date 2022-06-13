@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.shared_viewmodel.ui.StoreSharedViewModel" />
@@ -24,24 +25,51 @@
             android:layout_height="50dp"
             android:background="@drawable/refresh"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="칸수:"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@id/iv_refresh"
+            app:layout_constraintTop_toTopOf="@id/et_set_count"
+            app:layout_constraintBottom_toBottomOf="@id/et_set_count"/>
+
+        <EditText
+            android:id="@+id/et_set_count"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background"
+            app:layout_constraintStart_toEndOf="@id/tv"
+            android:hint="4"
+            android:inputType="number"
+            android:textColorHint="#ccc"
+            android:textColor="@color/black"
+            android:maxLines="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/iv_refresh"/>
 
         <EditText
             android:id="@+id/et"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:maxLines="1"
+            android:hint="아이템을 입력해주세요"
             android:inputType="text"
-            android:hint="input text here"
-            android:textColorHint="#ccc"
+            android:maxLines="1"
             android:textColor="#000"
+            android:textColorHint="#ccc"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_refresh" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.example.shared_viewmodel.BetterRecyclerView
             android:id="@+id/rv"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
