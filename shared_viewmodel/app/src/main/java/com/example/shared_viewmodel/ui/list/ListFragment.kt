@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.shared_viewmodel.LogHelper
+import com.example.shared_viewmodel.MainActivity
 import com.example.shared_viewmodel.R
 import com.example.shared_viewmodel.databinding.FragmentListBinding
 import com.example.shared_viewmodel.model.MainData
@@ -27,6 +28,12 @@ class ListFragment : Fragment() {
     private val _adapter: ModulesAdapter by lazy { ModulesAdapter() }
 
     private val mainList = mutableListOf<MainData>()
+
+    private val callback = object: OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            findNavController().navigate(R.id.action_listFragment_to_homeFragment)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragmentBinding = FragmentListBinding.inflate(inflater, container, false)
@@ -49,38 +56,24 @@ class ListFragment : Fragment() {
             rv.layoutManager = LinearLayoutManager(requireContext())
 
             ivRefresh.setOnClickListener {
-                hideKeyboard()
-                processData(et.text.toString())
-
-                val pagingCount = if (etSetCount.text.isEmpty()) 0 else etSetCount.text.toString().toInt()
-                _adapter.setPageCount(pagingCount)
                 _adapter.differ.submitList(null)
-                storeSharedViewModel.setMainList(mainList.toList())
+                refreshMain()
             }
-
-            et.apply {
-                setOnKeyListener { _, keyCode, event ->
-                    if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
-                        // scroll top
-                        rv.scrollToPosition(0)
-                        hideKeyboard()
-
-                        processData(et.text.toString())
-                        storeSharedViewModel.setMainList(mainList.toList())
-
-                        return@setOnKeyListener true
-                    }
-                    false
-                }
-            }
-            etSetCount.setOnKeyListener { _, keyCode, event ->
+            et.setOnKeyListener { _, keyCode, event ->
                 if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
-                    hideKeyboard()
-                    _adapter.setPageCount(etSetCount.text.toString().toInt())
+                    refreshMain()
                     return@setOnKeyListener true
                 }
                 false
             }
+            etSetCount.setOnKeyListener { _, keyCode, event ->
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
+                    refreshMain()
+                    return@setOnKeyListener true
+                }
+                false
+            }
+
             _adapter.setOnItemClickListener(clickListener)
 
             // observe store list
@@ -113,11 +106,33 @@ class ListFragment : Fragment() {
         findNavController().navigate(R.id.action_listFragment_to_detailFragment)
     }
 
-    private fun hideKeyboard() {
+    private fun refreshMain() {
+        // hide keyboard
         val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         activity?.currentFocus?.let { view ->
             inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
         }
+        binding?.let {
+            // scroll to top
+            it.rv.scrollToPosition(0)
+            // process input string
+            processData(it.et.text.toString())
+            // reset adapter page count
+            val pagingCount = if (it.etSetCount.text.isEmpty()) 4 else it.etSetCount.text.toString().toInt()
+            _adapter.setPagingCount(pagingCount)
+        }
+        // submit data list
+        storeSharedViewModel.setMainList(mainList.toList())
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity() as? MainActivity)?.onBackPressedDispatcher?.addCallback(callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
     }
 }
 

@@ -4,11 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
-import com.example.shared_viewmodel.GridSpacingItemDecoration
-import com.example.shared_viewmodel.LogHelper
 import com.example.shared_viewmodel.databinding.*
 import com.example.shared_viewmodel.model.MainData
 import com.example.shared_viewmodel.model.StoreData
+import com.example.shared_viewmodel.ui.list.ModulesAdapter.GridListHolder.Companion.CURR_PAGE
 import com.example.shared_viewmodel.ui.list.ModulesAdapter.GridListHolder.Companion.PAGING_COUNT
 
 /**
@@ -88,7 +87,8 @@ class ModulesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    fun setPageCount(page: Int) {
+    fun setPagingCount(page: Int) {
+        CURR_PAGE = 1
         PAGING_COUNT = if (page == 0) 1
         else page
     }
@@ -96,10 +96,10 @@ class ModulesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class GridListHolder(private val itemBinding: VhGridListBinding) : MainHolder(itemBinding.root) {
         private lateinit var adapter: GridAdapter
         lateinit var list: List<StoreData>
+        private var totalPage = 1
 
         companion object {
             var CURR_PAGE = 1
-            var TOTAL_PAGE = 1
             var PAGING_COUNT = 4
         }
 
@@ -107,7 +107,7 @@ class ModulesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             adapter = GridAdapter(listener)
             list = item.dataList!!
 
-            TOTAL_PAGE = if (list.size % PAGING_COUNT == 0) {
+            totalPage = if (list.size % PAGING_COUNT == 0) {
                 list.size / PAGING_COUNT
             } else {
                 list.size / PAGING_COUNT + 1
@@ -123,10 +123,10 @@ class ModulesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
 
         private fun incPageCount() {
-            if (CURR_PAGE < TOTAL_PAGE) {
+            if (CURR_PAGE < totalPage) {
                 ++CURR_PAGE
             } else {
-                CURR_PAGE = TOTAL_PAGE
+                CURR_PAGE = totalPage
             }
             paging()
         }
@@ -149,6 +149,7 @@ class ModulesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val currColumn = if (newList.size % 2 != 0) newList.size / 2 + 1 else newList.size / 2
             val emptyHolderCount = (totalColumn - currColumn) * 2
 
+            // ui for empty row
             if (emptyHolderCount > 0) {
                 for (i in 0 until emptyHolderCount) {
                     val emptyData = StoreData(0, "")
@@ -157,8 +158,7 @@ class ModulesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
 
             adapter.differ.submitList(newList.toList())
-
-            itemBinding.tvPagination.text = String.format("%s/%s", CURR_PAGE, TOTAL_PAGE)
+            itemBinding.tvPagination.text = String.format("%s/%s", CURR_PAGE, totalPage)
         }
     }
 
