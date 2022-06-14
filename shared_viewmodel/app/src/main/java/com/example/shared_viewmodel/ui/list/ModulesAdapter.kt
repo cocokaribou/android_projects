@@ -89,8 +89,7 @@ class ModulesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun setPagingCount(page: Int) {
         CURR_PAGE = 1
-        PAGING_COUNT = if (page == 0) 1
-        else page
+        PAGING_COUNT = if (page == 0) 1 else page
     }
 
     class GridListHolder(private val itemBinding: VhGridListBinding) : MainHolder(itemBinding.root) {
@@ -145,9 +144,10 @@ class ModulesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val end = if (list.size < CURR_PAGE * PAGING_COUNT) list.size - 1 else start + PAGING_COUNT - 1
             val newList = list.slice(start .. end).toMutableList()
 
-            val totalColumn = PAGING_COUNT / 2
-            val currColumn = if (newList.size % 2 != 0) newList.size / 2 + 1 else newList.size / 2
-            val emptyHolderCount = (totalColumn - currColumn) * 2
+            // column count fixed
+            val totalRow = PAGING_COUNT / 2
+            val currRow = if (newList.size % 2 != 0) newList.size / 2 + 1 else newList.size / 2
+            val emptyHolderCount = (totalRow - currRow) * 2
 
             // ui for empty row
             if (emptyHolderCount > 0) {
