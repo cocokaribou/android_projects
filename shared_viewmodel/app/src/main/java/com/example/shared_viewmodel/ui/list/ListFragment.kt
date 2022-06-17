@@ -15,19 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shared_viewmodel.MainActivity
 import com.example.shared_viewmodel.R
 import com.example.shared_viewmodel.databinding.FragmentListBinding
-import com.example.shared_viewmodel.model.MainData
-import com.example.shared_viewmodel.model.StoreData
 import com.example.shared_viewmodel.ui.StoreSharedViewModel
 
 class ListFragment : Fragment() {
 
     private var binding: FragmentListBinding? = null
-
     private val storeSharedViewModel: StoreSharedViewModel by activityViewModels()
-
     private val _adapter: ModulesAdapter by lazy { ModulesAdapter() }
-
-    private val mainList = mutableListOf<MainData>()
 
     private val callback = object: OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
@@ -55,26 +49,14 @@ class ListFragment : Fragment() {
             rv.adapter = _adapter
             rv.layoutManager = LinearLayoutManager(requireContext())
 
+            // refresh
             ivRefresh.setOnClickListener {
                 _adapter.differ.submitList(null)
                 refreshMain()
             }
-            et.setOnKeyListener { _, keyCode, event ->
-                if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
-                    refreshMain()
-                    return@setOnKeyListener true
-                }
-                false
-            }
-            etSetCount.setOnKeyListener { _, keyCode, event ->
-                if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
-                    refreshMain()
-                    return@setOnKeyListener true
-                }
-                false
-            }
-
-            _adapter.setOnItemClickListener(clickListener)
+            et.setOnKeyListener(refreshCallback)
+            etSetCount.setOnKeyListener(refreshCallback)
+            _adapter.setOnItemClickListener(clickCallback)
 
             // observe store list
             storeSharedViewModel.mainList.observe(viewLifecycleOwner) { list ->
@@ -83,24 +65,19 @@ class ListFragment : Fragment() {
         }
     }
 
-    private fun processData(input: String) {
-        mainList.clear()
-
-        val inputList = input.split(" ")
-        val storeList = mutableListOf<StoreData>()
-        inputList.forEachIndexed { i, item ->
-            val storeData = StoreData(i, item)
-            storeList.add(storeData)
-            mainList.add(MainData(ModulesType.Vertical, data = storeData))
+    private val refreshCallback = View.OnKeyListener { _, keyCode, event ->
+        if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
+            refreshMain()
+            return@OnKeyListener true
         }
-        mainList.add(MainData(ModulesType.Grid, dataList = storeList))
-        mainList.add(MainData(ModulesType.Horizontal, dataList = storeList))
+        false
     }
 
-    private val clickListener : (String) -> Unit = { item ->
+    private val clickCallback : (String) -> Unit = { item ->
         storeSharedViewModel.setStoContent(item)
         goDetailFrag()
     }
+
 
     private fun goDetailFrag() {
         findNavController().navigate(R.id.action_listFragment_to_detailFragment)
@@ -115,14 +92,13 @@ class ListFragment : Fragment() {
         binding?.let {
             // scroll to top
             it.rv.scrollToPosition(0)
-            // process input string
-            processData(it.et.text.toString())
             // reset adapter page count
             val pagingCount = if (it.etSetCount.text.isEmpty()) 4 else it.etSetCount.text.toString().toInt()
             _adapter.setPagingCount(pagingCount)
+
+            // process input string
+            storeSharedViewModel.setMainList(it.et.text.toString())
         }
-        // submit data list
-        storeSharedViewModel.setMainList(mainList.toList())
     }
 
     override fun onAttach(context: Context) {

@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.shared_viewmodel.model.MainData
+import com.example.shared_viewmodel.model.StoreData
+import com.example.shared_viewmodel.ui.list.ModulesType
 
 /**
  */
@@ -11,7 +13,21 @@ class StoreSharedViewModel: ViewModel() {
     private val _mainList = MutableLiveData<List<MainData>>()
     val mainList : LiveData<List<MainData>> = _mainList
 
-    fun setMainList(mainList: List<MainData>) {
+    fun setMainList(input: String) {
+        val mainList = mutableListOf<MainData>()
+
+        val inputList = input.split(" ")
+        val storeList = mutableListOf<StoreData>()
+        mainList.add(MainData(ModulesType.Grid, dataList = storeList))
+        mainList.add(MainData(ModulesType.Horizontal, dataList = storeList))
+        inputList.forEachIndexed { i, item ->
+            val storeData = StoreData(i, item)
+            storeList.add(storeData)
+            mainList.add(MainData(ModulesType.Vertical, data = storeData))
+        }
+        mainList.add(MainData(ModulesType.Horizontal, dataList = storeList))
+        mainList.add(MainData(ModulesType.Horizontal, dataList = storeList))
+        mainList.add(MainData(ModulesType.Horizontal, dataList = storeList))
         _mainList.value = mainList
     }
     private val _stoList = MutableLiveData<List<String>>()

@@ -7,4 +7,8 @@ data class MainData(
     var type : ModulesType,
     var data: StoreData? = null,
     var dataList: List<StoreData>? = null
-)
+) {
+    fun clone() : MainData {
+        return copy()
+    }
+}

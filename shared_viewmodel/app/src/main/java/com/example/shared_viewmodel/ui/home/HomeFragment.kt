@@ -17,7 +17,7 @@ import com.example.shared_viewmodel.ui.StoreSharedViewModel
 
 class HomeFragment: Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding
+    private var binding: FragmentHomeBinding? = null
 
     private val memberViewModel: MemberSharedViewModel by activityViewModels()
     private val storeSharedViewModel: StoreSharedViewModel by activityViewModels()
@@ -30,12 +30,12 @@ class HomeFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnGoList.setOnClickListener {
+        binding?.btnGoList?.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_listFragment)
         }
     }
@@ -48,5 +48,10 @@ class HomeFragment: Fragment() {
     override fun onDetach() {
         super.onDetach()
         callback.remove()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }

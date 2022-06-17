@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
+import com.example.shared_viewmodel.LogHelper
 import com.example.shared_viewmodel.databinding.*
 import com.example.shared_viewmodel.model.MainData
 import com.example.shared_viewmodel.model.StoreData
 import com.example.shared_viewmodel.ui.list.ModulesAdapter.GridListHolder.Companion.CURR_PAGE
 import com.example.shared_viewmodel.ui.list.ModulesAdapter.GridListHolder.Companion.PAGING_COUNT
+import com.example.shared_viewmodel.MainHolder
 
 /**
  * Modules Adapter
@@ -125,7 +127,7 @@ class ModulesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             if (CURR_PAGE < totalPage) {
                 ++CURR_PAGE
             } else {
-                CURR_PAGE = totalPage
+                CURR_PAGE = 1
             }
             paging()
         }
@@ -134,7 +136,7 @@ class ModulesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             if (CURR_PAGE > 1) {
                 --CURR_PAGE
             } else {
-                CURR_PAGE = 1
+                CURR_PAGE = totalPage
             }
             paging()
         }
@@ -158,11 +160,6 @@ class ModulesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
 
             adapter.differ.submitList(newList.toList())
-            itemBinding.tvPagination.text = String.format("%s/%s", CURR_PAGE, totalPage)
         }
-    }
-
-    abstract class MainHolder(view: View) : RecyclerView.ViewHolder(view) {
-        abstract fun bind(item: MainData, listener: Click)
     }
 }
