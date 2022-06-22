@@ -27,32 +27,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="칸수:"
-            android:textSize="15sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="10dp"
-            app:layout_constraintStart_toEndOf="@id/iv_refresh"
-            app:layout_constraintTop_toTopOf="@id/et_set_count"
-            app:layout_constraintBottom_toBottomOf="@id/et_set_count"/>
-
-        <EditText
-            android:id="@+id/et_set_count"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background"
-            app:layout_constraintStart_toEndOf="@id/tv"
-            android:hint="4"
-            android:inputType="number"
-            android:textColorHint="#ccc"
-            android:textColor="@color/black"
-            android:maxLines="1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/iv_refresh"/>
-
         <EditText
             android:id="@+id/et"
             android:layout_width="match_parent"

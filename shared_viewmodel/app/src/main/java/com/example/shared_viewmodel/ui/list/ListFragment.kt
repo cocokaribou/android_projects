@@ -7,14 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.shared_viewmodel.BaseApplication
 import com.example.shared_viewmodel.MainActivity
 import com.example.shared_viewmodel.R
 import com.example.shared_viewmodel.databinding.FragmentListBinding
+import com.example.shared_viewmodel.model.MainHomeResult
 import com.example.shared_viewmodel.ui.StoreSharedViewModel
 
 class ListFragment : Fragment() {
@@ -39,7 +46,9 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        storeSharedViewModel.initPageCount()
+        // request banner data
+        storeSharedViewModel.searchMainHomeRepo()
+        storeSharedViewModel.initDetailStackCount()
 
         binding?.apply {
             viewModel = storeSharedViewModel
@@ -55,7 +64,7 @@ class ListFragment : Fragment() {
                 refreshMain()
             }
             et.setOnKeyListener(refreshCallback)
-            etSetCount.setOnKeyListener(refreshCallback)
+
             _adapter.setOnItemClickListener(clickCallback)
 
             // observe store list
@@ -75,15 +84,13 @@ class ListFragment : Fragment() {
 
     private val clickCallback : (String) -> Unit = { item ->
         storeSharedViewModel.setStoContent(item)
-        goDetailFrag()
-    }
-
-
-    private fun goDetailFrag() {
         findNavController().navigate(R.id.action_listFragment_to_detailFragment)
     }
 
     private fun refreshMain() {
+        // request banner data
+        storeSharedViewModel.searchMainHomeRepo()
+
         // hide keyboard
         val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         activity?.currentFocus?.let { view ->
@@ -92,12 +99,16 @@ class ListFragment : Fragment() {
         binding?.let {
             // scroll to top
             it.rv.scrollToPosition(0)
-            // reset adapter page count
-            val pagingCount = if (it.etSetCount.text.isEmpty()) 4 else it.etSetCount.text.toString().toInt()
-            _adapter.setPagingCount(pagingCount)
+        }
 
-            // process input string
-            storeSharedViewModel.setMainList(it.et.text.toString())
+
+        val input = binding?.et?.text ?: ""
+        storeSharedViewModel.mainHomeResult.observe(viewLifecycleOwner) {
+            if (it is MainHomeResult.Success) {
+                it.data.homeMainBanner?.let { bannerList ->
+                    storeSharedViewModel.setMainList(input.toString(), bannerList)
+                }
+            }
         }
     }
 
@@ -109,6 +120,11 @@ class ListFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         callback.remove()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }
 

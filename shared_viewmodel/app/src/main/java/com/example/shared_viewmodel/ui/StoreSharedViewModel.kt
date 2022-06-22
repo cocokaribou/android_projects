@@ -1,40 +1,57 @@
 package com.example.shared_viewmodel.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.shared_viewmodel.model.MainData
-import com.example.shared_viewmodel.model.StoreData
+import androidx.lifecycle.*
+import com.example.shared_viewmodel.model.*
 import com.example.shared_viewmodel.ui.list.ModulesType
+import kotlinx.coroutines.Dispatchers
 
 /**
  */
 class StoreSharedViewModel: ViewModel() {
-    private val _mainList = MutableLiveData<List<MainData>>()
-    val mainList : LiveData<List<MainData>> = _mainList
+    // api response(flow) to livedata
+    private val repository = MainHomeRepository()
+    private val paramMainHome = MutableLiveData<String>()
+    val mainHomeResult: LiveData<MainHomeResult> = paramMainHome.switchMap {
+        liveData {
+            val stream = repository.searchMainHomeStream().asLiveData(Dispatchers.Main)
+            emitSource(stream)
+        }
+    }
 
-    fun setMainList(input: String) {
-        val mainList = mutableListOf<MainData>()
+    fun searchMainHomeRepo() {
+        paramMainHome.postValue("")
+    }
 
+    // in-app input data
+    private val _mainList = MutableLiveData<List<ModuleData>>()
+    val mainList : LiveData<List<ModuleData>> = _mainList
+
+    // set main recyler view ui
+    fun setMainList(input: String, bannerList: List<HomeMainBanner>) {
         val inputList = input.split(" ")
+
+        val moduleList = mutableListOf<ModuleData>()
         val storeList = mutableListOf<StoreData>()
-        mainList.add(MainData(ModulesType.Grid, dataList = storeList))
-        mainList.add(MainData(ModulesType.Horizontal, dataList = storeList))
+        moduleList.add(ModuleData(ModulesType.Banner, bannerList = bannerList))
+        moduleList.add(ModuleData(ModulesType.Grid, storeList = storeList))
+        moduleList.add(ModuleData(ModulesType.Horizontal, storeList = storeList))
         inputList.forEachIndexed { i, item ->
             val storeData = StoreData(i, item)
             storeList.add(storeData)
-            mainList.add(MainData(ModulesType.Vertical, data = storeData))
+            moduleList.add(ModuleData(ModulesType.Vertical, store = storeData))
         }
-        mainList.add(MainData(ModulesType.Horizontal, dataList = storeList))
-        mainList.add(MainData(ModulesType.Horizontal, dataList = storeList))
-        mainList.add(MainData(ModulesType.Horizontal, dataList = storeList))
-        _mainList.value = mainList
-    }
-    private val _stoList = MutableLiveData<List<String>>()
-    val stoList : LiveData<List<String>> = _stoList
+        moduleList.add(ModuleData(ModulesType.Horizontal, storeList = storeList))
+        moduleList.add(ModuleData(ModulesType.Horizontal, storeList = storeList))
+        moduleList.add(ModuleData(ModulesType.Horizontal, storeList = storeList))
+        moduleList.add(ModuleData(ModulesType.Horizontal, storeList = storeList))
+        moduleList.add(ModuleData(ModulesType.Horizontal, storeList = storeList))
+        moduleList.add(ModuleData(ModulesType.Horizontal, storeList = storeList))
+        moduleList.add(ModuleData(ModulesType.Horizontal, storeList = storeList))
+        moduleList.add(ModuleData(ModulesType.Horizontal, storeList = storeList))
+        moduleList.add(ModuleData(ModulesType.Horizontal, storeList = storeList))
+        moduleList.add(ModuleData(ModulesType.Horizontal, storeList = storeList))
 
-    fun setStoList(stoList: List<String>) {
-        _stoList.value = stoList
+        _mainList.value = moduleList
     }
 
     private val _stoContent = MutableLiveData<String>()
@@ -44,26 +61,26 @@ class StoreSharedViewModel: ViewModel() {
         _stoContent.value = stoContent
     }
 
-    val currentPage = MutableLiveData<Int>().apply { value = 0 }
+    val currentStack = MutableLiveData(0)
 
-    fun incPageCount() {
-        currentPage.value?.let { page ->
-            currentPage.value = page + 1
+    fun incStackCount() {
+        currentStack.value?.let { page ->
+            currentStack.value = page + 1
         }
     }
-    fun decPageCount() {
-        currentPage.value?.let { page ->
+    fun decStackCount() {
+        currentStack.value?.let { page ->
             if (page > 0) {
-                currentPage.value = page - 1
+                currentStack.value = page - 1
             } else {
-                currentPage.value = 0
+                currentStack.value = 0
             }
         }
     }
 
-    fun initPageCount() {
-        currentPage.value?.let {
-            currentPage.value = 0
+    fun initDetailStackCount() {
+        currentStack.value?.let {
+            currentStack.value = 0
         }
     }
 }

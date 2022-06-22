@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="360:574"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@color/teal_700" />
+
+            <View
+                android:id="@+id/view_dim"
+                android:layout_width="match_parent"
+                android:layout_height="315dp"
+                android:background="@drawable/bg_gradient_000000_66000000_270"
+                app:layout_constraintBottom_toBottomOf="@id/iv"
+                app:layout_constraintDimensionRatio="360:315" />
+
+            <TextView
+                android:id="@+id/tv_brand"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginBottom="15dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="2"
+                android:textColor="#ffffff"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/tv_title"
+                app:layout_constraintEnd_toEndOf="@id/iv"
+                app:layout_constraintStart_toStartOf="@id/iv"
+                tools:text="REISS\nREISS" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginBottom="9dp"
+                android:ellipsize="none"
+                android:gravity="center"
+                android:maxLines="2"
+                android:textColor="#ffffff"
+                android:textSize="39dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/tv_subtitle"
+                app:layout_constraintEnd_toEndOf="@id/iv"
+                app:layout_constraintStart_toStartOf="@id/iv"
+                tools:text="REISS OUTLET WEEK" />
+
+            <TextView
+                android:id="@+id/tv_subtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginBottom="62dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="2"
+                android:textColor="#ffffff"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@id/iv"
+                app:layout_constraintEnd_toEndOf="@id/iv"
+                app:layout_constraintStart_toStartOf="@id/iv"
+                tools:text="본격 가을 쇼핑은 시마을 면세점\n5주년 기념 특별 특가 + 페이백 혜택" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

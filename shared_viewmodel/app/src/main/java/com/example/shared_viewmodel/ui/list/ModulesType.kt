@@ -1,7 +1,7 @@
 package com.example.shared_viewmodel.ui.list
 
 enum class ModulesType {
-//    Banner,
+    Banner,
     Grid,
     Vertical,
     Horizontal,

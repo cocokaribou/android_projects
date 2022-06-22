@@ -46,7 +46,7 @@ class DetailFragment : Fragment() {
                 receivedString = content + pageCount
             }
 
-            storeSharedViewModel.currentPage.observe(viewLifecycleOwner) { _pageCount ->
+            storeSharedViewModel.currentStack.observe(viewLifecycleOwner) { _pageCount ->
                 pageCount = _pageCount
                 receivedString = content + pageCount
             }
@@ -65,7 +65,7 @@ class DetailFragment : Fragment() {
             btnStackFrag.setOnClickListener {
 //                findNavController().navigate(R.id.action_detailFragment_to_detailFragment)
 
-                storeSharedViewModel.incPageCount()
+                storeSharedViewModel.incStackCount()
 
                 /**
                  * separate fragment manager
@@ -85,7 +85,7 @@ class DetailFragment : Fragment() {
 
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                storeSharedViewModel.currentPage.observe(viewLifecycleOwner) { page ->
+                storeSharedViewModel.currentStack.observe(viewLifecycleOwner) { page ->
                     if (page == 0) {
                         findNavController().navigate(R.id.action_detailFragment_to_listFragment)
                     } else {
@@ -106,6 +106,6 @@ class DetailFragment : Fragment() {
         super.onDestroy()
         callback.remove()
 
-        storeSharedViewModel.decPageCount()
+        storeSharedViewModel.decStackCount()
     }
 }
