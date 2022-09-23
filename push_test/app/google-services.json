@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:711093126145:android:d031f72411266400d86c00",
+        "mobilesdk_app_id": "1:711093126145:android:42e9d40417d7a85ad86c00",
         "android_client_info": {
-          "package_name": "com.pionnet.overpass.push_test"
+          "package_name": "kr.co.pionnet.SampleProject"
         }
       },
       "oauth_client": [
