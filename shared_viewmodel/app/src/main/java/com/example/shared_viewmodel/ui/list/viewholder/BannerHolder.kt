@@ -1,11 +1,16 @@
 package com.example.shared_viewmodel.ui.list.viewholder
 
 import android.annotation.SuppressLint
+import android.content.ContextWrapper
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -22,13 +27,55 @@ import com.example.shared_viewmodel.model.ModuleData
 import com.example.shared_viewmodel.ui.list.BaseHolder
 import com.example.shared_viewmodel.ui.list.Click
 import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 
-class BannerHolder(private val itemBinding: VhMainHomeBannerBinding) : BaseHolder(itemBinding.root) {
-    var currPage = 1
-    var totalPage = 0
+class BannerHolder(private val itemBinding: VhMainHomeBannerBinding, lifecycleOwner: LifecycleOwner) : BaseHolder(itemBinding.root) {
+    private var totalPage = 0
 
     var isScrollStopped = false
     var isSettled = false
+
+    private val job = lifecycleOwner.lifecycleScope.launch {
+        while (lifecycleOwner.lifecycleScope.isActive) {
+            delay(2000L)
+            val nextPage =
+                if (itemBinding.viewpager.currentItem == totalPage-1) {
+                    0
+                } else {
+                    itemBinding.viewpager.currentItem + 1
+                }
+            if (!isSettled && !isScrollStopped) {
+                itemBinding.viewpager.currentItem = nextPage
+            }
+        }
+    }
+
+    init {
+        job.start()
+        lifecycleOwner.lifecycle.addObserver(object: LifecycleEventObserver {
+            override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+                when(event) {
+                    Lifecycle.Event.ON_RESUME -> {
+                        LogHelper.v("⚠️ frag resumed")
+                        if (isScrollStopped) {
+                            startAutoScroll()
+                        }
+                    }
+                    Lifecycle.Event.ON_PAUSE -> {
+                        LogHelper.v("⚠️ frag paused")
+                        stopAutoScroll()
+                    }
+                    Lifecycle.Event.ON_DESTROY -> {
+                        LogHelper.v("⚠️ frag destroyed")
+                        job.cancel()
+                        LogHelper.v("⚠️ is coroutine active ${job.isActive}")
+                    }
+                }
+            }
+
+        })
+    }
 
     private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
 
@@ -51,26 +98,11 @@ class BannerHolder(private val itemBinding: VhMainHomeBannerBinding) : BaseHolde
         }
     }
 
-    init {
-        GlobalScope.launch(Dispatchers.Main) {
-            while (true) {
-                delay(2000L)
-                val nextPage =
-                    if (itemBinding.viewpager.currentItem == totalPage-1) {
-                        0
-                    } else {
-                        itemBinding.viewpager.currentItem + 1
-                    }
-                if (!isSettled && !isScrollStopped) {
-                    itemBinding.viewpager.currentItem = nextPage
-                }
-            }
-        }
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     override fun bind(item: ModuleData, listener: Click) {
         LogHelper.v("⚠️onBind")
+        totalPage = item.bannerList?.size ?: 0
+
         itemBinding.viewpager.apply {
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
             registerOnPageChangeCallback(pageChangeCallback)
@@ -81,7 +113,6 @@ class BannerHolder(private val itemBinding: VhMainHomeBannerBinding) : BaseHolde
                 when(event.action) {
                     // 눌렀을 때
                     MotionEvent.ACTION_MOVE -> {
-                        stopAutoScroll()
                         isSettled = true
                     }
                     // 뗐을 때
@@ -93,8 +124,7 @@ class BannerHolder(private val itemBinding: VhMainHomeBannerBinding) : BaseHolde
             }
         }
         itemBinding.tvIndicator.apply {
-            totalPage = item.bannerList?.size ?: 0
-            text = "${currPage}/$totalPage"
+            text = "1/$totalPage"
         }
 
         itemBinding.toggle.apply {
@@ -113,6 +143,16 @@ class BannerHolder(private val itemBinding: VhMainHomeBannerBinding) : BaseHolde
         }
     }
 
+    private fun startAutoScroll() {
+        isScrollStopped = false
+        LogHelper.v("시작")
+    }
+
+    private fun stopAutoScroll() {
+        isScrollStopped = true
+        LogHelper.v("스돕 isActive ${job.isActive}")
+    }
+
     override fun onAppeared() {
         super.onAppeared()
         startAutoScroll()
@@ -123,16 +163,6 @@ class BannerHolder(private val itemBinding: VhMainHomeBannerBinding) : BaseHolde
         if (!isScrollStopped) {
             stopAutoScroll()
         }
-    }
-
-    private fun startAutoScroll() {
-        isScrollStopped = false
-        LogHelper.v("시작")
-    }
-
-    private fun stopAutoScroll() {
-        isScrollStopped = true
-        LogHelper.v("스돕")
     }
 
 

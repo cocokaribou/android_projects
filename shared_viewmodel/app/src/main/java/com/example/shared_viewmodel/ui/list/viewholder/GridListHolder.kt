@@ -1,5 +1,6 @@
 package com.example.shared_viewmodel.ui.list.viewholder
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.shared_viewmodel.databinding.VhGridListBinding
 import com.example.shared_viewmodel.model.ModuleData
@@ -57,6 +58,7 @@ class GridListHolder(private val itemBinding: VhGridListBinding) : BaseHolder(it
         val start = (CURR_PAGE - 1) * PAGING_COUNT
         val end = if (list.size < CURR_PAGE * PAGING_COUNT) list.size - 1 else start + PAGING_COUNT - 1
         val newList = list.slice(start .. end).toMutableList()
+        val newList2 = list.subList(start, end)
 
         // column count fixed
         val totalRow = PAGING_COUNT / 2

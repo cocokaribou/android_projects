@@ -2,6 +2,7 @@ package com.example.shared_viewmodel.ui.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.*
 import com.example.shared_viewmodel.databinding.*
 import com.example.shared_viewmodel.model.ModuleData
@@ -14,12 +15,12 @@ import com.example.shared_viewmodel.ui.list.viewholder.VerticalListHolder
  * Modules Adapter
  * - adapter.setItemList
  */
-class ModulesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ModulesAdapter(private val lifecycleOwner: LifecycleOwner) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (ModulesType.values()[viewType]) {
             ModulesType.Banner -> {
                 val itemBinding = VhMainHomeBannerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                BannerHolder(itemBinding)
+                BannerHolder(itemBinding, lifecycleOwner)
             }
             ModulesType.Grid -> {
                 val itemBinding = VhGridListBinding.inflate(LayoutInflater.from(parent.context), parent, false)

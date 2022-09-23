@@ -26,7 +26,8 @@ class StoreSharedViewModel: ViewModel() {
     private val _mainList = MutableLiveData<List<ModuleData>>()
     val mainList : LiveData<List<ModuleData>> = _mainList
 
-    // set main recyler view ui
+    // set main recycler view ui
+    // CHECKER UI 로직은 fragment 단에 있어야 하는거 아냐..? 뷰모델은 데이터 조작만..
     fun setMainList(input: String, bannerList: List<HomeMainBanner>) {
         val inputList = input.split(" ")
 

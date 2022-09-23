@@ -7,17 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.shared_viewmodel.BaseApplication
 import com.example.shared_viewmodel.MainActivity
 import com.example.shared_viewmodel.R
 import com.example.shared_viewmodel.databinding.FragmentListBinding
@@ -28,7 +22,7 @@ class ListFragment : Fragment() {
 
     private var binding: FragmentListBinding? = null
     private val storeSharedViewModel: StoreSharedViewModel by activityViewModels()
-    private val _adapter: ModulesAdapter by lazy { ModulesAdapter() }
+    private val _adapter: ModulesAdapter by lazy { ModulesAdapter(viewLifecycleOwner) }
 
     private val callback = object: OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {

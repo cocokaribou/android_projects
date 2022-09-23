@@ -51,7 +51,16 @@ class HomeFragment: Fragment() {
     }
 
     override fun onDestroy() {
+        if (binding != null) {
+            binding = null
+        }
         super.onDestroy()
-        binding = null
+    }
+
+    override fun onDestroyView() {
+        if (binding != null) {
+            binding = null
+        }
+        super.onDestroyView()
     }
 }

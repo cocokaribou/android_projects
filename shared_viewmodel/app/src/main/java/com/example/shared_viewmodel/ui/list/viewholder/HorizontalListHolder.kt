@@ -1,5 +1,6 @@
 package com.example.shared_viewmodel.ui.list.viewholder
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shared_viewmodel.databinding.VhHorizontalListBinding
 import com.example.shared_viewmodel.model.ModuleData

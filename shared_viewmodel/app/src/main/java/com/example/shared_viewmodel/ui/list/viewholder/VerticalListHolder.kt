@@ -1,5 +1,6 @@
 package com.example.shared_viewmodel.ui.list.viewholder
 
+import androidx.lifecycle.LifecycleOwner
 import com.example.shared_viewmodel.databinding.ItemVerticalListBinding
 import com.example.shared_viewmodel.model.ModuleData
 import com.example.shared_viewmodel.ui.list.BaseHolder
