@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">lunch_recom</string>
+    <string name="korean">한식</string>
+    <string name="chinese">중식</string>
+    <string name="western">양식</string>
+    <string name="japanese">일식</string>
+</resources>
