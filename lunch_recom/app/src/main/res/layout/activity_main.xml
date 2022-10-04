@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-
     <data>
-
         <variable
             name="vm"
             type="com.youngin.lunch.ui.MainViewModel" />
@@ -13,25 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/scrollview"
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:background="@color/teal_200"
             android:scrollbars="none"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <LinearLayout
-                android:id="@+id/image_list"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </LinearLayout>
-
-        </ScrollView>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/frame"
@@ -39,20 +27,42 @@
             android:layout_height="320dp"
             android:src="@drawable/frame"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/menu"
-            android:textColor="@color/black"
-            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/frame"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="20dp"
-            android:text="점심은 너다!"/>
+            android:text="점심은 너다!"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frame" />
+
+        <ImageView
+            android:id="@+id/refresh"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/refresh"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다시"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@id/refresh"
+            app:layout_constraintEnd_toEndOf="@id/refresh"
+            app:layout_constraintStart_toStartOf="@id/refresh"
+            app:layout_constraintTop_toTopOf="@id/refresh" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

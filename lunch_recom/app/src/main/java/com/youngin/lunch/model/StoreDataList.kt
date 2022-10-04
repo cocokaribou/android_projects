@@ -6,6 +6,7 @@ data class StoreDataList(
     @field:SerializedName("storeList") var stoList: ArrayList<StoreData>?
 ) {
     data class StoreData(
+        @field:SerializedName("stoName") var stoName: String?,
         @field:SerializedName("stoImgUrl") var stoImgUrl: String?,
     )
 }

@@ -3,29 +3,27 @@ package com.youngin.lunch.ui
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.youngin.lunch.model.MainData
-import kotlinx.coroutines.flow.collect
+import com.youngin.lunch.model.Store
+import com.youngin.lunch.model.StoreDataList
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
     private val repository by lazy { MainRepository() }
 
-    init {
-        getMainData()
-    }
-
-    val mainData = MutableLiveData<MainData?>()
-    private fun getMainData() {
+    val mainData = MutableLiveData<StoreDataList?>()
+    fun getListData() {
         viewModelScope.launch {
-            repository.requestMainStream()
+            repository.requestStoreListStream()
                 .map {
-                    it.apply {
-                        it.getOrNull()?.todayRecommend?.let {
-                            it.stoImgUrl = "https://app-dl.pionnet.co.kr/store_img/${it.stoImgUrl}"
+                    it.getOrNull().apply {
+                        this?.let {
+                            stoList?.forEach {
+                                it.stoImgUrl = "https://app-dl.pionnet.co.kr/store_img/${it.stoImgUrl}"
+                            }
+                            stoList?.shuffle()
                         }
                     }
-                    it.getOrNull()
                 }
                 .collect {
                     mainData.postValue(it)

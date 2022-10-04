@@ -1,6 +1,5 @@
 package com.youngin.lunch
 
-import com.youngin.lunch.model.MainData
 import com.youngin.lunch.model.StoreDataList
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -14,17 +13,12 @@ import retrofit2.http.POST
 import java.util.concurrent.TimeUnit
 
 interface BaseApiService {
-
-    @POST("MainHomeData.api")
-    suspend fun getHomeData(): MainData
-
-    // 식당 리스트
     @FormUrlEncoded
     @POST("StoreList.api")
     suspend fun getStoreList(
         @Field("listType") listType: String = "c",
         @Field("cateNo") cateNo: Int,
-        @Field("page") page: Int
+        @Field("page") page: Int = 1
     ): StoreDataList
 
     companion object{

@@ -28,8 +28,15 @@ abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel>(@LayoutRes priv
             setVariable(BR.vm, viewModel)
         }
 
+        initView()
+        initObserve()
+
         service = BaseApiService.getApiService()
     }
+
+    abstract fun initView()
+
+    abstract fun initObserve()
 
     override fun onDestroy() {
         super.onDestroy()
