@@ -1,0 +1,50 @@
+package com.example.elandmall_kotlin.base
+
+import android.app.Application
+import android.content.Context
+import com.example.elandmall_kotlin.BuildConfig
+import com.example.elandmall_kotlin.util.Logger
+import com.facebook.flipper.android.AndroidFlipperClient
+import com.facebook.flipper.android.utils.FlipperUtils
+import com.facebook.flipper.plugins.inspector.DescriptorMapping
+import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
+import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
+import com.facebook.flipper.plugins.sharedpreferences.SharedPreferencesFlipperPlugin
+import com.facebook.soloader.SoLoader
+
+class BaseApplication : Application() {
+    companion object {
+        lateinit var instance: BaseApplication
+
+        val context: Context
+            get() = instance.applicationContext
+    }
+
+    init {
+        instance = this
+        Logger.initTag("youngin")
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        initFlipper()
+    }
+
+    private fun initFlipper() {
+        SoLoader.init(context, false)
+
+        if (BuildConfig.DEBUG && FlipperUtils.shouldEnableFlipper(context)) {
+            AndroidFlipperClient.getInstance(context).apply {
+                addPlugin(
+                    InspectorFlipperPlugin(
+                        context.applicationContext,
+                        DescriptorMapping.withDefaults()
+                    )
+                )
+                addPlugin(NetworkFlipperPlugin())
+                addPlugin(SharedPreferencesFlipperPlugin(context))
+
+            }.start()
+        }
+    }
+}

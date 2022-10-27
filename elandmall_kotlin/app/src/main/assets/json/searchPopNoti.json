@@ -1,0 +1,38 @@
+{
+  "code": "200",
+  "data": [
+    {
+      "noti_no": "20221015971",
+      "pop_noti_yn": "N",
+      "noti_cont": "<p><a href=\"/shop/initPlanShop.action?disp_ctg_no=2210648887\"><img alt=\"popup1_14\" src=\"http://www.elandrs.com/upload/fckeditor/noti/2022101666331099117.jpg\" style=\"width: 600px; height: 600px;\" /></a></p>\r\n",
+      "end_time": "2022-10-24 15:59:59.0",
+      "cookie_type": "0",
+      "noti_title": "[월]2210648887"
+    },
+    {
+      "noti_no": "20221015985",
+      "pop_noti_yn": "N",
+      "noti_cont": "<p><a href=\"/shop/initPlanShop.action?disp_ctg_no=2210649095\"><img alt=\"popup2\" src=\"https://www.elandrs.com/upload/fckeditor/noti/2022101666334459619.jpg\" style=\"width: 600px; height: 600px;\" /></a></p>\r\n",
+      "end_time": "2022-10-24 23:59:59.0",
+      "cookie_type": "0",
+      "noti_title": "[월]2210649095"
+    },
+    {
+      "noti_no": "20221015986",
+      "pop_noti_yn": "N",
+      "noti_cont": "<p><a href=\"/shop/initPlanShop.action?disp_ctg_no=2206619135\"><img alt=\"popup3\" src=\"http://www.elandrs.com/upload/fckeditor/noti/2022101666332394460.jpg\" style=\"width: 600px; height: 600px;\" /></a></p>\r\n",
+      "end_time": "2022-10-24 23:59:59.0",
+      "cookie_type": "0",
+      "noti_title": "[월]2206619135"
+    },
+    {
+      "noti_no": "20221015989",
+      "pop_noti_yn": "N",
+      "noti_cont": "<p><a href=\"/event/initEventDtl.action?event_no=E210612130\"><img alt=\"popup4\" src=\"http://www.elandrs.com/upload/fckeditor/noti/2022101666332587534.jpg\" style=\"width: 600px; height: 600px;\" /></a></p>\r\n",
+      "end_time": "2022-10-30 23:59:59.0",
+      "cookie_type": "0",
+      "noti_title": "[월]E210612130"
+    }
+  ],
+  "resultMsg": "success"
+}
