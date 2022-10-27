@@ -1,0 +1,32 @@
+package com.example.custom_logview.ui
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.custom_logview.CustomLog
+import com.example.custom_logview.LogBottomSheetFragment
+import com.example.custom_logview.databinding.ActivityMainBinding
+
+class MainActivity:AppCompatActivity() {
+
+    val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+    private val logBottomSheet: LogBottomSheetFragment by lazy { LogBottomSheetFragment() }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        CustomLog.d("debug log!")
+        CustomLog.w("warning log!")
+        CustomLog.i("info log!")
+        setContentView(binding.root)
+
+        CustomLog.logLiveData.observe(this) {
+            logBottomSheet.submitList(it)
+        }
+
+        binding.logview.setOnClickListener {
+            logBottomSheet.show(supportFragmentManager, "tag")
+        }
+    }
+}

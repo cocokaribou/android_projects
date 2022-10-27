@@ -5,6 +5,9 @@ import android.animation.ObjectAnimator
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +15,9 @@ import android.view.WindowManager
 import android.widget.BaseAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.*
+import com.example.custom_logview.databinding.FragmentLogBinding
+import com.example.custom_logview.databinding.ViewLogItemBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-
-typealias LogListener = (Int) -> Unit
 
 class LogBottomSheetFragment : BottomSheetDialogFragment() {
     private val mAdapter by lazy { LogAdapter() }
@@ -32,6 +35,9 @@ class LogBottomSheetFragment : BottomSheetDialogFragment() {
             list.adapter = mAdapter
             list.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
+        dialog?.window?.let {
+            it.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        }
         return binding.root
     }
 
@@ -42,7 +48,6 @@ class LogBottomSheetFragment : BottomSheetDialogFragment() {
 
 class LogAdapter : ListAdapter<LogData, LogAdapter.LogViewHolder>(diff) {
 
-    var listener: (Int) -> Unit = {}
     companion object {
         val diff = object : DiffUtil.ItemCallback<LogData>() {
             override fun areItemsTheSame(oldItem: LogData, newItem: LogData): Boolean {
@@ -67,27 +72,27 @@ class LogAdapter : ListAdapter<LogData, LogAdapter.LogViewHolder>(diff) {
     }
 
     override fun onBindViewHolder(holder: LogViewHolder, position: Int) {
-        listener = { LogDialog.Builder()
-            .setBodyText(currentList[position].body)
-            .create()
-            .show((holder.itemView.context as BaseActivity).supportFragmentManager, "")
-        }
-        holder.bind(currentList[position], listener)
+        holder.bind(currentList[position])
     }
 
-    class LogViewHolder(val binding: ViewLogItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(log: LogData, listener: LogListener) {
+    class LogViewHolder(private val binding: ViewLogItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(log: LogData) {
             binding.apply {
                 root.setOnClickListener {
-                    msg.alpha = 0.5f
+                    //NOP
                 }
-                msg.text = log.msg
 
                 if (log.isApiLog) {
-                    msg.setTextColor(log.color)
+                    msg.apply {
+                        text = log.msg
+                        setTextColor(log.color)
+                    }
                     type.visibility = View.GONE
                 } else {
-                    msg.setTextColor(Color.parseColor("#ffffff"))
+                    msg.apply {
+                        subStringColor(log.msg, log.msg.indexOf("\n"), log.msg.length)
+                        setTextColor(Color.parseColor("#ffffff"))
+                    }
                     type.apply {
                         visibility = View.VISIBLE
                         text = log.type.toString()
@@ -95,6 +100,18 @@ class LogAdapter : ListAdapter<LogData, LogAdapter.LogViewHolder>(diff) {
                     }
                 }
             }
+        }
+        private fun TextView.subStringColor(text: String?, start: Int, end: Int) {
+            val ssb = SpannableStringBuilder(text)
+
+            ssb.setSpan(
+                ForegroundColorSpan(Color.parseColor("#bbbbbb")),
+                start,
+                end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+
+            this.text = ssb
         }
     }
 }

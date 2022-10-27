@@ -12,7 +12,8 @@ enum class LogType {
     RESPONSE,
     D,
     I,
-    W
+    W,
+    E
 }
 
 class LogData(
@@ -25,6 +26,7 @@ class LogData(
     val time: String,
 ) {
     val isApiLog = type == LogType.RESPONSE || type == LogType.REQUEST
+    var isSuccessful: Boolean = true
 
     constructor(request: Request) : this(
         type = LogType.REQUEST,
@@ -44,7 +46,9 @@ class LogData(
         code = response.code,
         input = response,
         time = (response.receivedResponseAtMillis - response.sentRequestAtMillis).toString(),
-    )
+    ) {
+        isSuccessful = code == 200
+    }
 
     constructor(string: String, type: LogType) : this(
         type = type,
@@ -53,15 +57,15 @@ class LogData(
         method = "",
         code = 0,
         input = string,
-        time = SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS", Locale.KOREA).format(Date()).toString(),
+        time = "",
     )
 
     val msg: String
         get() {
-            return when(type) {
+            return when (type) {
                 LogType.REQUEST -> "--> $method $url (${length}-byte body)"
                 LogType.RESPONSE -> "<-- $code $url (${time}ms, $length body)"
-                else -> "$time $input"
+                else -> "$input"
             }
         }
 
@@ -86,19 +90,23 @@ class LogData(
 
     val color: Int
         get() {
-            return when(type) {
+            return when (type) {
                 LogType.REQUEST -> Color.parseColor("#7DC8CA")
-                LogType.RESPONSE -> Color.parseColor("#F3D2AC")
+                LogType.RESPONSE -> {
+                    if (isSuccessful) Color.parseColor("#F3D2AC")
+                    else Color.parseColor("#FF5555")
+                }
                 LogType.D -> Color.parseColor("#4b86e7")
                 LogType.I -> Color.parseColor("#02ff02")
-                else -> Color.parseColor("#ffff07")
+                LogType.W -> Color.parseColor("#ffff07")
+                else -> Color.parseColor("#ff5555")
             }
         }
 }
 
 
 object CustomLog {
-    val logList = mutableListOf<LogData>()
+    private val logList = mutableListOf<LogData>()
     val logLiveData = MutableLiveData<List<LogData>>()
 
     fun a(response: Response) {
@@ -112,20 +120,26 @@ object CustomLog {
     }
 
     fun d(string: String) {
-        val msg = string + getStackTrace(object : Throwable() {})
+        val msg = getMsgFormat(string, object : Throwable() {})
         logList.add(LogData(msg, LogType.D))
         logLiveData.postValue(logList.reversed())
     }
 
     fun i(string: String) {
-        val msg = string + getStackTrace(object : Throwable() {})
+        val msg = getMsgFormat(string, object : Throwable() {})
         logList.add(LogData(msg, LogType.I))
         logLiveData.postValue(logList.reversed())
     }
 
-    fun w(string:String) {
-        val msg = string + getStackTrace(object : Throwable() {})
+    fun w(string: String) {
+        val msg = getMsgFormat(string, object : Throwable() {})
         logList.add(LogData(msg, LogType.W))
+        logLiveData.postValue(logList.reversed())
+    }
+
+    fun e(string: String) {
+        val msg = getMsgFormat(string, object : Throwable() {})
+        logList.add(LogData(msg, LogType.E))
         logLiveData.postValue(logList.reversed())
     }
 
@@ -134,9 +148,11 @@ object CustomLog {
         logLiveData.postValue(mutableListOf())
     }
 
-    fun getStackTrace(t: Throwable): String {
+    private fun getMsgFormat(input: String, t: Throwable): String {
         if (t.stackTrace.size < 2) return ""
-        val e = t.stackTrace[1]
-        return "\nat " + "." + e.methodName + " (" + e.fileName + ":" + e.lineNumber + ")"
+        val loc = t.stackTrace[1].fileName.split(".")[0] + ":" + t.stackTrace[1].lineNumber
+        val time = SimpleDateFormat("[HH:mm:ss.SSS]", Locale.KOREA).format(Date()).toString()
+
+        return "$input\n$loc $time"
     }
 }
