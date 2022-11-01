@@ -2,6 +2,7 @@ package com.example.elandmall_kotlin.api
 
 import com.example.elandmall_kotlin.BuildConfig
 import com.example.elandmall_kotlin.base.BaseApplication
+import com.example.elandmall_kotlin.common.CommonConst.mainDomain
 import com.facebook.flipper.android.AndroidFlipperClient
 import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
 import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
@@ -43,11 +44,11 @@ object ApiManager {
             .readTimeout(10, TimeUnit.SECONDS)
             .build()
 
-        val builder : Retrofit = Retrofit.Builder()
-            .baseUrl("http://m.elandmall.com")
+        return Retrofit.Builder()
+            .baseUrl(mainDomain)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
-        return builder.create(ApiService::class.java)
+            .create(ApiService::class.java)
     }
 }

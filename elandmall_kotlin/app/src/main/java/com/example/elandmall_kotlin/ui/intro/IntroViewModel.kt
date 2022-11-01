@@ -13,7 +13,6 @@ import kotlinx.coroutines.launch
 
 class IntroViewModel : ViewModel() {
     private val repository by lazy { IntroRepository() }
-
     init {
         requestIntroApis()
     }

@@ -15,6 +15,12 @@ import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.main.MainActivity
 import com.example.elandmall_kotlin.util.Logger
 
+/**
+ * IntroActivity
+ * - check intro data
+ * - cache gnb, home data
+ * - launch main activity after 2sec delay
+ */
 class IntroActivity : BaseActivity<ActivityIntroBinding, IntroViewModel>(R.layout.activity_intro) {
     override val viewModel by viewModels<IntroViewModel>()
 

@@ -52,5 +52,5 @@ interface ApiService {
 
     //슬라이드 메뉴 카테고리
     @GET("/api/dispctg/searchGnbAllCategoryListElandJson.action?cate_expand_yn=Y")
-    suspend fun getSlideMenuData(): Call<ResponseBody>
+    suspend fun getCategoryList(): CategoryResponse
 }

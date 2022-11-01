@@ -13,6 +13,8 @@ import com.facebook.flipper.plugins.sharedpreferences.SharedPreferencesFlipperPl
 import com.facebook.soloader.SoLoader
 
 class BaseApplication : Application() {
+    var isAppRunning = false
+
     companion object {
         lateinit var instance: BaseApplication
 
@@ -46,5 +48,9 @@ class BaseApplication : Application() {
 
             }.start()
         }
+    }
+
+    fun clearData() {
+        isAppRunning = false
     }
 }

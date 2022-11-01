@@ -1,7 +1,7 @@
 package com.example.elandmall_kotlin.common
 
 /**
- * managing preference values
+ * preference variables
  */
 object DataManager {
 }

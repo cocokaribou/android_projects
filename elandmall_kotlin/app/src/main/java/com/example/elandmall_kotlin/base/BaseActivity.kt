@@ -1,5 +1,6 @@
 package com.example.elandmall_kotlin.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.annotation.LayoutRes
@@ -8,8 +9,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import com.example.elandmall_kotlin.BR
+import com.example.elandmall_kotlin.ui.intro.IntroActivity
 
-abstract class BaseActivity<B : ViewDataBinding, VM: ViewModel>(
+/**
+ * BaseActivity
+ * activity navigation using [com.example.elandmall_kotlin.ui.EventBus]
+ */
+abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel>(
     @LayoutRes private val layoutResId: Int
 ) : AppCompatActivity() {
 
@@ -28,6 +34,35 @@ abstract class BaseActivity<B : ViewDataBinding, VM: ViewModel>(
             setVariable(BR.vm, viewModel)
         }
     }
+
+    protected fun isSavedInstanceState(savedInstanceState:Bundle?): Boolean {
+        return if (savedInstanceState != null) {
+            val intent = Intent(this, IntroActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+            finishAffinity()
+            true
+        } else {
+            false
+        }
+    }
+
+    fun initBottomBar() {}
+
+    private fun navToHome() {}
+
+    private fun navToWeb() {}
+
+    private fun navToCategory() {}
+
+    private fun navToBrand() {}
+
+    private fun navToCart() {}
+
+    private fun navToSearch() {}
+
+    private fun navToSetting() {}
+
 
     override fun onDestroy() {
         super.onDestroy()

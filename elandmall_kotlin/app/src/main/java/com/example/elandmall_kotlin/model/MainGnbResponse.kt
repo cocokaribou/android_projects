@@ -7,7 +7,7 @@ data class MainGnbResponse(
     @SerializedName("data") val data: MainGnbData?,
 ) : BaseResponse() {
     data class MainGnbData(
-        @SerializedName("header_icon_list") val headerIconList: List<Header>?,
+        @SerializedName("header_icon_list") val gnbList: List<GNBData>?,
         @SerializedName("search_ad") val searchAd: SearchAd?,
         @SerializedName("top_banner") val topBanner: Banner?,
         @SerializedName("foot_banner") val footBanner: Banner?,
@@ -15,7 +15,7 @@ data class MainGnbResponse(
         @SerializedName("foot_chat_bot_banner") val footChatBotBanner: Banner?,
     )
 
-    data class Header(
+    data class GNBData(
         @SerializedName("ga_action") val gaAction: String?,
         @SerializedName("webview") val webview: String?,
         @SerializedName("menu_subtitle") val menuSubtitle: String?,
