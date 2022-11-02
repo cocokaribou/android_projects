@@ -7,6 +7,7 @@ import com.example.elandmall_kotlin.base.BaseActivity
 import com.example.elandmall_kotlin.base.BaseApplication
 import com.example.elandmall_kotlin.databinding.ActivityMainBinding
 import com.example.elandmall_kotlin.repository.MemDataSource
+import com.example.elandmall_kotlin.util.Logger
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -38,6 +39,7 @@ class MainActivity: BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.ac
 
         viewpager.apply {
             adapter = MainTabPagerAdapter(this@MainActivity)
+            isUserInputEnabled = true
         }
 
         TabLayoutMediator(tabs, viewpager) { tab, position ->

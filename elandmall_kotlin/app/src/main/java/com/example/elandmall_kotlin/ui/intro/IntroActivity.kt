@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.base.BaseActivity
 import com.example.elandmall_kotlin.common.ApiResult
@@ -14,6 +15,10 @@ import com.example.elandmall_kotlin.databinding.ActivityIntroBinding
 import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.main.MainActivity
 import com.example.elandmall_kotlin.util.Logger
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * IntroActivity
@@ -37,18 +42,19 @@ class IntroActivity : BaseActivity<ActivityIntroBinding, IntroViewModel>(R.layou
 
     private fun initObserve() {
         viewModel.mainFlag.observe(this) {
-            AlertDialog.Builder(this).apply {
-                if (it == ApiResult.SUCCESS) {
-                    setMessage("메인으로 진입합니다.")
-                    setPositiveButton("ok") { _, _ -> launchMain() }
-                } else {
-                    setMessage("오류가 발생하였습니다.")
-                    setPositiveButton("ok") { _, _ -> finish() }
-                }
-            }.create().show()
+            if (it != ApiResult.SUCCESS) {
+                AlertDialog.Builder(this)
+                    .setMessage(getString(R.string.alert_error_occurred))
+                    .setPositiveButton("ok") { _, _ -> finish() }
+                    .create().show()
+            } else {
+                CoroutineScope(Dispatchers.Main).launch {
+                    val sec = if (viewModel.completeTime < 2000) 2000 else viewModel.completeTime
+                    delay(sec)
 
-            Logger.i(MemDataSource.mainGnbCache.toString())
-            Logger.i(MemDataSource.homeCache.toString())
+                    launchMain()
+                }
+            }
         }
     }
 

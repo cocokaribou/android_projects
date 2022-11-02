@@ -28,7 +28,9 @@ data class MainGnbResponse(
         @SerializedName("new_tag_yn") val newTagYn: String?,
         @SerializedName("ga_category") val gaCategory: String?,
         @SerializedName("ga_label") val gaLabel: String?,
-    )
+    ){
+        val isWebView = webview == "Y"
+    }
 
     data class SearchAd(
         @SerializedName("tr_yn") val tryYn: String?,

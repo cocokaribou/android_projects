@@ -46,7 +46,9 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_marginBottom="40dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -75,9 +77,5 @@
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
                 android:layout_height="40dp" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-        <include
-            android:id="@+id/coach"
-            layout="@layout/layout_coach" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

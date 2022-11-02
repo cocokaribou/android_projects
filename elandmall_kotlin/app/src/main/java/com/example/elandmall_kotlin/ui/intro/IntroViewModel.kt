@@ -12,7 +12,11 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class IntroViewModel : ViewModel() {
+    var startTime: Long = 0L
+    var completeTime: Long = 0L
+
     private val repository by lazy { IntroRepository() }
+
     init {
         requestIntroApis()
     }
@@ -20,6 +24,7 @@ class IntroViewModel : ViewModel() {
     val mainFlag = MutableLiveData<ApiResult>()
     private fun requestIntroApis() {
         viewModelScope.launch {
+            startTime = System.currentTimeMillis()
             merge(repository.requestGnbStream(), repository.requestHomeStream())
                 .catch {
                     mainFlag.postValue(ApiResult.EXCEPTION)
@@ -41,6 +46,7 @@ class IntroViewModel : ViewModel() {
                 .onCompletion {
                     if (MemDataSource.mainGnbCache != null && MemDataSource.homeCache != null) {
                         mainFlag.postValue(ApiResult.SUCCESS)
+                        completeTime = System.currentTimeMillis() - startTime
                     } else {
                         mainFlag.postValue(ApiResult.FAIL)
                     }
