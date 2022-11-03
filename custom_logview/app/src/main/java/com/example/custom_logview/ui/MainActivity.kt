@@ -1,16 +1,24 @@
 package com.example.custom_logview.ui
 
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintSet
 import com.example.custom_logview.CustomLog
 import com.example.custom_logview.LogBottomSheetFragment
 import com.example.custom_logview.databinding.ActivityMainBinding
 
-class MainActivity:AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
+//    val logview by lazy {
+//        CustomLogView(this).apply {
+//            id = View.generateViewId()
+//        }
+//    }
     private val logBottomSheet: LogBottomSheetFragment by lazy { LogBottomSheetFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,11 +30,20 @@ class MainActivity:AppCompatActivity() {
         setContentView(binding.root)
 
         CustomLog.logLiveData.observe(this) {
-            logBottomSheet.submitList(it)
+//            logview.submitList(it)
+            binding.logview.submitList(it)
+//            logBottomSheet.submitList(it)
         }
 
-        binding.logview.setOnClickListener {
-            logBottomSheet.show(supportFragmentManager, "tag")
+        with(binding) {
+            logview.setOnClickListener {
+                if (logview.parent != null) {
+                    (logview.parent as ViewGroup).removeView(logview)
+                }
+                root.addView(logview)
+//            logBottomSheet.show(supportFragmentManager, "tag")
+
+            }
         }
     }
 }
