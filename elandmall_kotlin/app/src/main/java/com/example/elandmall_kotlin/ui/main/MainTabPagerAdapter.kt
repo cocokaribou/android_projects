@@ -26,18 +26,16 @@ class MainTabPagerAdapter(fm: FragmentActivity) : FragmentStateAdapter(fm) {
         var fragment =
             when (gnb?.menuCd) {
                 HOME_MENU_CD -> {
-                    HomeModuleFragment()
-//                    fragment = HomeModuleFragment.create(
-//                        tabName = gnb.menuName ?: "",
-//                        apiUrl = gnb.apiUrl ?: ""
-//                    )
+                    HomeModuleFragment.create(
+                        tabName = gnb.menuName ?: "",
+                        apiUrl = gnb.apiUrl ?: ""
+                    )
                 }
                 else -> {
-                    WebModulesFragment()
-//                    fragment = WebModulesFragment.create(
-//                        tabName = gnb?.menuName ?: "",
-//                        apiUrl = gnb?.apiUrl ?: ""
-//                    )
+                    WebModulesFragment.create(
+                        tabName = gnb?.menuName ?: "",
+                        apiUrl = gnb?.apiUrl ?: ""
+                    )
                 }
             }
         fragments[gnb?.menuCd] = fragment

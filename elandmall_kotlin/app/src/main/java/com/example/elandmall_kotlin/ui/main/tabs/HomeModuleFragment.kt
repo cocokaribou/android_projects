@@ -13,13 +13,10 @@ class HomeModuleFragment : BaseModuleFragment() {
         Logger.v("home created!")
         initUI()
         observeData()
-    }
 
-    private fun initUI() {
-        binding.text.text = "home"
-    }
+        val test = mutableListOf<String>().toList()
 
-    private fun observeData() {}
+    }
 
     companion object {
         fun create(tabName: String, apiUrl: String = "") =

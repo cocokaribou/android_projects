@@ -16,25 +16,42 @@ data class HomeResponse(
     class HomeOprice
 
     data class HomeData(
-        @SerializedName("home_eyou") val homeEyou: HomeEyou?,
-        @SerializedName("home_categoryIcon_list") val homeCategoryIconList: List<HomeCategoryIcon>?,
-        @SerializedName("home_brand_list") val homeBrandList: List<HomeBrand>?,
-        @SerializedName("home_lucky_deal") val homeLuckyDeal: List<HomeLuckyDeal>?,
-        @SerializedName("home_oprice_list") val homeOpriceList: List<HomeOprice>?,
-        @SerializedName("home_nc_live") val homeNcLive: HomeNcLive?,
-        @SerializedName("home_today_market") val homeTodayMarket: HomeTodayMarket?,
+        // 빌보드 배너
         @SerializedName("home_mainbanner_list") val homeMainbannerList: List<HomeMainbanner>?,
-        @SerializedName("home_timesale") val homeTimesale: List<HomeTimesale>?,
-        @SerializedName("home_banner_bottom") val homeBannerBottom: HomeBannerBottom?,
-        @SerializedName("home_imgbanner") val homeImgbanner: HomeImgbanner?,
-        @SerializedName("home_subbanner_list") val homeSubbannerList: List<Any>?,
+        // 카테고리 리스트
+        @SerializedName("home_categoryIcon_list") val homeCategoryIconList: List<HomeCategoryIcon>?,
+        // 상단 배너
         @SerializedName("home_banner_top") val homeBannerTop: Banner?,
-        @SerializedName("home_shoppingvj") val homeShoppingvj: List<Any>?,
+        // 상단 띠 배너
         @SerializedName("home_banner_top_list") val homeBannerTopList: List<Banner>?,
+        // 서브배너
+        @SerializedName("home_subbanner_list") val homeSubbannerList: List<Any>?,
+        // 브랜드 NEW
+        @SerializedName("home_brand_list") val homeBrandList: List<HomeBrand>?,
+        // 쇼핑 VJ
+        @SerializedName("home_shoppingvj") val homeShoppingvj: List<Any>?,
+        // 이미지 배너
+        @SerializedName("home_imgbanner") val homeImgbanner: HomeImgbanner?,
+        // NC LIVE
+        @SerializedName("home_nc_live") val homeNcLive: HomeNcLive?,
+        // 타임세일
+        @SerializedName("home_timesale") val homeTimesale: List<HomeTimesale>?,
+        // eYOU
+        @SerializedName("home_eyou") val homeEyou: HomeEyou?,
+        // 럭키딜
+        @SerializedName("home_lucky_deal") val homeLuckyDeal: List<HomeLuckyDeal>?,
+        // 중간 띠 배너
+        @SerializedName("home_banner_bottom") val homeBannerBottom: HomeBannerBottom?,
+        // 오늘의 장보기
+        @SerializedName("home_today_market") val homeTodayMarket: HomeTodayMarket?,
+        // 기획전
         @SerializedName("home_offers") val homeOffers: HomeOffers?,
+        // 오프라이스
+        @SerializedName("home_oprice_list") val homeOpriceList: List<HomeOprice>?,
+        // (구) 오프라인 쇼핑
+        @SerializedName("home_offline_shop") val homeOfflineShop: HomeOfflineShop?,
+        // MD 목록
         @SerializedName("home_md") val homeMd: HomeMd?,
-        @SerializedName("home_week_goods") val homeWeekGoods: List<Any>?,
-        @SerializedName("home_offline_shop") val homeOfflineShop: HomeOfflineShop?
     )
 
     data class HomeCategoryIcon(

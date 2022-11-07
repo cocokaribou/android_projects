@@ -6,9 +6,11 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.FragmentTabCommonBinding
+import com.example.elandmall_kotlin.ui.main.CommonModulesAdapter
 
 open class BaseModuleFragment: Fragment() {
 
@@ -22,6 +24,21 @@ open class BaseModuleFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.text.text = "아 뭐냐궁"
+        initUI()
+        observeData()
+    }
+
+    fun initUI() {
+        with(binding) {
+            list.apply {
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = CommonModulesAdapter()
+            }
+        }
+    }
+
+    fun observeData() {
+
     }
 }
