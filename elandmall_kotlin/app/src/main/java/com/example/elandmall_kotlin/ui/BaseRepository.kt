@@ -1,4 +1,4 @@
-package com.example.elandmall_kotlin.base
+package com.example.elandmall_kotlin.ui
 
 import com.example.elandmall_kotlin.api.ApiManager
 

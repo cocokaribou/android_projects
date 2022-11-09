@@ -3,12 +3,11 @@ package com.example.elandmall_kotlin.ui.main
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.elandmall_kotlin.base.BaseModuleFragment
+import com.example.elandmall_kotlin.ui.BaseModuleFragment
 import com.example.elandmall_kotlin.common.CommonConst.HOME_MENU_CD
 import com.example.elandmall_kotlin.repository.MemDataSource
-import com.example.elandmall_kotlin.ui.main.tabs.HomeModuleFragment
+import com.example.elandmall_kotlin.ui.main.tabs.home.HomeModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.WebModulesFragment
-import com.example.elandmall_kotlin.util.Logger
 
 class MainTabPagerAdapter(fm: FragmentActivity) : FragmentStateAdapter(fm) {
     // TODO infinite horizontal scroll
@@ -20,10 +19,9 @@ class MainTabPagerAdapter(fm: FragmentActivity) : FragmentStateAdapter(fm) {
         return data?.size ?: 0
     }
 
-    // TODO filter gnb list
     override fun createFragment(position: Int): Fragment {
         val gnb = data?.getOrNull(position)
-        var fragment =
+        val fragment =
             when (gnb?.menuCd) {
                 HOME_MENU_CD -> {
                     HomeModuleFragment.create(

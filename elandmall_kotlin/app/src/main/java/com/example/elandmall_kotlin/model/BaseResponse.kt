@@ -1,4 +1,4 @@
-package com.example.elandmall_kotlin.base
+package com.example.elandmall_kotlin.model
 
 import com.google.gson.annotations.SerializedName
 

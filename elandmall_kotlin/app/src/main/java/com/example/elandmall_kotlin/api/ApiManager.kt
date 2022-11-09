@@ -1,7 +1,7 @@
 package com.example.elandmall_kotlin.api
 
 import com.example.elandmall_kotlin.BuildConfig
-import com.example.elandmall_kotlin.base.BaseApplication
+import com.example.elandmall_kotlin.BaseApplication
 import com.example.elandmall_kotlin.common.CommonConst.mainDomain
 import com.facebook.flipper.android.AndroidFlipperClient
 import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 object ApiManager {
     private val logging: HttpLoggingInterceptor = HttpLoggingInterceptor()
         .setLevel(
-            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
+            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BASIC
             else HttpLoggingInterceptor.Level.NONE
         )
 

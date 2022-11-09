@@ -1,14 +1,12 @@
-package com.example.elandmall_kotlin.base
+package com.example.elandmall_kotlin
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
-import com.example.elandmall_kotlin.BR
 import com.example.elandmall_kotlin.ui.intro.IntroActivity
 
 /**

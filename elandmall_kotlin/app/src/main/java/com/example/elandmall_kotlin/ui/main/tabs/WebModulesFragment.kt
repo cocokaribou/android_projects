@@ -1,30 +1,20 @@
 package com.example.elandmall_kotlin.ui.main.tabs
 
 import android.os.Bundle
-import android.view.View
-import com.example.elandmall_kotlin.base.BaseModuleFragment
-import com.example.elandmall_kotlin.util.Logger
+import com.example.elandmall_kotlin.ui.BaseModuleFragment
 
-class WebModulesFragment: BaseModuleFragment() {
+class WebModulesFragment : BaseModuleFragment() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        Logger.v("web created!")
-
-        initUI()
-        observeData()
+    override fun initUI() = with(binding){
+        test.text = arguments?.get(KEY_ITEM_TAB_NAME).toString()
     }
 
-    private fun initUI() {
-        binding.text.text = "web"
+    override fun observeData() {
     }
-
-    private fun observeData() {}
 
     companion object {
         fun create(tabName: String, apiUrl: String = "") =
-            HomeModuleFragment().apply {
+            WebModulesFragment().apply {
                 arguments = Bundle().apply {
                     putString(KEY_ITEM_TAB_NAME, tabName)
                     if (apiUrl.isNotEmpty()) {

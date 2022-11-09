@@ -1,20 +1,14 @@
 package com.example.elandmall_kotlin.ui.intro
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
-import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.R
-import com.example.elandmall_kotlin.base.BaseActivity
+import com.example.elandmall_kotlin.BaseActivity
 import com.example.elandmall_kotlin.common.ApiResult
 import com.example.elandmall_kotlin.databinding.ActivityIntroBinding
-import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.main.MainActivity
-import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

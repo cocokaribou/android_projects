@@ -1,9 +1,6 @@
 package com.example.elandmall_kotlin.api
 
-import com.example.elandmall_kotlin.base.BaseResponse
 import com.example.elandmall_kotlin.model.*
-import okhttp3.ResponseBody
-import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {

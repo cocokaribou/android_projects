@@ -29,6 +29,7 @@
 
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tabs"
+                        android:overScrollMode="always"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:layout_constrainedWidth="true"

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.elandmall_kotlin.base.BaseApplication
 import com.example.elandmall_kotlin.common.CommonConst.HOST_LANDING
 import com.example.elandmall_kotlin.common.CommonConst.SCHEME_ELANDMALL
 import com.example.elandmall_kotlin.ui.intro.IntroActivity

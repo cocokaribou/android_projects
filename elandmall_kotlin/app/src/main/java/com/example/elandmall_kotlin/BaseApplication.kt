@@ -1,8 +1,7 @@
-package com.example.elandmall_kotlin.base
+package com.example.elandmall_kotlin
 
 import android.app.Application
 import android.content.Context
-import com.example.elandmall_kotlin.BuildConfig
 import com.example.elandmall_kotlin.util.Logger
 import com.facebook.flipper.android.AndroidFlipperClient
 import com.facebook.flipper.android.utils.FlipperUtils

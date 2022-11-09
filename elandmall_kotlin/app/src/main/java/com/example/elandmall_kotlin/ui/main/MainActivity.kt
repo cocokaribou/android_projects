@@ -3,11 +3,10 @@ package com.example.elandmall_kotlin.ui.main
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.elandmall_kotlin.R
-import com.example.elandmall_kotlin.base.BaseActivity
-import com.example.elandmall_kotlin.base.BaseApplication
+import com.example.elandmall_kotlin.BaseActivity
+import com.example.elandmall_kotlin.BaseApplication
 import com.example.elandmall_kotlin.databinding.ActivityMainBinding
 import com.example.elandmall_kotlin.repository.MemDataSource
-import com.example.elandmall_kotlin.util.Logger
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**

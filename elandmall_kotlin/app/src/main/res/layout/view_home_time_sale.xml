@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/home_section_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:text="타임세일"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/timer_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="6dp"
+        android:text="남은시간"
+        android:textColor="#2f2f2f"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toBottomOf="@id/timer"
+        app:layout_constraintEnd_toStartOf="@id/timer"
+        app:layout_constraintTop_toTopOf="@id/timer" />
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:textColor="#c9000b"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/title"
+        tools:text="07:49:32" />
+
+    <ImageView
+        android:id="@+id/goods_img"
+        android:layout_width="175dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginBottom="20dp"
+        android:background="#ffbbbb"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <TextView
+        android:id="@+id/goods_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:maxLines="1"
+        android:textColor="#121212"
+
+        android:textSize="13dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/goods_content"
+        app:layout_constraintTop_toTopOf="@id/goods_img"
+        tools:text="청정원" />
+
+    <TextView
+        android:id="@+id/goods_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="15dp"
+        android:ellipsize="end"
+        android:lines="2"
+        android:maxLines="2"
+        android:textColor="#666666"
+        android:textSize="13dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/goods_img"
+        app:layout_constraintTop_toBottomOf="@id/goods_name"
+        tools:text="제주도 산간에서 자란 소고기 550g\n2줄" />
+
+    <TextView
+        android:id="@+id/price_before"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:includeFontPadding="false"
+        android:textColor="#999999"
+        android:textSize="12dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/goods_content"
+        app:layout_constraintTop_toBottomOf="@id/goods_content"
+        tools:text="46,550원"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/sale_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:textColor="#c9000b"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/goods_content"
+        app:layout_constraintTop_toBottomOf="@+id/price_before"
+        tools:text="10%"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="55,550원"
+        android:textColor="#3e3e3e"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/price_before"
+        app:layout_constraintTop_toBottomOf="@+id/price_before"
+        app:layout_goneMarginStart="0dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/goods_content"
+        app:layout_constraintTop_toBottomOf="@+id/price">
+
+        <TextView
+            android:id="@+id/tag1"
+            style="@style/home_tag_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:text="무료배송"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tag2"
+            style="@style/home_tag_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="단독특가"
+            app:layout_constraintBottom_toBottomOf="@+id/tag1"
+            app:layout_constraintStart_toEndOf="@+id/tag1" />
+
+        <TextView
+            android:id="@+id/tag3"
+            style="@style/home_tag_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="단독특가"
+            app:layout_constraintBottom_toBottomOf="@+id/tag2"
+            app:layout_constraintStart_toEndOf="@+id/tag2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:textColor="#999999"
+        android:textSize="11dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/goods_img"
+        app:layout_constraintStart_toStartOf="@+id/goods_content"
+        tools:text="9,999개 구매" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="7.68dp"
+        android:layout_marginTop="15dp"
+        android:background="#f4f5f7"
+        app:layout_constraintTop_toBottomOf="@+id/goods_img" />
+</androidx.constraintlayout.widget.ConstraintLayout>
