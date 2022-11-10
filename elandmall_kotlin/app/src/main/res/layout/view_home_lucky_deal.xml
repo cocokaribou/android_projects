@@ -57,10 +57,10 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:text="고메치킨 순살크리스피 550g" />
 
-        <TextView
-            android:id="@+id/sale_percent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+<!--        <TextView-->
+<!--            android:id="@+id/sale_percent"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

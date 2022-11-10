@@ -36,6 +36,10 @@ abstract class BaseModuleFragment: Fragment() {
     abstract fun initUI()
     abstract fun observeData()
 
+    fun setModules(moduleList: MutableList<ModuleData>) {
+        moduleAdapter.value = moduleList
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
