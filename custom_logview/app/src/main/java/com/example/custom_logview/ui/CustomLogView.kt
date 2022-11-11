@@ -109,6 +109,7 @@ class CustomLogView @JvmOverloads constructor(
                 override fun onEnter() {
                     hideKeyboard()
                     CustomLog.search(search.text.toString())
+                    clearInput()
                 }
             })
             onFocusChangeListener = object: TextFocusListener() {
@@ -132,5 +133,9 @@ class CustomLogView @JvmOverloads constructor(
             inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
             view.clearFocus()
         }
+    }
+
+    private fun ViewLogBinding.clearInput() {
+        search.text.clear()
     }
 }
