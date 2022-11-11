@@ -4,13 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/custom_log_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:behavior_hideable="false">
+
+    <TextView
+        android:id="@+id/clear"
+        style="@style/log_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="clear"
+        app:layout_constraintBottom_toTopOf="@id/list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/save"
+        style="@style/log_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="save"
+        app:layout_constraintEnd_toStartOf="@id/clear"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/search"
+        style="@style/log_input"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:hint="search"
+        android:lines="1"
+        android:maxLines="1"
+        app:layout_constraintEnd_toStartOf="@id/save"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
-        android:background="#bb000000"
+        style="@style/log_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="4dp" />
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clear" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
