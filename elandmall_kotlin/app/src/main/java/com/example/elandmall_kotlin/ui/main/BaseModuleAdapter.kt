@@ -75,44 +75,38 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                     false
                 )
             )
-            else -> HomeLuckyDealViewHolder(
+            ModuleData.HomeLuckyDealData.ordinal() -> HomeLuckyDealViewHolder(
                 ViewHomeLuckyDealBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 )
             )
-//            ModuleData.HomeLuckyDealData.ordinal() -> HomeLuckyDealViewHolder(
-//                ViewHomeLuckyDealBinding.inflate(
-//                    LayoutInflater.from(parent.context),
-//                    parent,
-//                    false
-//                )
-//            )
-//
-//            ModuleData.HomeSeasonPlansData.ordinal() -> HomeSeasonPlanViewHolder(
-//                ViewHomeSeasonPlanModuleBinding.inflate(
-//                    LayoutInflater.from(parent.context),
-//                    parent,
-//                    false
-//                )
-//            )
-//
-//            ModuleData.HomeStoreShopData.ordinal() -> HomeStoreShopViewHolder(
-//                ViewHomeStoreShopModuleBinding.inflate(
-//                    LayoutInflater.from(parent.context),
-//                    parent,
-//                    false
-//                )
-//            )
-//
-//            else -> UnknownViewHolder(
-//                ViewUnknownModuleBinding.inflate(
-//                    LayoutInflater.from(parent.context),
-//                    parent,
-//                    false
-//                )
-//            )
+
+            ModuleData.HomeSeasonPlanData.ordinal() -> HomeSeasonPlanViewHolder(
+                ViewHomeSeasonPlanBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.HomeStoreShopData.ordinal() -> HomeStoreShopViewHolder(
+                ViewHomeStoreShopBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            // TODO other viewholders from gnb
+
+            else -> UnknownViewHolder(
+                ViewUnknownHolderBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
         }
     }
 

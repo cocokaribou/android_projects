@@ -1,10 +1,8 @@
 package com.example.elandmall_kotlin.ui.main.tabs.home
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.HomeResponse
-import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.BaseViewModel
 import com.example.elandmall_kotlin.ui.ModuleData
 import kotlinx.coroutines.flow.catch
@@ -104,7 +102,7 @@ class HomeViewModel : BaseViewModel() {
                     homeData.homeSeasonPlan.homeSeasonPlanList?.let { seasonList ->
                         seasonList.forEach {
                             moduleList.add(
-                                ModuleData.HomeSeasonPlansData(it)
+                                ModuleData.HomeSeasonPlanData(it)
                             )
                         }
                     }
@@ -116,13 +114,9 @@ class HomeViewModel : BaseViewModel() {
                         moduleList.add(
                             ModuleData.HomeStoreShopData(homeData.homeOfflineShop)
                         )
-
                     }
                 }
-
-
                 else -> {}
-
             }
         }
         homeList.postValue(moduleList)

@@ -18,7 +18,6 @@ sealed class ModuleData {
 
     data class HomeCategoryIconData(
         val homeCategoryIconData: List<HomeResponse.HomeCategoryIcon>,
-        val isMoreClick: Boolean = false,
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -78,7 +77,7 @@ sealed class ModuleData {
         companion object
     }
 
-    data class HomeSeasonPlansData(
+    data class HomeSeasonPlanData(
         val homeSeasonPlansData: HomeResponse.HomeSeasonPlan.HomeSeasonPlanItem
     ) : ModuleData() {
         override fun clone(): ModuleData {

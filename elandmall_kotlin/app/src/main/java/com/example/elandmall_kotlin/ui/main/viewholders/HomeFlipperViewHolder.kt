@@ -1,8 +1,10 @@
 package com.example.elandmall_kotlin.ui.main.viewholders
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.text.SpannableStringBuilder
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.viewpager2.widget.ViewPager2
@@ -14,8 +16,11 @@ import com.bumptech.glide.request.target.Target
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.ViewHomeMainBannerBinding
 import com.example.elandmall_kotlin.ui.BaseViewHolder
+import com.example.elandmall_kotlin.ui.EventBus
+import com.example.elandmall_kotlin.ui.LinkEvent
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.util.Logger
+import com.example.elandmall_kotlin.util.getSpannedBoldText
 
 class HomeMainBannerViewHolder(private val binding: ViewHomeMainBannerBinding) : BaseViewHolder(binding.root) {
     override fun onBind(item: Any, pos: Int) {
@@ -27,6 +32,17 @@ class HomeMainBannerViewHolder(private val binding: ViewHomeMainBannerBinding) :
     }
 
     private fun initView(data: ModuleData.HomeMainBannerData) = with(binding) {
+        val currIndex = flipper.indexOfChild(flipper.currentView)
+        popup.setOnClickListener {
+            EventBus.fire(LinkEvent(data.homeBannerData[currIndex].linkUrl))
+        }
+
+        counter.apply {
+            val count = "${currIndex + 1}/${data.homeBannerData.size}"
+            text = getSpannedBoldText(count, { currIndex + 1 }.toString())
+        }
+
+        flipper.isNestedScrollingEnabled = true
         data.homeBannerData.forEachIndexed { _, data ->
             flipper.addView(ImageView(itemView.context).apply {
                 scaleType = ImageView.ScaleType.CENTER_CROP
@@ -40,6 +56,12 @@ class HomeMainBannerViewHolder(private val binding: ViewHomeMainBannerBinding) :
                     .placeholder(R.drawable.noimg_1080x611)
                     .into(this)
             })
+
+            if(!flipper.isFlipping) {
+                flipper.startFlipping()
+            } else {
+                flipper.stopFlipping()
+            }
         }
     }
 
