@@ -3,7 +3,6 @@ package com.example.elandmall_kotlin.ui.main
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.elandmall_kotlin.ui.BaseModuleFragment
 import com.example.elandmall_kotlin.common.CommonConst.HOME_MENU_CD
 import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.main.tabs.home.HomeModuleFragment

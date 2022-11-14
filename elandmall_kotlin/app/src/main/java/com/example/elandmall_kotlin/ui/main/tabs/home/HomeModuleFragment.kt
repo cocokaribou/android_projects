@@ -1,16 +1,26 @@
 package com.example.elandmall_kotlin.ui.main.tabs.home
 
 import android.os.Bundle
-import com.example.elandmall_kotlin.ui.BaseModuleFragment
+import android.view.View
+import androidx.fragment.app.viewModels
+import com.example.elandmall_kotlin.repository.MemDataSource
+import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
+import com.example.elandmall_kotlin.util.Logger
 
 class HomeModuleFragment : BaseModuleFragment() {
 
-    override fun initUI() = with(binding){
-        test.text = arguments?.get(KEY_ITEM_TAB_NAME).toString()
-    }
+    override val viewModel: HomeViewModel by viewModels()
 
     override fun observeData() {
+        MemDataSource.homeCache?.let {
+            viewModel.setHomeModules(it)
+        }
+
+        viewModel.homeList.observe(this) {
+            setModules(it)
+        }
     }
+
     companion object {
         fun create(tabName: String, apiUrl: String = "") =
             HomeModuleFragment().apply {

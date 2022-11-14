@@ -44,7 +44,7 @@ data class HomeResponse(
         // 오늘의 장보기
         @SerializedName("home_today_market") val homeTodayMarket: HomeTodayMarket?,
         // 기획전
-        @SerializedName("home_offers") val homeOffers: HomeOffers?,
+        @SerializedName("home_offers") val homeSeasonPlan: HomeSeasonPlan?,
         // 오프라이스
         @SerializedName("home_oprice_list") val homeOpriceList: List<HomeOprice>?,
         // (구) 오프라인 쇼핑
@@ -146,7 +146,7 @@ data class HomeResponse(
         @SerializedName("ga_action") val gaAction: String?,
         @SerializedName("tr_yn") val trYn: String?,
         @SerializedName("shop_copy_nm") val shopCopyNm: String?,
-        @SerializedName("image_url") val imageUrl: String?,
+        @SerializedName("image_url") val imgUrl: String?,
         @SerializedName("rel_divi_cd") val relDiviCd: String?,
         @SerializedName("move_cont_no") val moveContNo: String?,
         @SerializedName("rel_no") val relNo: String?,
@@ -157,7 +157,16 @@ data class HomeResponse(
         @SerializedName("ga_category") val gaCategory: String?,
         @SerializedName("conts_divi_cd") val contsDiviCd: String?,
         @SerializedName("ga_label") val gaLabel: String?
-    )
+    ) {
+        val imageUrl:String
+        get() {
+            return if (!imgUrl.isNullOrEmpty() && imgUrl.startsWith("http")) {
+                imgUrl
+            } else {
+                "https:$imgUrl"
+            }
+        }
+    }
 
     data class HomeOfflineShop(
         @SerializedName("subtitle") val subtitle: String?,
@@ -311,12 +320,12 @@ data class HomeResponse(
         }
     }
 
-    data class HomeOffers(
+    data class HomeSeasonPlan(
         @SerializedName("subtitle") val subtitle: String?,
         @SerializedName("title") val title: String?,
-        @SerializedName("home_offers_list") val homeOffersList: List<HomeOffersItem>?
+        @SerializedName("home_offers_list") val homeSeasonPlanList: List<HomeSeasonPlanItem>?
     ) {
-        data class HomeOffersItem(
+        data class HomeSeasonPlanItem(
             @SerializedName("ga_action") val gaAction: String?,
             @SerializedName("tr_yn") val trYn: String?,
             @SerializedName("shop_copy_nm") val shopCopyNm: String?,

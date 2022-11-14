@@ -5,4 +5,7 @@ import com.example.elandmall_kotlin.databinding.ViewHomeTimeSaleBinding
 import com.example.elandmall_kotlin.ui.BaseViewHolder
 
 class HomeTimeSaleViewHolder(private val binding: ViewHomeTimeSaleBinding, val lifecycleOwner: LifecycleOwner) : BaseViewHolder(binding.root) {
+    override fun onBind(item: Any, pos: Int) {
+
+    }
 }

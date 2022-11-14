@@ -1,13 +1,13 @@
 package com.example.elandmall_kotlin.ui.main.tabs
 
 import android.os.Bundle
-import com.example.elandmall_kotlin.ui.BaseModuleFragment
+import androidx.fragment.app.viewModels
+import com.example.elandmall_kotlin.ui.BaseViewModel
+import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
 
 class WebModulesFragment : BaseModuleFragment() {
 
-    override fun initUI() = with(binding){
-        test.text = arguments?.get(KEY_ITEM_TAB_NAME).toString()
-    }
+    override val viewModel: WebviewViewModel by viewModels()
 
     override fun observeData() {
     }

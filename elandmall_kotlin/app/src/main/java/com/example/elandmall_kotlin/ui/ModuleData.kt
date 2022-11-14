@@ -7,7 +7,7 @@ sealed class ModuleData {
     abstract fun clone(): ModuleData
 
     data class HomeMainBannerData(
-        val homeBannerData: List<Banner>
+        val homeBannerData: List<HomeResponse.HomeMainbanner>
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -79,7 +79,7 @@ sealed class ModuleData {
     }
 
     data class HomeSeasonPlansData(
-        val homeSeasonPlansData: HomeResponse.HomeOffers
+        val homeSeasonPlansData: HomeResponse.HomeSeasonPlan.HomeSeasonPlanItem
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
