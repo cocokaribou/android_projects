@@ -43,7 +43,8 @@ class LandingActivity : AppCompatActivity() {
 
     private fun String.isKakaoLink(): Boolean {
         val uri = Uri.parse(this)
-        return getString(R.string.kakao_scheme) == uri.scheme && getString(R.string.kakaolink_host) == uri.host
+//        return getString(R.string.kakao_scheme) == uri.scheme && getString(R.string.kakaolink_host) == uri.host
+        return true
     }
 
     private fun String.isDeepLink(): Boolean {
