@@ -6,7 +6,7 @@ data class Banner(
     @SerializedName("ga_action") val gaAction: String?,
     @SerializedName("tr_yn") val trYn: String?,
     @SerializedName("shop_copy_nm") val shopCopyNm: String?,
-    @SerializedName("image_url") val imageUrl: String?,
+    @SerializedName("image_url") private val imgUrl: String?,
     @SerializedName("rel_divi_cd") val relDiviCd: String?,
     @SerializedName("move_cont_no") val moveContNo: String?,
     @SerializedName("rel_no") val relNo: String?,
@@ -17,4 +17,13 @@ data class Banner(
     @SerializedName("ga_category") val gaCategory: String?,
     @SerializedName("conts_divi_cd") val contsDiviCd: String?,
     @SerializedName("ga_label") val gaLabel: String?,
-)
+) {
+    val imageUrl:String
+        get() {
+            return if (!imgUrl.isNullOrEmpty() && imgUrl.startsWith("http")) {
+                imgUrl
+            } else {
+                "http:$imgUrl"
+            }
+        }
+}

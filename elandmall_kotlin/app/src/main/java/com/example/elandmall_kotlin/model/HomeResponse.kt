@@ -34,11 +34,11 @@ data class HomeResponse(
         // NC LIVE
         @SerializedName("home_nc_live") val homeNcLive: HomeNcLive?,
         // 타임세일
-        @SerializedName("home_timesale") val homeTimesale: List<HomeTimesale>?,
+        @SerializedName("home_timesale") val homeTimesale: Goods,
         // eYOU
         @SerializedName("home_eyou") val homeEyou: HomeEyou?,
         // 럭키딜
-        @SerializedName("home_lucky_deal") val homeLuckyDeal: List<HomeLuckyDeal>?,
+        @SerializedName("home_lucky_deal") val homeLuckyDeal: HomeLuckyDeal?,
         // 중간 띠 배너
         @SerializedName("home_banner_bottom") val homeBannerBottom: HomeBannerBottom?,
         // 오늘의 장보기
@@ -57,7 +57,7 @@ data class HomeResponse(
         @SerializedName("ga_action") val gaAction: String?,
         @SerializedName("tr_yn") val trYn: String?,
         @SerializedName("shop_copy_nm") val shopCopyNm: String?,
-        @SerializedName("image_url") val imageUrl: String?,
+        @SerializedName("image_url") private val imgUrl: String?,
         @SerializedName("rel_divi_cd") val relDiviCd: String?,
         @SerializedName("title") val title: String?,
         @SerializedName("move_cont_no") val moveContNo: String?,
@@ -70,7 +70,16 @@ data class HomeResponse(
         @SerializedName("ga_category") val gaCategory: String?,
         @SerializedName("conts_divi_cd") val contsDiviCd: String?,
         @SerializedName("ga_label") val gaLabel: String?
-    )
+    ) {
+        val imageUrl: String
+            get() {
+                return if (!imgUrl.isNullOrEmpty() && imgUrl.startsWith("http")) {
+                    imgUrl
+                } else {
+                    "http:$imgUrl"
+                }
+            }
+    }
 
     data class HomeBrand(
         @SerializedName("ga_action") val gaAction: String?,
@@ -98,43 +107,7 @@ data class HomeResponse(
         @SerializedName("goods_list") val goodsList: List<Goods>?,
         @SerializedName("subtitle") val subtitle: String?,
         @SerializedName("title") val title: String?
-    ) {
-        data class Goods(
-            @SerializedName("flag_img_path") val flagImgPath: String?,
-            @SerializedName("ga_action") val gaAction: String?,
-            @SerializedName("goods_nm") val goodsNm: String?,
-            @SerializedName("wish_zzim_Yn") val wishZzimYn: String?,
-            @SerializedName("flag_yn") val flagYn: String?,
-            @SerializedName("goods_no") val goodsNo: String?,
-            @SerializedName("brand_nm") val brandNm: String?,
-            @SerializedName("icon_view") val iconView: String?,
-            @SerializedName("cart_grp_cd") val cartGrpCd: String?,
-            @SerializedName("conts_dist_no") val contsDistNo: String?,
-            @SerializedName("cust_sale_price") val custSalePrice: Int?,
-            @SerializedName("sale_qty") val saleQty: Int?,
-            @SerializedName("link_url") val linkUrl: String?,
-            @SerializedName("wish_cart_Yn") val wishCartYn: String?,
-            @SerializedName("dlp_category") val dlpCategory: String?,
-            @SerializedName("conts_divi_cd") val contsDiviCd: String?,
-            @SerializedName("ga_label") val gaLabel: String?,
-            @SerializedName("field_recev_poss_yn") val fieldRecevPossYn: String?,
-            @SerializedName("no_image_url") val noImageUrl: String?,
-            @SerializedName("tr_yn") val trYn: String?,
-            @SerializedName("sale_rate") val saleRate: Int?,
-            @SerializedName("image_url") val imageUrl: String?,
-            @SerializedName("sale_shop_divi_cd") val saleShopDiviCd: String?,
-            @SerializedName("rel_divi_cd") val relDiviCd: String?,
-            @SerializedName("sale_price") val salePrice: Int?,
-            @SerializedName("rel_no") val relNo: String?,
-            @SerializedName("disp_ctg_no") val dispCtgNo: String?,
-            @SerializedName("vir_vend_no") val virVendNo: String?,
-            @SerializedName("quick_deli_poss_yn") val quickDeliPossYn: String?,
-            @SerializedName("dlp_list") val dlpList: String?,
-            @SerializedName("market_price") val marketPrice: Int?,
-            @SerializedName("sale_area_no") val saleAreaNo: String?,
-            @SerializedName("ga_category") val gaCategory: String?
-        )
-    }
+    )
 
     data class HomeTodayMarket(
         @SerializedName("home_today_list") val homeTodayList: List<Any>?,
@@ -146,7 +119,7 @@ data class HomeResponse(
         @SerializedName("ga_action") val gaAction: String?,
         @SerializedName("tr_yn") val trYn: String?,
         @SerializedName("shop_copy_nm") val shopCopyNm: String?,
-        @SerializedName("image_url") val imgUrl: String?,
+        @SerializedName("image_url") private val imgUrl: String?,
         @SerializedName("rel_divi_cd") val relDiviCd: String?,
         @SerializedName("move_cont_no") val moveContNo: String?,
         @SerializedName("rel_no") val relNo: String?,
@@ -158,14 +131,14 @@ data class HomeResponse(
         @SerializedName("conts_divi_cd") val contsDiviCd: String?,
         @SerializedName("ga_label") val gaLabel: String?
     ) {
-        val imageUrl:String
-        get() {
-            return if (!imgUrl.isNullOrEmpty() && imgUrl.startsWith("http")) {
-                imgUrl
-            } else {
-                "https:$imgUrl"
+        val imageUrl: String
+            get() {
+                return if (!imgUrl.isNullOrEmpty() && imgUrl.startsWith("http")) {
+                    imgUrl
+                } else {
+                    "http:$imgUrl"
+                }
             }
-        }
     }
 
     data class HomeOfflineShop(
@@ -224,49 +197,6 @@ data class HomeResponse(
             @SerializedName("ga_category") val gaCategory: String?,
             @SerializedName("conts_divi_cd") val contsDiviCd: String?,
             @SerializedName("ga_label") val gaLabel: String?
-        )
-    }
-
-    data class HomeTimesale(
-        @SerializedName("goods_list") val goodsList: List<GoodsX>?,
-        @SerializedName("title") val title: String?
-    ) {
-        data class GoodsX(
-            @SerializedName("flag_img_path") val flagImgPath: String?,
-            @SerializedName("ga_action") val gaAction: String?,
-            @SerializedName("goods_nm") val goodsNm: String?,
-            @SerializedName("wish_zzim_Yn") val wishZzimYn: String?,
-            @SerializedName("flag_yn") val flagYn: String?,
-            @SerializedName("goods_no") val goodsNo: String?,
-            @SerializedName("brand_nm") val brandNm: String?,
-            @SerializedName("icon_view") val iconView: String?,
-            @SerializedName("title") val title: String?,
-            @SerializedName("cart_grp_cd") val cartGrpCd: String?,
-            @SerializedName("conts_dist_no") val contsDistNo: String?,
-            @SerializedName("cust_sale_price") val custSalePrice: Int?,
-            @SerializedName("sale_qty") val saleQty: Int?,
-            @SerializedName("link_url") val linkUrl: String?,
-            @SerializedName("wish_cart_Yn") val wishCartYn: String?,
-            @SerializedName("dlp_category") val dlpCategory: String?,
-            @SerializedName("conts_divi_cd") val contsDiviCd: String?,
-            @SerializedName("ga_label") val gaLabel: String?,
-            @SerializedName("field_recev_poss_yn") val fieldRecevPossYn: String?,
-            @SerializedName("no_image_url") val noImageUrl: String?,
-            @SerializedName("tr_yn") val trYn: String?,
-            @SerializedName("sale_rate") val saleRate: Int?,
-            @SerializedName("image_url") val imageUrl: String?,
-            @SerializedName("sale_shop_divi_cd") val saleShopDiviCd: String?,
-            @SerializedName("rel_divi_cd") val relDiviCd: String?,
-            @SerializedName("sale_price") val salePrice: Int?,
-            @SerializedName("rel_no") val relNo: String?,
-            @SerializedName("disp_ctg_no") val dispCtgNo: String?,
-            @SerializedName("vir_vend_no") val virVendNo: String?,
-            @SerializedName("quick_deli_poss_yn") val quickDeliPossYn: String?,
-            @SerializedName("dlp_list") val dlpList: String?,
-            @SerializedName("market_price") val marketPrice: Int?,
-            @SerializedName("sale_area_no") val saleAreaNo: String?,
-            @SerializedName("time") val time: String?,
-            @SerializedName("ga_category") val gaCategory: String?
         )
     }
 
@@ -341,43 +271,6 @@ data class HomeResponse(
             @SerializedName("ga_category") val gaCategory: String?,
             @SerializedName("conts_divi_cd") val contsDiviCd: String?,
             @SerializedName("ga_label") val gaLabel: String?
-        ) {
-            data class Goods(
-                @SerializedName("flag_img_path") val flagImgPath: String?,
-                @SerializedName("ga_action") val gaAction: String?,
-                @SerializedName("goods_nm") val goodsNm: String?,
-                @SerializedName("wish_zzim_Yn") val wishZzimYn: String?,
-                @SerializedName("flag_yn") val flagYn: String?,
-                @SerializedName("goods_no") val goodsNo: String?,
-                @SerializedName("brand_nm") val brandNm: String?,
-                @SerializedName("cart_grp_cd") val cartGrpCd: String?,
-                @SerializedName("conts_dist_no") val contsDistNo: String?,
-                @SerializedName("cust_sale_price") val custSalePrice: Int?,
-                @SerializedName("link_url") val linkUrl: String?,
-                @SerializedName("wish_cart_Yn") val wishCartYn: String?,
-                @SerializedName("dlp_category") val dlpCategory: String?,
-                @SerializedName("conts_divi_cd") val contsDiviCd: String?,
-                @SerializedName("ga_label") val gaLabel: String?,
-                @SerializedName("field_recev_poss_yn") val fieldRecevPossYn: String?,
-                @SerializedName("no_image_url") val noImageUrl: String?,
-                @SerializedName("tr_yn") val trYn: String?,
-                @SerializedName("sale_rate") val saleRate: Int?,
-                @SerializedName("image_url") val imageUrl: String?,
-                @SerializedName("sale_shop_divi_cd") val saleShopDiviCd: String?,
-                @SerializedName("rel_divi_cd") val relDiviCd: String?,
-                @SerializedName("sale_price") val salePrice: Int?,
-                @SerializedName("rel_no") val relNo: String?,
-                @SerializedName("disp_ctg_no") val dispCtgNo: String?,
-                @SerializedName("vir_vend_no") val virVendNo: String?,
-                @SerializedName("quick_deli_poss_yn") val quickDeliPossYn: String?,
-                @SerializedName("dlp_list") val dlpList: String?,
-                @SerializedName("market_price") val marketPrice: Int?,
-                @SerializedName("sale_area_no") val saleAreaNo: String?,
-                @SerializedName("ga_category") val gaCategory: String?,
-                @SerializedName("lot_deli_yn") val lotDeliYn: String?
-            )
-        }
+        )
     }
-
-
 }

@@ -37,12 +37,12 @@ class MainActivity: BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.ac
         val gnbData = MemDataSource.mainGnbCache?.data?.gnbList
 
         viewpager.apply {
-            adapter = MainTabPagerAdapter(this@MainActivity)
+            adapter = MainTabPagerAdapter(supportFragmentManager, this@MainActivity.lifecycle)
             isUserInputEnabled = true
         }
 
         TabLayoutMediator(tabs, viewpager) { tab, position ->
-            tab.text = gnbData?.get(position)?.gaLabel
+            tab.text = gnbData?.get(position)?.menuName
         }.attach()
     }
 

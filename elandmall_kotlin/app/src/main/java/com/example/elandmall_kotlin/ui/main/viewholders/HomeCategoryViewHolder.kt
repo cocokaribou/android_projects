@@ -1,6 +1,7 @@
 package com.example.elandmall_kotlin.ui.main.viewholders
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,31 +16,66 @@ import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.LinkEvent
 import com.example.elandmall_kotlin.ui.ModuleData
+import com.example.elandmall_kotlin.ui.main.viewholders.HomeCategoryViewHolder.Companion.isExpanded
+import com.example.elandmall_kotlin.util.GridSideSpacingItemDecoration
+import com.example.elandmall_kotlin.util.Logger
 
 val SPAN_COUNT = 5
-val CLICK_EXPAND = (SPAN_COUNT * 2) - 1
+val ROW_COUNT = 2
+val INDEX_MORE = (SPAN_COUNT * ROW_COUNT) - 1
 
 class HomeCategoryViewHolder(private val binding: ViewHomeCategoryBinding) : BaseViewHolder(binding.root) {
-    private val mAdapter by lazy { CategoryListAdapter() }
+    private val mAdapter by lazy { CategoryListAdapter(::toggleExpand) }
     private val mLayoutManager by lazy { GridLayoutManager(binding.root.context, SPAN_COUNT) }
+    lateinit var itemDecoration: GridSideSpacingItemDecoration
 
-    override fun onBind(item: Any, pos: Int) {
-        (item as? ModuleData.HomeCategoryIconData)?.let {
-            initView(it)
-        }
+    companion object {
+        var isExpanded = false
     }
 
-    fun initView(data: ModuleData.HomeCategoryIconData) = with(binding) {
+    var list = listOf<HomeResponse.HomeCategoryIcon>()
+    override fun onBind(item: Any, pos: Int) {
+        (item as? ModuleData.HomeCategoryIconData)?.let {
+            list = it.homeCategoryIconData
+        }
+
+        initView()
+    }
+
+    private fun initView() = with(binding) {
         categoryList.apply {
             adapter = mAdapter
             layoutManager = mLayoutManager
         }
+        if (!::itemDecoration.isInitialized) {
+            itemDecoration = GridSideSpacingItemDecoration(SPAN_COUNT, 45)
+            categoryList.addItemDecoration(itemDecoration)
+        }
+        more.setOnClickListener {
+            toggleExpand()
+        }
 
-        mAdapter.submitList(data.homeCategoryIconData.subList(0, 9))
+        mAdapter.submitList(list.subList(0, SPAN_COUNT * ROW_COUNT))
+    }
+
+    private fun toggleExpand() {
+        if (isExpanded) {
+            // collapse
+            isExpanded = false
+            binding.more.visibility = View.GONE
+            mAdapter.submitList(list.subList(0, SPAN_COUNT * ROW_COUNT))
+        } else {
+            // expand
+            isExpanded = true
+            binding.more.visibility = View.VISIBLE
+            mAdapter.submitList(list)
+        }
+        mAdapter.notifyItemChanged(INDEX_MORE)
     }
 }
 
-class CategoryListAdapter : ListAdapter<HomeResponse.HomeCategoryIcon, CategoryListAdapter.CategoryItemViewHolder>(diff) {
+class CategoryListAdapter(val toggle: () -> Unit) :
+    ListAdapter<HomeResponse.HomeCategoryIcon, CategoryListAdapter.CategoryItemViewHolder>(diff) {
 
     companion object {
         val diff = object : DiffUtil.ItemCallback<HomeResponse.HomeCategoryIcon>() {
@@ -64,12 +100,24 @@ class CategoryListAdapter : ListAdapter<HomeResponse.HomeCategoryIcon, CategoryL
     }
 
     override fun onBindViewHolder(holder: CategoryItemViewHolder, position: Int) {
-        holder.onBind(currentList[position])
+        holder.onBind(currentList[position], toggle)
     }
 
     class CategoryItemViewHolder(private val binding: ViewHomeCategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: HomeResponse.HomeCategoryIcon) = with(binding) {
-            if (adapterPosition != CLICK_EXPAND) {
+        fun onBind(data: HomeResponse.HomeCategoryIcon, toggle: () -> Unit) = with(binding) {
+            if (adapterPosition == INDEX_MORE && !isExpanded) {
+                // expand icon
+                root.setOnClickListener {
+                    toggle.invoke()
+                }
+
+                cateName.text = "더보기"
+
+                Glide.with(itemView.context)
+                    .load(R.drawable.home_category_more)
+                    .into(cateImg)
+
+            } else {
                 // category icons
                 root.setOnClickListener {
                     EventBus.fire(LinkEvent(data.linkUrl))
@@ -77,24 +125,10 @@ class CategoryListAdapter : ListAdapter<HomeResponse.HomeCategoryIcon, CategoryL
 
                 cateName.text = data.title
 
-                Glide.with(binding.root.context)
+                Glide.with(itemView.context)
                     .load(data.imageUrl)
                     .into(cateImg)
-
-            } else {
-                // expand icon
-                root.setOnClickListener {
-                    TODO("expand list")
-                }
-
-                cateName.text = "더보기"
-
-                Glide.with(binding.root.context)
-                    .load(R.mipmap.ic_launcher)
-                    .into(cateImg)
             }
-
         }
     }
-
 }

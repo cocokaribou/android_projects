@@ -10,7 +10,7 @@ object MemDataSource {
     var mainGnbCache : MainGnbResponse? = null
     set(value) {
         field = value.apply {
-            this?.data?.gnbList?.filter { it.menuCd != null && it.apiUrl != null }
+            this?.data?.gnbList?.filter { it.menuCd != null }
         }
     }
     var homeCache : HomeResponse? = null

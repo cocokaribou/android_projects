@@ -5,21 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ViewFlipper
-        android:id="@+id/flipper"
+    <com.example.elandmall_kotlin.view.NestedScrollableHost
         android:layout_width="match_parent"
-        android:layout_height="192.33dp"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.example.elandmall_kotlin.view.NestedScrollableHost>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/popup"
         android:layout_width="65dp"
         android:layout_height="25dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/home_banner_counter"
         android:paddingEnd="6dp"
-        app:layout_constraintBottom_toBottomOf="@id/flipper"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
@@ -39,6 +45,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/flipper"
-        android:background="@drawable/shape_recyclerview_item_decoration"/>
+        android:background="@drawable/shape_recyclerview_item_decoration"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.elandmall_kotlin.ui
 
 import com.example.elandmall_kotlin.model.Banner
+import com.example.elandmall_kotlin.model.Goods
 import com.example.elandmall_kotlin.model.HomeResponse
 
 sealed class ModuleData {
@@ -37,7 +38,7 @@ sealed class ModuleData {
     }
 
     data class HomeTimeData(
-        val homeTimeData: List<HomeResponse.HomeTimesale>
+        val homeTimeData: Goods
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -68,7 +69,7 @@ sealed class ModuleData {
     }
 
     data class HomeLuckyDealData(
-        val homeLuckyDealData: HomeResponse.HomeLuckyDeal
+        val homeLuckyDealData: List<Goods>
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()

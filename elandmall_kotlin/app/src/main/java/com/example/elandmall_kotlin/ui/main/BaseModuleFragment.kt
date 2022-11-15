@@ -37,11 +37,6 @@ abstract class BaseModuleFragment : Fragment() {
         }
 
         _binding = FragmentBaseModuleBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         observeData()
 
@@ -55,6 +50,8 @@ abstract class BaseModuleFragment : Fragment() {
                 adapter = moduleAdapter
             }
         }
+
+        return binding.root
     }
 
     protected fun requestRefresh() {

@@ -10,6 +10,7 @@ class WebModulesFragment : BaseModuleFragment() {
     override val viewModel: WebviewViewModel by viewModels()
 
     override fun observeData() {
+        binding.test.text = arguments?.get(KEY_ITEM_TAB_NAME).toString()
     }
 
     companion object {
