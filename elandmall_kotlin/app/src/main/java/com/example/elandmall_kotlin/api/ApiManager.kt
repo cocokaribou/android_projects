@@ -13,6 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+val service by lazy { ApiManager.service() }
 object ApiManager {
     private val logging: HttpLoggingInterceptor = HttpLoggingInterceptor()
         .setLevel(

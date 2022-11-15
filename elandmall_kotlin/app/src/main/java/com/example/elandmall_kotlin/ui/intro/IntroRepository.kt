@@ -1,12 +1,9 @@
 package com.example.elandmall_kotlin.ui.intro
 
 import com.example.elandmall_kotlin.BaseApplication
-import com.example.elandmall_kotlin.common.AppConfig.USE_LOCAL_GNB
-import com.example.elandmall_kotlin.common.AppConfig.USE_LOCAL_HOME
 import com.example.elandmall_kotlin.model.HomeResponse
 import com.example.elandmall_kotlin.model.MainGnbResponse
 import com.example.elandmall_kotlin.repository.MajorRepository
-import com.example.elandmall_kotlin.ui.BaseRepository
 import com.example.elandmall_kotlin.util.getJsonFileToString
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -15,15 +12,11 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.retryWhen
 
-class IntroRepository : BaseRepository(), MajorRepository {
+class IntroRepository : MajorRepository {
      suspend fun requestGnbStream(): Flow<Result<MainGnbResponse>> {
         return flow {
-            val data = if (USE_LOCAL_GNB) {
-                val jsonString = getJsonFileToString("json/mainGnb.json", BaseApplication.context)
-                Gson().fromJson(jsonString, MainGnbResponse::class.java)
-            } else {
-                service.getNewGnbMenu()
-            }
+            val jsonString = getJsonFileToString("json/mainGnb.json", BaseApplication.context)
+            val data = Gson().fromJson(jsonString, MainGnbResponse::class.java)
             emit(Result.success(data))
         }.retryWhen { cause, attempt ->
             return@retryWhen attempt < 2 && cause is java.lang.Exception
@@ -32,12 +25,8 @@ class IntroRepository : BaseRepository(), MajorRepository {
 
     override suspend fun requestHomeStream(): Flow<Result<HomeResponse?>> {
         return flow {
-            val data = if (USE_LOCAL_HOME) {
-                val jsonString = getJsonFileToString("json/home.json", BaseApplication.context)
-                Gson().fromJson(jsonString, HomeResponse::class.java)
-            } else {
-                service.getHomeData()
-            }
+            val jsonString = getJsonFileToString("json/home.json", BaseApplication.context)
+            val data = Gson().fromJson(jsonString, HomeResponse::class.java)
             emit(Result.success(data))
         }.retryWhen { cause, attempt ->
             return@retryWhen attempt < 2 && cause is java.lang.Exception
