@@ -18,7 +18,6 @@ fun getChangedIndex(origin: String, changed: String): Pair<Int, Int> {
     }
     return Pair(start, end)
 }
-
 fun getSpannedBoldText(origin: String, changed: String) : Spannable {
     val sb = SpannableStringBuilder(origin)
     val pair = getChangedIndex(origin, changed)

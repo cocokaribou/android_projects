@@ -1,49 +1,27 @@
 package com.example.elandmall_kotlin.ui.main.viewholders
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
-import android.text.SpannableStringBuilder
 import android.widget.FrameLayout
 import android.widget.ImageView
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.ViewHomeMainBannerBinding
+import com.example.elandmall_kotlin.model.HomeResponse
 import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.LinkEvent
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.getSpannedBoldText
 
 class HomeMainBannerViewHolder(private val binding: ViewHomeMainBannerBinding) : BaseViewHolder(binding.root) {
     override fun onBind(item: Any, pos: Int) {
 
         (item as? ModuleData.HomeMainBannerData?)?.let {
-            initView(it)
+            initView(it.homeBannerData)
         }
-
     }
 
-    private fun initView(data: ModuleData.HomeMainBannerData) = with(binding) {
-        val currIndex = flipper.indexOfChild(flipper.currentView)
-        popup.setOnClickListener {
-            EventBus.fire(LinkEvent(data.homeBannerData[currIndex].linkUrl))
-        }
-
-        counter.apply {
-            val count = "${currIndex + 1}/${data.homeBannerData.size}"
-            text = getSpannedBoldText(count, { currIndex + 1 }.toString())
-        }
-
-        flipper.isNestedScrollingEnabled = true
-        data.homeBannerData.forEachIndexed { _, data ->
+    private fun initView(data: List<HomeResponse.HomeMainbanner>) = with(binding) {
+        data.forEach { data ->
             flipper.addView(ImageView(itemView.context).apply {
                 scaleType = ImageView.ScaleType.CENTER_CROP
                 layoutParams = FrameLayout.LayoutParams(
@@ -57,11 +35,25 @@ class HomeMainBannerViewHolder(private val binding: ViewHomeMainBannerBinding) :
                     .into(this)
             })
 
-            if(!flipper.isFlipping) {
-                flipper.startFlipping()
-            } else {
-                flipper.stopFlipping()
+            data.linkUrl?.let { link ->
+                root.setOnClickListener {
+                    EventBus.fire(LinkEvent(link))
+                }
             }
+        }
+
+        flipper.apply {
+            isNestedScrollingEnabled = true
+            startFlipping()
+        }
+
+        popup.setOnClickListener {
+            EventBus.fire(LinkEvent(data[flipper.displayedChild].linkUrl))
+        }
+
+        counter.apply {
+            val count = "${flipper.displayedChild + 1}/${data.size}"
+            text = getSpannedBoldText(count, count.split("/")[0])
         }
     }
 
