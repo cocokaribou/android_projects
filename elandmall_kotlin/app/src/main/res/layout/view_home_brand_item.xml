@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="62dp"
+    android:layout_height="wrap_content"
+    android:paddingBottom="21dp">
+
+    <ImageView
+        android:id="@+id/brand_bg"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:background="@drawable/home_brand_bg"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/brand_img"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toBottomOf="@id/brand_bg"
+        app:layout_constraintEnd_toEndOf="@id/brand_bg"
+        app:layout_constraintStart_toStartOf="@id/brand_bg"
+        app:layout_constraintTop_toTopOf="@id/brand_bg"
+        tools:background="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/brand_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:maxEms="6"
+        android:maxLines="1"
+        android:textSize="11dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/brand_bg"
+        tools:text="브랜드" />
+</androidx.constraintlayout.widget.ConstraintLayout>

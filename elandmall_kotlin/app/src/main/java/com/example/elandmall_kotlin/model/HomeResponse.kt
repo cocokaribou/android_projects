@@ -34,7 +34,7 @@ data class HomeResponse(
         // NC LIVE
         @SerializedName("home_nc_live") val homeNcLive: HomeNcLive?,
         // 타임세일
-        @SerializedName("home_timesale") val homeTimesale: HomeTimeSale,
+        @SerializedName("home_timesale") val homeTimesale: HomeTimeSale?,
         // eYOU
         @SerializedName("home_eyou") val homeEyou: HomeEyou?,
         // 럭키딜
@@ -85,7 +85,7 @@ data class HomeResponse(
         @SerializedName("ga_action") val gaAction: String?,
         @SerializedName("tr_yn") val trYn: String?,
         @SerializedName("shop_copy_nm") val shopCopyNm: String?,
-        @SerializedName("image_url") val imageUrl: String?,
+        @SerializedName("image_url") private val imgUrl: String?,
         @SerializedName("rel_divi_cd") val relDiviCd: String?,
         @SerializedName("brand_name") val brandName: String?,
         @SerializedName("move_cont_no") val moveContNo: String?,
@@ -101,7 +101,16 @@ data class HomeResponse(
         @SerializedName("ga_category") val gaCategory: String?,
         @SerializedName("conts_divi_cd") val contsDiviCd: String?,
         @SerializedName("ga_label") val gaLabel: String?
-    )
+    ) {
+        val imageUrl: String
+            get() {
+                return if (!imgUrl.isNullOrEmpty() && imgUrl.startsWith("http")) {
+                    imgUrl
+                } else {
+                    "http:$imgUrl"
+                }
+            }
+    }
 
     data class HomeLuckyDeal(
         @SerializedName("goods_list") val goodsList: List<Goods>?,

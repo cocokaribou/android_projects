@@ -132,39 +132,7 @@
         android:orientation="horizontal"
         android:paddingBottom="2dp"
         app:layout_constraintStart_toStartOf="@+id/goods_name"
-        app:layout_constraintTop_toBottomOf="@+id/price_after">
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/tag1"-->
-        <!--            style="@style/home_tag_style"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:text="무료배송"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/tag2"-->
-        <!--            style="@style/home_tag_style"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="2dp"-->
-        <!--            android:text="단독특가"-->
-        <!--            app:layout_constraintBottom_toBottomOf="@+id/tag1"-->
-        <!--            app:layout_constraintStart_toEndOf="@+id/tag1" />-->
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/tag3"-->
-        <!--            style="@style/home_tag_style"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="2dp"-->
-        <!--            android:text="단독특가"-->
-        <!--            app:layout_constraintBottom_toBottomOf="@+id/tag2"-->
-        <!--            app:layout_constraintStart_toEndOf="@+id/tag2" />-->
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/price_after"/>
 
     <TextView
         android:id="@+id/quantity"

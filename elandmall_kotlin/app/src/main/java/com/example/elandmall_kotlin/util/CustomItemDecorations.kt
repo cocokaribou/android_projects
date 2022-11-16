@@ -3,13 +3,19 @@ package com.example.elandmall_kotlin.util
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.example.elandmall_kotlin.BaseApplication
 
-/**
- * Gridlayout 데코레이션
- * @param spanCount : 배치
- * @param spacing : 간격 (pixel값, dp값으로 적용하고 싶으면 xxhdpi 기준 3을 곱할것)
- * @param includeEdge : true -> position 상관없이 좌, 우, 위, 아래 spacing 동일, false -> 양 옆 제외 spacing, 두번째 줄부터 위에 spacing 적용
- */
+fun Int.dpToPx(): Int {
+    val density = BaseApplication.context.resources.displayMetrics.density
+    return (this * density).toInt()
+}
+
+
+fun Int.pxToDp(): Int {
+    val density = BaseApplication.context.resources.displayMetrics.density
+    return (this / density).toInt()
+}
+
 class GridSpacingItemDecoration(private val spanCount: Int, private val spacing: Int, private val includeEdge: Boolean) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
@@ -45,5 +51,43 @@ class GridSideSpacingItemDecoration(private val spanCount: Int, private val spac
 
         outRect.top = 0
         outRect.bottom = 0
+    }
+}
+
+
+class HorizontalSpacingItemDecoration(private val spacing: Int,
+                                      private val edgeSpacing: Int,
+                                      private val includeEdge: Boolean)
+    : RecyclerView.ItemDecoration() {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
+        val position = parent.getChildAdapterPosition(view) // item position
+        if (position == RecyclerView.NO_POSITION) {
+            return
+        }
+        val itemCount = state.itemCount
+
+        if (includeEdge) {
+            when (position) {
+                0 -> {
+                    outRect.left = edgeSpacing
+                    outRect.right = spacing
+                }
+                itemCount - 1 -> {
+                    outRect.right = edgeSpacing
+                }
+                else -> {
+                    outRect.right = spacing
+                }
+            }
+        } else {
+            if (position != itemCount - 1) {
+                outRect.right = spacing
+            }
+        }
     }
 }
