@@ -69,7 +69,7 @@ sealed class ModuleData {
     }
 
     data class HomeLuckyDealData(
-        val homeLuckyDealData: List<Goods>
+        val homeLuckyDealData: Goods
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()

@@ -85,9 +85,11 @@ class HomeViewModel : BaseViewModel() {
                     )
                 )
                 if (!homeData.homeLuckyDeal.goodsList.isNullOrEmpty()) {
-                    moduleList.add(
-                        ModuleData.HomeLuckyDealData(homeData.homeLuckyDeal.goodsList)
-                    )       
+                    homeData.homeLuckyDeal.goodsList.forEach {
+                        moduleList.add(
+                            ModuleData.HomeLuckyDealData(it)
+                        )
+                    }
                 }
             }
             // title holder & goods holder

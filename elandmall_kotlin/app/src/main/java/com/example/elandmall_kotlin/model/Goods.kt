@@ -3,7 +3,7 @@ package com.example.elandmall_kotlin.model
 import com.google.gson.annotations.SerializedName
 
 data class Goods(
-    @SerializedName("flag_img_path") val flagImgPath: String?,
+    @SerializedName("flag_img_path") private val flagImgPath: String?,
     @SerializedName("ga_action") val gaAction: String?,
     @SerializedName("goods_nm") val goodsNm: String?,
     @SerializedName("wish_zzim_Yn") val wishZzimYn: String?,
@@ -43,6 +43,15 @@ data class Goods(
                 imgUrl
             } else {
                 "http:$imgUrl"
+            }
+        }
+
+    val flagImgUrl: String
+        get() {
+            return if (!flagImgPath.isNullOrEmpty() && flagImgPath.startsWith("http")) {
+                flagImgPath
+            } else {
+                "http:$flagImgPath"
             }
         }
 }

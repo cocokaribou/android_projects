@@ -24,36 +24,5 @@
         app:layout_constraintTop_toTopOf="@id/title"
         tools:text="주목해야할 금주의 트렌드" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/more"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/more_txt"
-            style="@style/home_section_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingEnd="3.84dp"
-            android:text="더보기"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/more_img"
-            app:layout_constraintTop_toTopOf="parent"
-
-            />
-
-        <ImageView
-            android:id="@+id/more_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:paddingEnd="14.4dp"
-            android:src="@drawable/btn_ca_path"
-            app:layout_constraintBottom_toBottomOf="@id/more_txt"
-            app:layout_constraintStart_toEndOf="@id/more_txt"
-            app:layout_constraintTop_toTopOf="@id/more_txt" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
