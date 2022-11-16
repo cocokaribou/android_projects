@@ -101,12 +101,13 @@ class HomeViewModel : BaseViewModel() {
                     )
                 )
 
-                homeData.homeSeasonPlan.homeSeasonPlanList?.let { seasonList ->
-                    seasonList.forEach {
+                if (!homeData.homeSeasonPlan.homeSeasonPlanList.isNullOrEmpty()) {
+                    homeData.homeSeasonPlan.homeSeasonPlanList.forEach {
                         moduleList.add(
                             ModuleData.HomeSeasonPlanData(it)
                         )
                     }
+
                 }
             }
 
