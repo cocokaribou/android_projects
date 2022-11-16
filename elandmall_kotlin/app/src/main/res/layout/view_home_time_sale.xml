@@ -55,21 +55,20 @@
         app:layout_constraintTop_toBottomOf="@id/title" />
 
     <TextView
-        android:id="@+id/goods_name"
+        android:id="@+id/goods_brand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:maxLines="1"
         android:textColor="#121212"
-
         android:textSize="13dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/goods_content"
+        app:layout_constraintStart_toStartOf="@id/goods_name"
         app:layout_constraintTop_toTopOf="@id/goods_img"
         tools:text="청정원" />
 
     <TextView
-        android:id="@+id/goods_content"
+        android:id="@+id/goods_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -79,10 +78,9 @@
         android:maxLines="2"
         android:textColor="#666666"
         android:textSize="13dp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/goods_img"
-        app:layout_constraintTop_toBottomOf="@id/goods_name"
+        app:layout_constraintTop_toBottomOf="@id/goods_brand"
         tools:text="제주도 산간에서 자란 소고기 550g\n2줄" />
 
     <TextView
@@ -92,15 +90,15 @@
         android:layout_marginTop="10dp"
         android:includeFontPadding="false"
         android:textColor="#999999"
-        android:textSize="12dp"
+        android:textSize="10dp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/goods_content"
-        app:layout_constraintTop_toBottomOf="@id/goods_content"
+        app:layout_constraintStart_toStartOf="@id/goods_name"
+        app:layout_constraintTop_toBottomOf="@id/goods_name"
         tools:text="46,550원"
         tools:visibility="visible" />
 
     <TextView
-        android:id="@+id/sale_percent"
+        android:id="@+id/sale_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:includeFontPadding="false"
@@ -108,68 +106,68 @@
         android:textSize="18dp"
         android:textStyle="bold"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/goods_content"
+        app:layout_constraintStart_toStartOf="@+id/goods_name"
         app:layout_constraintTop_toBottomOf="@+id/price_before"
         tools:text="10%"
         tools:visibility="visible" />
 
     <TextView
-        android:id="@+id/price"
+        android:id="@+id/price_after"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:includeFontPadding="false"
-        android:text="55,550원"
         android:textColor="#3e3e3e"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/price_before"
+        android:textSize="13dp"
+        app:layout_constraintStart_toEndOf="@+id/sale_rate"
         app:layout_constraintTop_toBottomOf="@+id/price_before"
-        app:layout_goneMarginStart="0dp" />
+        app:layout_goneMarginStart="0dp"
+        tools:text="55,550원" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/goods_content"
-        app:layout_constraintTop_toBottomOf="@+id/price">
+        android:orientation="horizontal"
+        android:paddingBottom="2dp"
+        app:layout_constraintStart_toStartOf="@+id/goods_name"
+        app:layout_constraintTop_toBottomOf="@+id/price_after">
 
-        <TextView
-            android:id="@+id/tag1"
-            style="@style/home_tag_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:text="무료배송"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/tag1"-->
+        <!--            style="@style/home_tag_style"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="무료배송"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <TextView
-            android:id="@+id/tag2"
-            style="@style/home_tag_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:text="단독특가"
-            app:layout_constraintBottom_toBottomOf="@+id/tag1"
-            app:layout_constraintStart_toEndOf="@+id/tag1" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/tag2"-->
+        <!--            style="@style/home_tag_style"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="2dp"-->
+        <!--            android:text="단독특가"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/tag1"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/tag1" />-->
 
-        <TextView
-            android:id="@+id/tag3"
-            style="@style/home_tag_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:text="단독특가"
-            app:layout_constraintBottom_toBottomOf="@+id/tag2"
-            app:layout_constraintStart_toEndOf="@+id/tag2" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/tag3"-->
+        <!--            style="@style/home_tag_style"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="2dp"-->
+        <!--            android:text="단독특가"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/tag2"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/tag2" />-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/buy"
+        android:id="@+id/quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -178,7 +176,7 @@
         android:textSize="11dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/goods_img"
-        app:layout_constraintStart_toStartOf="@+id/goods_content"
+        app:layout_constraintStart_toStartOf="@+id/goods_brand"
         tools:text="9,999개 구매" />
 
     <View

@@ -152,7 +152,6 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
 
     override fun onCurrentListChanged(previousList: MutableList<ModuleData>, currentList: MutableList<ModuleData>) {
         super.onCurrentListChanged(previousList, currentList)
-        Logger.v("current list changed")
     }
 }
 

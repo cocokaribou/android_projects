@@ -34,7 +34,7 @@ data class HomeResponse(
         // NC LIVE
         @SerializedName("home_nc_live") val homeNcLive: HomeNcLive?,
         // 타임세일
-        @SerializedName("home_timesale") val homeTimesale: Goods,
+        @SerializedName("home_timesale") val homeTimesale: HomeTimeSale,
         // eYOU
         @SerializedName("home_eyou") val homeEyou: HomeEyou?,
         // 럭키딜
@@ -198,6 +198,30 @@ data class HomeResponse(
             @SerializedName("conts_divi_cd") val contsDiviCd: String?,
             @SerializedName("ga_label") val gaLabel: String?
         )
+    }
+    data class HomeTimeSale(
+        @SerializedName("flag_img_path") val flagImgPath: String?,
+        @SerializedName("goods_nm") val goodsNm: String?,
+        @SerializedName("brand_nm") val brandNm: String?,
+        @SerializedName("icon_view") val iconView: String?,
+        @SerializedName("title") val title: String?,
+        @SerializedName("cust_sale_price") val custSalePrice: Int?,
+        @SerializedName("sale_qty") val saleQty: Int?,
+        @SerializedName("link_url") val linkUrl: String?,
+        @SerializedName("sale_rate") val saleRate: Int?,
+        @SerializedName("image_url") private val imgUrl: String?,
+        @SerializedName("sale_price") val salePrice: Int?,
+        @SerializedName("market_price") val marketPrice: Int?,
+        @SerializedName("time") val time: String?
+    ) {
+        val imageUrl: String
+            get() {
+                return if (!imgUrl.isNullOrEmpty() && imgUrl.startsWith("http")) {
+                    imgUrl
+                } else {
+                    "http:$imgUrl"
+                }
+            }
     }
 
     data class HomeMd(

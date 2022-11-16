@@ -38,7 +38,7 @@ sealed class ModuleData {
     }
 
     data class HomeTimeData(
-        val homeTimeData: Goods
+        val homeTimeData: HomeResponse.HomeTimeSale
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()

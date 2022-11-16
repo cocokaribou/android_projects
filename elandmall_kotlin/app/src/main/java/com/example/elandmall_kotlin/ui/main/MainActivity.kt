@@ -17,6 +17,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 class MainActivity: BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.activity_main) {
     override val viewModel by viewModels<MainViewModel>()
 
+    val mAdapter by lazy { MainTabPagerAdapter(supportFragmentManager, lifecycle) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,12 +36,12 @@ class MainActivity: BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.ac
     }
 
     private fun initGNB() = with(binding){
-        val gnbData = MemDataSource.mainGnbCache?.data?.gnbList
-
+        mAdapter.updateFragment()
         viewpager.apply {
-            adapter = MainTabPagerAdapter(supportFragmentManager, this@MainActivity.lifecycle)
+            adapter = mAdapter
             isUserInputEnabled = true
         }
+        val gnbData = MemDataSource.mainGnbCache?.data?.gnbList
 
         TabLayoutMediator(tabs, viewpager) { tab, position ->
             tab.text = gnbData?.get(position)?.menuName
