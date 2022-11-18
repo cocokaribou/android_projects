@@ -35,7 +35,13 @@ data class Goods(
     @SerializedName("dlp_list") val dlpList: String?,
     @SerializedName("market_price") val marketPrice: Int?,
     @SerializedName("sale_area_no") val saleAreaNo: String?,
-    @SerializedName("ga_category") val gaCategory: String?
+    @SerializedName("ga_category") val gaCategory: String?,
+    // home time sale
+    @SerializedName("title") val title: String?,
+    @SerializedName("time") val time: String?,
+    // home md
+    @SerializedName("goods_comment_count") val goodsCommentCount: Int?,
+    @SerializedName("goods_star_point") val goodsStarPoint: Int?
 ) {
     val imageUrl:String
         get() {

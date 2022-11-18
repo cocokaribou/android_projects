@@ -2,11 +2,14 @@ package com.example.elandmall_kotlin
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
+import com.example.elandmall_kotlin.ui.LinkEvent
+import com.example.elandmall_kotlin.ui.LinkEventType
 import com.example.elandmall_kotlin.ui.intro.IntroActivity
 
 /**
@@ -42,6 +45,17 @@ abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel>(
             true
         } else {
             false
+        }
+    }
+
+    open fun onLinkEvent(event: LinkEvent) {
+        when(event.type) {
+            LinkEventType.DEFAULT -> {
+                Toast(this).apply{
+                    setText("link event: ${event.url}")
+                }.show()
+            }
+            else -> {}
         }
     }
 

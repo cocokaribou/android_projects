@@ -10,9 +10,12 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.ViewHomeTimeSaleBinding
+import com.example.elandmall_kotlin.model.Goods
 import com.example.elandmall_kotlin.model.HomeResponse
 import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.ModuleData
+import com.example.elandmall_kotlin.util.GoodsUtil.drawGoodsUI
+import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.getSpannedSizeText
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
@@ -35,64 +38,9 @@ class HomeTimeSaleViewHolder(private val binding: ViewHomeTimeSaleBinding, val l
         }
     }
 
-    private fun initView(data: HomeResponse.HomeTimeSale) = with(binding) {
-        // image
-        Glide.with(itemView.context)
-            .load(data.imageUrl)
-            .into(goodsImg)
-
-        // brand name
-        if (data.brandNm.isNullOrEmpty()) {
-            goodsBrand.visibility = View.GONE
-        } else {
-            goodsBrand.text = data.brandNm
-        }
-
-        // goods name
-        goodsName.text = data.goodsNm
-
-        // price before sale
-        val before = getPrice(data.marketPrice ?: 0, data.custSalePrice ?: 0)
-        if (before == 0) {
-            priceBefore.visibility = View.GONE
-        } else {
-            val beforeWon = "${before}원"
-            priceBefore.text = getSpannedSizeText(beforeWon, before.toString(), 12)
-        }
-
-        // sales rate
-        if (data.saleRate == 0) {
-            saleRate.visibility = View.GONE
-        } else {
-            saleRate.text = data.saleRate.toString()
-        }
-
-        // market price
-        val price = "${data.custSalePrice}원"
-        priceAfter.text = getSpannedSizeText(price, data.custSalePrice.toString(), sizeDp = 18, bold = true)
-
-        // tags
-        if (data.iconView.isNullOrEmpty()) {
-            tag.visibility = View.GONE
-        } else {
-            val list = data.iconView.split(",").map { it.trim() }
-            list.forEach {
-                val tv = TextView(itemView.context, null, 0, R.style.home_tag_style).apply {
-                    text = it
-                }
-                tag.addView(tv)
-                tag.children.forEachIndexed { i, v ->
-                    if (i != 0) {
-                        val param = v.layoutParams as ViewGroup.MarginLayoutParams
-                        param.setMargins(6, 0, 0, 0)
-                        tv.requestLayout()
-                    }
-                }
-            }
-        }
-
-        // quantity
-        quantity.text = "${data.saleQty}개 구매"
+    private fun initView(data: Goods) = with(binding) {
+        // common ui
+        drawGoodsUI(binding, data)
 
         // timer
         data.time?.let {
@@ -102,7 +50,7 @@ class HomeTimeSaleViewHolder(private val binding: ViewHomeTimeSaleBinding, val l
                         binding.timer.text = "Finshed."
                         awaitCancellation()
                     } else {
-                        binding.timer.text = duration.formatSecond()
+                        binding.timer.text = duration.toTimeString()
                     }
                 }
                 .launchIn(lifecycleOwner.lifecycleScope)
@@ -133,16 +81,11 @@ class HomeTimeSaleViewHolder(private val binding: ViewHomeTimeSaleBinding, val l
         }
     }
 
-    private fun Long.formatSecond(): String {
+    private fun Long.toTimeString(): String {
         val hours = this / 3600
         val minutes = (this % 3600) / 60
         val seconds = this % 60
 
         return String.format("%02d:%02d:%02d", hours, minutes, seconds)
-    }
-
-    private fun getPrice(market: Int, cust: Int): Int {
-        return if (market > cust) market
-        else 0
     }
 }

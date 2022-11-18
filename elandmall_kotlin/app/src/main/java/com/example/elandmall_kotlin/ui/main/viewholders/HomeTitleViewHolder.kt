@@ -1,5 +1,6 @@
 package com.example.elandmall_kotlin.ui.main.viewholders
 
+import android.view.View
 import com.example.elandmall_kotlin.databinding.ViewHomeTitleBinding
 import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.ModuleData

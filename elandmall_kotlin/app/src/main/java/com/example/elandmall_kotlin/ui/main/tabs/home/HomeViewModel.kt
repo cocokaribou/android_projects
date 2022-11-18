@@ -112,12 +112,29 @@ class HomeViewModel : BaseViewModel() {
             }
 
             if (homeData.homeOfflineShop != null) {
-                if (homeData.homeOfflineShop.homeOfflineShopBanner.isNullOrEmpty() && homeData.homeOfflineShop.homeOfflineShopList.isNullOrEmpty()) {
-                } else {
+                moduleList.add(
+                    ModuleData.HomeTitleData(
+                        homeData.homeOfflineShop.title ?: "이슈 브랜드",
+                        homeData.homeOfflineShop.subtitle ?: ""
+                    )
+                )
+                if (!homeData.homeOfflineShop.homeOfflineShopBanner.isNullOrEmpty() && !homeData.homeOfflineShop.homeOfflineShopList.isNullOrEmpty()) {
                     moduleList.add(
                         ModuleData.HomeStoreShopData(homeData.homeOfflineShop)
                     )
                 }
+            }
+
+            if (homeData.homeMd != null) {
+                moduleList.add(
+                    ModuleData.HomeTitleData(
+                        homeData.homeMd.title ?: "MD 추천",
+                        homeData.homeMd.subtitle ?: "엄선한 추천 상품"
+                    )
+                )
+                moduleList.add(
+                    ModuleData.HomeMdData(homeData.homeMd)
+                )
             }
         }
         homeList.postValue(moduleList)

@@ -98,6 +98,14 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                     false
                 )
             )
+
+            ModuleData.HomeMdData.ordinal() -> HomeMdViewHolder(
+                ViewHomeMdBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
             // TODO other viewholders from gnb
 
             else -> UnknownViewHolder(

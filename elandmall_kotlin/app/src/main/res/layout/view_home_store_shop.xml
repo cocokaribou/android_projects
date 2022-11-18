@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
+
+    <com.example.elandmall_kotlin.view.NestedScrollableHost
+        android:id="@+id/store_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/store_banner_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_height="100dp" />
+    </com.example.elandmall_kotlin.view.NestedScrollableHost>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/store_banner_indicator"
+        android:layout_width="60dp"
+        android:layout_height="13dp"
+        android:background="#00000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/store_banner"
+        app:tabBackground="@drawable/circle_indicator_selector"
+        app:tabIndicatorColor="#00000000" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/store_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/store_banner_indicator"
+        app:spanCount="2"
+        tools:listitem="@layout/view_home_store_shop_item" />
+
+    <View
+        android:id="@+id/divider"
+        style="@style/divider_shadow_6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/store_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

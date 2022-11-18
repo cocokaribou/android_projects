@@ -7,6 +7,8 @@ import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 
+fun String.useNonBreakingSpace() = this.replace(' ','\u00A0')
+
 fun getChangedIndex(origin: String, changed: String): Pair<Int, Int> {
     if (origin.isEmpty()) return Pair(0, 0)
 

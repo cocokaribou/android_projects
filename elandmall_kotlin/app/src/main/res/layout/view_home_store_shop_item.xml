@@ -3,132 +3,112 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#ededed">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/goods_img"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
+        android:layout_height="0dp"
         android:scaleType="fitXY"
-        android:src="@drawable/noimg_1080x576"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/flag"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_margin="5.5dp"
-        android:scaleType="fitXY"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/noimg_510x510"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/goods"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:paddingStart="17dp"
-        android:paddingTop="12dp"
-        android:paddingEnd="15dp"
-        android:paddingBottom="17dp"
+        android:paddingStart="12dp"
+        android:paddingTop="12.5dp"
+        android:paddingEnd="11.5dp"
+        android:paddingBottom="17.3dp"
         app:layout_constraintTop_toBottomOf="@id/goods_img">
 
         <TextView
             android:id="@+id/brand_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:maxLines="1"
             android:textColor="#8e8e8e"
-            android:textSize="13dp"
+            android:textSize="13.4dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="CJ 제일제당" />
+            tools:text="브랜드" />
 
         <TextView
             android:id="@+id/goods_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:ellipsize="end"
+            android:includeFontPadding="false"
             android:maxLines="2"
+            android:paddingBottom="30dp"
             android:textColor="#3e3e3e"
-            android:textSize="13dp"
+            android:textSize="13.4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/brand_name"
-            tools:text="고메치킨 순살크리스피 550g" />
-
-        <TextView
-            android:id="@+id/sale_rate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#c9000b"
-            android:textSize="18dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/goods_name"
-            tools:text="10" />
-
-        <TextView
-            android:id="@+id/sale_rate_percent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingEnd="5dp"
-            android:textColor="#c9000b"
-            android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="@id/sale_rate"
-            app:layout_constraintStart_toEndOf="@id/sale_rate"
-            tools:text="%" />
-
-        <TextView
-            android:id="@+id/price_after"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:includeFontPadding="false"
-            android:textColor="#333333"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/sale_rate_percent"
-            app:layout_constraintTop_toBottomOf="@id/goods_name"
-            tools:text="46,500" />
-
-        <TextView
-            android:id="@+id/price_after_won"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="원"
-            android:textColor="#333333"
-            android:textSize="16dp"
-            app:flow_verticalAlign="bottom"
-            app:layout_constraintBottom_toBottomOf="@id/price_after"
-            app:layout_constraintStart_toEndOf="@id/price_after" />
+            tools:text="상품명" />
 
         <TextView
             android:id="@+id/price_before"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:ellipsize="end"
+            android:includeFontPadding="false"
             android:maxLines="1"
             android:textColor="#8e8e8e"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="@id/price_after"
-            app:layout_constraintStart_toEndOf="@id/price_after_won"
-            tools:text="47,000" />
+            android:textSize="11.5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/goods_name"
+            tools:text="10,000원" />
 
-        <LinearLayout
-            android:id="@+id/tag"
+        <TextView
+            android:id="@+id/sale_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6.72dp"
-            android:orientation="horizontal"
+            android:includeFontPadding="false"
+            android:textColor="#c9000b"
+            android:textSize="18dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/price_after" />
+            app:layout_constraintTop_toBottomOf="@id/price_before"
+            tools:text="50" />
 
+        <TextView
+            android:id="@+id/sale_rate_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="%"
+            android:textColor="#c9000b"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@id/sale_rate"
+            app:layout_constraintStart_toEndOf="@id/sale_rate" />
+
+        <TextView
+            android:id="@+id/price_after"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3.8dp"
+            android:includeFontPadding="false"
+            android:textColor="#333333"
+            android:textSize="17.3dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/sale_rate_percent"
+            app:layout_constraintTop_toBottomOf="@id/price_before"
+            tools:text="5000" />
+
+        <TextView
+            android:id="@+id/price_after_won"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="원"
+            android:textColor="#333333"
+            android:textSize="13.4dp"
+            app:layout_constraintBottom_toBottomOf="@id/price_after"
+            app:layout_constraintStart_toEndOf="@id/price_after" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <View
-        android:id="@+id/divider"
-        style="@style/divider_shadow_6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/goods" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,736 @@
+{
+  "code": "200",
+  "data": {
+    "smartpick_list": [
+      {
+        "rel_cont_nm": "대전유성점",
+        "category_no": "1906396125"
+      },
+      {
+        "rel_cont_nm": "강서점",
+        "category_no": "1807354249"
+      },
+      {
+        "rel_cont_nm": "부천점",
+        "category_no": "1708325729"
+      },
+      {
+        "rel_cont_nm": "동수원점",
+        "category_no": "1708325731"
+      },
+      {
+        "rel_cont_nm": "괴정점",
+        "category_no": "1904388131"
+      },
+      {
+        "rel_cont_nm": "평촌점",
+        "category_no": "1708325732"
+      },
+      {
+        "rel_cont_nm": "청주점",
+        "category_no": "2001426054"
+      },
+      {
+        "rel_cont_nm": "고잔점",
+        "category_no": "1708325976"
+      },
+      {
+        "rel_cont_nm": "순천점",
+        "category_no": "2002433796"
+      },
+      {
+        "rel_cont_nm": "울산점",
+        "category_no": "2007459366"
+      },
+      {
+        "rel_cont_nm": "중앙로역점",
+        "category_no": "2002433792"
+      }
+    ],
+    "banjjak_deli": {
+      "btn_nm": "배송지 설정",
+      "flag": "P",
+      "btn_url": "/mypage/searchBanJJakDlvpListLayer.action?layerClose=Y&url=%2Fapi%2Fdispctg%2FgetInitStoreShoppingApi.action",
+      "img_path": "",
+      "img_link": "",
+      "addr": "오늘받송 가능지역을 확인하세요."
+    },
+    "store_banner_list": [],
+    "ctg_navi": [
+      {
+        "ctg_no": "1704316850",
+        "ctg_nm": "NC백화점"
+      }
+    ],
+    "recommend_store_list": [
+      {
+        "store_nm": "대전유성점",
+        "image_url": "//www.elandrs.com/upload/dspl/banner/90/328/220700000356328.jpg",
+        "link_url": "https://www.elandmall.com/dispctg/searchStoreShoppingList.action?vend_no=V220021352"
+      },
+      {
+        "store_nm": "부천점",
+        "image_url": "//www.elandrs.com/upload/dspl/banner/90/420/00/200500000197420.jpg",
+        "link_url": "/dispctg/searchStoreShoppingList.action?vend_no=V160003263"
+      },
+      {
+        "store_nm": "강서점",
+        "image_url": "//www.elandrs.com/upload/dspl/banner/90/416/00/200500000197416.jpg",
+        "link_url": "/dispctg/searchStoreShoppingList.action?vend_no=V170004601"
+      },
+      {
+        "store_nm": "신구로점",
+        "image_url": "//www.elandrs.com/upload/dspl/banner/90/388/00/201100000233388.png",
+        "link_url": "/dispctg/searchStoreShoppingList.action?vend_no=V200014709"
+      }
+    ],
+    "category_goods_list": [
+      {
+        "goods_list": [
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]W NIKE COURT VISION ALTA LTR 코트비전 알타 우먼스 LTR DM0113-100",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 76050,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210402322&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510207&conts_divi_cd=10&rel_no=2210402322&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DW+NIKE+COURT+VISION+ALTA+LTR+%EC%BD%94%ED%8A%B8%EB%B9%84%EC%A0%84+%EC%95%8C%ED%83%80+%EC%9A%B0%EB%A8%BC%EC%8A%A4+LTR+DM0113-100&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/322/600/2210402322_0000041.jpg",
+            "sale_price": 84500,
+            "market_price": 89000,
+            "goods_comment_count": 1
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]NIKE COURT LEGACY (GS) 코트 레거시 (GS) DA5380 102",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 50400,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209276250&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510208&conts_divi_cd=10&rel_no=2209276250&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DNIKE+COURT+LEGACY+%28GS%29+%EC%BD%94%ED%8A%B8+%EB%A0%88%EA%B1%B0%EC%8B%9C+%28GS%29+DA5380+102&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/250/600/2209276250_0000089.jpg",
+            "sale_price": 56000,
+            "market_price": 59000,
+            "goods_comment_count": 4
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "와이드앵글 여성 CF 하이넥 다운 자켓 WWW21543",
+            "goods_no": "2210477035",
+            "brand_nm": "와이드앵글",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 258000,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210477035&vir_vend_no=VV21023697&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510230&conts_divi_cd=10&rel_no=2210477035&rel_divi_cd=10&brand_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80&goods_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80+%EC%97%AC%EC%84%B1+CF+%ED%95%98%EC%9D%B4%EB%84%A5+%EB%8B%A4%EC%9A%B4+%EC%9E%90%EC%BC%93+WWW21543&flag_img_path=",
+            "sale_rate": 0,
+            "image_url": "//www.elandrs.com/upload/prd/img/035/600/2210477035_0000001.jpg",
+            "sale_price": 0,
+            "market_price": 369000
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]W NIKE COURT VISION ALTA LTR 코트비전 알타 우먼스 LTR DM0113-100",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 76050,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210402322&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510207&conts_divi_cd=10&rel_no=2210402322&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DW+NIKE+COURT+VISION+ALTA+LTR+%EC%BD%94%ED%8A%B8%EB%B9%84%EC%A0%84+%EC%95%8C%ED%83%80+%EC%9A%B0%EB%A8%BC%EC%8A%A4+LTR+DM0113-100&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/322/600/2210402322_0000041.jpg",
+            "sale_price": 84500,
+            "market_price": 89000,
+            "goods_comment_count": 1
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]NIKE COURT LEGACY (GS) 코트 레거시 (GS) DA5380 102",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 50400,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209276250&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510208&conts_divi_cd=10&rel_no=2209276250&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DNIKE+COURT+LEGACY+%28GS%29+%EC%BD%94%ED%8A%B8+%EB%A0%88%EA%B1%B0%EC%8B%9C+%28GS%29+DA5380+102&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/250/600/2209276250_0000089.jpg",
+            "sale_price": 56000,
+            "market_price": 59000,
+            "goods_comment_count": 4
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "와이드앵글 여성 CF 하이넥 다운 자켓 WWW21543",
+            "goods_no": "2210477035",
+            "brand_nm": "와이드앵글",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 258000,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210477035&vir_vend_no=VV21023697&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510230&conts_divi_cd=10&rel_no=2210477035&rel_divi_cd=10&brand_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80&goods_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80+%EC%97%AC%EC%84%B1+CF+%ED%95%98%EC%9D%B4%EB%84%A5+%EB%8B%A4%EC%9A%B4+%EC%9E%90%EC%BC%93+WWW21543&flag_img_path=",
+            "sale_rate": 0,
+            "image_url": "//www.elandrs.com/upload/prd/img/035/600/2210477035_0000001.jpg",
+            "sale_price": 0,
+            "market_price": 369000
+          }
+        ],
+        "ctg_no": "1709327241",
+        "dactive_img_url": "//www.elandrs.com/upload/dspl/banner/90/688/00/221000000371688.png",
+        "ctg_nm": "스포츠",
+        "active_img_url": "//www.elandrs.com/upload/dspl/banner/90/687/00/221000000371687.png"
+      },
+      {
+        "goods_list": [
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]W NIKE COURT VISION ALTA LTR 코트비전 알타 우먼스 LTR DM0113-100",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 76050,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210402322&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510207&conts_divi_cd=10&rel_no=2210402322&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DW+NIKE+COURT+VISION+ALTA+LTR+%EC%BD%94%ED%8A%B8%EB%B9%84%EC%A0%84+%EC%95%8C%ED%83%80+%EC%9A%B0%EB%A8%BC%EC%8A%A4+LTR+DM0113-100&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/322/600/2210402322_0000041.jpg",
+            "sale_price": 84500,
+            "market_price": 89000,
+            "goods_comment_count": 1
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]NIKE COURT LEGACY (GS) 코트 레거시 (GS) DA5380 102",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 50400,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209276250&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510208&conts_divi_cd=10&rel_no=2209276250&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DNIKE+COURT+LEGACY+%28GS%29+%EC%BD%94%ED%8A%B8+%EB%A0%88%EA%B1%B0%EC%8B%9C+%28GS%29+DA5380+102&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/250/600/2209276250_0000089.jpg",
+            "sale_price": 56000,
+            "market_price": 59000,
+            "goods_comment_count": 4
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "와이드앵글 여성 CF 하이넥 다운 자켓 WWW21543",
+            "goods_no": "2210477035",
+            "brand_nm": "와이드앵글",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 258000,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210477035&vir_vend_no=VV21023697&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510230&conts_divi_cd=10&rel_no=2210477035&rel_divi_cd=10&brand_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80&goods_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80+%EC%97%AC%EC%84%B1+CF+%ED%95%98%EC%9D%B4%EB%84%A5+%EB%8B%A4%EC%9A%B4+%EC%9E%90%EC%BC%93+WWW21543&flag_img_path=",
+            "sale_rate": 0,
+            "image_url": "//www.elandrs.com/upload/prd/img/035/600/2210477035_0000001.jpg",
+            "sale_price": 0,
+            "market_price": 369000
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]W NIKE COURT VISION ALTA LTR 코트비전 알타 우먼스 LTR DM0113-100",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 76050,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210402322&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510207&conts_divi_cd=10&rel_no=2210402322&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DW+NIKE+COURT+VISION+ALTA+LTR+%EC%BD%94%ED%8A%B8%EB%B9%84%EC%A0%84+%EC%95%8C%ED%83%80+%EC%9A%B0%EB%A8%BC%EC%8A%A4+LTR+DM0113-100&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/322/600/2210402322_0000041.jpg",
+            "sale_price": 84500,
+            "market_price": 89000,
+            "goods_comment_count": 1
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]NIKE COURT LEGACY (GS) 코트 레거시 (GS) DA5380 102",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 50400,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209276250&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510208&conts_divi_cd=10&rel_no=2209276250&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DNIKE+COURT+LEGACY+%28GS%29+%EC%BD%94%ED%8A%B8+%EB%A0%88%EA%B1%B0%EC%8B%9C+%28GS%29+DA5380+102&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/250/600/2209276250_0000089.jpg",
+            "sale_price": 56000,
+            "market_price": 59000,
+            "goods_comment_count": 4
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "와이드앵글 여성 CF 하이넥 다운 자켓 WWW21543",
+            "goods_no": "2210477035",
+            "brand_nm": "와이드앵글",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 258000,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210477035&vir_vend_no=VV21023697&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510230&conts_divi_cd=10&rel_no=2210477035&rel_divi_cd=10&brand_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80&goods_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80+%EC%97%AC%EC%84%B1+CF+%ED%95%98%EC%9D%B4%EB%84%A5+%EB%8B%A4%EC%9A%B4+%EC%9E%90%EC%BC%93+WWW21543&flag_img_path=",
+            "sale_rate": 0,
+            "image_url": "//www.elandrs.com/upload/prd/img/035/600/2210477035_0000001.jpg",
+            "sale_price": 0,
+            "market_price": 369000
+          }
+        ],
+        "dactive_img_url": "//www.elandrs.com/upload/dspl/banner/90/689/00/221000000371689.png",
+        "ctg_nm": "패션잡화",
+        "active_img_url": "//www.elandrs.com/upload/dspl/banner/90/690/00/221000000371690.png"
+      },
+      {
+        "ga_action": "",
+        "goods_list": [
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]W NIKE COURT VISION ALTA LTR 코트비전 알타 우먼스 LTR DM0113-100",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 76050,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210402322&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510207&conts_divi_cd=10&rel_no=2210402322&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DW+NIKE+COURT+VISION+ALTA+LTR+%EC%BD%94%ED%8A%B8%EB%B9%84%EC%A0%84+%EC%95%8C%ED%83%80+%EC%9A%B0%EB%A8%BC%EC%8A%A4+LTR+DM0113-100&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/322/600/2210402322_0000041.jpg",
+            "sale_price": 84500,
+            "market_price": 89000,
+            "goods_comment_count": 1
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]NIKE COURT LEGACY (GS) 코트 레거시 (GS) DA5380 102",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 50400,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209276250&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510208&conts_divi_cd=10&rel_no=2209276250&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DNIKE+COURT+LEGACY+%28GS%29+%EC%BD%94%ED%8A%B8+%EB%A0%88%EA%B1%B0%EC%8B%9C+%28GS%29+DA5380+102&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/250/600/2209276250_0000089.jpg",
+            "sale_price": 56000,
+            "market_price": 59000,
+            "goods_comment_count": 4
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "와이드앵글 여성 CF 하이넥 다운 자켓 WWW21543",
+            "goods_no": "2210477035",
+            "brand_nm": "와이드앵글",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 258000,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210477035&vir_vend_no=VV21023697&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510230&conts_divi_cd=10&rel_no=2210477035&rel_divi_cd=10&brand_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80&goods_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80+%EC%97%AC%EC%84%B1+CF+%ED%95%98%EC%9D%B4%EB%84%A5+%EB%8B%A4%EC%9A%B4+%EC%9E%90%EC%BC%93+WWW21543&flag_img_path=",
+            "sale_rate": 0,
+            "image_url": "//www.elandrs.com/upload/prd/img/035/600/2210477035_0000001.jpg",
+            "sale_price": 0,
+            "market_price": 369000
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]W NIKE COURT VISION ALTA LTR 코트비전 알타 우먼스 LTR DM0113-100",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 76050,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210402322&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510207&conts_divi_cd=10&rel_no=2210402322&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DW+NIKE+COURT+VISION+ALTA+LTR+%EC%BD%94%ED%8A%B8%EB%B9%84%EC%A0%84+%EC%95%8C%ED%83%80+%EC%9A%B0%EB%A8%BC%EC%8A%A4+LTR+DM0113-100&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/322/600/2210402322_0000041.jpg",
+            "sale_price": 84500,
+            "market_price": 89000,
+            "goods_comment_count": 1
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]NIKE COURT LEGACY (GS) 코트 레거시 (GS) DA5380 102",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 50400,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209276250&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510208&conts_divi_cd=10&rel_no=2209276250&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DNIKE+COURT+LEGACY+%28GS%29+%EC%BD%94%ED%8A%B8+%EB%A0%88%EA%B1%B0%EC%8B%9C+%28GS%29+DA5380+102&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/250/600/2209276250_0000089.jpg",
+            "sale_price": 56000,
+            "market_price": 59000,
+            "goods_comment_count": 4
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "와이드앵글 여성 CF 하이넥 다운 자켓 WWW21543",
+            "goods_no": "2210477035",
+            "brand_nm": "와이드앵글",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 258000,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210477035&vir_vend_no=VV21023697&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510230&conts_divi_cd=10&rel_no=2210477035&rel_divi_cd=10&brand_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80&goods_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80+%EC%97%AC%EC%84%B1+CF+%ED%95%98%EC%9D%B4%EB%84%A5+%EB%8B%A4%EC%9A%B4+%EC%9E%90%EC%BC%93+WWW21543&flag_img_path=",
+            "sale_rate": 0,
+            "image_url": "//www.elandrs.com/upload/prd/img/035/600/2210477035_0000001.jpg",
+            "sale_price": 0,
+            "market_price": 369000
+          }
+        ],
+        "dactive_img_url": "//www.elandrs.com/upload/dspl/banner/90/691/00/221000000371691.png",
+        "ctg_nm": "유아동",
+        "active_img_url": "//www.elandrs.com/upload/dspl/banner/90/692/00/221000000371692.png"
+      },
+      {
+        "ga_action": "",
+        "goods_list": [
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]W NIKE COURT VISION ALTA LTR 코트비전 알타 우먼스 LTR DM0113-100",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 76050,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210402322&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510207&conts_divi_cd=10&rel_no=2210402322&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DW+NIKE+COURT+VISION+ALTA+LTR+%EC%BD%94%ED%8A%B8%EB%B9%84%EC%A0%84+%EC%95%8C%ED%83%80+%EC%9A%B0%EB%A8%BC%EC%8A%A4+LTR+DM0113-100&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/322/600/2210402322_0000041.jpg",
+            "sale_price": 84500,
+            "market_price": 89000,
+            "goods_comment_count": 1
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]NIKE COURT LEGACY (GS) 코트 레거시 (GS) DA5380 102",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 50400,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209276250&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510208&conts_divi_cd=10&rel_no=2209276250&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DNIKE+COURT+LEGACY+%28GS%29+%EC%BD%94%ED%8A%B8+%EB%A0%88%EA%B1%B0%EC%8B%9C+%28GS%29+DA5380+102&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/250/600/2209276250_0000089.jpg",
+            "sale_price": 56000,
+            "market_price": 59000,
+            "goods_comment_count": 4
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "와이드앵글 여성 CF 하이넥 다운 자켓 WWW21543",
+            "goods_no": "2210477035",
+            "brand_nm": "와이드앵글",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 258000,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210477035&vir_vend_no=VV21023697&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510230&conts_divi_cd=10&rel_no=2210477035&rel_divi_cd=10&brand_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80&goods_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80+%EC%97%AC%EC%84%B1+CF+%ED%95%98%EC%9D%B4%EB%84%A5+%EB%8B%A4%EC%9A%B4+%EC%9E%90%EC%BC%93+WWW21543&flag_img_path=",
+            "sale_rate": 0,
+            "image_url": "//www.elandrs.com/upload/prd/img/035/600/2210477035_0000001.jpg",
+            "sale_price": 0,
+            "market_price": 369000
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]W NIKE COURT VISION ALTA LTR 코트비전 알타 우먼스 LTR DM0113-100",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 76050,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210402322&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510207&conts_divi_cd=10&rel_no=2210402322&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DW+NIKE+COURT+VISION+ALTA+LTR+%EC%BD%94%ED%8A%B8%EB%B9%84%EC%A0%84+%EC%95%8C%ED%83%80+%EC%9A%B0%EB%A8%BC%EC%8A%A4+LTR+DM0113-100&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/322/600/2210402322_0000041.jpg",
+            "sale_price": 84500,
+            "market_price": 89000,
+            "goods_comment_count": 1
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]NIKE COURT LEGACY (GS) 코트 레거시 (GS) DA5380 102",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 50400,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209276250&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510208&conts_divi_cd=10&rel_no=2209276250&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DNIKE+COURT+LEGACY+%28GS%29+%EC%BD%94%ED%8A%B8+%EB%A0%88%EA%B1%B0%EC%8B%9C+%28GS%29+DA5380+102&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/250/600/2209276250_0000089.jpg",
+            "sale_price": 56000,
+            "market_price": 59000,
+            "goods_comment_count": 4
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "와이드앵글 여성 CF 하이넥 다운 자켓 WWW21543",
+            "goods_no": "2210477035",
+            "brand_nm": "와이드앵글",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 258000,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210477035&vir_vend_no=VV21023697&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510230&conts_divi_cd=10&rel_no=2210477035&rel_divi_cd=10&brand_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80&goods_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80+%EC%97%AC%EC%84%B1+CF+%ED%95%98%EC%9D%B4%EB%84%A5+%EB%8B%A4%EC%9A%B4+%EC%9E%90%EC%BC%93+WWW21543&flag_img_path=",
+            "sale_rate": 0,
+            "image_url": "//www.elandrs.com/upload/prd/img/035/600/2210477035_0000001.jpg",
+            "sale_price": 0,
+            "market_price": 369000
+          }
+        ],
+        "dactive_img_url": "//www.elandrs.com/upload/dspl/banner/90/693/00/221000000371693.png",
+        "ctg_nm": "여성의류",
+        "active_img_url": "//www.elandrs.com/upload/dspl/banner/90/694/00/221000000371694.png"
+      },
+      {
+        "goods_list": [
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]W NIKE COURT VISION ALTA LTR 코트비전 알타 우먼스 LTR DM0113-100",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 76050,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210402322&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510207&conts_divi_cd=10&rel_no=2210402322&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DW+NIKE+COURT+VISION+ALTA+LTR+%EC%BD%94%ED%8A%B8%EB%B9%84%EC%A0%84+%EC%95%8C%ED%83%80+%EC%9A%B0%EB%A8%BC%EC%8A%A4+LTR+DM0113-100&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/322/600/2210402322_0000041.jpg",
+            "sale_price": 84500,
+            "market_price": 89000,
+            "goods_comment_count": 1
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]NIKE COURT LEGACY (GS) 코트 레거시 (GS) DA5380 102",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 50400,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209276250&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510208&conts_divi_cd=10&rel_no=2209276250&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DNIKE+COURT+LEGACY+%28GS%29+%EC%BD%94%ED%8A%B8+%EB%A0%88%EA%B1%B0%EC%8B%9C+%28GS%29+DA5380+102&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/250/600/2209276250_0000089.jpg",
+            "sale_price": 56000,
+            "market_price": 59000,
+            "goods_comment_count": 4
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "와이드앵글 여성 CF 하이넥 다운 자켓 WWW21543",
+            "goods_no": "2210477035",
+            "brand_nm": "와이드앵글",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 258000,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210477035&vir_vend_no=VV21023697&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510230&conts_divi_cd=10&rel_no=2210477035&rel_divi_cd=10&brand_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80&goods_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80+%EC%97%AC%EC%84%B1+CF+%ED%95%98%EC%9D%B4%EB%84%A5+%EB%8B%A4%EC%9A%B4+%EC%9E%90%EC%BC%93+WWW21543&flag_img_path=",
+            "sale_rate": 0,
+            "image_url": "//www.elandrs.com/upload/prd/img/035/600/2210477035_0000001.jpg",
+            "sale_price": 0,
+            "market_price": 369000
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]W NIKE COURT VISION ALTA LTR 코트비전 알타 우먼스 LTR DM0113-100",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 76050,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210402322&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510207&conts_divi_cd=10&rel_no=2210402322&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DW+NIKE+COURT+VISION+ALTA+LTR+%EC%BD%94%ED%8A%B8%EB%B9%84%EC%A0%84+%EC%95%8C%ED%83%80+%EC%9A%B0%EB%A8%BC%EC%8A%A4+LTR+DM0113-100&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/322/600/2210402322_0000041.jpg",
+            "sale_price": 84500,
+            "market_price": 89000,
+            "goods_comment_count": 1
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]NIKE COURT LEGACY (GS) 코트 레거시 (GS) DA5380 102",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 50400,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209276250&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510208&conts_divi_cd=10&rel_no=2209276250&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DNIKE+COURT+LEGACY+%28GS%29+%EC%BD%94%ED%8A%B8+%EB%A0%88%EA%B1%B0%EC%8B%9C+%28GS%29+DA5380+102&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/250/600/2209276250_0000089.jpg",
+            "sale_price": 56000,
+            "market_price": 59000,
+            "goods_comment_count": 4
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "와이드앵글 여성 CF 하이넥 다운 자켓 WWW21543",
+            "goods_no": "2210477035",
+            "brand_nm": "와이드앵글",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 258000,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210477035&vir_vend_no=VV21023697&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510230&conts_divi_cd=10&rel_no=2210477035&rel_divi_cd=10&brand_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80&goods_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80+%EC%97%AC%EC%84%B1+CF+%ED%95%98%EC%9D%B4%EB%84%A5+%EB%8B%A4%EC%9A%B4+%EC%9E%90%EC%BC%93+WWW21543&flag_img_path=",
+            "sale_rate": 0,
+            "image_url": "//www.elandrs.com/upload/prd/img/035/600/2210477035_0000001.jpg",
+            "sale_price": 0,
+            "market_price": 369000
+          }
+        ],
+        "dactive_img_url": "//www.elandrs.com/upload/dspl/banner/90/695/00/221000000371695.png",
+        "ctg_nm": "언더웨어",
+        "active_img_url": "//www.elandrs.com/upload/dspl/banner/90/696/00/221000000371696.png"
+      },
+      {
+        "goods_list": [
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]W NIKE COURT VISION ALTA LTR 코트비전 알타 우먼스 LTR DM0113-100",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 76050,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210402322&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510207&conts_divi_cd=10&rel_no=2210402322&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DW+NIKE+COURT+VISION+ALTA+LTR+%EC%BD%94%ED%8A%B8%EB%B9%84%EC%A0%84+%EC%95%8C%ED%83%80+%EC%9A%B0%EB%A8%BC%EC%8A%A4+LTR+DM0113-100&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/322/600/2210402322_0000041.jpg",
+            "sale_price": 84500,
+            "market_price": 89000,
+            "goods_comment_count": 1
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]NIKE COURT LEGACY (GS) 코트 레거시 (GS) DA5380 102",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 50400,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209276250&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510208&conts_divi_cd=10&rel_no=2209276250&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DNIKE+COURT+LEGACY+%28GS%29+%EC%BD%94%ED%8A%B8+%EB%A0%88%EA%B1%B0%EC%8B%9C+%28GS%29+DA5380+102&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/250/600/2209276250_0000089.jpg",
+            "sale_price": 56000,
+            "market_price": 59000,
+            "goods_comment_count": 4
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "와이드앵글 여성 CF 하이넥 다운 자켓 WWW21543",
+            "goods_no": "2210477035",
+            "brand_nm": "와이드앵글",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 258000,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210477035&vir_vend_no=VV21023697&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510230&conts_divi_cd=10&rel_no=2210477035&rel_divi_cd=10&brand_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80&goods_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80+%EC%97%AC%EC%84%B1+CF+%ED%95%98%EC%9D%B4%EB%84%A5+%EB%8B%A4%EC%9A%B4+%EC%9E%90%EC%BC%93+WWW21543&flag_img_path=",
+            "sale_rate": 0,
+            "image_url": "//www.elandrs.com/upload/prd/img/035/600/2210477035_0000001.jpg",
+            "sale_price": 0,
+            "market_price": 369000
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]W NIKE COURT VISION ALTA LTR 코트비전 알타 우먼스 LTR DM0113-100",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 76050,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210402322&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510207&conts_divi_cd=10&rel_no=2210402322&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DW+NIKE+COURT+VISION+ALTA+LTR+%EC%BD%94%ED%8A%B8%EB%B9%84%EC%A0%84+%EC%95%8C%ED%83%80+%EC%9A%B0%EB%A8%BC%EC%8A%A4+LTR+DM0113-100&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/322/600/2210402322_0000041.jpg",
+            "sale_price": 84500,
+            "market_price": 89000,
+            "goods_comment_count": 1
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]NIKE COURT LEGACY (GS) 코트 레거시 (GS) DA5380 102",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 50400,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209276250&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510208&conts_divi_cd=10&rel_no=2209276250&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DNIKE+COURT+LEGACY+%28GS%29+%EC%BD%94%ED%8A%B8+%EB%A0%88%EA%B1%B0%EC%8B%9C+%28GS%29+DA5380+102&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/250/600/2209276250_0000089.jpg",
+            "sale_price": 56000,
+            "market_price": 59000,
+            "goods_comment_count": 4
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "와이드앵글 여성 CF 하이넥 다운 자켓 WWW21543",
+            "goods_no": "2210477035",
+            "brand_nm": "와이드앵글",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 258000,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210477035&vir_vend_no=VV21023697&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510230&conts_divi_cd=10&rel_no=2210477035&rel_divi_cd=10&brand_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80&goods_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80+%EC%97%AC%EC%84%B1+CF+%ED%95%98%EC%9D%B4%EB%84%A5+%EB%8B%A4%EC%9A%B4+%EC%9E%90%EC%BC%93+WWW21543&flag_img_path=",
+            "sale_rate": 0,
+            "image_url": "//www.elandrs.com/upload/prd/img/035/600/2210477035_0000001.jpg",
+            "sale_price": 0,
+            "market_price": 369000
+          }
+        ],
+        "dactive_img_url": "//www.elandrs.com/upload/dspl/banner/90/697/00/221000000371697.png",
+        "ctg_nm": "캐주얼",
+        "active_img_url": "//www.elandrs.com/upload/dspl/banner/90/698/00/221000000371698.png"
+      },
+      {
+        "goods_list": [
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]W NIKE COURT VISION ALTA LTR 코트비전 알타 우먼스 LTR DM0113-100",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 76050,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210402322&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510207&conts_divi_cd=10&rel_no=2210402322&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DW+NIKE+COURT+VISION+ALTA+LTR+%EC%BD%94%ED%8A%B8%EB%B9%84%EC%A0%84+%EC%95%8C%ED%83%80+%EC%9A%B0%EB%A8%BC%EC%8A%A4+LTR+DM0113-100&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/322/600/2210402322_0000041.jpg",
+            "sale_price": 84500,
+            "market_price": 89000,
+            "goods_comment_count": 1
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]NIKE COURT LEGACY (GS) 코트 레거시 (GS) DA5380 102",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 50400,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209276250&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510208&conts_divi_cd=10&rel_no=2209276250&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DNIKE+COURT+LEGACY+%28GS%29+%EC%BD%94%ED%8A%B8+%EB%A0%88%EA%B1%B0%EC%8B%9C+%28GS%29+DA5380+102&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/250/600/2209276250_0000089.jpg",
+            "sale_price": 56000,
+            "market_price": 59000,
+            "goods_comment_count": 4
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "와이드앵글 여성 CF 하이넥 다운 자켓 WWW21543",
+            "goods_no": "2210477035",
+            "brand_nm": "와이드앵글",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 258000,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210477035&vir_vend_no=VV21023697&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510230&conts_divi_cd=10&rel_no=2210477035&rel_divi_cd=10&brand_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80&goods_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80+%EC%97%AC%EC%84%B1+CF+%ED%95%98%EC%9D%B4%EB%84%A5+%EB%8B%A4%EC%9A%B4+%EC%9E%90%EC%BC%93+WWW21543&flag_img_path=",
+            "sale_rate": 0,
+            "image_url": "//www.elandrs.com/upload/prd/img/035/600/2210477035_0000001.jpg",
+            "sale_price": 0,
+            "market_price": 369000
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]W NIKE COURT VISION ALTA LTR 코트비전 알타 우먼스 LTR DM0113-100",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 76050,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210402322&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510207&conts_divi_cd=10&rel_no=2210402322&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DW+NIKE+COURT+VISION+ALTA+LTR+%EC%BD%94%ED%8A%B8%EB%B9%84%EC%A0%84+%EC%95%8C%ED%83%80+%EC%9A%B0%EB%A8%BC%EC%8A%A4+LTR+DM0113-100&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/322/600/2210402322_0000041.jpg",
+            "sale_price": 84500,
+            "market_price": 89000,
+            "goods_comment_count": 1
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "[💥무배+즉시할인10%💥]NIKE COURT LEGACY (GS) 코트 레거시 (GS) DA5380 102",
+            "goods_star_point": 100,
+            "brand_nm": "나이키",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 50400,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209276250&vir_vend_no=VV18008595&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510208&conts_divi_cd=10&rel_no=2209276250&rel_divi_cd=10&brand_nm=%EB%82%98%EC%9D%B4%ED%82%A4&goods_nm=%5B%F0%9F%92%A5%EB%AC%B4%EB%B0%B0%2B%EC%A6%89%EC%8B%9C%ED%95%A0%EC%9D%B810%25%F0%9F%92%A5%5DNIKE+COURT+LEGACY+%28GS%29+%EC%BD%94%ED%8A%B8+%EB%A0%88%EA%B1%B0%EC%8B%9C+%28GS%29+DA5380+102&flag_img_path=",
+            "sale_rate": 15,
+            "image_url": "//www.elandrs.com/upload/prd/img/250/600/2209276250_0000089.jpg",
+            "sale_price": 56000,
+            "market_price": 59000,
+            "goods_comment_count": 4
+          },
+          {
+            "flag_img_path": "",
+            "goods_nm": "와이드앵글 여성 CF 하이넥 다운 자켓 WWW21543",
+            "goods_no": "2210477035",
+            "brand_nm": "와이드앵글",
+            "icon_view": "무료배송,",
+            "cust_sale_price": 258000,
+            "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2210477035&vir_vend_no=VV21023697&sale_shop_divi_cd=&disp_ctg_no=&sale_area_no=&tr_yn=&conts_dist_no=C22111633510230&conts_divi_cd=10&rel_no=2210477035&rel_divi_cd=10&brand_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80&goods_nm=%EC%99%80%EC%9D%B4%EB%93%9C%EC%95%B5%EA%B8%80+%EC%97%AC%EC%84%B1+CF+%ED%95%98%EC%9D%B4%EB%84%A5+%EB%8B%A4%EC%9A%B4+%EC%9E%90%EC%BC%93+WWW21543&flag_img_path=",
+            "sale_rate": 0,
+            "image_url": "//www.elandrs.com/upload/prd/img/035/600/2210477035_0000001.jpg",
+            "sale_price": 0,
+            "market_price": 369000
+          }
+        ],
+        "dactive_img_url": "//www.elandrs.com/upload/dspl/banner/90/700/00/221000000371700.png",
+        "ctg_nm": "남성",
+        "active_img_url": "//www.elandrs.com/upload/dspl/banner/90/701/00/221000000371701.png"
+      }
+    ],
+    "my_regular_store_list": [],
+    "store_mainbanner_list": [
+      {
+        "image_url": "//www.elandrs.com/upload/dspl/banner/10/801/221100000378801.jpg",
+        "link_url": "https://m.elandmall.com/shop/initPlanShop.action?disp_ctg_no=2202587846"
+      },
+      {
+        "image_url": "//www.elandrs.com/upload/dspl/banner/10/677/221100000378677.jpg",
+        "link_url": "https://m.elandmall.com/shop/initPlanShop.action?disp_ctg_no=2106529582"
+      },
+      {
+        "image_url": "//www.elandrs.com/upload/dspl/banner/10/611/221100000378611.jpg",
+        "link_url": "https://m.elandmall.com/shop/initPlanShop.action?disp_ctg_no=2110560747"
+      },
+      {
+        "image_url": "//www.elandrs.com/upload/dspl/banner/10/674/221100000378674.jpg",
+        "link_url": "https://m.elandmall.com/shop/initPlanShop.action?disp_ctg_no=2105523117"
+      }
+    ]
+  },
+  "resultMsg": "success"
+}

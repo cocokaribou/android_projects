@@ -1,12 +1,15 @@
 package com.example.elandmall_kotlin.ui.main
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.BaseActivity
 import com.example.elandmall_kotlin.BaseApplication
 import com.example.elandmall_kotlin.databinding.ActivityMainBinding
 import com.example.elandmall_kotlin.repository.MemDataSource
+import com.example.elandmall_kotlin.ui.EventBus
+import com.example.elandmall_kotlin.ui.LinkEvent
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -48,7 +51,13 @@ class MainActivity: BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.ac
         }.attach()
     }
 
-    private fun initObserve() {}
+    private fun initObserve() {
+        EventBus.linkEvent.observe(this) {
+            it.getIfNotHandled()?.let { event ->
+                onLinkEvent(event)
+            }
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()

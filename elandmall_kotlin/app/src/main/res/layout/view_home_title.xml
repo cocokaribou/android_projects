@@ -24,5 +24,4 @@
         app:layout_constraintTop_toTopOf="@id/title"
         tools:text="주목해야할 금주의 트렌드" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

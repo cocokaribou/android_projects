@@ -26,7 +26,6 @@ val INDEX_MORE = (SPAN_COUNT * ROW_COUNT) - 1
 
 class HomeCategoryViewHolder(private val binding: ViewHomeCategoryBinding) : BaseViewHolder(binding.root) {
     private val mAdapter by lazy { CategoryListAdapter(::toggleExpand) }
-    private val mLayoutManager by lazy { GridLayoutManager(binding.root.context, SPAN_COUNT) }
     lateinit var itemDecoration: GridSideSpacingItemDecoration
 
     companion object {
@@ -43,10 +42,8 @@ class HomeCategoryViewHolder(private val binding: ViewHomeCategoryBinding) : Bas
     }
 
     private fun initView() = with(binding) {
-        categoryList.apply {
-            adapter = mAdapter
-            layoutManager = mLayoutManager
-        }
+        categoryList.adapter = mAdapter
+
         if (!::itemDecoration.isInitialized) {
             itemDecoration = GridSideSpacingItemDecoration(SPAN_COUNT, 45)
             categoryList.addItemDecoration(itemDecoration)
