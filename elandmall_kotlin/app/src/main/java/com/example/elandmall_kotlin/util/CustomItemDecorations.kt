@@ -9,7 +9,10 @@ fun Int.dpToPx(): Int {
     val density = BaseApplication.context.resources.displayMetrics.density
     return (this * density).toInt()
 }
-
+fun Float.dpToPx(): Int {
+    val density = BaseApplication.context.resources.displayMetrics.density
+    return (this * density).toInt()
+}
 
 fun Int.pxToDp(): Int {
     val density = BaseApplication.context.resources.displayMetrics.density

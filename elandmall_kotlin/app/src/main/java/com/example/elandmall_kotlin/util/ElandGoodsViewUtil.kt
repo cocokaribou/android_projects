@@ -19,7 +19,9 @@ import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 // Goods.kt model
 object GoodsUtil {
-    fun drawGoodsUI(binding: ViewBinding, data: Goods) {
+    lateinit var binding: ViewBinding
+    fun drawGoodsUI(mBinding: ViewBinding, data: Goods) {
+        binding = mBinding
         binding.root.let {
             // goods image
             try {
@@ -27,7 +29,8 @@ object GoodsUtil {
                 Glide.with(it.context)
                     .load(data.imageUrl)
                     .into(goodsImg)
-            } catch (e: RuntimeException) { }
+            } catch (e: RuntimeException) {
+            }
 
 
             // flag
@@ -135,7 +138,7 @@ object GoodsUtil {
                     tag.visibility = View.VISIBLE
                     val list = data.iconView.split(",").map { it.trim() }.filter { it.isNotEmpty() }
                     list.forEach {
-                        val tv = TextView(binding.root.context, null, 0, R.style.home_tag_style).apply {
+                        val tv = TextView(binding.root.context, null, 0).apply {
                             text = it
                         }
                         tag.addView(tv)
@@ -160,7 +163,8 @@ object GoodsUtil {
                 } else {
                     rating.visibility = View.GONE
                 }
-            } catch (e: RuntimeException) {}
+            } catch (e: RuntimeException) {
+            }
 
             // review count
             try {
@@ -170,7 +174,36 @@ object GoodsUtil {
                 } else {
                     reviewCount.text = ""
                 }
-            } catch (e: RuntimeException) {}
+            } catch (e: RuntimeException) {
+            }
+        }
+    }
+
+    fun Unit.tagUIType(type: String) {
+        try {
+            val tag = binding.root.findViewById<LinearLayout>(R.id.tag)
+            when (type) {
+                "home" -> {
+                    tag.children.forEach {
+                        with(it as TextView) {
+                            setBackgroundResource(R.drawable.tag_bg)
+                            setTextAppearance(R.style.home_tag_style)
+                            setPadding(7.dpToPx(), (4.5).toFloat().dpToPx(), 7.dpToPx(), (4.5).toFloat().dpToPx())
+                        }
+                    }
+                }
+                "storeshop" -> {
+                    tag.children.forEach {
+                        with(it as TextView) {
+                            setTextAppearance(R.style.home_tag_style)
+                            setPadding(7.dpToPx(), (4.5).toFloat().dpToPx(), 7.dpToPx(), (4.5).toFloat().dpToPx())
+                        }
+                    }
+                }
+                else -> {}
+            }
+
+        } catch (e: RuntimeException) {
         }
     }
 

@@ -21,5 +21,4 @@ class HomeRepository: MajorRepository {
             return@retryWhen attempt < 2 && cause is java.lang.Exception
         }.flowOn(Dispatchers.IO)
     }
-
 }

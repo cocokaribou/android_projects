@@ -45,7 +45,7 @@ class HomeStoreShopViewHolder(private val binding: ViewHomeStoreShopBinding) : B
         }
 
         override fun areContentsTheSame(oldItem: Banner, newItem: Banner): Boolean {
-            return oldItem.contsDistNo == newItem.contsDistNo
+            return oldItem.linkUrl == newItem.linkUrl
         }
     }) {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BannerViewHolder {

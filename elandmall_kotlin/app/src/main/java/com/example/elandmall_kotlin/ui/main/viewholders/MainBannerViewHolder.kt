@@ -22,7 +22,7 @@ import com.example.elandmall_kotlin.util.AdjustHeightImageViewTarget
 import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.getSpannedBoldText
 
-class HomeMainBannerViewHolder(private val binding: ViewHomeMainBannerBinding) : BaseViewHolder(binding.root) {
+class MainBannerViewHolder(private val binding: ViewHomeMainBannerBinding) : BaseViewHolder(binding.root) {
     val mAdapter by lazy { MainBannerPagerAdapter() }
     override fun onBind(item: Any, pos: Int) {
         (item as? ModuleData.HomeMainBannerData?)?.let {
@@ -30,7 +30,7 @@ class HomeMainBannerViewHolder(private val binding: ViewHomeMainBannerBinding) :
         }
     }
 
-    private fun initView(data: List<HomeResponse.HomeMainbanner>) = with(binding) {
+    private fun initView(data: List<Banner>) = with(binding) {
         viewpager.apply {
             mAdapter.submitList(data)
             adapter = mAdapter
@@ -49,12 +49,12 @@ class HomeMainBannerViewHolder(private val binding: ViewHomeMainBannerBinding) :
         }
     }
 
-    inner class MainBannerPagerAdapter : ListAdapter<HomeResponse.HomeMainbanner, MainBannerPagerAdapter.MainBannerItemViewHolder>(object :
-        DiffUtil.ItemCallback<HomeResponse.HomeMainbanner>() {
-        override fun areItemsTheSame(oldItem: HomeResponse.HomeMainbanner, newItem: HomeResponse.HomeMainbanner): Boolean =
+    inner class MainBannerPagerAdapter : ListAdapter<Banner, MainBannerPagerAdapter.MainBannerItemViewHolder>(object :
+        DiffUtil.ItemCallback<Banner>() {
+        override fun areItemsTheSame(oldItem: Banner, newItem: Banner): Boolean =
             oldItem == newItem
 
-        override fun areContentsTheSame(oldItem: HomeResponse.HomeMainbanner, newItem: HomeResponse.HomeMainbanner): Boolean =
+        override fun areContentsTheSame(oldItem: Banner, newItem: Banner): Boolean =
             oldItem == newItem
     }) {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainBannerItemViewHolder {

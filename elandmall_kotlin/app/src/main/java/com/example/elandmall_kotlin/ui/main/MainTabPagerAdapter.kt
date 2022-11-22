@@ -14,6 +14,7 @@ import com.example.elandmall_kotlin.model.MainGnbResponse
 import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.main.tabs.home.HomeModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.WebModulesFragment
+import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopModuleFragment
 import com.example.elandmall_kotlin.util.Logger
 
 class MainTabPagerAdapter(fm: FragmentManager, lifeCycle: Lifecycle) : FragmentStateAdapter(fm, lifeCycle) {
@@ -35,7 +36,7 @@ class MainTabPagerAdapter(fm: FragmentManager, lifeCycle: Lifecycle) : FragmentS
                     )
                 }
                 STORE_MENU_CD -> {
-                    HomeModuleFragment.create(
+                    StoreShopModuleFragment.create(
                         tabName = gnb.menuName ?: "",
                         apiUrl = gnb.apiUrl ?: ""
                     )

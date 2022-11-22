@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class HomeViewModel : BaseViewModel() {
-    val repository: HomeRepository by lazy { HomeRepository() }
+    private val repository: HomeRepository by lazy { HomeRepository() }
 
     val refreshedData = MutableLiveData<HomeResponse?>()
     override fun requestRefresh() {
@@ -35,7 +35,6 @@ class HomeViewModel : BaseViewModel() {
     }
 
     val homeList = MutableLiveData<MutableList<ModuleData>>()
-
     fun setHomeModules(data: HomeResponse) {
         val moduleList = mutableListOf<ModuleData>()
         data.data?.let { homeData ->

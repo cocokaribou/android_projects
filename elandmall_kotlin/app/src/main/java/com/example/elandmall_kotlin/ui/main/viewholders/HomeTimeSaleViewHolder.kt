@@ -1,8 +1,12 @@
 package com.example.elandmall_kotlin.ui.main.viewholders
 
 import android.os.Build
+import android.widget.TextView
+import androidx.core.view.children
 import androidx.core.view.doOnAttach
+import androidx.core.view.forEach
 import androidx.lifecycle.*
+import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.ViewHomeTimeSaleBinding
 import com.example.elandmall_kotlin.model.Goods
 import com.example.elandmall_kotlin.ui.BaseViewHolder
@@ -56,6 +60,9 @@ class HomeTimeSaleViewHolder(private val binding: ViewHomeTimeSaleBinding, priva
     private fun initView(data: Goods) = with(binding) {
         // common ui
         drawGoodsUI(binding, data)
+        binding.tag.forEach {
+            (it as TextView).setTextAppearance(R.style.home_tag_style)
+        }
 
         // timer
         data.time?.let {

@@ -10,7 +10,6 @@ import com.example.elandmall_kotlin.databinding.*
 import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.viewholders.*
-import com.example.elandmall_kotlin.util.Logger
 
 class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapter<ModuleData, BaseViewHolder>(diff) {
     companion object {
@@ -28,7 +27,7 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
-            ModuleData.HomeMainBannerData.ordinal() -> HomeMainBannerViewHolder(
+            ModuleData.HomeMainBannerData.ordinal() -> MainBannerViewHolder(
                 ViewHomeMainBannerBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,

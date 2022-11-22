@@ -8,7 +8,7 @@ sealed class ModuleData {
     abstract fun clone(): ModuleData
 
     data class HomeMainBannerData(
-        val homeBannerData: List<HomeResponse.HomeMainbanner>
+        val homeBannerData: List<Banner>
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()

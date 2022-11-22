@@ -16,7 +16,7 @@ data class HomeResponse(
 
     data class HomeData(
         // 빌보드 배너
-        @SerializedName("home_mainbanner_list") val homeMainbannerList: List<HomeMainbanner>?,
+        @SerializedName("home_mainbanner_list") val homeMainbannerList: List<Banner>?,
         // 카테고리 리스트
         @SerializedName("home_categoryIcon_list") val homeCategoryIconList: List<HomeCategoryIcon>?,
         // 상단 배너
@@ -54,22 +54,10 @@ data class HomeResponse(
     )
 
     data class HomeCategoryIcon(
-        @SerializedName("ga_action") val gaAction: String?,
-        @SerializedName("tr_yn") val trYn: String?,
-        @SerializedName("shop_copy_nm") val shopCopyNm: String?,
         @SerializedName("image_url") private val imgUrl: String?,
-        @SerializedName("rel_divi_cd") val relDiviCd: String?,
         @SerializedName("title") val title: String?,
-        @SerializedName("move_cont_no") val moveContNo: String?,
-        @SerializedName("rel_no") val relNo: String?,
-        @SerializedName("conts_dist_no") val contsDistNo: String?,
-        @SerializedName("rel_cont_nm") val relContNm: String?,
         @SerializedName("categoryNo") val categoryNo: String?,
         @SerializedName("link_url") val linkUrl: String?,
-        @SerializedName("sale_area_no") val saleAreaNo: String?,
-        @SerializedName("ga_category") val gaCategory: String?,
-        @SerializedName("conts_divi_cd") val contsDiviCd: String?,
-        @SerializedName("ga_label") val gaLabel: String?
     ) {
         val imageUrl: String
             get() {
@@ -82,25 +70,9 @@ data class HomeResponse(
     }
 
     data class HomeBrand(
-        @SerializedName("ga_action") val gaAction: String?,
-        @SerializedName("tr_yn") val trYn: String?,
-        @SerializedName("shop_copy_nm") val shopCopyNm: String?,
         @SerializedName("image_url") private val imgUrl: String?,
-        @SerializedName("rel_divi_cd") val relDiviCd: String?,
         @SerializedName("brand_name") val brandName: String?,
-        @SerializedName("move_cont_no") val moveContNo: String?,
-        @SerializedName("rel_no") val relNo: String?,
-        @SerializedName("conts_dist_no") val contsDistNo: String?,
-        @SerializedName("rel_cont_nm") val relContNm: String?,
-        @SerializedName("eland_brand_yn") val elandBrandYn: String?,
-        @SerializedName("Conts_form_cd") val contsFormCd: String?,
         @SerializedName("link_url") val linkUrl: String?,
-        @SerializedName("staff_yn") val staffYn: String?,
-        @SerializedName("sale_area_no") val saleAreaNo: String?,
-        @SerializedName("disp_seq") val dispSeq: Int?,
-        @SerializedName("ga_category") val gaCategory: String?,
-        @SerializedName("conts_divi_cd") val contsDiviCd: String?,
-        @SerializedName("ga_label") val gaLabel: String?
     ) {
         val imageUrl: String
             get() {
@@ -124,32 +96,6 @@ data class HomeResponse(
         @SerializedName("title") val title: String?
     )
 
-    data class HomeMainbanner(
-        @SerializedName("ga_action") val gaAction: String?,
-        @SerializedName("tr_yn") val trYn: String?,
-        @SerializedName("shop_copy_nm") val shopCopyNm: String?,
-        @SerializedName("image_url") private val imgUrl: String?,
-        @SerializedName("rel_divi_cd") val relDiviCd: String?,
-        @SerializedName("move_cont_no") val moveContNo: String?,
-        @SerializedName("rel_no") val relNo: String?,
-        @SerializedName("conts_dist_no") val contsDistNo: String?,
-        @SerializedName("rel_cont_nm") val relContNm: String?,
-        @SerializedName("link_url") val linkUrl: String?,
-        @SerializedName("sale_area_no") val saleAreaNo: String?,
-        @SerializedName("ga_category") val gaCategory: String?,
-        @SerializedName("conts_divi_cd") val contsDiviCd: String?,
-        @SerializedName("ga_label") val gaLabel: String?
-    ) {
-        val imageUrl: String
-            get() {
-                return if (!imgUrl.isNullOrEmpty() && imgUrl.startsWith("http")) {
-                    imgUrl
-                } else {
-                    "http:$imgUrl"
-                }
-            }
-    }
-
     data class HomeOfflineShop(
         @SerializedName("subtitle") val subtitle: String?,
         @SerializedName("home_offline_shop_list") val homeOfflineShopList: List<Goods>?,
@@ -163,12 +109,9 @@ data class HomeResponse(
         @SerializedName("title") val title: String?
     ) {
         data class HomeMdCat(
-            @SerializedName("ga_action") val gaAction: String?,
             @SerializedName("home_md_goods") val homeMdGoods: List<Goods>?,
             @SerializedName("image_url") val imageUrl: String?,
             @SerializedName("menu_title") val menuTitle: String?,
-            @SerializedName("ga_category") val gaCategory: String?,
-            @SerializedName("ga_label") val gaLabel: String?
         )
     }
 
@@ -178,21 +121,9 @@ data class HomeResponse(
         @SerializedName("home_offers_list") val homeSeasonPlanList: List<HomeSeasonPlanItem>?
     ) {
         data class HomeSeasonPlanItem(
-            @SerializedName("ga_action") val gaAction: String?,
-            @SerializedName("tr_yn") val trYn: String?,
-            @SerializedName("shop_copy_nm") val shopCopyNm: String?,
             @SerializedName("image_url") val imageUrl: String?,
-            @SerializedName("rel_divi_cd") val relDiviCd: String?,
-            @SerializedName("move_cont_no") val moveContNo: String?,
-            @SerializedName("rel_no") val relNo: String?,
-            @SerializedName("conts_dist_no") val contsDistNo: String?,
-            @SerializedName("rel_cont_nm") val relContNm: String?,
             @SerializedName("goods_list") val goodsList: List<Goods>?,
             @SerializedName("link_url") val linkUrl: String?,
-            @SerializedName("sale_area_no") val saleAreaNo: String?,
-            @SerializedName("ga_category") val gaCategory: String?,
-            @SerializedName("conts_divi_cd") val contsDiviCd: String?,
-            @SerializedName("ga_label") val gaLabel: String?
         )
     }
 }

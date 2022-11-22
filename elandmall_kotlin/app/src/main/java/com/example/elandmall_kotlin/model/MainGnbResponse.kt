@@ -27,7 +27,7 @@ data class MainGnbResponse(
         @SerializedName("new_tag_yn") val newTagYn: String?,
         @SerializedName("ga_category") val gaCategory: String?,
         @SerializedName("ga_label") val gaLabel: String?,
-    ){
+    ) {
         val isWebView = webview == "Y"
     }
 
@@ -43,21 +43,5 @@ data class MainGnbResponse(
         @SerializedName("rel_no") val relNo: String?,
         @SerializedName("conts_dist_no") val contsDistNo: String?,
         @SerializedName("ga_label") val gaLabel: String?,
-
-        )
-
-    /**
-     * ga data
-
-    @SerializedName("tr_yn") val trYn: String?,
-    @SerializedName("ga_action") val gaAction: String?,
-    @SerializedName("rel_divi_cd") val relDiviCd: String?,
-    @SerializedName("sale_area_no") val saleAreaNo: String?,
-    @SerializedName("ga_category") val gaCategory: String?,
-    @SerializedName("conts_divi_cd") val contsDiviCd: String?,
-    @SerializedName("rel_no") val relNo: String?,
-    @SerializedName("conts_dist_no") val contsDistNo: String?,
-    @SerializedName("ga_label") val gaLabel: String?
-     *
-     */
+    )
 }
