@@ -17,8 +17,8 @@ import com.google.android.material.tabs.TabLayoutMediator
  * - init tab pager
  * - handle landing intent
  */
-class MainActivity: BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.activity_main) {
-    override val viewModel by viewModels<MainViewModel>()
+class MainActivity: BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.activity_main) {
+    override val viewModel by viewModels<BaseViewModel>()
 
     val mAdapter by lazy { MainTabPagerAdapter(supportFragmentManager, lifecycle) }
 

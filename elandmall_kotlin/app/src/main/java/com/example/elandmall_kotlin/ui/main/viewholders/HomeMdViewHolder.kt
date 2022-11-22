@@ -18,6 +18,8 @@ import com.example.elandmall_kotlin.util.GoodsUtil.drawGoodsUI
 import com.example.elandmall_kotlin.util.GoodsUtil.goodsDiff
 import com.example.elandmall_kotlin.util.HorizontalSpacingItemDecoration
 import com.example.elandmall_kotlin.util.Logger
+import com.example.elandmall_kotlin.util.dpToPx
+import com.example.elandmall_kotlin.util.pxToDp
 
 var selectedTab = 0
 
@@ -29,14 +31,12 @@ class HomeMdViewHolder(private val binding: ViewHomeMdBinding) : BaseViewHolder(
         mCateAdapter.notifyItemChanged(selectedTab)
 
         // position after
-        Logger.v("clicked! $it")
         selectedTab = it
         mCateAdapter.notifyItemChanged(selectedTab)
         mListAdapter.submitList(data.homeMdCatList?.get(selectedTab)?.homeMdGoods)
     }
     private val mCateAdapter by lazy { CategoryAdapter(tabSelector) }
     private val mListAdapter by lazy { MdListAdapter() }
-    lateinit var mItemDecoration: HorizontalSpacingItemDecoration
 
     override fun onBind(item: Any, pos: Int) {
         (item as? ModuleData.HomeMdData)?.let {
@@ -47,21 +47,16 @@ class HomeMdViewHolder(private val binding: ViewHomeMdBinding) : BaseViewHolder(
 
     private fun initView(data: HomeResponse.HomeMd) = with(binding) {
         mCateAdapter.submitList(data.homeMdCatList)
-        if (!::mItemDecoration.isInitialized) {
-            mItemDecoration = HorizontalSpacingItemDecoration(spacing = 3, edgeSpacing = 1, includeEdge = false)
-            mdCateList.addItemDecoration(mItemDecoration)
-        }
         mdCateList.adapter = mCateAdapter
 
 
         mListAdapter.submitList(data.homeMdCatList?.get(0)?.homeMdGoods)
         mdGoodsList.adapter = mListAdapter
     }
-}
 
-class CategoryAdapter(private val tabSelector: (Int) -> Unit) : ListAdapter<HomeResponse.HomeMd.HomeMdCat, CategoryAdapter.MdCateViewHolder>(diff) {
-    companion object {
-        val diff = object : DiffUtil.ItemCallback<HomeResponse.HomeMd.HomeMdCat>() {
+    inner class CategoryAdapter(private val tabSelector: (Int) -> Unit) :
+        ListAdapter<HomeResponse.HomeMd.HomeMdCat, CategoryAdapter.MdCateViewHolder>(object :
+            DiffUtil.ItemCallback<HomeResponse.HomeMd.HomeMdCat>() {
             override fun areItemsTheSame(oldItem: HomeResponse.HomeMd.HomeMdCat, newItem: HomeResponse.HomeMd.HomeMdCat): Boolean {
                 return oldItem == newItem
             }
@@ -70,62 +65,70 @@ class CategoryAdapter(private val tabSelector: (Int) -> Unit) : ListAdapter<Home
                 return oldItem.menuTitle == newItem.menuTitle
             }
 
+        }) {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MdCateViewHolder {
+            return MdCateViewHolder(
+                ViewHomeMdCateItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+        }
+
+        override fun onBindViewHolder(holder: MdCateViewHolder, position: Int) {
+            holder.onBind(tabSelector)
+        }
+
+        inner class MdCateViewHolder(private val binding: ViewHomeMdCateItemBinding) : RecyclerView.ViewHolder(binding.root) {
+            fun onBind(tabSelector: (Int) -> Unit) = with(binding) {
+                val data = currentList[adapterPosition]
+                Glide.with(itemView.context)
+                    .load("http:" + data.imageUrl)
+                    .into(cateImg)
+
+                if (adapterPosition == selectedTab) {
+                    selected.visibility = View.VISIBLE
+                    notSelected.visibility = View.GONE
+                } else {
+                    selected.visibility = View.GONE
+                    notSelected.visibility = View.VISIBLE
+                }
+
+                if (adapterPosition == currentList.size - 1) {
+                    spacing.visibility = View.GONE
+                } else {
+                    spacing.visibility = View.VISIBLE
+                }
+
+                cateName.text = data.menuTitle
+                root.setOnClickListener {
+                    tabSelector(adapterPosition)
+                }
+            }
         }
     }
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MdCateViewHolder {
-        return MdCateViewHolder(
-            ViewHomeMdCateItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
+    inner class MdListAdapter : ListAdapter<Goods, MdListAdapter.MdViewHolder>(goodsDiff) {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MdViewHolder {
+            return MdViewHolder(
+                ViewHomeMdItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
             )
-        )
-    }
-
-    override fun onBindViewHolder(holder: MdCateViewHolder, position: Int) {
-        holder.onBind(currentList[position], tabSelector)
-    }
-
-    inner class MdCateViewHolder(private val binding: ViewHomeMdCateItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: HomeResponse.HomeMd.HomeMdCat, tabSelector: (Int) -> Unit) = with(binding) {
-            Glide.with(itemView.context)
-                .load("http:" + data.imageUrl)
-                .into(cateImg)
-
-            if (adapterPosition == selectedTab) {
-                bar.visibility = View.VISIBLE
-            } else {
-                bar.visibility = View.GONE
-            }
-
-            cateName.text = data.menuTitle
-            root.setOnClickListener {
-                tabSelector(adapterPosition)
-            }
         }
-    }
-}
 
-class MdListAdapter : ListAdapter<Goods, MdListAdapter.MdViewHolder>(goodsDiff) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MdViewHolder {
-        return MdViewHolder(
-            ViewHomeMdItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
-    }
+        override fun onBindViewHolder(holder: MdViewHolder, position: Int) {
+            holder.onBind()
+        }
 
-    override fun onBindViewHolder(holder: MdViewHolder, position: Int) {
-        holder.onBind(currentList[position])
-    }
-
-    inner class MdViewHolder(private val binding: ViewHomeMdItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Goods) {
-            drawGoodsUI(binding, data)
+        inner class MdViewHolder(private val binding: ViewHomeMdItemBinding) : RecyclerView.ViewHolder(binding.root) {
+            fun onBind() {
+                drawGoodsUI(binding, currentList[adapterPosition])
+            }
         }
     }
 }

@@ -1,27 +1,21 @@
 package com.example.elandmall_kotlin.ui.main.viewholders
 
 import android.os.Build
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.view.children
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
-import com.example.elandmall_kotlin.R
+import androidx.core.view.doOnAttach
+import androidx.lifecycle.*
 import com.example.elandmall_kotlin.databinding.ViewHomeTimeSaleBinding
 import com.example.elandmall_kotlin.model.Goods
-import com.example.elandmall_kotlin.model.HomeResponse
 import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.util.GoodsUtil.drawGoodsUI
 import com.example.elandmall_kotlin.util.Logger
-import com.example.elandmall_kotlin.util.getSpannedSizeText
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -30,8 +24,29 @@ import java.util.*
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
-class HomeTimeSaleViewHolder(private val binding: ViewHomeTimeSaleBinding, val lifecycleOwner: LifecycleOwner) :
+class HomeTimeSaleViewHolder(private val binding: ViewHomeTimeSaleBinding, private val lifecycleOwner: LifecycleOwner) :
     BaseViewHolder(binding.root) {
+
+    private var endTime: String = "2000/01/01 00:00:00"
+    var job: Job? = null
+
+    init {
+        lifecycleOwner.lifecycle.addObserver(object : LifecycleEventObserver {
+            override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+                when (event) {
+                    Lifecycle.Event.ON_PAUSE -> {
+                        stopTimer()
+                    }
+                    Lifecycle.Event.ON_RESUME -> {
+                        if (itemView.isAttachedToWindow) {
+                            startTimer()
+                        }
+                    }
+                }
+            }
+        })
+    }
+
     override fun onBind(item: Any, pos: Int) {
         (item as? ModuleData.HomeTimeData)?.homeTimeData?.let {
             initView(it)
@@ -44,28 +59,44 @@ class HomeTimeSaleViewHolder(private val binding: ViewHomeTimeSaleBinding, val l
 
         // timer
         data.time?.let {
-            tickerFlow(interval = 1.seconds, end = it)
-                .onEach { duration ->
-                    if (duration < 0L) {
-                        binding.timer.text = "Finshed."
-                        awaitCancellation()
-                    } else {
-                        binding.timer.text = duration.toTimeString()
-                    }
-                }
-                .launchIn(lifecycleOwner.lifecycleScope)
+            endTime = it
         }
+    }
+
+    override fun onAppeared() {
+        startTimer()
+    }
+
+    override fun onDisappeard() {
+        stopTimer()
+    }
+
+    private fun startTimer() {
+        job = tickerFlow(interval = 1.seconds, end = endTime)
+            .onEach { diff ->
+                if (diff < 0L) {
+                    binding.timer.text = "Finshed."
+                    awaitCancellation()
+                } else {
+                    binding.timer.text = diff.toTimeString()
+                }
+            }
+            .launchIn(lifecycleOwner.lifecycleScope)
+    }
+
+    private fun stopTimer() {
+        job?.cancel()
     }
 
     private fun tickerFlow(interval: Duration, end: String) = flow {
         delay(0L)
         while (true) {
-            emit(getDurationSec(end))
+            emit(getRemainingTime(end))
             delay(interval)
         }
     }
 
-    private fun getDurationSec(end: String): Long {
+    private fun getRemainingTime(end: String): Long {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
             val dDay = LocalDateTime.parse(end, formatter)

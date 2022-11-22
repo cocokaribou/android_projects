@@ -3,33 +3,31 @@ package com.example.elandmall_kotlin.ui.main.tabs.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.HomeResponse
-import com.example.elandmall_kotlin.ui.BaseViewModel
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.util.Logger
+import com.example.elandmall_kotlin.ui.main.BaseViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class HomeViewModel : BaseViewModel() {
-
-    init {
-
-    }
-
     val repository: HomeRepository by lazy { HomeRepository() }
-    val homeData = MutableLiveData<HomeResponse?>()
-    fun requestHome() {
+
+    val refreshedData = MutableLiveData<HomeResponse?>()
+    override fun requestRefresh() {
         viewModelScope.launch {
             repository.requestHomeStream()
                 .catch {
-                    homeData.postValue(null)
+                    refreshedData.postValue(null)
+                    isSuccess.postValue(false)
                 }
                 .collect {
                     it.fold(
                         onSuccess = {
-                            homeData.postValue(it)
+                            refreshedData.postValue(it)
+                            isSuccess.postValue(true)
                         },
                         onFailure = {
-                            homeData.postValue(null)
+                            refreshedData.postValue(null)
+                            isSuccess.postValue(false)
                         }
                     )
                 }

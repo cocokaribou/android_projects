@@ -2,7 +2,6 @@ package com.example.elandmall_kotlin.ui.main.tabs
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
-import com.example.elandmall_kotlin.ui.BaseViewModel
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
 
 class WebModulesFragment : BaseModuleFragment() {

@@ -1,5 +1,6 @@
 package com.example.elandmall_kotlin.util
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -14,6 +15,7 @@ import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.model.Goods
 import java.text.NumberFormat
 import java.util.*
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 // Goods.kt model
 object GoodsUtil {
@@ -85,7 +87,7 @@ object GoodsUtil {
             // sale rate
             try {
                 val saleRate = it.findViewById<TextView>(R.id.sale_rate)
-                if (data.saleRate == 0) {
+                if (data.saleRate == 0 || data.saleRate == null) {
                     saleRate.visibility = View.GONE
                 } else {
                     saleRate.visibility = View.VISIBLE
@@ -96,7 +98,7 @@ object GoodsUtil {
 
             try {
                 val saleRatePercent = it.findViewById<TextView>(R.id.sale_rate_percent)
-                if (data.saleRate == 0) {
+                if (data.saleRate == 0 || data.saleRate == null) {
                     saleRatePercent.visibility = View.GONE
                 } else {
                     saleRatePercent.visibility = View.VISIBLE
@@ -154,7 +156,7 @@ object GoodsUtil {
                 val rating = it.findViewById<RatingBar>(R.id.rating)
                 if (data.goodsStarPoint != 0 && data.goodsStarPoint != null) {
                     rating.visibility = View.VISIBLE
-                    rating.rating = (data.goodsStarPoint / 20.0).toFloat()
+                    rating.rating = (data.goodsStarPoint.toFloat() / 20.0).toFloat()
                 } else {
                     rating.visibility = View.GONE
                 }
@@ -165,6 +167,8 @@ object GoodsUtil {
                 val reviewCount = it.findViewById<TextView>(R.id.review_count)
                 if (data.goodsCommentCount != 0 && data.goodsCommentCount != null) {
                     reviewCount.text = "(${data.goodsCommentCount})"
+                } else {
+                    reviewCount.text = ""
                 }
             } catch (e: RuntimeException) {}
         }
@@ -175,7 +179,7 @@ object GoodsUtil {
         else 0
     }
 
-    fun Int.priceToString(): String {
+    private fun Int.priceToString(): String {
         return NumberFormat.getNumberInstance(Locale.US).format(this)
     }
 

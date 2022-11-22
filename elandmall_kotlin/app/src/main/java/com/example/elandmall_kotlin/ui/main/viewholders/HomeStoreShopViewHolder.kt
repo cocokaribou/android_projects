@@ -31,76 +31,75 @@ class HomeStoreShopViewHolder(private val binding: ViewHomeStoreShopBinding) : B
     }
 
     private fun initView(data: HomeResponse.HomeOfflineShop) = with(binding) {
-        mBannerAdapter.submitList(data.homeOfflineShopBanner)
         storeBannerList.adapter = mBannerAdapter
-        TabLayoutMediator(storeBannerIndicator, storeBannerList){ _, _ -> }.attach()
+        mBannerAdapter.submitList(data.homeOfflineShopBanner)
+        TabLayoutMediator(storeBannerIndicator, storeBannerList) { _, _ -> }.attach()
 
         mListAdapter.submitList(data.homeOfflineShopList)
         storeList.adapter = mListAdapter
     }
-}
 
-class BannerAdapter : ListAdapter<Banner, BannerAdapter.BannerViewHolder>(diff) {
-    companion object {
-        val diff = object : DiffUtil.ItemCallback<Banner>() {
-            override fun areItemsTheSame(oldItem: Banner, newItem: Banner): Boolean {
-                return oldItem == newItem
-            }
+    inner class BannerAdapter : ListAdapter<Banner, BannerAdapter.BannerViewHolder>(object : DiffUtil.ItemCallback<Banner>() {
+        override fun areItemsTheSame(oldItem: Banner, newItem: Banner): Boolean {
+            return oldItem == newItem
+        }
 
-            override fun areContentsTheSame(oldItem: Banner, newItem: Banner): Boolean {
-                return oldItem.contsDistNo == newItem.contsDistNo
+        override fun areContentsTheSame(oldItem: Banner, newItem: Banner): Boolean {
+            return oldItem.contsDistNo == newItem.contsDistNo
+        }
+    }) {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BannerViewHolder {
+            return BannerViewHolder(
+                ViewHomeStoreShopBannerItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+        }
+
+        override fun onBindViewHolder(holder: BannerViewHolder, position: Int) {
+            holder.onBind()
+        }
+
+
+        inner class BannerViewHolder(private val binding: ViewHomeStoreShopBannerItemBinding) : RecyclerView.ViewHolder(binding.root) {
+            fun onBind() {
+                val data = currentList[adapterPosition]
+                Glide.with(itemView.context)
+                    .load(data.imageUrl)
+                    .into(binding.bannerImg)
+
+                binding.root.setOnClickListener {
+                    EventBus.fire(LinkEvent(data.linkUrl))
+                }
             }
         }
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BannerViewHolder {
-        return BannerViewHolder(
-            ViewHomeStoreShopBannerItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
+
+    inner class StoreListAdapter : ListAdapter<Goods, StoreListAdapter.StoreItemViewHolder>(goodsDiff) {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreItemViewHolder {
+            return StoreItemViewHolder(
+                ViewHomeStoreShopItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
             )
-        )
-    }
-
-    override fun onBindViewHolder(holder: BannerViewHolder, position: Int) {
-        holder.onBind(currentList[position])
-    }
-
-
-    inner class BannerViewHolder(private val binding: ViewHomeStoreShopBannerItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Banner) {
-            Glide.with(itemView.context)
-                .load(data.imageUrl)
-                .into(binding.bannerImg)
-
-            binding.root.setOnClickListener {
-                EventBus.fire(LinkEvent(data.linkUrl))
-            }
         }
-    }
-}
 
-class StoreListAdapter : ListAdapter<Goods, StoreListAdapter.StoreItemViewHolder>(goodsDiff) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreItemViewHolder {
-        return StoreItemViewHolder(
-            ViewHomeStoreShopItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
-    }
+        override fun onBindViewHolder(holder: StoreItemViewHolder, position: Int) {
+            holder.onBind()
+        }
 
-    override fun onBindViewHolder(holder: StoreItemViewHolder, position: Int) {
-        holder.onBind(currentList[position])
-    }
+        inner class StoreItemViewHolder(private val binding: ViewHomeStoreShopItemBinding) : RecyclerView.ViewHolder(binding.root) {
+            fun onBind() = with(binding) {
+                val data = currentList[adapterPosition]
+                drawGoodsUI(binding, data)
 
-    inner class StoreItemViewHolder(private val binding: ViewHomeStoreShopItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Goods) = with(binding){
-            drawGoodsUI(binding, data)
-
-            if (data.saleRate != 0) {
-                priceBefore.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                if (data.saleRate != 0) {
+                    priceBefore.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                }
             }
         }
     }

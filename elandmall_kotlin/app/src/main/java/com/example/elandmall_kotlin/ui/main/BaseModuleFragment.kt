@@ -1,5 +1,6 @@
 package com.example.elandmall_kotlin.ui.main
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,16 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.elandmall_kotlin.databinding.FragmentBaseModuleBinding
-import com.example.elandmall_kotlin.ui.BaseViewModel
 import com.example.elandmall_kotlin.ui.ModuleData
+import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.isNetworkAvailable
 
 abstract class BaseModuleFragment : Fragment() {
-
-    val mainViewModel: MainViewModel by activityViewModels()
     abstract val viewModel: BaseViewModel
 
-    private lateinit var tabName: String
+    lateinit var tabName: String
     private var url: String = ""
 
     companion object {
@@ -43,6 +42,12 @@ abstract class BaseModuleFragment : Fragment() {
         with(binding) {
             swipeRefresh.setOnRefreshListener {
                 requestRefresh()
+            }
+            viewModel.isSuccess.observe(requireActivity()) {
+                swipeRefresh.isRefreshing = false
+                if (!it) {
+                    AlertDialog.Builder(requireActivity()).setMessage("인터넷을 연결해주세요.").setPositiveButton("확인") { _, _ -> }.create().show()
+                }
             }
 
             list.apply {

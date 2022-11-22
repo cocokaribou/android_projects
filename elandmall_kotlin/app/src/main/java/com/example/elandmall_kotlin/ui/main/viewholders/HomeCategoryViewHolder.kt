@@ -69,13 +69,10 @@ class HomeCategoryViewHolder(private val binding: ViewHomeCategoryBinding) : Bas
         }
         mAdapter.notifyItemChanged(INDEX_MORE)
     }
-}
 
-class CategoryListAdapter(val toggle: () -> Unit) :
-    ListAdapter<HomeResponse.HomeCategoryIcon, CategoryListAdapter.CategoryItemViewHolder>(diff) {
-
-    companion object {
-        val diff = object : DiffUtil.ItemCallback<HomeResponse.HomeCategoryIcon>() {
+    inner class CategoryListAdapter(val toggleListener: () -> Unit) :
+        ListAdapter<HomeResponse.HomeCategoryIcon, CategoryListAdapter.CategoryItemViewHolder>(object :
+            DiffUtil.ItemCallback<HomeResponse.HomeCategoryIcon>() {
             override fun areItemsTheSame(oldItem: HomeResponse.HomeCategoryIcon, newItem: HomeResponse.HomeCategoryIcon): Boolean {
                 return oldItem == newItem
             }
@@ -84,48 +81,51 @@ class CategoryListAdapter(val toggle: () -> Unit) :
                 return oldItem.categoryNo == newItem.categoryNo
             }
 
-        }
-    }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryItemViewHolder {
-        return CategoryItemViewHolder(
-            ViewHomeCategoryItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
+        }) {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryItemViewHolder {
+            return CategoryItemViewHolder(
+                ViewHomeCategoryItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
             )
-        )
-    }
+        }
 
-    override fun onBindViewHolder(holder: CategoryItemViewHolder, position: Int) {
-        holder.onBind(currentList[position], toggle)
-    }
+        override fun onBindViewHolder(holder: CategoryItemViewHolder, position: Int) {
+            holder.onBind(toggleListener)
+        }
 
-    class CategoryItemViewHolder(private val binding: ViewHomeCategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: HomeResponse.HomeCategoryIcon, toggle: () -> Unit) = with(binding) {
-            if (adapterPosition == INDEX_MORE && !isExpanded) {
-                // expand icon
-                root.setOnClickListener {
-                    toggle.invoke()
+        inner class CategoryItemViewHolder(private val binding: ViewHomeCategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
+            fun onBind(toggle: () -> Unit) = with(binding) {
+                if (adapterPosition == INDEX_MORE && !isExpanded) {
+                    // expand icon
+                    root.setOnClickListener {
+                        toggle.invoke()
+                    }
+
+                    cateName.text = "더보기"
+
+                    Glide.with(itemView.context)
+                        .load(R.drawable.home_category_more)
+                        .into(cateImg)
+
+                } else {
+                    // category icons
+                    val data = currentList[adapterPosition]
+                    root.setOnClickListener {
+                        EventBus.fire(LinkEvent(data.linkUrl))
+                    }
+
+                    cateName.text = data.title
+
+                    Glide.with(itemView.context)
+                        .load(data.imageUrl)
+                        .into(cateImg)
                 }
-
-                cateName.text = "더보기"
-
-                Glide.with(itemView.context)
-                    .load(R.drawable.home_category_more)
-                    .into(cateImg)
-
-            } else {
-                // category icons
-                root.setOnClickListener {
-                    EventBus.fire(LinkEvent(data.linkUrl))
-                }
-
-                cateName.text = data.title
-
-                Glide.with(itemView.context)
-                    .load(data.imageUrl)
-                    .into(cateImg)
             }
         }
     }
 }
+

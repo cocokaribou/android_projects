@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="7dp"
-        android:src="@drawable/noimg_510x510"
         app:layout_constraintBottom_toTopOf="@id/goods"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintTop_toTopOf="parent" />
