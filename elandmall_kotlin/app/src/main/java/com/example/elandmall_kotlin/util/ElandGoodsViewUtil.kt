@@ -1,6 +1,5 @@
 package com.example.elandmall_kotlin.util
 
-import android.text.Spannable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -13,6 +12,8 @@ import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.model.Goods
+import java.text.NumberFormat
+import java.util.*
 
 // Goods.kt model
 object GoodsUtil {
@@ -175,9 +176,7 @@ object GoodsUtil {
     }
 
     fun Int.priceToString(): String {
-        val hundreds = if (this % 1000 == 0) "000" else "${this % 1000}"
-        val thousands = if (this / 1000 < 1) "" else "${this / 1000},"
-        return "$thousands$hundreds"
+        return NumberFormat.getNumberInstance(Locale.US).format(this)
     }
 
     val goodsDiff = object : DiffUtil.ItemCallback<Goods>() {
