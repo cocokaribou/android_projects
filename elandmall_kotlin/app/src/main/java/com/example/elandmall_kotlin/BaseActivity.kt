@@ -1,5 +1,8 @@
 package com.example.elandmall_kotlin
 
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -36,7 +39,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel>(
         }
     }
 
-    protected fun isSavedInstanceState(savedInstanceState:Bundle?): Boolean {
+    protected fun isSavedInstanceState(savedInstanceState: Bundle?): Boolean {
         return if (savedInstanceState != null) {
             val intent = Intent(this, IntroActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -49,9 +52,9 @@ abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel>(
     }
 
     open fun onLinkEvent(event: LinkEvent) {
-        when(event.type) {
+        when (event.type) {
             LinkEventType.DEFAULT -> {
-                Toast(this).apply{
+                Toast(this).apply {
                     setText("link event: ${event.url}")
                 }.show()
             }

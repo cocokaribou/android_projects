@@ -6,6 +6,6 @@ import com.example.elandmall_kotlin.common.ApiResult
 
 open class BaseViewModel: ViewModel() {
 
-    val isSuccess = MutableLiveData<Boolean>()
+    open val refreshComplete = MutableLiveData<String>()
     open fun requestRefresh() {}
 }

@@ -5,36 +5,39 @@ import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.HomeResponse
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
+import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class HomeViewModel : BaseViewModel() {
     private val repository: HomeRepository by lazy { HomeRepository() }
 
-    val refreshedData = MutableLiveData<HomeResponse?>()
+    override val refreshComplete = MutableLiveData<String>()
+
+    val refreshedList = MutableLiveData<HomeResponse?>()
     override fun requestRefresh() {
         viewModelScope.launch {
             repository.requestHomeStream()
                 .catch {
-                    refreshedData.postValue(null)
-                    isSuccess.postValue(false)
+                    refreshedList.postValue(null)
+                    refreshComplete.postValue("home")
                 }
                 .collect {
                     it.fold(
                         onSuccess = {
-                            refreshedData.postValue(it)
-                            isSuccess.postValue(true)
+                            refreshedList.postValue(it)
+                            refreshComplete.postValue("home")
                         },
                         onFailure = {
-                            refreshedData.postValue(null)
-                            isSuccess.postValue(false)
+                            refreshedList.postValue(null)
+                            refreshComplete.postValue("home")
                         }
                     )
                 }
         }
     }
 
-    val homeList = MutableLiveData<MutableList<ModuleData>>()
+    val uiList = MutableLiveData<MutableList<ModuleData>>()
     fun setHomeModules(data: HomeResponse) {
         val moduleList = mutableListOf<ModuleData>()
         data.data?.let { homeData ->
@@ -134,6 +137,6 @@ class HomeViewModel : BaseViewModel() {
                 )
             }
         }
-        homeList.postValue(moduleList)
+        uiList.postValue(moduleList)
     }
 }

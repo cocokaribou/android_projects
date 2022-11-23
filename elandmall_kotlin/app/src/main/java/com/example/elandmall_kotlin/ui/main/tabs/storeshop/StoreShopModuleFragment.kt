@@ -8,11 +8,11 @@ class StoreShopModuleFragment : BaseModuleFragment() {
 
     override val viewModel: StoreShopViewModel by viewModels()
     override fun observeData() {
-        viewModel.requestedData.observe(this) {
+        viewModel.storeShopList.observe(this) {
             viewModel.setStoreShopModules(it)
         }
 
-        viewModel.storeList.observe(this) {
+        viewModel.uiList.observe(this) {
             setModules(it)
         }
     }

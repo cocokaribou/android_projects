@@ -10,6 +10,8 @@ import com.example.elandmall_kotlin.databinding.ActivityMainBinding
 import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.LinkEvent
+import com.example.elandmall_kotlin.util.Logger
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -17,7 +19,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  * - init tab pager
  * - handle landing intent
  */
-class MainActivity: BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.activity_main) {
+class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.activity_main) {
     override val viewModel by viewModels<BaseViewModel>()
 
     val mAdapter by lazy { MainTabPagerAdapter(supportFragmentManager, lifecycle) }
@@ -38,7 +40,7 @@ class MainActivity: BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.ac
         initGNB()
     }
 
-    private fun initGNB() = with(binding){
+    private fun initGNB() = with(binding) {
         mAdapter.updateFragment()
         viewpager.apply {
             adapter = mAdapter
@@ -46,6 +48,17 @@ class MainActivity: BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.ac
         }
         val gnbData = MemDataSource.mainGnbCache?.data?.gnbList
 
+        tabs.apply {
+            clearOnTabSelectedListeners()
+            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    Logger.v("${gnbData?.get(tab?.position ?: 0)?.menuName}")
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {}
+                override fun onTabReselected(tab: TabLayout.Tab?) {}
+            })
+        }
         TabLayoutMediator(tabs, viewpager) { tab, position ->
             tab.text = gnbData?.get(position)?.menuName
         }.attach()

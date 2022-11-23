@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.fragment.app.viewModels
 import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
-import com.example.elandmall_kotlin.util.Logger
 
 class HomeModuleFragment : BaseModuleFragment() {
 
@@ -17,13 +16,13 @@ class HomeModuleFragment : BaseModuleFragment() {
         }
 
         // refresh
-        viewModel.refreshedData.observe(this) {
+        viewModel.refreshedList.observe(this) {
             it?.let {
                 viewModel.setHomeModules(it)
             }
         }
 
-        viewModel.homeList.observe(this) {
+        viewModel.uiList.observe(this) {
             setModules(it)
         }
     }

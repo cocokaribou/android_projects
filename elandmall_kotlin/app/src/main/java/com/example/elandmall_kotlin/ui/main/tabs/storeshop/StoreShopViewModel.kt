@@ -5,28 +5,30 @@ import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
-import com.example.elandmall_kotlin.ui.main.tabs.home.HomeRepository
+import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class StoreShopViewModel : BaseViewModel() {
     private val repository: StoreShopRepository by lazy { StoreShopRepository() }
 
-    val requestedData = MutableLiveData<StoreShopResponse?>()
+    override val refreshComplete = MutableLiveData<String>()
 
+    val storeShopList = MutableLiveData<StoreShopResponse?>()
     init {
+        // init
         viewModelScope.launch {
             repository.requestStoreShopStream()
                 .catch {
-                    requestedData.postValue(null)
+                    storeShopList.postValue(null)
                 }
                 .collect {
                     it.fold(
                         onSuccess = {
-                            requestedData.postValue(it)
+                            storeShopList.postValue(it)
                         },
                         onFailure = {
-                            requestedData.postValue(null)
+                            storeShopList.postValue(null)
                         }
                     )
                 }
@@ -34,23 +36,29 @@ class StoreShopViewModel : BaseViewModel() {
     }
 
     override fun requestRefresh() {
+        // refresh
         viewModelScope.launch {
             repository.requestStoreShopStream()
                 .catch {
+                    storeShopList.postValue(null)
+                    refreshComplete.postValue("storeshop")
                 }
                 .collect {
                     it.fold(
                         onSuccess = {
-                            requestedData.postValue(it)
+                            storeShopList.postValue(it)
+                            refreshComplete.postValue("storeshop")
                         },
                         onFailure = {
+                            storeShopList.postValue(null)
+                            refreshComplete.postValue("storeshop")
                         }
                     )
                 }
         }
     }
 
-    val storeList = MutableLiveData<MutableList<ModuleData>>()
+    val uiList = MutableLiveData<MutableList<ModuleData>>()
     fun setStoreShopModules(data: StoreShopResponse?) {
         val moduleList = mutableListOf<ModuleData>()
         data?.data?.let { storeShopData ->
@@ -62,6 +70,6 @@ class StoreShopViewModel : BaseViewModel() {
                 )
             }
         }
-        storeList.postValue(moduleList)
+        uiList.postValue(moduleList)
     }
 }
