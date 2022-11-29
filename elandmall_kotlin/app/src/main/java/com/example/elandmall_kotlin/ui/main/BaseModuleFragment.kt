@@ -37,7 +37,6 @@ abstract class BaseModuleFragment : Fragment() {
 
         observeData()
 
-        Logger.v("$tabName oncreate")
         // base UI
         with(binding) {
             // refresh

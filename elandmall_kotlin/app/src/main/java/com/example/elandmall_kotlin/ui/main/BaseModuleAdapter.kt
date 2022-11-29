@@ -27,8 +27,8 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
-            ModuleData.HomeMainBannerData.ordinal() -> MainBannerViewHolder(
-                ViewHomeMainBannerBinding.inflate(
+            ModuleData.MainBannerData.ordinal() -> MainBannerViewHolder(
+                ViewMainBannerBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -67,8 +67,8 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
-            ModuleData.HomeTitleData.ordinal() -> HomeTitleViewHolder(
-                ViewHomeTitleBinding.inflate(
+            ModuleData.TitleData.ordinal() -> TitleViewHolder(
+                ViewTitleBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -105,7 +105,62 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                     false
                 )
             )
-            // TODO other viewholders from gnb
+
+            ModuleData.StoreShopDeliveryData.ordinal() -> StoreShopDeliveryViewHolder(
+                ViewStoreShopDeliveryBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.HorizontalCategoryData.ordinal() -> HorizontalCategoryViewHolder(
+                ViewHorizontalCategoryBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.StoreShopRegularData.ordinal() -> StoreShopRegularViewHolder(
+                ViewStoreShopRegularBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.StoreShopPickData.ordinal() -> StoreShopPickViewHolder(
+                ViewStoreShopPickBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.GoodsMultiGridData.ordinal() -> GoodsMultiGridViewHolder(
+                ViewGoodsMultiGridBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.StoreShopCateTabData.ordinal() -> StoreShopCateTabViewHolder(
+                ViewStoreShopCateTabBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.CenterTextData.ordinal() -> CenterTextViewHolder(
+                ViewCenterTextBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
 
             else -> UnknownViewHolder(
                 ViewUnknownHolderBinding.inflate(

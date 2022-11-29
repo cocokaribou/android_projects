@@ -46,13 +46,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.a
             adapter = mAdapter
             isUserInputEnabled = true
         }
+        // TODO 오프라인 개발중
+        viewpager.currentItem = 8
         val gnbData = MemDataSource.mainGnbCache?.data?.gnbList
 
         tabs.apply {
             clearOnTabSelectedListeners()
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-                    Logger.v("${gnbData?.get(tab?.position ?: 0)?.menuName}")
+//                    Logger.v("${gnbData?.get(tab?.position ?: 0)?.menuName}")
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}

@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.HomeResponse
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
-import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
@@ -43,7 +42,7 @@ class HomeViewModel : BaseViewModel() {
         data.data?.let { homeData ->
             if (!homeData.homeMainbannerList.isNullOrEmpty()) {
                 moduleList.add(
-                    ModuleData.HomeMainBannerData(
+                    ModuleData.MainBannerData(
                         homeData.homeMainbannerList
                     )
                 )
@@ -79,7 +78,7 @@ class HomeViewModel : BaseViewModel() {
             // title holder & goods holder
             if (homeData.homeLuckyDeal != null) {
                 moduleList.add(
-                    ModuleData.HomeTitleData(
+                    ModuleData.TitleData(
                         homeData.homeLuckyDeal.title ?: "럭키딜",
                         homeData.homeLuckyDeal.subtitle ?: "서브타이틀"
                     )
@@ -95,7 +94,7 @@ class HomeViewModel : BaseViewModel() {
             // title holder & goods holder
             if (homeData.homeSeasonPlan != null) {
                 moduleList.add(
-                    ModuleData.HomeTitleData(
+                    ModuleData.TitleData(
                         homeData.homeSeasonPlan.title ?: "시즌기획전",
                         homeData.homeSeasonPlan.subtitle ?: "서브타이틀"
                     )
@@ -113,7 +112,7 @@ class HomeViewModel : BaseViewModel() {
 
             if (homeData.homeOfflineShop != null) {
                 moduleList.add(
-                    ModuleData.HomeTitleData(
+                    ModuleData.TitleData(
                         homeData.homeOfflineShop.title ?: "이슈 브랜드",
                         homeData.homeOfflineShop.subtitle ?: ""
                     )
@@ -127,7 +126,7 @@ class HomeViewModel : BaseViewModel() {
 
             if (homeData.homeMd != null) {
                 moduleList.add(
-                    ModuleData.HomeTitleData(
+                    ModuleData.TitleData(
                         homeData.homeMd.title ?: "MD 추천",
                         homeData.homeMd.subtitle ?: "엄선한 추천 상품"
                     )

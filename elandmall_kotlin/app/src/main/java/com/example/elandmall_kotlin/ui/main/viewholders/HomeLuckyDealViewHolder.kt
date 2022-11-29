@@ -9,7 +9,8 @@ import com.example.elandmall_kotlin.util.GoodsUtil.tagUIType
 class HomeLuckyDealViewHolder(private val binding: ViewHomeLuckyDealBinding) : BaseViewHolder(binding.root) {
     override fun onBind(item: Any, pos: Int) {
         (item as? ModuleData.HomeLuckyDealData)?.let {
-            drawGoodsUI(binding, it.homeLuckyDealData).tagUIType("home")
+            drawGoodsUI(binding, it.homeLuckyDealData)
+                .tagUIType("home")
         }
     }
 }

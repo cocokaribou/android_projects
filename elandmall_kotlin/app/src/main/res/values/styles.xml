@@ -40,6 +40,12 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="divider_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.7dp</item>
+        <item name="android:background">#bbbbbb</item>
+    </style>
+
     <style name="divider_solid_9">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">9dp</item>

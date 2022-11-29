@@ -2,31 +2,26 @@ package com.example.elandmall_kotlin.ui.main.viewholders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.example.elandmall_kotlin.R
-import com.example.elandmall_kotlin.databinding.ViewHomeMainBannerBinding
 import com.example.elandmall_kotlin.databinding.ViewHomeMainBannerItemBinding
+import com.example.elandmall_kotlin.databinding.ViewMainBannerBinding
 import com.example.elandmall_kotlin.model.Banner
-import com.example.elandmall_kotlin.model.HomeResponse
 import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.LinkEvent
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.util.AdjustHeightImageViewTarget
-import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.getSpannedBoldText
 
-class MainBannerViewHolder(private val binding: ViewHomeMainBannerBinding) : BaseViewHolder(binding.root) {
+class MainBannerViewHolder(private val binding: ViewMainBannerBinding) : BaseViewHolder(binding.root) {
     val mAdapter by lazy { MainBannerPagerAdapter() }
     override fun onBind(item: Any, pos: Int) {
-        (item as? ModuleData.HomeMainBannerData?)?.let {
-            initView(it.homeBannerData)
+        (item as? ModuleData.MainBannerData?)?.let {
+            initView(it.mainBannerData)
         }
     }
 
@@ -55,7 +50,7 @@ class MainBannerViewHolder(private val binding: ViewHomeMainBannerBinding) : Bas
             oldItem == newItem
 
         override fun areContentsTheSame(oldItem: Banner, newItem: Banner): Boolean =
-            oldItem == newItem
+            oldItem.linkUrl == newItem.linkUrl
     }) {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainBannerItemViewHolder {
             return MainBannerItemViewHolder(

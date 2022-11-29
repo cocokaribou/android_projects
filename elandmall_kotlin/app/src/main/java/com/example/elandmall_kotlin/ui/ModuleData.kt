@@ -3,12 +3,13 @@ package com.example.elandmall_kotlin.ui
 import com.example.elandmall_kotlin.model.Banner
 import com.example.elandmall_kotlin.model.Goods
 import com.example.elandmall_kotlin.model.HomeResponse
+import com.example.elandmall_kotlin.model.StoreShopResponse
 
 sealed class ModuleData {
     abstract fun clone(): ModuleData
 
-    data class HomeMainBannerData(
-        val homeBannerData: List<Banner>
+    data class MainBannerData(
+        val mainBannerData: List<Banner>
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -57,7 +58,7 @@ sealed class ModuleData {
         companion object
     }
 
-    data class HomeTitleData(
+    data class TitleData(
         val title: String,
         val subTitle: String
     ) : ModuleData() {
@@ -100,11 +101,114 @@ sealed class ModuleData {
 
     data class HomeMdData(
         val homeMdData: HomeResponse.HomeMd
-    ): ModuleData() {
+    ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
         }
 
         companion object
     }
+
+    data class StoreShopDeliveryData(
+        val storeShopDeliveryData: StoreShopResponse.BanjjakDeli
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class HorizontalCategoryData(
+        val horizontalCategoryData: List<StoreShopResponse.RecommendStore>
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class StoreShopRegularData(
+        val storeShopRegularData: List<StoreShopResponse.MyRegularStore>
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class StoreShopPickData(
+        val storeShopPickData: List<StoreShopResponse.StorePick>,
+        val clicker: () -> Unit
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class GoodsGridData(
+        val goodsData: Goods
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class GoodsMultiGridData(
+        val goodsListData: List<Goods>
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class GoodsLinearData(
+        val goodsData: Goods
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class GoodsLargeData(
+        val goodsData: Goods
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class CenterTextData(
+        val text: String,
+        val includeDivider: Boolean
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class StoreShopCateTabData(
+        val storeShopCateList: List<StoreShopResponse.CategoryGoods>
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
 }

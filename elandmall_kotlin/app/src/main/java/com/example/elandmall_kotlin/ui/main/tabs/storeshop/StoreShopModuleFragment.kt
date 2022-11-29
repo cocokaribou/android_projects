@@ -3,6 +3,7 @@ package com.example.elandmall_kotlin.ui.main.tabs.storeshop
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
+import com.example.elandmall_kotlin.util.Logger
 
 class StoreShopModuleFragment : BaseModuleFragment() {
 
