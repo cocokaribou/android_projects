@@ -2,6 +2,7 @@ package com.example.elandmall_kotlin.util
 
 import android.content.Context
 import android.content.res.AssetManager
+import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -45,3 +46,5 @@ fun getJsonFileToString(filePath: String, context: Context): String {
     }
     return result
 }
+fun getScreenWidthToPx(): Int = Resources.getSystem().displayMetrics.widthPixels
+fun getScreenHeightToPx(): Int = Resources.getSystem().displayMetrics.heightPixels

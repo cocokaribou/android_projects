@@ -1,9 +1,7 @@
 package com.example.elandmall_kotlin.ui.main.tabs.storeshop
 
-import android.content.DialogInterface
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.elandmall_kotlin.model.Goods
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
@@ -11,7 +9,6 @@ import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-typealias ViewHolderListener = () -> Unit
 class StoreShopViewModel : BaseViewModel() {
     private val repository: StoreShopRepository by lazy { StoreShopRepository() }
 
@@ -19,6 +16,7 @@ class StoreShopViewModel : BaseViewModel() {
 
     var storeResult: StoreShopResponse.StoreData? = null
     val storeShopList = MutableLiveData<StoreShopResponse.StoreData?>()
+    val cateList = MutableLiveData<List<StoreShopResponse.CategoryGoods>>()
 
     init {
         // store shop
@@ -72,6 +70,9 @@ class StoreShopViewModel : BaseViewModel() {
                                 before.goodsList = it?.data?.keywordResult?.searchGoods!!
                             }
 
+                            storeResult?.categoryGoodsList?.let {
+                                cateList.postValue(it)
+                            }
                             storeShopList.postValue(storeResult)
                             refreshComplete.postValue("storeshop")
                         },
@@ -84,6 +85,15 @@ class StoreShopViewModel : BaseViewModel() {
         }
     }
 
+    var clicked = 0
+    val clicker: () -> Unit = {
+       if (clicked <= 2) {
+           clicked = 0
+       }
+       else {
+           clicked++
+       }
+    }
     val uiList = MutableLiveData<MutableList<ModuleData>>()
     fun setStoreShopModules(data: StoreShopResponse.StoreData?) {
         val moduleList = mutableListOf<ModuleData>()
@@ -105,7 +115,7 @@ class StoreShopViewModel : BaseViewModel() {
 
             if (!storeShopData.recommendStoreList.isNullOrEmpty()) {
                 moduleList.add(
-                    ModuleData.HorizontalCategoryData(
+                    ModuleData.CategoryHorizontalData(
                         storeShopData.recommendStoreList
                     )
                 )
@@ -141,9 +151,8 @@ class StoreShopViewModel : BaseViewModel() {
                     }
                 }
                 moduleList.add(
-                    ModuleData.CenterTextData(
-                        text = storeShopData.storePickList[0].relContNm ?: "",
-                        includeDivider = false
+                    ModuleData.StoreShopPickMoreData(
+                        text = storeShopData.storePickList[0].relContNm + " 바로가기 >"
                     )
                 )
             }
@@ -162,32 +171,32 @@ class StoreShopViewModel : BaseViewModel() {
                         )
                     )
 
-                    when(clicked) {
-                        0 -> {
-                            Logger.v("그리드")
+//                    when(clicked) {
+//                        0 -> {
+//                            Logger.v("그리드")
                             it.goodsList?.chunked(2)?.forEach {
                                 moduleList.add(
                                     ModuleData.GoodsMultiGridData(it)
                                 )
                             }
-                        }
-                        1 -> {
-                            Logger.v("리니어")
-                            it.goodsList?.forEach {
-                                moduleList.add(
-                                    ModuleData.GoodsLinearData(it)
-                                )
-                            }
-                        }
-                        2 -> {
-                            Logger.v("라지")
-                            it.goodsList?.forEach {
-                                moduleList.add(
-                                    ModuleData.GoodsLargeData(it)
-                                )
-                            }
-                        }
-                    }
+//                        }
+//                        1 -> {
+//                            Logger.v("리니어")
+//                            it.goodsList?.forEach {
+//                                moduleList.add(
+//                                    ModuleData.GoodsLinearData(it)
+//                                )
+//                            }
+//                        }
+//                        2 -> {
+//                            Logger.v("라지")
+//                            it.goodsList?.forEach {
+//                                moduleList.add(
+//                                    ModuleData.GoodsLargeData(it)
+//                                )
+//                            }
+//                        }
+//                    }
 
                 }
 

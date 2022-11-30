@@ -1,7 +1,7 @@
 package com.example.elandmall_kotlin.ui.main
 
 import android.os.Bundle
-import android.widget.Toast
+import android.widget.TextView
 import androidx.activity.viewModels
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.BaseActivity
@@ -9,8 +9,6 @@ import com.example.elandmall_kotlin.BaseApplication
 import com.example.elandmall_kotlin.databinding.ActivityMainBinding
 import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.LinkEvent
-import com.example.elandmall_kotlin.util.Logger
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

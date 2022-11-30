@@ -48,7 +48,7 @@ data class StoreShopResponse(
     )
 
     data class CategoryGoods(
-        @SerializedName("goods_list") val goodsList: List<Goods>?,
+        @SerializedName("goods_list") val goodsList: MutableList<Goods>?,
         @SerializedName("ctg_no") val ctgNo: String?,
         @SerializedName("dactive_img_url") val dactiveImgUrl: String?,
         @SerializedName("ctg_nm") val ctgNm: String?,

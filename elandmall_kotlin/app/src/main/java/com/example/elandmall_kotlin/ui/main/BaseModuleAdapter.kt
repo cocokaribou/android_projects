@@ -114,8 +114,8 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
-            ModuleData.HorizontalCategoryData.ordinal() -> HorizontalCategoryViewHolder(
-                ViewHorizontalCategoryBinding.inflate(
+            ModuleData.CategoryHorizontalData.ordinal() -> CategoryHorizontalViewHolder(
+                ViewCategoryHorizontalBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -132,6 +132,14 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
 
             ModuleData.StoreShopPickData.ordinal() -> StoreShopPickViewHolder(
                 ViewStoreShopPickBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.StoreShopPickMoreData.ordinal() -> StoreShopPickMoreViewHolder(
+                ViewStoreShopPickMoreBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -217,7 +225,7 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
     }
 }
 
-private inline fun <reified T : Any> T.ordinal(): Int {
+inline fun <reified T : Any> T.ordinal(): Int {
     if (T::class.isSealed) {
         return T::class.java.classes.indexOfFirst { sub -> sub == javaClass }
     }

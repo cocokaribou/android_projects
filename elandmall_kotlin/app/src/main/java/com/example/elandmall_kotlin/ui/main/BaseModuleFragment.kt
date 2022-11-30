@@ -4,12 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
+import androidx.core.view.children
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.distinctUntilChanged
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.databinding.FragmentBaseModuleBinding
+import com.example.elandmall_kotlin.databinding.ViewCenterTextBinding
 import com.example.elandmall_kotlin.ui.ModuleData
+import com.example.elandmall_kotlin.ui.main.viewholders.selectedTab
 import com.example.elandmall_kotlin.util.DialogUtil.popUpDialog
 import com.example.elandmall_kotlin.util.Logger
+import com.google.android.material.tabs.TabLayoutMediator
 
 abstract class BaseModuleFragment : Fragment() {
     abstract val viewModel: BaseViewModel
@@ -54,6 +62,7 @@ abstract class BaseModuleFragment : Fragment() {
             list.apply {
                 setHasFixedSize(true)
                 adapter = moduleAdapter
+                addOnScrollListener(scrollListener)
             }
         }
 
@@ -70,8 +79,45 @@ abstract class BaseModuleFragment : Fragment() {
         moduleAdapter.value = moduleList
     }
 
-    fun addFooter(moduleList: MutableList<ModuleData>) {
+    fun addFooter(moduleList: MutableList<ModuleData>) {}
 
+    open fun setStickyTab(isOn: Boolean) {}
+
+    open fun selectTab(pos: Int) {}
+
+    private val scrollListener = object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+
+            // store shop fragment
+            val firstVisiblePos = (binding.list.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() ?: 0
+            val tabPos = moduleAdapter.value.indexOfFirst { it is ModuleData.StoreShopCateTabData }
+            if (moduleAdapter.value.count() != -1 && tabPos <= firstVisiblePos) {
+                setStickyTab(true)
+            } else {
+                setStickyTab(false)
+            }
+
+            val posList = mutableMapOf<Int, Int>()
+            var index = 0
+            moduleAdapter.value.forEachIndexed { i, it ->
+                if (it is ModuleData.CenterTextData) {
+                    posList[index] = i
+                    index++
+                }
+            }
+
+            val lastVisiblePos = (binding.list.layoutManager as? LinearLayoutManager)?.findLastCompletelyVisibleItemPosition() ?: 0
+            if (binding.sticky.isVisible) {
+                posList.values.forEach {
+                    if (moduleAdapter.value.count() != -1 && it > firstVisiblePos && it <= lastVisiblePos) {
+                        // list indices
+                        val keys = posList.filterValues { value -> value == it }.keys
+                        selectTab(keys.first())
+                    }
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

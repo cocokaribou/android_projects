@@ -12,11 +12,18 @@ object EventBus {
     private var lastEventTime: Long = 0
 
     val linkEvent: MutableLiveData<SingleLiveEvent<LinkEvent>> = MutableLiveData()
+    val storeShopEvent: MutableLiveData<SingleLiveEvent<StoreShopEvent>> = MutableLiveData()
 
     fun fire(event: LinkEvent, checkInterval: Boolean = true) {
         if (checkInterval && isIntervalTooShort()) return
 
         linkEvent.value = SingleLiveEvent(event)
+    }
+
+    fun fire(event: StoreShopEvent, checkInterval: Boolean = true) {
+        if (checkInterval && isIntervalTooShort()) return
+
+        storeShopEvent.value = SingleLiveEvent(event)
     }
 
     private fun isIntervalTooShort(): Boolean {
@@ -67,6 +74,14 @@ enum class LinkEventType {
     BRAND,
     WEB
 }
+
+class StoreShopEvent(val type: StoreShopEventType, val pos: Int)
+
+enum class StoreShopEventType {
+    CHANGE_VIEW_HOLDER,
+    SELECT_TAB
+}
+
 
 class SingleLiveEvent<out T>(private val content: T) {
     var hasBeenHandled = false
