@@ -15,13 +15,14 @@ import com.example.elandmall_kotlin.util.dpToPx
 
 class CategoryAdapter : ListAdapter<StoreShopResponse.CategoryGoods, CategoryAdapter.StickyViewHolder>(diff) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StickyViewHolder {
-        return StickyViewHolder(
-            ViewHomeCategoryItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+        // weight
+        val view = ViewHomeCategoryItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
+        view.root.layoutParams.width = parent.width / 5
+        return StickyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: StickyViewHolder, position: Int) {

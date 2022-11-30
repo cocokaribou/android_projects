@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.view.children
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.distinctUntilChanged
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -71,7 +72,8 @@ class StoreShopModuleFragment : BaseModuleFragment() {
     // 1. scroll list
     // 2. select tab
     override fun selectTab(pos: Int) {
-        binding.sticky.scrollToPosition(pos)
+        Logger.v("뭘 주는거임 $pos")
+        (binding.sticky.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(pos, getScreenWidthToPx()/2)
         EventBus.fire(StoreShopEvent(StoreShopEventType.SELECT_TAB, pos))
     }
 

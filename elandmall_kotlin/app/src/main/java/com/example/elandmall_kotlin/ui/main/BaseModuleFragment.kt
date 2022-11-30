@@ -107,13 +107,11 @@ abstract class BaseModuleFragment : Fragment() {
                 }
             }
 
-            val lastVisiblePos = (binding.list.layoutManager as? LinearLayoutManager)?.findLastCompletelyVisibleItemPosition() ?: 0
+            val lastVisiblePos = (binding.list.layoutManager as? LinearLayoutManager)?.findLastVisibleItemPosition() ?: 0
             if (binding.sticky.isVisible) {
-                posList.values.forEach {
-                    if (moduleAdapter.value.count() != -1 && it > firstVisiblePos && it <= lastVisiblePos) {
-                        // list indices
-                        val keys = posList.filterValues { value -> value == it }.keys
-                        selectTab(keys.first())
+                for (i in firstVisiblePos .. lastVisiblePos) {
+                    if (moduleAdapter.value[i] is ModuleData.CenterTextData) {
+                        selectTab(posList.filterValues { it == i }.keys.first())
                     }
                 }
             }
