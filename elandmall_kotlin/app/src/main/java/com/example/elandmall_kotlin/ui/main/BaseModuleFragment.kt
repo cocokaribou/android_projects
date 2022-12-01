@@ -4,20 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AbsListView
-import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.distinctUntilChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.databinding.FragmentBaseModuleBinding
-import com.example.elandmall_kotlin.databinding.ViewCenterTextBinding
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.ui.main.viewholders.selectedTab
-import com.example.elandmall_kotlin.util.DialogUtil.popUpDialog
 import com.example.elandmall_kotlin.util.Logger
-import com.google.android.material.tabs.TabLayoutMediator
 
 abstract class BaseModuleFragment : Fragment() {
     abstract val viewModel: BaseViewModel
@@ -83,7 +76,11 @@ abstract class BaseModuleFragment : Fragment() {
 
     open fun setStickyTab(isOn: Boolean) {}
 
-    open fun selectTab(pos: Int) {}
+    open fun selectTab(pair: Pair<Int, Int>) {}
+
+    fun scrollToY(pos: Int) {
+        (binding.list.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(pos, 0)
+    }
 
     private val scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -98,21 +95,10 @@ abstract class BaseModuleFragment : Fragment() {
                 setStickyTab(false)
             }
 
-            val posList = mutableMapOf<Int, Int>()
-            var index = 0
-            moduleAdapter.value.forEachIndexed { i, it ->
-                if (it is ModuleData.CenterTextData) {
-                    posList[index] = i
-                    index++
-                }
-            }
-
             val lastVisiblePos = (binding.list.layoutManager as? LinearLayoutManager)?.findLastVisibleItemPosition() ?: 0
             if (binding.sticky.isVisible) {
-                for (i in firstVisiblePos .. lastVisiblePos) {
-                    if (moduleAdapter.value[i] is ModuleData.CenterTextData) {
-                        selectTab(posList.filterValues { it == i }.keys.first())
-                    }
+                for (i in firstVisiblePos..lastVisiblePos) {
+                   Logger.v("i $i")
                 }
             }
         }

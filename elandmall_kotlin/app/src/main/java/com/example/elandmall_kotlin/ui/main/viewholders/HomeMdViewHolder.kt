@@ -27,13 +27,8 @@ class HomeMdViewHolder(private val binding: ViewHomeMdBinding) : BaseViewHolder(
     lateinit var data: HomeResponse.HomeMd
 
     private val tabSelector: (Int) -> Unit = {
-        // position before
-        mCateAdapter.notifyItemChanged(selectedTab)
-
-        // position after
         selectedTab = it
-        mCateAdapter.notifyItemChanged(selectedTab)
-        mListAdapter.submitList(data.homeMdCatList?.get(selectedTab)?.homeMdGoods)
+        mListAdapter.submitList(data.homeMdCatList?.get(it)?.homeMdGoods)
     }
     private val mCateAdapter by lazy { CategoryAdapter(tabSelector) }
     private val mListAdapter by lazy { MdListAdapter() }
@@ -83,18 +78,12 @@ class HomeMdViewHolder(private val binding: ViewHomeMdBinding) : BaseViewHolder(
 
         inner class MdCateViewHolder(private val binding: ViewHomeMdCateItemBinding) : RecyclerView.ViewHolder(binding.root) {
             fun onBind(tabSelector: (Int) -> Unit) = with(binding) {
+                selectIndicator.isSelected = adapterPosition == 0
+
                 val data = currentList[adapterPosition]
                 Glide.with(itemView.context)
                     .load("http:" + data.imageUrl)
                     .into(cateImg)
-
-                if (adapterPosition == selectedTab) {
-                    selected.visibility = View.VISIBLE
-                    notSelected.visibility = View.GONE
-                } else {
-                    selected.visibility = View.GONE
-                    notSelected.visibility = View.VISIBLE
-                }
 
                 if (adapterPosition == currentList.size - 1) {
                     spacing.visibility = View.GONE
@@ -104,6 +93,7 @@ class HomeMdViewHolder(private val binding: ViewHomeMdBinding) : BaseViewHolder(
 
                 cateName.text = data.menuTitle
                 root.setOnClickListener {
+                    selectIndicator.isSelected = !selectIndicator.isSelected
                     tabSelector(adapterPosition)
                 }
             }

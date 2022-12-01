@@ -5,6 +5,7 @@ import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.tabs.storeshop.CategoryAdapter
+import com.example.elandmall_kotlin.util.Logger
 
 class StoreShopCateTabViewHolder(private val binding: ViewStoreShopCateTabBinding) : BaseViewHolder(binding.root) {
     val cateAdapter by lazy { CategoryAdapter() }
@@ -16,6 +17,7 @@ class StoreShopCateTabViewHolder(private val binding: ViewStoreShopCateTabBindin
     }
 
     private fun initUI(data: List<StoreShopResponse.CategoryGoods>) = with(binding) {
+        list.setHasFixedSize(true)
         list.adapter = cateAdapter
         cateAdapter.submitList(data)
     }

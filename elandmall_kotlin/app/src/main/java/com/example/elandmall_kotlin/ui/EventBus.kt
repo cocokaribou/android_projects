@@ -75,7 +75,25 @@ enum class LinkEventType {
     WEB
 }
 
-class StoreShopEvent(val type: StoreShopEventType, val pos: Int)
+class StoreShopEvent {
+    val type: StoreShopEventType
+    val pos: Pair<Int, Int>
+
+    constructor(type: StoreShopEventType) {
+        this.type = type
+        this.pos = Pair(0,0)
+    }
+
+    constructor(type: StoreShopEventType, pos:Pair<Int, Int>) {
+        this.type = type
+        this.pos = pos
+    }
+
+    constructor(pos:Pair<Int, Int>) {
+        this.type = StoreShopEventType.SELECT_TAB
+        this.pos = pos
+    }
+}
 
 enum class StoreShopEventType {
     CHANGE_VIEW_HOLDER,

@@ -3,9 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#ff3cad"
-    android:layout_height="60dp">
+    android:background="@color/white"
+    android:paddingBottom="10dp"
+    android:layout_height="70dp">
 
+    <View
+        android:id="@+id/divider1"
+        style="@style/divider_line"
+        android:background="#ddd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
     <TextView
         android:id="@+id/content"
         android:layout_width="wrap_content"
@@ -14,11 +21,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"
         android:text="text content" />
 
     <View
-        android:id="@+id/divider"
+        android:id="@+id/divider2"
         style="@style/divider_line"
+        android:background="#ddd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

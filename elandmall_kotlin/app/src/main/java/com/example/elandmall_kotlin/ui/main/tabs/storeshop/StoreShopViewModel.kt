@@ -66,13 +66,16 @@ class StoreShopViewModel : BaseViewModel() {
                 .collect {
                     it.fold(
                         onSuccess = {
+                            // 최종 data
                             storeResult?.storePickList?.map { before ->
                                 before.goodsList = it?.data?.keywordResult?.searchGoods!!
                             }
 
+                            // sticky
                             storeResult?.categoryGoodsList?.let {
                                 cateList.postValue(it)
                             }
+
                             storeShopList.postValue(storeResult)
                             refreshComplete.postValue("storeshop")
                         },
@@ -158,6 +161,7 @@ class StoreShopViewModel : BaseViewModel() {
             }
 
             if (!storeShopData.categoryGoodsList.isNullOrEmpty()) {
+                Logger.v("뭐셈 ${storeShopData.categoryGoodsList}")
                 moduleList.add(
                     ModuleData.StoreShopCateTabData(
                         storeShopData.categoryGoodsList
@@ -165,7 +169,7 @@ class StoreShopViewModel : BaseViewModel() {
                 )
                 storeShopData.categoryGoodsList.forEach {
                     moduleList.add(
-                        ModuleData.CenterTextData(
+                        ModuleData.StoreShopCateNameData(
                             text = it.ctgNm ?: "",
                             includeDivider = false
                         )

@@ -200,7 +200,7 @@ sealed class ModuleData {
         companion object
     }
 
-    data class CenterTextData(
+    data class StoreShopCateNameData(
         val text: String,
         val includeDivider: Boolean
     ) : ModuleData() {

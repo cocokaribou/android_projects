@@ -1,12 +1,10 @@
 package com.example.elandmall_kotlin.util
 
 import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RatingBar
-import android.widget.TextView
+import android.widget.*
 import androidx.core.view.children
 import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
@@ -53,7 +51,7 @@ object GoodsUtil {
             try {
                 val brandNm = it.findViewById<TextView>(R.id.brand_name)
                 if (data.brandNm.isNullOrEmpty()) {
-                    brandNm.visibility = View.GONE
+                    brandNm.visibility = View.INVISIBLE
                 } else {
                     brandNm.visibility = View.VISIBLE
                     brandNm.text = data.brandNm
@@ -77,9 +75,11 @@ object GoodsUtil {
                 if (before != 0) {
                     priceBefore.visibility = View.VISIBLE
                     priceBefore.text = "${before.priceToString()}원"
+                    priceBefore.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 } else if (data.salePrice != null && data.saleRate != 0) {
                     priceBefore.visibility = View.VISIBLE
                     priceBefore.text = "${data.salePrice.priceToString()}원"
+                    priceBefore.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 } else {
                     priceBefore.visibility = View.GONE
                 }
@@ -176,6 +176,16 @@ object GoodsUtil {
                 }
             } catch (e: RuntimeException) {
             }
+
+            // wish
+
+            try {
+                val wish = it.findViewById<ImageView>(R.id.wish)
+                wish.setOnClickListener {
+                    if (!it.isSelected) Toast.makeText(it.context, "찜!", Toast.LENGTH_SHORT).show()
+                    it.isSelected = !it.isSelected
+                }
+            } catch (e: RuntimeException) {}
         }
     }
 
@@ -195,8 +205,8 @@ object GoodsUtil {
                 "storeshop" -> {
                     tag.children.forEach {
                         with(it as TextView) {
-                            setTextAppearance(R.style.home_tag_style)
-                            setPadding(7.dpToPx(), (4.5).toFloat().dpToPx(), 7.dpToPx(), (4.5).toFloat().dpToPx())
+                            setTextAppearance(R.style.store_tag_style)
+                            setPadding(0, 0, 7.dpToPx(), 0)
                         }
                     }
                 }

@@ -25,21 +25,21 @@
         android:gravity="center_horizontal"
         android:letterSpacing="-0.1"
         android:maxLines="2"
+        android:lines="2"
         android:paddingHorizontal="4.5dp"
         android:textColor="#3e3e3e"
         android:textSize="11.3dp"
-        app:layout_constraintBottom_toBottomOf="@id/selected"
+        app:layout_constraintBottom_toBottomOf="@id/select_indicator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cate_img"
         tools:text="카테고리 최대 두 줄로" />
 
-    <View
-        android:id="@+id/selected"
+    <ImageView
+        android:id="@+id/select_indicator"
         android:layout_width="match_parent"
-        android:layout_height="4.5dp"
-        android:background="#c9000b"
-        android:visibility="gone"
+        android:layout_height="4dp"
+        android:src="@drawable/selector_category"
         tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

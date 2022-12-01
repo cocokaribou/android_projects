@@ -1,5 +1,7 @@
 package com.example.elandmall_kotlin.ui.main.tabs.storeshop
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,16 +9,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy.ALL
-import com.bumptech.glide.load.engine.DiskCacheStrategy.RESOURCE
-import com.example.elandmall_kotlin.R
-import com.example.elandmall_kotlin.databinding.ViewHomeCategoryItemBinding
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.example.elandmall_kotlin.databinding.ViewStoreShopCateTabItemBinding
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.util.dpToPx
 
 class CategoryAdapter : ListAdapter<StoreShopResponse.CategoryGoods, CategoryAdapter.StickyViewHolder>(diff) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StickyViewHolder {
         // weight
-        val view = ViewHomeCategoryItemBinding.inflate(
+        val view = ViewStoreShopCateTabItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -30,9 +33,11 @@ class CategoryAdapter : ListAdapter<StoreShopResponse.CategoryGoods, CategoryAda
     }
 
     var selected = 0
-    inner class StickyViewHolder(private val binding: ViewHomeCategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class StickyViewHolder(private val binding: ViewStoreShopCateTabItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind() = with(binding) {
             val currentItem = currentList[adapterPosition]
+
+            selectIndicator.isSelected = adapterPosition == selected
 
             val src = if (adapterPosition == selected) {
                 currentItem.activeImgUrl
@@ -40,24 +45,35 @@ class CategoryAdapter : ListAdapter<StoreShopResponse.CategoryGoods, CategoryAda
                 currentItem.dactiveImgUrl
             }
 
+            // prevent glitching
             Glide.with(itemView.context)
+                .asBitmap()
                 .load("http:$src")
                 .override(30.dpToPx(), 30.dpToPx())
                 .diskCacheStrategy(ALL)
-                .into(cateImg)
+                .into(object: CustomTarget<Bitmap>(){
+                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                        cateImg.setImageBitmap(resource)
+                    }
+                    override fun onLoadCleared(placeholder: Drawable?) {}
+                })
+
             cateName.text = currentItem.ctgNm
 
             root.setOnClickListener {
-                select(adapterPosition)
+                selectIndicator.isSelected = !selectIndicator.isSelected
+                scrollToX(adapterPosition)
             }
         }
     }
 
     // 1. scroll list
     // 2. select tab
-    fun select(pos: Int) {
+    fun scrollToX(pos: Int) {
+        notifyItemChanged(selected)
         selected = pos
-        notifyDataSetChanged()
+
+        notifyItemChanged(selected)
     }
 }
 

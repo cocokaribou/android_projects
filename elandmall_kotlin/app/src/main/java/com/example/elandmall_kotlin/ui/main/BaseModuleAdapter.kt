@@ -162,8 +162,8 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
-            ModuleData.CenterTextData.ordinal() -> CenterTextViewHolder(
-                ViewCenterTextBinding.inflate(
+            ModuleData.StoreShopCateNameData.ordinal() -> StoreShopCateNameViewHolder(
+                ViewStoreShopCateNameBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false

@@ -1,32 +1,15 @@
 package com.example.elandmall_kotlin.ui.main.tabs.storeshop
 
-import android.media.AudioRecord.MetricsConstants.SOURCE
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.view.children
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.distinctUntilChanged
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
-import com.example.elandmall_kotlin.R
-import com.example.elandmall_kotlin.databinding.ViewCategoryItemBinding
-import com.example.elandmall_kotlin.databinding.ViewHomeCategoryItemBinding
-import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.StoreShopEvent
 import com.example.elandmall_kotlin.ui.StoreShopEventType
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
 import com.example.elandmall_kotlin.util.Logger
-import com.example.elandmall_kotlin.util.dpToPx
 import com.example.elandmall_kotlin.util.getScreenWidthToPx
-import com.example.elandmall_kotlin.util.pxToDp
 
 class StoreShopModuleFragment : BaseModuleFragment() {
 
@@ -50,9 +33,13 @@ class StoreShopModuleFragment : BaseModuleFragment() {
             it.getIfNotHandled()?.let {
                 when (it.type) {
                     StoreShopEventType.SELECT_TAB -> {
+                        // horizontal
                         with(binding.sticky.adapter as CategoryAdapter) {
-                            select(it.pos)
+                            scrollToX(it.pos.first)
                         }
+                        // vertical
+                        scrollToY(it.pos.second)
+
                     }
                     StoreShopEventType.CHANGE_VIEW_HOLDER -> {}
                 }
@@ -69,12 +56,10 @@ class StoreShopModuleFragment : BaseModuleFragment() {
         adapter = cateAdapter
     }
 
-    // 1. scroll list
-    // 2. select tab
-    override fun selectTab(pos: Int) {
-        Logger.v("뭘 주는거임 $pos")
-        (binding.sticky.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(pos, getScreenWidthToPx()/2)
-        EventBus.fire(StoreShopEvent(StoreShopEventType.SELECT_TAB, pos))
+    override fun selectTab(pair: Pair<Int,Int>) {
+        Logger.v("횡 ${pair.first}")
+        Logger.v("종 ${pair.second}")
+        EventBus.fire(StoreShopEvent(pair))
     }
 
     companion object {

@@ -6,7 +6,7 @@ import com.example.elandmall_kotlin.ui.ModuleData
 
 class StoreShopPickMoreViewHolder(private val binding: ViewStoreShopPickMoreBinding): BaseViewHolder(binding.root) {
     override fun onBind(item: Any, pos: Int) {
-        (item as? ModuleData.CenterTextData)?.let {
+        (item as? ModuleData.StoreShopCateNameData)?.let {
             binding.content.text = it.text
         }
     }
