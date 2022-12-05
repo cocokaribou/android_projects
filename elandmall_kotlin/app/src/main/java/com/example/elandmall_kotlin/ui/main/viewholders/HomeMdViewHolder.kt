@@ -28,6 +28,8 @@ class HomeMdViewHolder(private val binding: ViewHomeMdBinding) : BaseViewHolder(
 
     private val tabSelector: (Int) -> Unit = {
         selectedTab = it
+        mCateAdapter.notifyDataSetChanged()
+
         mListAdapter.submitList(data.homeMdCatList?.get(it)?.homeMdGoods)
     }
     private val mCateAdapter by lazy { CategoryAdapter(tabSelector) }
@@ -78,7 +80,7 @@ class HomeMdViewHolder(private val binding: ViewHomeMdBinding) : BaseViewHolder(
 
         inner class MdCateViewHolder(private val binding: ViewHomeMdCateItemBinding) : RecyclerView.ViewHolder(binding.root) {
             fun onBind(tabSelector: (Int) -> Unit) = with(binding) {
-                selectIndicator.isSelected = adapterPosition == 0
+                selectIndicator.isSelected = adapterPosition == selectedTab
 
                 val data = currentList[adapterPosition]
                 Glide.with(itemView.context)

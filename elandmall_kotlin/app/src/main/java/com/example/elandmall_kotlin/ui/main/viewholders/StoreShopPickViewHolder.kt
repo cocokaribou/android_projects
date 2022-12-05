@@ -4,7 +4,6 @@ import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.ViewStoreShopPickBinding
 import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.util.Logger
 
 class StoreShopPickViewHolder(private val binding: ViewStoreShopPickBinding):BaseViewHolder(binding.root) {
     override fun onBind(item: Any, pos: Int) {
@@ -15,19 +14,7 @@ class StoreShopPickViewHolder(private val binding: ViewStoreShopPickBinding):Bas
 
     private fun initUI(data: ModuleData.StoreShopPickData) {
         var holderType = 0
-        binding.button.setOnClickListener {
-            if (holderType >=2 ) {
-                holderType = 0
-            } else {
-                holderType++
-            }
-
-            val src = when (holderType) {
-                0 -> R.drawable.ic_grid_icon
-                1 -> R.drawable.ic_linear_icon
-                else -> R.drawable.ic_large_icon
-            }
-            binding.button.setImageResource(src)
+        binding.storeMore.setOnClickListener {
             data.clicker.invoke()
         }
     }

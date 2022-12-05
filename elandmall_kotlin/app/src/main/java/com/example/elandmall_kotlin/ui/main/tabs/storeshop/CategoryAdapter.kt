@@ -9,14 +9,21 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy.ALL
-import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.elandmall_kotlin.databinding.ViewStoreShopCateTabItemBinding
 import com.example.elandmall_kotlin.model.StoreShopResponse
+import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.dpToPx
 
 class CategoryAdapter : ListAdapter<StoreShopResponse.CategoryGoods, CategoryAdapter.StickyViewHolder>(diff) {
+    companion object {
+        val categoryAdapter by lazy { CategoryAdapter() }
+    }
+
+    init {
+        Logger.v("어댑터 초기화!")
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StickyViewHolder {
         // weight
         val view = ViewStoreShopCateTabItemBinding.inflate(
@@ -32,14 +39,14 @@ class CategoryAdapter : ListAdapter<StoreShopResponse.CategoryGoods, CategoryAda
         holder.onBind()
     }
 
-    var selected = 0
+    var selectedTab = 0
     inner class StickyViewHolder(private val binding: ViewStoreShopCateTabItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind() = with(binding) {
             val currentItem = currentList[adapterPosition]
 
-            selectIndicator.isSelected = adapterPosition == selected
+            selectIndicator.isSelected = adapterPosition == selectedTab
 
-            val src = if (adapterPosition == selected) {
+            val src = if (adapterPosition == selectedTab) {
                 currentItem.activeImgUrl
             } else {
                 currentItem.dactiveImgUrl
@@ -62,18 +69,15 @@ class CategoryAdapter : ListAdapter<StoreShopResponse.CategoryGoods, CategoryAda
 
             root.setOnClickListener {
                 selectIndicator.isSelected = !selectIndicator.isSelected
-                scrollToX(adapterPosition)
+                tabSelector(adapterPosition)
             }
         }
     }
 
-    // 1. scroll list
-    // 2. select tab
-    fun scrollToX(pos: Int) {
-        notifyItemChanged(selected)
-        selected = pos
+    fun tabSelector(index: Int) {
+        selectedTab = index
 
-        notifyItemChanged(selected)
+        notifyDataSetChanged()
     }
 }
 

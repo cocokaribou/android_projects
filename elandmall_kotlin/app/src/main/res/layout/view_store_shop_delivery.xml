@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#dd00cc"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
+        android:id="@+id/banjjak_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:gravity="center_horizontal"
+        android:paddingHorizontal="9dp"
+        android:paddingVertical="5dp"
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="#666666"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@id/banjjak_tag"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="20dp"
-        android:text="delivery"/>
+        app:layout_constraintStart_toEndOf="@id/banjjak_tag"
+        app:layout_constraintTop_toTopOf="@id/banjjak_tag" />
+
+    <View
+        android:id="@+id/divider"
+        style="@style/divider_shadow_6"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/banjjak_tag" />
 </androidx.constraintlayout.widget.ConstraintLayout>

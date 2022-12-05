@@ -114,8 +114,8 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
-            ModuleData.CategoryHorizontalData.ordinal() -> CategoryHorizontalViewHolder(
-                ViewCategoryHorizontalBinding.inflate(
+            ModuleData.StoreShopRecommendData.ordinal() -> StoreShopRecommendViewHolder(
+                ViewStoreShopRecommendBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -132,6 +132,14 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
 
             ModuleData.StoreShopPickData.ordinal() -> StoreShopPickViewHolder(
                 ViewStoreShopPickBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.GoodsSortData.ordinal() -> GoodsSortViewHolder(
+                ViewGoodsSortBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false

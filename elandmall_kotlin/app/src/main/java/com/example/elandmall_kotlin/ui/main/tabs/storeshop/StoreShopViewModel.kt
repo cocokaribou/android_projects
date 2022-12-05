@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
-import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -88,14 +87,17 @@ class StoreShopViewModel : BaseViewModel() {
         }
     }
 
-    var clicked = 0
-    val clicker: () -> Unit = {
-       if (clicked <= 2) {
-           clicked = 0
-       }
-       else {
-           clicked++
-       }
+    var gridClicked = 0
+    val gridClick: () -> Unit = {
+        if (gridClicked <= 2) {
+            gridClicked = 0
+        } else {
+            gridClicked++
+        }
+    }
+    var sortClicked = 2
+    val sortClick: (Int) -> Unit = {
+        sortClicked = it
     }
     val uiList = MutableLiveData<MutableList<ModuleData>>()
     fun setStoreShopModules(data: StoreShopResponse.StoreData?) {
@@ -118,13 +120,25 @@ class StoreShopViewModel : BaseViewModel() {
 
             if (!storeShopData.recommendStoreList.isNullOrEmpty()) {
                 moduleList.add(
-                    ModuleData.CategoryHorizontalData(
+                    ModuleData.TitleData(
+                        title = "추천 지점",
+                        subTitle = ""
+                    )
+                )
+                moduleList.add(
+                    ModuleData.StoreShopRecommendData(
                         storeShopData.recommendStoreList
                     )
                 )
             }
 
             if (storeShopData.myRegularStoreList != null) {
+                moduleList.add(
+                    ModuleData.TitleData(
+                        title = "나의 단골매장",
+                        subTitle = ""
+                    )
+                )
                 moduleList.add(
                     ModuleData.StoreShopRegularData(
                         storeShopData.myRegularStoreList
@@ -143,7 +157,13 @@ class StoreShopViewModel : BaseViewModel() {
                 moduleList.add(
                     ModuleData.StoreShopPickData(
                         storeShopData.storePickList,
-                        clicker
+                        gridClick
+                    )
+                )
+                moduleList.add(
+                    ModuleData.GoodsSortData(
+                        goodsSortMap = storeShopSort,
+                        sortClick
                     )
                 )
                 if (!storeShopData.storePickList.isNullOrEmpty()) {
@@ -161,7 +181,6 @@ class StoreShopViewModel : BaseViewModel() {
             }
 
             if (!storeShopData.categoryGoodsList.isNullOrEmpty()) {
-                Logger.v("뭐셈 ${storeShopData.categoryGoodsList}")
                 moduleList.add(
                     ModuleData.StoreShopCateTabData(
                         storeShopData.categoryGoodsList
@@ -178,11 +197,11 @@ class StoreShopViewModel : BaseViewModel() {
 //                    when(clicked) {
 //                        0 -> {
 //                            Logger.v("그리드")
-                            it.goodsList?.chunked(2)?.forEach {
-                                moduleList.add(
-                                    ModuleData.GoodsMultiGridData(it)
-                                )
-                            }
+                    it.goodsList?.chunked(2)?.forEach {
+                        moduleList.add(
+                            ModuleData.GoodsMultiGridData(it)
+                        )
+                    }
 //                        }
 //                        1 -> {
 //                            Logger.v("리니어")
@@ -208,4 +227,14 @@ class StoreShopViewModel : BaseViewModel() {
         }
         uiList.postValue(moduleList)
     }
+
+    val storeShopSort: Map<String, Int> = mapOf(
+        "인기상품순" to 1,
+        "신상품순" to 2,
+        "낮은가격순" to 3,
+        "높은가격순" to 4,
+        "상품평순" to 5,
+        "할인율높은순" to 8,
+        "추천순" to 7
+    )
 }

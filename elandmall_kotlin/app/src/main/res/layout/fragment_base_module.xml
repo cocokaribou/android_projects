@@ -28,19 +28,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <com.example.elandmall_kotlin.view.NestedScrollableHost
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/sticky"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:visibility="gone"
-            tools:listitem="@layout/view_category_item" />
-    </com.example.elandmall_kotlin.view.NestedScrollableHost>
+    <include
+        android:id="@+id/sticky"
+        layout="@layout/view_store_shop_cate_tab"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

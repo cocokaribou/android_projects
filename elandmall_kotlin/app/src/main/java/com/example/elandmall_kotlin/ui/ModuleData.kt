@@ -119,8 +119,8 @@ sealed class ModuleData {
         companion object
     }
 
-    data class CategoryHorizontalData(
-        val horizontalCategoryData: List<StoreShopResponse.RecommendStore>
+    data class StoreShopRecommendData(
+        val storeShopRecommendData: List<StoreShopResponse.RecommendStore>
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -149,6 +149,18 @@ sealed class ModuleData {
 
         companion object
     }
+
+    data class GoodsSortData(
+        val goodsSortMap: Map<String, Int>,
+        val clicker: (Int) -> Unit
+    ): ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
 
     data class StoreShopPickMoreData(
         val text: String

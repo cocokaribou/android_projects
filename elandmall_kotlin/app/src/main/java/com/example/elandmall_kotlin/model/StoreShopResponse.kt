@@ -45,7 +45,9 @@ data class StoreShopResponse(
         @SerializedName("store_nm") val storeNm: String?,
         @SerializedName("image_url") val imageUrl: String?,
         @SerializedName("link_url") val linkUrl: String?
-    )
+    ) {
+        constructor(link: String) : this("", "", link)
+    }
 
     data class CategoryGoods(
         @SerializedName("goods_list") val goodsList: MutableList<Goods>?,

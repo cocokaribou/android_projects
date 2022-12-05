@@ -77,19 +77,19 @@ enum class LinkEventType {
 
 class StoreShopEvent {
     val type: StoreShopEventType
-    val pos: Pair<Int, Int>
+    val pos: Int
 
     constructor(type: StoreShopEventType) {
         this.type = type
-        this.pos = Pair(0,0)
+        this.pos = 0
     }
 
-    constructor(type: StoreShopEventType, pos:Pair<Int, Int>) {
+    constructor(type: StoreShopEventType, pos:Int) {
         this.type = type
         this.pos = pos
     }
 
-    constructor(pos:Pair<Int, Int>) {
+    constructor(pos:Int) {
         this.type = StoreShopEventType.SELECT_TAB
         this.pos = pos
     }

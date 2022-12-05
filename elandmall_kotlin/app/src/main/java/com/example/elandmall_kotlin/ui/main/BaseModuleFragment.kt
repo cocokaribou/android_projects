@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.databinding.FragmentBaseModuleBinding
 import com.example.elandmall_kotlin.ui.ModuleData
+import com.example.elandmall_kotlin.ui.main.tabs.storeshop.CategoryAdapter.Companion.categoryAdapter
 import com.example.elandmall_kotlin.util.Logger
 
 abstract class BaseModuleFragment : Fragment() {
@@ -57,6 +58,9 @@ abstract class BaseModuleFragment : Fragment() {
                 adapter = moduleAdapter
                 addOnScrollListener(scrollListener)
             }
+
+            // storeshop sticky
+            sticky.list.adapter = categoryAdapter
         }
 
         return binding.root
@@ -74,9 +78,9 @@ abstract class BaseModuleFragment : Fragment() {
 
     fun addFooter(moduleList: MutableList<ModuleData>) {}
 
-    open fun setStickyTab(isOn: Boolean) {}
+    open fun setStickyVisible(isOn: Boolean) {}
 
-    open fun selectTab(pair: Pair<Int, Int>) {}
+    open fun selectTab(position: Int) {}
 
     fun scrollToY(pos: Int) {
         (binding.list.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(pos, 0)
@@ -86,19 +90,21 @@ abstract class BaseModuleFragment : Fragment() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
 
-            // store shop fragment
             val firstVisiblePos = (binding.list.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() ?: 0
+            val lastVisiblePos = (binding.list.layoutManager as? LinearLayoutManager)?.findLastVisibleItemPosition() ?: 0
+
+            // store shop fragment
             val tabPos = moduleAdapter.value.indexOfFirst { it is ModuleData.StoreShopCateTabData }
             if (moduleAdapter.value.count() != -1 && tabPos <= firstVisiblePos) {
-                setStickyTab(true)
+                setStickyVisible(true)
             } else {
-                setStickyTab(false)
+                setStickyVisible(false)
             }
 
-            val lastVisiblePos = (binding.list.layoutManager as? LinearLayoutManager)?.findLastVisibleItemPosition() ?: 0
-            if (binding.sticky.isVisible) {
-                for (i in firstVisiblePos..lastVisiblePos) {
-                   Logger.v("i $i")
+            val cateNamePos = moduleAdapter.value.indexOfFirst { it is ModuleData.StoreShopCateNameData }
+            if (binding.sticky.list.isVisible) {
+                if (moduleAdapter.value.count() != -1 && cateNamePos > lastVisiblePos) {
+                    selectTab(cateNamePos)
                 }
             }
         }

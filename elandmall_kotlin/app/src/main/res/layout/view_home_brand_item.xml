@@ -10,7 +10,7 @@
         android:id="@+id/brand_bg"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:background="@drawable/home_brand_bg"
+        android:background="@drawable/background_solid_circle"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
