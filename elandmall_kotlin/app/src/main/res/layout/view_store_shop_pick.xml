@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -25,7 +26,7 @@
         android:id="@+id/store_nm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="대전유성점"
+        tools:text="대전유성점"
         android:textSize="14.4dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/location"
@@ -40,7 +41,7 @@
         android:background="@drawable/background_stroke_radius"
         android:paddingHorizontal="10dp"
         android:paddingVertical="5dp"
-        android:text="다른지점 찾기"
+        android:text="@string/search_other_branch"
         android:textSize="13dp"
         android:textColor="#666666"
         app:layout_constraintBottom_toBottomOf="@id/location"

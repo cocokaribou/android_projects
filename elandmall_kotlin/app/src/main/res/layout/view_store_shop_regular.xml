@@ -85,7 +85,7 @@
                 android:backgroundTint="#eeeeee"
                 android:gravity="center_horizontal"
                 android:textSize="14dp"
-                android:text="매장찾기"
+                android:text="@string/store_shop_search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/search_icon"

@@ -64,7 +64,7 @@
             android:id="@+id/price_after_won"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="원"
+            android:text="@string/won"
             android:textColor="#333333"
             android:textSize="10.5dp"
             app:layout_constraintBottom_toBottomOf="@id/price_after"
