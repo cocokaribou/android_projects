@@ -8,7 +8,6 @@ import com.example.elandmall_kotlin.ui.StoreShopEvent
 import com.example.elandmall_kotlin.ui.StoreShopEventType
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.storeshop.CategoryAdapter.Companion.categoryAdapter
-import com.example.elandmall_kotlin.util.Logger
 
 class StoreShopModuleFragment : BaseModuleFragment() {
 
@@ -16,32 +15,36 @@ class StoreShopModuleFragment : BaseModuleFragment() {
 
     var categoryCount = 0
     override fun observeData() {
-        viewModel.storeShopList.observe(this) {
-            viewModel.setStoreShopModules(it)
-        }
-
         viewModel.uiList.observe(this) {
             setModules(it)
         }
         viewModel.cateList.observe(this) {
-            categoryCount = it.size
+            categoryCount = it?.size ?: 0
             categoryAdapter.submitList(it)
         }
 
+        // holder click events
         EventBus.storeShopEvent.observe(requireActivity()) {
             it.getIfNotHandled()?.let {
                 when (it.type) {
-                    StoreShopEventType.SELECT_TAB -> {
-                        Logger.v("들어오니... 하.. ${it.pos}")
+                    StoreShopEventType.CATEGORY_SCROLL -> {
                         // horizontal
                         with(binding.sticky.list.adapter as CategoryAdapter) {
-                            tabSelector(it.pos / categoryCount + 1)
+                            tabSelector(it.content as Int / categoryCount + 1)
                         }
                         // vertical
-                        scrollToY(it.pos)
+                        scrollToY(it.content as Int)
 
                     }
-                    StoreShopEventType.CHANGE_VIEW_HOLDER -> {}
+                    StoreShopEventType.GRID_CLICK -> {
+                        viewModel.updateGrid(it.content as Int)
+                    }
+                    StoreShopEventType.SORT_CLICK -> {
+                        viewModel.updateSort(it.content as String)
+                    }
+                    StoreShopEventType.STORE_CLICK -> {
+                        viewModel.updateStore(it.content as String)
+                    }
                 }
             }
         }

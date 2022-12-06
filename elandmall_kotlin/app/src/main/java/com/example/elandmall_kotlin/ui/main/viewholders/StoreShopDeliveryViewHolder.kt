@@ -38,7 +38,7 @@ class StoreShopDeliveryViewHolder(private val binding: ViewStoreShopDeliveryBind
             }
             else -> {
                 // D
-                banjjakTag.setBackgroundResource(R.drawable.background_solid_radius)
+                banjjakTag.setBackgroundResource(R.drawable.background_solid_radius_40dp)
                 banjjakTag.text = "오늘받송불가"
                 banjjakTag.setTextAppearance(R.style.banjjak_tag_style_off)
             }

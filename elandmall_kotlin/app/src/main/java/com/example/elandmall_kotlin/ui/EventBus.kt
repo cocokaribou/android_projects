@@ -77,27 +77,35 @@ enum class LinkEventType {
 
 class StoreShopEvent {
     val type: StoreShopEventType
-    val pos: Int
+    val content: Any
 
     constructor(type: StoreShopEventType) {
         this.type = type
-        this.pos = 0
+        this.content = 0
     }
 
-    constructor(type: StoreShopEventType, pos:Int) {
+    constructor(type: StoreShopEventType, content: Any) {
         this.type = type
-        this.pos = pos
+        this.content = content
     }
 
-    constructor(pos:Int) {
-        this.type = StoreShopEventType.SELECT_TAB
-        this.pos = pos
+    constructor(type: StoreShopEventType, index :Int) {
+        this.type = type
+        this.content = index
     }
+
+    constructor(index:Int) {
+        this.type = StoreShopEventType.CATEGORY_SCROLL
+        this.content = index
+    }
+
 }
 
 enum class StoreShopEventType {
-    CHANGE_VIEW_HOLDER,
-    SELECT_TAB
+    GRID_CLICK,
+    SORT_CLICK,
+    STORE_CLICK,
+    CATEGORY_SCROLL
 }
 
 

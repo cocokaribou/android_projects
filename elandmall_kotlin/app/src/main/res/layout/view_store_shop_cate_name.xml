@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textStyle="bold"
-        android:text="text content" />
+        tools:text="여성의류" />
 
     <View
         android:id="@+id/divider1"

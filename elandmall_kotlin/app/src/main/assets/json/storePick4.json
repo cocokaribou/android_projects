@@ -1,0 +1,139 @@
+{
+  "code": "200",
+  "data": {
+    "relate_kwds": [],
+    "keyword_result": {
+      "search_goods": [
+        {
+          "flag_img_path": "",
+          "goods_nm": "[데일리지] 테이퍼드 웜진_SPTJB4VC21",
+          "goods_star_point": 94,
+          "brand_nm": "스파오",
+          "icon_view": "",
+          "cust_sale_price": 15500,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2111876950&vir_vend_no=VV16001887&sale_shop_divi_cd=13&disp_ctg_no=&sale_area_no=D1606000568&tr_yn=N&conts_dist_no=2111876950&conts_divi_cd=20&rel_no=2111876950&rel_divi_cd=10&brand_nm=%EC%8A%A4%ED%8C%8C%EC%98%A4&goods_nm=%5B%EB%8D%B0%EC%9D%BC%EB%A6%AC%EC%A7%80%5D+%ED%85%8C%EC%9D%B4%ED%8D%BC%EB%93%9C+%EC%9B%9C%EC%A7%84_SPTJB4VC21&flag_img_path=",
+          "sale_rate": 61,
+          "image_url": "//www.elandrs.com/upload/prd/img/950/600/2111876950_0000010.jpg",
+          "sale_price": 0,
+          "market_price": 39900,
+          "goods_comment_count": 32
+        },
+        {
+          "flag_img_path": "//www.elandrs.com/upload/dspl/banner/90/278/00/220700000354278.png",
+          "goods_nm": "[✯단독상품✯]테일러드 싱글 울혼방 자켓 MIWJKD114B",
+          "goods_star_point": 99,
+          "brand_nm": "미쏘",
+          "icon_view": "무료배송,BEST,",
+          "cust_sale_price": 80020,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209379756&vir_vend_no=VV16001901&sale_shop_divi_cd=13&disp_ctg_no=&sale_area_no=D1606000568&tr_yn=N&conts_dist_no=2209379756&conts_divi_cd=20&rel_no=2209379756&rel_divi_cd=10&brand_nm=%EB%AF%B8%EC%8F%98&goods_nm=%5B%E2%9C%AF%EB%8B%A8%EB%8F%85%EC%83%81%ED%92%88%E2%9C%AF%5D%ED%85%8C%EC%9D%BC%EB%9F%AC%EB%93%9C+%EC%8B%B1%EA%B8%80+%EC%9A%B8%ED%98%BC%EB%B0%A9+%EC%9E%90%EC%BC%93+MIWJKD114B&flag_img_path=//www.elandrs.com/upload/dspl/banner/90/278/00/220700000354278.png",
+          "sale_rate": 20,
+          "image_url": "//www.elandrs.com/upload/prd/img/756/600/2209379756_0000005.jpg",
+          "sale_price": 89910,
+          "market_price": 99900,
+          "goods_comment_count": 20
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "[포맨] [데일리지]웜 히든밴딩 세미와이드_SPTAB4VM02",
+          "goods_star_point": 97,
+          "brand_nm": "스파오",
+          "icon_view": "",
+          "cust_sale_price": 15500,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2110763700&vir_vend_no=VV16001887&sale_shop_divi_cd=13&disp_ctg_no=&sale_area_no=D1606000568&tr_yn=N&conts_dist_no=2110763700&conts_divi_cd=20&rel_no=2110763700&rel_divi_cd=10&brand_nm=%EC%8A%A4%ED%8C%8C%EC%98%A4&goods_nm=%5B%ED%8F%AC%EB%A7%A8%5D+%5B%EB%8D%B0%EC%9D%BC%EB%A6%AC%EC%A7%80%5D%EC%9B%9C+%ED%9E%88%EB%93%A0%EB%B0%B4%EB%94%A9+%EC%84%B8%EB%AF%B8%EC%99%80%EC%9D%B4%EB%93%9C_SPTAB4VM02&flag_img_path=",
+          "sale_rate": 61,
+          "image_url": "//www.elandrs.com/upload/prd/img/700/600/2110763700_0000007.jpg",
+          "sale_price": 0,
+          "market_price": 39900,
+          "goods_comment_count": 25
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "코듀로이 퀼팅 베스트_SPJVB4TG12",
+          "goods_star_point": 98,
+          "brand_nm": "스파오",
+          "icon_view": "",
+          "cust_sale_price": 17900,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2106069528&vir_vend_no=VV16001887&sale_shop_divi_cd=13&disp_ctg_no=&sale_area_no=D1606000568&tr_yn=N&conts_dist_no=2106069528&conts_divi_cd=20&rel_no=2106069528&rel_divi_cd=10&brand_nm=%EC%8A%A4%ED%8C%8C%EC%98%A4&goods_nm=%EC%BD%94%EB%93%80%EB%A1%9C%EC%9D%B4+%ED%80%BC%ED%8C%85+%EB%B2%A0%EC%8A%A4%ED%8A%B8_SPJVB4TG12&flag_img_path=",
+          "sale_rate": 55,
+          "image_url": "//www.elandrs.com/upload/prd/img/528/600/2106069528_0000005.jpg",
+          "sale_price": 0,
+          "market_price": 39900,
+          "goods_comment_count": 83
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "플리스 셋업 팬츠_SPFWB4VC02",
+          "goods_star_point": 95,
+          "brand_nm": "스파오",
+          "icon_view": "",
+          "cust_sale_price": 13500,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2110753588&vir_vend_no=VV16001887&sale_shop_divi_cd=13&disp_ctg_no=&sale_area_no=D1606000568&tr_yn=N&conts_dist_no=2110753588&conts_divi_cd=20&rel_no=2110753588&rel_divi_cd=10&brand_nm=%EC%8A%A4%ED%8C%8C%EC%98%A4&goods_nm=%ED%94%8C%EB%A6%AC%EC%8A%A4+%EC%85%8B%EC%97%85+%ED%8C%AC%EC%B8%A0_SPFWB4VC02&flag_img_path=",
+          "sale_rate": 55,
+          "image_url": "//www.elandrs.com/upload/prd/img/588/600/2110753588_0000012.jpg",
+          "sale_price": 0,
+          "market_price": 29900,
+          "goods_comment_count": 155
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "[베베드피노] 시리얼아웃포켓다운점퍼_BP14DM362",
+          "goods_star_point": 98,
+          "brand_nm": "베베드피노",
+          "icon_view": "무료배송,",
+          "cust_sale_price": 85410,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2111879672&vir_vend_no=VV21021189&sale_shop_divi_cd=13&disp_ctg_no=&sale_area_no=D1606000568&tr_yn=N&conts_dist_no=2111879672&conts_divi_cd=20&rel_no=2111879672&rel_divi_cd=10&brand_nm=%EB%B2%A0%EB%B2%A0%EB%93%9C%ED%94%BC%EB%85%B8&goods_nm=%5B%EB%B2%A0%EB%B2%A0%EB%93%9C%ED%94%BC%EB%85%B8%5D+%EC%8B%9C%EB%A6%AC%EC%96%BC%EC%95%84%EC%9B%83%ED%8F%AC%EC%BC%93%EB%8B%A4%EC%9A%B4%EC%A0%90%ED%8D%BC_BP14DM362&flag_img_path=",
+          "sale_rate": 46,
+          "image_url": "//www.elandrs.com/upload/prd/img/672/600/2111879672_0000001.jpg",
+          "sale_price": 94900,
+          "market_price": 159000,
+          "goods_comment_count": 26
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "[나영PICK 단독선오픈!][쉐베베] 자수 밍크가방_디자인 선택",
+          "brand_nm": "쉐베베",
+          "icon_view": "",
+          "cust_sale_price": 37900,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2211531175&vir_vend_no=VV21021231&sale_shop_divi_cd=13&disp_ctg_no=&sale_area_no=D1606000568&tr_yn=N&conts_dist_no=2211531175&conts_divi_cd=20&rel_no=2211531175&rel_divi_cd=10&brand_nm=%EC%89%90%EB%B2%A0%EB%B2%A0&goods_nm=%5B%EB%82%98%EC%98%81PICK+%EB%8B%A8%EB%8F%85%EC%84%A0%EC%98%A4%ED%94%88%21%5D%5B%EC%89%90%EB%B2%A0%EB%B2%A0%5D+%EC%9E%90%EC%88%98+%EB%B0%8D%ED%81%AC%EA%B0%80%EB%B0%A9_%EB%94%94%EC%9E%90%EC%9D%B8+%EC%84%A0%ED%83%9D&flag_img_path=",
+          "sale_rate": 24,
+          "image_url": "//www.elandrs.com/upload/prd/img/175/600/2211531175_0000001.jpg",
+          "sale_price": 0,
+          "market_price": 50000,
+          "sale_area_no": "D1606000568"
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "[✯APP에서 15%✯][아옳이 Pick] 벨티드 숏 덕다운 (4colors)_ RMJDC4VS15",
+          "goods_star_point": 100,
+          "brand_nm": "로엠",
+          "icon_view": "무료배송,",
+          "cust_sale_price": 198900,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2207064211&vir_vend_no=VV16001884&sale_shop_divi_cd=13&disp_ctg_no=&sale_area_no=D1606000568&tr_yn=N&conts_dist_no=2207064211&conts_divi_cd=20&rel_no=2207064211&rel_divi_cd=10&brand_nm=%EB%A1%9C%EC%97%A0&goods_nm=%5B%E2%9C%AFAPP%EC%97%90%EC%84%9C+15%25%E2%9C%AF%5D%5B%EC%95%84%EC%98%B3%EC%9D%B4+Pick%5D+%EB%B2%A8%ED%8B%B0%EB%93%9C+%EC%88%8F+%EB%8D%95%EB%8B%A4%EC%9A%B4+%284colors%29_+RMJDC4VS15&flag_img_path=",
+          "sale_rate": 0,
+          "image_url": "//www.elandrs.com/upload/prd/img/211/600/2207064211_0000015.jpg",
+          "sale_price": 199000,
+          "market_price": 0,
+          "goods_comment_count": 27
+        },
+        {
+          "flag_img_path": "//www.elandrs.com/upload/dspl/banner/90/798/00/221100000377798.png",
+          "goods_nm": "✯미쏘X블랙페스타✯ 시그니처 베스트셀러 아우터 20% 할인",
+          "goods_star_point": 98,
+          "brand_nm": "",
+          "icon_view": "",
+          "cust_sale_price": 19900,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2203356921&vir_vend_no=VV16001901&sale_shop_divi_cd=13&disp_ctg_no=&sale_area_no=D1606000568&tr_yn=N&conts_dist_no=2203356921&conts_divi_cd=20&rel_no=2203356921&rel_divi_cd=10&brand_nm=&goods_nm=%E2%9C%AF%EB%AF%B8%EC%8F%98X%EB%B8%94%EB%9E%99%ED%8E%98%EC%8A%A4%ED%83%80%E2%9C%AF+%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B2%98+%EB%B2%A0%EC%8A%A4%ED%8A%B8%EC%85%80%EB%9F%AC+%EC%95%84%EC%9A%B0%ED%84%B0+20%25+%ED%95%A0%EC%9D%B8&flag_img_path=//www.elandrs.com/upload/dspl/banner/90/798/00/221100000377798.png",
+          "sale_rate": 0,
+          "image_url": "//www.elandrs.com/upload/prd/img/921/600/2203356921_0000019.jpg",
+          "sale_price": 0,
+          "market_price": 0,
+          "goods_comment_count": 482
+        }
+      ],
+      "total_count": 99999,
+      "result_count": 10
+    }
+  },
+  "keyword": "",
+  "resultMsg": "success"
+}

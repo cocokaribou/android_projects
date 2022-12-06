@@ -4,9 +4,9 @@ package com.example.elandmall_kotlin.model
 import com.google.gson.annotations.SerializedName
 
 data class StoreShopResponse(
-    @SerializedName("data") val data: StoreData?,
+    @SerializedName("data") val data: Data?,
 ) {
-    data class StoreData(
+    data class Data(
         @SerializedName("smartpick_list") val storePickList: MutableList<StorePick>?,
         @SerializedName("banjjak_deli") val banjjakDeli: BanjjakDeli?,
         @SerializedName("store_banner_list") val storeBannerList: List<Any>?,
@@ -24,7 +24,6 @@ data class StoreShopResponse(
     data class StorePick(
         @SerializedName("rel_cont_nm") val relContNm: String?,
         @SerializedName("category_no") var categoryNo: String?,
-        var goodsList: List<Goods> = listOf()
     )
 
     data class BanjjakDeli(
@@ -33,7 +32,17 @@ data class StoreShopResponse(
         @SerializedName("btn_url") val btnUrl: String?,
         @SerializedName("img_path") val imgPath: String?,
         @SerializedName("img_link") val imgLink: String?,
-        @SerializedName("addr") val addr: String?
+        @SerializedName("addr") val addr: String?,
+        // when login
+        @SerializedName("banjjak_shop") val banjjakShop: BanjjakShop
+    )
+
+    data class BanjjakShop(
+        @SerializedName("quick_deli_poss_yn") val quickDeliPossYN: String?,
+        @SerializedName("vend_info") val vendInfo: String?,
+        @SerializedName("store_pagesize") val storePageSize : Int?,
+        @SerializedName("banner") val banner: String?,
+        @SerializedName("disp_ctg_no") val dispCtgNo : String?
     )
 
     data class CtgNavi(

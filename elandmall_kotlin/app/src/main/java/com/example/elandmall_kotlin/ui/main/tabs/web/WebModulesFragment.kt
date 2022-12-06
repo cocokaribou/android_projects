@@ -1,4 +1,4 @@
-package com.example.elandmall_kotlin.ui.main.tabs
+package com.example.elandmall_kotlin.ui.main.tabs.web
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels

@@ -1,4 +1,4 @@
-package com.example.elandmall_kotlin.ui.main.tabs
+package com.example.elandmall_kotlin.ui.main.tabs.web
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

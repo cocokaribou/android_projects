@@ -55,6 +55,14 @@
         <item name="android:textColor">#c9000b</item>
     </style>
 
+    <style name="bottom_sheet_theme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/app_modal_style</item>
+    </style>
+
+    <style name="app_modal_style" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/background_solid_radius_top_20dp</item>
+    </style>
+
     <style name="divider_line">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0.7dp</item>

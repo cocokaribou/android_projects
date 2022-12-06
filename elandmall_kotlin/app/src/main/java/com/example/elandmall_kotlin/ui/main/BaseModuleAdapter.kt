@@ -23,6 +23,7 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
         set(value) {
             field = value
             submitList(field)
+            notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
@@ -130,8 +131,16 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
-            ModuleData.StoreShopPickData.ordinal() -> StoreShopPickViewHolder(
-                ViewStoreShopPickBinding.inflate(
+            ModuleData.StoreShopPickHeaderData.ordinal() -> StoreShopPickHeaderViewHolder(
+                ViewStoreShopPickHeaderBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.StoreShopEmptyGoodsData.ordinal() -> StoreShopEmptyGoodsViewHolder(
+                ViewStoreShopEmptyGoodsBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -156,6 +165,22 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
 
             ModuleData.GoodsMultiGridData.ordinal() -> GoodsMultiGridViewHolder(
                 ViewGoodsMultiGridBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.GoodsLinearData.ordinal() -> GoodsLinearViewHolder(
+                ViewGoodsLinearBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.GoodsLargeData.ordinal() -> GoodsLargeViewHolder(
+                ViewGoodsLargeBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
