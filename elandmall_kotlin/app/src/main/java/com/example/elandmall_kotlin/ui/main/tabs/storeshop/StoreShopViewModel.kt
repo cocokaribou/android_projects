@@ -104,7 +104,7 @@ class StoreShopViewModel : BaseViewModel() {
             // recommend offline shop
             if (!storeShopData.recommendStoreList.isNullOrEmpty()) {
                 moduleList.add(
-                    ModuleData.TitleData(
+                    ModuleData.CommonTitleData(
                         title = "추천 지점",
                         subTitle = ""
                     )
@@ -119,7 +119,7 @@ class StoreShopViewModel : BaseViewModel() {
             // regular
             if (storeShopData.myRegularStoreList != null) {
                 moduleList.add(
-                    ModuleData.TitleData(
+                    ModuleData.CommonTitleData(
                         title = "나의 단골매장",
                         subTitle = ""
                     )
@@ -134,7 +134,7 @@ class StoreShopViewModel : BaseViewModel() {
             // store pick
             if (!storeShopData.storePickList.isNullOrEmpty()) {
                 moduleList.add(
-                    ModuleData.TitleData(
+                    ModuleData.CommonTitleData(
                         title = "스토어픽 지점",
                         subTitle = "매장에서 직접 확인하고 픽업해보세요."
                     )
@@ -147,8 +147,8 @@ class StoreShopViewModel : BaseViewModel() {
                     )
                 )
                 moduleList.add(
-                    ModuleData.GoodsSortData(
-                        goodsSortMap = storeSortMap,
+                    ModuleData.CommonSortData(
+                        sortMap = storeSortMap,
                         sortSelected = mSortKey,
                         gridSelected = mGridNo
                     )
@@ -163,7 +163,7 @@ class StoreShopViewModel : BaseViewModel() {
             // category
             if (!storeShopData.categoryGoodsList.isNullOrEmpty()) {
                 moduleList.add(
-                    ModuleData.TitleData(
+                    ModuleData.CommonTitleData(
                         title = "카테고리별 베스트 상품",
                         subTitle = ""
                     )
@@ -181,7 +181,7 @@ class StoreShopViewModel : BaseViewModel() {
                     )
                     it.goodsList?.chunked(2)?.forEach {
                         moduleList.add(
-                            ModuleData.GoodsMultiGridData(it)
+                            ModuleData.CommonGoodsMultiGridData(it)
                         )
                     }
                 }
@@ -218,7 +218,7 @@ class StoreShopViewModel : BaseViewModel() {
         }
 
         moduleList.map {
-            if (it is ModuleData.GoodsSortData) {
+            if (it is ModuleData.CommonSortData) {
                 it.gridSelected = mGridNo
                 it.sortSelected = mSortKey
             }
@@ -250,7 +250,7 @@ class StoreShopViewModel : BaseViewModel() {
         mSortNo = storeSortMap[sortClicked] ?: 2
 
         moduleList.map {
-            if (it is ModuleData.GoodsSortData) {
+            if (it is ModuleData.CommonSortData) {
                 it.sortSelected = sortClicked
                 it.gridSelected = mGridNo
             }
@@ -276,7 +276,7 @@ class StoreShopViewModel : BaseViewModel() {
                 goodsList.chunked(2).reversed().forEach {
                     pickModuleList.add(
                         index,
-                        ModuleData.GoodsMultiGridData(it)
+                        ModuleData.CommonGoodsMultiGridData(it)
                     )
                 }
             }
@@ -284,7 +284,7 @@ class StoreShopViewModel : BaseViewModel() {
                 goodsList.reversed().forEach {
                     pickModuleList.add(
                         index,
-                        ModuleData.GoodsLinearData(it)
+                        ModuleData.CommonGoodsLinearData(it)
                     )
                 }
             }
@@ -292,7 +292,7 @@ class StoreShopViewModel : BaseViewModel() {
                 goodsList.reversed().forEach {
                     pickModuleList.add(
                         index,
-                        ModuleData.GoodsLargeData(it)
+                        ModuleData.CommonGoodsLargeData(it)
                     )
                 }
             }

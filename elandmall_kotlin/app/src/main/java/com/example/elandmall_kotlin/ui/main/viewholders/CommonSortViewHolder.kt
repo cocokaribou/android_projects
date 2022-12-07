@@ -5,13 +5,12 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.elandmall_kotlin.R
-import com.example.elandmall_kotlin.databinding.ViewGoodsSortBinding
+import com.example.elandmall_kotlin.databinding.ViewCommonSortBinding
 import com.example.elandmall_kotlin.ui.*
-import com.example.elandmall_kotlin.util.Logger
 
-class GoodsSortViewHolder(private val binding: ViewGoodsSortBinding) : BaseViewHolder(binding.root) {
+class CommonSortViewHolder(private val binding: ViewCommonSortBinding) : BaseViewHolder(binding.root) {
     override fun onBind(item: Any, pos: Int) {
-        (item as? ModuleData.GoodsSortData)?.let {
+        (item as? ModuleData.CommonSortData)?.let {
             initUi(it)
         }
     }
@@ -19,12 +18,12 @@ class GoodsSortViewHolder(private val binding: ViewGoodsSortBinding) : BaseViewH
     var isSpinnerTouched = false
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun initUi(data: ModuleData.GoodsSortData) = with(binding) {
-        val list = data.goodsSortMap.keys.toTypedArray()
+    private fun initUi(data: ModuleData.CommonSortData) = with(binding) {
+        val list = data.sortMap.keys.toTypedArray()
         val selected = list.indexOfFirst { it == data.sortSelected }
 
         spinner.apply {
-            adapter = ArrayAdapter(binding.root.context, R.layout.view_goods_sort_item, list)
+            adapter = ArrayAdapter(binding.root.context, R.layout.view_common_sort_item, list)
             setSelection(selected)
             setOnTouchListener { _, _ ->
                 isSpinnerTouched = true

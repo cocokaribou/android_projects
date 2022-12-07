@@ -67,8 +67,8 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
-            ModuleData.TitleData.ordinal() -> TitleViewHolder(
-                ViewTitleBinding.inflate(
+            ModuleData.CommonTitleData.ordinal() -> CommonTitleViewHolder(
+                ViewCommonTitleBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -146,8 +146,8 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
-            ModuleData.GoodsSortData.ordinal() -> GoodsSortViewHolder(
-                ViewGoodsSortBinding.inflate(
+            ModuleData.CommonSortData.ordinal() -> CommonSortViewHolder(
+                ViewCommonSortBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -162,24 +162,24 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
-            ModuleData.GoodsMultiGridData.ordinal() -> GoodsMultiGridViewHolder(
-                ViewGoodsMultiGridBinding.inflate(
+            ModuleData.CommonGoodsMultiGridData.ordinal() -> CommonGoodsMultiGridViewHolder(
+                ViewCommonGoodsMultiGridBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 )
             )
 
-            ModuleData.GoodsLinearData.ordinal() -> GoodsLinearViewHolder(
-                ViewGoodsLinearBinding.inflate(
+            ModuleData.CommonGoodsLinearData.ordinal() -> CommonGoodsLinearViewHolder(
+                ViewCommonGoodsLinearBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 )
             )
 
-            ModuleData.GoodsLargeData.ordinal() -> GoodsLargeViewHolder(
-                ViewGoodsLargeBinding.inflate(
+            ModuleData.CommonGoodsLargeData.ordinal() -> CommonGoodsLargeViewHolder(
+                ViewCommonGoodsLargeBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false

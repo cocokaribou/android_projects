@@ -58,7 +58,7 @@ sealed class ModuleData {
         companion object
     }
 
-    data class TitleData(
+    data class CommonTitleData(
         val title: String,
         val subTitle: String
     ) : ModuleData() {
@@ -150,8 +150,8 @@ sealed class ModuleData {
         companion object
     }
 
-    data class GoodsSortData(
-        val goodsSortMap: Map<String, Any>,
+    data class CommonSortData(
+        val sortMap: Map<String, Any>,
         var sortSelected: String,
         var gridSelected: Int
     ): ModuleData() {
@@ -181,7 +181,7 @@ sealed class ModuleData {
         companion object
     }
 
-    data class GoodsGridData(
+    data class CommonGoodsGridData(
         val goodsData: Goods
     ) : ModuleData() {
         override fun clone(): ModuleData {
@@ -191,7 +191,7 @@ sealed class ModuleData {
         companion object
     }
 
-    data class GoodsMultiGridData(
+    data class CommonGoodsMultiGridData(
         val goodsListData: List<Goods>
     ) : ModuleData() {
         override fun clone(): ModuleData {
@@ -201,7 +201,7 @@ sealed class ModuleData {
         companion object
     }
 
-    data class GoodsLinearData(
+    data class CommonGoodsLinearData(
         val goodsData: Goods
     ) : ModuleData() {
         override fun clone(): ModuleData {
@@ -211,7 +211,7 @@ sealed class ModuleData {
         companion object
     }
 
-    data class GoodsLargeData(
+    data class CommonGoodsLargeData(
         val goodsData: Goods
     ) : ModuleData() {
         override fun clone(): ModuleData {

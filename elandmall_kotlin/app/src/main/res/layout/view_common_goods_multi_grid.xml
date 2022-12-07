@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/holder1"
-        layout="@layout/view_goods_grid"
+        layout="@layout/view_common_goods_grid"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -27,7 +27,7 @@
 
     <include
         android:id="@+id/holder2"
-        layout="@layout/view_goods_grid"
+        layout="@layout/view_common_goods_grid"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

@@ -73,7 +73,7 @@ class HomeViewModel : BaseViewModel() {
             // title holder & goods holder
             if (homeData.homeLuckyDeal != null) {
                 moduleList.add(
-                    ModuleData.TitleData(
+                    ModuleData.CommonTitleData(
                         homeData.homeLuckyDeal.title ?: "럭키딜",
                         homeData.homeLuckyDeal.subtitle ?: "서브타이틀"
                     )
@@ -89,7 +89,7 @@ class HomeViewModel : BaseViewModel() {
             // title holder & goods holder
             if (homeData.homeSeasonPlan != null) {
                 moduleList.add(
-                    ModuleData.TitleData(
+                    ModuleData.CommonTitleData(
                         homeData.homeSeasonPlan.title ?: "시즌기획전",
                         homeData.homeSeasonPlan.subtitle ?: "서브타이틀"
                     )
@@ -107,7 +107,7 @@ class HomeViewModel : BaseViewModel() {
 
             if (homeData.homeOfflineShop != null) {
                 moduleList.add(
-                    ModuleData.TitleData(
+                    ModuleData.CommonTitleData(
                         homeData.homeOfflineShop.title ?: "이슈 브랜드",
                         homeData.homeOfflineShop.subtitle ?: ""
                     )
@@ -121,7 +121,7 @@ class HomeViewModel : BaseViewModel() {
 
             if (homeData.homeMd != null) {
                 moduleList.add(
-                    ModuleData.TitleData(
+                    ModuleData.CommonTitleData(
                         homeData.homeMd.title ?: "MD 추천",
                         homeData.homeMd.subtitle ?: "엄선한 추천 상품"
                     )
