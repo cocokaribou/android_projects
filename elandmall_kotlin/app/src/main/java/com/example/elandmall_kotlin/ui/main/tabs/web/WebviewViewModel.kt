@@ -5,5 +5,4 @@ import androidx.lifecycle.ViewModel
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
 
 class WebviewViewModel : BaseViewModel() {
-    override val refreshComplete = MutableLiveData<String>()
 }

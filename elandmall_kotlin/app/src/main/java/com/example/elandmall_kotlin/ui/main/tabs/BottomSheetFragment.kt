@@ -21,6 +21,7 @@ enum class DialogType {
 }
 
 var selected = 0
+
 class BottomSheetFragment(
     private val type: DialogType,
     private val list: List<Any>
@@ -93,9 +94,11 @@ class BottomSheetFragment(
                     selector.isSelected = adapterPosition == selected
 
                     root.setOnClickListener {
-                        selected = adapterPosition
-                        notifyDataSetChanged()
-                        EventBus.fire(StoreShopEvent(StoreShopEventType.STORE_CLICK, data.categoryNo ?: ""))
+                        if (selected != adapterPosition) {
+                            selected = adapterPosition
+                            notifyDataSetChanged()
+                            EventBus.fire(StoreShopEvent(StoreShopEventType.STORE_CLICK, data))
+                        }
                         dismiss()
                     }
                 }

@@ -139,9 +139,9 @@ sealed class ModuleData {
         companion object
     }
 
-    data class StoreShopPickHeaderData(
-        val storeShopPickData: List<StoreShopResponse.StorePick>,
-        var selected: String
+    data class StorePickHeaderData(
+        val storePickData: List<StoreShopResponse.StorePick>,
+        var storeSelected: String
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -151,7 +151,9 @@ sealed class ModuleData {
     }
 
     data class GoodsSortData(
-        val goodsSortMap: Map<String, Any>
+        val goodsSortMap: Map<String, Any>,
+        var sortSelected: String,
+        var gridSelected: Int
     ): ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -161,8 +163,8 @@ sealed class ModuleData {
     }
 
 
-    data class StoreShopPickMoreData(
-        val text: String
+    data class StorePickMoreData(
+        var storeSelected: String
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -220,8 +222,7 @@ sealed class ModuleData {
     }
 
     data class StoreShopCateNameData(
-        val text: String,
-        val includeDivider: Boolean
+        val text: String
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()

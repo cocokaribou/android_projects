@@ -70,6 +70,8 @@ class NestedScrollableHost : FrameLayout {
         } else if (e.action == MotionEvent.ACTION_MOVE) {
             val dx = e.x - initialX
             val dy = e.y - initialY
+
+            if (dx > dy) return
             val isVpHorizontal = orientation == ORIENTATION_HORIZONTAL
 
             // assuming ViewPager2 touch-slop is 2x touch-slop of child

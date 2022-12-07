@@ -1,5 +1,6 @@
 package com.example.elandmall_kotlin.ui.main.viewholders
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -8,40 +9,54 @@ import com.example.elandmall_kotlin.databinding.ViewGoodsSortBinding
 import com.example.elandmall_kotlin.ui.*
 import com.example.elandmall_kotlin.util.Logger
 
-class GoodsSortViewHolder(private val binding: ViewGoodsSortBinding): BaseViewHolder(binding.root) {
+class GoodsSortViewHolder(private val binding: ViewGoodsSortBinding) : BaseViewHolder(binding.root) {
     override fun onBind(item: Any, pos: Int) {
         (item as? ModuleData.GoodsSortData)?.let {
             initUi(it)
         }
     }
 
-    var clicked = 0
-    private fun initUi(data: ModuleData.GoodsSortData) = with(binding){
+    var isSpinnerTouched = false
 
-        list.adapter = ArrayAdapter(binding.root.context, R.layout.view_goods_sort_item, data.goodsSortMap.keys.toTypedArray())
-        list.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                EventBus.fire(StoreShopEvent(StoreShopEventType.SORT_CLICK, parent?.selectedItem ?: ""))
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initUi(data: ModuleData.GoodsSortData) = with(binding) {
+        val list = data.goodsSortMap.keys.toTypedArray()
+        val selected = list.indexOfFirst { it == data.sortSelected }
+
+        spinner.apply {
+            adapter = ArrayAdapter(binding.root.context, R.layout.view_goods_sort_item, list)
+            setSelection(selected)
+            setOnTouchListener { _, _ ->
+                isSpinnerTouched = true
+                false
             }
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    if (!isSpinnerTouched) return
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+                    if (data.sortSelected != parent?.selectedItem) {
+                        EventBus.fire(StoreShopEvent(StoreShopEventType.SORT_CLICK, parent?.selectedItem!!))
+                    }
+                    isSpinnerTouched = false
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    isSpinnerTouched = false
+                }
             }
-
         }
 
-        grid.setOnClickListener {
-            if (clicked >= 2) {
-                clicked = 0
-            } else {
-                clicked++
-            }
+        val imgSource = when (data.gridSelected) {
+            0 -> R.drawable.ic_btn_holder_grid
+            1 -> R.drawable.ic_btn_holder_linear
+            else -> R.drawable.ic_btn_holder_large
+        }
 
-            when (clicked) {
-                0 -> binding.grid.setImageResource(R.drawable.ic_btn_holder_grid)
-                1 -> binding.grid.setImageResource(R.drawable.ic_btn_holder_linear)
-                2 -> binding.grid.setImageResource(R.drawable.ic_btn_holder_large)
+        grid.apply {
+            setImageResource(imgSource)
+            setOnClickListener {
+                EventBus.fire(StoreShopEvent(StoreShopEventType.GRID_CLICK))
             }
-            EventBus.fire(StoreShopEvent(StoreShopEventType.GRID_CLICK, clicked))
         }
     }
 }

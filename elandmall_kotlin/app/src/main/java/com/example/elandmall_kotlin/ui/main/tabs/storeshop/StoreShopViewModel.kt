@@ -7,19 +7,26 @@ import com.example.elandmall_kotlin.model.StorePickResponse
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
-import com.example.elandmall_kotlin.util.removeRange
+import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.launch
 
 class StoreShopViewModel : BaseViewModel() {
     private val repository: StoreShopRepository by lazy { StoreShopRepository() }
 
-    override val refreshComplete = MutableLiveData<String>()
-
+    // store pick ui payloads
     var mSortNo = 2
+    var mSortKey = "신상품순"
     var mCateNo = ""
-    val cateList = MutableLiveData<List<StoreShopResponse.CategoryGoods>?>()
+    var mGridNo = 0
 
-    private val moduleList: MutableList<ModuleData> = mutableListOf()
+    // category list
+    var cateData = listOf<StoreShopResponse.CategoryGoods>()
+    val cateList = MutableLiveData<List<StoreShopResponse.CategoryGoods>>()
+
+    private var pickData = listOf<Goods>()
+    private var pickModuleList = mutableListOf<ModuleData>()
+    private val moduleList = mutableListOf<ModuleData>()
+
     val uiList = MutableLiveData<MutableList<ModuleData>>()
 
     init {
@@ -41,12 +48,12 @@ class StoreShopViewModel : BaseViewModel() {
                             it?.data?.let { data ->
                                 setStoreShopModules(data)
 
-                                cateList.postValue(data.categoryGoodsList)
+                                cateData = data.categoryGoodsList ?: listOf()
 
                                 // when success, call another api
                                 data.storePickList?.get(0)?.categoryNo?.let {
                                     mCateNo = it
-                                    requestPick(mCateNo, mSortNo)
+                                    requestPick(mCateNo, mSortNo, mGridNo)
                                 }
                             }
                         },
@@ -56,14 +63,16 @@ class StoreShopViewModel : BaseViewModel() {
         }
     }
 
-    private fun requestPick(category: String, sort: Int) {
+    private fun requestPick(categoryNo: String, sortNo: Int, gridNo: Int) {
         // will not utilize param (mock data)
+        Logger.v("payload! cate: $categoryNo || sort: $sortNo || grid: $gridNo")
         viewModelScope.launch {
             repository.requestStorePickStream()
                 .collect {
                     it.fold(
                         onSuccess = {
-                            setStorePickModules(it?.data)
+                            setStorePickModules(it?.data, gridNo)
+                            cateList.postValue(cateData)
                         },
                         onFailure = {}
                     )
@@ -132,25 +141,33 @@ class StoreShopViewModel : BaseViewModel() {
                 )
 
                 moduleList.add(
-                    ModuleData.StoreShopPickHeaderData(
+                    ModuleData.StorePickHeaderData(
                         storeShopData.storePickList,
-                        selected = storeShopData.storePickList[0].categoryNo!!
+                        storeSelected = storeShopData.storePickList[0].relContNm ?: ""
                     )
                 )
                 moduleList.add(
                     ModuleData.GoodsSortData(
-                        goodsSortMap = storeShopSort,
+                        goodsSortMap = storeSortMap,
+                        sortSelected = mSortKey,
+                        gridSelected = mGridNo
                     )
                 )
                 moduleList.add(
-                    ModuleData.StoreShopPickMoreData(
-                        text = storeShopData.storePickList[0].relContNm + " 바로가기 >"
+                    ModuleData.StorePickMoreData(
+                        storeSelected = storeShopData.storePickList[0].relContNm ?: ""
                     )
                 )
             }
 
             // category
             if (!storeShopData.categoryGoodsList.isNullOrEmpty()) {
+                moduleList.add(
+                    ModuleData.TitleData(
+                        title = "카테고리별 베스트 상품",
+                        subTitle = ""
+                    )
+                )
                 moduleList.add(
                     ModuleData.StoreShopCateTabData(
                         storeShopData.categoryGoodsList
@@ -159,8 +176,7 @@ class StoreShopViewModel : BaseViewModel() {
                 storeShopData.categoryGoodsList.forEach {
                     moduleList.add(
                         ModuleData.StoreShopCateNameData(
-                            text = it.ctgNm ?: "",
-                            includeDivider = false
+                            text = it.ctgNm ?: ""
                         )
                     )
                     it.goodsList?.chunked(2)?.forEach {
@@ -172,93 +188,78 @@ class StoreShopViewModel : BaseViewModel() {
 
             }
         }
-        refreshComplete.postValue("storepick")
         uiList.postValue(moduleList)
     }
 
-    private fun setStorePickModules(data: StorePickResponse.Data?) {
-        val index = moduleList.indexOfFirst { it is ModuleData.StoreShopPickMoreData }
+    private fun setStorePickModules(data: StorePickResponse.Data?, gridNo: Int) {
+        pickModuleList = moduleList.map { it.clone() }.toMutableList()
+
+        val index = pickModuleList.indexOfFirst { it is ModuleData.StorePickMoreData }
         data?.let { storePickData ->
-            if (storePickData.keywordResult?.searchGoods.isNullOrEmpty()) {
-                // empty storepick
-                moduleList.add(
-                    index,
-                    ModuleData.StoreShopEmptyGoodsData()
-                )
-            } else {
-                storePickData.keywordResult?.searchGoods?.let {
-                    pickList = it
-                    it.toMutableList().chunked(2).reversed().forEach {
-                        moduleList.add(
-                            index,
-                            ModuleData.GoodsMultiGridData(it)
-                        )
-                    }
-                }
+            storePickData.keywordResult?.searchGoods?.let {
+                pickData = it
+
+                drawGrid(it, gridNo)
             }
-            uiList.postValue(moduleList)
         } ?: run {
-            // empty storepick
-            moduleList.add(
+            pickModuleList.add(
                 index,
                 ModuleData.StoreShopEmptyGoodsData()
             )
-            uiList.postValue(moduleList)
         }
+        uiList.postValue(pickModuleList)
     }
 
-    private lateinit var pickList: List<Goods>
-    fun updateGrid(gridClicked: Int) {
-        val start = moduleList.indexOfFirst { it is ModuleData.GoodsSortData } + 1
-        val end = moduleList.indexOfFirst { it is ModuleData.StoreShopPickMoreData }
-        moduleList.removeRange(start until end)
+    fun updateGrid() {
+        if (mGridNo >= 2) {
+            mGridNo = 0
+        } else {
+            mGridNo++
+        }
 
-        val index = moduleList.indexOfFirst { it is ModuleData.StoreShopPickMoreData }
-        when (gridClicked) {
-            0 -> {
-                pickList.chunked(2).reversed().forEach {
-                    moduleList.add(
-                        index,
-                        ModuleData.GoodsMultiGridData(it)
-                    )
-                }
+        moduleList.map {
+            if (it is ModuleData.GoodsSortData) {
+                it.gridSelected = mGridNo
+                it.sortSelected = mSortKey
             }
-            1 -> {
-                pickList.reversed().forEach {
-                    moduleList.add(
-                        index,
-                        ModuleData.GoodsLinearData(it)
-                    )
-                }
+        }
+        pickModuleList = moduleList.map { it.clone() }.toMutableList()
+
+        drawGrid(pickData, mGridNo)
+        uiList.postValue(pickModuleList)
+    }
+
+    fun updateStore(data: StoreShopResponse.StorePick) {
+        mCateNo = data.categoryNo ?: return
+
+        moduleList.map {
+            if (it is ModuleData.StorePickHeaderData) {
+                it.storeSelected = data.relContNm ?: ""
             }
-            2 -> {
-                pickList.reversed().forEach {
-                    moduleList.add(
-                        index,
-                        ModuleData.GoodsLargeData(it)
-                    )
-                }
+
+            if (it is ModuleData.StorePickMoreData) {
+                it.storeSelected = data.relContNm ?: ""
             }
         }
         uiList.postValue(moduleList)
+        requestPick(categoryNo = mCateNo, sortNo = mSortNo, gridNo = mGridNo)
     }
 
-    fun updateStore(categoryNo: String) {
-        mCateNo = categoryNo
-//        moduleList.map {
-//            if (it is ModuleData.StoreShopPickHeaderData) {
-//                it.selected = categoryNo
-//            }
-//        }
-        requestPick(category = mCateNo, sort = mSortNo)
+    fun updateSort(sortClicked: String) {
+        mSortKey = sortClicked
+        mSortNo = storeSortMap[sortClicked] ?: 2
+
+        moduleList.map {
+            if (it is ModuleData.GoodsSortData) {
+                it.sortSelected = sortClicked
+                it.gridSelected = mGridNo
+            }
+        }
+        uiList.postValue(moduleList)
+        requestPick(categoryNo = mCateNo, sortNo = mSortNo, gridNo = mGridNo)
     }
 
-    fun updateSort(key: String) {
-        mSortNo = storeShopSort[key] ?: 2
-        requestPick(category = key, sort = mSortNo)
-    }
-
-    private val storeShopSort: Map<String, Int> = mapOf(
+    private val storeSortMap: Map<String, Int> = mapOf(
         "인기상품순" to 1,
         "신상품순" to 2,
         "낮은가격순" to 3,
@@ -267,4 +268,34 @@ class StoreShopViewModel : BaseViewModel() {
         "할인율높은순" to 8,
         "추천순" to 7
     )
+
+    private fun drawGrid(goodsList:List<Goods>, type:Int) {
+        val index = pickModuleList.indexOfFirst { it is ModuleData.StorePickMoreData }
+        when (type) {
+            0 -> {
+                goodsList.chunked(2).reversed().forEach {
+                    pickModuleList.add(
+                        index,
+                        ModuleData.GoodsMultiGridData(it)
+                    )
+                }
+            }
+            1 -> {
+                goodsList.reversed().forEach {
+                    pickModuleList.add(
+                        index,
+                        ModuleData.GoodsLinearData(it)
+                    )
+                }
+            }
+            2 -> {
+                goodsList.reversed().forEach {
+                    pickModuleList.add(
+                        index,
+                        ModuleData.GoodsLargeData(it)
+                    )
+                }
+            }
+        }
+    }
 }

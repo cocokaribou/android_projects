@@ -34,6 +34,7 @@ class HomeMdViewHolder(private val binding: ViewHomeMdBinding) : BaseViewHolder(
     }
     private val mCateAdapter by lazy { CategoryAdapter(tabSelector) }
     private val mListAdapter by lazy { MdListAdapter() }
+    private val mItemDecoration by lazy { HorizontalSpacingItemDecoration(spacing = 1.dpToPx(), edgeSpacing = 0, includeEdge = false) }
 
     override fun onBind(item: Any, pos: Int) {
         (item as? ModuleData.HomeMdData)?.let {
@@ -44,10 +45,13 @@ class HomeMdViewHolder(private val binding: ViewHomeMdBinding) : BaseViewHolder(
 
     private fun initView(data: HomeResponse.HomeMd) = with(binding) {
         mCateAdapter.submitList(data.homeMdCatList)
+
         mdCateList.adapter = mCateAdapter
+        if (mdCateList.itemDecorationCount == 0) {
+            mdCateList.addItemDecoration(mItemDecoration)
+        }
 
-
-        mListAdapter.submitList(data.homeMdCatList?.get(0)?.homeMdGoods)
+        mListAdapter.submitList(data.homeMdCatList?.get(selectedTab)?.homeMdGoods)
         mdGoodsList.adapter = mListAdapter
     }
 
@@ -86,12 +90,6 @@ class HomeMdViewHolder(private val binding: ViewHomeMdBinding) : BaseViewHolder(
                 Glide.with(itemView.context)
                     .load("http:" + data.imageUrl)
                     .into(cateImg)
-
-                if (adapterPosition == currentList.size - 1) {
-                    spacing.visibility = View.GONE
-                } else {
-                    spacing.visibility = View.VISIBLE
-                }
 
                 cateName.text = data.menuTitle
                 root.setOnClickListener {

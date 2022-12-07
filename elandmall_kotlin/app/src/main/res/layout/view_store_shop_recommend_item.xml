@@ -9,7 +9,6 @@
         android:id="@+id/recommend_lay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8.5dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,19 +17,17 @@
         <ImageView
             android:id="@+id/store_img"
             android:layout_width="82dp"
-            android:layout_height="0dp"
+            android:layout_height="82dp"
             android:background="@mipmap/ic_launcher"
             android:scaleType="centerCrop"
-            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="82dp"
-            android:layout_height="0dp"
+            android:layout_height="82dp"
             android:background="@drawable/ic_mask_circle"
-            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +53,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        android:paddingHorizontal="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,10 +61,9 @@
         <ImageView
             android:id="@+id/more_image"
             android:layout_width="40dp"
-            android:layout_height="0dp"
+            android:layout_height="40dp"
             android:background="@drawable/ic_arrow_right"
             android:backgroundTint="#2f2f2f"
-            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

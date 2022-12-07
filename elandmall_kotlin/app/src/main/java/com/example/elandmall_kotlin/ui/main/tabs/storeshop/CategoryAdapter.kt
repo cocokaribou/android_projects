@@ -21,9 +21,6 @@ class CategoryAdapter : ListAdapter<StoreShopResponse.CategoryGoods, CategoryAda
         val categoryAdapter by lazy { CategoryAdapter() }
     }
 
-    init {
-        Logger.v("어댑터 초기화!")
-    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StickyViewHolder {
         // weight
         val view = ViewStoreShopCateTabItemBinding.inflate(

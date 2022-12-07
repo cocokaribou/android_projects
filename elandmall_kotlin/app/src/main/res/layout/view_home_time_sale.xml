@@ -45,12 +45,11 @@
     <ImageView
         android:id="@+id/goods_img"
         android:layout_width="175dp"
-        android:layout_height="0dp"
+        android:layout_height="175dp"
         android:layout_marginTop="17dp"
         android:layout_marginBottom="20dp"
         android:background="#ffbbbb"
         android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="@id/title"
         app:layout_constraintTop_toBottomOf="@id/title" />
 

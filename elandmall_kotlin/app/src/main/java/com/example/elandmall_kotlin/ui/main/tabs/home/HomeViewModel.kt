@@ -11,25 +11,20 @@ import kotlinx.coroutines.launch
 class HomeViewModel : BaseViewModel() {
     private val repository: HomeRepository by lazy { HomeRepository() }
 
-    override val refreshComplete = MutableLiveData<String>()
-
     val refreshedList = MutableLiveData<HomeResponse?>()
     override fun requestRefresh() {
         viewModelScope.launch {
             repository.requestHomeStream()
                 .catch {
                     refreshedList.postValue(null)
-                    refreshComplete.postValue("home")
                 }
                 .collect {
                     it.fold(
                         onSuccess = {
                             refreshedList.postValue(it)
-                            refreshComplete.postValue("home")
                         },
                         onFailure = {
                             refreshedList.postValue(null)
-                            refreshComplete.postValue("home")
                         }
                     )
                 }

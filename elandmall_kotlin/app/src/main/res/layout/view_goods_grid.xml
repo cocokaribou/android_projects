@@ -19,7 +19,7 @@
         android:layout_width="34dp"
         android:layout_height="34dp"
         android:layout_margin="6dp"
-        android:src="@drawable/selector_wish"
+        android:src="@drawable/selector_wish_circle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,6 +85,7 @@
             android:layout_height="wrap_content"
             android:textColor="#8e8e8e"
             android:textSize="11dp"
+            android:layout_marginTop="5dp"
             app:layout_constraintBottom_toTopOf="@id/price_after"
             app:layout_constraintStart_toEndOf="@id/sale_rate_percent"
             app:layout_constraintTop_toBottomOf="@id/goods_name"

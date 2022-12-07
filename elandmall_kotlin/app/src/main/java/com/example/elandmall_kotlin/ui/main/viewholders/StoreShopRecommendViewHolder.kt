@@ -15,9 +15,12 @@ import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.LinkEvent
 import com.example.elandmall_kotlin.ui.ModuleData
+import com.example.elandmall_kotlin.util.HorizontalSpacingItemDecoration
+import com.example.elandmall_kotlin.util.dpToPx
 
 class StoreShopRecommendViewHolder(private val binding: ViewStoreShopRecommendBinding) : BaseViewHolder(binding.root) {
     private val mAdapter by lazy { RecommendAdapter() }
+    private val mItemDecoration by lazy { HorizontalSpacingItemDecoration(17.dpToPx(), 17.dpToPx(), true) }
     override fun onBind(item: Any, pos: Int) {
         (item as? ModuleData.StoreShopRecommendData)?.let {
             val list = it.storeShopRecommendData.toMutableList()
@@ -28,7 +31,11 @@ class StoreShopRecommendViewHolder(private val binding: ViewStoreShopRecommendBi
 
     private fun initUI(data: List<StoreShopResponse.RecommendStore>) = with(binding) {
         mAdapter.submitList(data)
+
         list.adapter = mAdapter
+        if (list.itemDecorationCount == 0) {
+            list.addItemDecoration(mItemDecoration)
+        }
     }
 
     inner class RecommendAdapter : ListAdapter<StoreShopResponse.RecommendStore, RecommendAdapter.RecommendHolder>(diff) {

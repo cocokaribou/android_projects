@@ -1,27 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
-    android:background="@color/purple_200">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
-
-    <ImageView
-        android:id="@+id/goods_img"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-    <TextView
-        android:id="@+id/goods_name"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/goods_img"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="13.33dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/goods_img"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="#eeeeee" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/goods_lay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:layout_constraintEnd_toStartOf="@id/wish"
+            app:layout_constraintStart_toEndOf="@id/goods_img"
+            app:layout_constraintTop_toTopOf="@id/goods_img">
+
+            <TextView
+                android:id="@+id/brand_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="#8e8e8e"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="킴스클럽" />
+
+            <TextView
+                android:id="@+id/goods_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:lines="2"
+                android:textColor="#333333"
+                android:textSize="13dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/brand_name"
+                tools:text="덧신/덧버선 5종모음/균일가 3000/6000원" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/goods_name">
+
+                <TextView
+                    android:id="@+id/sale_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c9000b"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="10" />
+
+                <TextView
+                    android:id="@+id/sale_rate_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="4dp"
+                    android:text="@string/percent"
+                    android:textColor="#c9000b"
+                    android:textSize="17dp"
+                    app:layout_constraintBottom_toBottomOf="@id/sale_rate"
+                    app:layout_constraintStart_toEndOf="@id/sale_rate" />
+
+                <TextView
+                    android:id="@+id/price_before"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#8e8e8e"
+                    android:textSize="11dp"
+                    android:translationY="3dp"
+                    app:layout_constraintStart_toEndOf="@id/sale_rate_percent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="46,550" />
+
+                <TextView
+                    android:id="@+id/price_after"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:textColor="#333333"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/sale_rate_percent"
+                    app:layout_constraintTop_toBottomOf="@id/price_before"
+                    tools:text="41,895" />
+
+                <TextView
+                    android:id="@+id/price_after_won"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/won"
+                    android:textColor="#333333"
+                    android:textSize="12dp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/price_after"
+                    app:layout_constraintStart_toEndOf="@id/price_after" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/wish"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/background_stroke_grey_1dp"
+            android:src="@drawable/selector_wish"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/goods_lay"
+            app:layout_constraintTop_toTopOf="@id/goods_lay" />
+
+        <ImageView
+            android:id="@+id/cart"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/background_stroke_grey_1dp"
+            android:backgroundTint="@color/black"
+            android:src="@drawable/ic_shopping_bag"
+            android:scaleType="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wish" />
+
+        <RatingBar
+            android:id="@+id/rating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0.33dp"
+            android:layout_marginTop="7dp"
+            android:isIndicator="false"
+            android:progressBackgroundTint="#666666"
+            android:progressTint="#252525"
+            android:rating="1.1"
+            android:scaleX="0.75"
+            android:scaleY="0.75"
+            android:secondaryProgressTint="#00000000"
+            android:stepSize="0.1"
+            android:transformPivotY="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/goods_img" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        style="@style/divider_line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

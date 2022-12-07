@@ -43,13 +43,9 @@ abstract class BaseModuleFragment : Fragment() {
         with(binding) {
             // refresh
             swipeRefresh.setOnRefreshListener {
-                Logger.v("땡겨요")
-                requestRefresh()
-            }
-
-            viewModel.refreshComplete.observe(requireActivity()) {
-                Logger.v("$it 새로고침")
+                Logger.v("✅ refresh")
                 binding.swipeRefresh.isRefreshing = false
+                requestRefresh()
             }
 
             // recycler view

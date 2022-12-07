@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.example.elandmall_kotlin.databinding.ViewHomeMainBannerItemBinding
 import com.example.elandmall_kotlin.databinding.ViewMainBannerBinding
+import com.example.elandmall_kotlin.databinding.ViewMainBannerItemBinding
 import com.example.elandmall_kotlin.model.Banner
 import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.EventBus
@@ -54,7 +54,7 @@ class MainBannerViewHolder(private val binding: ViewMainBannerBinding) : BaseVie
     }) {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainBannerItemViewHolder {
             return MainBannerItemViewHolder(
-                ViewHomeMainBannerItemBinding.inflate(
+                ViewMainBannerItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -66,7 +66,7 @@ class MainBannerViewHolder(private val binding: ViewMainBannerBinding) : BaseVie
             holder.onBind()
         }
 
-        inner class MainBannerItemViewHolder(private val binding: ViewHomeMainBannerItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        inner class MainBannerItemViewHolder(private val binding: ViewMainBannerItemBinding) : RecyclerView.ViewHolder(binding.root) {
             fun onBind() = with(binding) {
                 val data = currentList[adapterPosition]
                 Glide.with(itemView.context)

@@ -3,6 +3,7 @@ package com.example.elandmall_kotlin.ui.main.tabs.storeshop
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.StoreShopEvent
 import com.example.elandmall_kotlin.ui.StoreShopEventType
@@ -37,13 +38,13 @@ class StoreShopModuleFragment : BaseModuleFragment() {
 
                     }
                     StoreShopEventType.GRID_CLICK -> {
-                        viewModel.updateGrid(it.content as Int)
+                        viewModel.updateGrid()
                     }
                     StoreShopEventType.SORT_CLICK -> {
                         viewModel.updateSort(it.content as String)
                     }
                     StoreShopEventType.STORE_CLICK -> {
-                        viewModel.updateStore(it.content as String)
+                        viewModel.updateStore(it.content as StoreShopResponse.StorePick)
                     }
                 }
             }

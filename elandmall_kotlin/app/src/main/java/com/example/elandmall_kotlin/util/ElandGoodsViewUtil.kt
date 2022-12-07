@@ -51,7 +51,7 @@ object GoodsUtil {
             try {
                 val brandNm = it.findViewById<TextView>(R.id.brand_name)
                 if (data.brandNm.isNullOrEmpty()) {
-                    brandNm.visibility = View.INVISIBLE
+                    brandNm.visibility = View.GONE
                 } else {
                     brandNm.visibility = View.VISIBLE
                     brandNm.text = data.brandNm
