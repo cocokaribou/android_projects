@@ -13,13 +13,20 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.elandmall_kotlin.databinding.ViewStoreShopCateTabItemBinding
 import com.example.elandmall_kotlin.model.StoreShopResponse
+import com.example.elandmall_kotlin.ui.EventBus
+import com.example.elandmall_kotlin.ui.StoreShopEvent
+import com.example.elandmall_kotlin.ui.StoreShopEventType
 import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.dpToPx
+import com.example.elandmall_kotlin.util.getScreenWidthToPx
 
-class CategoryAdapter : ListAdapter<StoreShopResponse.CategoryGoods, CategoryAdapter.StickyViewHolder>(diff) {
+class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.StickyViewHolder>() {
     companion object {
         val categoryAdapter by lazy { CategoryAdapter() }
     }
+    var currentList = listOf<StoreShopResponse.CategoryGoods>()
+
+    override fun getItemCount(): Int = currentList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StickyViewHolder {
         // weight
@@ -28,7 +35,6 @@ class CategoryAdapter : ListAdapter<StoreShopResponse.CategoryGoods, CategoryAda
             parent,
             false
         )
-        view.root.layoutParams.width = parent.width / 5
         return StickyViewHolder(view)
     }
 
@@ -37,8 +43,11 @@ class CategoryAdapter : ListAdapter<StoreShopResponse.CategoryGoods, CategoryAda
     }
 
     var selectedTab = 0
+
     inner class StickyViewHolder(private val binding: ViewStoreShopCateTabItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind() = with(binding) {
+            root.layoutParams.width = getScreenWidthToPx() / 5
+
             val currentItem = currentList[adapterPosition]
 
             selectIndicator.isSelected = adapterPosition == selectedTab
@@ -54,8 +63,7 @@ class CategoryAdapter : ListAdapter<StoreShopResponse.CategoryGoods, CategoryAda
                 .asBitmap()
                 .load("http:$src")
                 .override(30.dpToPx(), 30.dpToPx())
-                .diskCacheStrategy(ALL)
-                .into(object: CustomTarget<Bitmap>(){
+                .into(object : CustomTarget<Bitmap>() {
                     override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                         cateImg.setImageBitmap(resource)
                     }
@@ -74,19 +82,7 @@ class CategoryAdapter : ListAdapter<StoreShopResponse.CategoryGoods, CategoryAda
     fun tabSelector(index: Int) {
         selectedTab = index
 
+        EventBus.fire(StoreShopEvent(StoreShopEventType.CATEGORY_SCROLL, index))
         notifyDataSetChanged()
-    }
-}
-
-val diff = object : DiffUtil.ItemCallback<StoreShopResponse.CategoryGoods>() {
-    override fun areItemsTheSame(oldItem: StoreShopResponse.CategoryGoods, newItem: StoreShopResponse.CategoryGoods): Boolean {
-        return oldItem == newItem
-    }
-
-    override fun areContentsTheSame(
-        oldItem: StoreShopResponse.CategoryGoods,
-        newItem: StoreShopResponse.CategoryGoods
-    ): Boolean {
-        return oldItem.ctgNm == newItem.ctgNm
     }
 }

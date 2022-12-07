@@ -7,6 +7,7 @@ import com.example.elandmall_kotlin.model.StorePickResponse
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
+import com.example.elandmall_kotlin.ui.main.tabs.storeshop.CategoryAdapter.Companion.categoryAdapter
 import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.launch
 
@@ -21,7 +22,7 @@ class StoreShopViewModel : BaseViewModel() {
 
     // category list
     var cateData = listOf<StoreShopResponse.CategoryGoods>()
-    val cateList = MutableLiveData<List<StoreShopResponse.CategoryGoods>>()
+    var cateCount = 0
 
     private var pickData = listOf<Goods>()
     private var pickModuleList = mutableListOf<ModuleData>()
@@ -72,7 +73,8 @@ class StoreShopViewModel : BaseViewModel() {
                     it.fold(
                         onSuccess = {
                             setStorePickModules(it?.data, gridNo)
-                            cateList.postValue(cateData)
+                            categoryAdapter.currentList = cateData
+                            cateCount = cateData.size
                         },
                         onFailure = {}
                     )

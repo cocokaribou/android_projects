@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,9 +55,6 @@ abstract class BaseModuleFragment : Fragment() {
                 adapter = moduleAdapter
                 addOnScrollListener(scrollListener)
             }
-
-            // storeshop sticky
-            sticky.list.adapter = categoryAdapter
         }
 
         return binding.root
@@ -79,7 +77,14 @@ abstract class BaseModuleFragment : Fragment() {
     open fun selectTab(position: Int) {}
 
     fun scrollToY(pos: Int) {
-        (binding.list.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(pos, 0)
+        val posList = mutableListOf<Int>()
+        moduleAdapter.value.forEachIndexed { index, moduleData ->
+            if (moduleData is ModuleData.StoreShopCateNameData) {
+                posList.add(index)
+            }
+        }
+
+        (binding.list.layoutManager as? LinearLayoutManager)?.scrollToPosition(posList[pos])
     }
 
     private val scrollListener = object : RecyclerView.OnScrollListener() {
@@ -87,20 +92,22 @@ abstract class BaseModuleFragment : Fragment() {
             super.onScrolled(recyclerView, dx, dy)
 
             val firstVisiblePos = (binding.list.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() ?: 0
-            val lastVisiblePos = (binding.list.layoutManager as? LinearLayoutManager)?.findLastVisibleItemPosition() ?: 0
 
-            // store shop fragment
+            // store shop fragment sticky
             val tabPos = moduleAdapter.value.indexOfFirst { it is ModuleData.StoreShopCateTabData }
-            if (moduleAdapter.value.count() != -1 && tabPos <= firstVisiblePos) {
-                setStickyVisible(true)
-            } else {
-                setStickyVisible(false)
-            }
+            binding.sticky.apply {
+                visibility = if (moduleAdapter.value.count() != -1 && tabPos <= firstVisiblePos) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
 
-            val cateNamePos = moduleAdapter.value.indexOfFirst { it is ModuleData.StoreShopCateNameData }
-            if (binding.sticky.list.isVisible) {
-                if (moduleAdapter.value.count() != -1 && cateNamePos > lastVisiblePos) {
-                    selectTab(cateNamePos)
+                if (isVisible) {
+                    moduleAdapter.value.forEachIndexed { i, it ->
+                        if (it is ModuleData.StoreShopCateNameData && i <= firstVisiblePos) {
+//                            selectTab(i)
+                        }
+                    }
                 }
             }
         }
