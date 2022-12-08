@@ -7,7 +7,7 @@ import com.example.elandmall_kotlin.model.StorePickResponse
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
-import com.example.elandmall_kotlin.ui.main.tabs.storeshop.CategoryAdapter.Companion.categoryAdapter
+import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopCategoryAdapter.Companion.storeShopCateAdapter
 import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.launch
 
@@ -22,7 +22,6 @@ class StoreShopViewModel : BaseViewModel() {
 
     // category list
     var cateData = listOf<StoreShopResponse.CategoryGoods>()
-    var cateCount = 0
 
     private var pickData = listOf<Goods>()
     private var pickModuleList = mutableListOf<ModuleData>()
@@ -73,8 +72,7 @@ class StoreShopViewModel : BaseViewModel() {
                     it.fold(
                         onSuccess = {
                             setStorePickModules(it?.data, gridNo)
-                            categoryAdapter.currentList = cateData
-                            cateCount = cateData.size
+                            storeShopCateAdapter.submitList(cateData)
                         },
                         onFailure = {}
                     )
@@ -183,7 +181,7 @@ class StoreShopViewModel : BaseViewModel() {
                     )
                     it.goodsList?.chunked(2)?.forEach {
                         moduleList.add(
-                            ModuleData.CommonGoodsMultiGridData(it)
+                            ModuleData.CommonGoodsGridData(it)
                         )
                     }
                 }
@@ -278,7 +276,7 @@ class StoreShopViewModel : BaseViewModel() {
                 goodsList.chunked(2).reversed().forEach {
                     pickModuleList.add(
                         index,
-                        ModuleData.CommonGoodsMultiGridData(it)
+                        ModuleData.CommonGoodsGridData(it)
                     )
                 }
             }

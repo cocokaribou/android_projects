@@ -182,16 +182,6 @@ sealed class ModuleData {
     }
 
     data class CommonGoodsGridData(
-        val goodsData: Goods
-    ) : ModuleData() {
-        override fun clone(): ModuleData {
-            return copy()
-        }
-
-        companion object
-    }
-
-    data class CommonGoodsMultiGridData(
         val goodsListData: List<Goods>
     ) : ModuleData() {
         override fun clone(): ModuleData {

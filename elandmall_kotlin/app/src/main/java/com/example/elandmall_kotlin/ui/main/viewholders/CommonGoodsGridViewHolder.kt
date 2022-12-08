@@ -1,16 +1,16 @@
 package com.example.elandmall_kotlin.ui.main.viewholders
 
 import android.view.View
-import com.example.elandmall_kotlin.databinding.ViewCommonGoodsMultiGridBinding
+import com.example.elandmall_kotlin.databinding.ViewCommonGoodsGridBinding
 import com.example.elandmall_kotlin.model.Goods
 import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.util.GoodsUtil.drawGoodsUI
 import com.example.elandmall_kotlin.util.GoodsUtil.tagUIType
 
-class CommonGoodsMultiGridViewHolder(private val binding: ViewCommonGoodsMultiGridBinding) : BaseViewHolder(binding.root) {
+class CommonGoodsGridViewHolder(private val binding: ViewCommonGoodsGridBinding) : BaseViewHolder(binding.root) {
     override fun onBind(item: Any, pos: Int) {
-        (item as? ModuleData.CommonGoodsMultiGridData)?.let {
+        (item as? ModuleData.CommonGoodsGridData)?.let {
             initUI(it.goodsListData)
         }
     }

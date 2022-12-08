@@ -4,15 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.databinding.FragmentBaseModuleBinding
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.ui.main.tabs.storeshop.CategoryAdapter.Companion.categoryAdapter
+import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopCategoryAdapter
+import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopCategoryAdapter.Companion.storeShopCateAdapter
 import com.example.elandmall_kotlin.util.Logger
+import com.example.elandmall_kotlin.util.getScreenWidthToPx
+import kotlin.math.round
 
 abstract class BaseModuleFragment : Fragment() {
     abstract val viewModel: BaseViewModel
@@ -72,9 +74,15 @@ abstract class BaseModuleFragment : Fragment() {
 
     fun addFooter(moduleList: MutableList<ModuleData>) {}
 
-    open fun setStickyVisible(isOn: Boolean) {}
+    fun scrollToX(position: Int) {
+        val double = position.toDouble() / storeShopCateAdapter.cateCount.toDouble()
+        val selected = (round(double) - 2).toInt()
+        storeShopCateAdapter.tabSelector(selected)
 
-    open fun selectTab(position: Int) {}
+        val halfScreen = getScreenWidthToPx() / 2
+        val halfHolder = getScreenWidthToPx() / 10
+        (binding.sticky.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(selected, halfScreen - halfHolder)
+    }
 
     fun scrollToY(pos: Int) {
         val posList = mutableListOf<Int>()
@@ -84,14 +92,18 @@ abstract class BaseModuleFragment : Fragment() {
             }
         }
 
-        (binding.list.layoutManager as? LinearLayoutManager)?.scrollToPosition(posList[pos])
+        val stickyHeight = binding.sticky.height
+
+        (binding.list.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(posList[pos], stickyHeight)
     }
 
     private val scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
 
-            val firstVisiblePos = (binding.list.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() ?: 0
+            val layoutManager = binding.list.layoutManager as? LinearLayoutManager ?: return
+
+            val firstVisiblePos = layoutManager.findFirstVisibleItemPosition()
 
             // store shop fragment sticky
             val tabPos = moduleAdapter.value.indexOfFirst { it is ModuleData.StoreShopCateTabData }
@@ -103,10 +115,8 @@ abstract class BaseModuleFragment : Fragment() {
                 }
 
                 if (isVisible) {
-                    moduleAdapter.value.forEachIndexed { i, it ->
-                        if (it is ModuleData.StoreShopCateNameData && i <= firstVisiblePos) {
-//                            selectTab(i)
-                        }
+                    if (moduleAdapter.value[firstVisiblePos] is ModuleData.StoreShopCateNameData) {
+                        scrollToX(firstVisiblePos)
                     }
                 }
             }

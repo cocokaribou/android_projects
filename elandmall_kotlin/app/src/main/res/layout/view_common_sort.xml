@@ -1,51 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
-    <Spinner
-        android:id="@+id/spinner"
+    <TextView
+        android:id="@+id/sort"
         android:layout_width="0dp"
         android:layout_height="35.5dp"
-        android:spinnerMode="dropdown"
         android:layout_marginStart="11.52dp"
         android:background="@drawable/background_stroke_grey_1dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/grid"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:paddingStart="11.33dp"
+        android:spinnerMode="dropdown"
+        android:textColor="#333333"
+        android:textSize="13.5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@id/grid"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="신상품순" />
 
-    <ImageView
-        android:id="@+id/dropdown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_btn_drop_down"
-        app:layout_constraintTop_toTopOf="@id/spinner"
-        app:layout_constraintBottom_toBottomOf="@id/spinner"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintEnd_toEndOf="@id/spinner"/>
 
     <ImageView
         android:id="@+id/grid"
         android:layout_width="35.5dp"
         android:layout_height="35.5dp"
+        android:layout_marginStart="5dp"
         android:layout_marginEnd="11.52dp"
         android:background="@drawable/background_stroke_grey_1dp"
         android:src="@drawable/ic_btn_holder_grid"
-        android:layout_marginStart="5dp"
-        app:layout_constraintStart_toEndOf="@id/spinner"
+        app:layout_constraintBottom_toBottomOf="@id/sort"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/spinner"
-        app:layout_constraintBottom_toBottomOf="@id/spinner"/>
+        app:layout_constraintStart_toEndOf="@id/sort"
+        app:layout_constraintTop_toTopOf="@id/sort" />
 
     <View
         style="@style/divider_line"
         android:layout_marginTop="9.56dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sort" />
 </androidx.constraintlayout.widget.ConstraintLayout>

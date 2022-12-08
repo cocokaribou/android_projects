@@ -1,12 +1,12 @@
 package com.example.elandmall_kotlin.ui.main.viewholders
 
-import android.annotation.SuppressLint
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
+import androidx.fragment.app.FragmentActivity
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.ViewCommonSortBinding
 import com.example.elandmall_kotlin.ui.*
+import com.example.elandmall_kotlin.ui.main.tabs.BottomSheetFragment
+import com.example.elandmall_kotlin.ui.main.tabs.DialogType
+import com.example.elandmall_kotlin.util.Logger
 
 class CommonSortViewHolder(private val binding: ViewCommonSortBinding) : BaseViewHolder(binding.root) {
     override fun onBind(item: Any, pos: Int) {
@@ -15,33 +15,16 @@ class CommonSortViewHolder(private val binding: ViewCommonSortBinding) : BaseVie
         }
     }
 
-    var isSpinnerTouched = false
-
-    @SuppressLint("ClickableViewAccessibility")
     private fun initUi(data: ModuleData.CommonSortData) = with(binding) {
-        val list = data.sortMap.keys.toTypedArray()
-        val selected = list.indexOfFirst { it == data.sortSelected }
+        val list = data.sortMap.keys.toTypedArray().toList()
 
-        spinner.apply {
-            adapter = ArrayAdapter(binding.root.context, R.layout.view_common_sort_item, list)
-            setSelection(selected)
-            setOnTouchListener { _, _ ->
-                isSpinnerTouched = true
-                false
-            }
-            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    if (!isSpinnerTouched) return
-
-                    if (data.sortSelected != parent?.selectedItem) {
-                        EventBus.fire(StoreShopEvent(StoreShopEventType.SORT_CLICK, parent?.selectedItem!!))
-                    }
-                    isSpinnerTouched = false
-                }
-
-                override fun onNothingSelected(p0: AdapterView<*>?) {
-                    isSpinnerTouched = false
-                }
+        sort.apply {
+            text = data.sortSelected
+            setOnClickListener {
+                BottomSheetFragment(
+                    DialogType.COMMON_SORT,
+                    list
+                ).show((binding.root.context as FragmentActivity).supportFragmentManager, "")
             }
         }
 

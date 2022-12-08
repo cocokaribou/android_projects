@@ -4,11 +4,8 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy.ALL
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.elandmall_kotlin.databinding.ViewStoreShopCateTabItemBinding
@@ -20,41 +17,48 @@ import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.dpToPx
 import com.example.elandmall_kotlin.util.getScreenWidthToPx
 
-class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.StickyViewHolder>() {
+class StoreShopCategoryAdapter : RecyclerView.Adapter<StoreShopCategoryAdapter.StickyViewHolder>() {
     companion object {
-        val categoryAdapter by lazy { CategoryAdapter() }
+        val storeShopCateAdapter by lazy { StoreShopCategoryAdapter() }
     }
-    var currentList = listOf<StoreShopResponse.CategoryGoods>()
+
+    fun submitList(list: List<StoreShopResponse.CategoryGoods>) {
+        currentList = list
+    }
+
+    val cateCount by lazy { currentList.size }
+    private var currentList = listOf<StoreShopResponse.CategoryGoods>()
 
     override fun getItemCount(): Int = currentList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StickyViewHolder {
-        // weight
-        val view = ViewStoreShopCateTabItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
+        return StickyViewHolder(
+            ViewStoreShopCateTabItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         )
-        return StickyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: StickyViewHolder, position: Int) {
         holder.onBind()
     }
 
-    var selectedTab = 0
+    var tabSelected = 0
 
     inner class StickyViewHolder(private val binding: ViewStoreShopCateTabItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind() = with(binding) {
+            // weight
             root.layoutParams.width = getScreenWidthToPx() / 5
 
             val currentItem = currentList[adapterPosition]
 
-            selectIndicator.isSelected = adapterPosition == selectedTab
-
-            val src = if (adapterPosition == selectedTab) {
+            val src = if (adapterPosition == tabSelected) {
+                selectIndicator.isSelected = true
                 currentItem.activeImgUrl
             } else {
+                selectIndicator.isSelected = false
                 currentItem.dactiveImgUrl
             }
 
@@ -67,22 +71,22 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.StickyViewHolder>()
                     override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                         cateImg.setImageBitmap(resource)
                     }
+
                     override fun onLoadCleared(placeholder: Drawable?) {}
                 })
 
             cateName.text = currentItem.ctgNm
 
             root.setOnClickListener {
-                selectIndicator.isSelected = !selectIndicator.isSelected
                 tabSelector(adapterPosition)
             }
         }
     }
 
     fun tabSelector(index: Int) {
-        selectedTab = index
+        tabSelected = index
+        notifyDataSetChanged()
 
         EventBus.fire(StoreShopEvent(StoreShopEventType.CATEGORY_SCROLL, index))
-        notifyDataSetChanged()
     }
 }

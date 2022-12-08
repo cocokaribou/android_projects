@@ -162,8 +162,8 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
-            ModuleData.CommonGoodsMultiGridData.ordinal() -> CommonGoodsMultiGridViewHolder(
-                ViewCommonGoodsMultiGridBinding.inflate(
+            ModuleData.CommonGoodsGridData.ordinal() -> CommonGoodsGridViewHolder(
+                ViewCommonGoodsGridBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
