@@ -211,7 +211,7 @@ sealed class ModuleData {
         companion object
     }
 
-    data class StoreShopCateNameData(
+    data class StoreShopCateTitleData(
         val text: String
     ) : ModuleData() {
         override fun clone(): ModuleData {

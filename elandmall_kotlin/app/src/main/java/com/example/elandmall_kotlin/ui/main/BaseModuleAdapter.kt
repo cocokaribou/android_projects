@@ -194,8 +194,8 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
-            ModuleData.StoreShopCateNameData.ordinal() -> StoreShopCateNameViewHolder(
-                ViewStoreShopCateNameBinding.inflate(
+            ModuleData.StoreShopCateTitleData.ordinal() -> StoreShopCateTitleViewHolder(
+                ViewStoreShopCateTitleBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false

@@ -1,10 +1,15 @@
 package com.example.elandmall_kotlin.ui.main.tabs.storeshop
 
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.EventBus
+import com.example.elandmall_kotlin.ui.StoreShopEvent
 import com.example.elandmall_kotlin.ui.StoreShopEventType
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopCategoryAdapter.Companion.storeShopCateAdapter
@@ -23,6 +28,7 @@ class StoreShopModuleFragment : BaseModuleFragment() {
             // sticky header
             binding.sticky.adapter = storeShopCateAdapter
         }
+
         // holder click events
         EventBus.storeShopEvent.observe(requireActivity()) {
             it.getIfNotHandled()?.let {

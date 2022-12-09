@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.databinding.FragmentBaseModuleBinding
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopCategoryAdapter
 import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopCategoryAdapter.Companion.storeShopCateAdapter
 import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.getScreenWidthToPx
@@ -87,7 +86,7 @@ abstract class BaseModuleFragment : Fragment() {
     fun scrollToY(pos: Int) {
         val posList = mutableListOf<Int>()
         moduleAdapter.value.forEachIndexed { index, moduleData ->
-            if (moduleData is ModuleData.StoreShopCateNameData) {
+            if (moduleData is ModuleData.StoreShopCateTitleData) {
                 posList.add(index)
             }
         }
@@ -115,7 +114,7 @@ abstract class BaseModuleFragment : Fragment() {
                 }
 
                 if (isVisible) {
-                    if (moduleAdapter.value[firstVisiblePos] is ModuleData.StoreShopCateNameData) {
+                    if (moduleAdapter.value[firstVisiblePos] is ModuleData.StoreShopCateTitleData) {
                         scrollToX(firstVisiblePos)
                     }
                 }

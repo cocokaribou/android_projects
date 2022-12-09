@@ -175,7 +175,7 @@ class StoreShopViewModel : BaseViewModel() {
                 )
                 storeShopData.categoryGoodsList.forEach {
                     moduleList.add(
-                        ModuleData.StoreShopCateNameData(
+                        ModuleData.StoreShopCateTitleData(
                             text = it.ctgNm ?: ""
                         )
                     )

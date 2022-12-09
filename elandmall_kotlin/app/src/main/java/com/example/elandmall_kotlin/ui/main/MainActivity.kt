@@ -44,8 +44,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.a
             adapter = mAdapter
             isUserInputEnabled = true
         }
-        // TODO 오프라인 개발중
-        viewpager.currentItem = 8
+        viewpager.currentItem = 6
         val gnbData = MemDataSource.mainGnbCache?.data?.gnbList
 
         tabs.apply {
