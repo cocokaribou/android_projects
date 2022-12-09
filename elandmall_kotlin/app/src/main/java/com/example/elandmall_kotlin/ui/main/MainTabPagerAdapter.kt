@@ -9,7 +9,7 @@ import com.example.elandmall_kotlin.common.CommonConst.HOME_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.STORE_MENU_CD
 import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.main.tabs.home.HomeModuleFragment
-import com.example.elandmall_kotlin.ui.main.tabs.web.WebModulesFragment
+import com.example.elandmall_kotlin.ui.main.tabs.web.WebviewModulesFragment
 import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopModuleFragment
 
 class MainTabPagerAdapter(fm: FragmentManager, lifeCycle: Lifecycle) : FragmentStateAdapter(fm, lifeCycle) {
@@ -37,7 +37,7 @@ class MainTabPagerAdapter(fm: FragmentManager, lifeCycle: Lifecycle) : FragmentS
                     )
                 }
                 else -> {
-                    WebModulesFragment.create(
+                    WebviewModulesFragment.create(
                         tabName = gnb.menuName ?: "",
                         apiUrl = gnb.apiUrl ?: ""
                     )

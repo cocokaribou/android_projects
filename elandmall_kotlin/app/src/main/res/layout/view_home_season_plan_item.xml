@@ -33,7 +33,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="브랜드" />
+            tools:text="@string/tools_text_brand_nm" />
 
         <TextView
             android:id="@+id/goods_name"
@@ -45,7 +45,7 @@
             android:textSize="12.5dp"
             app:layout_constraintStart_toStartOf="@id/brand_name"
             app:layout_constraintTop_toBottomOf="@id/brand_name"
-            tools:text="덧신/덧버선 5종모음/균일가 3000/6000원" />
+            tools:text="@string/tools_text_goods_nm" />
 
         <TextView
             android:id="@+id/price_after"
@@ -53,12 +53,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:ellipsize="end"
-            android:text="46,550"
             android:textColor="#333333"
             android:textSize="12.5dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/goods_name"
-            app:layout_constraintTop_toBottomOf="@id/goods_name" />
+            app:layout_constraintTop_toBottomOf="@id/goods_name"
+            tools:text="@string/tools_text_price_after"/>
 
         <TextView
             android:id="@+id/price_after_won"

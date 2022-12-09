@@ -7,7 +7,7 @@ import com.example.elandmall_kotlin.model.StorePickResponse
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
-import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopCategoryAdapter.Companion.storeShopCateAdapter
+import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopStickyAdapter.Companion.storeShopCateAdapter
 import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.launch
 
@@ -36,6 +36,11 @@ class StoreShopViewModel : BaseViewModel() {
 
     override fun requestRefresh() {
         // refresh
+        mSortNo = 2
+        mSortKey = "신상품순"
+        mCateNo = ""
+        mGridNo = 0
+
         requestStore()
     }
 
@@ -86,7 +91,7 @@ class StoreShopViewModel : BaseViewModel() {
             // main banner
             if (!storeShopData.storeMainbannerList.isNullOrEmpty()) {
                 moduleList.add(
-                    ModuleData.MainBannerData(
+                    ModuleData.CommonMainBannerData(
                         storeShopData.storeMainbannerList
                     )
                 )
@@ -153,6 +158,8 @@ class StoreShopViewModel : BaseViewModel() {
                         gridSelected = mGridNo
                     )
                 )
+                // goods
+
                 moduleList.add(
                     ModuleData.StorePickMoreData(
                         storeSelected = storeShopData.storePickList[0].relContNm ?: ""
@@ -173,13 +180,14 @@ class StoreShopViewModel : BaseViewModel() {
                         storeShopData.categoryGoodsList
                     )
                 )
-                storeShopData.categoryGoodsList.forEach {
+                storeShopData.categoryGoodsList.forEachIndexed { i, data ->
                     moduleList.add(
                         ModuleData.StoreShopCateTitleData(
-                            text = it.ctgNm ?: ""
+                            text = data.ctgNm ?: "",
+                            i
                         )
                     )
-                    it.goodsList?.chunked(2)?.forEach {
+                    data.goodsList?.chunked(2)?.forEach {
                         moduleList.add(
                             ModuleData.CommonGoodsGridData(it)
                         )
@@ -199,7 +207,7 @@ class StoreShopViewModel : BaseViewModel() {
             storePickData.keywordResult?.searchGoods?.let {
                 pickData = it
 
-                drawGrid(it, gridNo)
+                drawStorePickGoods(it, gridNo)
             }
         } ?: run {
             pickModuleList.add(
@@ -225,7 +233,7 @@ class StoreShopViewModel : BaseViewModel() {
         }
         pickModuleList = moduleList.map { it.clone() }.toMutableList()
 
-        drawGrid(pickData, mGridNo)
+        drawStorePickGoods(pickData, mGridNo)
         uiList.postValue(pickModuleList)
     }
 
@@ -269,30 +277,30 @@ class StoreShopViewModel : BaseViewModel() {
         "추천순" to 7
     )
 
-    private fun drawGrid(goodsList:List<Goods>, type:Int) {
+    private fun drawStorePickGoods(goodsList:List<Goods>, type:Int) {
         val index = pickModuleList.indexOfFirst { it is ModuleData.StorePickMoreData }
         when (type) {
             0 -> {
-                goodsList.chunked(2).reversed().forEach {
+                goodsList.chunked(2).forEachIndexed { i, goods ->
                     pickModuleList.add(
-                        index,
-                        ModuleData.CommonGoodsGridData(it)
+                        i + index,
+                        ModuleData.CommonGoodsGridData(goods)
                     )
                 }
             }
             1 -> {
-                goodsList.reversed().forEach {
+                goodsList.forEachIndexed { i, goods ->
                     pickModuleList.add(
-                        index,
-                        ModuleData.CommonGoodsLinearData(it)
+                        i + index,
+                        ModuleData.CommonGoodsLinearData(goods)
                     )
                 }
             }
             2 -> {
-                goodsList.reversed().forEach {
+                goodsList.forEachIndexed { i, goods ->
                     pickModuleList.add(
-                        index,
-                        ModuleData.CommonGoodsLargeData(it)
+                        i + index,
+                        ModuleData.CommonGoodsLargeData(goods)
                     )
                 }
             }

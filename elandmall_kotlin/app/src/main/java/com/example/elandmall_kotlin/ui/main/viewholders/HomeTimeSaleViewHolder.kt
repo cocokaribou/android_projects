@@ -2,8 +2,6 @@ package com.example.elandmall_kotlin.ui.main.viewholders
 
 import android.os.Build
 import android.widget.TextView
-import androidx.core.view.children
-import androidx.core.view.doOnAttach
 import androidx.core.view.forEach
 import androidx.lifecycle.*
 import com.example.elandmall_kotlin.R
@@ -12,14 +10,12 @@ import com.example.elandmall_kotlin.model.Goods
 import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.util.GoodsUtil.drawGoodsUI
-import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -52,7 +48,7 @@ class HomeTimeSaleViewHolder(private val binding: ViewHomeTimeSaleBinding, priva
     }
 
     override fun onBind(item: Any, pos: Int) {
-        (item as? ModuleData.HomeTimeData)?.homeTimeData?.let {
+        (item as? ModuleData.HomeTimeSaleData)?.homeTimeSaleData?.let {
             initView(it)
         }
     }

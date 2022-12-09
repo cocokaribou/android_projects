@@ -56,14 +56,10 @@ class BottomSheetFragment(
     }
 
     inner class DialogAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-        init {
-            Logger.v("어댑터 초기화!")
-        }
         var items: List<Any> = listOf()
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             when (type) {
                 DialogType.STORE_PICK -> {
-                    Logger.v("지점이여~")
                     return DialogStorePickHolder(
                         ViewDialogItemStorePickBinding.inflate(
                             LayoutInflater.from(parent.context),
@@ -73,7 +69,6 @@ class BottomSheetFragment(
                     )
                 }
                 DialogType.COMMON_SORT -> {
-                    Logger.v("분류여~")
                     return DialogCommonSortHolder(
                         ViewDialogItemStorePickBinding.inflate(
                             LayoutInflater.from(parent.context),

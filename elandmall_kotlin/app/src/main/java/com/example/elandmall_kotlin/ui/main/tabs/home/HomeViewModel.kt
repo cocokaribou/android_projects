@@ -37,7 +37,7 @@ class HomeViewModel : BaseViewModel() {
         data.data?.let { homeData ->
             if (!homeData.homeMainbannerList.isNullOrEmpty()) {
                 moduleList.add(
-                    ModuleData.MainBannerData(
+                    ModuleData.CommonMainBannerData(
                         homeData.homeMainbannerList
                     )
                 )
@@ -51,14 +51,14 @@ class HomeViewModel : BaseViewModel() {
             }
             if (!homeData.homeBannerTopList.isNullOrEmpty()) {
                 moduleList.add(
-                    ModuleData.HomeMultiBannerData(
+                    ModuleData.CommonMultiBannerData(
                         homeData.homeBannerTopList
                     )
                 )
             }
             if (homeData.homeTimesale != null) {
                 moduleList.add(
-                    ModuleData.HomeTimeData(
+                    ModuleData.HomeTimeSaleData(
                         homeData.homeTimesale
                     )
                 )
@@ -127,7 +127,7 @@ class HomeViewModel : BaseViewModel() {
                     )
                 )
                 moduleList.add(
-                    ModuleData.HomeMdData(homeData.homeMd)
+                    ModuleData.HomeMdRecommendData(homeData.homeMd)
                 )
             }
         }

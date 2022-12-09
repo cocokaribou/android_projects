@@ -178,7 +178,6 @@ object GoodsUtil {
             }
 
             // wish
-
             try {
                 val wish = it.findViewById<ImageView>(R.id.wish)
                 wish.setOnClickListener {

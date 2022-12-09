@@ -41,7 +41,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="슈펜" />
+            tools:text="@string/tools_text_brand_nm" />
 
         <TextView
             android:id="@+id/goods_name"
@@ -54,7 +54,7 @@
             android:textSize="13dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/brand_name"
-            tools:text="오프라이스 새우볶음밥 1인(250g)" />
+            tools:text="@string/tools_text_goods_nm" />
 
         <TextView
             android:id="@+id/sale_rate"
@@ -66,7 +66,7 @@
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@id/price_after"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="50" />
+            tools:text="@string/tools_text_sale_rate" />
 
         <TextView
             android:id="@+id/sale_rate_percent"
@@ -83,13 +83,13 @@
             android:id="@+id/price_before"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:textColor="#8e8e8e"
             android:textSize="11dp"
-            android:layout_marginTop="5dp"
             app:layout_constraintBottom_toTopOf="@id/price_after"
             app:layout_constraintStart_toEndOf="@id/sale_rate_percent"
             app:layout_constraintTop_toBottomOf="@id/goods_name"
-            tools:text="30,000" />
+            tools:text="@string/tools_text_price_before" />
 
         <TextView
             android:id="@+id/price_after"
@@ -101,7 +101,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/sale_rate_percent"
             app:layout_constraintTop_toBottomOf="@id/price_before"
-            tools:text="15,000" />
+            tools:text="@string/tools_text_price_after" />
 
         <TextView
             android:id="@+id/price_after_won"
@@ -144,7 +144,7 @@
             app:layout_constraintBottom_toBottomOf="@id/rating"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/rating"
-            tools:text="(51)" />
+            tools:text="@string/tools_text_review_count" />
 
         <LinearLayout
             android:id="@+id/tag"
@@ -152,8 +152,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

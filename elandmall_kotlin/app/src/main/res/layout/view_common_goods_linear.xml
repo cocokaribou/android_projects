@@ -43,7 +43,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="킴스클럽" />
+                tools:text="@string/tools_text_brand_nm" />
 
             <TextView
                 android:id="@+id/goods_name"
@@ -55,7 +55,7 @@
                 android:textSize="13dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/brand_name"
-                tools:text="덧신/덧버선 5종모음/균일가 3000/6000원" />
+                tools:text="@string/tools_text_goods_nm" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
@@ -73,7 +73,7 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="10" />
+                    tools:text="@string/tools_text_sale_rate" />
 
                 <TextView
                     android:id="@+id/sale_rate_percent"
@@ -95,7 +95,7 @@
                     android:translationY="3dp"
                     app:layout_constraintStart_toEndOf="@id/sale_rate_percent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="46,550" />
+                    tools:text="@string/tools_text_price_before" />
 
                 <TextView
                     android:id="@+id/price_after"
@@ -108,7 +108,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/sale_rate_percent"
                     app:layout_constraintTop_toBottomOf="@id/price_before"
-                    tools:text="41,895" />
+                    tools:text="@string/tools_text_price_after" />
 
                 <TextView
                     android:id="@+id/price_after_won"

@@ -35,7 +35,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="브랜드" />
+            tools:text="@string/tools_text_brand_nm" />
 
         <TextView
             android:id="@+id/goods_name"
@@ -49,7 +49,7 @@
             android:textSize="13.4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/brand_name"
-            tools:text="상품명" />
+            tools:text="@string/tools_text_goods_nm" />
 
         <TextView
             android:id="@+id/price_before"
@@ -61,7 +61,7 @@
             android:textSize="11.5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/goods_name"
-            tools:text="10,000원" />
+            tools:text="@string/tools_text_price_before" />
 
         <TextView
             android:id="@+id/sale_rate"
@@ -73,7 +73,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/price_before"
-            tools:text="50" />
+            tools:text="@string/tools_text_sale_rate" />
 
         <TextView
             android:id="@+id/sale_rate_percent"
@@ -97,7 +97,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/sale_rate_percent"
             app:layout_constraintTop_toBottomOf="@id/price_before"
-            tools:text="5000" />
+            tools:text="@string/tools_text_price_after" />
 
         <TextView
             android:id="@+id/price_after_won"

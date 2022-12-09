@@ -1,7 +1,7 @@
 package com.example.elandmall_kotlin.ui.main.viewholders
 
 import com.bumptech.glide.Glide
-import com.example.elandmall_kotlin.databinding.ViewHomeMultiBannerBinding
+import com.example.elandmall_kotlin.databinding.ViewCommonMultiBannerBinding
 import com.example.elandmall_kotlin.model.Banner
 import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.EventBus
@@ -9,10 +9,10 @@ import com.example.elandmall_kotlin.ui.LinkEvent
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.util.AdjustHeightImageViewTarget
 
-class HomeMultiBannerViewHolder(private val binding: ViewHomeMultiBannerBinding) : BaseViewHolder(binding.root) {
+class CommonMultiBannerViewHolder(private val binding: ViewCommonMultiBannerBinding) : BaseViewHolder(binding.root) {
     override fun onBind(item: Any, pos: Int) {
-        (item as? ModuleData.HomeMultiBannerData)?.let {
-            initView(it.homeBannerData)
+        (item as? ModuleData.CommonMultiBannerData)?.let {
+            initView(it.multiBannerData)
         }
     }
 

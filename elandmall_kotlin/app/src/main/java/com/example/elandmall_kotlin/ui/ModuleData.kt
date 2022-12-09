@@ -8,7 +8,7 @@ import com.example.elandmall_kotlin.model.StoreShopResponse
 sealed class ModuleData {
     abstract fun clone(): ModuleData
 
-    data class MainBannerData(
+    data class CommonMainBannerData(
         val mainBannerData: List<Banner>
     ) : ModuleData() {
         override fun clone(): ModuleData {
@@ -28,8 +28,8 @@ sealed class ModuleData {
         companion object
     }
 
-    data class HomeMultiBannerData(
-        val homeBannerData: List<Banner>
+    data class CommonMultiBannerData(
+        val multiBannerData: List<Banner>
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -38,8 +38,8 @@ sealed class ModuleData {
         companion object
     }
 
-    data class HomeTimeData(
-        val homeTimeData: Goods
+    data class HomeTimeSaleData(
+        val homeTimeSaleData: Goods
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -99,7 +99,7 @@ sealed class ModuleData {
         companion object
     }
 
-    data class HomeMdData(
+    data class HomeMdRecommendData(
         val homeMdData: HomeResponse.HomeMd
     ) : ModuleData() {
         override fun clone(): ModuleData {
@@ -212,7 +212,8 @@ sealed class ModuleData {
     }
 
     data class StoreShopCateTitleData(
-        val text: String
+        val text: String,
+        val index: Int
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.viewModels
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
 
-class WebModulesFragment : BaseModuleFragment() {
+class WebviewModulesFragment : BaseModuleFragment() {
 
     override val viewModel: WebviewViewModel by viewModels()
 
@@ -14,7 +14,7 @@ class WebModulesFragment : BaseModuleFragment() {
 
     companion object {
         fun create(tabName: String, apiUrl: String = "") =
-            WebModulesFragment().apply {
+            WebviewModulesFragment().apply {
                 arguments = Bundle().apply {
                     putString(KEY_ITEM_TAB_NAME, tabName)
                     if (apiUrl.isNotEmpty()) {

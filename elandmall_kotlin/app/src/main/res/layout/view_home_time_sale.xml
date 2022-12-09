@@ -64,7 +64,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/goods_name"
         app:layout_constraintTop_toTopOf="@id/goods_img"
-        tools:text="청정원" />
+        tools:text="@string/tools_text_brand_nm" />
 
     <TextView
         android:id="@+id/goods_name"
@@ -80,7 +80,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/goods_img"
         app:layout_constraintTop_toBottomOf="@id/brand_name"
-        tools:text="제주도 산간에서 자란 소고기 550g\n2줄" />
+        tools:text="@string/tools_text_goods_nm" />
 
     <TextView
         android:id="@+id/price_before"
@@ -93,7 +93,7 @@
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="@id/goods_name"
         app:layout_constraintTop_toBottomOf="@id/goods_name"
-        tools:text="46,550원"
+        tools:text="@string/tools_text_price_before"
         tools:visibility="visible" />
 
     <TextView
@@ -107,7 +107,7 @@
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/goods_name"
         app:layout_constraintTop_toBottomOf="@+id/price_before"
-        tools:text="10%"
+        tools:text="@string/tools_text_sale_rate"
         tools:visibility="visible" />
 
     <TextView
@@ -122,7 +122,7 @@
         app:layout_constraintStart_toEndOf="@+id/sale_rate"
         app:layout_constraintTop_toBottomOf="@+id/price_before"
         app:layout_goneMarginStart="0dp"
-        tools:text="55,550" />
+        tools:text="@string/tools_text_price_after" />
 
     <TextView
         android:id="@+id/price_after_won"
@@ -158,7 +158,7 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/goods_img"
         app:layout_constraintStart_toStartOf="@+id/brand_name"
-        tools:text="9,999개 구매" />
+        tools:text="@string/tools_text_quantity" />
 
     <View
         android:id="@+id/divider"

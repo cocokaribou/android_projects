@@ -1,7 +1,6 @@
 package com.example.elandmall_kotlin.ui.main.viewholders
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -17,13 +16,11 @@ import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.util.GoodsUtil.drawGoodsUI
 import com.example.elandmall_kotlin.util.GoodsUtil.goodsDiff
 import com.example.elandmall_kotlin.util.HorizontalSpacingItemDecoration
-import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.dpToPx
-import com.example.elandmall_kotlin.util.pxToDp
 
 var selectedTab = 0
 
-class HomeMdViewHolder(private val binding: ViewHomeMdBinding) : BaseViewHolder(binding.root) {
+class HomeMdRecommendViewHolder(private val binding: ViewHomeMdBinding) : BaseViewHolder(binding.root) {
     lateinit var data: HomeResponse.HomeMd
 
     private val tabSelector: (Int) -> Unit = {
@@ -37,7 +34,7 @@ class HomeMdViewHolder(private val binding: ViewHomeMdBinding) : BaseViewHolder(
     private val mItemDecoration by lazy { HorizontalSpacingItemDecoration(spacing = 1.dpToPx(), edgeSpacing = 0, includeEdge = false) }
 
     override fun onBind(item: Any, pos: Int) {
-        (item as? ModuleData.HomeMdData)?.let {
+        (item as? ModuleData.HomeMdRecommendData)?.let {
             data = it.homeMdData
             initView(data)
         }

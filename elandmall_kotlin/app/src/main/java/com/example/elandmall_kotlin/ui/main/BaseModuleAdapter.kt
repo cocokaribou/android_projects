@@ -27,8 +27,8 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
-            ModuleData.MainBannerData.ordinal() -> MainBannerViewHolder(
-                ViewMainBannerBinding.inflate(
+            ModuleData.CommonMainBannerData.ordinal() -> CommonMainBannerViewHolder(
+                ViewCommonMainBannerBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -43,15 +43,15 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
-            ModuleData.HomeMultiBannerData.ordinal() -> HomeMultiBannerViewHolder(
-                ViewHomeMultiBannerBinding.inflate(
+            ModuleData.CommonMultiBannerData.ordinal() -> CommonMultiBannerViewHolder(
+                ViewCommonMultiBannerBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 )
             )
 
-            ModuleData.HomeTimeData.ordinal() -> HomeTimeSaleViewHolder(
+            ModuleData.HomeTimeSaleData.ordinal() -> HomeTimeSaleViewHolder(
                 ViewHomeTimeSaleBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -98,7 +98,7 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
-            ModuleData.HomeMdData.ordinal() -> HomeMdViewHolder(
+            ModuleData.HomeMdRecommendData.ordinal() -> HomeMdRecommendViewHolder(
                 ViewHomeMdBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,

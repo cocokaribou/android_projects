@@ -43,7 +43,7 @@
             android:textSize="13dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="CJ 제일제당" />
+            tools:text="@string/tools_text_brand_nm" />
 
         <TextView
             android:id="@+id/goods_name"
@@ -55,7 +55,7 @@
             android:textSize="13dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/brand_name"
-            tools:text="고메치킨 순살크리스피 550g" />
+            tools:text="@string/tools_text_goods_nm" />
 
         <TextView
             android:id="@+id/sale_rate"
@@ -65,7 +65,7 @@
             android:textSize="18dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/goods_name"
-            tools:text="10" />
+            tools:text="@string/tools_text_sale_rate" />
 
         <TextView
             android:id="@+id/sale_rate_percent"
@@ -76,7 +76,7 @@
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@id/sale_rate"
             app:layout_constraintStart_toEndOf="@id/sale_rate"
-            tools:text="%" />
+            android:text="@string/percent" />
 
         <TextView
             android:id="@+id/price_after"
@@ -88,7 +88,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/sale_rate_percent"
             app:layout_constraintTop_toBottomOf="@id/goods_name"
-            tools:text="46,500" />
+            tools:text="@string/tools_text_price_after" />
 
         <TextView
             android:id="@+id/price_after_won"
@@ -112,7 +112,7 @@
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="@id/price_after"
             app:layout_constraintStart_toEndOf="@id/price_after_won"
-            tools:text="47,000" />
+            tools:text="@string/tools_text_price_before" />
 
         <LinearLayout
             android:id="@+id/tag"

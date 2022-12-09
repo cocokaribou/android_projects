@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -17,9 +18,9 @@ import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.dpToPx
 import com.example.elandmall_kotlin.util.getScreenWidthToPx
 
-class StoreShopCategoryAdapter : RecyclerView.Adapter<StoreShopCategoryAdapter.StickyViewHolder>() {
+class StoreShopStickyAdapter : RecyclerView.Adapter<StoreShopStickyAdapter.StickyViewHolder>() {
     companion object {
-        val storeShopCateAdapter by lazy { StoreShopCategoryAdapter() }
+        val storeShopCateAdapter by lazy { StoreShopStickyAdapter() }
     }
 
     fun submitList(list: List<StoreShopResponse.CategoryGoods>) {
@@ -78,7 +79,10 @@ class StoreShopCategoryAdapter : RecyclerView.Adapter<StoreShopCategoryAdapter.S
             cateName.text = currentItem.ctgNm
 
             root.setOnClickListener {
-                tabSelector(adapterPosition)
+                tabSelected = adapterPosition
+                EventBus.fire(StoreShopEvent(StoreShopEventType.CATEGORY_SCROLL, adapterPosition))
+
+                notifyDataSetChanged()
             }
         }
     }
@@ -86,7 +90,5 @@ class StoreShopCategoryAdapter : RecyclerView.Adapter<StoreShopCategoryAdapter.S
     fun tabSelector(index: Int) {
         tabSelected = index
         notifyDataSetChanged()
-
-        EventBus.fire(StoreShopEvent(StoreShopEventType.CATEGORY_SCROLL, index))
     }
 }
