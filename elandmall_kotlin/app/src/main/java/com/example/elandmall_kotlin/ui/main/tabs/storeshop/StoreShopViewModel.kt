@@ -154,6 +154,7 @@ class StoreShopViewModel : BaseViewModel() {
                 moduleList.add(
                     ModuleData.CommonSortData(
                         sortMap = storeSortMap,
+                        includeTopPadding = false,
                         sortSelected = mSortKey,
                         gridSelected = mGridNo
                     )
@@ -277,7 +278,7 @@ class StoreShopViewModel : BaseViewModel() {
         "추천순" to 7
     )
 
-    private fun drawStorePickGoods(goodsList:List<Goods>, type:Int) {
+    private fun drawStorePickGoods(goodsList: List<Goods>, type: Int) {
         val index = pickModuleList.indexOfFirst { it is ModuleData.StorePickMoreData }
         when (type) {
             0 -> {

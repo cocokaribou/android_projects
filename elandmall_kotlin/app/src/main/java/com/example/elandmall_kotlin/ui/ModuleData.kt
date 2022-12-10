@@ -152,16 +152,16 @@ sealed class ModuleData {
 
     data class CommonSortData(
         val sortMap: Map<String, Any>,
+        val includeTopPadding: Boolean,
         var sortSelected: String,
         var gridSelected: Int
-    ): ModuleData() {
+    ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
         }
 
         companion object
     }
-
 
     data class StorePickMoreData(
         var storeSelected: String
@@ -173,7 +173,7 @@ sealed class ModuleData {
         companion object
     }
 
-    class StoreShopEmptyGoodsData: ModuleData() {
+    class StoreShopEmptyGoodsData : ModuleData() {
         override fun clone(): ModuleData {
             return StoreShopEmptyGoodsData()
         }
@@ -232,4 +232,36 @@ sealed class ModuleData {
         companion object
     }
 
+    data class CommonCenterTitleData(
+        val title: String
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class CommonWebViewData(
+        val contentHtml: String,
+        val contentUrl: String?,
+        val shareUrl: String?,
+        val shareImgPath: String?
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class PlanDetailTabTitleData(
+        val title: String
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
 }

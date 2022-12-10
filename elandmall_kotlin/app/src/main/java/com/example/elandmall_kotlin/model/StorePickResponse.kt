@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class StorePickResponse(
     @SerializedName("data") val data: Data?,
     @SerializedName("keyword") val keyword: String?,
-) {
+):BaseResponse() {
     data class Data(
         @SerializedName("relate_kwds") val relateKwds: List<Any>?,
         @SerializedName("keyword_result") val keywordResult: KeywordResult?

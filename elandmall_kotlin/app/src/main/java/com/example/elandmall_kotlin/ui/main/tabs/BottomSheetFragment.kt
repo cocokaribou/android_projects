@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.FragmentBottomSheetBinding
+import com.example.elandmall_kotlin.databinding.ViewDialogItemPlanDetailBinding
 import com.example.elandmall_kotlin.databinding.ViewDialogItemStorePickBinding
+import com.example.elandmall_kotlin.model.PlanDetailResponse
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.StoreShopEvent
@@ -19,12 +21,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 enum class DialogType {
     STORE_PICK,
-    COMMON_SORT,
+    STORE_PICK_SORT,
+    PLAN_DETAIL_TAB,
     OTHER
 }
 
 var storeSelected = 0
 var sortSelected = 1
+var planDetailSelected = 0
 
 class BottomSheetFragment(
     private val type: DialogType,
@@ -39,15 +43,17 @@ class BottomSheetFragment(
                 dismiss()
             }
             dialogList.adapter = mAdapter
+            dialogList.layoutManager = LinearLayoutManager(this@BottomSheetFragment.context, LinearLayoutManager.VERTICAL, false)
 
             when (type) {
                 DialogType.STORE_PICK -> {
                     dialogTitle.text = "스토어픽 지점"
-                    dialogList.layoutManager = LinearLayoutManager(this@BottomSheetFragment.context, LinearLayoutManager.VERTICAL, false)
                 }
-                DialogType.COMMON_SORT -> {
+                DialogType.STORE_PICK_SORT -> {
                     dialogTitle.text = "상품분류"
-                    dialogList.layoutManager = LinearLayoutManager(this@BottomSheetFragment.context, LinearLayoutManager.VERTICAL, false)
+                }
+                DialogType.PLAN_DETAIL_TAB -> {
+                    dialogTitle.text = "기획전 분류"
                 }
             }
         }
@@ -68,9 +74,18 @@ class BottomSheetFragment(
                         )
                     )
                 }
-                DialogType.COMMON_SORT -> {
-                    return DialogCommonSortHolder(
+                DialogType.STORE_PICK_SORT -> {
+                    return DialogStorePickSortHolder(
                         ViewDialogItemStorePickBinding.inflate(
+                            LayoutInflater.from(parent.context),
+                            parent,
+                            false
+                        )
+                    )
+                }
+                DialogType.PLAN_DETAIL_TAB -> {
+                    return DialogPlanDetailTabHolder(
+                        ViewDialogItemPlanDetailBinding.inflate(
                             LayoutInflater.from(parent.context),
                             parent,
                             false
@@ -95,9 +110,13 @@ class BottomSheetFragment(
                 DialogType.STORE_PICK -> {
                     (holder as? DialogStorePickHolder)?.onBind()
                 }
-                DialogType.COMMON_SORT -> {
-                    (holder as? DialogCommonSortHolder)?.onBind()
+                DialogType.STORE_PICK_SORT -> {
+                    (holder as? DialogStorePickSortHolder)?.onBind()
                 }
+                DialogType.PLAN_DETAIL_TAB -> {
+                    (holder as? DialogPlanDetailTabHolder)?.onBind()
+                }
+
             }
         }
 
@@ -130,7 +149,7 @@ class BottomSheetFragment(
             }
         }
 
-        inner class DialogCommonSortHolder(private val binding: ViewDialogItemStorePickBinding) : RecyclerView.ViewHolder(binding.root) {
+        inner class DialogStorePickSortHolder(private val binding: ViewDialogItemStorePickBinding) : RecyclerView.ViewHolder(binding.root) {
             fun onBind() = with(binding) {
                 val data = items[adapterPosition] as? String
 
@@ -145,6 +164,29 @@ class BottomSheetFragment(
                     root.setOnClickListener {
                         if (sortSelected != adapterPosition) {
                             sortSelected = adapterPosition
+                            EventBus.fire(StoreShopEvent(StoreShopEventType.SORT_CLICK, data))
+                        }
+                        dismiss()
+                    }
+                }
+
+            }
+        }
+
+        inner class DialogPlanDetailTabHolder(private val binding: ViewDialogItemPlanDetailBinding) : RecyclerView.ViewHolder(binding.root) {
+            fun onBind() = with(binding) {
+                val data = items[adapterPosition] as? PlanDetailResponse.Tab
+                data?.let { it ->
+                    name.text = it.dispCtgNm
+
+                    if (adapterPosition == planDetailSelected) {
+                        selector.isSelected = true
+                        name.setTextColor(resources.getColor(R.color.check_blue, null))
+                    }
+
+                    root.setOnClickListener {
+                        if (planDetailSelected != adapterPosition) {
+                            planDetailSelected = adapterPosition
                             EventBus.fire(StoreShopEvent(StoreShopEventType.SORT_CLICK, data))
                         }
                         dismiss()

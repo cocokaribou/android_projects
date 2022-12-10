@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName
 class Goods(
     @SerializedName("flag_img_path") private val flagImgPath: String?,
     @SerializedName("goods_nm") val goodsNm: String?,
-    @SerializedName("goods_no") val goodsNo: String?,
     @SerializedName("brand_nm") val brandNm: String?,
     @SerializedName("icon_view") val iconView: String?,
     @SerializedName("cust_sale_price") val custSalePrice: Int?,
@@ -15,12 +14,11 @@ class Goods(
     @SerializedName("image_url") private val imgUrl: String?,
     @SerializedName("sale_price") val salePrice: Int?,
     @SerializedName("market_price") val marketPrice: Int?,
+    @SerializedName("goods_comment_count") val goodsCommentCount: Int?,
+    @SerializedName("goods_star_point") val goodsStarPoint: Int?,
     // home time sale
     @SerializedName("title") val title: String?,
-    @SerializedName("time") val time: String?,
-    // home md
-    @SerializedName("goods_comment_count") val goodsCommentCount: Int?,
-    @SerializedName("goods_star_point") val goodsStarPoint: Int?
+    @SerializedName("time") val time: String?
 ) {
     val imageUrl:String
         get() {

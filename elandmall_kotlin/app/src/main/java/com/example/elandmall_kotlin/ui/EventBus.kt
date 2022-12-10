@@ -108,6 +108,15 @@ enum class StoreShopEventType {
     CATEGORY_SCROLL
 }
 
+class PlanDetailEvent {
+
+}
+
+enum class PlanDetailEventType {
+    GRID_CLICK,
+    TAB_CLICK,
+    CATEGORY_SCROLL
+}
 
 class SingleLiveEvent<out T>(private val content: T) {
     var hasBeenHandled = false

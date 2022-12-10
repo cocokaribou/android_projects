@@ -231,7 +231,7 @@ object GoodsUtil {
         }
 
         override fun areContentsTheSame(oldItem: Goods, newItem: Goods): Boolean {
-            return oldItem.goodsNo == newItem.goodsNo
+            return oldItem.goodsNm == newItem.goodsNm
         }
     }
 }

@@ -6,9 +6,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.adapter.FragmentViewHolder
 import com.example.elandmall_kotlin.common.CommonConst.HOME_MENU_CD
+import com.example.elandmall_kotlin.common.CommonConst.PLANS_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.STORE_MENU_CD
+import com.example.elandmall_kotlin.model.PlanDetailResponse
 import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.main.tabs.home.HomeModuleFragment
+import com.example.elandmall_kotlin.ui.main.tabs.plandetail.PlanDetailModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.web.WebviewModulesFragment
 import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopModuleFragment
 
@@ -36,6 +39,13 @@ class MainTabPagerAdapter(fm: FragmentManager, lifeCycle: Lifecycle) : FragmentS
                         apiUrl = gnb.apiUrl ?: ""
                     )
                 }
+                PLANS_MENU_CD -> {
+                    PlanDetailModuleFragment.create(
+                        tabName = gnb.menuName ?: "",
+                        apiUrl = gnb.apiUrl ?: ""
+                    )
+                }
+
                 else -> {
                     WebviewModulesFragment.create(
                         tabName = gnb.menuName ?: "",

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class StoreShopResponse(
     @SerializedName("data") val data: Data?,
-) {
+):BaseResponse() {
     data class Data(
         @SerializedName("smartpick_list") val storePickList: MutableList<StorePick>?,
         @SerializedName("banjjak_deli") val banjjakDeli: BanjjakDeli?,

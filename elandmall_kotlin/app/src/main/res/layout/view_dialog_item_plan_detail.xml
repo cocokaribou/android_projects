@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingVertical="12dp"
-    android:paddingHorizontal="27dp">
+    android:paddingHorizontal="7dp">
 
     <ImageView
         android:id="@+id/selector"

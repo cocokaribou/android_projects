@@ -3,6 +3,7 @@ package com.example.elandmall_kotlin.ui.main.tabs.storeshop
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +28,6 @@ class StoreShopStickyAdapter : RecyclerView.Adapter<StoreShopStickyAdapter.Stick
         currentList = list
     }
 
-    val cateCount by lazy { currentList.size }
     private var currentList = listOf<StoreShopResponse.CategoryGoods>()
 
     override fun getItemCount(): Int = currentList.size
@@ -55,26 +55,28 @@ class StoreShopStickyAdapter : RecyclerView.Adapter<StoreShopStickyAdapter.Stick
 
             val currentItem = currentList[adapterPosition]
 
-            val src = if (adapterPosition == tabSelected) {
+            // prevent glitching
+            Glide.with(itemView.context)
+                .load("http:${currentItem.dactiveImgUrl}")
+                .override(30.dpToPx(), 30.dpToPx())
+                .into(cateImgDefault)
+
+            Glide.with(itemView.context)
+                .load("http:${currentItem.activeImgUrl}")
+                .override(30.dpToPx(), 30.dpToPx())
+                .into(cateImgSelected)
+
+
+            if (adapterPosition == tabSelected) {
                 selectIndicator.isSelected = true
-                currentItem.activeImgUrl
+                cateImgSelected.visibility = View.VISIBLE
+                cateImgDefault.visibility = View.GONE
             } else {
                 selectIndicator.isSelected = false
                 currentItem.dactiveImgUrl
+                cateImgSelected.visibility = View.GONE
+                cateImgDefault.visibility = View.VISIBLE
             }
-
-            // prevent glitching
-            Glide.with(itemView.context)
-                .asBitmap()
-                .load("http:$src")
-                .override(30.dpToPx(), 30.dpToPx())
-                .into(object : CustomTarget<Bitmap>() {
-                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                        cateImg.setImageBitmap(resource)
-                    }
-
-                    override fun onLoadCleared(placeholder: Drawable?) {}
-                })
 
             cateName.text = currentItem.ctgNm
 

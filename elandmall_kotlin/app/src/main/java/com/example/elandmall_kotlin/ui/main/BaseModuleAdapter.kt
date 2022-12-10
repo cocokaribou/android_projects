@@ -202,6 +202,30 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
+            ModuleData.CommonCenterTitleData.ordinal() -> CommonCenterTitleViewHolder(
+                ViewCommonCenterTitleBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.CommonWebViewData.ordinal() -> CommonWebViewViewHolder(
+                ViewCommonWebViewBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.PlanDetailTabTitleData.ordinal() -> PlanDetailTabTitleViewHolder(
+                ViewPlanDetailTabTitleBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
             else -> UnknownViewHolder(
                 ViewUnknownHolderBinding.inflate(
                     LayoutInflater.from(parent.context),

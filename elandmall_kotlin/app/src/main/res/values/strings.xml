@@ -10,7 +10,7 @@
     <string name="won">원</string>
     <string name="percent">%</string>
 
-    <!--tools text for goods-->
+    <!--tools:text-->
     <string name="tools_text_brand_nm">CJ 제일제당</string>
     <string name="tools_text_goods_nm">고메치킨 순살크리스피 550g</string>
     <string name="tools_text_sale_rate">10</string>
@@ -18,6 +18,8 @@
     <string name="tools_text_price_after">41,800</string>
     <string name="tools_text_review_count">(51)</string>
     <string name="tools_text_quantity">9,999개 구매</string>
+
+    <string name="tools_text_title">TITLE TEXT</string>
 
     <string name="time_sale">타임세일</string>
     <string name="time_left">남은시간</string>

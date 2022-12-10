@@ -35,7 +35,9 @@ class StoreShopModuleFragment : BaseModuleFragment() {
             setModules(it)
 
             // sticky header
-            binding.sticky.adapter = storeShopCateAdapter
+            binding.storeshopSticky.apply {
+                adapter = storeShopCateAdapter
+            }
         }
 
         // holder click events
@@ -70,7 +72,7 @@ class StoreShopModuleFragment : BaseModuleFragment() {
             val firstVisiblePos = layoutManager.findFirstVisibleItemPosition()
 
             val tabPos = moduleAdapter.value.indexOfFirst { it is ModuleData.StoreShopCateTabData }
-            binding.sticky.apply {
+            binding.storeshopSticky.apply {
                 visibility = if (moduleAdapter.value.count() != -1 && tabPos <= firstVisiblePos) {
                     View.VISIBLE
                 } else {
@@ -84,16 +86,16 @@ class StoreShopModuleFragment : BaseModuleFragment() {
         }
     }
 
-    fun scrollToX(position: Int) {
+    private fun scrollToX(position: Int) {
         val selected = (position - 17) / 6
         storeShopCateAdapter.tabSelector(selected)
 
         val halfScreen = getScreenWidthToPx() / 2
         val halfHolder = getScreenWidthToPx() / 10
-        (binding.sticky.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(selected, halfScreen - halfHolder)
+        (binding.storeshopSticky.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(selected, halfScreen - halfHolder)
     }
 
-    fun scrollToY(pos: Int) {
+    private fun scrollToY(pos: Int) {
         val posList = mutableListOf<Int>()
         moduleAdapter.value.forEachIndexed { index, moduleData ->
             if (moduleData is ModuleData.StoreShopCateTitleData) {
