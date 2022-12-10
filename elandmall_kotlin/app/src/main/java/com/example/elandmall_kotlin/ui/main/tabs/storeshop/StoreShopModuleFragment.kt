@@ -43,7 +43,9 @@ class StoreShopModuleFragment : BaseModuleFragment() {
             it.getIfNotHandled()?.let {
                 when (it.type) {
                     StoreShopEventType.CATEGORY_SCROLL -> {
-                        scrollToY(it.content as Int)
+                        val pos = it.content as Int
+                        scrollToX(pos)
+                        scrollToY(pos)
                     }
                     StoreShopEventType.GRID_CLICK -> {
                         viewModel.updateGrid()
@@ -66,7 +68,6 @@ class StoreShopModuleFragment : BaseModuleFragment() {
             val layoutManager = binding.list.layoutManager as? LinearLayoutManager ?: return
 
             val firstVisiblePos = layoutManager.findFirstVisibleItemPosition()
-            val lastVisiblePos = layoutManager.findLastVisibleItemPosition()
 
             val tabPos = moduleAdapter.value.indexOfFirst { it is ModuleData.StoreShopCateTabData }
             binding.sticky.apply {
@@ -78,22 +79,13 @@ class StoreShopModuleFragment : BaseModuleFragment() {
 
                 if (isVisible) {
                     scrollToX(firstVisiblePos)
-//                    for (i in firstVisiblePos .. lastVisiblePos) {
-//                            scrollToX(i)
-//                    }
                 }
             }
         }
     }
 
     fun scrollToX(position: Int) {
-        if (moduleAdapter.value[position] is ModuleData.StoreShopCateTitleData) {
-            Logger.v("✅타이틀!!!!!!! $position")
-        } else {
-            Logger.v("position $position")
-        }
-        val double = position.toDouble() / storeShopCateAdapter.cateCount.toDouble()
-        val selected = (round(double) - 1).toInt()
+        val selected = (position - 17) / 6
         storeShopCateAdapter.tabSelector(selected)
 
         val halfScreen = getScreenWidthToPx() / 2
@@ -109,9 +101,7 @@ class StoreShopModuleFragment : BaseModuleFragment() {
             }
         }
 
-        val stickyHeight = binding.sticky.height
-
-        (binding.list.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(posList[pos], stickyHeight)
+        (binding.list.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(posList[pos], 0)
     }
 
     companion object {

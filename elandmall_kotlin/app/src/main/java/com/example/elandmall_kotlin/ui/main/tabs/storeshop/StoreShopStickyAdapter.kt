@@ -79,8 +79,8 @@ class StoreShopStickyAdapter : RecyclerView.Adapter<StoreShopStickyAdapter.Stick
             cateName.text = currentItem.ctgNm
 
             root.setOnClickListener {
-                tabSelected = adapterPosition
                 EventBus.fire(StoreShopEvent(StoreShopEventType.CATEGORY_SCROLL, adapterPosition))
+                tabSelected = adapterPosition
 
                 notifyDataSetChanged()
             }
