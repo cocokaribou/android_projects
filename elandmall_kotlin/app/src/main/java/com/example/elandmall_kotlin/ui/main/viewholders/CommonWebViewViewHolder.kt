@@ -1,11 +1,13 @@
 package com.example.elandmall_kotlin.ui.main.viewholders
 
+import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebSettings.LOAD_NO_CACHE
 import android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.bumptech.glide.Glide
 import com.example.elandmall_kotlin.databinding.ViewCommonWebViewBinding
 import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.EventBus
@@ -14,15 +16,15 @@ import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.util.setHtmlDoc
 
 class CommonWebViewViewHolder(private val binding: ViewCommonWebViewBinding) : BaseViewHolder(binding.root) {
-    val mWebViewClient by lazy { CommonWebViewClient() }
+    private val mWebViewClient by lazy { CommonWebViewClient() }
     override fun onBind(item: Any, pos: Int) {
         (item as? ModuleData.CommonWebViewData)?.let {
             initUI(it)
         }
     }
 
-    fun initUI(data: ModuleData.CommonWebViewData) = with(binding) {
-        val mWebview = WebView(binding.root.context).apply {
+    private fun initUI(data: ModuleData.CommonWebViewData) = with(binding) {
+        val mWebView = WebView(root.context).apply {
             webViewClient = mWebViewClient
             settings.apply {
                 javaScriptEnabled = true
@@ -38,7 +40,15 @@ class CommonWebViewViewHolder(private val binding: ViewCommonWebViewBinding) : B
             loadDataWithBaseURL(null, data.contentHtml.setHtmlDoc(), "text/html", "UTF-8", null);
         }
         if (webview.childCount == 0) {
-            webview.addView(mWebview)
+            // for wrap_content option
+            webview.addView(mWebView)
+        }
+
+        if (!data.shareUrl.isNullOrEmpty()) {
+            share.visibility = View.VISIBLE
+            share.setOnClickListener {
+                EventBus.fire(LinkEvent(data.shareUrl))
+            }
         }
     }
 
