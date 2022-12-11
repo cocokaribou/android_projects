@@ -13,8 +13,9 @@ import com.bumptech.glide.request.transition.Transition
 import com.example.elandmall_kotlin.databinding.ViewStoreShopCateTabItemBinding
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.StoreShopEvent
-import com.example.elandmall_kotlin.ui.StoreShopEventType
+import com.example.elandmall_kotlin.ui.TabType
+import com.example.elandmall_kotlin.ui.ViewHolderEvent
+import com.example.elandmall_kotlin.ui.ViewHolderEventType
 import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.dpToPx
 import com.example.elandmall_kotlin.util.getScreenWidthToPx
@@ -81,7 +82,11 @@ class StoreShopStickyAdapter : RecyclerView.Adapter<StoreShopStickyAdapter.Stick
             cateName.text = currentItem.ctgNm
 
             root.setOnClickListener {
-                EventBus.fire(StoreShopEvent(StoreShopEventType.CATEGORY_SCROLL, adapterPosition))
+                EventBus.fire(ViewHolderEvent(
+                    eventType = ViewHolderEventType.CATEGORY_SCROLL,
+                    tabType = TabType.STORE_SHOP,
+                    content = adapterPosition
+                ))
                 tabSelected = adapterPosition
 
                 notifyDataSetChanged()

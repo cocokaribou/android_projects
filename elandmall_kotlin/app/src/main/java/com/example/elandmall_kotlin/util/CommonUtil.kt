@@ -6,6 +6,9 @@ import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import com.example.elandmall_kotlin.common.CommonConst.mainDomain
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -69,4 +72,28 @@ inline fun <reified T> MutableList<T>.removeRange(range: IntRange) {
     val filtered = filterIndexed { i, t -> i < fromIndex || i > toIndex }
     clear()
     addAll(filtered)
+}
+
+fun String.setHtmlDoc(): String {
+    val header = "<html><head>" +
+            "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no\" />" +
+            "<style>body {margin: 0px;padding: 0px;}</style> " +
+            "</head><body>"
+    val closedTag = "</body></html>"
+
+    val htmlText = header + this + closedTag
+    val doc: Document = Jsoup.parse(htmlText)
+
+    val hyperLink = doc.getElementsByTag("a")
+    if (hyperLink.size > 0) {
+        for (i in 0 until hyperLink.size) {
+            var href: String = hyperLink.get(i).attr("href")
+            if (href.isNotEmpty() && !href.startsWith("http")) {
+                href = mainDomain + href
+                hyperLink[i].attr("href", href)
+            }
+        }
+    }
+
+    return doc.toString()
 }

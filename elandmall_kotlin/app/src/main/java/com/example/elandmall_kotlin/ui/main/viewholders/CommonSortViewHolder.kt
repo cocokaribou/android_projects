@@ -28,7 +28,7 @@ class CommonSortViewHolder(private val binding: ViewCommonSortBinding) : BaseVie
             text = data.sortSelected
             setOnClickListener {
                 BottomSheetFragment(
-                    DialogType.STORE_PICK_SORT,
+                    DialogType.STORE_SHOP_SORT,
                     list
                 ).show((binding.root.context as FragmentActivity).supportFragmentManager, "")
             }
@@ -43,7 +43,12 @@ class CommonSortViewHolder(private val binding: ViewCommonSortBinding) : BaseVie
         grid.apply {
             setImageResource(imgSource)
             setOnClickListener {
-                EventBus.fire(StoreShopEvent(StoreShopEventType.GRID_CLICK))
+                EventBus.fire(
+                    ViewHolderEvent(
+                        eventType = ViewHolderEventType.GRID_CLICK,
+                        tabType = data.tabType
+                    )
+                )
             }
         }
     }

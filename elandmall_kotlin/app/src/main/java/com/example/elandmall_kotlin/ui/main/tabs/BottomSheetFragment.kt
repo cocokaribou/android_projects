@@ -13,15 +13,12 @@ import com.example.elandmall_kotlin.databinding.ViewDialogItemPlanDetailBinding
 import com.example.elandmall_kotlin.databinding.ViewDialogItemStorePickBinding
 import com.example.elandmall_kotlin.model.PlanDetailResponse
 import com.example.elandmall_kotlin.model.StoreShopResponse
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.StoreShopEvent
-import com.example.elandmall_kotlin.ui.StoreShopEventType
-import com.example.elandmall_kotlin.util.Logger
+import com.example.elandmall_kotlin.ui.*
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 enum class DialogType {
     STORE_PICK,
-    STORE_PICK_SORT,
+    STORE_SHOP_SORT,
     PLAN_DETAIL_TAB,
     OTHER
 }
@@ -49,7 +46,7 @@ class BottomSheetFragment(
                 DialogType.STORE_PICK -> {
                     dialogTitle.text = "스토어픽 지점"
                 }
-                DialogType.STORE_PICK_SORT -> {
+                DialogType.STORE_SHOP_SORT -> {
                     dialogTitle.text = "상품분류"
                 }
                 DialogType.PLAN_DETAIL_TAB -> {
@@ -74,7 +71,7 @@ class BottomSheetFragment(
                         )
                     )
                 }
-                DialogType.STORE_PICK_SORT -> {
+                DialogType.STORE_SHOP_SORT -> {
                     return DialogStorePickSortHolder(
                         ViewDialogItemStorePickBinding.inflate(
                             LayoutInflater.from(parent.context),
@@ -110,7 +107,7 @@ class BottomSheetFragment(
                 DialogType.STORE_PICK -> {
                     (holder as? DialogStorePickHolder)?.onBind()
                 }
-                DialogType.STORE_PICK_SORT -> {
+                DialogType.STORE_SHOP_SORT -> {
                     (holder as? DialogStorePickSortHolder)?.onBind()
                 }
                 DialogType.PLAN_DETAIL_TAB -> {
@@ -140,7 +137,13 @@ class BottomSheetFragment(
                     root.setOnClickListener {
                         if (storeSelected != adapterPosition) {
                             storeSelected = adapterPosition
-                            EventBus.fire(StoreShopEvent(StoreShopEventType.STORE_CLICK, data))
+                            EventBus.fire(
+                                ViewHolderEvent(
+                                    eventType = ViewHolderEventType.STORE_CLICK,
+                                    tabType = TabType.STORE_SHOP,
+                                    data
+                                )
+                            )
                         }
                         dismiss()
                     }
@@ -164,7 +167,13 @@ class BottomSheetFragment(
                     root.setOnClickListener {
                         if (sortSelected != adapterPosition) {
                             sortSelected = adapterPosition
-                            EventBus.fire(StoreShopEvent(StoreShopEventType.SORT_CLICK, data))
+                            EventBus.fire(
+                                ViewHolderEvent(
+                                    eventType = ViewHolderEventType.SORT_CLICK,
+                                    tabType = TabType.STORE_SHOP,
+                                    data
+                                )
+                            )
                         }
                         dismiss()
                     }
@@ -173,7 +182,8 @@ class BottomSheetFragment(
             }
         }
 
-        inner class DialogPlanDetailTabHolder(private val binding: ViewDialogItemPlanDetailBinding) : RecyclerView.ViewHolder(binding.root) {
+        inner class DialogPlanDetailTabHolder(private val binding: ViewDialogItemPlanDetailBinding) :
+            RecyclerView.ViewHolder(binding.root) {
             fun onBind() = with(binding) {
                 val data = items[adapterPosition] as? PlanDetailResponse.Tab
                 data?.let { it ->
@@ -187,7 +197,13 @@ class BottomSheetFragment(
                     root.setOnClickListener {
                         if (planDetailSelected != adapterPosition) {
                             planDetailSelected = adapterPosition
-                            EventBus.fire(StoreShopEvent(StoreShopEventType.SORT_CLICK, data))
+                            EventBus.fire(
+                                ViewHolderEvent(
+                                    eventType = ViewHolderEventType.SORT_CLICK,
+                                    tabType = TabType.PLAN_DETAIL,
+                                    data
+                                )
+                            )
                         }
                         dismiss()
                     }

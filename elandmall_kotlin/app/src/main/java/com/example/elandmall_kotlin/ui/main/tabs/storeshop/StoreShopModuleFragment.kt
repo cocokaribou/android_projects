@@ -7,9 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.model.StoreShopResponse
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.ui.StoreShopEventType
+import com.example.elandmall_kotlin.ui.*
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopStickyAdapter.Companion.storeShopCateAdapter
 import com.example.elandmall_kotlin.util.Logger
@@ -42,22 +40,25 @@ class StoreShopModuleFragment : BaseModuleFragment() {
 
         // holder click events
         EventBus.storeShopEvent.observe(requireActivity()) {
-            it.getIfNotHandled()?.let {
-                when (it.type) {
-                    StoreShopEventType.CATEGORY_SCROLL -> {
-                        val pos = it.content as Int
-                        scrollToX(pos)
-                        scrollToY(pos)
+            it.getIfNotHandled()?.let { event ->
+                if (event.tabType == TabType.STORE_SHOP) {
+                    when (event.eventType) {
+                        ViewHolderEventType.CATEGORY_SCROLL -> {
+                            val pos = event.content as Int
+                            scrollToX(pos)
+                            scrollToY(pos)
+                        }
+                        ViewHolderEventType.GRID_CLICK -> {
+                            viewModel.updateGrid()
+                        }
+                        ViewHolderEventType.SORT_CLICK -> {
+                            viewModel.updateSort(event.content as String)
+                        }
+                        ViewHolderEventType.STORE_CLICK -> {
+                            viewModel.updateStore(event.content as StoreShopResponse.StorePick)
+                        }
                     }
-                    StoreShopEventType.GRID_CLICK -> {
-                        viewModel.updateGrid()
-                    }
-                    StoreShopEventType.SORT_CLICK -> {
-                        viewModel.updateSort(it.content as String)
-                    }
-                    StoreShopEventType.STORE_CLICK -> {
-                        viewModel.updateStore(it.content as StoreShopResponse.StorePick)
-                    }
+
                 }
             }
         }

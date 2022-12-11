@@ -1,20 +1,51 @@
 package com.example.elandmall_kotlin.ui.main.viewholders
 
+import android.webkit.WebResourceRequest
+import android.webkit.WebSettings
+import android.webkit.WebSettings.LOAD_NO_CACHE
+import android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import com.example.elandmall_kotlin.databinding.ViewCommonWebViewBinding
 import com.example.elandmall_kotlin.ui.BaseViewHolder
+import com.example.elandmall_kotlin.ui.EventBus
+import com.example.elandmall_kotlin.ui.LinkEvent
 import com.example.elandmall_kotlin.ui.ModuleData
+import com.example.elandmall_kotlin.util.setHtmlDoc
 
 class CommonWebViewViewHolder(private val binding: ViewCommonWebViewBinding) : BaseViewHolder(binding.root) {
+    val mWebViewClient by lazy { CommonWebViewClient() }
     override fun onBind(item: Any, pos: Int) {
         (item as? ModuleData.CommonWebViewData)?.let {
             initUI(it)
         }
     }
 
-    fun initUI(data: ModuleData.CommonWebViewData) = with(binding){
-        webivew.settings.apply {
-            javaScriptEnabled = true
+    fun initUI(data: ModuleData.CommonWebViewData) = with(binding) {
+        val mWebview = WebView(binding.root.context).apply {
+            webViewClient = mWebViewClient
+            settings.apply {
+                javaScriptEnabled = true
+                useWideViewPort = true
+                builtInZoomControls = true
+                loadWithOverviewMode = true
+                domStorageEnabled = true
+                cacheMode = LOAD_NO_CACHE
+                mixedContentMode = MIXED_CONTENT_ALWAYS_ALLOW
+                layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
+            }
+            setInitialScale(1)
+            loadDataWithBaseURL(null, data.contentHtml.setHtmlDoc(), "text/html", "UTF-8", null);
         }
-        webivew.loadData(data.contentHtml, "text/html; charset=utf-8", "UTF-8");
+        if (webview.childCount == 0) {
+            webview.addView(mWebview)
+        }
+    }
+
+    inner class CommonWebViewClient : WebViewClient() {
+        override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+            EventBus.fire(LinkEvent(request?.url.toString()))
+            return true
+        }
     }
 }

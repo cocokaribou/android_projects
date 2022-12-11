@@ -6,6 +6,7 @@ import com.example.elandmall_kotlin.model.Goods
 import com.example.elandmall_kotlin.model.StorePickResponse
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.ModuleData
+import com.example.elandmall_kotlin.ui.TabType
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
 import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopStickyAdapter.Companion.storeShopCateAdapter
 import com.example.elandmall_kotlin.util.Logger
@@ -153,6 +154,7 @@ class StoreShopViewModel : BaseViewModel() {
                 )
                 moduleList.add(
                     ModuleData.CommonSortData(
+                        TabType.STORE_SHOP,
                         sortMap = storeSortMap,
                         includeTopPadding = false,
                         sortSelected = mSortKey,

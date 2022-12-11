@@ -151,6 +151,7 @@ sealed class ModuleData {
     }
 
     data class CommonSortData(
+        val tabType: TabType,
         val sortMap: Map<String, Any>,
         val includeTopPadding: Boolean,
         var sortSelected: String,

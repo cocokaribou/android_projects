@@ -88,4 +88,7 @@ dependencies {
 
     // viewPager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
+    // jsoup
+    implementation 'org.jsoup:jsoup:1.13.1'
 }

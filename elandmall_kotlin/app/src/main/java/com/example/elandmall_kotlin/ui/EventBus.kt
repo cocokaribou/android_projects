@@ -12,7 +12,7 @@ object EventBus {
     private var lastEventTime: Long = 0
 
     val linkEvent: MutableLiveData<SingleLiveEvent<LinkEvent>> = MutableLiveData()
-    val storeShopEvent: MutableLiveData<SingleLiveEvent<StoreShopEvent>> = MutableLiveData()
+    val storeShopEvent: MutableLiveData<SingleLiveEvent<ViewHolderEvent>> = MutableLiveData()
 
     fun fire(event: LinkEvent, checkInterval: Boolean = true) {
         if (checkInterval && isIntervalTooShort()) return
@@ -20,7 +20,7 @@ object EventBus {
         linkEvent.value = SingleLiveEvent(event)
     }
 
-    fun fire(event: StoreShopEvent, checkInterval: Boolean = true) {
+    fun fire(event: ViewHolderEvent, checkInterval: Boolean = true) {
         if (checkInterval && isIntervalTooShort()) return
 
         storeShopEvent.value = SingleLiveEvent(event)
@@ -75,47 +75,34 @@ enum class LinkEventType {
     WEB
 }
 
-class StoreShopEvent {
-    val type: StoreShopEventType
+class ViewHolderEvent {
+    val eventType: ViewHolderEventType
+    val tabType: TabType
     val content: Any
 
-    constructor(type: StoreShopEventType) {
-        this.type = type
+    constructor(eventType: ViewHolderEventType, tabType: TabType) {
+        this.eventType = eventType
+        this.tabType = tabType
         this.content = 0
     }
 
-    constructor(type: StoreShopEventType, content: Any) {
-        this.type = type
+    constructor(eventType: ViewHolderEventType, tabType: TabType, content: Any) {
+        this.eventType = eventType
+        this.tabType = tabType
         this.content = content
     }
-
-    constructor(type: StoreShopEventType, index :Int) {
-        this.type = type
-        this.content = index
-    }
-
-    constructor(index:Int) {
-        this.type = StoreShopEventType.CATEGORY_SCROLL
-        this.content = index
-    }
-
 }
 
-enum class StoreShopEventType {
+enum class ViewHolderEventType {
     GRID_CLICK,
     SORT_CLICK,
     STORE_CLICK,
     CATEGORY_SCROLL
 }
 
-class PlanDetailEvent {
-
-}
-
-enum class PlanDetailEventType {
-    GRID_CLICK,
-    TAB_CLICK,
-    CATEGORY_SCROLL
+enum class TabType {
+    STORE_SHOP,
+    PLAN_DETAIL
 }
 
 class SingleLiveEvent<out T>(private val content: T) {

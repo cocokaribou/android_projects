@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.PlanDetailResponse
 import com.example.elandmall_kotlin.ui.ModuleData
+import com.example.elandmall_kotlin.ui.TabType
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
 import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.launch
@@ -80,6 +81,7 @@ class PlanDetailViewModel : BaseViewModel() {
                 val map = tabData.map { it.dispCtgNm!! to i++ }.toMap()
                 moduleList.add(
                     ModuleData.CommonSortData(
+                        TabType.PLAN_DETAIL,
                         map,
                         includeTopPadding = true,
                         sortSelected = tabData[1].dispCtgNm ?: "",
