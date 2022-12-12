@@ -40,7 +40,7 @@ class StoreShopModuleFragment : BaseModuleFragment() {
         }
 
         // holder click events
-        EventBus.storeShopEvent.observe(requireActivity()) {
+        EventBus.viewHolderEvent.observe(requireActivity()) {
             it.getIfNotHandled()?.let { event ->
                 if (event.tabType == TabType.STORE_SHOP) {
                     when (event.eventType) {

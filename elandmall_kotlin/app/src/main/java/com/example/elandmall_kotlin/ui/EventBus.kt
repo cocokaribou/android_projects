@@ -12,7 +12,7 @@ object EventBus {
     private var lastEventTime: Long = 0
 
     val linkEvent: MutableLiveData<SingleLiveEvent<LinkEvent>> = MutableLiveData()
-    val storeShopEvent: MutableLiveData<SingleLiveEvent<ViewHolderEvent>> = MutableLiveData()
+    val viewHolderEvent: MutableLiveData<SingleLiveEvent<ViewHolderEvent>> = MutableLiveData()
 
     fun fire(event: LinkEvent, checkInterval: Boolean = true) {
         if (checkInterval && isIntervalTooShort()) return
@@ -23,7 +23,7 @@ object EventBus {
     fun fire(event: ViewHolderEvent, checkInterval: Boolean = true) {
         if (checkInterval && isIntervalTooShort()) return
 
-        storeShopEvent.value = SingleLiveEvent(event)
+        viewHolderEvent.value = SingleLiveEvent(event)
     }
 
     private fun isIntervalTooShort(): Boolean {

@@ -29,7 +29,7 @@ var planDetailSelected = 0
 
 class BottomSheetFragment(
     private val type: DialogType,
-    private val list: List<Any>
+    private val list: List<Any>,
 ) :
     BottomSheetDialogFragment() {
     private val mAdapter by lazy { DialogAdapter().apply { items = list } }
@@ -162,6 +162,9 @@ class BottomSheetFragment(
                     if (adapterPosition == sortSelected) {
                         selector.isSelected = true
                         name.setTextColor(resources.getColor(R.color.check_blue, null))
+                    } else {
+                        selector.isSelected = false
+                        name.setTextColor(Color.parseColor("#2b2b2b"))
                     }
 
                     root.setOnClickListener {
@@ -185,13 +188,16 @@ class BottomSheetFragment(
         inner class DialogPlanDetailTabHolder(private val binding: ViewDialogItemPlanDetailBinding) :
             RecyclerView.ViewHolder(binding.root) {
             fun onBind() = with(binding) {
-                val data = items[adapterPosition] as? PlanDetailResponse.Tab
+                val data = items[adapterPosition] as? String
                 data?.let { it ->
-                    name.text = it.dispCtgNm
+                    name.text = it
 
                     if (adapterPosition == planDetailSelected) {
                         selector.isSelected = true
                         name.setTextColor(resources.getColor(R.color.check_blue, null))
+                    } else {
+                        selector.isSelected = false
+                        name.setTextColor(Color.parseColor("#2b2b2b"))
                     }
 
                     root.setOnClickListener {
@@ -201,7 +207,7 @@ class BottomSheetFragment(
                                 ViewHolderEvent(
                                     eventType = ViewHolderEventType.SORT_CLICK,
                                     tabType = TabType.PLAN_DETAIL,
-                                    data
+                                    adapterPosition
                                 )
                             )
                         }

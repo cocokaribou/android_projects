@@ -49,7 +49,7 @@
 
     <!-- plan detail sticky -->
     <include
-        android:id="@+id/plandetail_sticky_title"
+        android:id="@+id/plandetail_title"
         layout="@layout/view_common_center_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,11 +57,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/plandetail_sticky_sort"
+        android:id="@+id/plandetail_sort"
         layout="@layout/view_common_sort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/plandetail_sticky_title" />
+        app:layout_constraintTop_toBottomOf="@id/plandetail_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

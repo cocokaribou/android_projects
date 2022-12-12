@@ -6,16 +6,16 @@ import com.example.elandmall_kotlin.model.PlanDetailResponse
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.TabType
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
-import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.launch
 
 class PlanDetailViewModel : BaseViewModel() {
     private val repository: PlanDetailRepository by lazy { PlanDetailRepository() }
 
     var planShopName = ""
-    var tabData = mutableListOf<PlanDetailResponse.Tab>()
+    var tabList = listOf<String>()
     var mGridNo = 0
 
+    var indexList = mutableListOf<Int>()
     var goodsInfoData = listOf<PlanDetailResponse.GoodsInfo>()
     private var goodsModuleList = mutableListOf<ModuleData>()
     private var moduleList = mutableListOf<ModuleData>()
@@ -73,18 +73,16 @@ class PlanDetailViewModel : BaseViewModel() {
 
             // common sort
             if (!planDetailData.tabList.isNullOrEmpty()) {
-                tabData = planDetailData.tabList.toMutableList().apply {
-                    add(0, PlanDetailResponse.Tab("전체보기"))
-                }
+                tabList = planDetailData.tabList.map { it.dispCtgNm ?: "" }
 
                 var i = 0
-                val map = tabData.map { it.dispCtgNm!! to i++ }.toMap()
+                val map = tabList.associateWith { i++ }
                 moduleList.add(
                     ModuleData.CommonSortData(
                         TabType.PLAN_DETAIL,
                         map,
                         includeTopPadding = true,
-                        sortSelected = tabData[1].dispCtgNm ?: "",
+                        sortSelected = tabList[0],
                         gridSelected = mGridNo
                     )
                 )
@@ -101,6 +99,7 @@ class PlanDetailViewModel : BaseViewModel() {
                 goodsModuleList = moduleList.map { it.clone() }.toMutableList()
 
                 planDetailData.goodsInfo.forEachIndexed { i, tabData ->
+                    indexList.add(i)
                     goodsModuleList.add(
                         ModuleData.PlanDetailTabTitleData(
                             title = tabData.tabTitle,
@@ -109,6 +108,7 @@ class PlanDetailViewModel : BaseViewModel() {
 
                     tabData.goodsList?.let { goodsList ->
                         goodsList.chunked(2).forEach {
+                            indexList.add(i)
                             goodsModuleList.add(
                                 ModuleData.CommonGoodsGridData(
                                     goodsListData = it
@@ -123,6 +123,7 @@ class PlanDetailViewModel : BaseViewModel() {
     }
 
     fun updateGrid() {
+        indexList.clear()
         if (mGridNo >= 2) {
             mGridNo = 0
         } else {
@@ -132,6 +133,7 @@ class PlanDetailViewModel : BaseViewModel() {
         goodsModuleList = moduleList.map { it.clone() }.toMutableList()
 
         goodsInfoData.forEachIndexed { i, data ->
+            indexList.add(i)
             goodsModuleList.add(
                 ModuleData.PlanDetailTabTitleData(
                     data.tabTitle
@@ -142,6 +144,7 @@ class PlanDetailViewModel : BaseViewModel() {
                 when (mGridNo) {
                     0 -> {
                         goodsList.chunked(2).forEach {
+                            indexList.add(i)
                             goodsModuleList.add(
                                 ModuleData.CommonGoodsGridData(it)
                             )
@@ -149,6 +152,7 @@ class PlanDetailViewModel : BaseViewModel() {
                     }
                     1 -> {
                         goodsList.forEach {
+                            indexList.add(i)
                             goodsModuleList.add(
                                 ModuleData.CommonGoodsLinearData(it)
                             )
@@ -156,6 +160,7 @@ class PlanDetailViewModel : BaseViewModel() {
                     }
                     2 -> {
                         goodsList.forEach {
+                            indexList.add(i)
                             goodsModuleList.add(
                                 ModuleData.CommonGoodsLargeData(it)
                             )
@@ -166,5 +171,9 @@ class PlanDetailViewModel : BaseViewModel() {
                 uiList.postValue(goodsModuleList)
             }
         }
+    }
+
+    fun updateSort() {
+
     }
 }
