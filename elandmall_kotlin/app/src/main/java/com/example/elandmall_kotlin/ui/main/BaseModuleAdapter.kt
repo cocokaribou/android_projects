@@ -32,7 +32,7 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                     LayoutInflater.from(parent.context),
                     parent,
                     false
-                )
+                ), lifecycleOwner
             )
 
             ModuleData.HomeCategoryIconData.ordinal() -> HomeCategoryViewHolder(

@@ -26,21 +26,30 @@ abstract class BaseModuleFragment : Fragment() {
 
     val moduleAdapter by lazy { BaseModuleAdapter(this) }
 
+    override fun onResume() {
+        super.onResume()
+        observeData()
+
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentBaseModuleBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         arguments?.let {
             tabName = it.getString(KEY_ITEM_TAB_NAME)!!
             url = it.getString(KEY_ITEM_URL) ?: ""
         }
 
-        _binding = FragmentBaseModuleBinding.inflate(inflater, container, false)
-
-        observeData()
-
         // base UI
         with(binding) {
             // refresh
             swipeRefresh.setOnRefreshListener {
-                Logger.v("✅ refresh")
+
                 binding.swipeRefresh.isRefreshing = false
                 requestRefresh()
             }
@@ -51,8 +60,6 @@ abstract class BaseModuleFragment : Fragment() {
                 adapter = moduleAdapter
             }
         }
-
-        return binding.root
     }
 
     fun addScrollListener(listener: RecyclerView.OnScrollListener) {

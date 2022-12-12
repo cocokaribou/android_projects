@@ -1,7 +1,10 @@
 package com.example.elandmall_kotlin.ui.main.tabs.plandetail
 
+import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,8 +19,8 @@ import com.example.elandmall_kotlin.util.Logger
 class PlanDetailModuleFragment : BaseModuleFragment() {
     override val viewModel: PlanDetailViewModel by viewModels()
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         addScrollListener(scrollListener)
     }
 

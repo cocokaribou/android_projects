@@ -7,19 +7,20 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.model.StoreShopResponse
-import com.example.elandmall_kotlin.ui.*
+import com.example.elandmall_kotlin.ui.EventBus
+import com.example.elandmall_kotlin.ui.ModuleData
+import com.example.elandmall_kotlin.ui.TabType
+import com.example.elandmall_kotlin.ui.ViewHolderEventType
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopStickyAdapter.Companion.storeShopCateAdapter
-import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.getScreenWidthToPx
-import kotlin.math.round
 
 class StoreShopModuleFragment : BaseModuleFragment() {
 
     override val viewModel: StoreShopViewModel by viewModels()
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         addScrollListener(scrollListener)
     }
 

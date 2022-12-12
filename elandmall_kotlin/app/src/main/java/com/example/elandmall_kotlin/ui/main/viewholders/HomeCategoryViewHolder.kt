@@ -19,10 +19,11 @@ import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.viewholders.HomeCategoryViewHolder.Companion.isExpanded
 import com.example.elandmall_kotlin.util.GridSideSpacingItemDecoration
 import com.example.elandmall_kotlin.util.Logger
+import com.example.elandmall_kotlin.util.dpToPx
 
-val SPAN_COUNT = 5
-val ROW_COUNT = 2
-val INDEX_MORE = (SPAN_COUNT * ROW_COUNT) - 1
+const val SPAN_COUNT = 5
+const val ROW_COUNT = 2
+const val INDEX_MORE = (SPAN_COUNT * ROW_COUNT) - 1
 
 class HomeCategoryViewHolder(private val binding: ViewHomeCategoryBinding) : BaseViewHolder(binding.root) {
     private val mAdapter by lazy { CategoryListAdapter(::toggleExpand) }
@@ -70,7 +71,7 @@ class HomeCategoryViewHolder(private val binding: ViewHomeCategoryBinding) : Bas
         mAdapter.notifyItemChanged(INDEX_MORE)
     }
 
-    inner class CategoryListAdapter(val toggleListener: () -> Unit) :
+    inner class CategoryListAdapter(private val toggleListener: () -> Unit) :
         ListAdapter<HomeResponse.HomeCategoryIcon, CategoryListAdapter.CategoryItemViewHolder>(object :
             DiffUtil.ItemCallback<HomeResponse.HomeCategoryIcon>() {
             override fun areItemsTheSame(oldItem: HomeResponse.HomeCategoryIcon, newItem: HomeResponse.HomeCategoryIcon): Boolean {
@@ -99,30 +100,34 @@ class HomeCategoryViewHolder(private val binding: ViewHomeCategoryBinding) : Bas
 
         inner class CategoryItemViewHolder(private val binding: ViewHomeCategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
             fun onBind(toggle: () -> Unit) = with(binding) {
+                val data = currentList[adapterPosition]
+
+                Glide.with(root.context)
+                    .load(data.imageUrl)
+                    .override(30.dpToPx(), 30.dpToPx())
+                    .into(cateImg)
+
                 if (adapterPosition == INDEX_MORE && !isExpanded) {
                     // expand icon
                     root.setOnClickListener {
                         toggle.invoke()
                     }
 
-                    cateName.text = "더보기"
-
-                    Glide.with(itemView.context)
-                        .load(R.drawable.home_category_more)
-                        .into(cateImg)
+                    cateMore.visibility = View.VISIBLE
+                    cateMoreTxt.visibility = View.VISIBLE
+                    cateImg.visibility = View.GONE
 
                 } else {
                     // category icons
-                    val data = currentList[adapterPosition]
                     root.setOnClickListener {
                         EventBus.fire(LinkEvent(data.linkUrl))
                     }
 
                     cateName.text = data.title
 
-                    Glide.with(itemView.context)
-                        .load(data.imageUrl)
-                        .into(cateImg)
+                    cateMore.visibility = View.GONE
+                    cateMoreTxt.visibility = View.GONE
+                    cateImg.visibility = View.VISIBLE
                 }
             }
         }

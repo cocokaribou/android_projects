@@ -59,7 +59,7 @@ class HomeBrandViewHolder(private val binding: ViewHomeBrandBinding) : BaseViewH
         inner class BrandIconViewHolder(val binding: ViewHomeBrandItemBinding) : RecyclerView.ViewHolder(binding.root) {
             fun onBind() {
                 val data = currentList[adapterPosition]
-                Glide.with(itemView.context)
+                Glide.with(binding.root.context)
                     .load(data.imageUrl)
                     .into(binding.brandImg)
 

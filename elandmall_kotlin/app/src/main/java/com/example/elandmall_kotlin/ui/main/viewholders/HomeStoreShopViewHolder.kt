@@ -66,7 +66,7 @@ class HomeStoreShopViewHolder(private val binding: ViewHomeStoreShopBinding) : B
         inner class BannerViewHolder(private val binding: ViewHomeStoreShopBannerItemBinding) : RecyclerView.ViewHolder(binding.root) {
             fun onBind() {
                 val data = currentList[adapterPosition]
-                Glide.with(itemView.context)
+                Glide.with(binding.root.context)
                     .load(data.imageUrl)
                     .into(binding.bannerImg)
 

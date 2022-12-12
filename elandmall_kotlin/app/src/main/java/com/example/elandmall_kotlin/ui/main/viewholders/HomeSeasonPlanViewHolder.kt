@@ -14,6 +14,7 @@ import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.util.GoodsUtil.drawGoodsUI
 import com.example.elandmall_kotlin.util.GoodsUtil.goodsDiff
+import com.example.elandmall_kotlin.util.getScreenWidthToPx
 import com.example.elandmall_kotlin.util.getSpannedSizeText
 
 class HomeSeasonPlanViewHolder(private val binding: ViewHomeSeasonPlanBinding) : BaseViewHolder(binding.root) {
@@ -25,8 +26,9 @@ class HomeSeasonPlanViewHolder(private val binding: ViewHomeSeasonPlanBinding) :
     }
 
     private fun initView(data: HomeResponse.HomeSeasonPlan.HomeSeasonPlanItem) = with(binding) {
-        Glide.with(itemView.context)
+        Glide.with(root.context)
             .load("http:" + data.imageUrl)
+            .override(getScreenWidthToPx(), getScreenWidthToPx())
             .into(seasonImage)
 
         seasonList.adapter = mAdapter

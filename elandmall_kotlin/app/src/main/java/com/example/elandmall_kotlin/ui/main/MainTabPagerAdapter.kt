@@ -8,12 +8,14 @@ import androidx.viewpager2.adapter.FragmentViewHolder
 import com.example.elandmall_kotlin.common.CommonConst.HOME_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.PLANS_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.STORE_MENU_CD
+import com.example.elandmall_kotlin.model.MainGnbResponse
 import com.example.elandmall_kotlin.model.PlanDetailResponse
 import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.main.tabs.home.HomeModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.plandetail.PlanDetailModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.web.WebviewModulesFragment
 import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopModuleFragment
+import com.example.elandmall_kotlin.util.Logger
 
 class MainTabPagerAdapter(fm: FragmentManager, lifeCycle: Lifecycle) : FragmentStateAdapter(fm, lifeCycle) {
     // TODO infinite horizontal scroll
@@ -22,38 +24,44 @@ class MainTabPagerAdapter(fm: FragmentManager, lifeCycle: Lifecycle) : FragmentS
 
     override fun getItemCount() = fragments.size
 
-    fun updateFragment() {
-        val gnbList = MemDataSource.mainGnbCache?.data?.gnbList ?: return
-
+    fun initFragments(gnbList: List<MainGnbResponse.GNBData>) {
+        fragments.clear()
         gnbList.forEach { gnb ->
-            val fragment = when (gnb.menuCd) {
+            when (gnb.menuCd) {
                 HOME_MENU_CD -> {
-                    HomeModuleFragment.create(
-                        tabName = gnb.menuName ?: "",
-                        apiUrl = gnb.apiUrl ?: ""
+                    fragments.add(
+                        HomeModuleFragment.create(
+                            tabName = gnb.menuName ?: "",
+                            apiUrl = gnb.apiUrl ?: ""
+                        )
                     )
                 }
                 STORE_MENU_CD -> {
-                    StoreShopModuleFragment.create(
-                        tabName = gnb.menuName ?: "",
-                        apiUrl = gnb.apiUrl ?: ""
+                    fragments.add(
+                        StoreShopModuleFragment.create(
+                            tabName = gnb.menuName ?: "",
+                            apiUrl = gnb.apiUrl ?: ""
+                        )
                     )
                 }
                 PLANS_MENU_CD -> {
-                    PlanDetailModuleFragment.create(
-                        tabName = gnb.menuName ?: "",
-                        apiUrl = gnb.apiUrl ?: ""
+                    fragments.add(
+                        PlanDetailModuleFragment.create(
+                            tabName = gnb.menuName ?: "",
+                            apiUrl = gnb.apiUrl ?: ""
+                        )
                     )
                 }
 
                 else -> {
-                    WebviewModulesFragment.create(
-                        tabName = gnb.menuName ?: "",
-                        apiUrl = gnb.apiUrl ?: ""
+                    fragments.add(
+                        WebviewModulesFragment.create(
+                            tabName = gnb.menuName ?: "",
+                            apiUrl = gnb.apiUrl ?: ""
+                        )
                     )
                 }
             }
-            fragments.add(fragment)
         }
 
         notifyDataSetChanged()

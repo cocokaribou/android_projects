@@ -3,17 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="60dp"
-    android:paddingVertical="16dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingVertical="16dp">
+
 
     <ImageView
         android:id="@+id/cate_img"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
-        tools:background="@drawable/home_category_more"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/cate_more"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/home_category_more"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/cate_name"
@@ -30,6 +41,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cate_img"
         tools:text="카테고리" />
+
+    <TextView
+        android:id="@+id/cate_more_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:letterSpacing="-0.05"
+        android:lines="1"
+        android:maxLength="6"
+        android:maxLines="1"
+        android:text="@string/more"
+        android:textColor="#353535"
+        android:textSize="11dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cate_more" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

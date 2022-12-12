@@ -24,7 +24,7 @@
         android:visibility="gone"
         android:backgroundTint="#88ffffff"
         android:background="@drawable/background_solid_circle"
-        android:scaleType="center"
+        android:scaleType="centerInside"
         android:src="@drawable/ic_share"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

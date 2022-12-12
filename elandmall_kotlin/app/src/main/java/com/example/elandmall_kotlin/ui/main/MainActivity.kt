@@ -1,7 +1,6 @@
 package com.example.elandmall_kotlin.ui.main
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.viewModels
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.BaseActivity
@@ -9,7 +8,6 @@ import com.example.elandmall_kotlin.BaseApplication
 import com.example.elandmall_kotlin.databinding.ActivityMainBinding
 import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.util.Logger
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -21,7 +19,13 @@ import com.google.android.material.tabs.TabLayoutMediator
 class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.activity_main) {
     override val viewModel by viewModels<BaseViewModel>()
 
-    val mAdapter by lazy { MainTabPagerAdapter(supportFragmentManager, lifecycle) }
+    private val mAdapter by lazy { MainTabPagerAdapter(supportFragmentManager, lifecycle) }
+
+    init {
+        MemDataSource.mainGnbCache?.data?.gnbList?.let {
+            mAdapter.initFragments(it)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,28 +44,28 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.a
     }
 
     private fun initGNB() = with(binding) {
-        mAdapter.updateFragment()
         viewpager.apply {
             adapter = mAdapter
             isUserInputEnabled = true
+            setCurrentItem(0, false)
         }
-        viewpager.currentItem = 0
-        val gnbData = MemDataSource.mainGnbCache?.data?.gnbList
+
+        MemDataSource.mainGnbCache?.data?.gnbList?.let {
+            TabLayoutMediator(tabs, viewpager) { tab, position ->
+                tab.text = it[position].menuName
+            }.attach()
+        }
 
         tabs.apply {
-            clearOnTabSelectedListeners()
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-//                    Logger.v("${gnbData?.get(tab?.position ?: 0)?.menuName}")
+                    // do something
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}
                 override fun onTabReselected(tab: TabLayout.Tab?) {}
             })
         }
-        TabLayoutMediator(tabs, viewpager) { tab, position ->
-            tab.text = gnbData?.get(position)?.menuName
-        }.attach()
     }
 
     private fun initObserve() {

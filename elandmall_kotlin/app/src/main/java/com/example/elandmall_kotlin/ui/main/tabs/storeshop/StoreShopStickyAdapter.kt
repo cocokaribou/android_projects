@@ -57,12 +57,12 @@ class StoreShopStickyAdapter : RecyclerView.Adapter<StoreShopStickyAdapter.Stick
             val currentItem = currentList[adapterPosition]
 
             // prevent glitching
-            Glide.with(itemView.context)
+            Glide.with(root.context)
                 .load("http:${currentItem.dactiveImgUrl}")
                 .override(30.dpToPx(), 30.dpToPx())
                 .into(cateImgDefault)
 
-            Glide.with(itemView.context)
+            Glide.with(root.context)
                 .load("http:${currentItem.activeImgUrl}")
                 .override(30.dpToPx(), 30.dpToPx())
                 .into(cateImgSelected)

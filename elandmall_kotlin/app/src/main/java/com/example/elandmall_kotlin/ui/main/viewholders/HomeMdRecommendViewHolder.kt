@@ -84,7 +84,7 @@ class HomeMdRecommendViewHolder(private val binding: ViewHomeMdBinding) : BaseVi
                 selectIndicator.isSelected = adapterPosition == selectedTab
 
                 val data = currentList[adapterPosition]
-                Glide.with(itemView.context)
+                Glide.with(root.context)
                     .load("http:" + data.imageUrl)
                     .into(cateImg)
 
