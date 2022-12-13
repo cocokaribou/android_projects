@@ -11,7 +11,6 @@ import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.FragmentBottomSheetBinding
 import com.example.elandmall_kotlin.databinding.ViewDialogItemPlanDetailBinding
 import com.example.elandmall_kotlin.databinding.ViewDialogItemStorePickBinding
-import com.example.elandmall_kotlin.model.PlanDetailResponse
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.*
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -19,7 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 enum class DialogType {
     STORE_PICK,
     STORE_SHOP_SORT,
-    PLAN_DETAIL_TAB,
+    PLAN_DETAIL,
     OTHER
 }
 
@@ -33,6 +32,10 @@ class BottomSheetFragment(
 ) :
     BottomSheetDialogFragment() {
     private val mAdapter by lazy { DialogAdapter().apply { items = list } }
+
+    fun setPlanDetailSelected(selected: Int) {
+        planDetailSelected = selected
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentBottomSheetBinding.inflate(inflater).apply {
@@ -49,7 +52,7 @@ class BottomSheetFragment(
                 DialogType.STORE_SHOP_SORT -> {
                     dialogTitle.text = "상품분류"
                 }
-                DialogType.PLAN_DETAIL_TAB -> {
+                DialogType.PLAN_DETAIL -> {
                     dialogTitle.text = "기획전 분류"
                 }
             }
@@ -80,7 +83,7 @@ class BottomSheetFragment(
                         )
                     )
                 }
-                DialogType.PLAN_DETAIL_TAB -> {
+                DialogType.PLAN_DETAIL -> {
                     return DialogPlanDetailTabHolder(
                         ViewDialogItemPlanDetailBinding.inflate(
                             LayoutInflater.from(parent.context),
@@ -110,7 +113,7 @@ class BottomSheetFragment(
                 DialogType.STORE_SHOP_SORT -> {
                     (holder as? DialogStorePickSortHolder)?.onBind()
                 }
-                DialogType.PLAN_DETAIL_TAB -> {
+                DialogType.PLAN_DETAIL -> {
                     (holder as? DialogPlanDetailTabHolder)?.onBind()
                 }
 

@@ -6,6 +6,7 @@ import com.example.elandmall_kotlin.model.PlanDetailResponse
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.TabType
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
+import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.launch
 
 class PlanDetailViewModel : BaseViewModel() {
@@ -49,7 +50,7 @@ class PlanDetailViewModel : BaseViewModel() {
     private fun setPlanDetailModules(data: PlanDetailResponse.Data?) {
         moduleList.clear()
         data?.let { planDetailData ->
-            // plandetail top webview
+            // plan shop info
             planDetailData.planShopInfo?.let { planShopInfo ->
                 if (!planShopInfo.planShopNm.isNullOrEmpty()) {
                     planShopName = planShopInfo.planShopNm
@@ -99,7 +100,9 @@ class PlanDetailViewModel : BaseViewModel() {
                 goodsModuleList = moduleList.map { it.clone() }.toMutableList()
 
                 planDetailData.goodsInfo.forEachIndexed { i, tabData ->
+                    // for sticky ui
                     indexList.add(i)
+
                     goodsModuleList.add(
                         ModuleData.PlanDetailTabTitleData(
                             title = tabData.tabTitle,
@@ -124,13 +127,19 @@ class PlanDetailViewModel : BaseViewModel() {
 
     fun updateGrid() {
         indexList.clear()
+
         if (mGridNo >= 2) {
             mGridNo = 0
         } else {
             mGridNo++
         }
 
-        goodsModuleList = moduleList.map { it.clone() }.toMutableList()
+        goodsModuleList = moduleList.map {
+            if (it is ModuleData.CommonSortData) {
+                it.gridSelected = mGridNo
+            }
+            it.clone()
+        }.toMutableList()
 
         goodsInfoData.forEachIndexed { i, data ->
             indexList.add(i)
@@ -167,13 +176,8 @@ class PlanDetailViewModel : BaseViewModel() {
                         }
                     }
                 }
-
                 uiList.postValue(goodsModuleList)
             }
         }
-    }
-
-    fun updateSort() {
-
     }
 }

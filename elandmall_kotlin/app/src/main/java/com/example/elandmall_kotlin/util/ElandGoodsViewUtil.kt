@@ -185,6 +185,9 @@ object GoodsUtil {
                     it.isSelected = !it.isSelected
                 }
             } catch (e: RuntimeException) {}
+
+            // goods link
+
         }
     }
 

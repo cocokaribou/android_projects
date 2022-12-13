@@ -13,10 +13,11 @@ import com.example.elandmall_kotlin.ui.ViewHolderEventType
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.BottomSheetFragment
 import com.example.elandmall_kotlin.ui.main.tabs.DialogType
+import com.example.elandmall_kotlin.util.Logger
 
 
 class PlanDetailModuleFragment : BaseModuleFragment() {
-    val bottomSheetListener: (Int) -> Int = { 0 }
+    var sortSelected = 0
     override val viewModel: PlanDetailViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -24,6 +25,10 @@ class PlanDetailModuleFragment : BaseModuleFragment() {
         addScrollListener(scrollListener)
     }
 
+    override fun onResume() {
+        super.onResume()
+        addScrollListener(scrollListener)
+    }
     override fun onPause() {
         super.onPause()
         removeScrollListener(scrollListener)
@@ -33,7 +38,6 @@ class PlanDetailModuleFragment : BaseModuleFragment() {
         viewModel.uiList.observe(this) {
             setModules(it)
 
-            // sticky header
             initSticky()
         }
 
@@ -57,31 +61,34 @@ class PlanDetailModuleFragment : BaseModuleFragment() {
     }
 
     private fun initSticky() = with(binding) {
-        plandetailSort.apply {
-            sort.text = viewModel.tabList[0]
-            sort.setOnClickListener {
-                BottomSheetFragment(
-                    type = DialogType.PLAN_DETAIL_TAB,
-                    list = viewModel.tabList
-                ).show(requireActivity().supportFragmentManager, "")
-            }
-
-            val imgSource = when (viewModel.mGridNo) {
-                0 -> R.drawable.ic_btn_holder_grid
-                1 -> R.drawable.ic_btn_holder_linear
-                else -> R.drawable.ic_btn_holder_large
-            }
-            grid.setImageResource(imgSource)
-            grid.setOnClickListener {
-                viewModel.updateGrid()
-            }
-        }
-
         plandetailTitle.apply {
             root.visibility = View.VISIBLE
             title.text = viewModel.planShopName
         }
 
+        plandetailSort.sort.apply {
+            text = viewModel.tabList[sortSelected]
+            setOnClickListener {
+                BottomSheetFragment(
+                    type = DialogType.PLAN_DETAIL,
+                    list = viewModel.tabList
+                ).apply {
+                    setPlanDetailSelected(sortSelected)
+                }.show(requireActivity().supportFragmentManager, "")
+            }
+        }
+
+        plandetailSort.grid.apply {
+            val imgSource = when (viewModel.mGridNo) {
+                0 -> R.drawable.ic_btn_holder_grid
+                1 -> R.drawable.ic_btn_holder_linear
+                else -> R.drawable.ic_btn_holder_large
+            }
+            setImageResource(imgSource)
+            setOnClickListener {
+                viewModel.updateGrid()
+            }
+        }
     }
 
     private val scrollListener = object : RecyclerView.OnScrollListener() {
@@ -102,6 +109,7 @@ class PlanDetailModuleFragment : BaseModuleFragment() {
 
                 if (firstVisiblePos > 3) {
                     val tabIndex = viewModel.indexList[firstVisiblePos - 3]
+                    sortSelected = tabIndex
                     binding.plandetailSort.sort.text = viewModel.tabList[tabIndex]
                 }
             }
@@ -109,7 +117,6 @@ class PlanDetailModuleFragment : BaseModuleFragment() {
     }
 
     private fun scrollToY(pos: Int) {
-        bottomSheetListener.invoke(pos)
         val posList = mutableListOf<Int>()
         moduleAdapter.value.forEachIndexed { index, moduleData ->
             if (moduleData is ModuleData.PlanDetailTabTitleData) {

@@ -26,9 +26,13 @@ class CommonSortViewHolder(private val binding: ViewCommonSortBinding) : BaseVie
 
         sort.apply {
             text = data.sortSelected
+            val dialogType = when (data.tabType) {
+                TabType.PLAN_DETAIL -> DialogType.PLAN_DETAIL
+                TabType.STORE_SHOP -> DialogType.STORE_SHOP_SORT
+            }
             setOnClickListener {
                 BottomSheetFragment(
-                    DialogType.STORE_SHOP_SORT,
+                    dialogType,
                     list
                 ).show((binding.root.context as FragmentActivity).supportFragmentManager, "")
             }

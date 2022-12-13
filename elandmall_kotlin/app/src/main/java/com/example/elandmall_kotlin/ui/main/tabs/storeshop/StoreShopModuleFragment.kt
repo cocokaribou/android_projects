@@ -24,6 +24,11 @@ class StoreShopModuleFragment : BaseModuleFragment() {
         addScrollListener(scrollListener)
     }
 
+    override fun onResume() {
+        super.onResume()
+        addScrollListener(scrollListener)
+    }
+
     override fun onPause() {
         super.onPause()
         removeScrollListener(scrollListener)
