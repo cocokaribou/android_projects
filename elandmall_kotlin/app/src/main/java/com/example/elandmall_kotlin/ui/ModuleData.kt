@@ -1,9 +1,6 @@
 package com.example.elandmall_kotlin.ui
 
-import com.example.elandmall_kotlin.model.Banner
-import com.example.elandmall_kotlin.model.Goods
-import com.example.elandmall_kotlin.model.HomeResponse
-import com.example.elandmall_kotlin.model.StoreShopResponse
+import com.example.elandmall_kotlin.model.*
 
 sealed class ModuleData {
     abstract fun clone(): ModuleData
@@ -258,6 +255,56 @@ sealed class ModuleData {
 
     data class PlanDetailTabTitleData(
         val title: String
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class EKidsCategoryData(
+        val eKidsCateList: List<EKidsResponse.Ctg>
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class EKidsSpecialGoodsData(
+        val goodsData: Goods
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class EKidsBrandData(
+        val brandList: List<Banner>
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class EKidsRecommendCategoryData(
+        val categoryList: List<String>
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class EKidsExpandableData(
+        var title: String
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()

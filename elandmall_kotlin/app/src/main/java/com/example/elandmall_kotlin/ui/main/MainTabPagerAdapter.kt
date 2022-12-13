@@ -5,12 +5,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.adapter.FragmentViewHolder
+import com.example.elandmall_kotlin.common.CommonConst.EKIDS_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.HOME_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.PLANS_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.STORE_MENU_CD
 import com.example.elandmall_kotlin.model.MainGnbResponse
 import com.example.elandmall_kotlin.model.PlanDetailResponse
 import com.example.elandmall_kotlin.repository.MemDataSource
+import com.example.elandmall_kotlin.ui.main.tabs.ekids.EKidsModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.home.HomeModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.plandetail.PlanDetailModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.web.WebviewModulesFragment
@@ -53,6 +55,14 @@ class MainTabPagerAdapter(fm: FragmentManager, lifeCycle: Lifecycle) : FragmentS
                     )
                 }
 
+                EKIDS_MENU_CD -> {
+                    fragments.add(
+                        EKidsModuleFragment.create(
+                            tabName = gnb.menuName ?: "",
+                            apiUrl = gnb.apiUrl ?: ""
+                        )
+                    )
+                }
                 else -> {
                     fragments.add(
                         WebviewModulesFragment.create(

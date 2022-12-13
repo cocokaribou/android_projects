@@ -47,77 +47,76 @@ class PlanDetailViewModel : BaseViewModel() {
         }
     }
 
-    private fun setPlanDetailModules(data: PlanDetailResponse.Data?) {
+    private fun setPlanDetailModules(data: PlanDetailResponse.Data) {
         moduleList.clear()
-        data?.let { planDetailData ->
-            // plan shop info
-            planDetailData.planShopInfo?.let { planShopInfo ->
-                if (!planShopInfo.planShopNm.isNullOrEmpty()) {
-                    planShopName = planShopInfo.planShopNm
-                    moduleList.add(
-                        ModuleData.CommonCenterTitleData(
-                            title = planShopInfo.planShopNm
-                        )
-                    )
-                }
-                if (planShopInfo.bannerInfo?.htmlCont != null) {
-                    moduleList.add(
-                        ModuleData.CommonWebViewData(
-                            contentHtml = planShopInfo.bannerInfo.htmlCont,
-                            contentUrl = planShopInfo.shareUrl,
-                            shareUrl = planShopInfo.shareUrl,
-                            shareImgPath = planShopInfo.shareImgPath
-                        )
-                    )
-                }
-            }
 
-            // common sort
-            if (!planDetailData.tabList.isNullOrEmpty()) {
-                tabList = planDetailData.tabList.map { it.dispCtgNm ?: "" }
-
-                var i = 0
-                val map = tabList.associateWith { i++ }
+        // plan shop info
+        data.planShopInfo?.let { planShopInfo ->
+            if (!planShopInfo.planShopNm.isNullOrEmpty()) {
+                planShopName = planShopInfo.planShopNm
                 moduleList.add(
-                    ModuleData.CommonSortData(
-                        TabType.PLAN_DETAIL,
-                        map,
-                        includeTopPadding = true,
-                        sortSelected = tabList[0],
-                        gridSelected = mGridNo
+                    ModuleData.CommonCenterTitleData(
+                        title = planShopInfo.planShopNm
                     )
                 )
             }
-
-            // tab title + goods
-            // changing UI
-            if (!planDetailData.goodsInfo.isNullOrEmpty()) {
-                planDetailData.goodsInfo.map {
-                    it.tabTitle = "${it.dispCtgNm}(${it.goodsList?.size ?: 0})"
-                }
-
-                goodsInfoData = planDetailData.goodsInfo
-                goodsModuleList = moduleList.map { it.clone() }.toMutableList()
-
-                planDetailData.goodsInfo.forEachIndexed { i, tabData ->
-                    // for sticky ui
-                    indexList.add(i)
-
-                    goodsModuleList.add(
-                        ModuleData.PlanDetailTabTitleData(
-                            title = tabData.tabTitle,
-                        )
+            if (planShopInfo.bannerInfo?.htmlCont != null) {
+                moduleList.add(
+                    ModuleData.CommonWebViewData(
+                        contentHtml = planShopInfo.bannerInfo.htmlCont,
+                        contentUrl = planShopInfo.shareUrl,
+                        shareUrl = planShopInfo.shareUrl,
+                        shareImgPath = planShopInfo.shareImgPath
                     )
+                )
+            }
+        }
 
-                    tabData.goodsList?.let { goodsList ->
-                        goodsList.chunked(2).forEach {
-                            indexList.add(i)
-                            goodsModuleList.add(
-                                ModuleData.CommonGoodsGridData(
-                                    goodsListData = it
-                                )
+        // common sort
+        if (!data.tabList.isNullOrEmpty()) {
+            tabList = data.tabList.map { it.dispCtgNm ?: "" }
+
+            var i = 0
+            val map = tabList.associateWith { i++ }
+            moduleList.add(
+                ModuleData.CommonSortData(
+                    TabType.PLAN_DETAIL,
+                    map,
+                    includeTopPadding = true,
+                    sortSelected = tabList[0],
+                    gridSelected = mGridNo
+                )
+            )
+        }
+
+        // tab title + goods
+        // changing UI
+        if (!data.goodsInfo.isNullOrEmpty()) {
+            data.goodsInfo.map {
+                it.tabTitle = "${it.dispCtgNm}(${it.goodsList?.size ?: 0})"
+            }
+
+            goodsInfoData = data.goodsInfo
+            goodsModuleList = moduleList.map { it.clone() }.toMutableList()
+
+            data.goodsInfo.forEachIndexed { i, tabData ->
+                // for sticky ui
+                indexList.add(i)
+
+                goodsModuleList.add(
+                    ModuleData.PlanDetailTabTitleData(
+                        title = tabData.tabTitle,
+                    )
+                )
+
+                tabData.goodsList?.let { goodsList ->
+                    goodsList.chunked(2).forEach {
+                        indexList.add(i)
+                        goodsModuleList.add(
+                            ModuleData.CommonGoodsGridData(
+                                goodsListData = it
                             )
-                        }
+                        )
                     }
                 }
             }

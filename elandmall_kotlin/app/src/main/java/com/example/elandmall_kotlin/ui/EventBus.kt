@@ -102,7 +102,8 @@ enum class ViewHolderEventType {
 
 enum class TabType {
     STORE_SHOP,
-    PLAN_DETAIL
+    PLAN_DETAIL,
+    EKIDS
 }
 
 class SingleLiveEvent<out T>(private val content: T) {

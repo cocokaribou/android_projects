@@ -226,6 +226,46 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
+            ModuleData.EKidsCategoryData.ordinal() -> EKidsCategoryViewHolder(
+                ViewEkidsCategoryBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.EKidsSpecialGoodsData.ordinal() -> EKidsSpecialGoodsViewHolder(
+                ViewEkidsSpecialGoodsBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.EKidsBrandData.ordinal() -> EKidsBrandViewHolder(
+                ViewEkidsBrandBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.EKidsRecommendCategoryData.ordinal() -> EKidsRecommendCategoryViewHolder(
+                ViewEkidsRecommendCategoryBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            ModuleData.EKidsExpandableData.ordinal() -> EKidsExpandableViewHolder(
+                ViewEkidsExpandableBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
             else -> UnknownViewHolder(
                 ViewUnknownHolderBinding.inflate(
                     LayoutInflater.from(parent.context),
