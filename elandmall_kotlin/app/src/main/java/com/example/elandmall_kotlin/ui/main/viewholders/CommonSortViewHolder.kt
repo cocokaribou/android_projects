@@ -28,7 +28,7 @@ class CommonSortViewHolder(private val binding: ViewCommonSortBinding) : BaseVie
             text = data.sortSelected
             val dialogType = when (data.tabType) {
                 TabType.PLAN_DETAIL -> DialogType.PLAN_DETAIL
-                TabType.STORE_SHOP -> DialogType.STORE_SHOP_SORT
+                else -> DialogType.STORE_SHOP_SORT
             }
             setOnClickListener {
                 BottomSheetFragment(

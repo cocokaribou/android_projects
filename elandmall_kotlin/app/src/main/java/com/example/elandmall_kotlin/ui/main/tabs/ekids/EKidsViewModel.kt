@@ -9,13 +9,17 @@ import com.example.elandmall_kotlin.ui.main.BaseViewModel
 import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.launch
 
+var weeklyBestSelected = ""
+var newArrivalSelected = ""
+
 class EKidsViewModel : BaseViewModel() {
     private val repository by lazy { EKidsRepository() }
 
     private var moduleList = mutableListOf<ModuleData>()
 
-    var mdRecommendList = listOf<Goods>()
-    var newArrivalList =listOf<Goods>()
+    var weeklyBestMap = mapOf<String?, List<Goods>?>()
+    var newArrivalMap = mapOf<String?, List<Goods>?>()
+
     val uiList = MutableLiveData<MutableList<ModuleData>>()
 
     init {
@@ -116,6 +120,7 @@ class EKidsViewModel : BaseViewModel() {
         }
 
         // weekly best (md recommend)
+        // changing UI
         data.weeklyBest?.title?.let { title ->
             moduleList.add(
                 ModuleData.CommonCenterTitleData(
@@ -131,8 +136,12 @@ class EKidsViewModel : BaseViewModel() {
                     cateList
                 )
             )
+            ctgGroup.forEach {
+                weeklyBestMap = mapOf(it.ctgNm to it.goodsList)
+                weeklyBestSelected = ctgGroup[0].ctgNm ?: ""
+            }
 
-            ctgGroup[0].goodsList?.subList(0, 20)?.chunked(2)?.forEach { goodsList ->
+            ctgGroup[0].goodsList?.subList(0, 4)?.chunked(2)?.forEach { goodsList ->
                 moduleList.add(
                     ModuleData.CommonGoodsGridData(
                         goodsList
@@ -149,6 +158,7 @@ class EKidsViewModel : BaseViewModel() {
 
 
         // new arrival(md new recommend)
+        // changing UI
         data.newArrival?.title?.let { title ->
             moduleList.add(
                 ModuleData.CommonCenterTitleData(
@@ -165,7 +175,12 @@ class EKidsViewModel : BaseViewModel() {
                 )
             )
 
-            newArrival[0].goodsList?.subList(0, 20)?.chunked(2)?.forEach { goodsList ->
+            newArrival.forEach {
+                newArrivalMap = mapOf(it.ctgNm to it.goodsList)
+                newArrivalSelected = newArrival[0].ctgNm ?: ""
+            }
+
+            newArrival[0].goodsList?.subList(0, 4)?.chunked(2)?.forEach { goodsList ->
                 moduleList.add(
                     ModuleData.CommonGoodsGridData(
                         goodsList
@@ -181,5 +196,35 @@ class EKidsViewModel : BaseViewModel() {
         }
 
         uiList.postValue(moduleList)
+    }
+
+    fun updateWeeklyBest(selected: String) {
+        weeklyBestSelected = selected
+
+        val start = moduleList.indexOfFirst { it is ModuleData.EKidsRecommendCategoryData }
+        val end = moduleList.indexOfFirst { it is ModuleData.EKidsExpandableData }
+
+        val updatedList = moduleList - moduleList.subList(start, end + 1)
+
+        uiList.postValue(updatedList.toMutableList())
+    }
+
+    fun updateNewArrival(selected: String) {
+        newArrivalSelected = selected
+
+        val start = moduleList.indexOfLast { it is ModuleData.EKidsRecommendCategoryData }
+        val end = moduleList.indexOfLast { it is ModuleData.EKidsExpandableData }
+
+        val updatedList = moduleList - moduleList.subList(start, end + 1)
+
+        uiList.postValue(updatedList.toMutableList())
+    }
+
+    fun expandWeeklyBest() {
+
+    }
+
+    fun expandNewArrival() {
+
     }
 }

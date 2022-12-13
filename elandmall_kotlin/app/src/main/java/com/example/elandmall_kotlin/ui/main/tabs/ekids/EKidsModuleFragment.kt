@@ -16,6 +16,9 @@ class EKidsModuleFragment : BaseModuleFragment() {
             setModules(it)
         }
 
+        binding.buttn.setOnClickListener {
+            viewModel.updateNewArrival("something")
+        }
 //        EventBus.viewHolderEvent.observe(requireActivity()) {
 //            it.getIfNotHandled()?.let { event ->
 //                if(event.tabType == TabType.EKIDS) {
