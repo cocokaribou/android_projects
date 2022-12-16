@@ -1,22 +1,16 @@
 package com.example.elandmall_kotlin.ui.main.tabs.storeshop
 
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.example.elandmall_kotlin.databinding.ViewStoreShopCateTabItemBinding
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.TabType
 import com.example.elandmall_kotlin.ui.ViewHolderEvent
 import com.example.elandmall_kotlin.ui.ViewHolderEventType
-import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.dpToPx
 import com.example.elandmall_kotlin.util.getScreenWidthToPx
 
@@ -83,7 +77,7 @@ class StoreShopStickyAdapter : RecyclerView.Adapter<StoreShopStickyAdapter.Stick
 
             root.setOnClickListener {
                 EventBus.fire(ViewHolderEvent(
-                    eventType = ViewHolderEventType.CATEGORY_SCROLL,
+                    eventType = ViewHolderEventType.CATEGORY_SCROLL1,
                     tabType = TabType.STORE_SHOP,
                     content = adapterPosition
                 ))

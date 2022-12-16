@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:id="@+id/title"
+    android:paddingHorizontal="15dp"
+    android:paddingVertical="8dp"
+    android:textSize="13dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:text="@string/tools_text_title"
+    android:background="@drawable/background_category_default"
+    android:layout_height="wrap_content" />

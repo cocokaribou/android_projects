@@ -49,7 +49,7 @@ class StoreShopModuleFragment : BaseModuleFragment() {
             it.getIfNotHandled()?.let { event ->
                 if (event.tabType == TabType.STORE_SHOP) {
                     when (event.eventType) {
-                        ViewHolderEventType.CATEGORY_SCROLL -> {
+                        ViewHolderEventType.CATEGORY_SCROLL1 -> {
                             val pos = event.content as Int
                             scrollToX(pos)
                             scrollToY(pos)

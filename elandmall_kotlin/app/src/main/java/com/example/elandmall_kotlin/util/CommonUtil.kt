@@ -49,14 +49,15 @@ fun getJsonFileToString(filePath: String, context: Context): String {
     }
     return result
 }
+
 fun getScreenWidthToPx(): Int = Resources.getSystem().displayMetrics.widthPixels
 fun getScreenHeightToPx(): Int = Resources.getSystem().displayMetrics.heightPixels
 
-inline fun <reified T> MutableList<T>.removeRange(range: IntRange) {
+inline fun <reified T> MutableList<T>.removeRange(range: IntRange): List<T> {
     val fromIndex = range.start
     val toIndex = range.last
     if (fromIndex == toIndex) {
-        return
+        return listOf()
     }
 
     if (fromIndex >= size) {
@@ -69,9 +70,7 @@ inline fun <reified T> MutableList<T>.removeRange(range: IntRange) {
         throw IndexOutOfBoundsException("fromIndex $fromIndex > toIndex $toIndex")
     }
 
-    val filtered = filterIndexed { i, t -> i < fromIndex || i > toIndex }
-    clear()
-    addAll(filtered)
+    return filterIndexed { i, t -> i < fromIndex || i > toIndex }
 }
 
 fun String.setHtmlDoc(): String {
@@ -97,3 +96,4 @@ fun String.setHtmlDoc(): String {
 
     return doc.toString()
 }
+

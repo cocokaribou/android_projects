@@ -1,5 +1,6 @@
 package com.example.elandmall_kotlin.ui
 
+import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.model.*
 
 sealed class ModuleData {
@@ -294,7 +295,9 @@ sealed class ModuleData {
     }
 
     data class EKidsRecommendCategoryData(
-        val categoryList: List<String>
+        val categoryList: List<String>,
+        var cateSelected: Int,
+        val viewType: String
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -304,7 +307,8 @@ sealed class ModuleData {
     }
 
     data class EKidsExpandableData(
-        var title: String
+        var title: String = "더보기",
+        val viewType: String
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()

@@ -439,7 +439,163 @@
             }
           ],
           "ctg_nm": "가을&겨울 신상"
+        },
+        {
+          "goods_list": [
+            {
+              "flag_img_path": "",
+              "goods_nm": "★에릭칼★ 그림티셔츠 MLLA2281R_IVORY",
+              "goods_star_point": 100,
+              "brand_nm": "밀리밤",
+              "icon_view": "무료배송,",
+              "cust_sale_price": 20900,
+              "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2208189390&vir_vend_no=CN003567&sale_shop_divi_cd=11&disp_ctg_no=1812371653&sale_area_no=D1606000566&tr_yn=Y&conts_dist_no=2208189390&conts_divi_cd=20&rel_no=2208189390&rel_divi_cd=10&brand_nm=%EB%B0%80%EB%A6%AC%EB%B0%A4&goods_nm=%E2%98%85%EC%97%90%EB%A6%AD%EC%B9%BC%E2%98%85+%EA%B7%B8%EB%A6%BC%ED%8B%B0%EC%85%94%EC%B8%A0+MLLA2281R_IVORY&flag_img_path=",
+              "sale_rate": 30,
+              "image_url": "//www.elandrs.com/upload/prd/img/390/600/2208189390_0000010.jpg",
+              "sale_price": 0,
+              "market_price": 29900,
+              "goods_comment_count": 5
+            },
+            {
+              "flag_img_path": "",
+              "goods_nm": "★에릭칼★ 그림티셔츠 MLLA2281R_M.GREEN",
+              "goods_star_point": 100,
+              "brand_nm": "밀리밤",
+              "icon_view": "",
+              "cust_sale_price": 20900,
+              "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2208189389&vir_vend_no=CN003567&sale_shop_divi_cd=11&disp_ctg_no=1812371653&sale_area_no=D1606000566&tr_yn=Y&conts_dist_no=2208189389&conts_divi_cd=20&rel_no=2208189389&rel_divi_cd=10&brand_nm=%EB%B0%80%EB%A6%AC%EB%B0%A4&goods_nm=%E2%98%85%EC%97%90%EB%A6%AD%EC%B9%BC%E2%98%85+%EA%B7%B8%EB%A6%BC%ED%8B%B0%EC%85%94%EC%B8%A0+MLLA2281R_M.GREEN&flag_img_path=",
+              "sale_rate": 30,
+              "image_url": "//www.elandrs.com/upload/prd/img/389/600/2208189389_0000010.jpg",
+              "sale_price": 0,
+              "market_price": 29900,
+              "goods_comment_count": 3
+            },
+            {
+              "flag_img_path": "",
+              "goods_nm": "[★시즌오프★]★에릭칼★ 그림 티셔츠 MLLA2282R_YELLOW",
+              "brand_nm": "밀리밤",
+              "icon_view": "무료배송,",
+              "cust_sale_price": 20900,
+              "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2208189386&vir_vend_no=CN003567&sale_shop_divi_cd=11&disp_ctg_no=1812371653&sale_area_no=D1606000566&tr_yn=Y&conts_dist_no=2208189386&conts_divi_cd=20&rel_no=2208189386&rel_divi_cd=10&brand_nm=%EB%B0%80%EB%A6%AC%EB%B0%A4&goods_nm=%5B%E2%98%85%EC%8B%9C%EC%A6%8C%EC%98%A4%ED%94%84%E2%98%85%5D%E2%98%85%EC%97%90%EB%A6%AD%EC%B9%BC%E2%98%85+%EA%B7%B8%EB%A6%BC+%ED%8B%B0%EC%85%94%EC%B8%A0+MLLA2282R_YELLOW&flag_img_path=",
+              "sale_rate": 30,
+              "image_url": "//www.elandrs.com/upload/prd/img/386/600/2208189386_0000009.jpg",
+              "sale_price": 0,
+              "market_price": 29900
+            },
+            {
+              "flag_img_path": "",
+              "goods_nm": "[★시즌오프★]★에릭칼★ 그림 맨투맨 MLMA22W1R_PINK",
+              "goods_star_point": 100,
+              "brand_nm": "밀리밤",
+              "icon_view": "무료배송,",
+              "cust_sale_price": 27900,
+              "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2208189385&vir_vend_no=CN003567&sale_shop_divi_cd=11&disp_ctg_no=1812371653&sale_area_no=D1606000566&tr_yn=Y&conts_dist_no=2208189385&conts_divi_cd=20&rel_no=2208189385&rel_divi_cd=10&brand_nm=%EB%B0%80%EB%A6%AC%EB%B0%A4&goods_nm=%5B%E2%98%85%EC%8B%9C%EC%A6%8C%EC%98%A4%ED%94%84%E2%98%85%5D%E2%98%85%EC%97%90%EB%A6%AD%EC%B9%BC%E2%98%85+%EA%B7%B8%EB%A6%BC+%EB%A7%A8%ED%88%AC%EB%A7%A8+MLMA22W1R_PINK&flag_img_path=",
+              "sale_rate": 30,
+              "image_url": "//www.elandrs.com/upload/prd/img/385/600/2208189385_0000011.jpg",
+              "sale_price": 0,
+              "market_price": 39900,
+              "goods_comment_count": 35
+            },
+            {
+              "flag_img_path": "",
+              "goods_nm": "★에릭칼★ 그림 맨투맨 MLMA22W1R_L.GREY",
+              "goods_star_point": 100,
+              "brand_nm": "밀리밤",
+              "icon_view": "",
+              "cust_sale_price": 27900,
+              "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2208189384&vir_vend_no=CN003567&sale_shop_divi_cd=11&disp_ctg_no=1812371653&sale_area_no=D1606000566&tr_yn=Y&conts_dist_no=2208189384&conts_divi_cd=20&rel_no=2208189384&rel_divi_cd=10&brand_nm=%EB%B0%80%EB%A6%AC%EB%B0%A4&goods_nm=%E2%98%85%EC%97%90%EB%A6%AD%EC%B9%BC%E2%98%85+%EA%B7%B8%EB%A6%BC+%EB%A7%A8%ED%88%AC%EB%A7%A8+MLMA22W1R_L.GREY&flag_img_path=",
+              "sale_rate": 30,
+              "image_url": "//www.elandrs.com/upload/prd/img/384/600/2208189384_0000011.jpg",
+              "sale_price": 0,
+              "market_price": 39900,
+              "goods_comment_count": 38
+            },
+            {
+              "flag_img_path": "",
+              "goods_nm": "★에릭칼★ 그림 맨투맨 MLMA22W1R_GREEN",
+              "goods_star_point": 100,
+              "brand_nm": "밀리밤",
+              "icon_view": "",
+              "cust_sale_price": 27900,
+              "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2208189382&vir_vend_no=CN003567&sale_shop_divi_cd=11&disp_ctg_no=1812371653&sale_area_no=D1606000566&tr_yn=Y&conts_dist_no=2208189382&conts_divi_cd=20&rel_no=2208189382&rel_divi_cd=10&brand_nm=%EB%B0%80%EB%A6%AC%EB%B0%A4&goods_nm=%E2%98%85%EC%97%90%EB%A6%AD%EC%B9%BC%E2%98%85+%EA%B7%B8%EB%A6%BC+%EB%A7%A8%ED%88%AC%EB%A7%A8+MLMA22W1R_GREEN&flag_img_path=",
+              "sale_rate": 30,
+              "image_url": "//www.elandrs.com/upload/prd/img/382/600/2208189382_0000011.jpg",
+              "sale_price": 0,
+              "market_price": 39900,
+              "goods_comment_count": 43
+            },
+            {
+              "flag_img_path": "",
+              "goods_nm": "[★시즌오프★]밀리 캉캉 미니스커트 MLWH22952",
+              "goods_star_point": 90,
+              "brand_nm": "밀리밤",
+              "icon_view": "무료배송,",
+              "cust_sale_price": 20900,
+              "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2208176316&vir_vend_no=CN003567&sale_shop_divi_cd=11&disp_ctg_no=1812371653&sale_area_no=D1606000566&tr_yn=Y&conts_dist_no=2208176316&conts_divi_cd=20&rel_no=2208176316&rel_divi_cd=10&brand_nm=%EB%B0%80%EB%A6%AC%EB%B0%A4&goods_nm=%5B%E2%98%85%EC%8B%9C%EC%A6%8C%EC%98%A4%ED%94%84%E2%98%85%5D%EB%B0%80%EB%A6%AC+%EC%BA%89%EC%BA%89+%EB%AF%B8%EB%8B%88%EC%8A%A4%EC%BB%A4%ED%8A%B8+MLWH22952&flag_img_path=",
+              "sale_rate": 30,
+              "image_url": "//www.elandrs.com/upload/prd/img/316/600/2208176316_0000012.jpg",
+              "sale_price": 0,
+              "market_price": 29900,
+              "goods_comment_count": 2
+            },
+            {
+              "flag_img_path": "",
+              "goods_nm": "[★시즌오프★]아이좋아 캠핑 아노락 긴바지 세트 MLMS22960",
+              "goods_star_point": 99,
+              "brand_nm": "밀리밤",
+              "icon_view": "무료배송,",
+              "cust_sale_price": 55900,
+              "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2208176313&vir_vend_no=CN003567&sale_shop_divi_cd=11&disp_ctg_no=1812371653&sale_area_no=D1606000566&tr_yn=Y&conts_dist_no=2208176313&conts_divi_cd=20&rel_no=2208176313&rel_divi_cd=10&brand_nm=%EB%B0%80%EB%A6%AC%EB%B0%A4&goods_nm=%5B%E2%98%85%EC%8B%9C%EC%A6%8C%EC%98%A4%ED%94%84%E2%98%85%5D%EC%95%84%EC%9D%B4%EC%A2%8B%EC%95%84+%EC%BA%A0%ED%95%91+%EC%95%84%EB%85%B8%EB%9D%BD+%EA%B8%B4%EB%B0%94%EC%A7%80+%EC%84%B8%ED%8A%B8+MLMS22960&flag_img_path=",
+              "sale_rate": 30,
+              "image_url": "//www.elandrs.com/upload/prd/img/313/600/2208176313_0000021.jpg",
+              "sale_price": 0,
+              "market_price": 79900,
+              "goods_comment_count": 14
+            },
+            {
+              "flag_img_path": "",
+              "goods_nm": "보들보들 튤립 스웨터 MLKA22W51",
+              "brand_nm": "밀리밤",
+              "icon_view": "무료배송,",
+              "cust_sale_price": 27900,
+              "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2208176311&vir_vend_no=CN003567&sale_shop_divi_cd=11&disp_ctg_no=1812371653&sale_area_no=D1606000566&tr_yn=Y&conts_dist_no=2208176311&conts_divi_cd=20&rel_no=2208176311&rel_divi_cd=10&brand_nm=%EB%B0%80%EB%A6%AC%EB%B0%A4&goods_nm=%EB%B3%B4%EB%93%A4%EB%B3%B4%EB%93%A4+%ED%8A%A4%EB%A6%BD+%EC%8A%A4%EC%9B%A8%ED%84%B0+MLKA22W51&flag_img_path=",
+              "sale_rate": 30,
+              "image_url": "//www.elandrs.com/upload/prd/img/311/600/2208176311_0000008.jpg",
+              "sale_price": 0,
+              "market_price": 39900
+            },
+            {
+              "flag_img_path": "",
+              "goods_nm": "★에릭칼★ 그림 맨투맨 MLMA22W1R_IVORY",
+              "goods_star_point": 100,
+              "brand_nm": "밀리밤",
+              "icon_view": "",
+              "cust_sale_price": 27900,
+              "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2208168408&vir_vend_no=CN003567&sale_shop_divi_cd=11&disp_ctg_no=1812371653&sale_area_no=D1606000566&tr_yn=Y&conts_dist_no=2208168408&conts_divi_cd=20&rel_no=2208168408&rel_divi_cd=10&brand_nm=%EB%B0%80%EB%A6%AC%EB%B0%A4&goods_nm=%E2%98%85%EC%97%90%EB%A6%AD%EC%B9%BC%E2%98%85+%EA%B7%B8%EB%A6%BC+%EB%A7%A8%ED%88%AC%EB%A7%A8+MLMA22W1R_IVORY&flag_img_path=",
+              "sale_rate": 30,
+              "image_url": "//www.elandrs.com/upload/prd/img/408/600/2208168408_0000011.jpg",
+              "sale_price": 0,
+              "market_price": 39900,
+              "goods_comment_count": 34
+            },
+            {
+              "flag_img_path": "",
+              "goods_nm": "크랙 맨투맨 MLMA22960",
+              "goods_star_point": 100,
+              "brand_nm": "밀리밤",
+              "icon_view": "무료배송,",
+              "cust_sale_price": 29900,
+              "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2208168407&vir_vend_no=CN003567&sale_shop_divi_cd=11&disp_ctg_no=1812371653&sale_area_no=D1606000566&tr_yn=Y&conts_dist_no=2208168407&conts_divi_cd=20&rel_no=2208168407&rel_divi_cd=10&brand_nm=%EB%B0%80%EB%A6%AC%EB%B0%A4&goods_nm=%ED%81%AC%EB%9E%99+%EB%A7%A8%ED%88%AC%EB%A7%A8+MLMA22960&flag_img_path=",
+              "sale_rate": 0,
+              "image_url": "//www.elandrs.com/upload/prd/img/407/600/2208168407_0000001.JPG",
+              "sale_price": 0,
+              "market_price": 0,
+              "goods_comment_count": 1
+            }
+          ],
+          "ctg_nm": "크리스마스 신상"
         }
+
       ]
     },
     "band_banner": [
