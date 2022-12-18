@@ -98,7 +98,9 @@ enum class ViewHolderEventType {
     SORT_CLICK,
     STORE_CLICK,
     CATEGORY_SCROLL1,
-    CATEGORY_SCROLL2
+    CATEGORY_SCROLL2,
+    TOGGLE_MORE1,
+    TOGGLE_MORE2
 }
 
 enum class TabType {

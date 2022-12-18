@@ -6,9 +6,6 @@ import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.TabType
 import com.example.elandmall_kotlin.ui.ViewHolderEventType
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
-import com.example.elandmall_kotlin.ui.main.BaseViewModel
-import com.example.elandmall_kotlin.ui.main.tabs.plandetail.PlanDetailModuleFragment
-import com.example.elandmall_kotlin.util.Logger
 
 class EKidsModuleFragment : BaseModuleFragment() {
     override val viewModel: EKidsViewModel by viewModels()
@@ -28,14 +25,16 @@ class EKidsModuleFragment : BaseModuleFragment() {
                         ViewHolderEventType.CATEGORY_SCROLL2 -> {
                             viewModel.updateNewArrival(event.content as? Int ?: 0)
                         }
+                        ViewHolderEventType.TOGGLE_MORE1 -> {
+                            viewModel.toggleWeeklyBest()
+                        }
+                        ViewHolderEventType.TOGGLE_MORE2 -> {
+                            viewModel.toggleNewArrival()
+                        }
                     }
                 }
             }
         }
-    }
-
-    fun expand() {
-
     }
 
     companion object {

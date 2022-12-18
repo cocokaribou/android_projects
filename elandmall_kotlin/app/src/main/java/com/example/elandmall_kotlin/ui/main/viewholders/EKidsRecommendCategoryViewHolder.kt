@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.R
@@ -23,7 +24,6 @@ var viewType = ""
 class EKidsRecommendCategoryViewHolder(private val binding: ViewEkidsRecommendCategoryBinding) : BaseViewHolder(binding.root) {
     override fun onBind(item: Any, pos: Int) {
         (item as? ModuleData.EKidsRecommendCategoryData)?.let {
-            Logger.v("그린다~ ${it.viewType}")
             initUI(it)
         }
     }
@@ -33,13 +33,14 @@ class EKidsRecommendCategoryViewHolder(private val binding: ViewEkidsRecommendCa
         val mWeeklyAdapter = CategoryAdapter().apply { submitList(data.categoryList) }
         val mNewAdapter = CategoryAdapter().apply { submitList(data.categoryList) }
 
-        Logger.v("지금 타입 ${data.viewType}")
         if ("weeklyBest".equals(data.viewType, true)) {
             weeklyBestSelected = data.cateSelected
             list.adapter = mWeeklyAdapter
+            (list.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(weeklyBestSelected, 0)
         } else {
             newArrivalSelected = data.cateSelected
             list.adapter = mNewAdapter
+            (list.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(newArrivalSelected, 0)
         }
     }
 

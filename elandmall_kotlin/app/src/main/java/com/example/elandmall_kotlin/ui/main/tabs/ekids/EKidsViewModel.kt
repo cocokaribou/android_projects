@@ -8,13 +8,12 @@ import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
 import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.removeRange
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 var weeklyBestSelected = 0
 var newArrivalSelected = 0
+var isWeeklyExpanded = false
+var isNewExpanded = false
 
 class EKidsViewModel : BaseViewModel() {
     private val repository by lazy { EKidsRepository() }
@@ -222,9 +221,15 @@ class EKidsViewModel : BaseViewModel() {
         val start = moduleList.indexOfFirst { it is ModuleData.CommonGoodsGridData }
         val end = moduleList.indexOfFirst { it is ModuleData.EKidsExpandableData }
 
-        val updatedList = moduleList.removeRange(start..end).map { it.clone() }.toMutableList()
+        val updatedList = moduleList.removeGoodsUI(start..end)
 
+        // new ui list
         updatedGoods?.let { goodsList ->
+            updatedList.map {
+                if (it is ModuleData.EKidsRecommendCategoryData && "weeklyBest".equals(it.viewType, true)) {
+                    it.cateSelected = weeklyBestSelected
+                }
+            }
             goodsList.take(20).chunked(2).forEachIndexed { i, it ->
                 updatedList.add(i + start, ModuleData.CommonGoodsGridData(it))
             }
@@ -234,14 +239,7 @@ class EKidsViewModel : BaseViewModel() {
             }
         }
 
-//        if (it is ModuleData.EKidsRecommendCategoryData && "weeklyBest".equals(it.viewType, true)) {
-//            it.cateSelected = weeklyBestSelected
-//        }
-
-        CoroutineScope(Dispatchers.Main).launch {
-            delay(100)
-            uiList.postValue(updatedList)
-        }
+        uiList.postValue(updatedList)
     }
 
     fun updateNewArrival(selected: Int) {
@@ -251,9 +249,15 @@ class EKidsViewModel : BaseViewModel() {
         val start = moduleList.indexOfLast { it is ModuleData.EKidsRecommendCategoryData } + 1
         val end = moduleList.indexOfLast { it is ModuleData.EKidsExpandableData }
 
-        val updatedList = moduleList.removeRange(start..end).map { it.clone() }.toMutableList()
-
+        val updatedList = moduleList.removeGoodsUI(start..end)
+        // new ui list
         updatedGoods?.let { goodsList ->
+            updatedList.map {
+                if (it is ModuleData.EKidsRecommendCategoryData && "newArrival".equals(it.viewType, true)) {
+                    it.cateSelected = newArrivalSelected
+                }
+            }
+
             goodsList.take(20).chunked(2).forEachIndexed { i, it ->
                 updatedList.add(i + start, ModuleData.CommonGoodsGridData(it))
             }
@@ -263,21 +267,62 @@ class EKidsViewModel : BaseViewModel() {
             }
         }
 
-        //if (it is ModuleData.EKidsRecommendCategoryData && "newArrival".equals(it.viewType, true)) {
-        //                it.cateSelected = newArrivalSelected
-        //            }
+        uiList.postValue(updatedList)
+    }
 
-        CoroutineScope(Dispatchers.Main).launch {
-            delay(100)
+    fun toggleWeeklyBest() {
+        isWeeklyExpanded = !isWeeklyExpanded
+
+        if (!isWeeklyExpanded) {
+            // collapse
+            val start = moduleList.indexOfFirst { it is ModuleData.CommonGoodsGridData }
+            val end = moduleList.indexOfFirst { it is ModuleData.EKidsExpandableData }
+
+            val updatedList =
+                moduleList.removeGoodsUI((start + 10) until end).map { it.clone() }.toMutableList()
+
+            updatedList.map {
+                if (it is ModuleData.EKidsExpandableData && "weeklyBest".equals(it.viewType, true)) {
+                    it.isExpanded = isWeeklyExpanded
+                }
+            }
             uiList.postValue(updatedList)
+            moduleList = updatedList
+
+        } else {
+            val end = moduleList.indexOfFirst { it is ModuleData.EKidsExpandableData }
+            val updatedList = moduleList.map { it.clone() }.toMutableList()
+
+            val updatedGoods = weeklyBestList[weeklyBestSelected]?.toMutableList()?.removeRange(0..19)
+
+            updatedGoods?.let { goodsList ->
+                goodsList.chunked(2).forEachIndexed { i, it ->
+                    updatedList.add(i + end, ModuleData.CommonGoodsGridData(it))
+                }
+
+                updatedList.map {
+                    if (it is ModuleData.EKidsExpandableData && "weeklyBest".equals(it.viewType, true)) {
+                        it.isExpanded = isWeeklyExpanded
+                    }
+                }
+                uiList.postValue(updatedList)
+                moduleList = updatedList
+            }
         }
     }
 
-    fun expandWeeklyBest() {
+    fun toggleNewArrival() {
+        isNewExpanded = !isNewExpanded
 
+        if (isNewExpanded) {
+            // collapse more
+        } else {
+            // expand more
+            val updatedList = moduleList.map { it.clone() }.toMutableList()
+        }
     }
 
-    fun expandNewArrival() {
-
+    private fun MutableList<ModuleData>.removeGoodsUI(range: IntRange): MutableList<ModuleData> {
+        return this.removeRange(range).map { it.clone() }.toMutableList()
     }
 }

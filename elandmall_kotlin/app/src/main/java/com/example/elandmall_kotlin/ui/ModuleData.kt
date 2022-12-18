@@ -307,8 +307,8 @@ sealed class ModuleData {
     }
 
     data class EKidsExpandableData(
-        var title: String = "더보기",
-        val viewType: String
+        val viewType: String,
+        var isExpanded: Boolean = false
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
