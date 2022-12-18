@@ -20,10 +20,10 @@ class EKidsModuleFragment : BaseModuleFragment() {
                 if(event.tabType == TabType.EKIDS) {
                     when (event.eventType) {
                         ViewHolderEventType.CATEGORY_SCROLL1 -> {
-                            viewModel.updateWeeklyBest(event.content as? Int ?: 0)
+                            viewModel.changeWeeklyBestTab(event.content as? Int ?: 0)
                         }
                         ViewHolderEventType.CATEGORY_SCROLL2 -> {
-                            viewModel.updateNewArrival(event.content as? Int ?: 0)
+                            viewModel.changeNewArrivalTab(event.content as? Int ?: 0)
                         }
                         ViewHolderEventType.TOGGLE_MORE1 -> {
                             viewModel.toggleWeeklyBest()

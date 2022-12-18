@@ -214,14 +214,16 @@ class EKidsViewModel : BaseViewModel() {
         uiList.postValue(moduleList)
     }
 
-    fun updateWeeklyBest(selected: Int) {
+    fun changeWeeklyBestTab(selected: Int) {
         weeklyBestSelected = selected
+        isWeeklyExpanded = false
+
         val updatedGoods = weeklyBestList[weeklyBestSelected]
 
         val start = moduleList.indexOfFirst { it is ModuleData.CommonGoodsGridData }
-        val end = moduleList.indexOfFirst { it is ModuleData.EKidsExpandableData }
+        val end = moduleList.indexOfLast { it is ModuleData.EKidsRecommendCategoryData } - 2
 
-        val updatedList = moduleList.removeGoodsUI(start..end)
+        val updatedList = moduleList.removeGoodsUI(start .. end)
 
         // new ui list
         updatedGoods?.let { goodsList ->
@@ -240,10 +242,13 @@ class EKidsViewModel : BaseViewModel() {
         }
 
         uiList.postValue(updatedList)
+        moduleList = updatedList
     }
 
-    fun updateNewArrival(selected: Int) {
+    fun changeNewArrivalTab(selected: Int) {
         newArrivalSelected = selected
+        isNewExpanded = false
+
         val updatedGoods = newArrivalList[newArrivalSelected]
 
         val start = moduleList.indexOfLast { it is ModuleData.EKidsRecommendCategoryData } + 1
