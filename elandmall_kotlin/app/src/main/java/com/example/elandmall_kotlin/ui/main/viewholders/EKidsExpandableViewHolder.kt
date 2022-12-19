@@ -15,22 +15,14 @@ class EKidsExpandableViewHolder(private val binding: ViewEkidsExpandableBinding)
 
     private fun initUI(data: ModuleData.EKidsExpandableData) = with(binding){
         if ("weeklyBest".equals(data.viewType, true)) {
-            title.text = if (data.isExpanded) {
-                BaseApplication.context.resources.getString(R.string.close)
-            } else {
-                BaseApplication.context.resources.getString(R.string.more)
-            }
+            title.text = if (data.isExpanded) BaseApplication.context.resources.getString(R.string.close) else BaseApplication.context.resources.getString(R.string.more)
 
             root.setOnClickListener {
                 EventBus.fire(ViewHolderEvent(ViewHolderEventType.TOGGLE_MORE1, TabType.EKIDS))
             }
 
         } else {
-            title.text = if (data.isExpanded) {
-                BaseApplication.context.resources.getString(R.string.close)
-            } else {
-                BaseApplication.context.resources.getString(R.string.more)
-            }
+            title.text = if (data.isExpanded) BaseApplication.context.resources.getString(R.string.close) else BaseApplication.context.resources.getString(R.string.more)
 
             root.setOnClickListener {
                 EventBus.fire(ViewHolderEvent(ViewHolderEventType.TOGGLE_MORE2, TabType.EKIDS))

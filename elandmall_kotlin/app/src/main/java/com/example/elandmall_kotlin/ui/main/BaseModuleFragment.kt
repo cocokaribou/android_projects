@@ -56,7 +56,6 @@ abstract class BaseModuleFragment : Fragment() {
 
             // recycler view
             list.apply {
-                setHasFixedSize(true)
                 adapter = moduleAdapter
             }
         }

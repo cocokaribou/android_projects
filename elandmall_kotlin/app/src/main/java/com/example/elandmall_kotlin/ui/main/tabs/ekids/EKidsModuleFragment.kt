@@ -20,16 +20,18 @@ class EKidsModuleFragment : BaseModuleFragment() {
                 if(event.tabType == TabType.EKIDS) {
                     when (event.eventType) {
                         ViewHolderEventType.CATEGORY_SCROLL1 -> {
-                            viewModel.changeWeeklyBestTab(event.content as? Int ?: 0)
+                            val selected = event.content as? Int ?: 0
+                            viewModel.changeWeeklyBestTab(selected)
                         }
                         ViewHolderEventType.CATEGORY_SCROLL2 -> {
-                            viewModel.changeNewArrivalTab(event.content as? Int ?: 0)
+                            val selected = event.content as? Int ?: 0
+                            viewModel.changeNewArrivalTab(selected)
                         }
                         ViewHolderEventType.TOGGLE_MORE1 -> {
-                            viewModel.toggleWeeklyBest()
+                            viewModel.toggleWeeklyBestMore()
                         }
                         ViewHolderEventType.TOGGLE_MORE2 -> {
-                            viewModel.toggleNewArrival()
+                            viewModel.toggleNewArrivalMore()
                         }
                     }
                 }
