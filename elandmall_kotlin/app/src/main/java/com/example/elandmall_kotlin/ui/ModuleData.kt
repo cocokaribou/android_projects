@@ -322,4 +322,14 @@ sealed class ModuleData {
 
         companion object
     }
+
+    data class CommonCategoryTabData(
+        var categoryList: List<Category>
+    ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
 }

@@ -265,6 +265,13 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                     false
                 )
             )
+            ModuleData.CommonCategoryTabData.ordinal() -> CommonCategoryTabViewHolder(
+                ViewCommonCategoryTabBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
 
             else -> UnknownViewHolder(
                 ViewUnknownHolderBinding.inflate(

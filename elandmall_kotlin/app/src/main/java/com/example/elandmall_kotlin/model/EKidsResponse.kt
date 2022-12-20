@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class EKidsResponse(
     @SerializedName("data") val data: Data?
-) {
+) : BaseResponse() {
     data class Data(
         @SerializedName("ctg_list") val ctgList: List<Ctg>?,
         @SerializedName("new_arrival") val newArrival: NewArrival?,

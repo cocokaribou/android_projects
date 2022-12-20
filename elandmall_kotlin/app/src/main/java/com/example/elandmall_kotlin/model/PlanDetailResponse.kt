@@ -5,8 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class PlanDetailResponse(
     @SerializedName("data") val data: Data?
-) : BaseResponse(
-) {
+) : BaseResponse() {
     data class Data(
         @SerializedName("goods_info") val goodsInfo: List<GoodsInfo>?,
         @SerializedName("tab_list") val tabList: List<Tab>?,

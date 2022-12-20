@@ -21,8 +21,8 @@
                 android:id="@+id/md_cate_list"
                 android:layout_width="match_parent"
                 android:layout_height="81.33dp"
-                android:orientation="horizontal"
                 android:background="#bbbbbb"
+                android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.7dp"
                 android:background="#bbbbbb"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/md_goods_list"
