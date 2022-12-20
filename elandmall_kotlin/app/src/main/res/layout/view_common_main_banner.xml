@@ -18,7 +18,7 @@
     </com.example.elandmall_kotlin.view.NestedScrollableHost>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/popup"
+        android:id="@+id/indicator"
         android:layout_width="65dp"
         android:layout_height="25dp"
         android:layout_marginEnd="15dp"

@@ -7,7 +7,9 @@ sealed class ModuleData {
     abstract fun clone(): ModuleData
 
     data class CommonMainBannerData(
-        val mainBannerData: List<Banner>
+        val mainBannerData: List<Banner>,
+        var isDividerVisible: Boolean = true,
+        var isIndicatorVisible: Boolean = true
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -27,7 +29,8 @@ sealed class ModuleData {
     }
 
     data class CommonMultiBannerData(
-        val multiBannerData: List<Banner>
+        val multiBannerData: List<Banner>,
+        var isDividerVisible: Boolean = true
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -151,7 +154,7 @@ sealed class ModuleData {
     data class CommonSortData(
         val tabType: TabType,
         val sortMap: Map<String, Any>,
-        val includeTopPadding: Boolean,
+        val isTopPaddingVisible: Boolean,
         var sortSelected: String,
         var gridSelected: Int
     ) : ModuleData() {
@@ -181,7 +184,8 @@ sealed class ModuleData {
     }
 
     data class CommonGoodsGridData(
-        val goodsListData: List<Goods>
+        val goodsListData: List<Goods>,
+        var isDividerVisible: Boolean = true
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -232,7 +236,9 @@ sealed class ModuleData {
     }
 
     data class CommonCenterTitleData(
-        val title: String
+        val title: String,
+        val titleStyle: String,
+        var isDividerVisible: Boolean = true
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()

@@ -121,8 +121,14 @@ object GoodsUtil {
             // quantity
             try {
                 val quantity = it.findViewById<TextView>(R.id.quantity)
-                data.saleQty?.let {
-                    quantity.text = "${data.saleQty}개 구매"
+
+                data.saleQty?.let { it ->
+                    val format = if (it >= 10000) {
+                        "${it / 10000}만+"
+                    } else {
+                        it.priceToString()
+                    }
+                    quantity.text = "${format}개 구매"
                 }
             } catch (e: RuntimeException) {
             }
@@ -184,7 +190,8 @@ object GoodsUtil {
                     if (!it.isSelected) Toast.makeText(it.context, "찜!", Toast.LENGTH_SHORT).show()
                     it.isSelected = !it.isSelected
                 }
-            } catch (e: RuntimeException) {}
+            } catch (e: RuntimeException) {
+            }
 
             // goods link
 

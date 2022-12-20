@@ -11,7 +11,9 @@ import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.ViewEkidsRecommendCategoryBinding
 import com.example.elandmall_kotlin.databinding.ViewEkidsRecommendCategoryItemBinding
 import com.example.elandmall_kotlin.ui.*
+import com.example.elandmall_kotlin.util.HorizontalSpacingItemDecoration
 import com.example.elandmall_kotlin.util.Logger
+import com.example.elandmall_kotlin.util.dpToPx
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -22,6 +24,7 @@ var newArrivalSelected = 0
 var viewType = ""
 
 class EKidsRecommendCategoryViewHolder(private val binding: ViewEkidsRecommendCategoryBinding) : BaseViewHolder(binding.root) {
+    private val mDecoration by lazy { HorizontalSpacingItemDecoration(6.dpToPx(), 12.dpToPx(), true) }
     override fun onBind(item: Any, pos: Int) {
         (item as? ModuleData.EKidsRecommendCategoryData)?.let {
             initUI(it)
@@ -41,6 +44,9 @@ class EKidsRecommendCategoryViewHolder(private val binding: ViewEkidsRecommendCa
             newArrivalSelected = data.cateSelected
             list.adapter = mNewAdapter
             (list.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(newArrivalSelected, 0)
+        }
+        if (list.itemDecorationCount == 0) {
+            list.addItemDecoration(mDecoration)
         }
     }
 

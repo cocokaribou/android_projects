@@ -7,6 +7,7 @@ import com.example.elandmall_kotlin.databinding.ViewCommonSortBinding
 import com.example.elandmall_kotlin.ui.*
 import com.example.elandmall_kotlin.ui.main.tabs.BottomSheetFragment
 import com.example.elandmall_kotlin.ui.main.tabs.DialogType
+import com.example.elandmall_kotlin.util.Logger
 
 class CommonSortViewHolder(private val binding: ViewCommonSortBinding) : BaseViewHolder(binding.root) {
     override fun onBind(item: Any, pos: Int) {
@@ -18,7 +19,7 @@ class CommonSortViewHolder(private val binding: ViewCommonSortBinding) : BaseVie
     private fun initUi(data: ModuleData.CommonSortData) = with(binding) {
         val list = data.sortMap.keys.toTypedArray().toList()
 
-        if (data.includeTopPadding) {
+        if (data.isTopPaddingVisible) {
             padding.visibility = View.VISIBLE
         } else {
             padding.visibility = View.GONE

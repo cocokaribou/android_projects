@@ -156,7 +156,7 @@ class StoreShopViewModel : BaseViewModel() {
                     ModuleData.CommonSortData(
                         TabType.STORE_SHOP,
                         sortMap = storeSortMap,
-                        includeTopPadding = false,
+                        isTopPaddingVisible = false,
                         sortSelected = mSortKey,
                         gridSelected = mGridNo
                     )

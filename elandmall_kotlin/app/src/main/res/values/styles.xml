@@ -80,4 +80,22 @@
         <item name="android:layout_height">6dp</item>
         <item name="android:background">@drawable/shape_recyclerview_item_decoration</item>
     </style>
+
+    <!-- common center title -->
+    <style name="common_center_ekids">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">50dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:textColor">#414141</item>
+    </style>
+
+    <style name="common_center_plan_detail">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

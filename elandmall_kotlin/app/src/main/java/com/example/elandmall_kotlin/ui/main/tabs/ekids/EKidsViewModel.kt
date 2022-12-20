@@ -2,10 +2,12 @@ package com.example.elandmall_kotlin.ui.main.tabs.ekids
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.model.EKidsResponse
 import com.example.elandmall_kotlin.model.Goods
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
+import com.example.elandmall_kotlin.util.dpToPx
 import com.example.elandmall_kotlin.util.removeRange
 import kotlinx.coroutines.launch
 
@@ -56,26 +58,24 @@ class EKidsViewModel : BaseViewModel() {
         // main banner
         if (!data.mainBanner.isNullOrEmpty()) {
             moduleList.add(
-                ModuleData.CommonMainBannerData(
-                    data.mainBanner
-                )
+                ModuleData.CommonMainBannerData(data.mainBanner)
             )
         }
 
         // category horizontal list
         if (!data.ctgList.isNullOrEmpty()) {
             moduleList.add(
-                ModuleData.EKidsCategoryData(
-                    data.ctgList
-                )
+                ModuleData.EKidsCategoryData(data.ctgList)
             )
         }
 
         // multi banner1
         if (!data.bandBanner.isNullOrEmpty()) {
             moduleList.add(
-                ModuleData.CommonMultiBannerData(
-                    data.bandBanner
+                ModuleData.CommonMainBannerData(
+                    data.bandBanner,
+                    isDividerVisible = false,
+                    isIndicatorVisible = false
                 )
             )
         }
@@ -84,7 +84,8 @@ class EKidsViewModel : BaseViewModel() {
         if (!data.subBanner.isNullOrEmpty()) {
             moduleList.add(
                 ModuleData.CommonMultiBannerData(
-                    data.subBanner
+                    data.subBanner,
+                    isDividerVisible = false
                 )
             )
         }
@@ -93,16 +94,16 @@ class EKidsViewModel : BaseViewModel() {
         data.specialDeal?.title?.let { title ->
             moduleList.add(
                 ModuleData.CommonCenterTitleData(
-                    title
+                    title,
+                    "ekids",
+                    isDividerVisible = false
                 )
             )
         }
         data.specialDeal?.goodsList?.let { goodsList ->
             goodsList.forEach { goods ->
                 moduleList.add(
-                    ModuleData.EKidsSpecialGoodsData(
-                        goods
-                    )
+                    ModuleData.EKidsSpecialGoodsData(goods)
                 )
             }
         }
@@ -111,15 +112,15 @@ class EKidsViewModel : BaseViewModel() {
         data.brandStory?.title?.let { title ->
             moduleList.add(
                 ModuleData.CommonCenterTitleData(
-                    title
+                    title,
+                    "ekids",
+                    isDividerVisible = false
                 )
             )
         }
         if (!data.brandStory?.bannerList.isNullOrEmpty()) {
             moduleList.add(
-                ModuleData.EKidsBrandData(
-                    data.brandStory?.bannerList ?: listOf()
-                )
+                ModuleData.EKidsBrandData(data.brandStory?.bannerList ?: listOf())
             )
         }
 
@@ -128,7 +129,9 @@ class EKidsViewModel : BaseViewModel() {
         data.weeklyBest?.title?.let { title ->
             moduleList.add(
                 ModuleData.CommonCenterTitleData(
-                    title
+                    title,
+                    "ekids",
+                    isDividerVisible = false
                 )
             )
         }
@@ -152,17 +155,13 @@ class EKidsViewModel : BaseViewModel() {
             val goodsList = ctgGroup[weeklyBestSelected].goodsList
             goodsList?.take(20)?.chunked(2)?.forEach { it ->
                 moduleList.add(
-                    ModuleData.CommonGoodsGridData(
-                        it
-                    )
+                    ModuleData.CommonGoodsGridData(it, false)
                 )
             }
 
             if ((goodsList?.size ?: 0) > 20) {
                 moduleList.add(
-                    ModuleData.EKidsExpandableData(
-                        viewType = "weeklyBest"
-                    )
+                    ModuleData.EKidsExpandableData(viewType = "weeklyBest")
                 )
             }
         }
@@ -173,7 +172,9 @@ class EKidsViewModel : BaseViewModel() {
         data.newArrival?.title?.let { title ->
             moduleList.add(
                 ModuleData.CommonCenterTitleData(
-                    title
+                    title,
+                    "ekids",
+                    isDividerVisible = false
                 )
             )
         }
@@ -197,17 +198,13 @@ class EKidsViewModel : BaseViewModel() {
             val goodsList = newArrival[newArrivalSelected].goodsList
             goodsList?.take(20)?.chunked(2)?.forEach { it ->
                 moduleList.add(
-                    ModuleData.CommonGoodsGridData(
-                        it
-                    )
+                    ModuleData.CommonGoodsGridData(it, false)
                 )
             }
 
             if ((goodsList?.size ?: 0) > 20) {
                 moduleList.add(
-                    ModuleData.EKidsExpandableData(
-                        viewType = "newArrival"
-                    )
+                    ModuleData.EKidsExpandableData(viewType = "newArrival")
                 )
             }
         }
@@ -236,7 +233,7 @@ class EKidsViewModel : BaseViewModel() {
             }
             goodsList.take(20).chunked(2).forEachIndexed { i, it ->
                 holderCount++
-                updatedList.add(i + start, ModuleData.CommonGoodsGridData(it))
+                updatedList.add(i + start, ModuleData.CommonGoodsGridData(it, false))
             }
 
             if (goodsList.size > 20) {
@@ -270,7 +267,7 @@ class EKidsViewModel : BaseViewModel() {
 
             goodsList.take(20).chunked(2).forEachIndexed { i, it ->
                 holderCount++
-                updatedList.add(i + start, ModuleData.CommonGoodsGridData(it))
+                updatedList.add(i + start, ModuleData.CommonGoodsGridData(it, false))
             }
 
             if (goodsList.size > 20) {
@@ -310,7 +307,7 @@ class EKidsViewModel : BaseViewModel() {
 
             updatedGoods?.let { goodsList ->
                 goodsList.chunked(2).forEachIndexed { i, it ->
-                    updatedList.add(i + end, ModuleData.CommonGoodsGridData(it))
+                    updatedList.add(i + end, ModuleData.CommonGoodsGridData(it, false))
                 }
 
                 updatedList.map {
@@ -337,7 +334,7 @@ class EKidsViewModel : BaseViewModel() {
             val updatedList = moduleList.removeGoodsHolder((start + 10) until end)
 
             updatedList.map {
-                if (it is ModuleData.EKidsExpandableData && "newArrival".equals(it.viewType, true)){
+                if (it is ModuleData.EKidsExpandableData && "newArrival".equals(it.viewType, true)) {
                     it.isExpanded = isNewExpanding
                 }
             }
@@ -353,11 +350,11 @@ class EKidsViewModel : BaseViewModel() {
 
             updatedGoods?.let { goodsList ->
                 goodsList.chunked(2).forEachIndexed { i, it ->
-                    updatedList.add(i + end, ModuleData.CommonGoodsGridData(it))
+                    updatedList.add(i + end, ModuleData.CommonGoodsGridData(it, false))
                 }
 
                 updatedList.map {
-                    if (it is ModuleData.EKidsExpandableData && "newArrival".equals(it.viewType, true)){
+                    if (it is ModuleData.EKidsExpandableData && "newArrival".equals(it.viewType, true)) {
                         it.isExpanded = isNewExpanding
                     }
                 }

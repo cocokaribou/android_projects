@@ -54,7 +54,7 @@ fun getScreenWidthToPx(): Int = Resources.getSystem().displayMetrics.widthPixels
 fun getScreenHeightToPx(): Int = Resources.getSystem().displayMetrics.heightPixels
 
 inline fun <reified T> MutableList<T>.removeRange(range: IntRange): List<T> {
-    val fromIndex = range.start
+    val fromIndex = range.first
     val toIndex = range.last
     if (fromIndex == toIndex) {
         return listOf()
@@ -70,7 +70,7 @@ inline fun <reified T> MutableList<T>.removeRange(range: IntRange): List<T> {
         throw IndexOutOfBoundsException("fromIndex $fromIndex > toIndex $toIndex")
     }
 
-    return filterIndexed { i, t -> i < fromIndex || i > toIndex }
+    return filterIndexed { i, _ -> i < fromIndex || i > toIndex }
 }
 
 fun String.setHtmlDoc(): String {

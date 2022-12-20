@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
-    android:background="@color/check_blue"
-    android:layout_marginStart="10dp"
-    android:layout_marginVertical="10dp"
-    android:layout_height="100dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="81dp"
+    android:layout_height="wrap_content"
+    android:paddingTop="20dp"
+    android:paddingBottom="31.5dp">
 
+    <ImageView
+        android:id="@+id/icon_bg"
+        android:layout_width="63dp"
+        android:layout_height="63dp"
+        android:background="@drawable/background_solid_circle"
+        android:backgroundTint="#f7f7f7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="@id/icon_bg"
+        app:layout_constraintStart_toStartOf="@id/icon_bg"
+        app:layout_constraintTop_toTopOf="@id/icon_bg"
+        app:layout_constraintBottom_toBottomOf="@id/icon_bg"/>
+
+    <TextView
+        android:id="@+id/icon_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:maxLength="8"
+        android:textSize="11dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/icon" />
 </androidx.constraintlayout.widget.ConstraintLayout>

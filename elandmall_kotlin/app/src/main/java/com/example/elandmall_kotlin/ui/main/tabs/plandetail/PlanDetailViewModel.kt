@@ -2,11 +2,13 @@ package com.example.elandmall_kotlin.ui.main.tabs.plandetail
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.model.PlanDetailResponse
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.TabType
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
 import com.example.elandmall_kotlin.util.Logger
+import com.example.elandmall_kotlin.util.dpToPx
 import kotlinx.coroutines.launch
 
 class PlanDetailViewModel : BaseViewModel() {
@@ -56,7 +58,9 @@ class PlanDetailViewModel : BaseViewModel() {
                 planShopName = planShopInfo.planShopNm
                 moduleList.add(
                     ModuleData.CommonCenterTitleData(
-                        title = planShopInfo.planShopNm
+                        title = planShopInfo.planShopNm,
+                        titleStyle = "plan_detail",
+                        isDividerVisible = true
                     )
                 )
             }
@@ -82,7 +86,7 @@ class PlanDetailViewModel : BaseViewModel() {
                 ModuleData.CommonSortData(
                     TabType.PLAN_DETAIL,
                     map,
-                    includeTopPadding = true,
+                    isTopPaddingVisible = true,
                     sortSelected = tabList[0],
                     gridSelected = mGridNo
                 )

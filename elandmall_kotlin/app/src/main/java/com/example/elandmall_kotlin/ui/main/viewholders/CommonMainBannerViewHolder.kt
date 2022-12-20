@@ -1,6 +1,7 @@
 package com.example.elandmall_kotlin.ui.main.viewholders
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -11,7 +12,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.target.ImageViewTarget
 import com.example.elandmall_kotlin.databinding.ViewCommonMainBannerBinding
 import com.example.elandmall_kotlin.databinding.ViewCommonMainBannerItemBinding
 import com.example.elandmall_kotlin.model.Banner
@@ -19,12 +20,8 @@ import com.example.elandmall_kotlin.ui.BaseViewHolder
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.LinkEvent
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.util.Logger
-import com.example.elandmall_kotlin.util.dpToPx
-import com.example.elandmall_kotlin.util.getScreenWidthToPx
-import com.example.elandmall_kotlin.util.getSpannedBoldText
+import com.example.elandmall_kotlin.util.*
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
@@ -72,11 +69,11 @@ class CommonMainBannerViewHolder(
     override fun onBind(item: Any, pos: Int) {
         (item as? ModuleData.CommonMainBannerData?)?.let {
             bannerList = it.mainBannerData
-            initView()
+            initView(it)
         }
     }
 
-    private fun initView() = with(binding) {
+    private fun initView(data: ModuleData.CommonMainBannerData) = with(binding) {
         viewpager.apply {
             mAdapter.submitList(bannerList)
             adapter = mAdapter
@@ -90,8 +87,19 @@ class CommonMainBannerViewHolder(
 
         counter.text = getSpannedBoldText("1/${bannerList.size}", "1")
 
-        popup.setOnClickListener {
+        indicator.setOnClickListener {
             EventBus.fire(LinkEvent(bannerList[viewpager.currentItem].linkUrl))
+        }
+        if (data.isDividerVisible) {
+            divider.visibility = View.VISIBLE
+        } else {
+            divider.visibility = View.GONE
+        }
+        // TODO indicator style
+        if (data.isIndicatorVisible) {
+            indicator.visibility = View.VISIBLE
+        } else {
+            indicator.visibility = View.GONE
         }
     }
 
@@ -147,8 +155,8 @@ class CommonMainBannerViewHolder(
 
                 Glide.with(root.context)
                     .load(data.imageUrl)
-                    .override(getScreenWidthToPx(), getScreenWidthToPx())
-                    .into(bannerImg)
+                    .override(getScreenWidthToPx(), ImageViewTarget.SIZE_ORIGINAL)
+                    .into(AdjustHeightImageViewTarget(bannerImg))
 
                 root.setOnClickListener {
                     EventBus.fire(LinkEvent(data.linkUrl))
