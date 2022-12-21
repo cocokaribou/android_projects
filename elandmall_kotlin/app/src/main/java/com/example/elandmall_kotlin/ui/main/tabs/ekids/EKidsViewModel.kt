@@ -2,14 +2,15 @@ package com.example.elandmall_kotlin.ui.main.tabs.ekids
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.model.EKidsResponse
 import com.example.elandmall_kotlin.model.Goods
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
-import com.example.elandmall_kotlin.util.dpToPx
 import com.example.elandmall_kotlin.util.removeRange
 import kotlinx.coroutines.launch
+
+typealias ToggleCallback = () -> Unit
+typealias ChangeCategoryCallback = (Int) -> Unit
 
 class EKidsViewModel : BaseViewModel() {
     private val repository by lazy { EKidsRepository() }
@@ -147,6 +148,9 @@ class EKidsViewModel : BaseViewModel() {
             moduleList.add(
                 ModuleData.EKidsRecommendCategoryData(
                     categoryList = cateList,
+                    changeCategory = {
+                        changeWeeklyBestTab(it)
+                    },
                     cateSelected = weeklyBestSelected,
                     viewType = "weeklyBest"
                 )
@@ -161,7 +165,9 @@ class EKidsViewModel : BaseViewModel() {
 
             if ((goodsList?.size ?: 0) > 20) {
                 moduleList.add(
-                    ModuleData.EKidsExpandableData(viewType = "weeklyBest")
+                    ModuleData.EKidsExpandableData(
+                        viewType = "weeklyBest",
+                        toggleExpand = { toggleWeeklyBestMore() })
                 )
             }
         }
@@ -190,6 +196,9 @@ class EKidsViewModel : BaseViewModel() {
             moduleList.add(
                 ModuleData.EKidsRecommendCategoryData(
                     categoryList = cateList,
+                    changeCategory = {
+                        changeNewArrivalTab(it)
+                    },
                     cateSelected = newArrivalSelected,
                     viewType = "newArrival"
                 )
@@ -204,7 +213,9 @@ class EKidsViewModel : BaseViewModel() {
 
             if ((goodsList?.size ?: 0) > 20) {
                 moduleList.add(
-                    ModuleData.EKidsExpandableData(viewType = "newArrival")
+                    ModuleData.EKidsExpandableData(
+                        viewType = "newArrival",
+                        toggleExpand = { toggleNewArrivalMore() })
                 )
             }
         }
@@ -212,7 +223,7 @@ class EKidsViewModel : BaseViewModel() {
         uiList.postValue(moduleList)
     }
 
-    fun changeWeeklyBestTab(selected: Int) {
+    private fun changeWeeklyBestTab(selected: Int) {
         weeklyBestSelected = selected
         isWeeklyExpanding = false
 
@@ -237,7 +248,9 @@ class EKidsViewModel : BaseViewModel() {
             }
 
             if (goodsList.size > 20) {
-                updatedList.add(start + holderCount, ModuleData.EKidsExpandableData(viewType = "weeklyBest"))
+                updatedList.add(start + holderCount, ModuleData.EKidsExpandableData(
+                    viewType = "weeklyBest",
+                    toggleExpand = { toggleWeeklyBestMore() }))
             }
         }
 
@@ -245,7 +258,7 @@ class EKidsViewModel : BaseViewModel() {
         moduleList = updatedList
     }
 
-    fun changeNewArrivalTab(selected: Int) {
+    private fun changeNewArrivalTab(selected: Int) {
         newArrivalSelected = selected
         isNewExpanding = false
 
@@ -271,7 +284,9 @@ class EKidsViewModel : BaseViewModel() {
             }
 
             if (goodsList.size > 20) {
-                updatedList.add(start + holderCount, ModuleData.EKidsExpandableData(viewType = "newArrival"))
+                updatedList.add(start + holderCount, ModuleData.EKidsExpandableData(
+                    viewType = "newArrival",
+                    toggleExpand = { toggleNewArrivalMore() }))
             }
         }
 
@@ -279,7 +294,7 @@ class EKidsViewModel : BaseViewModel() {
         moduleList = updatedList
     }
 
-    fun toggleWeeklyBestMore() {
+    private fun toggleWeeklyBestMore() {
         isWeeklyExpanding = !isWeeklyExpanding
 
         if (!isWeeklyExpanding) {
@@ -322,7 +337,7 @@ class EKidsViewModel : BaseViewModel() {
         }
     }
 
-    fun toggleNewArrivalMore() {
+    private fun toggleNewArrivalMore() {
         isNewExpanding = !isNewExpanding
 
         if (!isNewExpanding) {

@@ -4,7 +4,6 @@ import com.example.elandmall_kotlin.BaseApplication
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.ViewEkidsExpandableBinding
 import com.example.elandmall_kotlin.ui.*
-import com.example.elandmall_kotlin.util.Logger
 
 class EKidsExpandableViewHolder(private val binding: ViewEkidsExpandableBinding) : BaseViewHolder(binding.root) {
     override fun onBind(item: Any, pos: Int) {
@@ -18,14 +17,14 @@ class EKidsExpandableViewHolder(private val binding: ViewEkidsExpandableBinding)
             title.text = if (data.isExpanded) BaseApplication.context.resources.getString(R.string.close) else BaseApplication.context.resources.getString(R.string.more)
 
             root.setOnClickListener {
-                EventBus.fire(ViewHolderEvent(ViewHolderEventType.TOGGLE_MORE1, TabType.EKIDS))
+                data.toggleExpand()
             }
 
         } else {
             title.text = if (data.isExpanded) BaseApplication.context.resources.getString(R.string.close) else BaseApplication.context.resources.getString(R.string.more)
 
             root.setOnClickListener {
-                EventBus.fire(ViewHolderEvent(ViewHolderEventType.TOGGLE_MORE2, TabType.EKIDS))
+                data.toggleExpand()
             }
         }
     }

@@ -14,29 +14,6 @@ class EKidsModuleFragment : BaseModuleFragment() {
         viewModel.uiList.observe(this) {
             setModules(it)
         }
-
-        EventBus.viewHolderEvent.observe(requireActivity()) {
-            it.getIfNotHandled()?.let { event ->
-                if(event.tabType == TabType.EKIDS) {
-                    when (event.eventType) {
-                        ViewHolderEventType.CATEGORY_SCROLL1 -> {
-                            val selected = event.content as? Int ?: 0
-                            viewModel.changeWeeklyBestTab(selected)
-                        }
-                        ViewHolderEventType.CATEGORY_SCROLL2 -> {
-                            val selected = event.content as? Int ?: 0
-                            viewModel.changeNewArrivalTab(selected)
-                        }
-                        ViewHolderEventType.TOGGLE_MORE1 -> {
-                            viewModel.toggleWeeklyBestMore()
-                        }
-                        ViewHolderEventType.TOGGLE_MORE2 -> {
-                            viewModel.toggleNewArrivalMore()
-                        }
-                    }
-                }
-            }
-        }
     }
 
     companion object {

@@ -1,7 +1,8 @@
 package com.example.elandmall_kotlin.ui
 
-import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.model.*
+import com.example.elandmall_kotlin.ui.main.tabs.ekids.ChangeCategoryCallback
+import com.example.elandmall_kotlin.ui.main.tabs.ekids.ToggleCallback
 
 sealed class ModuleData {
     abstract fun clone(): ModuleData
@@ -302,6 +303,7 @@ sealed class ModuleData {
 
     data class EKidsRecommendCategoryData(
         val categoryList: List<String>,
+        val changeCategory: ChangeCategoryCallback,
         var cateSelected: Int,
         val viewType: String
     ) : ModuleData() {
@@ -314,6 +316,7 @@ sealed class ModuleData {
 
     data class EKidsExpandableData(
         val viewType: String,
+        val toggleExpand: ToggleCallback,
         var isExpanded: Boolean = false
     ) : ModuleData() {
         override fun clone(): ModuleData {

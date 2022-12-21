@@ -11,13 +11,9 @@ import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.ViewEkidsRecommendCategoryBinding
 import com.example.elandmall_kotlin.databinding.ViewEkidsRecommendCategoryItemBinding
 import com.example.elandmall_kotlin.ui.*
+import com.example.elandmall_kotlin.ui.main.tabs.ekids.ChangeCategoryCallback
 import com.example.elandmall_kotlin.util.HorizontalSpacingItemDecoration
-import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.dpToPx
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 var weeklyBestSelected = 0
 var newArrivalSelected = 0
@@ -33,8 +29,8 @@ class EKidsRecommendCategoryViewHolder(private val binding: ViewEkidsRecommendCa
 
     private fun initUI(data: ModuleData.EKidsRecommendCategoryData) = with(binding) {
         viewType = data.viewType
-        val mWeeklyAdapter = CategoryAdapter().apply { submitList(data.categoryList) }
-        val mNewAdapter = CategoryAdapter().apply { submitList(data.categoryList) }
+        val mWeeklyAdapter = CategoryAdapter(data.changeCategory).apply { submitList(data.categoryList) }
+        val mNewAdapter = CategoryAdapter(data.changeCategory).apply { submitList(data.categoryList) }
 
         if ("weeklyBest".equals(data.viewType, true)) {
             weeklyBestSelected = data.cateSelected
@@ -50,7 +46,7 @@ class EKidsRecommendCategoryViewHolder(private val binding: ViewEkidsRecommendCa
         }
     }
 
-    inner class CategoryAdapter : ListAdapter<String, CategoryAdapter.CategoryHolder>(object : DiffUtil.ItemCallback<String>() {
+    inner class CategoryAdapter(val callback: ChangeCategoryCallback) : ListAdapter<String, CategoryAdapter.CategoryHolder>(object : DiffUtil.ItemCallback<String>() {
         override fun areItemsTheSame(oldItem: String, newItem: String): Boolean = oldItem == newItem
         override fun areContentsTheSame(oldItem: String, newItem: String): Boolean = oldItem == newItem
     }) {
@@ -67,14 +63,14 @@ class EKidsRecommendCategoryViewHolder(private val binding: ViewEkidsRecommendCa
 
         override fun onBindViewHolder(holder: CategoryHolder, position: Int) {
             if ("weeklyBest".equals(viewType, true)) {
-                holder.onBind(weeklyBestSelected)
+                holder.onBind(weeklyBestSelected, callback)
             } else {
-                holder.onBind(newArrivalSelected)
+                holder.onBind(newArrivalSelected, callback)
             }
         }
 
         inner class CategoryHolder(val binding: ViewEkidsRecommendCategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
-            fun onBind(selected: Int) = with(binding) {
+            fun onBind(selected: Int, changeCategory: ChangeCategoryCallback) = with(binding) {
                 title.apply {
                     text = currentList[adapterPosition]
                     if (selected == adapterPosition) {
@@ -90,13 +86,13 @@ class EKidsRecommendCategoryViewHolder(private val binding: ViewEkidsRecommendCa
                         weeklyBestSelected = adapterPosition
                         notifyDataSetChanged()
 
-                        EventBus.fire(ViewHolderEvent(ViewHolderEventType.CATEGORY_SCROLL1, TabType.EKIDS, weeklyBestSelected))
+                        changeCategory(weeklyBestSelected)
 
                     } else {
                         newArrivalSelected = adapterPosition
                         notifyDataSetChanged()
 
-                        EventBus.fire(ViewHolderEvent(ViewHolderEventType.CATEGORY_SCROLL2, TabType.EKIDS, newArrivalSelected))
+                        changeCategory(newArrivalSelected)
                     }
                 }
             }
