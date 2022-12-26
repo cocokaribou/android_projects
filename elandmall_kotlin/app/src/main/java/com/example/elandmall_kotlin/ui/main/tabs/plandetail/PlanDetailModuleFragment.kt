@@ -12,7 +12,6 @@ import com.example.elandmall_kotlin.ui.TabType
 import com.example.elandmall_kotlin.ui.ViewHolderEventType
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.BottomSheetFragment
-import com.example.elandmall_kotlin.ui.main.tabs.DialogType
 import com.example.elandmall_kotlin.util.Logger
 
 
@@ -20,18 +19,22 @@ class PlanDetailModuleFragment : BaseModuleFragment() {
     var sortSelected = 0
     override val viewModel: PlanDetailViewModel by viewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        addScrollListener(scrollListener)
-    }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        addScrollListener(scrollListener)
+//        Logger.v("plandetail onViewCreated")
+//    }
 
     override fun onResume() {
         super.onResume()
         addScrollListener(scrollListener)
+        Logger.v("plandetail onResume")
     }
+
     override fun onPause() {
         super.onPause()
         removeScrollListener(scrollListener)
+        Logger.v("plandetail onPause")
     }
 
     override fun observeData() {
@@ -41,23 +44,11 @@ class PlanDetailModuleFragment : BaseModuleFragment() {
             initSticky()
         }
 
-        EventBus.viewHolderEvent.observe(requireActivity()) {
-            it.getIfNotHandled()?.let { event ->
-                if (event.tabType == TabType.PLAN_DETAIL) {
-                    when (event.eventType) {
-                        ViewHolderEventType.GRID_CLICK -> {
-                            viewModel.updateGrid()
-                        }
-                        ViewHolderEventType.SORT_CLICK -> {
-                            val index = event.content as? Int ?: 0
-                            binding.plandetailSort.sort.text = viewModel.tabList[index]
-                            scrollToY(index)
-                        }
-                    }
-                }
-            }
+        viewModel.index.observe(this) {
+            Logger.v("옵저버~")
+            binding.plandetailSort.root.visibility = View.VISIBLE
+            scrollToY(it)
         }
-
     }
 
     private fun initSticky() = with(binding) {
@@ -70,11 +61,13 @@ class PlanDetailModuleFragment : BaseModuleFragment() {
             text = viewModel.tabList[sortSelected]
             setOnClickListener {
                 BottomSheetFragment(
-                    type = DialogType.PLAN_DETAIL,
+                    sortCallback = {
+                        val pos = it as? Int ?: 0
+                        scrollToY(pos)
+                    },
+                    initIndex = sortSelected,
                     list = viewModel.tabList
-                ).apply {
-                    setPlanDetailSelected(sortSelected)
-                }.show(requireActivity().supportFragmentManager, "")
+                ).show(requireActivity().supportFragmentManager, "")
             }
         }
 
@@ -117,6 +110,8 @@ class PlanDetailModuleFragment : BaseModuleFragment() {
     }
 
     private fun scrollToY(pos: Int) {
+        binding.plandetailSort.sort.text = viewModel.tabList[pos]
+
         val posList = mutableListOf<Int>()
         moduleAdapter.value.forEachIndexed { index, moduleData ->
             if (moduleData is ModuleData.PlanDetailTabTitleData) {

@@ -6,7 +6,6 @@ import com.example.elandmall_kotlin.model.Goods
 import com.example.elandmall_kotlin.model.StorePickResponse
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.ui.TabType
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
 import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopStickyAdapter.Companion.storeShopCateAdapter
 import com.example.elandmall_kotlin.util.Logger
@@ -16,10 +15,10 @@ class StoreShopViewModel : BaseViewModel() {
     private val repository: StoreShopRepository by lazy { StoreShopRepository() }
 
     // store pick ui payloads
-    var mSortNo = 2
-    var mSortKey = "신상품순"
-    var mCateNo = ""
-    var mGridNo = 0
+    var sortNo = 1
+    var sortSelected = ""
+    var cateSelected = ""
+    var gridSelected = 0
 
     // category list
     var cateData = listOf<StoreShopResponse.CategoryGoods>()
@@ -37,10 +36,9 @@ class StoreShopViewModel : BaseViewModel() {
 
     override fun requestRefresh() {
         // refresh
-        mSortNo = 2
-        mSortKey = "신상품순"
-        mCateNo = ""
-        mGridNo = 0
+        sortNo = 1
+        cateSelected = ""
+        gridSelected = 0
 
         requestStore()
     }
@@ -58,8 +56,8 @@ class StoreShopViewModel : BaseViewModel() {
 
                                 // when success, call another api
                                 data.storePickList?.get(0)?.categoryNo?.let {
-                                    mCateNo = it
-                                    requestPick(mCateNo, mSortNo, mGridNo)
+                                    cateSelected = it
+                                    requestPick(cateSelected, sortNo, gridSelected)
                                 }
                             }
                         },
@@ -148,17 +146,32 @@ class StoreShopViewModel : BaseViewModel() {
 
                 moduleList.add(
                     ModuleData.StorePickHeaderData(
-                        storeShopData.storePickList,
-                        storeSelected = storeShopData.storePickList[0].relContNm ?: ""
+                        selectStore = {
+                            (it as? StoreShopResponse.StorePick)?.let { store ->
+                                updateStore(
+                                    store,
+                                    storeShopData.storePickList.indexOf(store)
+                                )
+                            }
+                        },
+                        list = storeShopData.storePickList,
+                        initIndex = 0
                     )
                 )
                 moduleList.add(
                     ModuleData.CommonSortData(
-                        TabType.STORE_SHOP,
-                        sortMap = storeSortMap,
+                        selectSort = {
+                            Logger.v("클릭!! $it")
+                            val pos = it as? Int ?: 0
+                            updateSort(pos, storeSortMap.keys.toList()[pos])
+                        },
+                        selectGrid = {
+                            Logger.v("그리드!!")
+                            updateGrid()
+                        },
+                        list = storeSortMap.keys.toList(),
                         isTopPaddingVisible = false,
-                        sortSelected = mSortKey,
-                        gridSelected = mGridNo
+                        sortSelected = 1
                     )
                 )
                 // goods
@@ -221,53 +234,56 @@ class StoreShopViewModel : BaseViewModel() {
         uiList.postValue(pickModuleList)
     }
 
-    fun updateGrid() {
-        if (mGridNo >= 2) {
-            mGridNo = 0
+    private fun updateGrid() {
+        if (gridSelected >= 2) {
+            gridSelected = 0
         } else {
-            mGridNo++
+            gridSelected++
         }
 
         moduleList.map {
             if (it is ModuleData.CommonSortData) {
-                it.gridSelected = mGridNo
-                it.sortSelected = mSortKey
+                it.gridSelected = gridSelected
+                it.sortSelected = sortNo
             }
         }
         pickModuleList = moduleList.map { it.clone() }.toMutableList()
 
-        drawStorePickGoods(pickData, mGridNo)
+        drawStorePickGoods(pickData, gridSelected)
         uiList.postValue(pickModuleList)
     }
 
-    fun updateStore(data: StoreShopResponse.StorePick) {
-        mCateNo = data.categoryNo ?: return
+    private fun updateStore(store: StoreShopResponse.StorePick, initIndex: Int) {
+        cateSelected = store.categoryNo ?: return
 
         moduleList.map {
             if (it is ModuleData.StorePickHeaderData) {
-                it.storeSelected = data.relContNm ?: ""
+                it.initIndex = initIndex
             }
 
             if (it is ModuleData.StorePickMoreData) {
-                it.storeSelected = data.relContNm ?: ""
+                it.storeSelected = store.relContNm ?: ""
             }
         }
         uiList.postValue(moduleList)
-        requestPick(categoryNo = mCateNo, sortNo = mSortNo, gridNo = mGridNo)
+        val sort = storeSortMap[sortSelected] ?: 1
+        requestPick(categoryNo = cateSelected, sortNo = sort, gridNo = gridSelected)
     }
 
-    fun updateSort(sortClicked: String) {
-        mSortKey = sortClicked
-        mSortNo = storeSortMap[sortClicked] ?: 2
+    private fun updateSort(sortNo: Int, sortKey: String) {
+        this.sortNo = sortNo
 
         moduleList.map {
             if (it is ModuleData.CommonSortData) {
-                it.sortSelected = sortClicked
-                it.gridSelected = mGridNo
+                it.sortSelected = sortNo
+                it.gridSelected = gridSelected
             }
         }
         uiList.postValue(moduleList)
-        requestPick(categoryNo = mCateNo, sortNo = mSortNo, gridNo = mGridNo)
+
+        sortSelected = sortKey
+        val sort = storeSortMap[sortKey] ?: 1
+        requestPick(categoryNo = cateSelected, sortNo = sort, gridNo = gridSelected)
     }
 
     private val storeSortMap: Map<String, Int> = mapOf(

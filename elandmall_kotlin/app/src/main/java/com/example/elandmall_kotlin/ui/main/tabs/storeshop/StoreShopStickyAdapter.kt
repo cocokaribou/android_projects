@@ -14,6 +14,7 @@ import com.example.elandmall_kotlin.ui.ViewHolderEventType
 import com.example.elandmall_kotlin.util.dpToPx
 import com.example.elandmall_kotlin.util.getScreenWidthToPx
 
+typealias ItemClickCallback = (Int) -> Unit
 class StoreShopStickyAdapter : RecyclerView.Adapter<StoreShopStickyAdapter.StickyViewHolder>() {
     companion object {
         val storeShopCateAdapter by lazy { StoreShopStickyAdapter() }
@@ -22,6 +23,8 @@ class StoreShopStickyAdapter : RecyclerView.Adapter<StoreShopStickyAdapter.Stick
     fun submitList(list: List<StoreShopResponse.CategoryGoods>) {
         currentList = list
     }
+
+    var itemClickCallback: ItemClickCallback = {}
 
     private var currentList = listOf<StoreShopResponse.CategoryGoods>()
 
@@ -76,11 +79,7 @@ class StoreShopStickyAdapter : RecyclerView.Adapter<StoreShopStickyAdapter.Stick
             cateName.text = currentItem.ctgNm
 
             root.setOnClickListener {
-                EventBus.fire(ViewHolderEvent(
-                    eventType = ViewHolderEventType.CATEGORY_SCROLL1,
-                    tabType = TabType.STORE_SHOP,
-                    content = adapterPosition
-                ))
+                itemClickCallback(adapterPosition)
                 tabSelected = adapterPosition
 
                 notifyDataSetChanged()

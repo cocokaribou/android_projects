@@ -6,65 +6,50 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.elandmall_kotlin.model.StoreShopResponse
-import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.ui.TabType
-import com.example.elandmall_kotlin.ui.ViewHolderEventType
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopStickyAdapter.Companion.storeShopCateAdapter
+import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.getScreenWidthToPx
 
 class StoreShopModuleFragment : BaseModuleFragment() {
 
     override val viewModel: StoreShopViewModel by viewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        addScrollListener(scrollListener)
-    }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        addScrollListener(scrollListener)
+//        Logger.v("storeshop onViewCreated")
+//    }
 
     override fun onResume() {
         super.onResume()
         addScrollListener(scrollListener)
+        scrollToX(visibleCatePos)
+        Logger.v("storeshop onResume")
     }
 
     override fun onPause() {
         super.onPause()
         removeScrollListener(scrollListener)
+        Logger.v("storeshop onPause")
     }
 
     override fun observeData() {
         viewModel.uiList.observe(this) {
             setModules(it)
 
-            // sticky header
-            binding.storeshopSticky.apply {
-                adapter = storeShopCateAdapter
-            }
+            initSticky()
         }
+    }
 
-        // holder click events
-        EventBus.viewHolderEvent.observe(requireActivity()) {
-            it.getIfNotHandled()?.let { event ->
-                if (event.tabType == TabType.STORE_SHOP) {
-                    when (event.eventType) {
-                        ViewHolderEventType.CATEGORY_SCROLL1 -> {
-                            val pos = event.content as Int
-                            scrollToX(pos)
-                            scrollToY(pos)
-                        }
-                        ViewHolderEventType.GRID_CLICK -> {
-                            viewModel.updateGrid()
-                        }
-                        ViewHolderEventType.SORT_CLICK -> {
-                            viewModel.updateSort(event.content as String)
-                        }
-                        ViewHolderEventType.STORE_CLICK -> {
-                            viewModel.updateStore(event.content as StoreShopResponse.StorePick)
-                        }
-                    }
-
+    private fun initSticky() {
+        binding.storeshopSticky.apply {
+            adapter = storeShopCateAdapter.apply {
+                itemClickCallback = { pos ->
+                    binding.storeshopSticky.visibility = View.VISIBLE
+                    scrollToX(pos)
+                    scrollToY(pos)
                 }
             }
         }
@@ -93,7 +78,10 @@ class StoreShopModuleFragment : BaseModuleFragment() {
         }
     }
 
+    var visibleCatePos = 0
     private fun scrollToX(position: Int) {
+        visibleCatePos = position
+
         val selected = (position - 17) / 6
         storeShopCateAdapter.tabSelector(selected)
 

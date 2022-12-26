@@ -6,9 +6,10 @@ import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.ViewCommonSortBinding
 import com.example.elandmall_kotlin.ui.*
 import com.example.elandmall_kotlin.ui.main.tabs.BottomSheetFragment
-import com.example.elandmall_kotlin.ui.main.tabs.DialogType
 import com.example.elandmall_kotlin.util.Logger
 
+typealias SortCallback = (Any) -> Unit
+typealias GridCallback = () -> Unit
 class CommonSortViewHolder(private val binding: ViewCommonSortBinding) : BaseViewHolder(binding.root) {
     override fun onBind(item: Any, pos: Int) {
         (item as? ModuleData.CommonSortData)?.let {
@@ -17,8 +18,6 @@ class CommonSortViewHolder(private val binding: ViewCommonSortBinding) : BaseVie
     }
 
     private fun initUi(data: ModuleData.CommonSortData) = with(binding) {
-        val list = data.sortMap.keys.toTypedArray().toList()
-
         if (data.isTopPaddingVisible) {
             padding.visibility = View.VISIBLE
         } else {
@@ -26,15 +25,12 @@ class CommonSortViewHolder(private val binding: ViewCommonSortBinding) : BaseVie
         }
 
         sort.apply {
-            text = data.sortSelected
-            val dialogType = when (data.tabType) {
-                TabType.PLAN_DETAIL -> DialogType.PLAN_DETAIL
-                else -> DialogType.STORE_SHOP_SORT
-            }
+            text = data.list[data.sortSelected ?: 0]
             setOnClickListener {
                 BottomSheetFragment(
-                    dialogType,
-                    list
+                    sortCallback = data.selectSort,
+                    initIndex = data.sortSelected ?: 0,
+                    list = data.list
                 ).show((binding.root.context as FragmentActivity).supportFragmentManager, "")
             }
         }
@@ -48,12 +44,7 @@ class CommonSortViewHolder(private val binding: ViewCommonSortBinding) : BaseVie
         grid.apply {
             setImageResource(imgSource)
             setOnClickListener {
-                EventBus.fire(
-                    ViewHolderEvent(
-                        eventType = ViewHolderEventType.GRID_CLICK,
-                        tabType = data.tabType
-                    )
-                )
+                data.selectGrid()
             }
         }
     }

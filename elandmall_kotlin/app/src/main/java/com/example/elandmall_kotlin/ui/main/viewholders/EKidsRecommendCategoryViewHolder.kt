@@ -33,11 +33,11 @@ class EKidsRecommendCategoryViewHolder(private val binding: ViewEkidsRecommendCa
         val mNewAdapter = CategoryAdapter(data.changeCategory).apply { submitList(data.categoryList) }
 
         if ("weeklyBest".equals(data.viewType, true)) {
-            weeklyBestSelected = data.cateSelected
+            weeklyBestSelected = data.initIndex
             list.adapter = mWeeklyAdapter
             (list.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(weeklyBestSelected, 0)
         } else {
-            newArrivalSelected = data.cateSelected
+            newArrivalSelected = data.initIndex
             list.adapter = mNewAdapter
             (list.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(newArrivalSelected, 0)
         }

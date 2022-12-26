@@ -6,25 +6,13 @@
     app:layout_behavior="@string/bottom_sheet_behavior"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/dialog_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
-        android:textColor="#2b2b2b"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="title" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dialog_list"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toTopOf="@id/divider"
-        app:layout_constraintTop_toBottomOf="@id/dialog_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/divider"

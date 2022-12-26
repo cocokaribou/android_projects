@@ -3,6 +3,8 @@ package com.example.elandmall_kotlin.ui
 import com.example.elandmall_kotlin.model.*
 import com.example.elandmall_kotlin.ui.main.tabs.ekids.ChangeCategoryCallback
 import com.example.elandmall_kotlin.ui.main.tabs.ekids.ToggleCallback
+import com.example.elandmall_kotlin.ui.main.viewholders.GridCallback
+import com.example.elandmall_kotlin.ui.main.viewholders.SortCallback
 
 sealed class ModuleData {
     abstract fun clone(): ModuleData
@@ -142,8 +144,9 @@ sealed class ModuleData {
     }
 
     data class StorePickHeaderData(
-        val storePickData: List<StoreShopResponse.StorePick>,
-        var storeSelected: String
+        val selectStore: SortCallback,
+        val list: List<StoreShopResponse.StorePick>,
+        var initIndex: Int
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -153,11 +156,12 @@ sealed class ModuleData {
     }
 
     data class CommonSortData(
-        val tabType: TabType,
-        val sortMap: Map<String, Any>,
+        val selectSort : SortCallback,
+        val selectGrid : GridCallback,
+        val list: List<String>,
         val isTopPaddingVisible: Boolean,
-        var sortSelected: String,
-        var gridSelected: Int
+        var sortSelected: Int? = 0,
+        var gridSelected: Int? = 0
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -304,7 +308,7 @@ sealed class ModuleData {
     data class EKidsRecommendCategoryData(
         val categoryList: List<String>,
         val changeCategory: ChangeCategoryCallback,
-        var cateSelected: Int,
+        var initIndex: Int,
         val viewType: String
     ) : ModuleData() {
         override fun clone(): ModuleData {

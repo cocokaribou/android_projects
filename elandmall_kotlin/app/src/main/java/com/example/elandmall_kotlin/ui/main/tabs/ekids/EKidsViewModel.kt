@@ -151,7 +151,7 @@ class EKidsViewModel : BaseViewModel() {
                     changeCategory = {
                         changeWeeklyBestTab(it)
                     },
-                    cateSelected = weeklyBestSelected,
+                    initIndex = weeklyBestSelected,
                     viewType = "weeklyBest"
                 )
             )
@@ -199,7 +199,7 @@ class EKidsViewModel : BaseViewModel() {
                     changeCategory = {
                         changeNewArrivalTab(it)
                     },
-                    cateSelected = newArrivalSelected,
+                    initIndex = newArrivalSelected,
                     viewType = "newArrival"
                 )
             )
@@ -239,7 +239,7 @@ class EKidsViewModel : BaseViewModel() {
         updatedGoods?.let { goodsList ->
             updatedList.map {
                 if (it is ModuleData.EKidsRecommendCategoryData && "weeklyBest".equals(it.viewType, true)) {
-                    it.cateSelected = weeklyBestSelected
+                    it.initIndex = weeklyBestSelected
                 }
             }
             goodsList.take(20).chunked(2).forEachIndexed { i, it ->
@@ -274,7 +274,7 @@ class EKidsViewModel : BaseViewModel() {
         updatedGoods?.let { goodsList ->
             updatedList.map {
                 if (it is ModuleData.EKidsRecommendCategoryData && "newArrival".equals(it.viewType, true)) {
-                    it.cateSelected = newArrivalSelected
+                    it.initIndex = newArrivalSelected
                 }
             }
 

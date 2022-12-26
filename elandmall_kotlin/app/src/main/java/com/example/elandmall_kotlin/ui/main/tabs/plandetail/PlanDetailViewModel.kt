@@ -24,6 +24,7 @@ class PlanDetailViewModel : BaseViewModel() {
     private var moduleList = mutableListOf<ModuleData>()
 
     val uiList = MutableLiveData<MutableList<ModuleData>>()
+    val index = MutableLiveData<Int>()
 
     init {
         requestPlanDetail()
@@ -80,15 +81,17 @@ class PlanDetailViewModel : BaseViewModel() {
         if (!data.tabList.isNullOrEmpty()) {
             tabList = data.tabList.map { it.dispCtgNm ?: "" }
 
-            var i = 0
-            val map = tabList.associateWith { i++ }
             moduleList.add(
                 ModuleData.CommonSortData(
-                    TabType.PLAN_DETAIL,
-                    map,
-                    isTopPaddingVisible = true,
-                    sortSelected = tabList[0],
-                    gridSelected = mGridNo
+                    selectSort = {
+                        val pos = it as? Int ?: 0
+                        index.postValue(pos)
+                    },
+                    selectGrid = {
+                        updateGrid()
+                    },
+                    list = tabList,
+                    isTopPaddingVisible = true
                 )
             )
         }
