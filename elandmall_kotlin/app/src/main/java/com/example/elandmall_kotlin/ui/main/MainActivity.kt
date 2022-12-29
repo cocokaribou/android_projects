@@ -8,6 +8,7 @@ import com.example.elandmall_kotlin.BaseApplication
 import com.example.elandmall_kotlin.databinding.ActivityMainBinding
 import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.EventBus
+import com.example.elandmall_kotlin.util.Logger
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -47,7 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.a
         viewpager.apply {
             adapter = mAdapter
             isUserInputEnabled = true
-            setCurrentItem(5, false)
+            setCurrentItem(0, false)
         }
 
         MemDataSource.mainGnbCache?.data?.gnbList?.let {

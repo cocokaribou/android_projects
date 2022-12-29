@@ -80,6 +80,7 @@ class BottomSheetFragment(
                     }
                 }
 
+                // list of StorePick
                 (items[adapterPosition] as? StoreShopResponse.StorePick)?.let { storeData ->
                     name.text = storeData.relContNm
 

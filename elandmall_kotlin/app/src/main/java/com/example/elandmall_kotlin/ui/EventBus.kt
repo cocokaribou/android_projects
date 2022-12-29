@@ -94,6 +94,7 @@ class ViewHolderEvent {
 }
 
 enum class ViewHolderEventType {
+    TAB_SELECT,
     GRID_CLICK,
     SORT_CLICK,
     STORE_CLICK,
@@ -104,6 +105,7 @@ enum class ViewHolderEventType {
 }
 
 enum class TabType {
+    LUCKY_DEAL,
     STORE_SHOP,
     PLAN_DETAIL
 }

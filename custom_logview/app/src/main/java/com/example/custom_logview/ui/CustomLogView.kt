@@ -15,8 +15,10 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
+import com.example.custom_logview.R
 import com.example.custom_logview.databinding.ViewLogBinding
 import com.example.custom_logview.util.EnterListener
 import com.example.custom_logview.util.TextFocusListener
@@ -95,8 +97,9 @@ class CustomLogView @JvmOverloads constructor(
         }
 
         clear.setOnClickListener {
-            toast("clear log!")
-            CustomLog.clear()
+            val constraints = ConstraintSet()
+            constraints.clone(binding.root.context, R.layout.view_log2)
+            constraints.applyTo(binding.root)
         }
 
         save.setOnClickListener {

@@ -3,7 +3,9 @@ package com.example.elandmall_kotlin.ui.main.tabs.home
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import com.example.elandmall_kotlin.repository.MemDataSource
+import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
+import com.example.elandmall_kotlin.util.Logger
 
 class HomeModuleFragment : BaseModuleFragment() {
 
@@ -24,6 +26,12 @@ class HomeModuleFragment : BaseModuleFragment() {
 
         viewModel.uiList.observe(this) {
             setModules(it)
+        }
+
+        EventBus.viewHolderEvent.observe(viewLifecycleOwner) {
+            it.getIfNotHandled()?.let {
+                Logger.v("계속 여길 타느냐 $it")
+            }
         }
     }
 

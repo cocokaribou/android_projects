@@ -3,6 +3,7 @@ package com.example.elandmall_kotlin.ui
 import com.example.elandmall_kotlin.model.*
 import com.example.elandmall_kotlin.ui.main.tabs.ekids.ChangeCategoryCallback
 import com.example.elandmall_kotlin.ui.main.tabs.ekids.ToggleCallback
+import com.example.elandmall_kotlin.ui.main.tabs.luckydeal.CategoryPayloadCallback
 import com.example.elandmall_kotlin.ui.main.viewholders.GridCallback
 import com.example.elandmall_kotlin.ui.main.viewholders.SortCallback
 
@@ -190,7 +191,7 @@ sealed class ModuleData {
 
     data class CommonGoodsGridData(
         val goodsListData: List<Goods>,
-        var isDividerVisible: Boolean = true
+        var dividerType: DividerType = DividerType.SINGLE_LINE
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -331,7 +332,8 @@ sealed class ModuleData {
     }
 
     data class CommonCategoryTabData(
-        var categoryList: List<Category>
+        var categoryList: List<Category>,
+        var changeCategory: CategoryPayloadCallback
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -339,4 +341,9 @@ sealed class ModuleData {
 
         companion object
     }
+}
+enum class DividerType{
+    SINGLE_LINE,
+    PADDED_LINE,
+    GONE
 }

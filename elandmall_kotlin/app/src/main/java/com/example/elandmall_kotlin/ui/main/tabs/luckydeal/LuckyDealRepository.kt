@@ -23,9 +23,20 @@ class LuckyDealRepository {
         }.flowOn(Dispatchers.IO)
     }
 
+    var randCounter = 0
     suspend fun requestLuckyDealTabStream(conrSetNo: String, conrSetCmpsNo: String): Flow<Result<LuckyDealTabResponse?>> {
         return flow {
-            val jsonString = getJsonFileToString("json/luckydeal_tab.json", BaseApplication.context)
+            val jsonString = when (randCounter) {
+                0 -> getJsonFileToString("json/luckydeal_tab.json", BaseApplication.context)
+                else -> getJsonFileToString("json/luckydeal_tab2.json", BaseApplication.context)
+            }
+
+            // for refreshing effect
+            if (randCounter >= 1) {
+                randCounter = 0
+            } else {
+                randCounter++
+            }
             val data = Gson().fromJson(jsonString, LuckyDealTabResponse::class.java)
             emit(Result.success(data))
         }.retryWhen { cause, attempt ->

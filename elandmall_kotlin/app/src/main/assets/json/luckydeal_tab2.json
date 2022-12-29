@@ -1,0 +1,170 @@
+{
+  "code": "200",
+  "data": {
+    "goods_info": {
+      "page_idx": "1",
+      "goods_list": [
+        {
+          "flag_img_path": "",
+          "goods_nm": "오늘출발~! 1차완판 재입고 페이퍼플레인키즈 아동패딩부츠 특가전!",
+          "brand_nm": "",
+          "icon_view": "무료배송,BEST,HIT,",
+          "cust_sale_price": 12900,
+          "sale_qty": 403,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=1611071544&vir_vend_no=VV16002489&sale_shop_divi_cd=15&disp_ctg_no=1512000577&sale_area_no=D1601000354&tr_yn=N&conts_dist_no=1611071544&conts_divi_cd=20&rel_no=1611071544&rel_divi_cd=10&brand_nm=&goods_nm=%EC%98%A4%EB%8A%98%EC%B6%9C%EB%B0%9C%7E%21+1%EC%B0%A8%EC%99%84%ED%8C%90+%EC%9E%AC%EC%9E%85%EA%B3%A0+%ED%8E%98%EC%9D%B4%ED%8D%BC%ED%94%8C%EB%A0%88%EC%9D%B8%ED%82%A4%EC%A6%88+%EC%95%84%EB%8F%99%ED%8C%A8%EB%94%A9%EB%B6%80%EC%B8%A0+%ED%8A%B9%EA%B0%80%EC%A0%84%21&flag_img_path=",
+          "sale_rate": 0,
+          "image_url": "//www.elandrs.com/upload/prd/img/544/240/1611071544_0000014.jpg",
+          "sale_price": 0,
+          "market_price": 0
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "[오후]오후 FW신상이월 BEST 아이템!",
+          "brand_nm": "",
+          "icon_view": "",
+          "cust_sale_price": 2320,
+          "sale_qty": 9263,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2211583338&vir_vend_no=VV17005747&sale_shop_divi_cd=15&disp_ctg_no=1512000577&sale_area_no=D1601000354&tr_yn=N&conts_dist_no=2211583338&conts_divi_cd=20&rel_no=2211583338&rel_divi_cd=10&brand_nm=&goods_nm=%5B%EC%98%A4%ED%9B%84%5D%EC%98%A4%ED%9B%84+FW%EC%8B%A0%EC%83%81%EC%9D%B4%EC%9B%94+BEST+%EC%95%84%EC%9D%B4%ED%85%9C%21&flag_img_path=",
+          "sale_rate": 0,
+          "image_url": "//www.elandrs.com/upload/prd/img/338/240/2211583338_0000004.jpg",
+          "sale_price": 0,
+          "market_price": 0
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "[인디고키즈] 신상이월 FW 베스트 아이템 초특가전!",
+          "brand_nm": "",
+          "icon_view": "",
+          "cust_sale_price": 4700,
+          "sale_qty": 21336,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2211583336&vir_vend_no=CN003563&sale_shop_divi_cd=15&disp_ctg_no=1512000577&sale_area_no=D1601000354&tr_yn=N&conts_dist_no=2211583336&conts_divi_cd=20&rel_no=2211583336&rel_divi_cd=10&brand_nm=&goods_nm=%5B%EC%9D%B8%EB%94%94%EA%B3%A0%ED%82%A4%EC%A6%88%5D+%EC%8B%A0%EC%83%81%EC%9D%B4%EC%9B%94+FW+%EB%B2%A0%EC%8A%A4%ED%8A%B8+%EC%95%84%EC%9D%B4%ED%85%9C+%EC%B4%88%ED%8A%B9%EA%B0%80%EC%A0%84%21&flag_img_path=",
+          "sale_rate": 0,
+          "image_url": "//www.elandrs.com/upload/prd/img/336/240/2211583336_0000001.jpg",
+          "sale_price": 0,
+          "market_price": 0
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "[아이스비스킷/누누누] 신학기가방, 구스아우터 단하루! 핫딜 ~51%+10%+7%",
+          "brand_nm": "",
+          "icon_view": "무료배송,",
+          "cust_sale_price": 6000,
+          "sale_qty": 611,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2212600024&vir_vend_no=VV21021189&sale_shop_divi_cd=15&disp_ctg_no=1512000577&sale_area_no=D1601000354&tr_yn=N&conts_dist_no=2212600024&conts_divi_cd=20&rel_no=2212600024&rel_divi_cd=10&brand_nm=&goods_nm=%5B%EC%95%84%EC%9D%B4%EC%8A%A4%EB%B9%84%EC%8A%A4%ED%82%B7%2F%EB%88%84%EB%88%84%EB%88%84%5D+%EC%8B%A0%ED%95%99%EA%B8%B0%EA%B0%80%EB%B0%A9%2C+%EA%B5%AC%EC%8A%A4%EC%95%84%EC%9A%B0%ED%84%B0+%EB%8B%A8%ED%95%98%EB%A3%A8%21+%ED%95%AB%EB%94%9C+%7E51%25%2B10%25%2B7%25&flag_img_path=",
+          "sale_rate": 0,
+          "image_url": "//www.elandrs.com/upload/prd/img/024/240/2212600024_0000005.jpg",
+          "sale_price": 0,
+          "market_price": 0
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "[유솔]★최대~75%★단 하루 브랜드데이, FW 이월 특가 찬스!",
+          "brand_nm": "",
+          "icon_view": "",
+          "cust_sale_price": 2900,
+          "sale_qty": 29996,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2211502163&vir_vend_no=VV17005755&sale_shop_divi_cd=15&disp_ctg_no=1512000577&sale_area_no=D1601000354&tr_yn=N&conts_dist_no=2211502163&conts_divi_cd=20&rel_no=2211502163&rel_divi_cd=10&brand_nm=&goods_nm=%5B%EC%9C%A0%EC%86%94%5D%E2%98%85%EC%B5%9C%EB%8C%80%7E75%25%E2%98%85%EB%8B%A8+%ED%95%98%EB%A3%A8+%EB%B8%8C%EB%9E%9C%EB%93%9C%EB%8D%B0%EC%9D%B4%2C+FW+%EC%9D%B4%EC%9B%94+%ED%8A%B9%EA%B0%80+%EC%B0%AC%EC%8A%A4%21&flag_img_path=",
+          "sale_rate": 0,
+          "image_url": "//www.elandrs.com/upload/prd/img/163/240/2211502163_0000005.jpg",
+          "sale_price": 0,
+          "market_price": 0
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "[유솔] 단 하루, 22FW 신상 특가!★최대~50%★",
+          "brand_nm": "",
+          "icon_view": "",
+          "cust_sale_price": 9900,
+          "sale_qty": 3116,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2211502160&vir_vend_no=VV17005755&sale_shop_divi_cd=15&disp_ctg_no=1512000577&sale_area_no=D1601000354&tr_yn=N&conts_dist_no=2211502160&conts_divi_cd=20&rel_no=2211502160&rel_divi_cd=10&brand_nm=&goods_nm=%5B%EC%9C%A0%EC%86%94%5D+%EB%8B%A8+%ED%95%98%EB%A3%A8%2C+22FW+%EC%8B%A0%EC%83%81+%ED%8A%B9%EA%B0%80%21%E2%98%85%EC%B5%9C%EB%8C%80%7E50%25%E2%98%85&flag_img_path=",
+          "sale_rate": 0,
+          "image_url": "//www.elandrs.com/upload/prd/img/160/240/2211502160_0000007.jpg",
+          "sale_price": 0,
+          "market_price": 0
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "[로엠] HAPPY HOLIDAY 연말룩 공개",
+          "brand_nm": "",
+          "icon_view": "",
+          "cust_sale_price": 19900,
+          "sale_qty": 13238,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2005448675&vir_vend_no=VV16001884&sale_shop_divi_cd=15&disp_ctg_no=1512000577&sale_area_no=D1601000354&tr_yn=N&conts_dist_no=2005448675&conts_divi_cd=20&rel_no=2005448675&rel_divi_cd=10&brand_nm=&goods_nm=%5B%EB%A1%9C%EC%97%A0%5D+HAPPY+HOLIDAY+%EC%97%B0%EB%A7%90%EB%A3%A9+%EA%B3%B5%EA%B0%9C&flag_img_path=",
+          "sale_rate": 0,
+          "image_url": "//www.elandrs.com/upload/prd/img/675/240/2005448675_0000011.jpg",
+          "sale_price": 0,
+          "market_price": 0
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "[NC위크] 경량패딩/다운/플리스/집업 外 아우터 FW시즌오프 초특가전!",
+          "brand_nm": "",
+          "icon_view": "무료배송,",
+          "cust_sale_price": 8000,
+          "sale_qty": 4364,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2111876728&vir_vend_no=VV18006224&sale_shop_divi_cd=15&disp_ctg_no=1512000577&sale_area_no=D1601000354&tr_yn=N&conts_dist_no=2111876728&conts_divi_cd=20&rel_no=2111876728&rel_divi_cd=10&brand_nm=&goods_nm=%5BNC%EC%9C%84%ED%81%AC%5D+%EA%B2%BD%EB%9F%89%ED%8C%A8%EB%94%A9%2F%EB%8B%A4%EC%9A%B4%2F%ED%94%8C%EB%A6%AC%EC%8A%A4%2F%EC%A7%91%EC%97%85+%E5%A4%96+%EC%95%84%EC%9A%B0%ED%84%B0+FW%EC%8B%9C%EC%A6%8C%EC%98%A4%ED%94%84+%EC%B4%88%ED%8A%B9%EA%B0%80%EC%A0%84%21&flag_img_path=",
+          "sale_rate": 0,
+          "image_url": "//www.elandrs.com/upload/prd/img/728/240/2111876728_0000041.jpg",
+          "sale_price": 0,
+          "market_price": 0
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "[의류성인연합] 확 추워진 날씨, SHORT&LONG 패딩 특가",
+          "brand_nm": "",
+          "icon_view": "무료배송,",
+          "cust_sale_price": 49900,
+          "sale_qty": 868,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2211590122&vir_vend_no=CN003590&sale_shop_divi_cd=15&disp_ctg_no=1512000577&sale_area_no=D1601000354&tr_yn=N&conts_dist_no=2211590122&conts_divi_cd=20&rel_no=2211590122&rel_divi_cd=10&brand_nm=&goods_nm=%5B%EC%9D%98%EB%A5%98%EC%84%B1%EC%9D%B8%EC%97%B0%ED%95%A9%5D+%ED%99%95+%EC%B6%94%EC%9B%8C%EC%A7%84+%EB%82%A0%EC%94%A8%2C+SHORT%26LONG+%ED%8C%A8%EB%94%A9+%ED%8A%B9%EA%B0%80&flag_img_path=",
+          "sale_rate": 0,
+          "image_url": "//www.elandrs.com/upload/prd/img/122/240/2211590122_0000001.jpg",
+          "sale_price": 0,
+          "market_price": 0
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "[이랜드키즈] MERRY CHRISTMAS SALE 🎄",
+          "brand_nm": "",
+          "icon_view": "무료배송,",
+          "cust_sale_price": 12720,
+          "sale_qty": 5686,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2209342385&vir_vend_no=CN003623&sale_shop_divi_cd=15&disp_ctg_no=1512000577&sale_area_no=D1601000354&tr_yn=N&conts_dist_no=2209342385&conts_divi_cd=20&rel_no=2209342385&rel_divi_cd=10&brand_nm=&goods_nm=%5B%EC%9D%B4%EB%9E%9C%EB%93%9C%ED%82%A4%EC%A6%88%5D+MERRY+CHRISTMAS+SALE+%F0%9F%8E%84&flag_img_path=",
+          "sale_rate": 0,
+          "image_url": "//www.elandrs.com/upload/prd/img/385/240/2209342385_0000004.jpg",
+          "sale_price": 0,
+          "market_price": 0
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "[나이키] 따뜻하고 편안한 겨울 캐주얼 아우터, 맨투맨 (UPTO 60%)",
+          "brand_nm": "",
+          "icon_view": "무료배송,BEST,HIT,NEW,",
+          "cust_sale_price": 84910,
+          "sale_qty": 4075,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2212597009&vir_vend_no=VV18006240&sale_shop_divi_cd=15&disp_ctg_no=1512000577&sale_area_no=D1601000354&tr_yn=N&conts_dist_no=2212597009&conts_divi_cd=20&rel_no=2212597009&rel_divi_cd=10&brand_nm=&goods_nm=%5B%EB%82%98%EC%9D%B4%ED%82%A4%5D+%EB%94%B0%EB%9C%BB%ED%95%98%EA%B3%A0+%ED%8E%B8%EC%95%88%ED%95%9C+%EA%B2%A8%EC%9A%B8+%EC%BA%90%EC%A3%BC%EC%96%BC+%EC%95%84%EC%9A%B0%ED%84%B0%2C+%EB%A7%A8%ED%88%AC%EB%A7%A8+%28UPTO+60%25%29&flag_img_path=",
+          "sale_rate": 0,
+          "image_url": "//www.elandrs.com/upload/prd/img/009/240/2212597009_0000001.jpg",
+          "sale_price": 0,
+          "market_price": 0
+        },
+        {
+          "flag_img_path": "",
+          "goods_nm": "[밀리밤]크리스마스준비완료!공주드레스 외 멋쟁이룩 완성!",
+          "brand_nm": "",
+          "icon_view": "",
+          "cust_sale_price": 4700,
+          "sale_qty": 20610,
+          "link_url": "https://m.elandmall.com/goods/initGoodsDetail.action?goods_no=2211547104&vir_vend_no=CN003567&sale_shop_divi_cd=15&disp_ctg_no=1512000577&sale_area_no=D1601000354&tr_yn=N&conts_dist_no=2211547104&conts_divi_cd=20&rel_no=2211547104&rel_divi_cd=10&brand_nm=&goods_nm=%5B%EB%B0%80%EB%A6%AC%EB%B0%A4%5D%ED%81%AC%EB%A6%AC%EC%8A%A4%EB%A7%88%EC%8A%A4%EC%A4%80%EB%B9%84%EC%99%84%EB%A3%8C%21%EA%B3%B5%EC%A3%BC%EB%93%9C%EB%A0%88%EC%8A%A4+%EC%99%B8+%EB%A9%8B%EC%9F%81%EC%9D%B4%EB%A3%A9+%EC%99%84%EC%84%B1%21&flag_img_path=",
+          "sale_rate": 0,
+          "image_url": "//www.elandrs.com/upload/prd/img/104/240/2211547104_0000004.jpg",
+          "sale_price": 0,
+          "market_price": 0
+        }
+      ],
+      "rows_per_page": "40",
+      "goods_Total_count": 354
+    },
+    "banner_list": []
+  },
+  "resultMsg": "success"
+}

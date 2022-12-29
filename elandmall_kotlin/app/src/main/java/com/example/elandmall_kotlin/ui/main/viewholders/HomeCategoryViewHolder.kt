@@ -12,10 +12,7 @@ import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.ViewHomeCategoryBinding
 import com.example.elandmall_kotlin.databinding.ViewHomeCategoryItemBinding
 import com.example.elandmall_kotlin.model.HomeResponse
-import com.example.elandmall_kotlin.ui.BaseViewHolder
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.LinkEvent
-import com.example.elandmall_kotlin.ui.ModuleData
+import com.example.elandmall_kotlin.ui.*
 import com.example.elandmall_kotlin.ui.main.viewholders.HomeCategoryViewHolder.Companion.isExpanded
 import com.example.elandmall_kotlin.util.GridSideSpacingItemDecoration
 import com.example.elandmall_kotlin.util.Logger
@@ -120,7 +117,8 @@ class HomeCategoryViewHolder(private val binding: ViewHomeCategoryBinding) : Bas
                 } else {
                     // category icons
                     root.setOnClickListener {
-                        EventBus.fire(LinkEvent(data.linkUrl))
+//                        EventBus.fire(LinkEvent(data.linkUrl))
+                        EventBus.fire(ViewHolderEvent(ViewHolderEventType.CATEGORY_SCROLL1, TabType.PLAN_DETAIL))
                     }
 
                     cateName.text = data.title

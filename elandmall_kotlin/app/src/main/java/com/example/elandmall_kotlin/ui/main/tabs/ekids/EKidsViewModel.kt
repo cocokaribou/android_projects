@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.EKidsResponse
 import com.example.elandmall_kotlin.model.Goods
+import com.example.elandmall_kotlin.ui.DividerType
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
 import com.example.elandmall_kotlin.util.removeRange
@@ -159,7 +160,7 @@ class EKidsViewModel : BaseViewModel() {
             val goodsList = ctgGroup[weeklyBestSelected].goodsList
             goodsList?.take(20)?.chunked(2)?.forEach { it ->
                 moduleList.add(
-                    ModuleData.CommonGoodsGridData(it, false)
+                    ModuleData.CommonGoodsGridData(it)
                 )
             }
 
@@ -207,7 +208,7 @@ class EKidsViewModel : BaseViewModel() {
             val goodsList = newArrival[newArrivalSelected].goodsList
             goodsList?.take(20)?.chunked(2)?.forEach { it ->
                 moduleList.add(
-                    ModuleData.CommonGoodsGridData(it, false)
+                    ModuleData.CommonGoodsGridData(it, DividerType.GONE)
                 )
             }
 
@@ -244,7 +245,7 @@ class EKidsViewModel : BaseViewModel() {
             }
             goodsList.take(20).chunked(2).forEachIndexed { i, it ->
                 holderCount++
-                updatedList.add(i + start, ModuleData.CommonGoodsGridData(it, false))
+                updatedList.add(i + start, ModuleData.CommonGoodsGridData(it, DividerType.GONE))
             }
 
             if (goodsList.size > 20) {
@@ -280,7 +281,7 @@ class EKidsViewModel : BaseViewModel() {
 
             goodsList.take(20).chunked(2).forEachIndexed { i, it ->
                 holderCount++
-                updatedList.add(i + start, ModuleData.CommonGoodsGridData(it, false))
+                updatedList.add(i + start, ModuleData.CommonGoodsGridData(it, DividerType.GONE))
             }
 
             if (goodsList.size > 20) {
@@ -322,7 +323,7 @@ class EKidsViewModel : BaseViewModel() {
 
             updatedGoods?.let { goodsList ->
                 goodsList.chunked(2).forEachIndexed { i, it ->
-                    updatedList.add(i + end, ModuleData.CommonGoodsGridData(it, false))
+                    updatedList.add(i + end, ModuleData.CommonGoodsGridData(it, DividerType.GONE))
                 }
 
                 updatedList.map {
@@ -365,7 +366,7 @@ class EKidsViewModel : BaseViewModel() {
 
             updatedGoods?.let { goodsList ->
                 goodsList.chunked(2).forEachIndexed { i, it ->
-                    updatedList.add(i + end, ModuleData.CommonGoodsGridData(it, false))
+                    updatedList.add(i + end, ModuleData.CommonGoodsGridData(it, DividerType.GONE))
                 }
 
                 updatedList.map {

@@ -17,13 +17,13 @@ class CommonGoodsGridViewHolder(private val binding: ViewCommonGoodsGridBinding)
     }
 
     private fun initUI(data: ModuleData.CommonGoodsGridData) =with(binding){
-        if (!data.isDividerVisible) {
-            divider1.visibility = View.GONE
-            divider2.visibility = View.GONE
-        } else {
-            divider1.visibility = View.VISIBLE
-            divider2.visibility = View.VISIBLE
-        }
+//        if (!data.isDividerVisible) {
+//            divider1.visibility = View.GONE
+//            divider2.visibility = View.GONE
+//        } else {
+//            divider1.visibility = View.VISIBLE
+//            divider2.visibility = View.VISIBLE
+//        }
 
         val item1 = data.goodsListData[0]
         val item2: Goods? =
