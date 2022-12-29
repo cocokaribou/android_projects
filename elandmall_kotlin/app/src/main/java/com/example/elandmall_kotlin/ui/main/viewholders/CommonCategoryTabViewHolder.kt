@@ -80,7 +80,6 @@ class CommonCategoryTabViewHolder(private val binding: ViewCommonCategoryTabBind
                         data.payload2?.let {
                             EventBus.fire(
                                 ViewHolderEvent(
-                                    tabType = TabType.LUCKY_DEAL,
                                     eventType = ViewHolderEventType.CATEGORY_SCROLL1,
                                 )
                             )

@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 import com.example.elandmall_kotlin.databinding.ViewStoreShopCateTabItemBinding
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.TabType
 import com.example.elandmall_kotlin.ui.ViewHolderEvent
 import com.example.elandmall_kotlin.ui.ViewHolderEventType
 import com.example.elandmall_kotlin.util.dpToPx
