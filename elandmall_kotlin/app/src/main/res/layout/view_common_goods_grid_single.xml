@@ -23,6 +23,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/rank"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:background="@drawable/background_rank_high"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:maxLength="2"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="01" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"

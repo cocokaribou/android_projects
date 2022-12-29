@@ -2,6 +2,7 @@ package com.example.elandmall_kotlin.ui.main.viewholders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -65,7 +66,13 @@ class CommonCategoryTabViewHolder(private val binding: ViewCommonCategoryTabBind
                 root.setOnClickListener {
                     if (adapterPosition != cateSelected) {
                         cateSelected = adapterPosition
-                        cateSelector(listOf(data.payload1!!, data.payload2!!))
+                        data.payload2?.let {
+                            cateSelector(listOf(data.payload1!!, data.payload2))
+                            Toast.makeText(root.context, "${data.payload1}, ${data.payload2}",Toast.LENGTH_SHORT).show()
+                        }?: run {
+                            cateSelector(listOf(data.payload1!!))
+                            Toast.makeText(root.context, data.payload1,Toast.LENGTH_SHORT).show()
+                        }
                         notifyDataSetChanged()
                     }
                 }

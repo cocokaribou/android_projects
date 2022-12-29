@@ -5,21 +5,20 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.adapter.FragmentViewHolder
+import com.example.elandmall_kotlin.common.CommonConst.BEST_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.EKIDS_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.HOME_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.LUCKYDEAL_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.PLANS_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.STORE_MENU_CD
 import com.example.elandmall_kotlin.model.MainGnbResponse
-import com.example.elandmall_kotlin.model.PlanDetailResponse
-import com.example.elandmall_kotlin.repository.MemDataSource
+import com.example.elandmall_kotlin.ui.main.tabs.best.BestModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.ekids.EKidsModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.home.HomeModuleFragment
-import com.example.elandmall_kotlin.ui.main.tabs.luckydeal.LuckyDealFragment
+import com.example.elandmall_kotlin.ui.main.tabs.luckydeal.LuckyDealModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.plandetail.PlanDetailModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.web.WebviewModulesFragment
 import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopModuleFragment
-import com.example.elandmall_kotlin.util.Logger
 
 class MainTabPagerAdapter(fm: FragmentManager, lifeCycle: Lifecycle) : FragmentStateAdapter(fm, lifeCycle) {
     // TODO infinite horizontal scroll
@@ -68,7 +67,15 @@ class MainTabPagerAdapter(fm: FragmentManager, lifeCycle: Lifecycle) : FragmentS
 
                 LUCKYDEAL_MENU_CD -> {
                     fragments.add(
-                        LuckyDealFragment.create(
+                        LuckyDealModuleFragment.create(
+                            tabName = gnb.menuName ?: "",
+                            apiUrl = gnb.apiUrl ?: ""
+                        )
+                    )
+                }
+                BEST_MENU_CD -> {
+                    fragments.add(
+                        BestModuleFragment.create(
                             tabName = gnb.menuName ?: "",
                             apiUrl = gnb.apiUrl ?: ""
                         )

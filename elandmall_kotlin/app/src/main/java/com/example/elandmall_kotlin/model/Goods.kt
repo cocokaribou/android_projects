@@ -16,9 +16,11 @@ class Goods(
     @SerializedName("market_price") val marketPrice: Int?,
     @SerializedName("goods_comment_count") val goodsCommentCount: Int?,
     @SerializedName("goods_star_point") val goodsStarPoint: Int?,
-    // home time sale
+    // home tab > time sale
     @SerializedName("title") val title: String?,
-    @SerializedName("time") val time: String?
+    @SerializedName("time") val time: String?,
+    // best tab
+    var rank: Int = -1
 ) {
     val imageUrl:String
         get() {

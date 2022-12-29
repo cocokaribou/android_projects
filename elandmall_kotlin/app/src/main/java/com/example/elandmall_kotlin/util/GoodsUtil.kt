@@ -195,6 +195,24 @@ object GoodsUtil {
 
             // goods link
 
+
+            // goods rank (best tab)
+            try {
+                val rank = it.findViewById<TextView>(R.id.rank)
+                if (data.rank == -1 || data.rank > 20) {
+                    rank.visibility = View.GONE
+                } else {
+                    rank.visibility = View.VISIBLE
+
+                    val rankTxt = if (data.rank < 10) "0${data.rank}" else data.rank.toString()
+                    rank.text = rankTxt
+
+                    val background = if (data.rank in 1..3) R.drawable.background_rank_high else R.drawable.background_rank_default
+                    rank.setBackgroundResource(background)
+
+                }
+            } catch (e: RuntimeException) {
+            }
         }
     }
 

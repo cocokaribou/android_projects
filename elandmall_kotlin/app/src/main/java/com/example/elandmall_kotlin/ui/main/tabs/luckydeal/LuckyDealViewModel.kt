@@ -7,6 +7,7 @@ import com.example.elandmall_kotlin.model.LuckyDealResponse
 import com.example.elandmall_kotlin.model.LuckyDealTabResponse
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
+import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.launch
 
 typealias CategoryPayloadCallback = (List<String>) -> Unit
@@ -116,7 +117,7 @@ class LuckyDealViewModel : BaseViewModel() {
         uiList.postValue(tabModuleList)
     }
 
-    fun changeCategoryTab(cateNo: String, cateCmpsNo: String) {
+    private fun changeCategoryTab(cateNo: String, cateCmpsNo: String) {
         requestLuckyDealTab(cateNo, cateCmpsNo)
     }
 }
