@@ -2,7 +2,6 @@ package com.example.elandmall_kotlin.ui.main.tabs.luckydeal
 
 import com.example.elandmall_kotlin.BaseApplication
 import com.example.elandmall_kotlin.model.LuckyDealResponse
-import com.example.elandmall_kotlin.model.LuckyDealTabResponse
 import com.example.elandmall_kotlin.util.getJsonFileToString
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +23,7 @@ class LuckyDealRepository {
     }
 
     var randCounter = 0
-    suspend fun requestLuckyDealTabStream(conrSetNo: String, conrSetCmpsNo: String): Flow<Result<LuckyDealTabResponse?>> {
+    suspend fun requestLuckyDealTabStream(conrSetNo: String, conrSetCmpsNo: String): Flow<Result<LuckyDealResponse?>> {
         return flow {
             val jsonString = when (randCounter) {
                 0 -> getJsonFileToString("json/luckydeal_tab.json", BaseApplication.context)
@@ -37,7 +36,7 @@ class LuckyDealRepository {
             } else {
                 randCounter++
             }
-            val data = Gson().fromJson(jsonString, LuckyDealTabResponse::class.java)
+            val data = Gson().fromJson(jsonString, LuckyDealResponse::class.java)
             emit(Result.success(data))
         }.retryWhen { cause, attempt ->
             return@retryWhen attempt < 2 && cause is java.lang.Exception

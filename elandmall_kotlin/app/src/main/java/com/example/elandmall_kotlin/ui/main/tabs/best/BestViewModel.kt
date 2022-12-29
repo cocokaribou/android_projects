@@ -3,13 +3,13 @@ package com.example.elandmall_kotlin.ui.main.tabs.best
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.BestResponse
-import com.example.elandmall_kotlin.model.BestTabResponse
 import com.example.elandmall_kotlin.model.Category
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
 import com.example.elandmall_kotlin.ui.main.viewholders.cateSelected
 import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class BestViewModel : BaseViewModel() {
@@ -70,8 +70,9 @@ class BestViewModel : BaseViewModel() {
         if (!data.dispCtgList.isNullOrEmpty()) {
             val list: List<Category> =
                 data.dispCtgList.map {
+                    val title = it.dispCtgShowNm ?: it.ldispCtgShowNm
                     val payload = it.dispCtgNo ?: it.ldispCtgNo
-                    Category(title = it.ldispCtgShowNm, payload1 = payload, image = it.imgPath)
+                    Category(title = title, payload1 = payload, image = it.imgPath)
                 }
             moduleList.add(
                 ModuleData.CommonCategoryTabData(
@@ -85,7 +86,7 @@ class BestViewModel : BaseViewModel() {
         uiList.postValue(moduleList)
     }
 
-    private fun setBestTabModules(data: BestTabResponse.Data) {
+    private fun setBestTabModules(data: BestResponse.Data) {
         tabModuleList = moduleList.map { it.clone() }.toMutableList()
 
         if (data.goodsInfo != null) {

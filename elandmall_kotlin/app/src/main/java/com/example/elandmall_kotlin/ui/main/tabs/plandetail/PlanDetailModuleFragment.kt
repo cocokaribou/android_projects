@@ -3,19 +3,24 @@ package com.example.elandmall_kotlin.ui.main.tabs.plandetail
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.R
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.ui.TabType
-import com.example.elandmall_kotlin.ui.ViewHolderEventType
+import com.example.elandmall_kotlin.ui.*
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.BottomSheetFragment
 import com.example.elandmall_kotlin.util.Logger
 
 
 class PlanDetailModuleFragment : BaseModuleFragment() {
+    override var fragmentObserver =
+        Observer<SingleLiveEvent<ViewHolderEvent>> {
+            it?.getIfNotHandled()?.let { event ->
+
+                Logger.v("plan detail! 여기를 타셔야합니다 $event")
+            }
+        }
     var sortSelected = 0
     override val viewModel: PlanDetailViewModel by viewModels()
 

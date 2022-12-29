@@ -5,16 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.databinding.FragmentBaseModuleBinding
+import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.util.Logger
+import com.example.elandmall_kotlin.ui.SingleLiveEvent
+import com.example.elandmall_kotlin.ui.ViewHolderEvent
 
 abstract class BaseModuleFragment : Fragment() {
     abstract val viewModel: BaseViewModel
+    abstract var fragmentObserver: Observer<SingleLiveEvent<ViewHolderEvent>>
 
     lateinit var tabName: String
     private var url: String = ""
+
 
     companion object {
         const val KEY_ITEM_TAB_NAME = "keyItemTabName"
@@ -30,6 +35,7 @@ abstract class BaseModuleFragment : Fragment() {
         super.onResume()
         observeData()
 
+        EventBus.viewHolderEvent.observe(viewLifecycleOwner, fragmentObserver)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -77,6 +83,11 @@ abstract class BaseModuleFragment : Fragment() {
 
     fun setModules(moduleList: MutableList<ModuleData>) {
         moduleAdapter.value = moduleList
+    }
+
+    override fun onPause() {
+        super.onPause()
+        EventBus.viewHolderEvent.removeObserver(fragmentObserver)
     }
 
     fun addFooter(moduleList: MutableList<ModuleData>) {}

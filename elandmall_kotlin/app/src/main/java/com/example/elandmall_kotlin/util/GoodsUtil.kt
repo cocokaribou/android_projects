@@ -199,7 +199,7 @@ object GoodsUtil {
             // goods rank (best tab)
             try {
                 val rank = it.findViewById<TextView>(R.id.rank)
-                if (data.rank == -1 || data.rank > 20) {
+                if (data.rank == 0 || data.rank > 20) {
                     rank.visibility = View.GONE
                 } else {
                     rank.visibility = View.VISIBLE

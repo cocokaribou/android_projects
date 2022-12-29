@@ -47,6 +47,7 @@ class HomeCategoryViewHolder(private val binding: ViewHomeCategoryBinding) : Bas
             categoryList.addItemDecoration(itemDecoration)
         }
         more.setOnClickListener {
+            EventBus.fire(ViewHolderEvent(tabType = TabType.PLAN_DETAIL, eventType = ViewHolderEventType.CATEGORY_SCROLL1))
             toggleExpand()
         }
 

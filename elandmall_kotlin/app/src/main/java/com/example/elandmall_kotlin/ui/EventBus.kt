@@ -77,18 +77,15 @@ enum class LinkEventType {
 
 class ViewHolderEvent {
     val eventType: ViewHolderEventType
-    val tabType: TabType
     val content: Any
 
-    constructor(eventType: ViewHolderEventType, tabType: TabType) {
+    constructor(eventType: ViewHolderEventType) {
         this.eventType = eventType
-        this.tabType = tabType
         this.content = 0
     }
 
-    constructor(eventType: ViewHolderEventType, tabType: TabType, content: Any) {
+    constructor(eventType: ViewHolderEventType, content: Any) {
         this.eventType = eventType
-        this.tabType = tabType
         this.content = content
     }
 }
@@ -102,12 +99,6 @@ enum class ViewHolderEventType {
     CATEGORY_SCROLL2,
     TOGGLE_MORE1,
     TOGGLE_MORE2
-}
-
-enum class TabType {
-    LUCKY_DEAL,
-    STORE_SHOP,
-    PLAN_DETAIL
 }
 
 class SingleLiveEvent<out T>(private val content: T) {

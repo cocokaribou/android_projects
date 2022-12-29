@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.Category
 import com.example.elandmall_kotlin.model.LuckyDealResponse
-import com.example.elandmall_kotlin.model.LuckyDealTabResponse
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
 import com.example.elandmall_kotlin.util.Logger
@@ -103,7 +102,7 @@ class LuckyDealViewModel : BaseViewModel() {
     }
 
     // TODO paging
-    private fun setLuckyDealTabModules(data: LuckyDealTabResponse.Data) {
+    private fun setLuckyDealTabModules(data: LuckyDealResponse.Data) {
         tabModuleList = moduleList.map { it.clone() }.toMutableList()
 
         data.goodsInfo?.goodsList?.let { goodsList ->

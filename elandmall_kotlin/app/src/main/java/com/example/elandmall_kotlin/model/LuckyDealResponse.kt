@@ -10,6 +10,8 @@ data class LuckyDealResponse(
         @SerializedName("new_goods_list") val newGoodsList: List<Goods>?,
         @SerializedName("conr_set_no") val conrSetNo: String?,
         @SerializedName("conr_set_cmps_no") val conrSetCmpsNo: String?,
+        @SerializedName("goods_info") val goodsInfo: GoodsInfo?,
+        @SerializedName("banner_list") val bannerList: List<Banner>?
     )
 
     data class DispCtg(
@@ -17,15 +19,6 @@ data class LuckyDealResponse(
         @SerializedName("conr_set_cmps_no") val conrSetCmpsNo: String?,
         @SerializedName("ctg_nm") val ctgNm: String?,
         @SerializedName("img") val img: String?
-    )
-}
-
-data class LuckyDealTabResponse(
-    @SerializedName("data") val data: Data?,
-) : BaseResponse() {
-    data class Data(
-        @SerializedName("goods_info") val goodsInfo: GoodsInfo?,
-        @SerializedName("banner_list") val bannerList: List<Banner>?
     )
 
     data class GoodsInfo(

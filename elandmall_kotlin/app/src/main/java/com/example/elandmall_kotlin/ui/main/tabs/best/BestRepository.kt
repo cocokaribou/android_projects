@@ -2,9 +2,6 @@ package com.example.elandmall_kotlin.ui.main.tabs.best
 
 import com.example.elandmall_kotlin.BaseApplication
 import com.example.elandmall_kotlin.model.BestResponse
-import com.example.elandmall_kotlin.model.BestTabResponse
-import com.example.elandmall_kotlin.model.LuckyDealResponse
-import com.example.elandmall_kotlin.model.LuckyDealTabResponse
 import com.example.elandmall_kotlin.util.getJsonFileToString
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +22,7 @@ class BestRepository {
     }
 
     var randCounter = 0
-    suspend fun requestBestTabStream(dispCtgNo: String, pageIdx: Int): Flow<Result<BestTabResponse?>> {
+    suspend fun requestBestTabStream(dispCtgNo: String, pageIdx: Int): Flow<Result<BestResponse?>> {
         return flow {
             val jsonString = when (randCounter) {
                 0 -> getJsonFileToString("json/best_tab.json", BaseApplication.context)
@@ -38,7 +35,7 @@ class BestRepository {
             } else {
                 randCounter++
             }
-            val data = Gson().fromJson(jsonString, BestTabResponse::class.java)
+            val data = Gson().fromJson(jsonString, BestResponse::class.java)
             emit(Result.success(data))
         }.retryWhen { cause, attempt ->
             return@retryWhen attempt < 2 && cause is java.lang.Exception

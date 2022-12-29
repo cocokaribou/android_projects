@@ -20,6 +20,7 @@ class PlanDetailViewModel : BaseViewModel() {
 
     var indexList = mutableListOf<Int>()
     var goodsInfoData = listOf<PlanDetailResponse.GoodsInfo>()
+
     private var goodsModuleList = mutableListOf<ModuleData>()
     private var moduleList = mutableListOf<ModuleData>()
 

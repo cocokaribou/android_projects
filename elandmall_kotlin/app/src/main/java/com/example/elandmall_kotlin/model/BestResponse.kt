@@ -8,6 +8,7 @@ data class BestResponse(
 ) : BaseResponse() {
     data class Data(
         @SerializedName("disp_ctg_list") val dispCtgList: List<DispCtg>?,
+        @SerializedName("goods_info") val goodsInfo: GoodsInfo?
     )
 
     data class DispCtg(
@@ -16,14 +17,6 @@ data class BestResponse(
         @SerializedName("disp_ctg_no") val dispCtgNo: String?,
         @SerializedName("ldisp_ctg_no") val ldispCtgNo: String?,
         @SerializedName("ldisp_ctg_show_nm") val ldispCtgShowNm: String?
-    )
-}
-
-data class BestTabResponse(
-    @SerializedName("data") val data: Data?,
-) {
-    data class Data(
-        @SerializedName("goods_info") val goodsInfo: GoodsInfo?
     )
 
     data class GoodsInfo(
