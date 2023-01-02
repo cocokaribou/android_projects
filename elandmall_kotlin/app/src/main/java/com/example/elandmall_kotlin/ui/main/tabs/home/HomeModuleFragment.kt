@@ -12,13 +12,6 @@ import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
 import com.example.elandmall_kotlin.util.Logger
 
 class HomeModuleFragment : BaseModuleFragment() {
-    override var fragmentObserver =
-        Observer<SingleLiveEvent<ViewHolderEvent>> {
-            it?.getIfNotHandled()?.let { event ->
-                Logger.v("home! 여기를 타셔야합니다 $event")
-            }
-        }
-
     override val viewModel: HomeViewModel by viewModels()
 
     override fun observeData() {

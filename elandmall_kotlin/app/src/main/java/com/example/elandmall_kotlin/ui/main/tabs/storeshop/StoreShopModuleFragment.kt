@@ -16,12 +16,6 @@ import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.getScreenWidthToPx
 
 class StoreShopModuleFragment : BaseModuleFragment() {
-    override var fragmentObserver =
-        Observer<SingleLiveEvent<ViewHolderEvent>> {
-            it?.getIfNotHandled()?.let { event ->
-                Logger.v("storeshop! 여기를 타셔야합니다 $event")
-            }
-        }
     override val viewModel: StoreShopViewModel by viewModels()
 
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

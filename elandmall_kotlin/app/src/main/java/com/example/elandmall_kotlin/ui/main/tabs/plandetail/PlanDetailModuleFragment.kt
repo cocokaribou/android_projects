@@ -14,13 +14,6 @@ import com.example.elandmall_kotlin.util.Logger
 
 
 class PlanDetailModuleFragment : BaseModuleFragment() {
-    override var fragmentObserver =
-        Observer<SingleLiveEvent<ViewHolderEvent>> {
-            it?.getIfNotHandled()?.let { event ->
-
-                Logger.v("plan detail! 여기를 타셔야합니다 $event")
-            }
-        }
     var sortSelected = 0
     override val viewModel: PlanDetailViewModel by viewModels()
 

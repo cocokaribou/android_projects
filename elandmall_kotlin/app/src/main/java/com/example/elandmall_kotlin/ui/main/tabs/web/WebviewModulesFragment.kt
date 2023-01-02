@@ -9,12 +9,6 @@ import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
 import com.example.elandmall_kotlin.util.Logger
 
 class WebviewModulesFragment : BaseModuleFragment() {
-    override var fragmentObserver =
-        Observer<SingleLiveEvent<ViewHolderEvent>> {
-            it?.getIfNotHandled()?.let { event ->
-                Logger.v("web! 여기를 타셔야합니다 $event")
-            }
-        }
     override val viewModel: WebviewViewModel by viewModels()
 
     override fun observeData() {

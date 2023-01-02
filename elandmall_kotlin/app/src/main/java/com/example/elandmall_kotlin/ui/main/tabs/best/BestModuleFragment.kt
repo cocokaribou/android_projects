@@ -11,12 +11,6 @@ import com.example.elandmall_kotlin.ui.main.tabs.luckydeal.LuckyDealModuleFragme
 import com.example.elandmall_kotlin.util.Logger
 
 class BestModuleFragment:BaseModuleFragment() {
-    override var fragmentObserver =
-        Observer<SingleLiveEvent<ViewHolderEvent>> {
-            it?.getIfNotHandled()?.let { event ->
-                Logger.v("best! 여기를 타셔야합니다 $event")
-            }
-        }
     override val viewModel: BestViewModel by viewModels()
     override fun observeData() {
         viewModel.uiList.observe(this) {

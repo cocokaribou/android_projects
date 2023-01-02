@@ -15,7 +15,6 @@ import com.example.elandmall_kotlin.ui.ViewHolderEvent
 
 abstract class BaseModuleFragment : Fragment() {
     abstract val viewModel: BaseViewModel
-    abstract var fragmentObserver: Observer<SingleLiveEvent<ViewHolderEvent>>
 
     lateinit var tabName: String
     private var url: String = ""
@@ -34,8 +33,6 @@ abstract class BaseModuleFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         observeData()
-
-        EventBus.viewHolderEvent.observe(viewLifecycleOwner, fragmentObserver)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -83,11 +80,6 @@ abstract class BaseModuleFragment : Fragment() {
 
     fun setModules(moduleList: MutableList<ModuleData>) {
         moduleAdapter.value = moduleList
-    }
-
-    override fun onPause() {
-        super.onPause()
-        EventBus.viewHolderEvent.removeObserver(fragmentObserver)
     }
 
     fun addFooter(moduleList: MutableList<ModuleData>) {}
