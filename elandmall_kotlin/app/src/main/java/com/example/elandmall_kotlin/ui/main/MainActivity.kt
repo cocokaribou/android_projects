@@ -48,7 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.a
         viewpager.apply {
             adapter = mAdapter
             isUserInputEnabled = true
-            setCurrentItem(7, false)
+            setCurrentItem(4, false)
         }
 
         MemDataSource.mainGnbCache?.data?.gnbList?.let {

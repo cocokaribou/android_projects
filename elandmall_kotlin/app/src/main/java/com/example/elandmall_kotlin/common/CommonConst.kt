@@ -24,7 +24,7 @@ object CommonConst {
     const val KIMS_MENU_CD = "90"
     const val OVERSEA_MENU_CD = "100"
     const val EKIDS_MENU_CD = "110"
-    const val NOW_MENU_CD = "120"
+    const val ESHOP_MENU_CD = "120"
     const val PLAN_DETAIL_MENU_CD = "130"
     const val OPRICE_MENU_CD = "140"
     const val COUPON_MENU_CD = "160"
