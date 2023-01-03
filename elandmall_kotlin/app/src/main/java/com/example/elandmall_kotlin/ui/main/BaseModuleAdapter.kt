@@ -82,7 +82,7 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
-            ModuleData.HomeSeasonPlanData.ordinal() -> HomeSeasonPlanViewHolder(
+            ModuleData.CommonPlanData.ordinal() -> CommonPlanViewHolder(
                 ViewHomeSeasonPlanBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,

@@ -22,23 +22,17 @@ class PlanRepository {
         }.flowOn(Dispatchers.IO)
     }
 
-    var randCounter = 0
-    suspend fun requestPlanTabStream(disp_ctg_no: String): Flow<Result<PlanResponse?>> {
+    suspend fun requestPlanTabStream(dispCtgNo: String, index: Int): Flow<Result<PlanResponse?>> {
         return flow {
-            val jsonString = when (randCounter) {
-                0 -> getJsonFileToString("json/plan_1.json", BaseApplication.context)
-                1 -> getJsonFileToString("json/plan_2.json", BaseApplication.context)
-                2 -> getJsonFileToString("json/plan_3.json", BaseApplication.context)
-                3 -> getJsonFileToString("json/plan_4.json", BaseApplication.context)
+            val jsonString = when (index) {
+                0 -> getJsonFileToString("json/plan_0_page1.json", BaseApplication.context)
+                1 -> getJsonFileToString("json/plan_1.json", BaseApplication.context)
+                2 -> getJsonFileToString("json/plan_2.json", BaseApplication.context)
+                3 -> getJsonFileToString("json/plan_3.json", BaseApplication.context)
+                4 -> getJsonFileToString("json/plan_4.json", BaseApplication.context)
                 else -> getJsonFileToString("json/plan_5.json", BaseApplication.context)
             }
 
-            // for refreshing effect
-            if (randCounter >= 4) {
-                randCounter = 0
-            } else {
-                randCounter++
-            }
             val data = Gson().fromJson(jsonString, PlanResponse::class.java)
             emit(Result.success(data))
         }.retryWhen { cause, attempt ->

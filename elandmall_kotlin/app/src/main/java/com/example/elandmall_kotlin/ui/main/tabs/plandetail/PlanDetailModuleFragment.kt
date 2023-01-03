@@ -17,22 +17,14 @@ class PlanDetailModuleFragment : BaseModuleFragment() {
     var sortSelected = 0
     override val viewModel: PlanDetailViewModel by viewModels()
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        addScrollListener(scrollListener)
-//        Logger.v("plandetail onViewCreated")
-//    }
-
     override fun onResume() {
         super.onResume()
         addScrollListener(scrollListener)
-        Logger.v("plandetail onResume")
     }
 
     override fun onPause() {
         super.onPause()
         removeScrollListener(scrollListener)
-        Logger.v("plandetail onPause")
     }
 
     override fun observeData() {
@@ -43,7 +35,6 @@ class PlanDetailModuleFragment : BaseModuleFragment() {
         }
 
         viewModel.index.observe(this) {
-            Logger.v("옵저버~")
             binding.plandetailSort.root.visibility = View.VISIBLE
             scrollToY(it)
         }

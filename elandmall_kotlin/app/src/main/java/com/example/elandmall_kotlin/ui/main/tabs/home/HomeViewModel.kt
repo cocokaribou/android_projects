@@ -98,7 +98,7 @@ class HomeViewModel : BaseViewModel() {
                 if (!homeData.homeSeasonPlan.homeSeasonPlanList.isNullOrEmpty()) {
                     homeData.homeSeasonPlan.homeSeasonPlanList.forEach {
                         moduleList.add(
-                            ModuleData.HomeSeasonPlanData(it)
+                            ModuleData.CommonPlanData(it)
                         )
                     }
 

@@ -84,8 +84,8 @@ sealed class ModuleData {
         companion object
     }
 
-    data class HomeSeasonPlanData(
-        val homeSeasonPlansData: HomeResponse.HomeSeasonPlan.HomeSeasonPlanItem
+    data class CommonPlanData(
+        val planData: Plan
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()

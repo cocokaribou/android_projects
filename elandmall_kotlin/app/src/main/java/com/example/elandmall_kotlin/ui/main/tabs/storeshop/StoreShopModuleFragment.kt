@@ -18,12 +18,6 @@ import com.example.elandmall_kotlin.util.getScreenWidthToPx
 class StoreShopModuleFragment : BaseModuleFragment() {
     override val viewModel: StoreShopViewModel by viewModels()
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        addScrollListener(scrollListener)
-//        Logger.v("storeshop onViewCreated")
-//    }
-
     override fun onResume() {
         super.onResume()
         addScrollListener(scrollListener)

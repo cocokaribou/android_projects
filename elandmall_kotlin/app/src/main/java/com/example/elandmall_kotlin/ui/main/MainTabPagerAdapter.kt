@@ -9,13 +9,15 @@ import com.example.elandmall_kotlin.common.CommonConst.BEST_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.EKIDS_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.HOME_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.LUCKYDEAL_MENU_CD
-import com.example.elandmall_kotlin.common.CommonConst.PLANS_MENU_CD
+import com.example.elandmall_kotlin.common.CommonConst.PLAN_DETAIL_MENU_CD
+import com.example.elandmall_kotlin.common.CommonConst.PLAN_MENU_CD
 import com.example.elandmall_kotlin.common.CommonConst.STORE_MENU_CD
 import com.example.elandmall_kotlin.model.MainGnbResponse
 import com.example.elandmall_kotlin.ui.main.tabs.best.BestModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.ekids.EKidsModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.home.HomeModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.luckydeal.LuckyDealModuleFragment
+import com.example.elandmall_kotlin.ui.main.tabs.plan.PlanModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.plandetail.PlanDetailModuleFragment
 import com.example.elandmall_kotlin.ui.main.tabs.web.WebviewModulesFragment
 import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopModuleFragment
@@ -47,7 +49,7 @@ class MainTabPagerAdapter(fm: FragmentManager, lifeCycle: Lifecycle) : FragmentS
                         )
                     )
                 }
-                PLANS_MENU_CD -> {
+                PLAN_DETAIL_MENU_CD -> {
                     fragments.add(
                         PlanDetailModuleFragment.create(
                             tabName = gnb.menuName ?: "",
@@ -76,6 +78,14 @@ class MainTabPagerAdapter(fm: FragmentManager, lifeCycle: Lifecycle) : FragmentS
                 BEST_MENU_CD -> {
                     fragments.add(
                         BestModuleFragment.create(
+                            tabName = gnb.menuName ?: "",
+                            apiUrl = gnb.apiUrl ?: ""
+                        )
+                    )
+                }
+                PLAN_MENU_CD -> {
+                    fragments.add(
+                        PlanModuleFragment.create(
                             tabName = gnb.menuName ?: "",
                             apiUrl = gnb.apiUrl ?: ""
                         )

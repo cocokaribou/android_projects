@@ -118,12 +118,6 @@ data class HomeResponse(
     data class HomeSeasonPlan(
         @SerializedName("subtitle") val subtitle: String?,
         @SerializedName("title") val title: String?,
-        @SerializedName("home_offers_list") val homeSeasonPlanList: List<HomeSeasonPlanItem>?
-    ) {
-        data class HomeSeasonPlanItem(
-            @SerializedName("image_url") val imageUrl: String?,
-            @SerializedName("goods_list") val goodsList: List<Goods>?,
-            @SerializedName("link_url") val linkUrl: String?,
-        )
-    }
+        @SerializedName("home_offers_list") val homeSeasonPlanList: List<Plan>?
+    )
 }

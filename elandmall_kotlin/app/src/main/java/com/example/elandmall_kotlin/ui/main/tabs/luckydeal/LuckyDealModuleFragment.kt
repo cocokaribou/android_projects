@@ -12,7 +12,6 @@ import com.example.elandmall_kotlin.util.Logger
 class LuckyDealModuleFragment : BaseModuleFragment() {
     override val viewModel: LuckyDealViewModel by viewModels()
     override fun observeData() {
-        viewModel
         viewModel.uiList.observe(this) {
             setModules(it)
         }
