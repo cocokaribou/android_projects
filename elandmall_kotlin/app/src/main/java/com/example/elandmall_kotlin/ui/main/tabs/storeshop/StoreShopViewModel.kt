@@ -108,10 +108,7 @@ class StoreShopViewModel : BaseViewModel() {
             // recommend offline shop
             if (!storeShopData.recommendStoreList.isNullOrEmpty()) {
                 moduleList.add(
-                    ModuleData.CommonTitleData(
-                        title = "추천 지점",
-                        subTitle = ""
-                    )
+                    ModuleData.CommonTitleData(title = "추천 지점")
                 )
                 moduleList.add(
                     ModuleData.StoreShopRecommendData(
@@ -123,10 +120,7 @@ class StoreShopViewModel : BaseViewModel() {
             // regular
             if (storeShopData.myRegularStoreList != null) {
                 moduleList.add(
-                    ModuleData.CommonTitleData(
-                        title = "나의 단골매장",
-                        subTitle = ""
-                    )
+                    ModuleData.CommonTitleData(title = "나의 단골매장")
                 )
                 moduleList.add(
                     ModuleData.StoreShopRegularData(
@@ -186,10 +180,7 @@ class StoreShopViewModel : BaseViewModel() {
             // category
             if (!storeShopData.categoryGoodsList.isNullOrEmpty()) {
                 moduleList.add(
-                    ModuleData.CommonTitleData(
-                        title = "카테고리별 베스트 상품",
-                        subTitle = ""
-                    )
+                    ModuleData.CommonTitleData(title = "카테고리별 베스트 상품")
                 )
                 moduleList.add(
                     ModuleData.StoreShopCateTabData(

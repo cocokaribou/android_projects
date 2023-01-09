@@ -3,7 +3,9 @@ package com.example.elandmall_kotlin.ui.main.viewholders
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.size
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -30,6 +32,7 @@ class CommonMultiBannerViewHolder(private val binding: ViewCommonMultiBannerBind
         mAdapter.submitList(data.multiBannerData)
         list.adapter = mAdapter
 
+        (list.layoutManager as GridLayoutManager).spanCount = data.multiBannerData.size
         if (data.isDividerVisible) {
             divider.visibility = View.VISIBLE
         } else {

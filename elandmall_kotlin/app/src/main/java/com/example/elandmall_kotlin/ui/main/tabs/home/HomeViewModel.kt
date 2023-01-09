@@ -107,10 +107,7 @@ class HomeViewModel : BaseViewModel() {
 
             if (homeData.homeOfflineShop != null) {
                 moduleList.add(
-                    ModuleData.CommonTitleData(
-                        homeData.homeOfflineShop.title ?: "이슈 브랜드",
-                        homeData.homeOfflineShop.subtitle ?: ""
-                    )
+                    ModuleData.CommonTitleData(homeData.homeOfflineShop.title ?: "이슈 브랜드")
                 )
                 if (!homeData.homeOfflineShop.homeOfflineShopBanner.isNullOrEmpty() && !homeData.homeOfflineShop.homeOfflineShopList.isNullOrEmpty()) {
                     moduleList.add(

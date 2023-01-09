@@ -65,7 +65,7 @@ sealed class ModuleData {
 
     data class CommonTitleData(
         val title: String,
-        val subTitle: String
+        val subTitle: String = ""
     ) : ModuleData() {
         override fun clone(): ModuleData {
             return copy()
@@ -335,6 +335,16 @@ sealed class ModuleData {
         var categoryList: List<Category>,
         var changeCategory: CategoryPayloadCallback
     ) : ModuleData() {
+        override fun clone(): ModuleData {
+            return copy()
+        }
+
+        companion object
+    }
+
+    data class EshopCategoryData(
+        var categoryList: List<String>
+    ): ModuleData() {
         override fun clone(): ModuleData {
             return copy()
         }

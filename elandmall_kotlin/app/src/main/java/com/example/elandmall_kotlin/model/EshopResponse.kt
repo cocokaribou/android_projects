@@ -23,13 +23,8 @@ data class EshopResponse(
             data class Group(
                 @SerializedName("goods_list") val goodsList: List<Goods>?,
                 @SerializedName("tab_title") val tabTitle: String?,
-                @SerializedName("planshop_list") val planshopList: PlanshopList?
-            ) {
-                data class PlanshopList(
-                    @SerializedName("image_url") val imageUrl: String?,
-                    @SerializedName("link_url") val linkUrl: String?
-                )
-            }
+                @SerializedName("planshop_list") val planshopList: Banner?
+            )
         }
 
         data class Ctg(

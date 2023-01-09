@@ -273,6 +273,14 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
                 )
             )
 
+            ModuleData.EshopCategoryData.ordinal() -> EshopCategoryViewHolder(
+                ViewEshopCategoryBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
             else -> UnknownViewHolder(
                 ViewUnknownHolderBinding.inflate(
                     LayoutInflater.from(parent.context),

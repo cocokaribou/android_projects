@@ -7,6 +7,7 @@ import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlin.reflect.jvm.internal.impl.descriptors.impl.ModuleAwareClassDescriptor
 
 class EShopViewModel : BaseViewModel() {
     val repository by lazy { EShopRepository() }
@@ -45,6 +46,34 @@ class EShopViewModel : BaseViewModel() {
             moduleList.add(
                 ModuleData.CommonMainBannerData(data.eshopMainPromotionList)
             )
+        }
+
+        if (!data.eshopSubBannerList.isNullOrEmpty()) {
+            moduleList.add(
+                ModuleData.CommonMultiBannerData(
+                    data.eshopSubBannerList,
+                    isDividerVisible = false,
+                )
+            )
+        }
+
+        data.eshopNowIssue?.let { now ->
+            moduleList.add(
+                ModuleData.CommonTitleData(now.title ?: "Modern House")
+            )
+
+            val cateList:List<String> = now.group?.map { it.tabTitle ?: "" } ?: listOf()
+            moduleList.add(
+                ModuleData.EshopCategoryData(cateList)
+            )
+
+            if (!now.group.isNullOrEmpty()) {
+                moduleList.add(
+                    ModuleData.CommonMultiBannerData(listOf(now.group[0].planshopList!!))
+                )
+            }
+
+
         }
 
         uiList.postValue(moduleList)
