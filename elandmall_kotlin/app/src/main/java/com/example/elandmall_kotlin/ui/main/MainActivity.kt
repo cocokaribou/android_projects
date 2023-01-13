@@ -8,8 +8,8 @@ import com.example.elandmall_kotlin.BaseApplication
 import com.example.elandmall_kotlin.databinding.ActivityMainBinding
 import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.util.Logger
-import com.google.android.material.tabs.TabLayout
+import com.example.elandmall_kotlin.util.CustomTabUtil.draw
+import com.example.elandmall_kotlin.util.CustomTabUtil.setTabListener
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -48,25 +48,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.a
         viewpager.apply {
             adapter = mAdapter
             isUserInputEnabled = true
-            setCurrentItem(4, false)
+            setCurrentItem(0, false)
         }
 
-        MemDataSource.mainGnbCache?.data?.gnbList?.let {
+        MemDataSource.mainGnbCache?.data?.gnbList?.let { list ->
             TabLayoutMediator(tabs, viewpager) { tab, position ->
-                tab.text = it[position].menuName
+                tab.draw(list[position])
             }.attach()
         }
-
-        tabs.apply {
-            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    // do something
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
-                override fun onTabReselected(tab: TabLayout.Tab?) {}
-            })
-        }
+        tabs.setTabListener()
     }
 
     private fun initObserve() {

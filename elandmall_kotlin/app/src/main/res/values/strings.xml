@@ -29,4 +29,8 @@
     <string name="store_shop_search">매장찾기</string>
     <string name="store_shop_empty_regular1">등록된 단골매장이 없습니다.</string>
     <string name="store_shop_empty_regular2">단골매장을 등록하면\n해당 매장의 최신 상품을 확인할 수 있습니다.</string>
+
+    <string name="logo_with_color"><font color="#c9000b">Eland</font><font color="#000000">mall</font></string>
+    <string name="tools_gnb_title">스토어쇼핑</string>
+    <string name="tools_gnb_subtitle">특가세일</string>
 </resources>

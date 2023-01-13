@@ -24,11 +24,14 @@ data class MainGnbResponse(
         @SerializedName("link_url") val linkUrl: String?,
         @SerializedName("menu_lank") val menuRank: Int?,
         @SerializedName("menu_nm") val menuName: String?,
-        @SerializedName("new_tag_yn") val newTagYn: String?,
+        @SerializedName("new_tag_yn") private val newTagYn: String?,
         @SerializedName("ga_category") val gaCategory: String?,
         @SerializedName("ga_label") val gaLabel: String?,
     ) {
-        val isWebView = webview == "Y"
+        val isWebView
+            get() = webview.equals("Y", true)
+        val isNew
+            get() = newTagYn.equals("Y", true)
     }
 
     data class SearchAd(

@@ -1,15 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="64dp"
+    android:background="#f4f5f7"
+    android:padding="12dp">
 
-    <TextView
+    <ImageView
+        android:id="@+id/menu_ic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:scaleY="1.4"
+        android:src="@drawable/ic_menu_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:fontFamily="sans-serif-black"
+        android:scaleY="0.9"
+        android:text="@string/logo_with_color"
+        android:textSize="27dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/menu_ic"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/search_input"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginHorizontal="8dp"
+        app:cardCornerRadius="36dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/cart"
+        app:layout_constraintStart_toEndOf="@id/logo"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/search_hint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="35dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="모던하우스 김장철"
+            android:textColor="#2f2f2f"
+            android:textSize="13dp" />
+
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_search" />
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/cart"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_shopping_bag"
+        android:tint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="header~"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:backgroundTint="#c9000b"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/cart"
+        app:layout_constraintEnd_toEndOf="@id/cart">
+
+        <TextView
+            android:id="@+id/cart_count"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="1"
+            android:textColor="@color/white"
+            android:textSize="9dp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

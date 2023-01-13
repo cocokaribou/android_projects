@@ -155,12 +155,10 @@ class StoreShopViewModel : BaseViewModel() {
                 moduleList.add(
                     ModuleData.CommonSortData(
                         selectSort = {
-                            Logger.v("클릭!! $it")
                             val pos = it as? Int ?: 0
                             updateSort(pos, storeSortMap.keys.toList()[pos])
                         },
                         selectGrid = {
-                            Logger.v("그리드!!")
                             updateGrid()
                         },
                         list = storeSortMap.keys.toList(),
@@ -169,7 +167,6 @@ class StoreShopViewModel : BaseViewModel() {
                     )
                 )
                 // goods
-
                 moduleList.add(
                     ModuleData.StorePickMoreData(
                         storeSelected = storeShopData.storePickList[0].relContNm ?: ""

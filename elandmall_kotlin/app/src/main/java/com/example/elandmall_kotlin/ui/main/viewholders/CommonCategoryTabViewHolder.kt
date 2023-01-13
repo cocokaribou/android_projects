@@ -24,7 +24,6 @@ class CommonCategoryTabViewHolder(private val binding: ViewCommonCategoryTabBind
     val mAdapter by lazy { CategoryAdapter() }
 
     override fun onBind(item: Any, pos: Int) {
-        Logger.v("여길 매번 다시 타야돼")
         (item as? ModuleData.CommonCategoryTabData)?.let {
             cateSelector = it.changeCategory
             initUI(it.categoryList)
