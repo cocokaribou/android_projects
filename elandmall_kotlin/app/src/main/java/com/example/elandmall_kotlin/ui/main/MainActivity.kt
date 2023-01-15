@@ -10,8 +10,6 @@ import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.util.CustomTabUtil.draw
 import com.example.elandmall_kotlin.util.CustomTabUtil.setTabListener
-import com.example.elandmall_kotlin.util.Logger
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -44,6 +42,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
 
     private fun initUI() {
         initGNB()
+        initTopBar(binding.topBar)
+        initBottomBar(binding.bottomBar)
     }
 
     private fun initGNB() = with(binding) {

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include
+                android:id="@+id/logo"
+                layout="@layout/logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/user_nm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="이영인 님"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/logo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/lnb_logout"
+                android:textColor="#bbb"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/user_nm"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_close"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/divider"
+            style="@style/divider_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:backgroundTint="#ddd"
+            app:layout_constraintTop_toBottomOf="@id/header" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/quick_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/divider">
+
+            <com.example.elandmall_kotlin.view.CategoryButton
+                android:id="@+id/btn1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ctg_icon="@drawable/ic_user"
+                app:ctg_title="@string/lnb_header_btn1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.elandmall_kotlin.view.CategoryButton
+                android:id="@+id/btn2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ctg_icon="@drawable/ic_shipping"
+                app:ctg_title="@string/lnb_header_btn2"
+                app:layout_constraintStart_toEndOf="@id/btn1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.elandmall_kotlin.view.CategoryButton
+                android:id="@+id/btn3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ctg_icon="@drawable/ic_shopping_bag"
+                app:ctg_title="@string/lnb_header_btn3"
+                app:layout_constraintStart_toEndOf="@id/btn2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.elandmall_kotlin.view.CategoryButton
+                android:id="@+id/btn4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ctg_icon="@drawable/ic_favorite"
+                app:ctg_title="@string/lnb_header_btn4"
+                app:layout_constraintStart_toEndOf="@id/btn3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.elandmall_kotlin.view.CategoryButton
+                android:id="@+id/btn5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ctg_icon="@drawable/ic_giftcard"
+                app:ctg_title="@string/lnb_header_btn5"
+                app:layout_constraintStart_toEndOf="@id/btn4"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

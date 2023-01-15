@@ -48,6 +48,14 @@
         </activity>
 
         <activity
+            android:name=".ui.category.CategoryActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".FirebaseLandingActivity"
             android:launchMode="singleTask"
             android:exported="true"
