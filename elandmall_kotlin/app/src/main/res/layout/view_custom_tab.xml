@@ -42,25 +42,31 @@
             app:layout_constraintEnd_toEndOf="@id/gnb_title"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.cardview.widget.CardView
+        <TextView
             android:id="@+id/new_ic"
             android:layout_width="14dp"
             android:layout_height="14dp"
-            android:layout_marginStart="3dp"
-            android:backgroundTint="#ff0000"
-            app:cardCornerRadius="10dp"
+            android:layout_marginStart="4dp"
+            android:background="#ff0000"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="N"
+            android:textColor="@color/white"
+            android:textSize="9dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/gnb_title"
-            app:layout_constraintTop_toTopOf="@id/gnb_title">
+            app:layout_constraintTop_toTopOf="@id/gnb_title" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:text="N"
-                android:textColor="@color/white"
-                android:textSize="9dp"
-                android:textStyle="bold" />
-        </androidx.cardview.widget.CardView>
+        <ImageView
+            android:id="@+id/new_ic_mask"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:tint="#f4f5f7"
+            android:visibility="gone"
+            android:src="@drawable/ic_mask_circle"
+            app:layout_constraintBottom_toBottomOf="@id/new_ic"
+            app:layout_constraintEnd_toEndOf="@id/new_ic"
+            app:layout_constraintStart_toStartOf="@id/new_ic"
+            app:layout_constraintTop_toTopOf="@id/new_ic" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

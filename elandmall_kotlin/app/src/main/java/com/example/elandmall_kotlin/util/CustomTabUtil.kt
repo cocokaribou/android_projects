@@ -15,6 +15,7 @@ object CustomTabUtil {
             gnbTitle.text = gnb.menuName
             gnbSubtitle.text = gnb.menuSubtitle
             newIc.visibility = if (gnb.isNew) View.VISIBLE else View.GONE
+            newIcMask.visibility = if (gnb.isNew) View.VISIBLE else View.GONE
 
             if (tabList.isEmpty()) gnbTitle.typeface = Typeface.DEFAULT_BOLD
         }

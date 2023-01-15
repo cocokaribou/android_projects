@@ -10,7 +10,6 @@
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/bottom_height"
             android:fitsSystemWindows="true">
 
             <com.google.android.material.appbar.AppBarLayout
@@ -47,13 +46,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <include
-            android:id="@+id/bottom_bar"
-            layout="@layout/layout_bottom_bar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/bottom_height"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            <include
+                android:id="@+id/bottom_bar"
+                layout="@layout/layout_bottom_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_height"
+                app:layout_anchor="@id/viewpager"
+                app:layout_anchorGravity="bottom"
+                app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

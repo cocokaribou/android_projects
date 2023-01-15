@@ -10,6 +10,8 @@ import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.util.CustomTabUtil.draw
 import com.example.elandmall_kotlin.util.CustomTabUtil.setTabListener
+import com.example.elandmall_kotlin.util.Logger
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -17,8 +19,8 @@ import com.google.android.material.tabs.TabLayoutMediator
  * - init tab pager
  * - handle landing intent
  */
-class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.activity_main) {
-    override val viewModel by viewModels<BaseViewModel>()
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.activity_main) {
+    override val viewModel by viewModels<MainViewModel>()
 
     private val mAdapter by lazy { MainTabPagerAdapter(supportFragmentManager, lifecycle) }
 
@@ -45,17 +47,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.a
     }
 
     private fun initGNB() = with(binding) {
+        val gnbList = MemDataSource.mainGnbCache?.data?.gnbList ?: return
+
         viewpager.apply {
             adapter = mAdapter
             isUserInputEnabled = true
+            offscreenPageLimit = gnbList.size
             setCurrentItem(0, false)
         }
 
-        MemDataSource.mainGnbCache?.data?.gnbList?.let { list ->
-            TabLayoutMediator(tabs, viewpager) { tab, position ->
-                tab.draw(list[position])
-            }.attach()
-        }
+        TabLayoutMediator(tabs, viewpager) { tab, position ->
+            tab.draw(gnbList[position])
+        }.attach()
+
         tabs.setTabListener()
     }
 
