@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.retryWhen
 
-class CategoryRepository {
+class LeftMenuRepository {
     suspend fun requestCategoryStream(): Flow<Result<CategoryResponse?>> {
         return flow {
             val jsonString = getJsonFileToString("json/leftMenu.json", BaseApplication.context)

@@ -1,8 +1,5 @@
 package com.example.elandmall_kotlin
 
-import android.app.Activity
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -15,7 +12,7 @@ import com.example.elandmall_kotlin.databinding.LayoutBottomBarBinding
 import com.example.elandmall_kotlin.databinding.LayoutTopBarBinding
 import com.example.elandmall_kotlin.ui.LinkEvent
 import com.example.elandmall_kotlin.ui.LinkEventType
-import com.example.elandmall_kotlin.ui.category.CategoryActivity
+import com.example.elandmall_kotlin.ui.category.LeftMenuActivity
 import com.example.elandmall_kotlin.ui.intro.IntroActivity
 import com.example.elandmall_kotlin.ui.search.SearchActivity
 
@@ -99,7 +96,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel>(
     }
 
     private fun navToCategory() {
-        val intent = Intent(this, CategoryActivity::class.java)
+        val intent = Intent(this, LeftMenuActivity::class.java)
 
         startActivity(intent)
     }

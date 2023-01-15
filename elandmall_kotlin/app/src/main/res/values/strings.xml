@@ -37,9 +37,4 @@
 
     <string name="lnb_login"><u>로그인</u> 해 주세요</string>
     <string name="lnb_logout"><u>로그아웃</u></string>
-    <string name="lnb_header_btn1">마이페이지</string>
-    <string name="lnb_header_btn2">주문/배송조회</string>
-    <string name="lnb_header_btn3">장바구니</string>
-    <string name="lnb_header_btn4">나의 찜목록</string>
-    <string name="lnb_header_btn5">쿠폰</string>
 </resources>

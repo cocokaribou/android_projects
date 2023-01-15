@@ -1,7 +1,21 @@
 package com.example.elandmall_kotlin.model
 
-
 import com.google.gson.annotations.SerializedName
+
+class LeftMenuModule(
+    val type: ModuleType,
+    val data: Any? = null
+)
+
+enum class ModuleType {
+    DIVIDER,
+    RECENTLY,
+    CATEGORY,
+    BRAND,
+    SHOP,
+    SERVICE_MENU,
+    FOOTER
+}
 
 data class CategoryResponse(
     @SerializedName("data") val data: Data?,

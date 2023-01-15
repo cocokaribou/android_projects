@@ -53,63 +53,36 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
-            android:id="@+id/divider"
+            android:id="@+id/divider1"
             style="@style/divider_line"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:backgroundTint="#ddd"
             app:layout_constraintTop_toBottomOf="@id/header" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/quick_menu"
+        <LinearLayout
+            android:id="@+id/top_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/divider">
+            android:paddingVertical="20dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/divider1"/>
 
-            <com.example.elandmall_kotlin.view.CategoryButton
-                android:id="@+id/btn1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:ctg_icon="@drawable/ic_user"
-                app:ctg_title="@string/lnb_header_btn1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:id="@+id/divider2"
+            style="@style/divider_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:backgroundTint="#ddd"
+            app:layout_constraintTop_toBottomOf="@id/top_menu" />
 
-            <com.example.elandmall_kotlin.view.CategoryButton
-                android:id="@+id/btn2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:ctg_icon="@drawable/ic_shipping"
-                app:ctg_title="@string/lnb_header_btn2"
-                app:layout_constraintStart_toEndOf="@id/btn1"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.example.elandmall_kotlin.view.CategoryButton
-                android:id="@+id/btn3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:ctg_icon="@drawable/ic_shopping_bag"
-                app:ctg_title="@string/lnb_header_btn3"
-                app:layout_constraintStart_toEndOf="@id/btn2"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.example.elandmall_kotlin.view.CategoryButton
-                android:id="@+id/btn4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:ctg_icon="@drawable/ic_favorite"
-                app:ctg_title="@string/lnb_header_btn4"
-                app:layout_constraintStart_toEndOf="@id/btn3"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.example.elandmall_kotlin.view.CategoryButton
-                android:id="@+id/btn5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:ctg_icon="@drawable/ic_giftcard"
-                app:ctg_title="@string/lnb_header_btn5"
-                app:layout_constraintStart_toEndOf="@id/btn4"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

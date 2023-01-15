@@ -48,7 +48,7 @@
         </activity>
 
         <activity
-            android:name=".ui.category.CategoryActivity"
+            android:name=".ui.category.LeftMenuActivity"
             android:screenOrientation="portrait"/>
 
         <activity

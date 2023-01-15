@@ -3,5 +3,6 @@
     <declare-styleable name="CategoryButton">
         <attr name="ctg_icon" format="reference|integer" />
         <attr name="ctg_title" format="reference|string" />
+        <attr name="ctg_link" format="reference|string"/>
     </declare-styleable>
 </resources>

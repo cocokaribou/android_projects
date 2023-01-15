@@ -139,7 +139,6 @@
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:background="@drawable/background_stroke_grey_1dp"
-            android:backgroundTint="@color/black"
             android:src="@drawable/ic_shopping_bag"
             android:scaleType="center"
             app:layout_constraintEnd_toEndOf="parent"

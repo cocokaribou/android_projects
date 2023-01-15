@@ -65,7 +65,6 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/ic_shopping_bag"
-        android:tint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

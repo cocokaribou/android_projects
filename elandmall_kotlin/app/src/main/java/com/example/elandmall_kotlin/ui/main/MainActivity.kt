@@ -10,6 +10,7 @@ import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.util.CustomTabUtil.draw
 import com.example.elandmall_kotlin.util.CustomTabUtil.setTabListener
+import com.example.elandmall_kotlin.util.Logger
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -66,7 +67,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
     private fun initObserve() {
         EventBus.linkEvent.observe(this) {
             it.getIfNotHandled()?.let { event ->
-                onLinkEvent(event)
+                Logger.v("왜 여기로..? $event")
             }
         }
     }
