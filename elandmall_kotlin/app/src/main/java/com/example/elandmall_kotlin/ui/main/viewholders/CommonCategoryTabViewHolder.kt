@@ -79,11 +79,6 @@ class CommonCategoryTabViewHolder(private val binding: ViewCommonCategoryTabBind
                     if (adapterPosition != cateSelected) {
                         cateSelected = adapterPosition
                         data.payload2?.let {
-                            EventBus.fire(
-                                ViewHolderEvent(
-                                    eventType = ViewHolderEventType.CATEGORY_SCROLL1,
-                                )
-                            )
                             cateSelector(listOf(data.payload1!!, data.payload2))
 
                             Toast.makeText(root.context, "${data.payload1}, ${data.payload2}", Toast.LENGTH_SHORT).show()

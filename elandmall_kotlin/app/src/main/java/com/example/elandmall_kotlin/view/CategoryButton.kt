@@ -27,6 +27,12 @@ class CategoryButton @JvmOverloads constructor(
 
     init {
         addView(binding.root)
+        attrs?.let {
+            val typedArray = context.obtainStyledAttributes(it, R.styleable.CategoryButton)
+
+            val imageSrc = typedArray.getResourceId(R.styleable.CategoryButton_ctg_icon, R.drawable.ic_user)
+            binding.icon.setImageResource(imageSrc)
+        }
     }
 
     var title = ""
@@ -34,13 +40,6 @@ class CategoryButton @JvmOverloads constructor(
             binding.title.text = value
             field = value
         }
-
-    var icon = R.drawable.ic_category
-        set(value) {
-            binding.icon.setImageResource(value)
-            field = value
-        }
-
 
     var click = {}
         set(value) {
@@ -50,22 +49,9 @@ class CategoryButton @JvmOverloads constructor(
             field = value
         }
 
-    var couponCount: Int? = 0
+    var count: Int? = null
         set(value) {
-            if (value == null)
-                binding.countHolder.visibility = View.GONE
-            else {
-                binding.countHolder.visibility = View.VISIBLE
-                binding.count.text = value.toString()
-            }
-            field = value
-        }
-
-    var cartCount: Int? = 0
-        set(value) {
-            if (value == null)
-                binding.countHolder.visibility = View.GONE
-            else {
+            if (value != null) {
                 binding.countHolder.visibility = View.VISIBLE
                 binding.count.text = value.toString()
             }

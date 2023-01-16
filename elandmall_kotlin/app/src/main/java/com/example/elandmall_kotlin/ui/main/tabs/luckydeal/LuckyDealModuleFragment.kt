@@ -5,7 +5,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.SingleLiveEvent
-import com.example.elandmall_kotlin.ui.ViewHolderEvent
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
 import com.example.elandmall_kotlin.util.Logger
 

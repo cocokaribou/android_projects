@@ -1,4 +1,4 @@
-package com.example.elandmall_kotlin.ui.category
+package com.example.elandmall_kotlin.ui.letfmenu
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -6,9 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.LeftMenuModule
 import com.example.elandmall_kotlin.model.CategoryResponse
 import com.example.elandmall_kotlin.model.ModuleType
+import com.example.elandmall_kotlin.ui.main.BaseViewModel
 import kotlinx.coroutines.launch
 
-class LeftMenuViewModel : ViewModel() {
+class LeftMenuViewModel : BaseViewModel() {
     private val repository by lazy { LeftMenuRepository() }
 
     init {
@@ -49,7 +50,7 @@ class LeftMenuViewModel : ViewModel() {
         val list = mutableListOf<LeftMenuModule>()
 
         list.add(LeftMenuModule(ModuleType.DIVIDER))
-        list.add(LeftMenuModule(ModuleType.RECENTLY, ""))
+        list.add(LeftMenuModule(ModuleType.RECENTLY))
 
         list.add(LeftMenuModule(ModuleType.DIVIDER))
         list.add(LeftMenuModule(ModuleType.CATEGORY))

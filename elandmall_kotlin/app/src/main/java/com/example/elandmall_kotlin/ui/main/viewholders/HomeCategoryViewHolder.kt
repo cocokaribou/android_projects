@@ -47,7 +47,6 @@ class HomeCategoryViewHolder(private val binding: ViewHomeCategoryBinding) : Bas
             categoryList.addItemDecoration(itemDecoration)
         }
         more.setOnClickListener {
-            EventBus.fire(ViewHolderEvent(eventType = ViewHolderEventType.CATEGORY_SCROLL1))
             toggleExpand()
         }
 
@@ -118,8 +117,6 @@ class HomeCategoryViewHolder(private val binding: ViewHomeCategoryBinding) : Bas
                 } else {
                     // category icons
                     root.setOnClickListener {
-//                        EventBus.fire(LinkEvent(data.linkUrl))
-                        EventBus.fire(ViewHolderEvent(ViewHolderEventType.CATEGORY_SCROLL1))
                     }
 
                     cateName.text = data.title

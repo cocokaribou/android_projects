@@ -3,40 +3,36 @@ package com.example.elandmall_kotlin
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.annotation.LayoutRes
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
+import com.example.elandmall_kotlin.common.CommonConst.EXTRA_LINK_EVENT
 import com.example.elandmall_kotlin.databinding.LayoutBottomBarBinding
 import com.example.elandmall_kotlin.databinding.LayoutTopBarBinding
+import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.LinkEvent
 import com.example.elandmall_kotlin.ui.LinkEventType
-import com.example.elandmall_kotlin.ui.category.LeftMenuActivity
+import com.example.elandmall_kotlin.ui.letfmenu.LeftMenuActivity
 import com.example.elandmall_kotlin.ui.intro.IntroActivity
 import com.example.elandmall_kotlin.ui.search.SearchActivity
+import com.example.elandmall_kotlin.util.isNetworkAvailable
 
 /**
  * BaseActivity
  * activity navigation using [com.example.elandmall_kotlin.ui.EventBus]
  */
-abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel>(
-    @LayoutRes private val layoutResId: Int
-) : AppCompatActivity() {
+open class BaseActivity : AppCompatActivity() {
 
-    val binding: B
-        get() = _binding!!
-    private var _binding: B? = null
-
-    abstract val viewModel: VM
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        _binding = DataBindingUtil.setContentView(this, layoutResId)
-
-        with(binding) {
-            lifecycleOwner = this@BaseActivity
-            setVariable(BR.vm, viewModel)
+    private val resultNavToLNB = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        when (it.resultCode) {
+            RESULT_OK -> {
+                it.data?.let { intent ->
+                    intent.getSerializableExtra(EXTRA_LINK_EVENT)?.let { extra ->
+                        onLinkEvent(extra as LinkEvent)
+                    }
+                }
+            }
         }
     }
 
@@ -52,41 +48,34 @@ abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel>(
         }
     }
 
-    open fun onLinkEvent(event: LinkEvent) {
+    protected open fun onLinkEvent(event: LinkEvent) {
         when (event.type) {
-            LinkEventType.DEFAULT -> {
-                navToWeb(event.url)
-            }
-            LinkEventType.CATEGORY -> {
-                navToCategory()
-            }
+            LinkEventType.LNB -> navToLNB()
+            LinkEventType.DEFAULT -> navToWeb(event.url)
+            LinkEventType.SEARCH -> navToSearch()
             else -> {}
         }
     }
     fun initTopBar(topBar: LayoutTopBarBinding) = with(topBar) {
-        logo.root.setOnClickListener {
-
-        }
         menuIc.setOnClickListener {
-            navToCategory()
+            EventBus.fire(LinkEvent(LinkEventType.LNB))
         }
         searchInput.setOnClickListener {
-            navToSearch()
+            EventBus.fire(LinkEvent(LinkEventType.SEARCH))
         }
     }
 
     fun initBottomBar(bottomBar: LayoutBottomBarBinding) = with(bottomBar){
         btn1.setOnClickListener {
-            navToCategory()
+            EventBus.fire(LinkEvent(LinkEventType.LNB))
         }
         btn2.setOnClickListener {
-            navToSearch()
+            EventBus.fire(LinkEvent(LinkEventType.SEARCH))
         }
         home.setOnClickListener {  }
         btn3.setOnClickListener {  }
         btn4.setOnClickListener {  }
     }
-
     private fun navToHome() {}
 
     private fun navToWeb(url: String?) {
@@ -95,25 +84,23 @@ abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel>(
         }.show()
     }
 
-    private fun navToCategory() {
-        val intent = Intent(this, LeftMenuActivity::class.java)
+    private fun navToLNB() {
+        if (isNetworkAvailable(this)) {
+            resultNavToLNB.launch(Intent(this, LeftMenuActivity::class.java))
+        } else {
 
-        startActivity(intent)
+        }
     }
 
     private fun navToCart() {}
 
     private fun navToSearch() {
-        val intent = Intent(this, SearchActivity::class.java)
+        if (isNetworkAvailable(this)) {
+            startActivity(Intent(this, SearchActivity::class.java))
+        } else {
 
-        startActivity(intent)
+        }
     }
 
     private fun navToSetting() {}
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
 }

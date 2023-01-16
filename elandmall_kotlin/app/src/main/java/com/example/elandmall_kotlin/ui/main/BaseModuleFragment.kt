@@ -13,13 +13,10 @@ import com.example.elandmall_kotlin.databinding.FragmentBaseModuleBinding
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.SingleLiveEvent
-import com.example.elandmall_kotlin.ui.ViewHolderEvent
 import com.example.elandmall_kotlin.util.Logger
 
 abstract class BaseModuleFragment : Fragment() {
     abstract val viewModel: BaseViewModel
-
-    val activityViewModel: MainViewModel by activityViewModels()
 
     lateinit var tabName: String
     private var url: String = ""

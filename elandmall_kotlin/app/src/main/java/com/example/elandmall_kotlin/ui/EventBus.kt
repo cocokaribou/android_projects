@@ -11,19 +11,12 @@ object EventBus {
     private const val MIN_CLICK_INTERVAL: Long = 200
     private var lastEventTime: Long = 0
 
-    val linkEvent: MutableLiveData<SingleLiveEvent<LinkEvent>> = MutableLiveData()
-    val viewHolderEvent: MutableLiveData<SingleLiveEvent<ViewHolderEvent>> = MutableLiveData()
+    val linkEvent = MutableLiveData<SingleLiveEvent<LinkEvent>>()
 
-    fun fire(event: LinkEvent, checkInterval: Boolean = true) {
-        if (checkInterval && isIntervalTooShort()) return
+    fun fire(event: LinkEvent) {
+        if (isIntervalTooShort()) return
 
         linkEvent.value = SingleLiveEvent(event)
-    }
-
-    fun fire(event: ViewHolderEvent, checkInterval: Boolean = true) {
-        if (checkInterval && isIntervalTooShort()) return
-
-        viewHolderEvent.value = SingleLiveEvent(event)
     }
 
     private fun isIntervalTooShort(): Boolean {
@@ -67,7 +60,7 @@ class LinkEvent : Serializable {
 enum class LinkEventType {
     DEFAULT,
     HOME,
-    CATEGORY,
+    LNB,
     SEARCH,
     SETTING,
     CAPTURE,
@@ -75,34 +68,8 @@ enum class LinkEventType {
     WEB
 }
 
-class ViewHolderEvent {
-    val eventType: ViewHolderEventType
-    val content: Any
-
-    constructor(eventType: ViewHolderEventType) {
-        this.eventType = eventType
-        this.content = 0
-    }
-
-    constructor(eventType: ViewHolderEventType, content: Any) {
-        this.eventType = eventType
-        this.content = content
-    }
-}
-
-enum class ViewHolderEventType {
-    TAB_SELECT,
-    GRID_CLICK,
-    SORT_CLICK,
-    STORE_CLICK,
-    CATEGORY_SCROLL1,
-    CATEGORY_SCROLL2,
-    TOGGLE_MORE1,
-    TOGGLE_MORE2
-}
-
 class SingleLiveEvent<out T>(private val content: T) {
-    var hasBeenHandled = false
+    private var hasBeenHandled = false
         private set // Allow external read but not write
 
     /**

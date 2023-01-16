@@ -34,6 +34,11 @@ object CommonConst {
      */
     const val SCHEME_ELANDMALL = "elandmall"
     const val HOST_LANDING = "landing"
+
+    /**
+     * intent extra keys
+     */
+    const val EXTRA_LINK_EVENT = "extra_link_event"
 }
 
 // api result flag

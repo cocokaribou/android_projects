@@ -1,13 +1,15 @@
-package com.example.elandmall_kotlin.ui.main
+package com.example.elandmall_kotlin.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.BaseActivity
 import com.example.elandmall_kotlin.BaseApplication
 import com.example.elandmall_kotlin.databinding.ActivityMainBinding
+import com.example.elandmall_kotlin.databinding.LayoutBottomBarBinding
+import com.example.elandmall_kotlin.databinding.LayoutTopBarBinding
 import com.example.elandmall_kotlin.repository.MemDataSource
-import com.example.elandmall_kotlin.ui.EventBus
+import com.example.elandmall_kotlin.ui.main.MainTabPagerAdapter
+import com.example.elandmall_kotlin.ui.main.MainViewModel
 import com.example.elandmall_kotlin.util.CustomTabUtil.draw
 import com.example.elandmall_kotlin.util.CustomTabUtil.setTabListener
 import com.example.elandmall_kotlin.util.Logger
@@ -18,8 +20,9 @@ import com.google.android.material.tabs.TabLayoutMediator
  * - init tab pager
  * - handle landing intent
  */
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.activity_main) {
-    override val viewModel by viewModels<MainViewModel>()
+class MainActivity : BaseActivity() {
+    val viewModel : MainViewModel by viewModels()
+    val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     private val mAdapter by lazy { MainTabPagerAdapter(supportFragmentManager, lifecycle) }
 
@@ -36,6 +39,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
             return
         }
         BaseApplication.instance.isAppRunning = true
+
+        setContentView(binding.root)
 
         initUI()
         initObserve()
@@ -67,13 +72,25 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
     private fun initObserve() {
         EventBus.linkEvent.observe(this) {
             it.getIfNotHandled()?.let { event ->
-                Logger.v("왜 여기로..? $event")
+                onLinkEvent(event)
             }
         }
     }
 
+    override fun onLinkEvent(linkEvent: LinkEvent) {
+        super.onLinkEvent(linkEvent)
+    }
+    override fun onPause() {
+        super.onPause()
+        Logger.v("youngin onPause main")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Logger.v("youngin onResume main")
+    }
     override fun onDestroy() {
         super.onDestroy()
-        BaseApplication.instance.clearData()
+        Logger.v("youngin onDestroy main")
     }
 }

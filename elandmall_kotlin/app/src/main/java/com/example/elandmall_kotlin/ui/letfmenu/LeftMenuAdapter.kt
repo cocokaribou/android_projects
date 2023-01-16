@@ -1,4 +1,4 @@
-package com.example.elandmall_kotlin.ui.category
+package com.example.elandmall_kotlin.ui.letfmenu
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,12 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 import com.example.elandmall_kotlin.databinding.*
 import com.example.elandmall_kotlin.model.LeftMenuModule
 import com.example.elandmall_kotlin.model.ModuleType
-import com.example.elandmall_kotlin.ui.category.viewholders.*
-import com.example.elandmall_kotlin.ui.main.ordinal
+import com.example.elandmall_kotlin.ui.letfmenu.viewholders.*
 
 class LeftMenuAdapter : ListAdapter<LeftMenuModule, LeftMenuBaseViewHolder>(object : DiffUtil.ItemCallback<LeftMenuModule>() {
     override fun areItemsTheSame(oldItem: LeftMenuModule, newItem: LeftMenuModule): Boolean = oldItem == newItem
@@ -20,7 +18,7 @@ class LeftMenuAdapter : ListAdapter<LeftMenuModule, LeftMenuBaseViewHolder>(obje
     override fun getItemViewType(position: Int): Int = currentList[position].type.ordinal
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeftMenuBaseViewHolder {
-        return when (currentList[viewType].type) {
+        return when (ModuleType.values()[viewType]) {
             ModuleType.DIVIDER -> {
                 Divider(
                     ViewLnbDividerBinding.inflate(

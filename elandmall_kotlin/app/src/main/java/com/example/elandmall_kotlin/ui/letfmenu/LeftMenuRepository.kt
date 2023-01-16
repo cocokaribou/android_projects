@@ -1,7 +1,6 @@
-package com.example.elandmall_kotlin.ui.category
+package com.example.elandmall_kotlin.ui.letfmenu
 
 import com.example.elandmall_kotlin.BaseApplication
-import com.example.elandmall_kotlin.model.BestResponse
 import com.example.elandmall_kotlin.model.CategoryResponse
 import com.example.elandmall_kotlin.util.getJsonFileToString
 import com.google.gson.Gson
