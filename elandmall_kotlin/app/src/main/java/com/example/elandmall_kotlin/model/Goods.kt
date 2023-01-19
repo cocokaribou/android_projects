@@ -20,9 +20,15 @@ class Goods(
     @SerializedName("title") val title: String?,
     @SerializedName("time") val time: String?,
     // best tab
-    var rank: Int = -1
+    var rank: Int = -1,
+    // goods detail
+    @SerializedName("brand_image_url") val brandImageUrl: String?,
+    @SerializedName("final_price") val finalPrice: Int?,
+    @SerializedName("coupon_sale_price") val couponSalePrice: Int?,
+    @SerializedName("goods_review_info") val goodsReviewInfo: GoodsReviewInfo?,
+    @SerializedName("goods_question_info") val goodsQuestionInfo: GoodsQuestionInfo?
 ) {
-    val imageUrl:String
+    val imageUrl: String
         get() {
             return if (!imgUrl.isNullOrEmpty() && imgUrl.startsWith("http")) {
                 imgUrl
@@ -39,4 +45,30 @@ class Goods(
                 "http:$flagImgPath"
             }
         }
+
+    data class GoodsReviewInfo(
+        @SerializedName("review_count") val reviewCount: Int?,
+        @SerializedName("review_list") val reviewList: List<Review?>?
+    ) {
+        data class Review(
+            @SerializedName("image_url") val imageUrl: String?,
+            @SerializedName("userID") val userID: String?,
+            @SerializedName("height") val height: String?,
+            @SerializedName("weight") val weight: String?,
+            @SerializedName("purchase_goods_info") val purchaseGoodsInfo: String?,
+            @SerializedName("review_comment") val reviewComment: String?
+        )
+    }
+
+    data class GoodsQuestionInfo(
+        @SerializedName("question_count") val questionCount: Int?,
+        @SerializedName("question_list") val questionList: List<Question?>?
+    ) {
+        data class Question(
+            @SerializedName("userID") val userID: String?,
+            @SerializedName("date") val date: String?,
+            @SerializedName("content") val content: String?,
+            @SerializedName("secret") val secret: Boolean?
+        )
+    }
 }

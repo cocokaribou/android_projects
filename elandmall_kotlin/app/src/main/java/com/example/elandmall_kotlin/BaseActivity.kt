@@ -1,10 +1,13 @@
 package com.example.elandmall_kotlin
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.ImageViewCompat
 import com.example.elandmall_kotlin.common.CommonConst.EXTRA_LINK_EVENT
 import com.example.elandmall_kotlin.databinding.LayoutBottomBarBinding
 import com.example.elandmall_kotlin.databinding.LayoutTopBarBinding

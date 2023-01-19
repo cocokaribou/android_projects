@@ -6,6 +6,12 @@
     <string name="cancel">취소</string>
     <string name="close">닫기</string>
     <string name="more">더보기</string>
+    <string name="login">로그인</string>
+    <string name="logout">로그아웃</string>
+    <string name="setting">설정</string>
+    <string name="category">카테고리</string>
+    <string name="brand">브랜드</string>
+    <string name="cs">고객센터</string>
 
     <string name="won">원</string>
     <string name="percent">%</string>
@@ -37,4 +43,12 @@
 
     <string name="lnb_login"><u>로그인</u> 해 주세요</string>
     <string name="lnb_logout"><u>로그아웃</u></string>
+
+    <string name="lnb_recently">최근 본 상품</string>
+    <string name="lnb_recently_view_all">전체보기 ></string>
+    <string name="lnb_recently_search_hint">검색어를 입력해 주세요.</string>
+    <string name="lnb_recently_empty">최근 본 상품이 없습니다.</string>
+    <string name="lnb_brand_search_hint">브랜드를 찾아 보세요.</string>
+    <string name="lnb_shop">추천 전문관</string>
+    <string name="lnb_service">서비스 메뉴</string>
 </resources>

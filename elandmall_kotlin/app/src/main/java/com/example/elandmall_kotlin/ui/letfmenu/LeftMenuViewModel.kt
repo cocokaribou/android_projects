@@ -1,10 +1,9 @@
 package com.example.elandmall_kotlin.ui.letfmenu
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.LeftMenuModule
-import com.example.elandmall_kotlin.model.CategoryResponse
+import com.example.elandmall_kotlin.model.LeftMenuResponse
 import com.example.elandmall_kotlin.model.ModuleType
 import com.example.elandmall_kotlin.ui.main.BaseViewModel
 import kotlinx.coroutines.launch
@@ -16,8 +15,8 @@ class LeftMenuViewModel : BaseViewModel() {
         requestCategory()
     }
 
-    val loginData = MutableLiveData<CategoryResponse.Data.LoginInfo>()
-    val topMenuData = MutableLiveData<List<CategoryResponse.Data.NavCatTopMenu?>>()
+    val loginData = MutableLiveData<LeftMenuResponse.LoginInfo?>()
+    val topMenuData = MutableLiveData<List<LeftMenuResponse.NavCatTopMenu?>>()
     val uiList = MutableLiveData<MutableList<LeftMenuModule>>()
 
     private fun requestCategory() {
@@ -37,32 +36,31 @@ class LeftMenuViewModel : BaseViewModel() {
                 }
         }
     }
-    private fun setStickyUI(data: CategoryResponse.Data) {
-        data.loginInfo?.let { login ->
-            loginData.postValue(login)
-        }
+    private fun setStickyUI(data: LeftMenuResponse.Data) {
+        loginData.postValue(data.loginInfo)
+
         data.navCatTopMenuList?.let { topMenu ->
             topMenuData.postValue(topMenu)
         }
     }
 
-    private fun setModules(data: CategoryResponse.Data) {
+    private fun setModules(data: LeftMenuResponse.Data) {
         val list = mutableListOf<LeftMenuModule>()
 
         list.add(LeftMenuModule(ModuleType.DIVIDER))
-        list.add(LeftMenuModule(ModuleType.RECENTLY))
-
+        list.add(LeftMenuModule(ModuleType.RECENTLY, data.navCatLatelyGoodsList))
         list.add(LeftMenuModule(ModuleType.DIVIDER))
-        list.add(LeftMenuModule(ModuleType.CATEGORY))
 
+        list.add(LeftMenuModule(ModuleType.CATEGORY, data.navCatCategoryList?.get(0)?.navCatCategoryMenuList))
         list.add(LeftMenuModule(ModuleType.DIVIDER))
-        list.add(LeftMenuModule(ModuleType.BRAND))
 
+        list.add(LeftMenuModule(ModuleType.BRAND, data.navCatBrandList))
         list.add(LeftMenuModule(ModuleType.DIVIDER))
-        list.add(LeftMenuModule(ModuleType.SHOP))
 
+        list.add(LeftMenuModule(ModuleType.SHOP, data.navCatShopList))
         list.add(LeftMenuModule(ModuleType.DIVIDER))
-        list.add(LeftMenuModule(ModuleType.SERVICE_MENU))
+
+        list.add(LeftMenuModule(ModuleType.SERVICE_MENU, data.navCatServicemenuList))
 
         list.add(LeftMenuModule(ModuleType.FOOTER))
 

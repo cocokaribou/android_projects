@@ -2,22 +2,19 @@ package com.example.elandmall_kotlin.ui.letfmenu
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.view.View
 import androidx.activity.viewModels
 import com.example.elandmall_kotlin.BaseActivity
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.common.CommonConst
 import com.example.elandmall_kotlin.databinding.ActivityLeftMenuBinding
-import com.example.elandmall_kotlin.model.CategoryResponse
+import com.example.elandmall_kotlin.model.LeftMenuResponse
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.LinkEvent
-import com.example.elandmall_kotlin.util.Logger
 
 class LeftMenuActivity : BaseActivity() {
     val viewModel: LeftMenuViewModel by viewModels()
-
-    //    val binding by lazy { ActivityLeftMenuBinding.inflate(layoutInflater) }
-    lateinit var binding: ActivityLeftMenuBinding
+    val binding by lazy { ActivityLeftMenuBinding.inflate(layoutInflater) }
 
     private val mAdapter by lazy { LeftMenuAdapter() }
 
@@ -27,7 +24,8 @@ class LeftMenuActivity : BaseActivity() {
         if (isSavedInstanceState(savedInstanceState)) {
             return
         }
-        binding = ActivityLeftMenuBinding.inflate(layoutInflater)
+        overridePendingTransition(R.anim.slide_left_in, R.anim.slide_none)
+
         setContentView(binding.root)
 
         initUI()
@@ -36,6 +34,8 @@ class LeftMenuActivity : BaseActivity() {
 
     private fun initUI() = with(binding) {
         list.adapter = mAdapter
+
+        close.setOnClickListener { finish() }
     }
 
     private fun initObserve() {
@@ -43,25 +43,41 @@ class LeftMenuActivity : BaseActivity() {
         observeUIData()
     }
 
-    fun observeLinkEvent() {
+    private fun observeLinkEvent() {
         EventBus.linkEvent.observe(this) {
             it.getIfNotHandled()?.let { event ->
+                onLinkEvent(event)
                 setResult(RESULT_OK, Intent().putExtra(CommonConst.EXTRA_LINK_EVENT, event))
                 finish()
             }
         }
     }
 
-    fun observeUIData() {
+    private fun observeUIData() {
+        viewModel.loginData.observe(this) {
+            initLoginUI(it)
+        }
         viewModel.topMenuData.observe(this) {
-            initTopMenu(it)
+            initTopMenuUI(it)
         }
         viewModel.uiList.observe(this) {
             mAdapter.submitList(it)
         }
     }
 
-    private fun initTopMenu(list: List<CategoryResponse.Data.NavCatTopMenu?>) = with(binding) {
+    private fun initLoginUI(loginInfo: LeftMenuResponse.LoginInfo?) = with(binding){
+        if (loginInfo?.isLogin == true){
+            userNm.text = loginInfo.mbrNm
+            userNm.visibility = View.VISIBLE
+
+            login.setText(R.string.lnb_logout)
+        } else {
+            userNm.visibility = View.GONE
+            login.setText(R.string.lnb_login)
+        }
+    }
+
+    private fun initTopMenuUI(list: List<LeftMenuResponse.NavCatTopMenu?>) = with(binding) {
         btn1.apply {
             title = list[0]?.menuNm ?: ""
             click = { EventBus.fire(LinkEvent(list[0]?.linkUrl)) }

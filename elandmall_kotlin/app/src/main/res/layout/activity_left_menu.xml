@@ -2,15 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.letfmenu.LeftMenuActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.letfmenu.LeftMenuActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="13dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <include
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="이영인 님"
-            android:textSize="13dp"
+            android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/logo"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,16 +37,16 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/lnb_logout"
-            android:textColor="#bbb"
-            android:textSize="13dp"
+            android:textColor="#999"
+            android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/user_nm"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
             android:src="@drawable/ic_close"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,8 @@
         android:id="@+id/top_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="15dp"
         app:layout_constraintTop_toBottomOf="@id/divider1">
 
         <com.example.elandmall_kotlin.view.CategoryButton

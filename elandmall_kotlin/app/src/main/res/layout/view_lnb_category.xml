@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#ddddff"
-    android:layout_height="550dp">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <TextView
+        android:id="@+id/title"
+        style="@style/common_lnb_title"
+        android:text="@string/category"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="카테고리"/>
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:spanCount="5"
+        tools:listitem="@layout/view_lnb_category_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

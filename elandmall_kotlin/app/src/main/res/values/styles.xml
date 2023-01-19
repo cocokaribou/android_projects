@@ -98,4 +98,13 @@
         <item name="android:textSize">15dp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="common_lnb_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">17dp</item>
+        <item name="android:textColor">#2f2f2f</item>
+    </style>
 </resources>

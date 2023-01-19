@@ -84,10 +84,10 @@ class LeftMenuAdapter : ListAdapter<LeftMenuModule, LeftMenuBaseViewHolder>(obje
     }
 
     override fun onBindViewHolder(holder: LeftMenuBaseViewHolder, position: Int) {
-        holder.onBind()
+        holder.onBind(currentList[position].data)
     }
 }
 
 abstract class LeftMenuBaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    open fun onBind() {}
+    open fun onBind(item: Any?) {}
 }

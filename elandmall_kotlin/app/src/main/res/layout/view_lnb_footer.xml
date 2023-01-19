@@ -1,11 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:background="#dddddd">
+    android:layout_height="wrap_content"
+    android:background="#f4f5f7"
+    android:paddingHorizontal="80dp">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="푸터" />
+        android:id="@+id/cs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
+        android:text="@string/cs"
+        android:textColor="#888"
+        android:textSize="13dp"
+        app:layout_constraintEnd_toStartOf="@id/login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="0.6dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="10dp"
+        android:background="#ddd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/login"
+        app:layout_constraintStart_toEndOf="@id/cs"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
+        android:text="@string/login"
+        android:textColor="#888"
+        android:textSize="13dp"
+        app:layout_constraintEnd_toStartOf="@id/setting"
+        app:layout_constraintStart_toEndOf="@id/cs"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="0.6dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="10dp"
+        android:background="#ddd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/setting"
+        app:layout_constraintStart_toEndOf="@id/login"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
+        android:text="@string/setting"
+        android:textColor="#888"
+        android:textSize="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/login"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
