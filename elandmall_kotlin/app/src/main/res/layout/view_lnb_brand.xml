@@ -14,7 +14,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/search"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
         android:backgroundTint="#f4f5f7"
         app:cardCornerRadius="30dp"
@@ -26,6 +26,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="20dp"
             android:gravity="center_vertical"
+            android:paddingVertical="10dp"
             android:text="@string/lnb_brand_search_hint"
             android:textColor="#343434"
             android:textSize="12dp" />
@@ -40,10 +41,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
-        android:paddingHorizontal="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
+        android:paddingHorizontal="5dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/search"
         app:spanCount="3" />

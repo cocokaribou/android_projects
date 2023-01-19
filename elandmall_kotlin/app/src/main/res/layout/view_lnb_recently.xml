@@ -26,7 +26,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/search"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
         android:backgroundTint="#f4f5f7"
         app:cardCornerRadius="30dp"
@@ -38,7 +38,8 @@
             android:layout_height="match_parent"
             android:layout_marginStart="20dp"
             android:gravity="center_vertical"
-            android:text="@string/lnb_recently_search_hint"
+            android:paddingVertical="10dp"
+            android:text="@string/lnb_search_hint"
             android:textColor="#343434"
             android:textSize="12dp" />
 
@@ -70,8 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="91dp"
             android:gravity="center"
-            android:textColor="#666666"
             android:text="@string/lnb_recently_empty"
+            android:textColor="#666666"
             android:textSize="13dp"
             android:visibility="visible"
             app:layout_constraintTop_toTopOf="parent" />

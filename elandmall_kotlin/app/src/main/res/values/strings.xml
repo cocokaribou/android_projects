@@ -46,7 +46,7 @@
 
     <string name="lnb_recently">최근 본 상품</string>
     <string name="lnb_recently_view_all">전체보기 ></string>
-    <string name="lnb_recently_search_hint">검색어를 입력해 주세요.</string>
+    <string name="lnb_search_hint">검색어를 입력해 주세요.</string>
     <string name="lnb_recently_empty">최근 본 상품이 없습니다.</string>
     <string name="lnb_brand_search_hint">브랜드를 찾아 보세요.</string>
     <string name="lnb_shop">추천 전문관</string>

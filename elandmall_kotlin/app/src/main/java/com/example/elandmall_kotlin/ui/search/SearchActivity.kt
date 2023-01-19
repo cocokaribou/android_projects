@@ -25,15 +25,15 @@ class SearchActivity : BaseActivity() {
 
         setContentView(binding.root)
 
-        binding.root.setOnClickListener {
-            EventBus.fire(LinkEvent(""))
-        }
+        initUI()
+        initObserve()
+    }
 
-        EventBus.linkEvent.observe(this) {
-            it.getIfNotHandled()?.let {
-                Logger.v("search")
-                finish()
-            }
-        }
+    private fun initUI() {
+
+    }
+
+    private fun initObserve() {
+
     }
 }
