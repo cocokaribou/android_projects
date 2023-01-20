@@ -9,7 +9,10 @@ import androidx.fragment.app.viewModels
 import com.example.elandmall_kotlin.ui.search.SearchBaseModuleFragment
 
 class SearchPopularFragment : SearchBaseModuleFragment() {
+    private val viewModel : SearchPopularViewModel by viewModels()
     override fun observeData() {
-        TODO("Not yet implemented")
+        viewModel.uiList.observe(this){
+            setModules(it)
+        }
     }
 }

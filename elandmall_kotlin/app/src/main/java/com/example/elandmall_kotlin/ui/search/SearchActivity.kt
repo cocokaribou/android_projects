@@ -7,15 +7,25 @@ import android.view.LayoutInflater
 import androidx.activity.viewModels
 import com.example.elandmall_kotlin.BaseActivity
 import com.example.elandmall_kotlin.R
+import com.example.elandmall_kotlin.common.CommonConst.EXTRA_SEARCH_TAB
 import com.example.elandmall_kotlin.databinding.ActivityIntroBinding
 import com.example.elandmall_kotlin.databinding.ActivitySearchBinding
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.LinkEvent
+import com.example.elandmall_kotlin.ui.main.MainTabPagerAdapter
+import com.example.elandmall_kotlin.util.CustomTabUtil.draw
+import com.example.elandmall_kotlin.util.CustomTabUtil.setTabListener
 import com.example.elandmall_kotlin.util.Logger
+import com.google.android.material.tabs.TabLayoutMediator
 
 class SearchActivity : BaseActivity() {
     val viewModel: SearchViewModel by viewModels()
     val binding by lazy { ActivitySearchBinding.inflate(layoutInflater) }
+
+    private val mAdapter by lazy { SearchTabPagerAdapter(supportFragmentManager, lifecycle) }
+    private val tabList = listOf("인기", "최근", "브랜드")
+
+    var currentTab = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +37,6 @@ class SearchActivity : BaseActivity() {
         setContentView(binding.root)
 
         resolveIntent(intent)
-
-        initUI()
-        initObserve()
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -38,12 +45,23 @@ class SearchActivity : BaseActivity() {
     }
 
     private fun resolveIntent(intent: Intent?) {
+        currentTab = intent?.getIntExtra(EXTRA_SEARCH_TAB, 0) ?: 0
 
-
+        initUI()
+        initObserve()
     }
 
-    private fun initUI() {
+    private fun initUI() = with(binding){
+        viewpager.apply {
+            adapter = mAdapter
+            isUserInputEnabled = true
+            offscreenPageLimit = tabList.size
+            setCurrentItem(currentTab, false)
+        }
 
+        TabLayoutMediator(tabs, viewpager) { tab, position ->
+            tab.text = tabList[position]
+        }.attach()
     }
 
     private fun initObserve() {

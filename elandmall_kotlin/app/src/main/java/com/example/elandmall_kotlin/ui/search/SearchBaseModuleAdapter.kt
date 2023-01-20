@@ -6,12 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.elandmall_kotlin.databinding.ViewSearchPopularPlanShopBinding
-import com.example.elandmall_kotlin.databinding.ViewSearchPopularRankingBinding
+import com.example.elandmall_kotlin.databinding.*
 import com.example.elandmall_kotlin.model.SearchModule
 import com.example.elandmall_kotlin.model.SearchModuleType
-import com.example.elandmall_kotlin.ui.search.viewholders.PopularPlanShopViewHolder
-import com.example.elandmall_kotlin.ui.search.viewholders.PopularRankingViewHolder
+import com.example.elandmall_kotlin.ui.search.viewholders.*
 
 class SearchBaseModuleAdapter : ListAdapter<SearchModule, SearchBaseViewHolder>(object : DiffUtil.ItemCallback<SearchModule>() {
     override fun areItemsTheSame(oldItem: SearchModule, newItem: SearchModule): Boolean = oldItem == newItem
@@ -37,12 +35,47 @@ class SearchBaseModuleAdapter : ListAdapter<SearchModule, SearchBaseViewHolder>(
                         false
                     )
                 )
-            SearchModuleType.RECENTLY_SEARCHED -> {}
-            SearchModuleType.RECENTLY_VIEWED -> {}
-            SearchModuleType.BRAND_TOP10 -> {}
-            SearchModuleType.BRAND_ALPHABETS -> {}
-            SearchModuleType.BRAND_LIST -> {}
-            else -> {}
+            SearchModuleType.RECENTLY_SEARCHED ->
+                RecentlySearchedViewHolder(
+                    ViewSearchRecentlySearchedBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+            SearchModuleType.RECENTLY_VIEWED -> {
+                RecentlyViewedViewHolder(
+                    ViewSearchRecentlyViewedBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+            }
+            SearchModuleType.BRAND_TOP10 ->
+                BrandTop10ViewHolder(
+                    ViewSearchBrandTop10Binding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+            SearchModuleType.BRAND_ALPHABETS ->
+                BrandAlphabetsViewHolder(
+                    ViewSearchBrandAlphabetsBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+            SearchModuleType.BRAND_LIST ->
+                BrandListViewHolder(
+                    ViewSearchBrandListBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
         }
     }
 
