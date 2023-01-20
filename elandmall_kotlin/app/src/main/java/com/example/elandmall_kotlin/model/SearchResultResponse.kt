@@ -13,7 +13,7 @@ data class SearchResultBrandResponse(
 }
 
 data class SearchResultTop10Response(
-    @SerializedName("result") private val result: List<List<String?>?>?
+    @SerializedName("result") private val result: List<List<String>?>?
 ) {
     val validData: List<String>?
         get() {
@@ -22,14 +22,14 @@ data class SearchResultTop10Response(
 }
 
 data class SearchResultPlanResponse(
-    @SerializedName("result") private val result: List<Result?>?
+    @SerializedName("result") private val result: List<Result>?
 ) {
-    data class Result(
-        @SerializedName("planshop") val planshop: List<PlanShop?>?
-    )
+    val validData: List<PlanShop>?
+        get() = result?.get(0)?.planshop
 
-    val validData: PlanShop?
-        get() = result?.get(0)?.planshop?.get(0)
+    data class Result(
+        @SerializedName("planshop") val planshop: List<PlanShop>?
+    )
 
     data class PlanShop(
         @SerializedName("banner_img_path") val bannerImgPath: String?,

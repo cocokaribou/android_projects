@@ -3,34 +3,28 @@
   "data": {
     "top_image_list": [
       {
-        "image_url": "//www.elandrs.com/upload/dspl/banner/90/328/220700000356328.jpg"
+        "image_url": "//www.elandrs.com/upload/dspl/banner/10/823/00/221000000373823.jpg"
       },
       {
-        "image_url": "//www.elandrs.com/upload/dspl/banner/90/420/00/200500000197420.jpg"
+        "image_url": "//www.elandrs.com/upload/dspl/banner/20/731/00/221000000373731.jpg"
       },
       {
-        "image_url": "//www.elandrs.com/upload/dspl/banner/90/416/00/200500000197416.jpg"
+        "image_url": "//www.elandrs.com/upload/dspl/banner/10/655/00/221000000373655.jpg"
       },
       {
-        "image_url": "//www.elandrs.com/upload/dspl/banner/90/388/00/201100000233388.png"
+        "image_url": "//www.elandrs.com/upload/dspl/banner/10/647/00/221000000373647.jpg"
       },
       {
-        "image_url": "//www.elandrs.com/upload/dspl/banner/90/419/00/200500000197419.jpg"
+        "image_url": "//www.elandrs.com/upload/dspl/banner/10/645/00/221000000373645.jpg"
       },
       {
-        "image_url": "//www.elandrs.com/upload/dspl/banner/90/421/00/200500000197421.jpg"
+        "image_url": "//www.elandrs.com/upload/dspl/banner/10/644/00/221000000373644.jpg"
       },
       {
-        "image_url": "//www.elandrs.com/upload/dspl/banner/90/432/00/200500000197432.jpg"
+        "image_url": "//www.elandrs.com/upload/dspl/banner/10/051/00/221000000374051.jpg"
       },
       {
-        "image_url": "//www.elandrs.com/upload/dspl/banner/90/427/00/200500000197427.jpg"
-      },
-      {
-        "image_url": "//www.elandrs.com/upload/dspl/banner/90/868/00/201200000236868.jpg"
-      },
-      {
-        "image_url": "//www.elandrs.com/upload/dspl/banner/90/984/00/220100000317984.jpg"
+        "image_url": "//www.elandrs.com/upload/dspl/banner/10/911/00/221000000373911.jpg"
       }
     ],
     "goods_info": {
@@ -126,7 +120,8 @@
             "secret": true
           }
         ]
-      }
+      },
+      "point": 60
     },
     "share": {
       "share_img_path": "//www.elandrs.com/upload/dspl/banner/11/043/00/230100000391043.jpg",

@@ -3,10 +3,19 @@ package com.example.elandmall_kotlin.model
 
 import com.google.gson.annotations.SerializedName
 
-data class PopularItem(
-    val brandNm: String,
-    val rankDiff: String
+class SearchModule(
+    val type: SearchModuleType,
+    val data: Any? = null
 )
+enum class SearchModuleType {
+    POPULAR_RANKING,
+    POPULAR_PLAN_SHOP,
+    RECENTLY_SEARCHED,
+    RECENTLY_VIEWED,
+    BRAND_TOP10,
+    BRAND_ALPHABETS,
+    BRAND_LIST
+}
 
 // search_popular.json
 data class SearchPopularResponse(
@@ -14,12 +23,17 @@ data class SearchPopularResponse(
 ) {
     val validData: List<PopularItem>?
         get() = result?.map {
-            PopularItem(brandNm = it?.get(0) ?: "", rankDiff = it?.get(1) ?: "")
+            PopularItem(brandNm = it?.get(0) ?: "", rankDiff = it?.get(1) ?: "0")
         }?.toList()
+
+    data class PopularItem(
+        val brandNm: String,
+        val rankDiff: String
+    )
 }
 
 // search_brand.json
-data class SearchPopularBrandResponse(
+data class SearchBrandResponse(
     @SerializedName("result") private val result: List<List<String>?>?
 ) {
     val validData: List<String>?
@@ -50,12 +64,11 @@ data class SearchPlanShopResponse(
 data class SearchBrandKeyword(
     @SerializedName("data") private val data: List<Data>?,
 ) {
-    val validData: Data?
-        get() = data?.get(0)
-
     data class Data(
         @SerializedName("nav_brand_keyword") val navBrandKeyword: NavBrandKeyword?
     )
+    val validData: NavBrandKeyword?
+        get() = data?.get(0)?.navBrandKeyword
 
     data class NavBrandKeyword(
         @SerializedName("nav_brand_keyword_list_kor") val navBrandKeywordListKor: List<NavBrandKeywordKor?>?,
@@ -82,10 +95,14 @@ data class SearchBrandKeywordList(
 
     data class Data(
         @SerializedName("nav_brand_keyword_title") val navBrandKeywordTitle: String?,
-        @SerializedName("nav_brand_keyword_list") val navBrandKeywordList: List<NavBrandKeyword?>?
-    )
+        @SerializedName("nav_brand_keyword_list") private val navBrandKeywordList: List<NavBrandKeyword?>?
+    ) {
+        val keywordList: List<String>?
+            get() = navBrandKeywordList?.map { it?.brandNm ?: "" }
 
-    data class NavBrandKeyword(
-        @SerializedName("brand_nm") val brandNm: String?
-    )
+        data class NavBrandKeyword(
+            @SerializedName("brand_nm") val brandNm: String?
+        )
+    }
+
 }

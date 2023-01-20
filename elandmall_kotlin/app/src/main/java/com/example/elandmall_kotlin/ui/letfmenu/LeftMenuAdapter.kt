@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.databinding.*
 import com.example.elandmall_kotlin.model.LeftMenuModule
-import com.example.elandmall_kotlin.model.ModuleType
+import com.example.elandmall_kotlin.model.LeftMenuModuleType
 import com.example.elandmall_kotlin.ui.letfmenu.viewholders.*
 
 class LeftMenuAdapter : ListAdapter<LeftMenuModule, LeftMenuBaseViewHolder>(object : DiffUtil.ItemCallback<LeftMenuModule>() {
@@ -18,8 +18,8 @@ class LeftMenuAdapter : ListAdapter<LeftMenuModule, LeftMenuBaseViewHolder>(obje
     override fun getItemViewType(position: Int): Int = currentList[position].type.ordinal
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeftMenuBaseViewHolder {
-        return when (ModuleType.values()[viewType]) {
-            ModuleType.DIVIDER -> {
+        return when (LeftMenuModuleType.values()[viewType]) {
+            LeftMenuModuleType.DIVIDER ->
                 Divider(
                     ViewLnbDividerBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -27,8 +27,8 @@ class LeftMenuAdapter : ListAdapter<LeftMenuModule, LeftMenuBaseViewHolder>(obje
                         false
                     )
                 )
-            }
-            ModuleType.RECENTLY -> {
+
+            LeftMenuModuleType.RECENTLY ->
                 RecentlyHolder(
                     ViewLnbRecentlyBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -36,8 +36,7 @@ class LeftMenuAdapter : ListAdapter<LeftMenuModule, LeftMenuBaseViewHolder>(obje
                         false
                     )
                 )
-            }
-            ModuleType.CATEGORY -> {
+            LeftMenuModuleType.CATEGORY ->
                 CategoryHolder(
                     ViewLnbCategoryBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -45,8 +44,7 @@ class LeftMenuAdapter : ListAdapter<LeftMenuModule, LeftMenuBaseViewHolder>(obje
                         false
                     )
                 )
-            }
-            ModuleType.BRAND -> {
+            LeftMenuModuleType.BRAND ->
                 BrandHolder(
                     ViewLnbBrandBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -54,8 +52,7 @@ class LeftMenuAdapter : ListAdapter<LeftMenuModule, LeftMenuBaseViewHolder>(obje
                         false
                     )
                 )
-            }
-            ModuleType.SHOP -> {
+            LeftMenuModuleType.SHOP ->
                 ShopHolder(
                     ViewLnbShopBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -63,8 +60,7 @@ class LeftMenuAdapter : ListAdapter<LeftMenuModule, LeftMenuBaseViewHolder>(obje
                         false
                     )
                 )
-            }
-            ModuleType.SERVICE_MENU -> {
+            LeftMenuModuleType.SERVICE_MENU ->
                 ServiceHolder(
                     ViewLnbServiceBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -72,7 +68,6 @@ class LeftMenuAdapter : ListAdapter<LeftMenuModule, LeftMenuBaseViewHolder>(obje
                         false
                     )
                 )
-            }
             else -> FooterHolder(
                 ViewLnbFooterBinding.inflate(
                     LayoutInflater.from(parent.context),

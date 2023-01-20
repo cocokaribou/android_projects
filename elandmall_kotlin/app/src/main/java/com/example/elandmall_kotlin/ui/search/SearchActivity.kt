@@ -1,5 +1,6 @@
 package com.example.elandmall_kotlin.ui.search
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.LayoutInflater
@@ -25,8 +26,20 @@ class SearchActivity : BaseActivity() {
 
         setContentView(binding.root)
 
+        resolveIntent(intent)
+
         initUI()
         initObserve()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        resolveIntent(intent)
+    }
+
+    private fun resolveIntent(intent: Intent?) {
+
+
     }
 
     private fun initUI() {

@@ -39,6 +39,7 @@ object CommonConst {
      * intent extra keys
      */
     const val EXTRA_LINK_EVENT = "extra_link_event"
+    const val EXTRA_SEARCH_TAB = "extra_search_type"
 }
 
 // api result flag

@@ -26,7 +26,8 @@ class Goods(
     @SerializedName("final_price") val finalPrice: Int?,
     @SerializedName("coupon_sale_price") val couponSalePrice: Int?,
     @SerializedName("goods_review_info") val goodsReviewInfo: GoodsReviewInfo?,
-    @SerializedName("goods_question_info") val goodsQuestionInfo: GoodsQuestionInfo?
+    @SerializedName("goods_question_info") val goodsQuestionInfo: GoodsQuestionInfo?,
+    @SerializedName("point") val point: String?
 ) {
     val imageUrl: String
         get() {
