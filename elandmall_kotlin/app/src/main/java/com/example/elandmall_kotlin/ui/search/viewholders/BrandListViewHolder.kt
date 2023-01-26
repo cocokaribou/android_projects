@@ -5,6 +5,8 @@ import com.example.elandmall_kotlin.ui.search.SearchBaseViewHolder
 
 class BrandListViewHolder(private val binding: ViewSearchBrandListBinding): SearchBaseViewHolder(binding.root) {
     override fun onBind(item: Any?) {
-
+        (item as? String?)?.let {
+            binding.brand.text = it
+        }
     }
 }

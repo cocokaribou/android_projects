@@ -6,36 +6,33 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/brand"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:paddingVertical="15dp"
-        android:textColor="#2d2d2d"
-        android:textSize="13dp"
-        app:layout_constraintEnd_toStartOf="@id/more"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/tools_text_brand_nm" />
-
-    <TextView
-        android:id="@+id/more"
+        android:id="@+id/alphabet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:scaleX="0.5"
-        android:text=">"
-        android:textColor="#bbb"
-        android:textSize="25dp"
+        android:layout_marginStart="10dp"
+        android:paddingVertical="10dp"
+        android:textColor="#2d2d2d"
+        android:textSize="19dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="\'ㄱ\'"/>
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textColor="#444444"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/alphabet"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/search_brand_count_format" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#ddd"
-        app:layout_constraintTop_toBottomOf="@id/brand" />
+        app:layout_constraintTop_toBottomOf="@id/alphabet" />
 </androidx.constraintlayout.widget.ConstraintLayout>

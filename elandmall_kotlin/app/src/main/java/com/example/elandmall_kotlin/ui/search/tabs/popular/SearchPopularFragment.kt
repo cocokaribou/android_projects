@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.elandmall_kotlin.ui.search.SearchBaseModuleFragment
+import com.example.elandmall_kotlin.util.Logger
 
 class SearchPopularFragment : SearchBaseModuleFragment() {
     private val viewModel : SearchPopularViewModel by viewModels()

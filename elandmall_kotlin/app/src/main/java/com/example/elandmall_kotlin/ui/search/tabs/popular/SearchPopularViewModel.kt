@@ -8,13 +8,21 @@ import com.example.elandmall_kotlin.model.SearchModuleType
 import com.example.elandmall_kotlin.model.SearchPlanShopResponse
 import com.example.elandmall_kotlin.model.SearchPopularResponse
 import com.example.elandmall_kotlin.ui.search.SearchRepository
+import com.example.elandmall_kotlin.util.Logger
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class SearchPopularViewModel : ViewModel() {
     private val repository by lazy { SearchRepository() }
 
     val uiList = MutableLiveData<MutableList<SearchModule>>()
+
+    var popularData: SearchPopularResponse? = null
+    var planShopData: SearchPlanShopResponse? = null
+
     init {
         requestMergedData()
     }
@@ -24,24 +32,33 @@ class SearchPopularViewModel : ViewModel() {
             merge(
                 repository.requestPopularStream(),
                 repository.requestPlanShopStream()
-            ).collect {
+            ).onEach {
                 it.fold(
                     onSuccess = { data ->
-                        setModules(data)
+                        (data as? SearchPopularResponse)?.let { popular ->
+                            popularData = popular
+                        }
+                        (data as? SearchPlanShopResponse)?.let { planShop ->
+                            planShopData = planShop
+                        }
                     },
                     onFailure = {}
                 )
-            }
+            }.onCompletion {
+                if (popularData != null && planShopData != null)
+                    setModules()
+            }.launchIn(viewModelScope)
         }
     }
-    fun setModules(data: Any?) {
+
+    fun setModules() {
         val list = mutableListOf<SearchModule>()
 
-        (data as? SearchPopularResponse)?.let {
+        popularData?.let {
             list.add(SearchModule(SearchModuleType.POPULAR_RANKING, it.validData))
         }
 
-        (data as? SearchPlanShopResponse)?.let {
+        planShopData?.let {
             list.add(SearchModule(SearchModuleType.POPULAR_PLAN_SHOP, it.validData))
         }
 

@@ -10,10 +10,10 @@ import com.example.elandmall_kotlin.databinding.*
 import com.example.elandmall_kotlin.model.SearchModule
 import com.example.elandmall_kotlin.model.SearchModuleType
 import com.example.elandmall_kotlin.ui.search.viewholders.*
+import com.example.elandmall_kotlin.util.Logger
 
 class SearchBaseModuleAdapter : ListAdapter<SearchModule, SearchBaseViewHolder>(object : DiffUtil.ItemCallback<SearchModule>() {
     override fun areItemsTheSame(oldItem: SearchModule, newItem: SearchModule): Boolean = oldItem == newItem
-
     override fun areContentsTheSame(oldItem: SearchModule, newItem: SearchModule): Boolean = oldItem.equals(newItem)
 }) {
     override fun getItemViewType(position: Int): Int = currentList[position].type.ordinal
@@ -68,6 +68,14 @@ class SearchBaseModuleAdapter : ListAdapter<SearchModule, SearchBaseViewHolder>(
                         false
                     )
                 )
+            SearchModuleType.BRAND_LIST_TITLE ->
+                BrandListTitleViewHolder(
+                    ViewSearchBrandListTitleBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
             SearchModuleType.BRAND_LIST ->
                 BrandListViewHolder(
                     ViewSearchBrandListBinding.inflate(
@@ -80,7 +88,7 @@ class SearchBaseModuleAdapter : ListAdapter<SearchModule, SearchBaseViewHolder>(
     }
 
     override fun onBindViewHolder(holder: SearchBaseViewHolder, position: Int) {
-        holder.onBind(currentList[position])
+        holder.onBind(currentList[position].data)
     }
 }
 

@@ -51,4 +51,8 @@
     <string name="lnb_brand_search_hint">브랜드를 찾아 보세요.</string>
     <string name="lnb_shop">추천 전문관</string>
     <string name="lnb_service">서비스 메뉴</string>
+
+    <string name="search_plan_shop">추천 기획전</string>
+    <string name="search_more">더보기 ></string>
+    <string name="search_brand_count_format">검색결과 총 &lt;font color="#c9000b">%s&lt;/font>건</string>
 </resources>
