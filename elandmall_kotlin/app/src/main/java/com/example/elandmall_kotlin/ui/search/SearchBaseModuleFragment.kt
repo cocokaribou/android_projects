@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.elandmall_kotlin.databinding.FragmentBaseModuleBinding
 import com.example.elandmall_kotlin.databinding.FragmentSearchBaseModuleBinding
 import com.example.elandmall_kotlin.model.SearchModule
+import com.example.elandmall_kotlin.model.SearchModuleType
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.ui.main.BaseModuleAdapter
 import com.example.elandmall_kotlin.util.Logger
@@ -39,5 +40,6 @@ abstract class SearchBaseModuleFragment : Fragment() {
 
     fun setModules(moduleList: MutableList<SearchModule>) {
         moduleAdapter.submitList(moduleList)
+        moduleAdapter.notifyDataSetChanged()
     }
 }

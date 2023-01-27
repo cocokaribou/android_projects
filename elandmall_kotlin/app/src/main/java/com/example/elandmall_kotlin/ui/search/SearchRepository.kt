@@ -51,7 +51,7 @@ class SearchRepository {
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun requestBrandKeywordListStream(): Flow<Result<SearchBrandKeywordList?>> {
+    suspend fun requestBrandKeywordListStream(alphabet: String): Flow<Result<SearchBrandKeywordList?>> {
         return flow {
             val jsonString = getJsonFileToString("json/search_brand_keyword_list.json", BaseApplication.context)
             val data = Gson().fromJson(jsonString, SearchBrandKeywordList::class.java)

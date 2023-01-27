@@ -10,15 +10,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.databinding.*
 import com.example.elandmall_kotlin.model.ModuleBrandData
-import com.example.elandmall_kotlin.model.SearchBrandKeyword
 import com.example.elandmall_kotlin.ui.search.SearchBaseViewHolder
 import com.example.elandmall_kotlin.util.GridSpacingItemDecoration
-import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.dpToPx
 
 var isKorean = true
 var savedIndex = 0
-var clicker: (Boolean, Int) -> Unit = { _, _ -> }
+var callback: (Boolean, Int) -> Unit = { _, _ -> }
 
 class BrandAlphabetsViewHolder(private val binding: ViewSearchBrandAlphabetsBinding) : SearchBaseViewHolder(binding.root) {
     private val mAdapter by lazy { AlphabetAdapter() }
@@ -30,9 +28,9 @@ class BrandAlphabetsViewHolder(private val binding: ViewSearchBrandAlphabetsBind
 
     private fun initUI(moduleData: ModuleBrandData) = with(binding) {
         isKorean = moduleData.isKorean
-        clicker = moduleData.click!!
+        callback = moduleData.click!!
 
-        mAdapter.submitList(moduleData.data)
+        mAdapter.submitList(moduleData.list)
 
         list.adapter = mAdapter
         if (list.itemDecorationCount == 0) {
@@ -89,7 +87,7 @@ class BrandAlphabetsViewHolder(private val binding: ViewSearchBrandAlphabetsBind
 
                 root.setOnClickListener {
                     savedIndex = adapterPosition
-                    clicker(isKorean, savedIndex)
+                    callback(isKorean, savedIndex)
                     notifyDataSetChanged()
                 }
             }
@@ -101,7 +99,9 @@ class BrandAlphabetsViewHolder(private val binding: ViewSearchBrandAlphabetsBind
 
                 root.setOnClickListener {
                     isKorean = !isKorean
-                    clicker(isKorean, 0)
+                    savedIndex = 0
+
+                    callback(isKorean, savedIndex)
                     notifyDataSetChanged()
                 }
             }

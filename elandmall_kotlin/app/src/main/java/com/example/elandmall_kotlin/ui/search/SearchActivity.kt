@@ -54,7 +54,7 @@ class SearchActivity : BaseActivity() {
     private fun initUI() = with(binding){
         viewpager.apply {
             adapter = mAdapter
-            isUserInputEnabled = true
+            isUserInputEnabled = false
             offscreenPageLimit = tabList.size
             setCurrentItem(currentTab, false)
         }

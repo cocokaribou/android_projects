@@ -5,11 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.*
 import com.example.elandmall_kotlin.ui.search.SearchRepository
-import com.example.elandmall_kotlin.util.Logger
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.merge
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class SearchBrandViewModel : ViewModel() {
@@ -18,79 +13,99 @@ class SearchBrandViewModel : ViewModel() {
     val uiList = MutableLiveData<MutableList<SearchModule>>()
     val moduleList = mutableListOf<SearchModule>()
 
-    private var alphabetList: List<String> = listOf()
-    private var brandList: SearchBrandKeywordList? = null
-
-    private var clickedIndex = 0
-    private var isKor = true
-    private var currentCount: SearchBrandKeyword.NavBrandKeywordItem? = null
-
-    private var clicker: (Boolean, Int) -> Unit = { switch, i ->
-        isKor = switch
-        clickedIndex = i
-
-        updateModules(isKor, clickedIndex, currentCount)
-    }
+    private var alphabetList: List<String>? = null
+    private var currentAlphabet: SearchBrandKeyword.NavBrandKeywordItem? = null
 
     init {
-        requestMergedData()
+        requestBrandAlphabet()
     }
 
-    private fun requestMergedData() {
+    private fun requestBrandAlphabet() {
         viewModelScope.launch {
-            merge(
-                repository.requestBrandKeywordStream(),
-                repository.requestBrandKeywordListStream()
-            ).onEach {
+            repository.requestBrandKeywordStream().collect {
                 it.fold(
                     onSuccess = {
-                        (it as? SearchBrandKeyword)?.validData?.let { data ->
-                            alphabetList = if (isKor) data.korList else data.engList
-                        }
-                        (it as? SearchBrandKeywordList)?.let { list ->
-                            brandList = list
+                        it?.validData?.let { data ->
+                            setAlphabetModules(data)
+
+                            val selected = data.korList[0]
+
+                            requestBrandList(selected)
                         }
                     },
                     onFailure = {}
                 )
-            }.onCompletion {
-                if (alphabetList != null && brandList != null)
-                    setModules()
-            }.launchIn(viewModelScope)
+            }
         }
     }
 
-    private fun setModules() {
-        moduleList.clear()
+    private fun requestBrandList(selected: String) {
+        viewModelScope.launch {
+            repository.requestBrandKeywordListStream(selected).collect {
+                it.fold(
+                    onSuccess = {
+                        it?.validData?.let { data ->
+                            setListModules(data)
+                        }
+                    },
+                    onFailure = {}
+                )
+            }
+        }
+    }
 
-        // alphabets
+    private fun setAlphabetModules(data: SearchBrandKeyword.NavBrandKeyword) {
+        currentAlphabet = data.navBrandKeywordListKor?.get(0)
+
         moduleList.add(
             SearchModule(
                 SearchModuleType.BRAND_ALPHABETS,
-                ModuleBrandData(isKorean = isKor, savedIndex = clickedIndex, data = alphabetList, clicker)
+                ModuleBrandData(
+                    isKorean = true,
+                    savedIndex = 0,
+                    list = data.korList,
+                    click = { isKorean, index ->
+                        alphabetList = if (isKorean) data.korList else data.engList
+                        currentAlphabet =
+                            if (isKorean) data.navBrandKeywordListKor?.get(index) else data.navBrandKeywordListEng?.get(index)
+
+                        updateModules(isKorean, index, alphabetList, currentAlphabet)
+                    })
             )
         )
-        // list title
-        moduleList.add(SearchModule(SearchModuleType.BRAND_LIST_TITLE, currentCount))
 
-        // list
-        brandList?.validData?.keywordList?.forEach { brandNm ->
-            moduleList.add(SearchModule(SearchModuleType.BRAND_LIST, brandNm))
-        }
-
-        uiList.postValue(moduleList)
+        moduleList.add(SearchModule(SearchModuleType.BRAND_LIST_TITLE, currentAlphabet))
     }
 
-    private fun updateModules(isKor: Boolean, clickedIndex: Int, currentBrandList: SearchBrandKeyword.NavBrandKeywordItem?) {
-        moduleList.map {
-            if (it.type == SearchModuleType.BRAND_ALPHABETS) {
-            }
-            if (it.type == SearchModuleType.BRAND_LIST_TITLE)
-                it.data = currentBrandList
+    private fun setListModules(data: SearchBrandKeywordList.Data) {
+        val copiedList = moduleList.toMutableList()
 
+        data.brandList?.forEach { brandNm ->
+            copiedList.add(SearchModule(SearchModuleType.BRAND_LIST, brandNm))
         }
-        uiList.postValue(moduleList)
 
-        val list = moduleList.find { it.type == SearchModuleType.BRAND_LIST }
+        uiList.postValue(copiedList)
+    }
+
+    private fun updateModules(isKor: Boolean, index: Int, updatedList: List<String>?, updatedAlphabet: SearchBrandKeyword.NavBrandKeywordItem?) {
+        moduleList.apply {
+            map {
+                when (it.type) {
+                    SearchModuleType.BRAND_ALPHABETS ->
+                        (it.data as? ModuleBrandData)?.apply {
+                            list = updatedList
+                            isKorean = isKor
+                            savedIndex = index
+                        }
+
+                    SearchModuleType.BRAND_LIST_TITLE ->
+                        it.data = updatedAlphabet
+
+                    else -> {}
+                }
+            }
+        }
+
+        requestBrandList(this.currentAlphabet?.navBrandKeywordTitle ?: "")
     }
 }

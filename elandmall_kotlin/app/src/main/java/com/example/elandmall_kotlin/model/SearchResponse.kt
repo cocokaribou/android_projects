@@ -72,6 +72,7 @@ data class SearchBrandKeyword(
     data class Data(
         @SerializedName("nav_brand_keyword") val navBrandKeyword: NavBrandKeyword?
     )
+
     val validData: NavBrandKeyword?
         get() = data?.get(0)?.navBrandKeyword
 
@@ -110,7 +111,7 @@ data class SearchBrandKeyword(
 data class ModuleBrandData(
     var isKorean: Boolean,
     var savedIndex: Int = 0,
-    var data: List<String>,
+    var list: List<String>?,
     var click: ((Boolean, Int) -> Unit)? = null
 )
 
@@ -125,7 +126,7 @@ data class SearchBrandKeywordList(
         @SerializedName("nav_brand_keyword_title") val navBrandKeywordTitle: String?,
         @SerializedName("nav_brand_keyword_list") private val navBrandKeywordList: List<NavBrandKeyword?>?
     ) {
-        val keywordList: List<String>?
+        val brandList: List<String>?
             get() = navBrandKeywordList?.map { it?.brandNm ?: "" }
 
         data class NavBrandKeyword(
