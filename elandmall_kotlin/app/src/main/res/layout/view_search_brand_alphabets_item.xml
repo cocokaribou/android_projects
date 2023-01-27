@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingVertical="4dp"
     tools:layout_width="60dp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/bg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:scaleY="0.8"
+        android:scaleY="0.85"
         app:cardCornerRadius="100dp"
         app:cardElevation="0dp"
         app:layout_constraintDimensionRatio="1:1"
@@ -22,7 +23,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxLength="2"
+        android:maxLength="3"
         android:textSize="15dp"
         android:textColor="#2b2b2b"
         app:layout_constraintBottom_toBottomOf="@id/bg"

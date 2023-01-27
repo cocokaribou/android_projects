@@ -10,7 +10,7 @@
         android:id="@+id/bg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:backgroundTint="#ee0000"
+        android:backgroundTint="#c9000b"
         app:cardCornerRadius="100dp"
         app:cardElevation="0dp"
         app:layout_constraintDimensionRatio="1:1"
@@ -18,11 +18,10 @@
 
     <ImageView
         android:id="@+id/ic"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:src="@drawable/ic_refresh"
         app:layout_constraintBottom_toBottomOf="@id/bg"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@id/lang"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@id/bg"
@@ -35,12 +34,12 @@
         android:layout_height="wrap_content"
         android:maxLength="1"
         android:textColor="@color/white"
-        android:textSize="16dp"
+        android:textSize="15.5dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/bg"
+        app:layout_constraintEnd_toEndOf="@id/bg"
         app:layout_constraintStart_toEndOf="@id/ic"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bg"
         tools:text="ㄱ" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:paddingVertical="15dp"
+        android:paddingVertical="10dp"
         android:textColor="#2d2d2d"
         android:textSize="13dp"
         app:layout_constraintEnd_toStartOf="@id/more"
@@ -36,6 +36,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#ddd"
+        android:background="#efefef"
         app:layout_constraintTop_toBottomOf="@id/brand" />
 </androidx.constraintlayout.widget.ConstraintLayout>

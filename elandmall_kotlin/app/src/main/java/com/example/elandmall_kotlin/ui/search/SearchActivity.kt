@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import com.example.elandmall_kotlin.BaseActivity
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.common.CommonConst.EXTRA_SEARCH_TAB
+import com.example.elandmall_kotlin.common.CommonConst.SEARCH_POPULAR
 import com.example.elandmall_kotlin.databinding.ActivityIntroBinding
 import com.example.elandmall_kotlin.databinding.ActivitySearchBinding
 import com.example.elandmall_kotlin.ui.EventBus
@@ -17,6 +18,7 @@ import com.example.elandmall_kotlin.util.CustomTabUtil.draw
 import com.example.elandmall_kotlin.util.CustomTabUtil.setTabListener
 import com.example.elandmall_kotlin.util.Logger
 import com.google.android.material.tabs.TabLayoutMediator
+import java.lang.Exception
 
 class SearchActivity : BaseActivity() {
     val viewModel: SearchViewModel by viewModels()
@@ -45,7 +47,8 @@ class SearchActivity : BaseActivity() {
     }
 
     private fun resolveIntent(intent: Intent?) {
-        currentTab = intent?.getIntExtra(EXTRA_SEARCH_TAB, 0) ?: 0
+        val tab = intent?.getStringExtra(EXTRA_SEARCH_TAB) ?: SEARCH_POPULAR
+        currentTab = try { tab.toInt() } catch (e: Exception) { 0 }
 
         initUI()
         initObserve()
@@ -62,6 +65,10 @@ class SearchActivity : BaseActivity() {
         TabLayoutMediator(tabs, viewpager) { tab, position ->
             tab.text = tabList[position]
         }.attach()
+
+        topBar.close.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initObserve() {

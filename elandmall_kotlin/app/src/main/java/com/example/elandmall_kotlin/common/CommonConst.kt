@@ -44,9 +44,9 @@ object CommonConst {
     /**
      * search tab type
      */
-    const val SEARCH_POPULAR = 0
-    const val SEARCH_RECENTLY = 1
-    const val SEARCH_BRAND = 2
+    const val SEARCH_POPULAR = "0"
+    const val SEARCH_RECENTLY = "1"
+    const val SEARCH_BRAND = "2"
 }
 
 // api result flag

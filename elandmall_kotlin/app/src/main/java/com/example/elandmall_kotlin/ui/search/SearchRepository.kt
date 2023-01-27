@@ -21,20 +21,20 @@ class SearchRepository {
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun requestBrandStream(): Flow<Result<SearchBrandResponse?>> {
+    suspend fun requestPlanShopStream(): Flow<Result<SearchPlanShopResponse?>> {
         return flow {
-            val jsonString = getJsonFileToString("json/search_brand.json", BaseApplication.context)
-            val data = Gson().fromJson(jsonString, SearchBrandResponse::class.java)
+            val jsonString = getJsonFileToString("json/search_planshop.json", BaseApplication.context)
+            val data = Gson().fromJson(jsonString, SearchPlanShopResponse::class.java)
             emit(Result.success(data))
         }.retryWhen { cause, attempt ->
             return@retryWhen attempt < 2 && cause is java.lang.Exception
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun requestPlanShopStream(): Flow<Result<SearchPlanShopResponse?>> {
+    suspend fun requestBrandTop10Stream(): Flow<Result<SearchBrandResponse?>> {
         return flow {
-            val jsonString = getJsonFileToString("json/search_planshop.json", BaseApplication.context)
-            val data = Gson().fromJson(jsonString, SearchPlanShopResponse::class.java)
+            val jsonString = getJsonFileToString("json/search_brand.json", BaseApplication.context)
+            val data = Gson().fromJson(jsonString, SearchBrandResponse::class.java)
             emit(Result.success(data))
         }.retryWhen { cause, attempt ->
             return@retryWhen attempt < 2 && cause is java.lang.Exception

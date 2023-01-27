@@ -1,14 +1,14 @@
 package com.example.elandmall_kotlin
 
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.ImageViewCompat
 import com.example.elandmall_kotlin.common.CommonConst.EXTRA_LINK_EVENT
+import com.example.elandmall_kotlin.common.CommonConst.EXTRA_SEARCH_TAB
+import com.example.elandmall_kotlin.common.CommonConst.SEARCH_BRAND
+import com.example.elandmall_kotlin.common.CommonConst.SEARCH_POPULAR
 import com.example.elandmall_kotlin.databinding.LayoutBottomBarBinding
 import com.example.elandmall_kotlin.databinding.LayoutTopBarBinding
 import com.example.elandmall_kotlin.ui.EventBus
@@ -55,7 +55,7 @@ open class BaseActivity : AppCompatActivity() {
         when (event.type) {
             LinkEventType.LNB -> navToLNB()
             LinkEventType.DEFAULT -> navToWeb(event.url)
-            LinkEventType.SEARCH -> navToSearch()
+            LinkEventType.SEARCH -> navToSearch(event.data)
             else -> {}
         }
     }
@@ -64,7 +64,7 @@ open class BaseActivity : AppCompatActivity() {
             EventBus.fire(LinkEvent(LinkEventType.LNB))
         }
         searchInput.setOnClickListener {
-            EventBus.fire(LinkEvent(LinkEventType.SEARCH))
+            EventBus.fire(LinkEvent(LinkEventType.SEARCH, SEARCH_POPULAR))
         }
     }
 
@@ -73,7 +73,7 @@ open class BaseActivity : AppCompatActivity() {
             EventBus.fire(LinkEvent(LinkEventType.LNB))
         }
         btn2.setOnClickListener {
-            EventBus.fire(LinkEvent(LinkEventType.SEARCH))
+            EventBus.fire(LinkEvent(LinkEventType.SEARCH, SEARCH_BRAND))
         }
         home.setOnClickListener {  }
         btn3.setOnClickListener {  }
@@ -97,9 +97,11 @@ open class BaseActivity : AppCompatActivity() {
 
     private fun navToCart() {}
 
-    private fun navToSearch() {
+    private fun navToSearch(data: String?) {
         if (isNetworkAvailable(this)) {
-            startActivity(Intent(this, SearchActivity::class.java))
+            val intent = Intent(this, SearchActivity::class.java)
+                .putExtra(EXTRA_SEARCH_TAB, data)
+            startActivity(intent)
         } else {
 
         }

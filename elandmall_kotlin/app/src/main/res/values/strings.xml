@@ -55,4 +55,6 @@
     <string name="search_plan_shop">추천 기획전</string>
     <string name="search_more">더보기 ></string>
     <string name="search_brand_count_format">검색결과 총 &lt;font color="#c9000b">%s&lt;/font>건</string>
+    <string name="search_brand_top10_title">지금 인기있는 브랜드</string>
+    <string name="search_brand_top10_format">&lt;b>%s&lt;/b> %s</string>
 </resources>

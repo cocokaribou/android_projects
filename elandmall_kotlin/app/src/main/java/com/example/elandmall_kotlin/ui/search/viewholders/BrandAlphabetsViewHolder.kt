@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.databinding.*
 import com.example.elandmall_kotlin.model.ModuleBrandData
 import com.example.elandmall_kotlin.ui.search.SearchBaseViewHolder
+import com.example.elandmall_kotlin.util.GridSideSpacingItemDecoration
 import com.example.elandmall_kotlin.util.GridSpacingItemDecoration
 import com.example.elandmall_kotlin.util.dpToPx
 
@@ -34,7 +35,7 @@ class BrandAlphabetsViewHolder(private val binding: ViewSearchBrandAlphabetsBind
 
         list.adapter = mAdapter
         if (list.itemDecorationCount == 0) {
-            list.addItemDecoration(GridSpacingItemDecoration(6, 10.dpToPx(), true))
+            list.addItemDecoration(GridSideSpacingItemDecoration(6, 10.dpToPx()))
         }
 
     }
@@ -95,7 +96,7 @@ class BrandAlphabetsViewHolder(private val binding: ViewSearchBrandAlphabetsBind
 
         inner class RefreshHolder(private val binding: ViewSearchBrandAlphabetsRefreshBinding) : RecyclerView.ViewHolder(binding.root) {
             fun onBind() = with(binding) {
-                lang.text = if (isKorean) "ㄱ" else "A"
+                lang.text = if (isKorean) "A" else "ㄱ"
 
                 root.setOnClickListener {
                     isKorean = !isKorean
