@@ -48,11 +48,15 @@
         </activity>
 
         <activity
-            android:name=".ui.letfmenu.LeftMenuActivity"
+            android:name=".ui.leftmenu.LeftMenuActivity"
             android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.search.SearchActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.capture.CaptureActivity"
             android:screenOrientation="portrait"/>
 
         <activity

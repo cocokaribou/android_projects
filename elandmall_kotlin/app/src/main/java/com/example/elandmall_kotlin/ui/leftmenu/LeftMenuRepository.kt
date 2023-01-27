@@ -1,4 +1,4 @@
-package com.example.elandmall_kotlin.ui.letfmenu
+package com.example.elandmall_kotlin.ui.leftmenu
 
 import com.example.elandmall_kotlin.BaseApplication
 import com.example.elandmall_kotlin.model.LeftMenuResponse

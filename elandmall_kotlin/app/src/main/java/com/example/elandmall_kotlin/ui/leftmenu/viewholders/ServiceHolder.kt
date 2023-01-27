@@ -1,4 +1,4 @@
-package com.example.elandmall_kotlin.ui.letfmenu.viewholders
+package com.example.elandmall_kotlin.ui.leftmenu.viewholders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +10,7 @@ import com.example.elandmall_kotlin.databinding.ViewLnbServiceItemBinding
 import com.example.elandmall_kotlin.model.LeftMenuResponse
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.LinkEvent
-import com.example.elandmall_kotlin.ui.letfmenu.LeftMenuBaseViewHolder
+import com.example.elandmall_kotlin.ui.leftmenu.LeftMenuBaseViewHolder
 import com.example.elandmall_kotlin.util.GridSpacingItemDecoration
 import com.example.elandmall_kotlin.util.dpToPx
 

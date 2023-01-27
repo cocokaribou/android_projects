@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/search_bar_height"
     android:background="#f2f2f2">
 
     <ImageView
-        android:id="@+id/barcode"
+        android:id="@+id/capture"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginVertical="10dp"
@@ -17,34 +18,62 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/bg"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/close"
-        app:layout_constraintStart_toEndOf="@id/barcode"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toEndOf="@id/capture"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:gravity="center_vertical"
-            android:text="@string/lnb_search_hint"
-            android:textColor="#999999"
-            android:textSize="13dp" />
+    <EditText
+        android:id="@+id/search_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#00ffffff"
+        android:hint="@string/lnb_search_hint"
+        android:inputType="textVisiblePassword"
+        android:maxLines="1"
+        android:paddingVertical="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="5dp"
+        android:textColor="#2b2b2b"
+        android:textColorHint="#999999"
+        android:textCursorDrawable="@drawable/cursor_gray"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toBottomOf="@id/bg"
+        app:layout_constraintEnd_toStartOf="@id/clear"
+        app:layout_constraintStart_toStartOf="@id/bg"
+        app:layout_constraintTop_toTopOf="@id/bg" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:paddingHorizontal="10dp"
-            android:src="@drawable/ic_search" />
-    </androidx.cardview.widget.CardView>
+    <ImageView
+        android:id="@+id/clear"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_clear_text"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/bg"
+        app:layout_constraintEnd_toStartOf="@id/search"
+        app:layout_constraintTop_toTopOf="@id/bg"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:paddingStart="3dp"
+        android:paddingEnd="7dp"
+        android:src="@drawable/ic_search"
+        app:layout_constraintBottom_toBottomOf="@id/bg"
+        app:layout_constraintEnd_toEndOf="@id/bg"
+        app:layout_constraintTop_toTopOf="@id/bg" />
 
     <TextView
         android:id="@+id/close"

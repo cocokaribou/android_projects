@@ -1,4 +1,4 @@
-package com.example.elandmall_kotlin.ui.letfmenu
+package com.example.elandmall_kotlin.ui.leftmenu
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope

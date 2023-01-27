@@ -1,4 +1,4 @@
-package com.example.elandmall_kotlin.ui.letfmenu
+package com.example.elandmall_kotlin.ui.leftmenu
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.databinding.*
 import com.example.elandmall_kotlin.model.LeftMenuModule
 import com.example.elandmall_kotlin.model.LeftMenuModuleType
-import com.example.elandmall_kotlin.ui.letfmenu.viewholders.*
+import com.example.elandmall_kotlin.ui.leftmenu.viewholders.*
 
 class LeftMenuAdapter : ListAdapter<LeftMenuModule, LeftMenuBaseViewHolder>(object : DiffUtil.ItemCallback<LeftMenuModule>() {
     override fun areItemsTheSame(oldItem: LeftMenuModule, newItem: LeftMenuModule): Boolean = oldItem == newItem

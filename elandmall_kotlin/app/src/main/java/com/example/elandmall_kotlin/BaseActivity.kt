@@ -1,5 +1,6 @@
 package com.example.elandmall_kotlin
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -14,9 +15,11 @@ import com.example.elandmall_kotlin.databinding.LayoutTopBarBinding
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.LinkEvent
 import com.example.elandmall_kotlin.ui.LinkEventType
-import com.example.elandmall_kotlin.ui.letfmenu.LeftMenuActivity
+import com.example.elandmall_kotlin.ui.capture.CaptureActivity
+import com.example.elandmall_kotlin.ui.leftmenu.LeftMenuActivity
 import com.example.elandmall_kotlin.ui.intro.IntroActivity
 import com.example.elandmall_kotlin.ui.search.SearchActivity
+import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.isNetworkAvailable
 
 /**
@@ -39,6 +42,18 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    private val resultCamera = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ){
+        resultCameraPermission.launch(Manifest.permission.CAMERA)
+    }
+
+    private val resultCameraPermission = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ){ isGranted ->
+        if (isGranted) Logger.v("통과유~")
+    }
+
     protected fun isSavedInstanceState(savedInstanceState: Bundle?): Boolean {
         return if (savedInstanceState != null) {
             val intent = Intent(this, IntroActivity::class.java)
@@ -56,9 +71,11 @@ open class BaseActivity : AppCompatActivity() {
             LinkEventType.LNB -> navToLNB()
             LinkEventType.DEFAULT -> navToWeb(event.url)
             LinkEventType.SEARCH -> navToSearch(event.data)
+            LinkEventType.CAPTURE -> navToCapture()
             else -> {}
         }
     }
+
     fun initTopBar(topBar: LayoutTopBarBinding) = with(topBar) {
         menuIc.setOnClickListener {
             EventBus.fire(LinkEvent(LinkEventType.LNB))
@@ -68,17 +85,18 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    fun initBottomBar(bottomBar: LayoutBottomBarBinding) = with(bottomBar){
+    fun initBottomBar(bottomBar: LayoutBottomBarBinding) = with(bottomBar) {
         btn1.setOnClickListener {
             EventBus.fire(LinkEvent(LinkEventType.LNB))
         }
         btn2.setOnClickListener {
             EventBus.fire(LinkEvent(LinkEventType.SEARCH, SEARCH_BRAND))
         }
-        home.setOnClickListener {  }
-        btn3.setOnClickListener {  }
-        btn4.setOnClickListener {  }
+        home.setOnClickListener { }
+        btn3.setOnClickListener { }
+        btn4.setOnClickListener { }
     }
+
     private fun navToHome() {}
 
     private fun navToWeb(url: String?) {
@@ -105,6 +123,10 @@ open class BaseActivity : AppCompatActivity() {
         } else {
 
         }
+    }
+
+    private fun navToCapture() {
+        startActivity(Intent(this, CaptureActivity::class.java))
     }
 
     private fun navToSetting() {}

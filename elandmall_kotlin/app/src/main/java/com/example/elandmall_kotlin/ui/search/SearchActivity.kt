@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.activity.viewModels
 import com.example.elandmall_kotlin.BaseActivity
 import com.example.elandmall_kotlin.R
@@ -13,10 +14,11 @@ import com.example.elandmall_kotlin.databinding.ActivityIntroBinding
 import com.example.elandmall_kotlin.databinding.ActivitySearchBinding
 import com.example.elandmall_kotlin.ui.EventBus
 import com.example.elandmall_kotlin.ui.LinkEvent
+import com.example.elandmall_kotlin.ui.LinkEventType
 import com.example.elandmall_kotlin.ui.main.MainTabPagerAdapter
+import com.example.elandmall_kotlin.util.*
 import com.example.elandmall_kotlin.util.CustomTabUtil.draw
 import com.example.elandmall_kotlin.util.CustomTabUtil.setTabListener
-import com.example.elandmall_kotlin.util.Logger
 import com.google.android.material.tabs.TabLayoutMediator
 import java.lang.Exception
 
@@ -48,13 +50,18 @@ class SearchActivity : BaseActivity() {
 
     private fun resolveIntent(intent: Intent?) {
         val tab = intent?.getStringExtra(EXTRA_SEARCH_TAB) ?: SEARCH_POPULAR
-        currentTab = try { tab.toInt() } catch (e: Exception) { 0 }
+        currentTab = try {
+            tab.toInt()
+        } catch (e: Exception) {
+            0
+        }
 
         initUI()
+        initTopBar()
         initObserve()
     }
 
-    private fun initUI() = with(binding){
+    private fun initUI() = with(binding) {
         viewpager.apply {
             adapter = mAdapter
             isUserInputEnabled = false
@@ -65,9 +72,25 @@ class SearchActivity : BaseActivity() {
         TabLayoutMediator(tabs, viewpager) { tab, position ->
             tab.text = tabList[position]
         }.attach()
+    }
 
-        topBar.close.setOnClickListener {
-            finish()
+    private fun initTopBar() = with(binding.topBar) {
+        close.setOnClickListener { finish() }
+        clear.setOnClickListener { searchInput.setText("") }
+        capture.setOnClickListener { EventBus.fire(LinkEvent(LinkEventType.CAPTURE)) }
+
+        search.setOnClickListener { searchInput.clearEditTextFocus() }
+
+        searchInput.apply {
+            setOnKeyListener(object : EnterListener() {
+                override fun onEnter() { searchInput.clearEditTextFocus() }
+            })
+            onFocusChangeListener = object : TextFocusListener() {
+                override fun onFocusOut() { searchInput.clearEditTextFocus() }
+            }
+            addTextChangedListener(object : TextInputWatcher() {
+                override fun onInputTextChanged() { clear.visibility = if (searchInput.text.isNotEmpty()) View.VISIBLE else View.GONE }
+            })
         }
     }
 

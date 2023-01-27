@@ -47,7 +47,7 @@ class BrandAlphabetsViewHolder(private val binding: ViewSearchBrandAlphabetsBind
 
         override fun getItemViewType(position: Int): Int = currentList.indices.elementAt(position)
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            return if (viewType != currentList.size - 1) {
+            return if (viewType != currentList.size - 1)
                 AlphabetHolder(
                     ViewSearchBrandAlphabetsItemBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -55,7 +55,7 @@ class BrandAlphabetsViewHolder(private val binding: ViewSearchBrandAlphabetsBind
                         false
                     )
                 )
-            } else
+            else
                 RefreshHolder(
                     ViewSearchBrandAlphabetsRefreshBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -86,10 +86,12 @@ class BrandAlphabetsViewHolder(private val binding: ViewSearchBrandAlphabetsBind
                     title.setTextColor(Color.parseColor("#2b2b2b"))
                 }
 
-                root.setOnClickListener {
-                    savedIndex = adapterPosition
-                    callback(isKorean, savedIndex)
-                    notifyDataSetChanged()
+                if (savedIndex != adapterPosition) {
+                    root.setOnClickListener {
+                        savedIndex = adapterPosition
+                        callback(isKorean, savedIndex)
+                        notifyDataSetChanged()
+                    }
                 }
             }
         }

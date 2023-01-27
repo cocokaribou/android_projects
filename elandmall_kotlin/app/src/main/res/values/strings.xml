@@ -57,4 +57,7 @@
     <string name="search_brand_count_format">검색결과 총 &lt;font color="#c9000b">%s&lt;/font>건</string>
     <string name="search_brand_top10_title">지금 인기있는 브랜드</string>
     <string name="search_brand_top10_format">&lt;b>%s&lt;/b> %s</string>
+
+    <string name="capture_title">QR/바코드 검색</string>
+    <string name="capture_guide">화면 중앙에 위치시키면 자동으로 인식합니다.</string>
 </resources>
