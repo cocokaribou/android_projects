@@ -5,12 +5,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.model.PlanDetailResponse
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.ui.main.BaseViewModel
+import com.example.elandmall_kotlin.ui.main.CommonViewModel
 import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.dpToPx
 import kotlinx.coroutines.launch
 
-class PlanDetailViewModel : BaseViewModel() {
+class PlanDetailViewModel : CommonViewModel() {
     private val repository: PlanDetailRepository by lazy { PlanDetailRepository() }
 
     var planShopName = ""

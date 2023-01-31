@@ -4,12 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.EshopResponse
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.ui.main.BaseViewModel
+import com.example.elandmall_kotlin.ui.main.CommonViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlin.reflect.jvm.internal.impl.descriptors.impl.ModuleAwareClassDescriptor
 
-class EShopViewModel : BaseViewModel() {
+class EShopViewModel : CommonViewModel() {
     val repository by lazy { EShopRepository() }
 
     val uiList = MutableLiveData<MutableList<ModuleData>>()

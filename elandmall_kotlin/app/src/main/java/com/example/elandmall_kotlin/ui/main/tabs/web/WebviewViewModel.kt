@@ -1,8 +1,6 @@
 package com.example.elandmall_kotlin.ui.main.tabs.web
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.elandmall_kotlin.ui.main.BaseViewModel
+import com.example.elandmall_kotlin.ui.main.CommonViewModel
 
-class WebviewViewModel : BaseViewModel() {
+class WebviewViewModel : CommonViewModel() {
 }

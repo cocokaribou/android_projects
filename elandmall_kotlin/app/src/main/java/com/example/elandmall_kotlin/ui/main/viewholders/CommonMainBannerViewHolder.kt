@@ -17,8 +17,8 @@ import com.example.elandmall_kotlin.databinding.ViewCommonMainBannerBinding
 import com.example.elandmall_kotlin.databinding.ViewCommonMainBannerItemBinding
 import com.example.elandmall_kotlin.model.Banner
 import com.example.elandmall_kotlin.ui.BaseViewHolder
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.LinkEvent
+import com.example.elandmall_kotlin.EventBus
+import com.example.elandmall_kotlin.LinkEvent
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.util.*
 import kotlinx.coroutines.Job

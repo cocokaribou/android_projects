@@ -3,21 +3,18 @@ package com.example.elandmall_kotlin.ui.main.viewholders
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.size
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.ImageViewTarget
 import com.example.elandmall_kotlin.databinding.ViewCommonMultiBannerBinding
 import com.example.elandmall_kotlin.databinding.ViewCommonMultiBannerItemBinding
 import com.example.elandmall_kotlin.model.Banner
 import com.example.elandmall_kotlin.ui.BaseViewHolder
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.LinkEvent
+import com.example.elandmall_kotlin.EventBus
+import com.example.elandmall_kotlin.LinkEvent
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.util.AdjustHeightImageViewTarget
 import com.example.elandmall_kotlin.util.getScreenWidthToPx
 
 class CommonMultiBannerViewHolder(private val binding: ViewCommonMultiBannerBinding) : BaseViewHolder(binding.root) {

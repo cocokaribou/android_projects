@@ -1,4 +1,4 @@
-package com.example.elandmall_kotlin.ui
+package com.example.elandmall_kotlin
 
 import android.os.SystemClock
 import androidx.lifecycle.MutableLiveData
@@ -27,7 +27,7 @@ object EventBus {
     }
 }
 
-class LinkEvent : Serializable {
+class LinkEvent {
     val url: String?
     val type: LinkEventType
     val data: String?

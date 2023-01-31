@@ -2,10 +2,10 @@ package com.example.elandmall_kotlin.ui.leftmenu
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.elandmall_kotlin.BaseViewModel
 import com.example.elandmall_kotlin.model.LeftMenuModule
 import com.example.elandmall_kotlin.model.LeftMenuResponse
 import com.example.elandmall_kotlin.model.LeftMenuModuleType
-import com.example.elandmall_kotlin.ui.main.BaseViewModel
 import kotlinx.coroutines.launch
 
 class LeftMenuViewModel : BaseViewModel() {

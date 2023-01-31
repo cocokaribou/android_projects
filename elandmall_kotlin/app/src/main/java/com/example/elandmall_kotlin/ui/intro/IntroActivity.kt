@@ -3,16 +3,13 @@ package com.example.elandmall_kotlin.ui.intro
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.BaseActivity
 import com.example.elandmall_kotlin.common.ApiResult
 import com.example.elandmall_kotlin.databinding.ActivityIntroBinding
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.MainActivity
-import com.example.elandmall_kotlin.util.Logger
+import com.example.elandmall_kotlin.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

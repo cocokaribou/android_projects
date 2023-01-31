@@ -11,8 +11,8 @@ import com.example.elandmall_kotlin.databinding.ViewEkidsCategoryBinding
 import com.example.elandmall_kotlin.databinding.ViewEkidsCategoryItemBinding
 import com.example.elandmall_kotlin.model.EKidsResponse
 import com.example.elandmall_kotlin.ui.BaseViewHolder
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.LinkEvent
+import com.example.elandmall_kotlin.EventBus
+import com.example.elandmall_kotlin.LinkEvent
 import com.example.elandmall_kotlin.ui.ModuleData
 
 class EKidsCategoryViewHolder(private val binding: ViewEkidsCategoryBinding) : BaseViewHolder(binding.root) {

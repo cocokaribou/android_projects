@@ -5,12 +5,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.Category
 import com.example.elandmall_kotlin.model.LuckyDealResponse
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.ui.main.BaseViewModel
+import com.example.elandmall_kotlin.ui.main.CommonViewModel
 import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.launch
 
 typealias CategoryPayloadCallback = (List<String>) -> Unit
-class LuckyDealViewModel : BaseViewModel() {
+class LuckyDealViewModel : CommonViewModel() {
     private val repository by lazy { LuckyDealRepository() }
 
     private val moduleList = mutableListOf<ModuleData>()

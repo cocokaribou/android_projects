@@ -2,12 +2,7 @@ package com.example.elandmall_kotlin.ui.main.tabs.best
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import com.example.elandmall_kotlin.ui.SingleLiveEvent
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
-import com.example.elandmall_kotlin.ui.main.BaseViewModel
-import com.example.elandmall_kotlin.ui.main.tabs.luckydeal.LuckyDealModuleFragment
-import com.example.elandmall_kotlin.util.Logger
 
 class BestModuleFragment:BaseModuleFragment() {
     override val viewModel: BestViewModel by viewModels()

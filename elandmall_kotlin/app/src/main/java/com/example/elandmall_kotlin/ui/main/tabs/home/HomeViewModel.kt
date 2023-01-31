@@ -4,11 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.HomeResponse
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.ui.main.BaseViewModel
+import com.example.elandmall_kotlin.ui.main.CommonViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
-class HomeViewModel : BaseViewModel() {
+class HomeViewModel : CommonViewModel() {
     private val repository: HomeRepository by lazy { HomeRepository() }
 
     val refreshedList = MutableLiveData<HomeResponse?>()

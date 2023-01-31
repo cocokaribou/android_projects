@@ -6,12 +6,12 @@ import com.example.elandmall_kotlin.model.Goods
 import com.example.elandmall_kotlin.model.StorePickResponse
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.ui.main.BaseViewModel
+import com.example.elandmall_kotlin.ui.main.CommonViewModel
 import com.example.elandmall_kotlin.ui.main.tabs.storeshop.StoreShopStickyAdapter.Companion.storeShopCateAdapter
 import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.launch
 
-class StoreShopViewModel : BaseViewModel() {
+class StoreShopViewModel : CommonViewModel() {
     private val repository: StoreShopRepository by lazy { StoreShopRepository() }
 
     // store pick ui payloads

@@ -7,9 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.elandmall_kotlin.common.CommonConst.HOST_LANDING
 import com.example.elandmall_kotlin.common.CommonConst.SCHEME_ELANDMALL
 import com.example.elandmall_kotlin.ui.intro.IntroActivity
-import com.example.elandmall_kotlin.ui.MainActivity
 
-class LandingActivity : AppCompatActivity() {
+class LandingActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

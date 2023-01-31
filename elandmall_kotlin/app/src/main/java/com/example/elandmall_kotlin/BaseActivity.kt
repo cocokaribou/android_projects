@@ -2,32 +2,34 @@ package com.example.elandmall_kotlin
 
 import android.Manifest
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.example.elandmall_kotlin.common.CommonConst.EXTRA_LINK_EVENT
 import com.example.elandmall_kotlin.common.CommonConst.EXTRA_SEARCH_TAB
 import com.example.elandmall_kotlin.common.CommonConst.SEARCH_BRAND
 import com.example.elandmall_kotlin.common.CommonConst.SEARCH_POPULAR
 import com.example.elandmall_kotlin.databinding.LayoutBottomBarBinding
 import com.example.elandmall_kotlin.databinding.LayoutTopBarBinding
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.LinkEvent
-import com.example.elandmall_kotlin.ui.LinkEventType
 import com.example.elandmall_kotlin.ui.capture.CaptureActivity
 import com.example.elandmall_kotlin.ui.leftmenu.LeftMenuActivity
 import com.example.elandmall_kotlin.ui.intro.IntroActivity
 import com.example.elandmall_kotlin.ui.search.SearchActivity
 import com.example.elandmall_kotlin.util.Logger
+import com.example.elandmall_kotlin.util.dialogConfirm
 import com.example.elandmall_kotlin.util.isNetworkAvailable
 
-/**
- * BaseActivity
- * activity navigation using [com.example.elandmall_kotlin.ui.EventBus]
- */
 open class BaseActivity : AppCompatActivity() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Logger.v("클래스 이름 ${this.javaClass.simpleName}")
+        Logger.v("context 이름 $this")
+    }
     private val resultNavToLNB = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
@@ -42,16 +44,31 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    private val resultCamera = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ){
-        resultCameraPermission.launch(Manifest.permission.CAMERA)
-    }
-
     private val resultCameraPermission = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
-    ){ isGranted ->
-        if (isGranted) Logger.v("통과유~")
+    ) { isGranted ->
+        if (isGranted) {
+            startActivity(Intent(this, CaptureActivity::class.java))
+        } else {
+            Logger.v("권한거부! ${this.baseContext}")
+            Logger.v("권한거부! ${this.applicationContext}")
+            Logger.v("권한거부! ${this.javaClass}")
+
+
+            dialogConfirm(this, "카메라 및 사진/미디어에 엑세스 하도록 접근 권한을 허용해야 합니다.",
+                okListener = {
+                    val rationale = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)
+                    if (rationale) {
+                        startActivity(
+                            Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                                .setData(Uri.fromParts("package", BuildConfig.APPLICATION_ID, null))
+                        )
+                    } else {
+                    }
+                }
+            )
+            onPermissionDenied()
+        }
     }
 
     protected fun isSavedInstanceState(savedInstanceState: Bundle?): Boolean {
@@ -126,8 +143,10 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     private fun navToCapture() {
-        startActivity(Intent(this, CaptureActivity::class.java))
+        resultCameraPermission.launch(Manifest.permission.CAMERA)
     }
+
+    open fun onPermissionDenied() {}
 
     private fun navToSetting() {}
 }

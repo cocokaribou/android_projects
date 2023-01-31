@@ -6,14 +6,14 @@ import com.example.elandmall_kotlin.model.EKidsResponse
 import com.example.elandmall_kotlin.model.Goods
 import com.example.elandmall_kotlin.ui.DividerType
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.ui.main.BaseViewModel
+import com.example.elandmall_kotlin.ui.main.CommonViewModel
 import com.example.elandmall_kotlin.util.removeRange
 import kotlinx.coroutines.launch
 
 typealias ToggleCallback = () -> Unit
 typealias ChangeCategoryCallback = (Int) -> Unit
 
-class EKidsViewModel : BaseViewModel() {
+class EKidsViewModel : CommonViewModel() {
     private val repository by lazy { EKidsRepository() }
 
     private var moduleList = mutableListOf<ModuleData>()

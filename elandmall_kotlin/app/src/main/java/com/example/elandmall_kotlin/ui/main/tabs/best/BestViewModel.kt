@@ -5,14 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.BestResponse
 import com.example.elandmall_kotlin.model.Category
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.ui.main.BaseViewModel
+import com.example.elandmall_kotlin.ui.main.CommonViewModel
 import com.example.elandmall_kotlin.ui.main.viewholders.cateSelected
 import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-class BestViewModel : BaseViewModel() {
+class BestViewModel : CommonViewModel() {
     private val repository by lazy { BestRepository() }
 
     private val moduleList = mutableListOf<ModuleData>()

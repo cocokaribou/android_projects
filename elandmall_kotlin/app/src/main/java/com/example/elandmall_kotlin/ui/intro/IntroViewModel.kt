@@ -3,6 +3,7 @@ package com.example.elandmall_kotlin.ui.intro
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.elandmall_kotlin.BaseViewModel
 import com.example.elandmall_kotlin.common.ApiResult
 import com.example.elandmall_kotlin.model.HomeResponse
 import com.example.elandmall_kotlin.model.MainGnbResponse
@@ -11,7 +12,7 @@ import com.example.elandmall_kotlin.util.Logger
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class IntroViewModel : ViewModel() {
+class IntroViewModel : BaseViewModel() {
     var startTime: Long = 0L
     var completeTime: Long = 0L
 

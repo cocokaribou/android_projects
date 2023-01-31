@@ -2,19 +2,12 @@ package com.example.elandmall_kotlin.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.TypedArray
-import android.media.metrics.Event
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.BtnCategoryBinding
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.EventBus.fire
-import com.example.elandmall_kotlin.ui.LinkEvent
 
 
 @SuppressLint("Recycle", "CustomViewStyleable")

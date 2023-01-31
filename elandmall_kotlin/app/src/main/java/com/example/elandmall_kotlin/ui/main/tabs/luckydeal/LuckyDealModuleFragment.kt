@@ -2,11 +2,7 @@ package com.example.elandmall_kotlin.ui.main.tabs.luckydeal
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.SingleLiveEvent
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
-import com.example.elandmall_kotlin.util.Logger
 
 class LuckyDealModuleFragment : BaseModuleFragment() {
     override val viewModel: LuckyDealViewModel by viewModels()

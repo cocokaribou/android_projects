@@ -15,19 +15,19 @@ class BaseApplication : Application() {
     var isAppRunning = false
 
     companion object {
+        @Volatile
         lateinit var instance: BaseApplication
 
         val context: Context
             get() = instance.applicationContext
     }
 
-    init {
-        instance = this
-        Logger.initTag("youngin")
-    }
-
     override fun onCreate() {
         super.onCreate()
+        instance = this
+
+        Logger.initTag("youngin")
+
         initFlipper()
     }
 

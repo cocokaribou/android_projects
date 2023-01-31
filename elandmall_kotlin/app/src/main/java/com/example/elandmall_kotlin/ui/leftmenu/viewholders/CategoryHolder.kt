@@ -9,8 +9,8 @@ import com.bumptech.glide.Glide
 import com.example.elandmall_kotlin.databinding.ViewLnbCategoryBinding
 import com.example.elandmall_kotlin.databinding.ViewLnbCategoryItemBinding
 import com.example.elandmall_kotlin.model.LeftMenuResponse
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.LinkEvent
+import com.example.elandmall_kotlin.EventBus
+import com.example.elandmall_kotlin.LinkEvent
 import com.example.elandmall_kotlin.ui.leftmenu.LeftMenuBaseViewHolder
 import com.example.elandmall_kotlin.util.useNonBreakingSpace
 

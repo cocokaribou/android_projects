@@ -2,29 +2,22 @@ package com.example.elandmall_kotlin.ui.search
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.viewModels
 import com.example.elandmall_kotlin.BaseActivity
-import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.common.CommonConst.EXTRA_SEARCH_TAB
 import com.example.elandmall_kotlin.common.CommonConst.SEARCH_POPULAR
-import com.example.elandmall_kotlin.databinding.ActivityIntroBinding
 import com.example.elandmall_kotlin.databinding.ActivitySearchBinding
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.LinkEvent
-import com.example.elandmall_kotlin.ui.LinkEventType
-import com.example.elandmall_kotlin.ui.main.MainTabPagerAdapter
+import com.example.elandmall_kotlin.EventBus
+import com.example.elandmall_kotlin.LinkEvent
+import com.example.elandmall_kotlin.LinkEventType
 import com.example.elandmall_kotlin.util.*
-import com.example.elandmall_kotlin.util.CustomTabUtil.draw
-import com.example.elandmall_kotlin.util.CustomTabUtil.setTabListener
 import com.google.android.material.tabs.TabLayoutMediator
 import java.lang.Exception
 
 class SearchActivity : BaseActivity() {
     val viewModel: SearchViewModel by viewModels()
-    val binding by lazy { ActivitySearchBinding.inflate(layoutInflater) }
+    private lateinit var binding : ActivitySearchBinding
 
     private val mAdapter by lazy { SearchTabPagerAdapter(supportFragmentManager, lifecycle) }
     private val tabList = listOf("인기", "최근", "브랜드")
@@ -34,10 +27,12 @@ class SearchActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        Logger.v("search 생성")
         if (isSavedInstanceState(savedInstanceState)) {
             return
         }
 
+        binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         resolveIntent(intent)
@@ -95,6 +90,10 @@ class SearchActivity : BaseActivity() {
     }
 
     private fun initObserve() {
-
+        EventBus.linkEvent.observe(this) {
+            it.getIfNotHandled()?.let { event ->
+                onLinkEvent(event)
+            }
+        }
     }
 }

@@ -1,14 +1,9 @@
 package com.example.elandmall_kotlin.ui.main.tabs.home
 
-import android.media.metrics.Event
 import android.os.Bundle
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.example.elandmall_kotlin.repository.MemDataSource
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.SingleLiveEvent
 import com.example.elandmall_kotlin.ui.main.BaseModuleFragment
-import com.example.elandmall_kotlin.util.Logger
 
 class HomeModuleFragment : BaseModuleFragment() {
     override val viewModel: HomeViewModel by viewModels()

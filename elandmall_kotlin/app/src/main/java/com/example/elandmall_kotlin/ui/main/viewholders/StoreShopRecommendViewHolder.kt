@@ -12,8 +12,8 @@ import com.example.elandmall_kotlin.databinding.ViewStoreShopRecommendBinding
 import com.example.elandmall_kotlin.databinding.ViewStoreShopRecommendItemBinding
 import com.example.elandmall_kotlin.model.StoreShopResponse
 import com.example.elandmall_kotlin.ui.BaseViewHolder
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.LinkEvent
+import com.example.elandmall_kotlin.EventBus
+import com.example.elandmall_kotlin.LinkEvent
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.util.HorizontalSpacingItemDecoration
 import com.example.elandmall_kotlin.util.dpToPx

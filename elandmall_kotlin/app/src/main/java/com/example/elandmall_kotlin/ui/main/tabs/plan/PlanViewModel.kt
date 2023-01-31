@@ -5,10 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.Category
 import com.example.elandmall_kotlin.model.PlanResponse
 import com.example.elandmall_kotlin.ui.ModuleData
-import com.example.elandmall_kotlin.ui.main.BaseViewModel
+import com.example.elandmall_kotlin.ui.main.CommonViewModel
 import kotlinx.coroutines.launch
 
-class PlanViewModel : BaseViewModel() {
+class PlanViewModel : CommonViewModel() {
     val repository by lazy { PlanRepository() }
     private val moduleList = mutableListOf<ModuleData>()
     private var tabModuleList = mutableListOf<ModuleData>()

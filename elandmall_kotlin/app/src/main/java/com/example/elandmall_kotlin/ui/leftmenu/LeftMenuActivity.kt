@@ -9,8 +9,8 @@ import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.common.CommonConst
 import com.example.elandmall_kotlin.databinding.ActivityLeftMenuBinding
 import com.example.elandmall_kotlin.model.LeftMenuResponse
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.LinkEvent
+import com.example.elandmall_kotlin.EventBus
+import com.example.elandmall_kotlin.LinkEvent
 
 class LeftMenuActivity : BaseActivity() {
     val viewModel: LeftMenuViewModel by viewModels()
@@ -47,7 +47,7 @@ class LeftMenuActivity : BaseActivity() {
         EventBus.linkEvent.observe(this) {
             it.getIfNotHandled()?.let { event ->
                 onLinkEvent(event)
-                setResult(RESULT_OK, Intent().putExtra(CommonConst.EXTRA_LINK_EVENT, event))
+//                setResult(RESULT_OK, Intent().putExtra(CommonConst.EXTRA_LINK_EVENT, event))
                 finish()
             }
         }

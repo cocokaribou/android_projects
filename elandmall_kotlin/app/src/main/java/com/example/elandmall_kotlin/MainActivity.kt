@@ -1,18 +1,15 @@
-package com.example.elandmall_kotlin.ui
+package com.example.elandmall_kotlin
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.example.elandmall_kotlin.BaseActivity
-import com.example.elandmall_kotlin.BaseApplication
 import com.example.elandmall_kotlin.databinding.ActivityMainBinding
-import com.example.elandmall_kotlin.databinding.LayoutBottomBarBinding
-import com.example.elandmall_kotlin.databinding.LayoutTopBarBinding
 import com.example.elandmall_kotlin.repository.MemDataSource
 import com.example.elandmall_kotlin.ui.main.MainTabPagerAdapter
 import com.example.elandmall_kotlin.ui.main.MainViewModel
 import com.example.elandmall_kotlin.util.CustomTabUtil.draw
 import com.example.elandmall_kotlin.util.CustomTabUtil.setTabListener
 import com.example.elandmall_kotlin.util.Logger
+import com.example.elandmall_kotlin.BaseActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -79,18 +76,5 @@ class MainActivity : BaseActivity() {
 
     override fun onLinkEvent(linkEvent: LinkEvent) {
         super.onLinkEvent(linkEvent)
-    }
-    override fun onPause() {
-        super.onPause()
-        Logger.v("youngin onPause main")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Logger.v("youngin onResume main")
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-        Logger.v("youngin onDestroy main")
     }
 }

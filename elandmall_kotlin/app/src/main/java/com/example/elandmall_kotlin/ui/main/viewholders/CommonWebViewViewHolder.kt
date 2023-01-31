@@ -7,11 +7,10 @@ import android.webkit.WebSettings.LOAD_NO_CACHE
 import android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.bumptech.glide.Glide
 import com.example.elandmall_kotlin.databinding.ViewCommonWebViewBinding
 import com.example.elandmall_kotlin.ui.BaseViewHolder
-import com.example.elandmall_kotlin.ui.EventBus
-import com.example.elandmall_kotlin.ui.LinkEvent
+import com.example.elandmall_kotlin.EventBus
+import com.example.elandmall_kotlin.LinkEvent
 import com.example.elandmall_kotlin.ui.ModuleData
 import com.example.elandmall_kotlin.util.setHtmlDoc
 
