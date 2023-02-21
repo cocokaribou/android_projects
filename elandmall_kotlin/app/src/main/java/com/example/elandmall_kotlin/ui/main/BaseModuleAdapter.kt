@@ -307,16 +307,6 @@ class BaseModuleAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapte
         }
     }
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-        // scroll animation effect
-    }
-
-    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
-        super.onDetachedFromRecyclerView(recyclerView)
-        // scroll animation effect
-    }
-
     override fun onViewAttachedToWindow(holder: BaseViewHolder) {
         super.onViewAttachedToWindow(holder)
         holder.onAppeared()

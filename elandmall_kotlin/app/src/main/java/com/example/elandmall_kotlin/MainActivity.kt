@@ -9,7 +9,7 @@ import com.example.elandmall_kotlin.ui.main.MainViewModel
 import com.example.elandmall_kotlin.util.CustomTabUtil.draw
 import com.example.elandmall_kotlin.util.CustomTabUtil.setTabListener
 import com.example.elandmall_kotlin.util.Logger
-import com.example.elandmall_kotlin.BaseActivity
+import com.example.elandmall_kotlin.common.CommonConst
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -18,8 +18,9 @@ import com.google.android.material.tabs.TabLayoutMediator
  * - handle landing intent
  */
 class MainActivity : BaseActivity() {
-    val viewModel : MainViewModel by viewModels()
+
     val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val viewModel: MainViewModel by viewModels()
 
     private val mAdapter by lazy { MainTabPagerAdapter(supportFragmentManager, lifecycle) }
 
@@ -45,7 +46,12 @@ class MainActivity : BaseActivity() {
 
     private fun initUI() {
         initGNB()
-        initTopBar(binding.topBar)
+        binding.topBar.menuIc.setOnClickListener {
+            EventBus.fire(LinkEvent(LinkEventType.LNB))
+        }
+        binding.topBar.searchInput.setOnClickListener {
+            EventBus.fire(LinkEvent(LinkEventType.SEARCH, CommonConst.SEARCH_BRAND))
+        }
         initBottomBar(binding.bottomBar)
     }
 
@@ -67,14 +73,11 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initObserve() {
-        EventBus.linkEvent.observe(this) {
-            it.getIfNotHandled()?.let { event ->
-                onLinkEvent(event)
+        EventBus.linkEvent.observe(this@MainActivity) { event ->
+            event.getIfNotHandled()?.let {
+                Logger.d("hyuk here main")
+                onLinkEvent(it)
             }
         }
-    }
-
-    override fun onLinkEvent(linkEvent: LinkEvent) {
-        super.onLinkEvent(linkEvent)
     }
 }

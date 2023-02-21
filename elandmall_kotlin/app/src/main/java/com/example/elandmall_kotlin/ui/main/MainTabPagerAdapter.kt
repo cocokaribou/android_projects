@@ -119,7 +119,4 @@ class MainTabPagerAdapter(fm: FragmentManager, lifeCycle: Lifecycle) : FragmentS
         return fragments[position]
     }
 
-    override fun onViewDetachedFromWindow(holder: FragmentViewHolder) {
-        super.onViewDetachedFromWindow(holder)
-    }
 }

@@ -11,7 +11,7 @@ object EventBus {
     private const val MIN_CLICK_INTERVAL: Long = 200
     private var lastEventTime: Long = 0
 
-    val linkEvent = MutableLiveData<SingleLiveEvent<LinkEvent>>()
+    val linkEvent: MutableLiveData<SingleLiveEvent<LinkEvent>> = MutableLiveData()
 
     fun fire(event: LinkEvent) {
         if (isIntervalTooShort()) return
@@ -70,7 +70,6 @@ enum class LinkEventType {
 
 class SingleLiveEvent<out T>(private val content: T) {
     private var hasBeenHandled = false
-        private set // Allow external read but not write
 
     /**
      * Returns the content and prevents its use again.

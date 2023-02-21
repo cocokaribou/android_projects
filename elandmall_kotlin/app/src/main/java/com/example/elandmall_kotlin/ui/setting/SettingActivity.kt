@@ -7,5 +7,4 @@ package com.example.elandmall_kotlin.ui.setting
  * - server changing dialog
  * - call customer service
  */
-class SettingActivity {
-}
+class SettingActivity

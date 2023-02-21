@@ -38,7 +38,7 @@ fun getJsonFileToString(filePath: String, context: Context): String {
     var result = ""
     val assetManager: AssetManager = context.assets
     try {
-        val `is` = assetManager.open(filePath!!)
+        val `is` = assetManager.open(filePath)
         val isr = InputStreamReader(`is`)
         val reader = BufferedReader(isr)
         val buffer = StringBuffer()

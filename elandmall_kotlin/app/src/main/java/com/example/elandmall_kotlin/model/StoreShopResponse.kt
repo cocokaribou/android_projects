@@ -17,9 +17,7 @@ data class StoreShopResponse(
         @SerializedName("store_mainbanner_list") val storeMainbannerList: List<Banner>?
     )
 
-    class MyRegularStore(
-        // member data
-    )
+    class MyRegularStore
 
     data class StorePick(
         @SerializedName("rel_cont_nm") val relContNm: String?,

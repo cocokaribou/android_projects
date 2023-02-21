@@ -4,17 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import com.example.elandmall_kotlin.BaseActivity
-import com.example.elandmall_kotlin.R
+import androidx.lifecycle.ViewModelProvider
+import com.example.elandmall_kotlin.*
 import com.example.elandmall_kotlin.common.CommonConst
 import com.example.elandmall_kotlin.databinding.ActivityLeftMenuBinding
 import com.example.elandmall_kotlin.model.LeftMenuResponse
-import com.example.elandmall_kotlin.EventBus
-import com.example.elandmall_kotlin.LinkEvent
+import com.example.elandmall_kotlin.util.Logger
 
 class LeftMenuActivity : BaseActivity() {
-    val viewModel: LeftMenuViewModel by viewModels()
-    val binding by lazy { ActivityLeftMenuBinding.inflate(layoutInflater) }
+    private lateinit var binding: ActivityLeftMenuBinding
+    private lateinit var viewModel: LeftMenuViewModel
 
     private val mAdapter by lazy { LeftMenuAdapter() }
 
@@ -26,6 +25,8 @@ class LeftMenuActivity : BaseActivity() {
         }
         overridePendingTransition(R.anim.slide_left_in, R.anim.slide_none)
 
+        viewModel = ViewModelProvider(this)[LeftMenuViewModel::class.java]
+        binding = ActivityLeftMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initUI()
@@ -44,8 +45,10 @@ class LeftMenuActivity : BaseActivity() {
     }
 
     private fun observeLinkEvent() {
-        EventBus.linkEvent.observe(this) {
+        Logger.d("hyuk observe")
+        EventBus.linkEvent.observe(this@LeftMenuActivity) {
             it.getIfNotHandled()?.let { event ->
+                Logger.d("hyuk here left")
                 onLinkEvent(event)
 //                setResult(RESULT_OK, Intent().putExtra(CommonConst.EXTRA_LINK_EVENT, event))
                 finish()
@@ -78,10 +81,13 @@ class LeftMenuActivity : BaseActivity() {
     }
 
     private fun initTopMenuUI(list: List<LeftMenuResponse.NavCatTopMenu?>) = with(binding) {
-        btn1.apply {
-            title = list[0]?.menuNm ?: ""
-            click = { EventBus.fire(LinkEvent(list[0]?.linkUrl)) }
+        btn1.setOnClickListener {
+            EventBus.fire(LinkEvent(LinkEventType.SEARCH, CommonConst.SEARCH_BRAND))
         }
+//        btn1.apply {
+//            title = list[0]?.menuNm ?: ""
+//            click = { EventBus.fire(LinkEvent(list[0]?.linkUrl)) }
+//        }
         btn2.apply {
             title = list[1]?.menuNm ?: ""
             click = { EventBus.fire(LinkEvent(list[1]?.linkUrl)) }

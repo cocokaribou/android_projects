@@ -36,7 +36,7 @@ class CommonWebViewViewHolder(private val binding: ViewCommonWebViewBinding) : B
                 layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
             }
             setInitialScale(1)
-            loadDataWithBaseURL(null, data.contentHtml.setHtmlDoc(), "text/html", "UTF-8", null);
+            loadDataWithBaseURL(null, data.contentHtml.setHtmlDoc(), "text/html", "UTF-8", null)
         }
         if (webview.childCount == 0) {
             // for wrap_content option

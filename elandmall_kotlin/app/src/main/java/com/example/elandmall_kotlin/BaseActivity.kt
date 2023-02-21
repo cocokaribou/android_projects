@@ -20,27 +20,46 @@ import com.example.elandmall_kotlin.ui.leftmenu.LeftMenuActivity
 import com.example.elandmall_kotlin.ui.intro.IntroActivity
 import com.example.elandmall_kotlin.ui.search.SearchActivity
 import com.example.elandmall_kotlin.util.Logger
+import com.example.elandmall_kotlin.util.PermissionGrantHelper
 import com.example.elandmall_kotlin.util.dialogConfirm
 import com.example.elandmall_kotlin.util.isNetworkAvailable
 
 open class BaseActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Logger.v("클래스 이름 ${this.javaClass.simpleName}")
-        Logger.v("context 이름 $this")
-    }
-    private val resultNavToLNB = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-        when (it.resultCode) {
-            RESULT_OK -> {
-                it.data?.let { intent ->
-                    intent.getSerializableExtra(EXTRA_LINK_EVENT)?.let { extra ->
-                        onLinkEvent(extra as LinkEvent)
+    private val permissionHelper = PermissionGrantHelper(this)
+    private val imagePermissions = arrayOf(
+        Manifest.permission.CAMERA
+    )
+
+    fun navToSearchCamera() {
+        if (isNetworkAvailable(this)) {
+            if (permissionHelper.isAllGranted(imagePermissions)) {
+                startActivity(Intent(this, CaptureActivity::class.java))
+            } else {
+                dialogConfirm(this, "카메라 및 사진/미디어에 엑세스 하도록 접근 권한을 허용해야 합니다.",
+                    okListener = {
+                        if (permissionHelper.isAllGranted(imagePermissions)) {
+                            startActivity(Intent(this, CaptureActivity::class.java))
+                        } else {
+                            val rationales = imagePermissions.filterIndexed { index, s ->
+                                ActivityCompat.shouldShowRequestPermissionRationale(this, s)
+                            }
+                            if (rationales.isNotEmpty()) {
+                                startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                                    .setData(Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)))
+                            } else {
+                                permissionHelper.checkMultiplePermissionsAndAction(imagePermissions,
+                                    grantedCallback = {
+                                        Logger.d("all granted.")
+                                    }
+                                )
+                            }
+                        }
                     }
-                }
+                )
             }
+        } else {
+            //dialogAlert(this, getString(R.string.msg_network_error))
         }
     }
 
@@ -95,10 +114,10 @@ open class BaseActivity : AppCompatActivity() {
 
     fun initTopBar(topBar: LayoutTopBarBinding) = with(topBar) {
         menuIc.setOnClickListener {
-            EventBus.fire(LinkEvent(LinkEventType.LNB))
+            navToLNB()
         }
         searchInput.setOnClickListener {
-            EventBus.fire(LinkEvent(LinkEventType.SEARCH, SEARCH_POPULAR))
+            navToSearch(SEARCH_POPULAR)
         }
     }
 
@@ -117,14 +136,14 @@ open class BaseActivity : AppCompatActivity() {
     private fun navToHome() {}
 
     private fun navToWeb(url: String?) {
-        Toast(this).apply {
-            setText("link event: $url")
-        }.show()
+//        Toast(this).apply {
+//            setText("link event: $url")
+//        }.show()
     }
 
     private fun navToLNB() {
         if (isNetworkAvailable(this)) {
-            resultNavToLNB.launch(Intent(this, LeftMenuActivity::class.java))
+            startActivity(Intent(this, LeftMenuActivity::class.java))
         } else {
 
         }

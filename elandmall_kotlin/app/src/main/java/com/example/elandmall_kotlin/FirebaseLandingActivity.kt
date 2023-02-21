@@ -5,5 +5,4 @@ import androidx.appcompat.app.AppCompatActivity
 /**
  * firebase dynamic link receiver
  */
-class FirebaseLandingActivity: AppCompatActivity() {
-}
+class FirebaseLandingActivity: AppCompatActivity()

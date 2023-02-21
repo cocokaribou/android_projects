@@ -72,7 +72,9 @@ class SearchActivity : BaseActivity() {
     private fun initTopBar() = with(binding.topBar) {
         close.setOnClickListener { finish() }
         clear.setOnClickListener { searchInput.setText("") }
-        capture.setOnClickListener { EventBus.fire(LinkEvent(LinkEventType.CAPTURE)) }
+        capture.setOnClickListener {
+            navToSearchCamera()
+        }
 
         search.setOnClickListener { searchInput.clearEditTextFocus() }
 
@@ -92,6 +94,7 @@ class SearchActivity : BaseActivity() {
     private fun initObserve() {
         EventBus.linkEvent.observe(this) {
             it.getIfNotHandled()?.let { event ->
+                Logger.d("hyuk here search")
                 onLinkEvent(event)
             }
         }

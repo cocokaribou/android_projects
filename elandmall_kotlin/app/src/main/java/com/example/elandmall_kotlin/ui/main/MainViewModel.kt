@@ -4,5 +4,4 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.elandmall_kotlin.BaseViewModel
 
-class MainViewModel : BaseViewModel() {
-}
+class MainViewModel : BaseViewModel()
