@@ -45,12 +45,10 @@ class LeftMenuActivity : BaseActivity() {
     }
 
     private fun observeLinkEvent() {
-        Logger.d("hyuk observe")
         EventBus.linkEvent.observe(this@LeftMenuActivity) {
             it.getIfNotHandled()?.let { event ->
-                Logger.d("hyuk here left")
+                Logger.v("leftmenu observe")
                 onLinkEvent(event)
-//                setResult(RESULT_OK, Intent().putExtra(CommonConst.EXTRA_LINK_EVENT, event))
                 finish()
             }
         }

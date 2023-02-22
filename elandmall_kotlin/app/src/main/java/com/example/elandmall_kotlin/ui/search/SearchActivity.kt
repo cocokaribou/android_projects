@@ -27,7 +27,6 @@ class SearchActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Logger.v("search 생성")
         if (isSavedInstanceState(savedInstanceState)) {
             return
         }
@@ -73,7 +72,7 @@ class SearchActivity : BaseActivity() {
         close.setOnClickListener { finish() }
         clear.setOnClickListener { searchInput.setText("") }
         capture.setOnClickListener {
-            navToSearchCamera()
+            EventBus.fire(LinkEvent(LinkEventType.CAPTURE))
         }
 
         search.setOnClickListener { searchInput.clearEditTextFocus() }
@@ -94,7 +93,7 @@ class SearchActivity : BaseActivity() {
     private fun initObserve() {
         EventBus.linkEvent.observe(this) {
             it.getIfNotHandled()?.let { event ->
-                Logger.d("hyuk here search")
+                Logger.v("search observe")
                 onLinkEvent(event)
             }
         }
