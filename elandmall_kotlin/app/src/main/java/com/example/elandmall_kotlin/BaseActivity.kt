@@ -45,8 +45,10 @@ open class BaseActivity : AppCompatActivity() {
                                 ActivityCompat.shouldShowRequestPermissionRationale(this, s)
                             }
                             if (rationales.isNotEmpty()) {
-                                startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                                    .setData(Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)))
+                                startActivity(
+                                    Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                                        .setData(Uri.fromParts("package", BuildConfig.APPLICATION_ID, null))
+                                )
                             } else {
                                 permissionHelper.checkMultiplePermissionsAndAction(imagePermissions,
                                     grantedCallback = {
