@@ -7,20 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
-import com.example.shared_viewmodel.MainActivity
-import com.example.shared_viewmodel.R
+import androidx.fragment.app.viewModels
+import com.example.shared_viewmodel.ui.MainActivity
 import com.example.shared_viewmodel.databinding.FragmentHomeBinding
-import com.example.shared_viewmodel.ui.MemberSharedViewModel
-import com.example.shared_viewmodel.ui.StoreSharedViewModel
+import com.example.shared_viewmodel.ui.CommonModuleRecyclerViewAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragment: Fragment() {
+    private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
+    private val viewModel: HomeViewModel by viewModels()
 
-    private var binding: FragmentHomeBinding? = null
-
-    private val memberViewModel: MemberSharedViewModel by activityViewModels()
-    private val storeSharedViewModel: StoreSharedViewModel by activityViewModels()
     private val callback = object: OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             requireActivity().finish()
@@ -28,15 +24,17 @@ class HomeFragment: Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.btnGoList?.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_listFragment)
+
+        binding.viewpager.apply {
+            adapter = CommonModuleRecyclerViewAdapter(this@HomeFragment)
+        }
+
+        TabLayoutMediator(binding.tabs, binding.viewpager) { tab, pos ->
         }
     }
 
@@ -48,19 +46,5 @@ class HomeFragment: Fragment() {
     override fun onDetach() {
         super.onDetach()
         callback.remove()
-    }
-
-    override fun onDestroy() {
-        if (binding != null) {
-            binding = null
-        }
-        super.onDestroy()
-    }
-
-    override fun onDestroyView() {
-        if (binding != null) {
-            binding = null
-        }
-        super.onDestroyView()
     }
 }

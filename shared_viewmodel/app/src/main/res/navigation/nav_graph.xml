@@ -3,7 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/introFragment"
+    tools:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/introFragment"
+        android:name="com.example.shared_viewmodel.ui.intro.IntroFragment"
+        android:label="intro"
+        tools:layout="@layout/fragment_intro">
+
+        <action
+            android:id="@+id/action_introFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/homeFragment"
@@ -11,54 +27,83 @@
         android:label="home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeFragment_to_listFragment"
-            app:destination="@id/listFragment" />
+            android:id="@+id/action_home_to_leftMenu"
+            app:destination="@id/leftMenuFragment" />
+
         <action
-            android:id="@+id/action_homeFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            android:id="@+id/action_home_to_cameraSearch"
+            app:destination="@id/cameraSearchFragment" />
+
         <action
-            android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_home_to_fullPlayer"
+            app:destination="@id/fullPlayerFragment" />
+
+        <action
+            android:id="@+id/action_home_to_notify"
+            app:destination="@id/notifyFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.shared_viewmodel.ui.login.LoginFragment"
-        android:label="login"
-        tools:layout="@layout/fragment_login" />
+        android:id="@+id/leftMenuFragment"
+        android:name="com.example.shared_viewmodel.ui.leftmenu.LeftMenuFragment"
+        android:label="leftMenu">
 
-    <fragment
-        android:id="@+id/listFragment"
-        android:name="com.example.shared_viewmodel.ui.list.ListFragment"
-        android:label="list"
-        tools:layout="@layout/fragment_list">
         <action
-            android:id="@+id/action_listFragment_to_detailFragment"
-            app:destination="@+id/detailFragment" />
+            android:id="@+id/action_leftMenu_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment" />
+
         <action
-            android:id="@+id/action_listFragment_to_homeFragment"
-            app:destination="@id/homeFragment"/>
+            android:id="@+id/action_leftMenu_to_web"
+            app:destination="@id/webViewFragment" />
+
+        <action
+            android:id="@+id/action_leftMenu_to_notify"
+            app:destination="@id/notifyFragment" />
+
     </fragment>
 
     <fragment
-        android:id="@+id/detailFragment"
-        android:name="com.example.shared_viewmodel.ui.detail.DetailFragment"
-        android:label="detail"
-        tools:layout="@layout/fragment_detail">
-        <action
-            android:id="@+id/action_detailFragment_to_listFragment"
-            app:destination="@id/listFragment"
-            app:popUpTo="@id/listFragment"
-            app:popUpToInclusive="true" />
+        android:id="@+id/webViewFragment"
+        android:name="com.example.shared_viewmodel.ui.webView.WebViewFragment"
+        android:label="webView">
 
         <action
-            android:id="@+id/action_detailFragment_to_detailFragment"
-            app:destination="@id/detailFragment"/>
+            android:id="@+id/action_webView_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/webViewFragment" />
+
         <action
-            android:id="@+id/action_detailFragment_to_homeFragment"
+            android:id="@+id/action_webView_to_leftMenu"
+            app:destination="@id/leftMenuFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cameraSearchFragment"
+        android:name="com.example.shared_viewmodel.ui.cameraSearch.CameraSearchFragment"
+        android:label="cameraSearch">
+
+        <action
+            android:id="@+id/action_cameraSearch_to_home"
             app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_detailFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/fullPlayerFragment"
+        android:name="com.example.shared_viewmodel.ui.fullPlayer.FullPlayerFragment"
+        android:label="fullPlayer">
+        <action
+            android:id="@+id/action_fullPlayer_to_home"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/notifyFragment"
+        android:name="com.example.shared_viewmodel.ui.notify.NotifyFragment"
+        android:label="notify">
+        <action
+            android:id="@+id/action_notify_to_home"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
 </navigation>

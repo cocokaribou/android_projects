@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:layout_alignParentBottom="true"
+    android:background="@color/white"
+    tools:ignore="ContentDescription">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_toStartOf="@id/bottom_right"
+        android:paddingTop="16dp">
+
+        <RelativeLayout
+            android:id="@+id/home"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="2dp"
+                android:text="HOME"
+                android:textColor="#000"
+                android:textSize="15dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/category"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="CATEGORY"
+                android:textColor="#000"
+                android:textSize="15dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/brand"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="BRAND"
+                android:textColor="#000"
+                android:textSize="15dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/my"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="MY"
+                android:textColor="#000"
+                android:textSize="15dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/alarm"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="3dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/alarmIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="ALARM"
+                android:textColor="#000"
+                android:textSize="15dp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/unReadPushIcon"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_alignEnd="@id/alarmIcon"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="2dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="#d99c63"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="0dp"
+                tools:visibility="visible" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottom_right"
+        android:layout_width="75dp"
+        android:layout_height="72dp"
+        android:layout_alignParentEnd="true"
+        android:background="@mipmap/ic_launcher"
+        android:paddingTop="12dp">
+
+        <ImageView
+            android:id="@+id/more"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="9dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/more_anim_container"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="9dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="0dp"/>
+
+    </RelativeLayout>
+</RelativeLayout>
