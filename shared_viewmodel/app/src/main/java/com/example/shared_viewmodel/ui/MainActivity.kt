@@ -20,22 +20,22 @@ import com.example.shared_viewmodel.databinding.LayoutBottomBarBinding
 import com.example.shared_viewmodel.util.Logger
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
-    private lateinit var binding: ActivityMainBinding
+    private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        
+
         navController = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment)!! as NavHostFragment).findNavController()
 
         // navigation destination listener
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            val navBar = findViewById<BottomNavigationView>(R.id.bottom_bar)
-            navBar.visibility = if (destination.label == "home") View.VISIBLE else View.GONE
+            binding.bottomBar.root.visibility =
+                if (destination.label == "home" || destination.label == "leftMenu") View.VISIBLE
+                else View.GONE
         }
 
         // fragment lifecycle listener
@@ -48,14 +48,19 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    private fun initBottomBar() {
-        binding.bottomBarLayout.home.setOnClickListener {
-            Logger.v("되셔??")
+    private fun initBottomBar() =with (binding.bottomBar){
+        home.setOnClickListener {
+        }
+        category.setOnClickListener {
+            navController.navigate(R.id.action_home_to_leftMenu)
+        }
+        brand.setOnClickListener {
+            navController.navigate(R.id.action_home_to_webview)
         }
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
+        if (navController.currentDestination?.label == "home") super.onBackPressed()
+        else navController.navigateUp()
     }
 }

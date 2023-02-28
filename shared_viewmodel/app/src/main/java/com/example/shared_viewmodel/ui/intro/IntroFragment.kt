@@ -18,7 +18,6 @@ class IntroFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentIntroBinding.inflate(layoutInflater)
-//        _binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_intro, container, false)
         return binding.root
     }
 
@@ -27,7 +26,7 @@ class IntroFragment : Fragment() {
 
         CoroutineScope(Dispatchers.Main).launch {
             delay(3000)
-            findNavController().navigate(R.id.action_introFragment_to_homeFragment, Bundle().apply {
+            findNavController().navigate(R.id.action_intro_to_home, Bundle().apply {
                 putString("test", "test")
             })
         }

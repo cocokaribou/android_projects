@@ -14,8 +14,12 @@ import com.example.shared_viewmodel.ui.CommonModuleRecyclerViewAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragment: Fragment() {
-    private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
+    private val binding get() = _binding!!
+    private var _binding: FragmentHomeBinding? = null
+
     private val viewModel: HomeViewModel by viewModels()
+
+    private var tabLayoutMediator: TabLayoutMediator? = null
 
     private val callback = object: OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
@@ -24,6 +28,7 @@ class HomeFragment: Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentHomeBinding.inflate(inflater)
         return binding.root
     }
 
@@ -35,9 +40,8 @@ class HomeFragment: Fragment() {
             offscreenPageLimit = 10
         }
 
-        TabLayoutMediator(binding.tabs, binding.viewpager) { tabs, pos ->
-            tabs.text = "tab${pos}"
-        }.attach()
+        tabLayoutMediator = TabLayoutMediator(binding.tabs, binding.viewpager) { tabs, pos -> tabs.text = "tab${pos}" }
+        tabLayoutMediator!!.attach()
     }
 
     override fun onAttach(context: Context) {
@@ -48,5 +52,12 @@ class HomeFragment: Fragment() {
     override fun onDetach() {
         super.onDetach()
         callback.remove()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.viewpager.adapter = null
+        tabLayoutMediator = null
+        _binding = null
     }
 }

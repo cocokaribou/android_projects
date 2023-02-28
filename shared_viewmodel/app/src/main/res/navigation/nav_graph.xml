@@ -13,7 +13,7 @@
         tools:layout="@layout/fragment_intro">
 
         <action
-            android:id="@+id/action_introFragment_to_homeFragment"
+            android:id="@+id/action_intro_to_home"
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
@@ -28,7 +28,11 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_home_to_leftMenu"
-            app:destination="@id/leftMenuFragment" />
+            app:destination="@id/leftMenuFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim"/>
 
         <action
             android:id="@+id/action_home_to_cameraSearch"
@@ -41,6 +45,10 @@
         <action
             android:id="@+id/action_home_to_notify"
             app:destination="@id/notifyFragment" />
+
+        <action
+            android:id="@+id/action_home_to_webview"
+            app:destination="@id/webViewFragment" />
     </fragment>
 
     <fragment
@@ -72,8 +80,7 @@
 
         <action
             android:id="@+id/action_webView_to_home"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/webViewFragment" />
+            app:destination="@id/homeFragment" />
 
         <action
             android:id="@+id/action_webView_to_leftMenu"
