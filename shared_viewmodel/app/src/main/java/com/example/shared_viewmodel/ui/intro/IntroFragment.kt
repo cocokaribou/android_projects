@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.shared_viewmodel.R
@@ -17,6 +18,7 @@ class IntroFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentIntroBinding.inflate(layoutInflater)
+//        _binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_intro, container, false)
         return binding.root
     }
 
@@ -31,8 +33,8 @@ class IntroFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }

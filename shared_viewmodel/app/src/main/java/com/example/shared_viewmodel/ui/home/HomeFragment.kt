@@ -32,10 +32,12 @@ class HomeFragment: Fragment() {
 
         binding.viewpager.apply {
             adapter = CommonModuleRecyclerViewAdapter(this@HomeFragment)
+            offscreenPageLimit = 10
         }
 
-        TabLayoutMediator(binding.tabs, binding.viewpager) { tab, pos ->
-        }
+        TabLayoutMediator(binding.tabs, binding.viewpager) { tabs, pos ->
+            tabs.text = "tab${pos}"
+        }.attach()
     }
 
     override fun onAttach(context: Context) {

@@ -46,7 +46,8 @@
     <fragment
         android:id="@+id/leftMenuFragment"
         android:name="com.example.shared_viewmodel.ui.leftmenu.LeftMenuFragment"
-        android:label="leftMenu">
+        android:label="leftMenu"
+        tools:layout="@layout/fragment_leftmenu">
 
         <action
             android:id="@+id/action_leftMenu_to_home"
@@ -66,7 +67,8 @@
     <fragment
         android:id="@+id/webViewFragment"
         android:name="com.example.shared_viewmodel.ui.webView.WebViewFragment"
-        android:label="webView">
+        android:label="webView"
+        tools:layout="@layout/fragment_webview">
 
         <action
             android:id="@+id/action_webView_to_home"
@@ -81,7 +83,8 @@
     <fragment
         android:id="@+id/cameraSearchFragment"
         android:name="com.example.shared_viewmodel.ui.cameraSearch.CameraSearchFragment"
-        android:label="cameraSearch">
+        android:label="cameraSearch"
+        tools:layout="@layout/fragment_camerasearch">
 
         <action
             android:id="@+id/action_cameraSearch_to_home"
@@ -91,7 +94,8 @@
     <fragment
         android:id="@+id/fullPlayerFragment"
         android:name="com.example.shared_viewmodel.ui.fullPlayer.FullPlayerFragment"
-        android:label="fullPlayer">
+        android:label="fullPlayer"
+        tools:layout="@layout/fragment_fullplayer">
         <action
             android:id="@+id/action_fullPlayer_to_home"
             app:destination="@id/homeFragment" />
@@ -100,7 +104,8 @@
     <fragment
         android:id="@+id/notifyFragment"
         android:name="com.example.shared_viewmodel.ui.notify.NotifyFragment"
-        android:label="notify">
+        android:label="notify"
+        tools:layout="@layout/fragment_notify">
         <action
             android:id="@+id/action_notify_to_home"
             app:destination="@id/homeFragment" />
