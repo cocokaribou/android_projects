@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.example.shared_viewmodel.ui.MainActivity
 import com.example.shared_viewmodel.databinding.FragmentHomeBinding
 import com.example.shared_viewmodel.ui.CommonModuleRecyclerViewAdapter
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragment: Fragment() {

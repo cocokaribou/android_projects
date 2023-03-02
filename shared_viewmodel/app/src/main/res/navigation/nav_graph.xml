@@ -32,7 +32,7 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_enter_anim"
-            app:popExitAnim="@anim/nav_default_exit_anim"/>
+            app:popExitAnim="@anim/nav_default_exit_anim" />
 
         <action
             android:id="@+id/action_home_to_cameraSearch"
@@ -85,6 +85,17 @@
         <action
             android:id="@+id/action_webView_to_leftMenu"
             app:destination="@id/leftMenuFragment" />
+
+        <action
+            android:id="@+id/action_webView_stack"
+            app:destination="@id/webViewFragment"
+            app:popUpTo="@id/webViewFragment" />
+        <action
+            android:id="@+id/action_webView_pop"
+            app:destination="@id/webViewFragment"
+            app:popUpTo="@id/webViewFragment"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
     <fragment

@@ -26,7 +26,7 @@ class IntroFragment : Fragment() {
 
         CoroutineScope(Dispatchers.Main).launch {
             delay(3000)
-            findNavController().navigate(R.id.action_intro_to_home, Bundle().apply {
+            findNavController().navigate(R.id.homeFragment, Bundle().apply {
                 putString("test", "test")
             })
         }

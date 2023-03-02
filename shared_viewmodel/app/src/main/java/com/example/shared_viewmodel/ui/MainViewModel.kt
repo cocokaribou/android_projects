@@ -4,5 +4,5 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainViewModel: ViewModel() {
-    val webFragmentCount = MutableLiveData<Int>()
+    var webFragmentCount = 0
 }
