@@ -49,6 +49,7 @@
         <action
             android:id="@+id/action_home_to_webview"
             app:destination="@id/webViewFragment" />
+
     </fragment>
 
     <fragment
@@ -58,13 +59,10 @@
         tools:layout="@layout/fragment_leftmenu">
 
         <action
-            android:id="@+id/action_leftMenu_to_home"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment" />
-
-        <action
             android:id="@+id/action_leftMenu_to_web"
-            app:destination="@id/webViewFragment" />
+            app:destination="@id/webViewFragment"
+            app:popUpTo="@id/leftMenuFragment"
+            app:popUpToInclusive="true"/>
 
         <action
             android:id="@+id/action_leftMenu_to_notify"
@@ -79,10 +77,6 @@
         tools:layout="@layout/fragment_webview">
 
         <action
-            android:id="@+id/action_webView_to_home"
-            app:destination="@id/homeFragment" />
-
-        <action
             android:id="@+id/action_webView_to_leftMenu"
             app:destination="@id/leftMenuFragment" />
 
@@ -90,6 +84,7 @@
             android:id="@+id/action_webView_stack"
             app:destination="@id/webViewFragment"
             app:popUpTo="@id/webViewFragment" />
+
         <action
             android:id="@+id/action_webView_pop"
             app:destination="@id/webViewFragment"
@@ -104,9 +99,6 @@
         android:label="cameraSearch"
         tools:layout="@layout/fragment_camerasearch">
 
-        <action
-            android:id="@+id/action_cameraSearch_to_home"
-            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment
@@ -114,9 +106,6 @@
         android:name="com.example.shared_viewmodel.ui.fullPlayer.FullPlayerFragment"
         android:label="fullPlayer"
         tools:layout="@layout/fragment_fullplayer">
-        <action
-            android:id="@+id/action_fullPlayer_to_home"
-            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment
@@ -124,9 +113,6 @@
         android:name="com.example.shared_viewmodel.ui.notify.NotifyFragment"
         android:label="notify"
         tools:layout="@layout/fragment_notify">
-        <action
-            android:id="@+id/action_notify_to_home"
-            app:destination="@id/homeFragment" />
     </fragment>
 
 </navigation>

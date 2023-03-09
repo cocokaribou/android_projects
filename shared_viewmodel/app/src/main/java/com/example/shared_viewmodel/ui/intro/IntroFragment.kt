@@ -6,15 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.shared_viewmodel.R
 import com.example.shared_viewmodel.databinding.FragmentIntroBinding
+import com.example.shared_viewmodel.ui.MainViewModel
 import com.example.shared_viewmodel.util.Logger
 import kotlinx.coroutines.*
 
 class IntroFragment : Fragment() {
     private val binding get() = _binding!!
     private var _binding: FragmentIntroBinding? = null
+
+    val mainViewModel by activityViewModels<MainViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentIntroBinding.inflate(layoutInflater)

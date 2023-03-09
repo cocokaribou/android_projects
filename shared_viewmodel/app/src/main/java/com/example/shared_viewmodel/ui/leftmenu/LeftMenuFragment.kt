@@ -37,7 +37,7 @@ class LeftMenuFragment: Fragment() {
 
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                findNavController().navigate(R.id.action_leftMenu_to_home, Bundle().apply { putString("result", "leftmenu") })
+                findNavController().navigateUp()
             }
         }
 

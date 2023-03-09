@@ -16,4 +16,7 @@
         <item name="android:background">#ffffff</item>
     </style>
     <style name="NoActionBar" parent="Theme.MaterialComponents.NoActionBar"/>
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/white</item>
+    </style>
 </resources>
