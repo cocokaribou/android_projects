@@ -16,9 +16,11 @@ import com.example.elandmall_kotlin.common.CommonConst.SEARCH_POPULAR
 import com.example.elandmall_kotlin.databinding.LayoutBottomBarBinding
 import com.example.elandmall_kotlin.databinding.LayoutTopBarBinding
 import com.example.elandmall_kotlin.ui.capture.CaptureActivity
+import com.example.elandmall_kotlin.ui.goods.GoodsActivity
 import com.example.elandmall_kotlin.ui.leftmenu.LeftMenuActivity
 import com.example.elandmall_kotlin.ui.intro.IntroActivity
 import com.example.elandmall_kotlin.ui.search.SearchActivity
+import com.example.elandmall_kotlin.ui.webview.WebViewActivity
 import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.PermissionGrantHelper
 import com.example.elandmall_kotlin.util.dialogConfirm
@@ -71,10 +73,6 @@ open class BaseActivity : AppCompatActivity() {
         if (isGranted) {
             startActivity(Intent(this, CaptureActivity::class.java))
         } else {
-            Logger.v("권한거부! ${this.baseContext}")
-            Logger.v("권한거부! ${this.applicationContext}")
-            Logger.v("권한거부! ${this.javaClass}")
-
 
             dialogConfirm(this, "카메라 및 사진/미디어에 엑세스 하도록 접근 권한을 허용해야 합니다.",
                 okListener = {
@@ -106,10 +104,12 @@ open class BaseActivity : AppCompatActivity() {
 
     protected open fun onLinkEvent(event: LinkEvent) {
         when (event.type) {
+            LinkEventType.HOME -> navToHome()
             LinkEventType.LNB -> navToLNB()
             LinkEventType.DEFAULT -> navToWeb(event.url)
             LinkEventType.SEARCH -> navToSearch(event.data)
             LinkEventType.CAPTURE -> navToCapture()
+            LinkEventType.GOODS -> navToGoods()
             else -> {}
         }
     }
@@ -135,12 +135,14 @@ open class BaseActivity : AppCompatActivity() {
         btn4.setOnClickListener { }
     }
 
-    private fun navToHome() {}
+    private fun navToHome() {
+        startActivity(Intent(this, MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        })
+    }
 
     private fun navToWeb(url: String?) {
-//        Toast(this).apply {
-//            setText("link event: $url")
-//        }.show()
+        startActivity(Intent(this, WebViewActivity::class.java))
     }
 
     private fun navToLNB() {
@@ -165,6 +167,10 @@ open class BaseActivity : AppCompatActivity() {
 
     private fun navToCapture() {
         resultCameraPermission.launch(Manifest.permission.CAMERA)
+    }
+
+    private fun navToGoods() {
+        startActivity(Intent(this, GoodsActivity::class.java))
     }
 
     open fun onPermissionDenied() {}

@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/store_banner"
-        app:tabBackground="@drawable/circle_indicator_selector"
+        app:tabBackground="@drawable/selector_dot_home"
         app:tabIndicatorColor="#00000000" />
 
     <androidx.recyclerview.widget.RecyclerView

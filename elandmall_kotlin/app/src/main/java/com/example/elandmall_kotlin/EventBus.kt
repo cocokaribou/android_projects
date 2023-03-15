@@ -2,6 +2,7 @@ package com.example.elandmall_kotlin
 
 import android.os.SystemClock
 import androidx.lifecycle.MutableLiveData
+import com.example.elandmall_kotlin.util.Logger
 import java.io.Serializable
 
 /**
@@ -65,7 +66,8 @@ enum class LinkEventType {
     SETTING,
     CAPTURE,
     BRAND,
-    WEB
+    WEB,
+    GOODS
 }
 
 class SingleLiveEvent<out T>(private val content: T) {

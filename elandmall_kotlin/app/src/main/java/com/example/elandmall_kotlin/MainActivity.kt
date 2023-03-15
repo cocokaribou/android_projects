@@ -73,10 +73,9 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initObserve() {
-        EventBus.linkEvent.observe(this@MainActivity) { event ->
-            event.getIfNotHandled()?.let {
-                Logger.v("main observe")
-                onLinkEvent(it)
+        EventBus.linkEvent.observe(this@MainActivity) {
+            it.getIfNotHandled()?.let { event ->
+                onLinkEvent(event)
             }
         }
     }

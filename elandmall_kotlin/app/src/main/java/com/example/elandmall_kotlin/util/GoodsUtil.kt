@@ -9,6 +9,9 @@ import androidx.core.view.children
 import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
+import com.example.elandmall_kotlin.EventBus
+import com.example.elandmall_kotlin.LinkEvent
+import com.example.elandmall_kotlin.LinkEventType
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.model.Goods
 import java.text.NumberFormat
@@ -193,7 +196,10 @@ object GoodsUtil {
             } catch (e: RuntimeException) {
             }
 
-            // goods link
+            // goods link (json mock data)
+            it.setOnClickListener {
+                EventBus.fire(LinkEvent(LinkEventType.GOODS))
+            }
 
 
             // goods rank (best tab)

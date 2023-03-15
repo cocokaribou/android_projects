@@ -29,7 +29,6 @@ class LeftMenuViewModel : BaseViewModel() {
                                 setStickyUI(data)
                                 setModules(data)
                             }
-
                         },
                         onFailure = {}
                     )

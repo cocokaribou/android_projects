@@ -60,4 +60,6 @@
 
     <string name="capture_title">QR/바코드 검색</string>
     <string name="capture_guide">화면 중앙에 위치시키면 자동으로 인식합니다.</string>
+
+    <string name="goods_buy">구매하기</string>
 </resources>
