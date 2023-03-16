@@ -250,12 +250,16 @@ object GoodsUtil {
         }
     }
 
+    fun Unit.removeClickListener() {
+        binding.root.setOnClickListener(null)
+    }
+
     private fun getPrice(market: Int, cust: Int): Int {
         return if (market > cust) market
         else 0
     }
 
-    private fun Int.priceToString(): String {
+     fun Int.priceToString(): String {
         return NumberFormat.getNumberInstance(Locale.US).format(this)
     }
 

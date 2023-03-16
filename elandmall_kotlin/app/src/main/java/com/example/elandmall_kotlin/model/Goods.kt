@@ -22,7 +22,7 @@ class Goods(
     // best tab
     var rank: Int = -1,
     // goods detail
-    @SerializedName("brand_image_url") val brandImageUrl: String?,
+    @SerializedName("brand_image_url") private val brandImageUrl: String?,
     @SerializedName("final_price") val finalPrice: Int?,
     @SerializedName("coupon_sale_price") val couponSalePrice: Int?,
     @SerializedName("goods_review_info") val goodsReviewInfo: GoodsReviewInfo?,
@@ -46,6 +46,14 @@ class Goods(
                 "http:$flagImgPath"
             }
         }
+
+    val brandImgUrl: String get() {
+        return if (!brandImageUrl.isNullOrEmpty() && brandImageUrl.startsWith("http")) {
+            brandImageUrl
+        } else {
+            "http:$brandImageUrl"
+        }
+    }
 
     data class GoodsReviewInfo(
         @SerializedName("review_count") val reviewCount: Int?,

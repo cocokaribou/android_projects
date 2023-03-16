@@ -3,11 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <com.google.android.material.tabs.TabLayout
+
+    <View
+        android:id="@+id/divider"
+        style="@style/divider_shadow_6"
         android:layout_width="match_parent"
-        android:background="@color/purple_200"
-        android:layout_height="@dimen/goods_tab_height"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicatorHeight="2dp"
-        app:tabSelectedTextColor="#dd9e0d" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/tabs"
+        layout="@layout/view_goods_tab_sticky"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/divider" />
 </androidx.constraintlayout.widget.ConstraintLayout>

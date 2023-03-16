@@ -9,10 +9,9 @@ class GoodsModule(
 
 enum class GoodsModuleType {
     HEADER,
-    DIVIDER,
     GOODS_TOP_IMAGE,
-    GOODS_SHARE,
     GOODS_INFO,
+    GOODS_TAB,
     SELLER_POPULAR,
     SELLER_RECOMMEND,
     FOOTER

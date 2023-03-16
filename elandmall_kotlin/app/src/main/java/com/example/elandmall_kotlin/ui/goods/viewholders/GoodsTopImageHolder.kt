@@ -30,9 +30,7 @@ class GoodsTopImageHolder(val binding: ViewGoodsTopImageBinding) : GoodsBaseView
 
         mAdapter.submitList(data)
 
-        TabLayoutMediator(tabs, list) { tabs, list ->
-
-        }.attach()
+        TabLayoutMediator(tabs, list) { _ , _ -> }.attach()
     }
 
     class TopImageAdapter :

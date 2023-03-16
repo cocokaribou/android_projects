@@ -1,8 +1,11 @@
 package com.example.elandmall_kotlin.ui.goods
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.BaseActivity
 import com.example.elandmall_kotlin.EventBus
 import com.example.elandmall_kotlin.databinding.ActivityGoodsBinding
@@ -18,6 +21,18 @@ class GoodsActivity: BaseActivity() {
     private val viewModel : GoodsViewModel by viewModels()
     private val mAdapter by lazy { GoodsAdapter() }
 
+    private val scrollListener by lazy {
+        object: RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    binding.top.visibility = View.VISIBLE
+                } else if (!recyclerView.canScrollVertically(-1)) {
+                    binding.top.visibility = View.GONE
+                }
+            }
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityGoodsBinding.inflate(layoutInflater)
@@ -28,7 +43,15 @@ class GoodsActivity: BaseActivity() {
     }
 
     private fun initUI() = with(binding){
-        list.adapter = mAdapter
+        list.apply {
+            adapter = mAdapter
+            addOnScrollListener(scrollListener)
+        }
+
+        top.setOnClickListener {
+            top.visibility = View.GONE
+            list.scrollToPosition(0)
+        }
     }
 
     private fun initObserve() = with(viewModel){

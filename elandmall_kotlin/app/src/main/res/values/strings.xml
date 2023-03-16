@@ -22,6 +22,8 @@
     <string name="tools_text_sale_rate">10</string>
     <string name="tools_text_price_before">46,500</string>
     <string name="tools_text_price_after">41,800</string>
+    <string name="tools_text_price_final">39,900</string>
+    <string name="tools_text_coupon_sale_price">1,900</string>
     <string name="tools_text_review_count">(51)</string>
     <string name="tools_text_quantity">9,999개 구매</string>
 
@@ -62,4 +64,14 @@
     <string name="capture_guide">화면 중앙에 위치시키면 자동으로 인식합니다.</string>
 
     <string name="goods_buy">구매하기</string>
+    <string name="goods_price_final">최종 예상 구매가</string>
+    <string name="goods_price_before">기본 가격</string>
+    <string name="goods_price_after">판매자 즉시 할인</string>
+    <string name="goods_price_coupon_sale">쿠폰 최대 할인</string>
+    <string name="goods_get_coupon">할인 쿠폰 받기</string>
+
+    <string name="shipping">배송</string>
+    <string name="goods_shipping"><b>모든 상품 무료배송!</b></string>
+    <string name="point">적립</string>
+    <string name="goods_point"><b>빠른페이 </b> 결제 시</string>
 </resources>
