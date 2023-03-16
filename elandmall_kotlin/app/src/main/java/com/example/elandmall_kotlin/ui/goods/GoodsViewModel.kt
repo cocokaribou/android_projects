@@ -11,14 +11,17 @@ class GoodsViewModel : ViewModel() {
     private val repository by lazy { GoodsRepository() }
 
     var currentTab = 0
-    val tabListener : (Int) -> Unit = {
+    val tabListener: (Int) -> Unit = {
         currentTab = it
         updateTabs()
     }
+
     init {
         requestGoods()
     }
 
+    val moduleList = mutableListOf<GoodsModule>()
+    var tabList = mutableListOf<GoodsModule>()
     val uiList = MutableLiveData<MutableList<GoodsModule>>()
 
     private fun requestGoods() {
@@ -41,20 +44,45 @@ class GoodsViewModel : ViewModel() {
     }
 
     private fun setModules(data: GoodsResponse.Data?) {
-        val list = mutableListOf<GoodsModule>()
+        moduleList.clear()
 
-        list.add(GoodsModule(GoodsModuleType.HEADER))
-        list.add(GoodsModule(GoodsModuleType.GOODS_TOP_IMAGE, data?.topImageList))
-        list.add(GoodsModule(GoodsModuleType.GOODS_INFO, mapOf("share" to data?.share, "info" to data?.goodsInfo)))
+        moduleList.add(GoodsModule(GoodsModuleType.HEADER))
+        moduleList.add(GoodsModule(GoodsModuleType.GOODS_TOP_IMAGE, data?.topImageList))
+        moduleList.add(GoodsModule(GoodsModuleType.GOODS_INFO, mapOf("share" to data?.share, "info" to data?.goodsInfo)))
 
-        val reviewCount =  data?.goodsInfo?.goodsReviewInfo?.reviewCount
+        val reviewCount = data?.goodsInfo?.goodsReviewInfo?.reviewCount
         val qnaCount = data?.goodsInfo?.goodsQuestionInfo?.questionCount
-        list.add(GoodsModule(GoodsModuleType.GOODS_TAB, mapOf("listener" to tabListener, "review_count" to reviewCount, "qna_count" to qnaCount)))
+        moduleList.add(
+            GoodsModule(
+                GoodsModuleType.GOODS_TAB,
+                mapOf("listener" to tabListener, "review_count" to reviewCount, "qna_count" to qnaCount)
+            )
+        )
 
-        uiList.postValue(list)
+        uiList.postValue(moduleList)
     }
 
     private fun updateTabs() {
+        tabList = moduleList.toMutableList()
 
+        when (currentTab) {
+            0 -> {
+                tabList.add(GoodsModule(GoodsModuleType.HEADER))
+            }
+            1 -> {
+                tabList.add(GoodsModule(GoodsModuleType.HEADER))
+                tabList.add(GoodsModule(GoodsModuleType.HEADER))
+
+            }
+            2 -> {
+                tabList.add(GoodsModule(GoodsModuleType.HEADER))
+            }
+            3 -> {
+                tabList.add(GoodsModule(GoodsModuleType.HEADER))
+                tabList.add(GoodsModule(GoodsModuleType.HEADER))
+            }
+        }
+
+        uiList.postValue(tabList)
     }
 }
