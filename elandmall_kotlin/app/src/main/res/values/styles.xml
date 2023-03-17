@@ -117,6 +117,7 @@
         <item name="android:windowMinWidthMinor">@fraction/dialog_width</item>
         <item name="android:windowBackground">@drawable/shape_dialog_basic</item>
     </style>
+
     <style name="DialogCancel">
         <item name="android:background">#787878</item>
         <item name="android:textSize">14dp</item>
@@ -129,5 +130,15 @@
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="goods_tag">
+        <item name="android:background">@drawable/background_stroke_goods_tag</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
     </style>
 </resources>

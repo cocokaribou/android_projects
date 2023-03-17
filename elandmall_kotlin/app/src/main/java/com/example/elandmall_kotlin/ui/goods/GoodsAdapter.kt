@@ -6,16 +6,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.elandmall_kotlin.databinding.ViewGoodsHeaderBinding
-import com.example.elandmall_kotlin.databinding.ViewGoodsInfoBinding
-import com.example.elandmall_kotlin.databinding.ViewGoodsTabBinding
-import com.example.elandmall_kotlin.databinding.ViewGoodsTopImageBinding
+import com.example.elandmall_kotlin.databinding.*
 import com.example.elandmall_kotlin.model.GoodsModule
 import com.example.elandmall_kotlin.model.GoodsModuleType
 import com.example.elandmall_kotlin.ui.goods.viewholders.GoodsHeaderHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.GoodsInfoHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.GoodsTabHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.GoodsTopImageHolder
+import com.example.elandmall_kotlin.ui.goods.viewholders.tab1.GoodsDetailPopularHolder
+import com.example.elandmall_kotlin.ui.goods.viewholders.tab1.GoodsDetailTagHolder
+import com.example.elandmall_kotlin.ui.goods.viewholders.tab1.GoodsDetailWebHolder
+import com.example.elandmall_kotlin.ui.goods.viewholders.tab2.GoodsReviewPreviewHolder
+import com.example.elandmall_kotlin.ui.goods.viewholders.tab3.GoodsQnaFormHolder
+import com.example.elandmall_kotlin.ui.goods.viewholders.tab4.GoodsOrderInfoHolder
+import com.example.elandmall_kotlin.ui.goods.viewholders.tab4.GoodsOrderInfoStoreHolder
 
 class GoodsAdapter : ListAdapter<GoodsModule, GoodsBaseViewHolder>(object : DiffUtil.ItemCallback<GoodsModule>() {
     override fun areItemsTheSame(oldItem: GoodsModule, newItem: GoodsModule): Boolean = oldItem == newItem
@@ -26,7 +30,7 @@ class GoodsAdapter : ListAdapter<GoodsModule, GoodsBaseViewHolder>(object : Diff
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoodsBaseViewHolder {
         return when (GoodsModuleType.values()[viewType]) {
-            GoodsModuleType.HEADER -> GoodsHeaderHolder(
+            GoodsModuleType.GOODS_HEADER -> GoodsHeaderHolder(
                 ViewGoodsHeaderBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -51,6 +55,55 @@ class GoodsAdapter : ListAdapter<GoodsModule, GoodsBaseViewHolder>(object : Diff
             )
             GoodsModuleType.GOODS_TAB -> GoodsTabHolder(
                 ViewGoodsTabBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            GoodsModuleType.GOODS_ORDER_INFO -> GoodsOrderInfoHolder(
+                ViewGoodsOrderInfoBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            GoodsModuleType.GOODS_ORDER_INFO_STORE -> GoodsOrderInfoStoreHolder(
+                ViewGoodsOrderInfoStoreBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            GoodsModuleType.GOODS_DETAIL_WEB -> GoodsDetailWebHolder(
+                ViewCommonWebViewBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            GoodsModuleType.GOODS_DETAIL_TAG -> GoodsDetailTagHolder(
+                ViewGoodsDetailTagBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            GoodsModuleType.GOODS_DETAIL_POPULAR -> GoodsDetailPopularHolder(
+                ViewGoodsDetailPopularBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            GoodsModuleType.GOODS_REVIEW_PREVIEW -> GoodsReviewPreviewHolder(
+                ViewGoodsReviewPreviewBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            GoodsModuleType.GOODS_QNA_FORM -> GoodsQnaFormHolder(
+                ViewGoodsQnaFormBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false

@@ -13,11 +13,6 @@
         android:paddingBottom="@dimen/goods_bottom_button_height"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <include
-        android:id="@+id/sticky_tabs"
-        layout="@layout/view_goods_tab_sticky"
-        android:visibility="gone" />
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/top"
         android:layout_width="45dp"

@@ -74,4 +74,49 @@
     <string name="goods_shipping"><b>모든 상품 무료배송!</b></string>
     <string name="point">적립</string>
     <string name="goods_point"><b>빠른페이 </b> 결제 시</string>
+
+    <string name="tag">태그</string>
+    <string name="goods_detail_popular">이 판매자의 인기 상품</string>
+
+    <string name="goods_store_info">스토어 정보</string>
+    <string name="goods_store_info_name">상호명</string>
+    <string name="goods_store_info_ceo">대표자</string>
+    <string name="goods_store_info_business_num">사업자번호</string>
+    <string name="goods_store_info_commerce_num">통신판매업번호</string>
+    <string name="goods_store_info_location">사업장소재지</string>
+    <string name="goods_store_cs">스토어 고객센터</string>
+    <string name="call">전화하기</string>
+
+    <string name="goods_order_info"> 배송정보\n
+                \n
+                도서산간 지역은 배송비가 추가비용이 발생할 수 있습니다.\n
+                결제 완료 후 1~3일 후 출고됩니다.\n
+                교환/환불\n
+                \n
+                반품 및 교환은 상품 수령 후 7일 이내에 신청하실 수 있습니다.\n
+                재화 등의 내용이 표시, 광고의 내용과 다르거나 계약내용과 다르게 이행된 경우에는 전자상거래법 제17조3항에 따라 청약철회를 할 수 있습니다.\n
+                교환/환불이 발생하는 경우 그 원인을 제공한 자가 배송비를 부담합니다.\n
+                - 고객변심 : 최초 배송비 + 반품 배송비 + (교환의 경우) 교환 배송비는 고객이 부담\n
+                - 판매자귀책 : 최초 배송비 + 반품 배송비 + (교환의 경우) 교환 배송비는 판매자가 부담\n
+                다음의 경우는 교환 및 환불이 불가능합니다.\n
+                - 반품/교환 가능 기간을 초과한 경우\n
+                - 상품 및 구성품을 분실하였거나 취급부주의로 인한 오염/파손/고장된 경우\n
+                - 상품을 착용하였거나 세탁, 수선한 경우\n
+                - 소비자 과실로 인한 옷의 변색(예 : 착생, 화장품 오염 등)\n
+                - 착용으로 인한 니트류 상품의 늘어남 발생 및 가죽 제품의 주름 발생\n
+                - 명품은 택 제거 후 반품 불가\n
+                - 상품의 가치가 현저히 감소하여 재판매가 불가할 경우\n
+                - 구매확정된 주문의 경우\n
+                - 귀금속류의 경우는 소비자분쟁해결 기준에 의거 교환만 가능합니다.\n
+                (단, 함량미달의 경우에는 환불이 가능함)\n
+                배송지연, 단순 변심으로 인한 교환/환불은 어렵습니다.\n
+                불량은 수령 후 7일 이내에 교환 가능합니다.\n
+                상품정보고시\n
+                \n
+                제조사 : (주)엘에스\n
+                제조일자 : 2022-10-13\n
+                원산지 : 한국\n
+                미성년자 주문취소 안내\n
+                \n
+                미성년자가 법정대리인의 동의 없이 구매계약을 체결한 경우 미성년자와 법정대리인은 구매계약을 취소할 수 있습니다</string>
 </resources>

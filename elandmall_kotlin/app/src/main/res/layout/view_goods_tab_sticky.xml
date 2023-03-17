@@ -8,11 +8,17 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="@dimen/goods_tab_height"
-        app:tabIndicatorHeight="3dp"
-        app:tabIndicatorColor="#d5a030"
-        app:tabSelectedTextColor="#d5a030"
-        app:tabRippleColor="#ffffff"
-        app:tabTextColor="@color/selector_goods_tab_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabIndicatorColor="#d5a030"
+        app:tabIndicatorHeight="3dp"
+        app:tabRippleColor="#ffffff"
+        app:tabSelectedTextColor="#d5a030"
+        app:tabTextColor="@color/selector_goods_tab_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/tabs"
+        android:background="#eeeeee"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,13 +8,25 @@ class GoodsModule(
 )
 
 enum class GoodsModuleType {
-    HEADER,
+    GOODS_HEADER,
     GOODS_TOP_IMAGE,
     GOODS_INFO,
     GOODS_TAB,
-    SELLER_POPULAR,
-    SELLER_RECOMMEND,
-    FOOTER
+    GOODS_DETAIL_KEYWORD,
+    GOODS_DETAIL_POPULAR,
+    GOODS_DETAIL_RECOM,
+    GOODS_DETAIL_SELLER_RECOM,
+    GOODS_DETAIL_WEB,
+    GOODS_DETAIL_TAG,
+    GOODS_REVIEW_EMPTY,
+    GOODS_REVIEW_MORE,
+    GOODS_REVIEW_PHOTO,
+    GOODS_REVIEW_PREVIEW,
+    GOODS_REVIEW_TEXT,
+    GOODS_QNA_FORM,
+    GOODS_QNA_LIST,
+    GOODS_ORDER_INFO,
+    GOODS_ORDER_INFO_STORE
 }
 
 data class GoodsResponse(
@@ -28,8 +40,8 @@ data class GoodsResponse(
         @SerializedName("goods_detail") val goodsDetail: String?,
         @SerializedName("seller_recommend_goods") val sellerRecommendGoods: List<SellerRecommendGood>?,
         @SerializedName("tag_list") val tagList: List<Tag>?,
-        @SerializedName("seller_popular_goods") val sellerPopularGoods: List<SellerPopularGood>?,
-        @SerializedName("recommend_goods") val recommendGoods: List<RecommendGood>?,
+        @SerializedName("seller_popular_goods") val sellerPopularGoods: List<Goods>?,
+        @SerializedName("recommend_goods") val recommendGoods: List<Goods>?,
         @SerializedName("popular_goods") val popularGoods: PopularGoods?,
         @SerializedName("order_info") val orderInfo: OrderInfo?
     ) {
@@ -75,25 +87,6 @@ data class GoodsResponse(
         data class Tag(
             @SerializedName("tag_nm") val tagNm: String?,
             @SerializedName("tag_link") val tagLink: String?
-        )
-
-        data class SellerPopularGood(
-            @SerializedName("image_url") val imageUrl: String?,
-            @SerializedName("goods_nm") val goodsNm: String?,
-            @SerializedName("sale_rate") val saleRate: Int?,
-            @SerializedName("cust_sale_price") val custSalePrice: Int?,
-            @SerializedName("favorite_yn") val favoriteYn: String?,
-            @SerializedName("link_url") val linkUrl: String?
-        )
-
-        data class RecommendGood(
-            @SerializedName("image_url") val imageUrl: String?,
-            @SerializedName("brand_nm") val brandNm: String?,
-            @SerializedName("goods_nm") val goodsNm: String?,
-            @SerializedName("sale_rate") val saleRate: Int?,
-            @SerializedName("cust_sale_price") val custSalePrice: Int?,
-            @SerializedName("market_price") val marketPrice: Int?,
-            @SerializedName("link_url") val linkUrl: String?
         )
 
         data class PopularGoods(
