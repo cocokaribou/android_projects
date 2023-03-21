@@ -4,12 +4,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import com.example.elandmall_kotlin.databinding.ViewGoodsTabStickyBinding
-import com.google.android.material.resources.TextAppearance
+import com.example.elandmall_kotlin.databinding.ViewGoodsCommonTabBinding
 import com.google.android.material.tabs.TabLayout
 import kotlin.reflect.KFunction1
 
-class CustomGoodsTab @JvmOverloads constructor(
+class GoodsCommonTabView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     def: Int = 0,
@@ -17,7 +16,7 @@ class CustomGoodsTab @JvmOverloads constructor(
     val updateListener: KFunction1<Int, Unit>?
 ) : LinearLayout(context, attrs, def) {
 
-    private val binding by lazy { ViewGoodsTabStickyBinding.inflate(LayoutInflater.from(context), this, true) }
+    private val binding by lazy { ViewGoodsCommonTabBinding.inflate(LayoutInflater.from(context), this, true) }
 
     private val tabList = listOf(
         binding.tabs.newTab().setText("상품정보"),
