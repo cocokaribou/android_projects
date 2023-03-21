@@ -11,9 +11,13 @@ import kotlinx.coroutines.launch
 class GoodsViewModel : ViewModel() {
     private val repository by lazy { GoodsRepository() }
 
+    var isExpand = false
     val currentTab = MutableLiveData<Int>()
     val tabListener: (Int) -> Unit = {
         updateTabInner(it)
+    }
+    val toggleListener: (Boolean) -> Unit = {
+        isExpand = it
     }
 
     init {
@@ -103,9 +107,10 @@ class GoodsViewModel : ViewModel() {
         when (index) {
             0 -> {
                 // detail tab
-                tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_WEB, goodsData?.goodsDetail ?: ""))
+                tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_WEB, mapOf("data" to (goodsData?.goodsDetail ?: ""), "isExpand" to isExpand, "toggle" to toggleListener)))
                 tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_TAG, goodsData?.tagList))
                 tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_POPULAR, goodsData?.sellerPopularGoods))
+                tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_SELLER_RECOM, goodsData?.sellerRecommendGoods))
             }
             1 -> {
                 // review tab
@@ -114,6 +119,8 @@ class GoodsViewModel : ViewModel() {
                         ?: listOf()
 
                 tabList.add(GoodsModule(GoodsModuleType.GOODS_REVIEW_PREVIEW, imgList))
+                tabList.add(GoodsModule(GoodsModuleType.GOODS_REVIEW_PHOTO, goodsData?.goodsInfo?.goodsReviewInfo?.reviewInfo?.reviewImageInfo))
+                tabList.add(GoodsModule(GoodsModuleType.GOODS_REVIEW_TEXT, goodsData?.goodsInfo?.goodsReviewInfo?.reviewInfo?.reviewTextInfo))
             }
             2 -> {
                 // Q&A tab

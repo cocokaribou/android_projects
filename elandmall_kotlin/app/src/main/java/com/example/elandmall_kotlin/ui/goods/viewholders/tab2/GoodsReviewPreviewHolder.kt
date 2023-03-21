@@ -28,8 +28,10 @@ class GoodsReviewPreviewHolder(val binding: ViewGoodsReviewPreviewBinding) : Goo
     private fun initUI(data: List<String>) = with(binding.root) {
         adapter = mAdapter
 
-        if (data.size >= 5) data.subList(0, 4)
-        mAdapter.submitList(data)
+        if (data.size >= 5)
+            mAdapter.submitList(data.subList(0, 5))
+        else
+            mAdapter.submitList(data)
 
         if (itemDecorationCount == 0) {
             addItemDecoration(GridSideSpacingItemDecoration(5, 10.dpToPx()))

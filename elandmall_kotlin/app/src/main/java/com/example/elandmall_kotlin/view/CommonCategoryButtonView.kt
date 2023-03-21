@@ -11,7 +11,7 @@ import com.example.elandmall_kotlin.databinding.BtnCategoryBinding
 
 
 @SuppressLint("Recycle", "CustomViewStyleable")
-class CategoryButton @JvmOverloads constructor(
+class CommonCategoryButtonView @JvmOverloads constructor(
     context: Context, private val attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(
     context, attrs, defStyleAttr

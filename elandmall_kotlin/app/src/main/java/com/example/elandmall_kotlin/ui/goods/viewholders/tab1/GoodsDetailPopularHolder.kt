@@ -11,12 +11,11 @@ import com.example.elandmall_kotlin.model.Goods
 import com.example.elandmall_kotlin.ui.goods.GoodsBaseViewHolder
 import com.example.elandmall_kotlin.util.GoodsUtil.drawGoodsUI
 import com.example.elandmall_kotlin.util.GridSpacingItemDecoration
-import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.util.dpToPx
 
 class GoodsDetailPopularHolder(val binding: ViewGoodsDetailPopularBinding) : GoodsBaseViewHolder(binding.root) {
 
-    private val mAdapter by lazy { GoodsDetailPopularAdapter() }
+    private val mAdapter by lazy { PopularAdapter() }
     override fun onBind(item: Any?) {
         (item as? List<*>)?.let {
             val dataList = it.filterIsInstance<Goods>()
@@ -28,18 +27,23 @@ class GoodsDetailPopularHolder(val binding: ViewGoodsDetailPopularBinding) : Goo
         list.adapter = mAdapter
         mAdapter.submitList(dataList)
 
+        // flexible UI
+        header
+            .setPaddingVertical(dp = 13)
+            .setDivider(isVisible = false)
+
         if (list.itemDecorationCount == 0) {
             list.addItemDecoration(GridSpacingItemDecoration(3, 8.dpToPx(), true))
         }
     }
 
-    class GoodsDetailPopularAdapter : ListAdapter<Goods, GoodsDetailPopularHolder>(object : DiffUtil.ItemCallback<Goods>() {
+    class PopularAdapter : ListAdapter<Goods, PopularHolder>(object : DiffUtil.ItemCallback<Goods>() {
         override fun areItemsTheSame(oldItem: Goods, newItem: Goods): Boolean = oldItem == newItem
         override fun areContentsTheSame(oldItem: Goods, newItem: Goods): Boolean = oldItem.goodsNm == newItem.goodsNm
 
     }) {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            GoodsDetailPopularHolder(
+            PopularHolder(
                 ViewGoodsDetailPopularItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -47,13 +51,13 @@ class GoodsDetailPopularHolder(val binding: ViewGoodsDetailPopularBinding) : Goo
                 )
             )
 
-        override fun onBindViewHolder(holder: GoodsDetailPopularHolder, position: Int) {
+        override fun onBindViewHolder(holder: PopularHolder, position: Int) {
             holder.onBind(currentList[position])
         }
 
     }
 
-    class GoodsDetailPopularHolder(val binding: ViewGoodsDetailPopularItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class PopularHolder(val binding: ViewGoodsDetailPopularItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(goods: Goods) {
             drawGoodsUI(binding, goods)
         }

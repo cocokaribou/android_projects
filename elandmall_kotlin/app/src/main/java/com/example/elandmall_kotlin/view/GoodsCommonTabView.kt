@@ -1,10 +1,13 @@
-package com.example.elandmall_kotlin.ui.goods
+package com.example.elandmall_kotlin.view
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.ViewGoodsCommonTabBinding
+import com.example.elandmall_kotlin.databinding.ViewGoodsTabBinding
 import com.google.android.material.tabs.TabLayout
 import kotlin.reflect.KFunction1
 
@@ -14,18 +17,21 @@ class GoodsCommonTabView @JvmOverloads constructor(
     def: Int = 0,
     val tabListener: ((Int) -> Unit)? = {},
     val updateListener: KFunction1<Int, Unit>?
-) : LinearLayout(context, attrs, def) {
+) : ConstraintLayout(context, attrs, def) {
 
-    private val binding by lazy { ViewGoodsCommonTabBinding.inflate(LayoutInflater.from(context), this, true) }
-
-    private val tabList = listOf(
-        binding.tabs.newTab().setText("상품정보"),
-        binding.tabs.newTab().setText("리뷰(0)"),
-        binding.tabs.newTab().setText("Q&A(0)"),
-        binding.tabs.newTab().setText("주문정보")
-    )
+    private var binding: ViewGoodsCommonTabBinding
+    private var tabList: List<TabLayout.Tab>
 
     init {
+        val view = inflate(context, R.layout.view_goods_common_tab, this)
+        binding = ViewGoodsCommonTabBinding.bind(view)
+
+        tabList = listOf(
+            binding.tabs.newTab().setText("상품정보"),
+            binding.tabs.newTab().setText("리뷰(0)"),
+            binding.tabs.newTab().setText("Q&A(0)"),
+            binding.tabs.newTab().setText("주문정보")
+        )
         tabList.forEach {
             binding.tabs.addTab(it)
         }

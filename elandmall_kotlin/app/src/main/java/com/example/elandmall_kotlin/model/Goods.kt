@@ -58,40 +58,32 @@ class Goods(
     data class GoodsReviewInfo(
         @SerializedName("review_count") val reviewCount: Int?,
         @SerializedName("review_info") val reviewInfo: ReviewInfo?
+    )
+    data class ReviewInfo(
+        @SerializedName("review_image_info") val reviewImageInfo: ReviewImageInfo?,
+        @SerializedName("review_text_info") val reviewTextInfo: ReviewTextInfo?
     ) {
-        data class ReviewInfo(
-            @SerializedName("review_image_info") val reviewImageInfo: ReviewImageInfo?,
-            @SerializedName("review_text_info") val reviewTextInfo: ReviewTextInfo?
+        data class ReviewImageInfo(
+            @SerializedName("review_count") val reviewCount: Int?,
+            @SerializedName("review_list") val reviewList: List<Review?>?,
+            @SerializedName("review_more_url") val reviewMoreUrl: String?
+        )
+        data class ReviewTextInfo(
+            @SerializedName("review_count") val reviewCount: Int?,
+            @SerializedName("review_list") val reviewList: List<Review?>?,
+            @SerializedName("review_more_url") val reviewMoreUrl: String?
+        )
+        data class Review(
+            @SerializedName("image_url") val imageUrl: String?,
+            @SerializedName("userID") val userID: String?,
+            @SerializedName("height") val height: String?,
+            @SerializedName("weight") val weight: String?,
+            @SerializedName("purchase_goods_info") val purchaseGoodsInfo: String?,
+            @SerializedName("review_comment") val reviewComment: String?,
+            @SerializedName("link_url") val linkUrl: String?
         ) {
-            data class ReviewImageInfo(
-                @SerializedName("review_count") val reviewCount: Int?,
-                @SerializedName("review_list") val reviewList: List<Review?>?,
-                @SerializedName("review_more_url") val reviewMoreUrl: String?
-            ) {
-                data class Review(
-                    @SerializedName("image_url") val imageUrl: String?,
-                    @SerializedName("userID") val userID: String?,
-                    @SerializedName("height") val height: String?,
-                    @SerializedName("weight") val weight: String?,
-                    @SerializedName("purchase_goods_info") val purchaseGoodsInfo: String?,
-                    @SerializedName("review_comment") val reviewComment: String?,
-                    @SerializedName("link_url") val linkUrl: String?
-                )
-            }
-
-            data class ReviewTextInfo(
-                @SerializedName("review_count") val reviewCount: Int?,
-                @SerializedName("review_list") val reviewList: List<Review?>?,
-                @SerializedName("review_more_url") val reviewMoreUrl: String?
-            ) {
-                data class Review(
-                    @SerializedName("userID") val userID: String?,
-                    @SerializedName("height") val height: String?,
-                    @SerializedName("weight") val weight: String?,
-                    @SerializedName("purchase_goods_info") val purchaseGoodsInfo: String?,
-                    @SerializedName("review_comment") val reviewComment: String?
-                )
-            }
+            // more UI
+            constructor(): this("", "", "", "", "", "", "")
         }
     }
 

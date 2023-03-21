@@ -1,6 +1,5 @@
 package com.example.elandmall_kotlin.util
 
-import android.app.Activity
 import android.content.Context
 import android.graphics.Typeface
 import android.text.Editable
@@ -14,11 +13,18 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import androidx.core.content.ContextCompat.getSystemService
 import com.example.elandmall_kotlin.BaseApplication
 
 fun String.useNonBreakingSpace() = this.replace(' ', '\u00A0')
 
+fun String.censoredString(visibleCharCount: Int): String {
+    var hiddenString = ""
+    this.forEachIndexed { i, c ->
+        val char = if (i < visibleCharCount) c else '*'
+        hiddenString += char
+    }
+    return hiddenString
+}
 fun getChangedIndex(origin: String, changed: String): Pair<Int, Int> {
     if (origin.isEmpty()) return Pair(0, 0)
 

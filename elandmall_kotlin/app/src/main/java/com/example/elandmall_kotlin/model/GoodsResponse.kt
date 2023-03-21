@@ -19,7 +19,6 @@ enum class GoodsModuleType {
     GOODS_DETAIL_WEB,
     GOODS_DETAIL_TAG,
     GOODS_REVIEW_EMPTY,
-    GOODS_REVIEW_MORE,
     GOODS_REVIEW_PHOTO,
     GOODS_REVIEW_PREVIEW,
     GOODS_REVIEW_TEXT,
@@ -38,7 +37,7 @@ data class GoodsResponse(
         @SerializedName("share") val share: Share?,
         @SerializedName("seller_popular_style") val sellerPopularStyle: SellerPopularStyle?,
         @SerializedName("goods_detail") val goodsDetail: String?,
-        @SerializedName("seller_recommend_goods") val sellerRecommendGoods: List<SellerRecommendGood>?,
+        @SerializedName("seller_recommend_goods") val sellerRecommendGoods: List<Goods>?,
         @SerializedName("tag_list") val tagList: List<Tag>?,
         @SerializedName("seller_popular_goods") val sellerPopularGoods: List<Goods>?,
         @SerializedName("recommend_goods") val recommendGoods: List<Goods>?,
@@ -73,17 +72,6 @@ data class GoodsResponse(
                 @SerializedName("link_url") val linkUrl: String?
             )
         }
-
-        data class SellerRecommendGood(
-            @SerializedName("image_url") val imageUrl: String?,
-            @SerializedName("brand_nm") val brandNm: String?,
-            @SerializedName("goods_nm") val goodsNm: String?,
-            @SerializedName("sale_rate") val saleRate: Int?,
-            @SerializedName("cust_sale_price") val custSalePrice: Int?,
-            @SerializedName("market_price") val marketPrice: Int?,
-            @SerializedName("link_url") val linkUrl: String?
-        )
-
         data class Tag(
             @SerializedName("tag_nm") val tagNm: String?,
             @SerializedName("tag_link") val tagLink: String?

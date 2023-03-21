@@ -3,15 +3,14 @@ package com.example.elandmall_kotlin.ui.goods
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.BaseActivity
 import com.example.elandmall_kotlin.EventBus
-import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.ActivityGoodsBinding
 import com.example.elandmall_kotlin.model.GoodsModuleType
+import com.example.elandmall_kotlin.view.GoodsCommonTabView
 
 class GoodsActivity : BaseActivity() {
 
@@ -21,7 +20,7 @@ class GoodsActivity : BaseActivity() {
     private val viewModel: GoodsViewModel by viewModels()
     private val mAdapter by lazy { GoodsAdapter() }
 
-    private val goodsTab by lazy { CustomGoodsTab(this, tabListener = viewModel.tabListener, updateListener = viewModel::updateTabInner) }
+    private val goodsTab by lazy { GoodsCommonTabView(this, tabListener = viewModel.tabListener, updateListener = viewModel::updateTabInner) }
 
     private val scrollListener by lazy {
         object : RecyclerView.OnScrollListener() {
@@ -70,7 +69,6 @@ class GoodsActivity : BaseActivity() {
 
         val layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         addContentView(goodsTab, layoutParams)
-        addContentView(TextView(this@GoodsActivity, null, 0, R.style.goods_tag), layoutParams)
     }
 
     private fun initObserve() = with(viewModel) {

@@ -77,6 +77,7 @@
 
     <string name="tag">태그</string>
     <string name="goods_detail_popular">이 판매자의 인기 상품</string>
+    <string name="goods_detail_more">상품정보 더보기 ▽</string>
 
     <string name="goods_store_info">스토어 정보</string>
     <string name="goods_store_info_name">상호명</string>

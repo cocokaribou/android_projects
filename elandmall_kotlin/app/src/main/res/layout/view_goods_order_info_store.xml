@@ -5,29 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <View
-        android:id="@+id/divider1"
-        style="@style/divider_shadow_6"
-        android:layout_width="match_parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
+    <com.example.elandmall_kotlin.view.GoodsCommonHeaderView
         android:id="@+id/header1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="20dp"
-        android:paddingStart="10dp"
-        android:text="@string/goods_store_info"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/divider1" />
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#eeeeee"
-        app:layout_constraintTop_toBottomOf="@id/header1" />
+        app:header_title="@string/goods_store_info"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/column1"
@@ -38,7 +21,7 @@
         app:layout_constraintEnd_toStartOf="@id/column2"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider2">
+        app:layout_constraintTop_toBottomOf="@id/header1">
 
         <TextView
             android:id="@+id/row1_text1"
@@ -105,7 +88,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toEndOf="@id/column1"
-        app:layout_constraintTop_toBottomOf="@id/divider2">
+        app:layout_constraintTop_toBottomOf="@id/header1">
 
         <TextView
             android:id="@+id/row2_text1"
@@ -172,29 +155,12 @@
             tools:text="@string/goods_store_info_location" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:id="@+id/divider3"
-        style="@style/divider_shadow_6"
-        android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/column1" />
-
-    <TextView
+    <com.example.elandmall_kotlin.view.GoodsCommonHeaderView
         android:id="@+id/header2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="20dp"
-        android:paddingStart="10dp"
-        android:text="@string/goods_store_cs"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/divider3" />
-
-    <View
-        android:id="@+id/divider4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#eeeeee"
-        app:layout_constraintTop_toBottomOf="@id/header2" />
+        app:header_title="@string/goods_store_cs"
+        app:layout_constraintTop_toBottomOf="@id/column1" />
 
     <ImageView
         android:id="@+id/ic1"
@@ -203,7 +169,7 @@
         android:padding="10dp"
         android:src="@drawable/ic_clock"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider4" />
+        app:layout_constraintTop_toBottomOf="@id/header2" />
 
     <TextView
         android:id="@+id/cs"

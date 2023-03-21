@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <View
-        android:id="@+id/divider1"
-        style="@style/divider_shadow_6"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent" />
-
-    <TextView
-        android:id="@+id/header1"
-        app:layout_constraintTop_toBottomOf="@id/divider1"
+    <com.example.elandmall_kotlin.view.GoodsCommonHeaderView
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="20dp"
-        android:paddingStart="10dp"
-        android:textSize="14dp"
-        android:textStyle="bold" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:header_title="포토리뷰(3)" />
 
-    <View
-        android:id="@+id/divider2"
-        app:layout_constraintTop_toBottomOf="@id/header1"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#eeeeee" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        tools:layout_height="380dp"
+        tools:listitem="@layout/view_goods_review_photo_item" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

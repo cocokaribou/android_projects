@@ -9,17 +9,17 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:header_title="@string/goods_detail_popular"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:header_title="포토리뷰(3)" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/header"
-        app:spanCount="3"
-        tools:layout_height="400dp"
-        tools:listitem="@layout/view_goods_detail_popular_item" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:listitem="@layout/view_goods_review_text_item" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,9 +14,12 @@ import com.example.elandmall_kotlin.ui.goods.viewholders.GoodsInfoHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.GoodsTabHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.GoodsTopImageHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.tab1.GoodsDetailPopularHolder
+import com.example.elandmall_kotlin.ui.goods.viewholders.tab1.GoodsDetailSellerRecomHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.tab1.GoodsDetailTagHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.tab1.GoodsDetailWebHolder
+import com.example.elandmall_kotlin.ui.goods.viewholders.tab2.GoodsReviewPhotoHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.tab2.GoodsReviewPreviewHolder
+import com.example.elandmall_kotlin.ui.goods.viewholders.tab2.GoodsReviewTextHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.tab3.GoodsQnaFormHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.tab4.GoodsOrderInfoHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.tab4.GoodsOrderInfoStoreHolder
@@ -75,7 +78,7 @@ class GoodsAdapter : ListAdapter<GoodsModule, GoodsBaseViewHolder>(object : Diff
                 )
             )
             GoodsModuleType.GOODS_DETAIL_WEB -> GoodsDetailWebHolder(
-                ViewCommonWebViewBinding.inflate(
+                ViewGoodsDetailWebBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -95,8 +98,29 @@ class GoodsAdapter : ListAdapter<GoodsModule, GoodsBaseViewHolder>(object : Diff
                     false
                 )
             )
+            GoodsModuleType.GOODS_DETAIL_SELLER_RECOM -> GoodsDetailSellerRecomHolder(
+                ViewGoodsDetailSellerRecomBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
             GoodsModuleType.GOODS_REVIEW_PREVIEW -> GoodsReviewPreviewHolder(
                 ViewGoodsReviewPreviewBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            GoodsModuleType.GOODS_REVIEW_PHOTO -> GoodsReviewPhotoHolder(
+                ViewGoodsReviewPhotoBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            GoodsModuleType.GOODS_REVIEW_TEXT -> GoodsReviewTextHolder(
+                ViewGoodsReviewTextBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false

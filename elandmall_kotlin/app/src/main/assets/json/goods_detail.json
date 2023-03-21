@@ -105,6 +105,13 @@
                 "weight": "50kg",
                 "purchase_goods_info": "이영인이영인이영인",
                 "review_comment": "굳샷입니다. 갱"
+              },
+              {
+                "userID": "이영인2",
+                "height": "170cm",
+                "weight": "50kg",
+                "purchase_goods_info": "이영인이영인이영인",
+                "review_comment": "굳샷입니다. 갱"
               }
             ],
             "review_more_url": "https://m.naver.com/goodsDetailReviewTextMore.action"

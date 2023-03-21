@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    tools:layout_width="90dp"
     android:layout_height="wrap_content">
 
     <ImageView
@@ -20,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="gone"
+        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@id/goods_img"
         app:layout_constraintEnd_toEndOf="@id/goods_img"
         app:layout_constraintStart_toStartOf="@id/goods_img"
@@ -28,7 +30,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#80dddddd"
+            android:background="#55000000"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +40,7 @@
             android:gravity="center"
             android:text="+"
             android:textColor="@color/white"
-            android:textSize="40dp" />
+            android:textSize="20dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

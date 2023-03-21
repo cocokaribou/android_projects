@@ -3,23 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <com.example.elandmall_kotlin.view.GoodsCommonHeaderView
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:header_title="@string/goods_detail_popular"
+        app:header_title="판매자 추천 상품"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/header"
-        app:spanCount="3"
-        tools:layout_height="400dp"
-        tools:listitem="@layout/view_goods_detail_popular_item" />
+        tools:listitem="@layout/view_goods_detail_seller_recom_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>
