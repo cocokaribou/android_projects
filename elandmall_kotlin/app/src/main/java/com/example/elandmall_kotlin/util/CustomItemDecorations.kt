@@ -94,3 +94,40 @@ class HorizontalSpacingItemDecoration(private val spacing: Int,
         }
     }
 }
+
+class VerticalSpacingItemDecoration(private val spacing: Int,
+                                    private val firstEndSpacing: Int,
+                                    private val includeTopBottom: Boolean)
+    : RecyclerView.ItemDecoration() {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
+        val position = parent.getChildAdapterPosition(view) // item position
+        if (position == RecyclerView.NO_POSITION) {
+            return
+        }
+        val itemCount = state.itemCount
+
+        if (includeTopBottom) {
+            when (position) {
+                0 -> {
+                    outRect.top = firstEndSpacing
+                    outRect.bottom = spacing
+                }
+                itemCount - 1 -> {
+                    outRect.bottom = firstEndSpacing
+                }
+                else -> {
+                    outRect.bottom = spacing
+                }
+            }
+        } else {
+            if (position != itemCount - 1) {
+                outRect.bottom = spacing
+            }
+        }
+    }
+}

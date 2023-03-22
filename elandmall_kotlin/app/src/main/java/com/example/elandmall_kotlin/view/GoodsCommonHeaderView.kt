@@ -2,6 +2,7 @@ package com.example.elandmall_kotlin.view
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.text.Spanned
 import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -30,17 +31,22 @@ class GoodsCommonHeaderView @JvmOverloads constructor(
         }
     }
 
-    fun setHeaderTitle(value: String):GoodsCommonHeaderView {
+    fun setHeaderTitle(value: String): GoodsCommonHeaderView {
         binding.title.text = value
         return this
     }
 
-    fun setPaddingVertical(dp: Int):GoodsCommonHeaderView {
+    fun setHeaderTitle(value: Spanned): GoodsCommonHeaderView {
+        binding.title.text = value
+        return this
+    }
+
+    fun setPaddingVertical(dp: Int): GoodsCommonHeaderView {
         binding.title.setPadding(15.dpToPx(), dp.dpToPx(), 0, dp.dpToPx())
         return this
     }
 
-    fun setDivider(isVisible: Boolean):GoodsCommonHeaderView {
+    fun setDivider(isVisible: Boolean): GoodsCommonHeaderView {
         binding.divider2.visibility = if (isVisible) View.VISIBLE else View.GONE
         return this
     }

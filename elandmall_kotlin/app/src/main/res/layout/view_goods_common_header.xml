@@ -18,8 +18,7 @@
         android:paddingStart="15dp"
         android:textSize="14dp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/divider1"
-        tools:text="타이틀" />
+        app:layout_constraintTop_toBottomOf="@id/divider1" />
 
     <View
         android:id="@+id/divider2"

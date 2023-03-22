@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 class GoodsModule(
     val type: GoodsModuleType,
-    val data: Any? = null
+    var data: Any? = null
 )
 
 enum class GoodsModuleType {
@@ -12,9 +12,9 @@ enum class GoodsModuleType {
     GOODS_TOP_IMAGE,
     GOODS_INFO,
     GOODS_TAB,
-    GOODS_DETAIL_KEYWORD,
     GOODS_DETAIL_POPULAR,
     GOODS_DETAIL_RECOM,
+    GOODS_DETAIL_SELLER_POPULAR,
     GOODS_DETAIL_SELLER_RECOM,
     GOODS_DETAIL_WEB,
     GOODS_DETAIL_TAG,
@@ -25,7 +25,8 @@ enum class GoodsModuleType {
     GOODS_QNA_FORM,
     GOODS_QNA_LIST,
     GOODS_ORDER_INFO,
-    GOODS_ORDER_INFO_STORE
+    GOODS_ORDER_INFO_STORE,
+    GOODS_BOTTOM_MARGIN
 }
 
 data class GoodsResponse(
@@ -63,15 +64,8 @@ data class GoodsResponse(
 
         data class SellerPopularStyle(
             @SerializedName("title") val title: String?,
-            @SerializedName("goods_list") val goodsList: List<Goods?>?
-        ) {
-            data class Goods(
-                @SerializedName("image_url") val imageUrl: String?,
-                @SerializedName("goods_nm") val goodsNm: String?,
-                @SerializedName("favorite_yn") val favoriteYn: String?,
-                @SerializedName("link_url") val linkUrl: String?
-            )
-        }
+            @SerializedName("goods_list") val goodsList: List<Goods>?
+        )
         data class Tag(
             @SerializedName("tag_nm") val tagNm: String?,
             @SerializedName("tag_link") val tagLink: String?
@@ -79,18 +73,8 @@ data class GoodsResponse(
 
         data class PopularGoods(
             @SerializedName("title") val title: String?,
-            @SerializedName("goods_list") val goodsList: List<Goods?>?
-        ) {
-            data class Goods(
-                @SerializedName("image_url") val imageUrl: String?,
-                @SerializedName("goods_nm") val goodsNm: String?,
-                @SerializedName("sale_rate") val saleRate: Int?,
-                @SerializedName("cust_sale_price") val custSalePrice: Int?,
-                @SerializedName("market_price") val marketPrice: Int?,
-                @SerializedName("link_url") val linkUrl: String?,
-                @SerializedName("brand_nm") val brandNm: String?
-            )
-        }
+            @SerializedName("goods_list") val goodsList: List<Goods>?
+        )
 
         data class OrderInfo(
             @SerializedName("bank_info") val bankInfo: String?,

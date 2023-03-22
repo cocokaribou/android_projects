@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingHorizontal="15dp"
-    android:paddingBottom="30dp">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/share_row"
         android:layout_width="match_parent"
         android:layout_height="55dp"
+        android:paddingHorizontal="15dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
@@ -48,6 +47,7 @@
         android:id="@+id/goods_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
         android:includeFontPadding="false"
         android:lineSpacingExtra="-2dp"
         android:maxLines="2"
@@ -60,6 +60,7 @@
         android:id="@+id/sale_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="7dp"
         android:textColor="#d5a030"
         android:textSize="20dp"
@@ -105,6 +106,7 @@
         android:id="@+id/collapsed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/background_stroke_grey_1dp"
         android:backgroundTint="@color/black"
@@ -146,6 +148,7 @@
         android:id="@+id/expanded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
         android:background="@drawable/background_solid_without_top"
         android:paddingHorizontal="15dp"
         android:paddingBottom="15dp"
@@ -221,6 +224,7 @@
         android:id="@+id/coupon_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
         android:layout_marginTop="15dp"
         android:elevation="0dp"
         app:cardCornerRadius="10dp"
@@ -251,6 +255,7 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginHorizontal="15dp"
         android:layout_marginTop="15dp"
         android:background="#dddddd"
         app:layout_constraintTop_toBottomOf="@id/coupon_button" />
@@ -259,6 +264,7 @@
         android:id="@+id/shipping1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:text="@string/shipping"
         android:textSize="13dp"
@@ -280,6 +286,7 @@
         android:id="@+id/point1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:text="@string/point"
         app:layout_constraintStart_toStartOf="parent"
@@ -296,6 +303,7 @@
         app:layout_constraintTop_toBottomOf="@id/shipping2" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/save_point"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -315,4 +323,11 @@
             android:textStyle="bold"
             tools:text="1% 적립" />
     </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/divider2"
+        style="@style/divider_shadow_6"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/save_point" />
 </androidx.constraintlayout.widget.ConstraintLayout>

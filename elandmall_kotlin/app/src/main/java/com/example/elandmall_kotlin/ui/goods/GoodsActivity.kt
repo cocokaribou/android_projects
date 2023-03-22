@@ -10,9 +10,11 @@ import com.example.elandmall_kotlin.BaseActivity
 import com.example.elandmall_kotlin.EventBus
 import com.example.elandmall_kotlin.databinding.ActivityGoodsBinding
 import com.example.elandmall_kotlin.model.GoodsModuleType
+import com.example.elandmall_kotlin.util.Logger
 import com.example.elandmall_kotlin.view.GoodsCommonTabView
+import com.example.elandmall_kotlin.view.TabListener
 
-class GoodsActivity : BaseActivity() {
+class GoodsActivity : BaseActivity(), TabListener {
 
     private val binding get() = _binding!!
     private var _binding: ActivityGoodsBinding? = null
@@ -20,7 +22,7 @@ class GoodsActivity : BaseActivity() {
     private val viewModel: GoodsViewModel by viewModels()
     private val mAdapter by lazy { GoodsAdapter() }
 
-    private val goodsTab by lazy { GoodsCommonTabView(this, tabListener = viewModel.tabListener, updateListener = viewModel::updateTabInner) }
+    private val goodsTab by lazy { GoodsCommonTabView(this) }
 
     private val scrollListener by lazy {
         object : RecyclerView.OnScrollListener() {
@@ -59,6 +61,8 @@ class GoodsActivity : BaseActivity() {
     private fun initUI() = with(binding) {
         list.apply {
             adapter = mAdapter
+            setRecycledViewPool(RecyclerView.RecycledViewPool())
+            (layoutManager as LinearLayoutManager).recycleChildrenOnDetach = true
             addOnScrollListener(scrollListener)
         }
 
@@ -69,6 +73,9 @@ class GoodsActivity : BaseActivity() {
 
         val layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         addContentView(goodsTab, layoutParams)
+
+        goodsTab.setCallback(this@GoodsActivity)
+        viewModel.setCallback(this@GoodsActivity)
     }
 
     private fun initObserve() = with(viewModel) {
@@ -84,24 +91,25 @@ class GoodsActivity : BaseActivity() {
         }
 
         stickyData.observe(this@GoodsActivity) {
-            val reviewCount = it["review_count"] as? Int
-            val qnaCount = it["qna_count"] as? Int
+            val reviewCount = it["reviewCount"] as? Int
+            val qnaCount = it["qnaCount"] as? Int
 
             goodsTab.updateCount(reviewCount, qnaCount)
         }
 
-        currentTab.observe(this@GoodsActivity) { index ->
-            updateTab(index)
+        currentIndex.observe(this@GoodsActivity) { index ->
+            Logger.v("액티비티에서 따라감")
+            goodsTab.selectTab(index)
         }
     }
-    private fun updateTab(index: Int) {
-        goodsTab.updateTab(index)
-        viewModel.updateTabInner(index)
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onTabSelect(index: Int) {
+        Logger.v("액티비티에서 누름! $index")
+        viewModel.updateTabInner(index)
     }
 }

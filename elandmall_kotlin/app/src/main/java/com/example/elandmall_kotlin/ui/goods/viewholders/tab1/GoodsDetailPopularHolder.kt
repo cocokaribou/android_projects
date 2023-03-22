@@ -1,65 +1,68 @@
 package com.example.elandmall_kotlin.ui.goods.viewholders.tab1
 
+import android.text.Html
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.elandmall_kotlin.databinding.ViewGoodsDetailItemBinding
 import com.example.elandmall_kotlin.databinding.ViewGoodsDetailPopularBinding
-import com.example.elandmall_kotlin.databinding.ViewGoodsDetailPopularItemBinding
 import com.example.elandmall_kotlin.model.Goods
+import com.example.elandmall_kotlin.model.GoodsResponse
 import com.example.elandmall_kotlin.ui.goods.GoodsBaseViewHolder
 import com.example.elandmall_kotlin.util.GoodsUtil.drawGoodsUI
-import com.example.elandmall_kotlin.util.GridSpacingItemDecoration
+import com.example.elandmall_kotlin.util.HorizontalSpacingItemDecoration
 import com.example.elandmall_kotlin.util.dpToPx
 
-class GoodsDetailPopularHolder(val binding: ViewGoodsDetailPopularBinding) : GoodsBaseViewHolder(binding.root) {
-
+class GoodsDetailPopularHolder(private val binding: ViewGoodsDetailPopularBinding) : GoodsBaseViewHolder(binding.root) {
     private val mAdapter by lazy { PopularAdapter() }
     override fun onBind(item: Any?) {
-        (item as? List<*>)?.let {
-            val dataList = it.filterIsInstance<Goods>()
-            initUI(dataList)
+        (item as? GoodsResponse.Data.PopularGoods)?.let {
+            initUI(it)
         }
     }
 
-    private fun initUI(dataList: List<Goods>) = with(binding) {
-        list.adapter = mAdapter
-        mAdapter.submitList(dataList)
+    private fun initUI(data: GoodsResponse.Data.PopularGoods) = with(binding){
 
-        // flexible UI
+        list.adapter = mAdapter
+        mAdapter.submitList(data.goodsList)
+
+        val title = "<u>${data.title}</u> 인기상품"
+
         header
+            .setHeaderTitle(Html.fromHtml(title))
             .setPaddingVertical(dp = 13)
             .setDivider(isVisible = false)
 
         if (list.itemDecorationCount == 0) {
-            list.addItemDecoration(GridSpacingItemDecoration(3, 8.dpToPx(), true))
+            list.addItemDecoration(HorizontalSpacingItemDecoration(10.dpToPx(), 10.dpToPx(), true))
         }
     }
 
     class PopularAdapter : ListAdapter<Goods, PopularHolder>(object : DiffUtil.ItemCallback<Goods>() {
         override fun areItemsTheSame(oldItem: Goods, newItem: Goods): Boolean = oldItem == newItem
         override fun areContentsTheSame(oldItem: Goods, newItem: Goods): Boolean = oldItem.goodsNm == newItem.goodsNm
-
     }) {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            PopularHolder(
-                ViewGoodsDetailPopularItemBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PopularHolder(
+            ViewGoodsDetailItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
             )
+        )
 
         override fun onBindViewHolder(holder: PopularHolder, position: Int) {
             holder.onBind(currentList[position])
         }
-
     }
 
-    class PopularHolder(val binding: ViewGoodsDetailPopularItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(goods: Goods) {
-            drawGoodsUI(binding, goods)
+    class PopularHolder(val binding: ViewGoodsDetailItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun onBind(data: Goods) {
+            drawGoodsUI(binding, data)
+
+            binding.brandName.visibility = if (data.brandNm.isNullOrEmpty()) View.INVISIBLE else View.VISIBLE
         }
     }
 }

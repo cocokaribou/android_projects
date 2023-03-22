@@ -1,23 +1,25 @@
 package com.example.elandmall_kotlin.ui.goods
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.elandmall_kotlin.model.*
 import com.example.elandmall_kotlin.util.Logger
+import com.example.elandmall_kotlin.view.TabListener
 import kotlinx.coroutines.launch
 
 class GoodsViewModel : ViewModel() {
     private val repository by lazy { GoodsRepository() }
 
-    var isExpand = false
-    val currentTab = MutableLiveData<Int>()
-    val tabListener: (Int) -> Unit = {
-        updateTabInner(it)
-    }
-    val toggleListener: (Boolean) -> Unit = {
+    private var isExpand = false
+    private val toggleListener: (Boolean) -> Unit = {
         isExpand = it
+    }
+
+    val currentIndex = MutableLiveData<Int>()
+    private var tabListener: TabListener? = null
+    fun setCallback(listener: TabListener) {
+        tabListener = listener
     }
 
     init {
@@ -63,54 +65,54 @@ class GoodsViewModel : ViewModel() {
             GoodsModule(
                 GoodsModuleType.GOODS_TAB,
                 mapOf(
-                    "listener" to tabListener,
-                    "current_tab" to currentTab,
-                    "review_count" to reviewCount,
-                    "qna_count" to qnaCount,
-                    "update_listener" to ::updateTabInner
+                    "currentIndex" to currentIndex.value,
+                    "reviewCount" to reviewCount,
+                    "qnaCount" to qnaCount,
+                    "updateTabInner" to ::updateTabInner
                 )
             )
         )
 
         // outer sticky view
-        stickyData.postValue(mapOf("current_tab" to currentTab, "review_count" to reviewCount, "qna_count" to qnaCount))
+        stickyData.postValue(mapOf("currentIndex" to currentIndex, "reviewCount" to reviewCount, "qnaCount" to qnaCount))
 
         uiList.postValue(moduleList)
     }
 
     fun updateTabInner(index: Int) {
-        Logger.v("매번 여기를 타셔야해요 $index")
-
-
-        moduleList.apply {
-            map {
-                if (it.type == GoodsModuleType.GOODS_TAB) {
-                    val reviewCount = goodsData?.goodsInfo?.goodsReviewInfo?.reviewCount
-                    val qnaCount = goodsData?.goodsInfo?.goodsQuestionInfo?.questionCount
-
-                    GoodsModule(
-                        GoodsModuleType.GOODS_TAB,
-                        mapOf(
-                            "listener" to tabListener,
-                            "current_tab" to index,
-                            "review_count" to 0,
-                            "qna_count" to 0,
-                            "update_listener" to ::updateTabInner
-                        )
-                    )
-                }
-            }
-        }
+        currentIndex.value = index
+        Logger.v("뷰모델을 탄답니다 $index")
         tabList = moduleList.toMutableList()
 
-        Logger.v("${(tabList.find{ it.type == GoodsModuleType.GOODS_TAB}?.data as Map<String, *>)["current_tab"]}")
+        val reviewCount = goodsData?.goodsInfo?.goodsReviewInfo?.reviewCount
+        val qnaCount = goodsData?.goodsInfo?.goodsQuestionInfo?.questionCount
+        tabList.map {
+            if (it.type == GoodsModuleType.GOODS_TAB) {
+                it.data = mapOf(
+                    "currentIndex" to currentIndex.value,
+                    "reviewCount" to reviewCount,
+                    "qnaCount" to qnaCount,
+                    "update_listener" to ::updateTabInner
+                )
+            }
+        }
+        Logger.e("리스트 제대로 업데이트? ${moduleList.joinToString { it.data.toString() } != tabList.joinToString { it.data.toString() }}")
+
         when (index) {
             0 -> {
                 // detail tab
-                tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_WEB, mapOf("data" to (goodsData?.goodsDetail ?: ""), "isExpand" to isExpand, "toggle" to toggleListener)))
+                tabList.add(
+                    GoodsModule(
+                        GoodsModuleType.GOODS_DETAIL_WEB,
+                        mapOf("data" to (goodsData?.goodsDetail ?: ""), "isExpand" to isExpand, "toggle" to toggleListener)
+                    )
+                )
                 tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_TAG, goodsData?.tagList))
-                tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_POPULAR, goodsData?.sellerPopularGoods))
                 tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_SELLER_RECOM, goodsData?.sellerRecommendGoods))
+                tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_SELLER_POPULAR, goodsData?.sellerPopularGoods))
+                tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_RECOM, goodsData?.recommendGoods))
+                tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_POPULAR, goodsData?.popularGoods))
+                tabList.add(GoodsModule(GoodsModuleType.GOODS_BOTTOM_MARGIN))
             }
             1 -> {
                 // review tab
@@ -119,17 +121,34 @@ class GoodsViewModel : ViewModel() {
                         ?: listOf()
 
                 tabList.add(GoodsModule(GoodsModuleType.GOODS_REVIEW_PREVIEW, imgList))
-                tabList.add(GoodsModule(GoodsModuleType.GOODS_REVIEW_PHOTO, goodsData?.goodsInfo?.goodsReviewInfo?.reviewInfo?.reviewImageInfo))
-                tabList.add(GoodsModule(GoodsModuleType.GOODS_REVIEW_TEXT, goodsData?.goodsInfo?.goodsReviewInfo?.reviewInfo?.reviewTextInfo))
+                tabList.add(
+                    GoodsModule(
+                        GoodsModuleType.GOODS_REVIEW_PHOTO,
+                        goodsData?.goodsInfo?.goodsReviewInfo?.reviewInfo?.reviewImageInfo
+                    )
+                )
+                tabList.add(
+                    GoodsModule(
+                        GoodsModuleType.GOODS_REVIEW_TEXT,
+                        goodsData?.goodsInfo?.goodsReviewInfo?.reviewInfo?.reviewTextInfo
+                    )
+                )
+                tabList.add(GoodsModule(GoodsModuleType.GOODS_BOTTOM_MARGIN))
             }
             2 -> {
                 // Q&A tab
                 tabList.add(GoodsModule(GoodsModuleType.GOODS_QNA_FORM))
+                tabList.add(GoodsModule(GoodsModuleType.GOODS_QNA_LIST, goodsData?.goodsInfo?.goodsQuestionInfo?.questionList))
+                tabList.add(GoodsModule(GoodsModuleType.GOODS_BOTTOM_MARGIN))
+                tabList.add(GoodsModule(GoodsModuleType.GOODS_BOTTOM_MARGIN))
+                tabList.add(GoodsModule(GoodsModuleType.GOODS_BOTTOM_MARGIN))
+
             }
             3 -> {
                 // order info tab
                 tabList.add(GoodsModule(GoodsModuleType.GOODS_ORDER_INFO))
                 tabList.add(GoodsModule(GoodsModuleType.GOODS_ORDER_INFO_STORE, goodsData?.orderInfo))
+                tabList.add(GoodsModule(GoodsModuleType.GOODS_BOTTOM_MARGIN))
             }
         }
 

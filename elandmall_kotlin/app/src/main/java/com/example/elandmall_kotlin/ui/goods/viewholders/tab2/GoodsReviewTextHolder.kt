@@ -17,29 +17,28 @@ class GoodsReviewTextHolder(val binding: ViewGoodsReviewTextBinding) : GoodsBase
     private val mAdapter by lazy { TextReviewAdapter() }
 
     override fun onBind(item: Any?) {
-        (item as? Goods.ReviewInfo.ReviewTextInfo)?.let { data ->
+        (item as? Goods.ReviewTextInfo)?.let { data ->
             initUI(data)
         }
     }
 
-    private fun initUI(data: Goods.ReviewInfo.ReviewTextInfo) = with(binding) {
+    private fun initUI(data: Goods.ReviewTextInfo) = with(binding) {
         header.setHeaderTitle("텍스트 리뷰 (${data.reviewCount})")
 
         list.adapter = mAdapter
-        Logger.v("yo ${data.reviewList?.size}")
         if ((data.reviewList?.size ?: 0) >= 4) {
             val list = data.reviewList?.subList(0, 3)?.toMutableList()
-            list?.add(Goods.ReviewInfo.Review())
+            list?.add(Goods.Review())
 
             mAdapter.submitList(list)
         } else
             mAdapter.submitList(data.reviewList)
     }
 
-    class TextReviewAdapter : ListAdapter<Goods.ReviewInfo.Review, RecyclerView.ViewHolder>(object :
-        DiffUtil.ItemCallback<Goods.ReviewInfo.Review>() {
-        override fun areItemsTheSame(oldItem: Goods.ReviewInfo.Review, newItem: Goods.ReviewInfo.Review) = oldItem == newItem
-        override fun areContentsTheSame(oldItem: Goods.ReviewInfo.Review, newItem: Goods.ReviewInfo.Review) =
+    class TextReviewAdapter : ListAdapter<Goods.Review, RecyclerView.ViewHolder>(object :
+        DiffUtil.ItemCallback<Goods.Review>() {
+        override fun areItemsTheSame(oldItem: Goods.Review, newItem: Goods.Review) = oldItem == newItem
+        override fun areContentsTheSame(oldItem: Goods.Review, newItem: Goods.Review) =
             oldItem.imageUrl == newItem.imageUrl
 
     }) {
@@ -75,7 +74,7 @@ class GoodsReviewTextHolder(val binding: ViewGoodsReviewTextBinding) : GoodsBase
     }
 
     class TextReviewHolder(private val binding: ViewGoodsReviewTextItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Goods.ReviewInfo.Review) = with(binding) {
+        fun onBind(data: Goods.Review) = with(binding) {
             userId.text = data.userID?.censoredString(1)
 
             bodySize.text = "${data.height ?: 0} ${data.weight}"

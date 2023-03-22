@@ -9,24 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.elandmall_kotlin.databinding.*
 import com.example.elandmall_kotlin.model.GoodsModule
 import com.example.elandmall_kotlin.model.GoodsModuleType
-import com.example.elandmall_kotlin.ui.goods.viewholders.GoodsHeaderHolder
-import com.example.elandmall_kotlin.ui.goods.viewholders.GoodsInfoHolder
-import com.example.elandmall_kotlin.ui.goods.viewholders.GoodsTabHolder
-import com.example.elandmall_kotlin.ui.goods.viewholders.GoodsTopImageHolder
-import com.example.elandmall_kotlin.ui.goods.viewholders.tab1.GoodsDetailPopularHolder
-import com.example.elandmall_kotlin.ui.goods.viewholders.tab1.GoodsDetailSellerRecomHolder
-import com.example.elandmall_kotlin.ui.goods.viewholders.tab1.GoodsDetailTagHolder
-import com.example.elandmall_kotlin.ui.goods.viewholders.tab1.GoodsDetailWebHolder
+import com.example.elandmall_kotlin.ui.goods.viewholders.*
+import com.example.elandmall_kotlin.ui.goods.viewholders.tab1.*
 import com.example.elandmall_kotlin.ui.goods.viewholders.tab2.GoodsReviewPhotoHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.tab2.GoodsReviewPreviewHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.tab2.GoodsReviewTextHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.tab3.GoodsQnaFormHolder
+import com.example.elandmall_kotlin.ui.goods.viewholders.tab3.GoodsQnaListHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.tab4.GoodsOrderInfoHolder
 import com.example.elandmall_kotlin.ui.goods.viewholders.tab4.GoodsOrderInfoStoreHolder
 
 class GoodsAdapter : ListAdapter<GoodsModule, GoodsBaseViewHolder>(object : DiffUtil.ItemCallback<GoodsModule>() {
     override fun areItemsTheSame(oldItem: GoodsModule, newItem: GoodsModule): Boolean = oldItem == newItem
-    override fun areContentsTheSame(oldItem: GoodsModule, newItem: GoodsModule): Boolean = oldItem.equals(newItem)
+    override fun areContentsTheSame(oldItem: GoodsModule, newItem: GoodsModule): Boolean = oldItem.data == newItem.data
 
 }) {
     override fun getItemViewType(position: Int): Int = currentList[position].type.ordinal
@@ -91,8 +86,8 @@ class GoodsAdapter : ListAdapter<GoodsModule, GoodsBaseViewHolder>(object : Diff
                     false
                 )
             )
-            GoodsModuleType.GOODS_DETAIL_POPULAR -> GoodsDetailPopularHolder(
-                ViewGoodsDetailPopularBinding.inflate(
+            GoodsModuleType.GOODS_DETAIL_SELLER_POPULAR -> GoodsDetailSellerPopularHolder(
+                ViewGoodsDetailSellerPopularBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -100,6 +95,20 @@ class GoodsAdapter : ListAdapter<GoodsModule, GoodsBaseViewHolder>(object : Diff
             )
             GoodsModuleType.GOODS_DETAIL_SELLER_RECOM -> GoodsDetailSellerRecomHolder(
                 ViewGoodsDetailSellerRecomBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            GoodsModuleType.GOODS_DETAIL_RECOM -> GoodsDetailRecomHolder(
+                ViewGoodsDetailRecomBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            GoodsModuleType.GOODS_DETAIL_POPULAR -> GoodsDetailPopularHolder(
+                ViewGoodsDetailPopularBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -133,8 +142,15 @@ class GoodsAdapter : ListAdapter<GoodsModule, GoodsBaseViewHolder>(object : Diff
                     false
                 )
             )
-            else -> GoodsInfoHolder(
-                ViewGoodsInfoBinding.inflate(
+            GoodsModuleType.GOODS_QNA_LIST -> GoodsQnaListHolder(
+                ViewGoodsQnaListBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            else -> GoodsBottomMarginHolder(
+                ViewGoodsBottomMarginBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false

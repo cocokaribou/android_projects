@@ -16,28 +16,28 @@ import com.example.elandmall_kotlin.util.censoredString
 class GoodsReviewPhotoHolder(val binding: ViewGoodsReviewPhotoBinding) : GoodsBaseViewHolder(binding.root) {
     private val mAdapter by lazy { PhotoReviewAdapter() }
     override fun onBind(item: Any?) {
-        (item as? Goods.ReviewInfo.ReviewImageInfo)?.let { data ->
+        (item as? Goods.ReviewImageInfo)?.let { data ->
             initUI(data)
         }
     }
 
-    private fun initUI(data: Goods.ReviewInfo.ReviewImageInfo) = with(binding) {
+    private fun initUI(data: Goods.ReviewImageInfo) = with(binding) {
         header.setHeaderTitle("포토 리뷰 (${data.reviewCount})")
 
         list.adapter = mAdapter
         if ((data.reviewList?.size ?: 0) >= 4) {
             val list = data.reviewList?.subList(0, 3)?.toMutableList()
-            list?.add(Goods.ReviewInfo.Review())
+            list?.add(Goods.Review())
 
             mAdapter.submitList(list)
         } else
             mAdapter.submitList(data.reviewList)
     }
 
-    class PhotoReviewAdapter : ListAdapter<Goods.ReviewInfo.Review, RecyclerView.ViewHolder>(object :
-        DiffUtil.ItemCallback<Goods.ReviewInfo.Review>() {
-        override fun areItemsTheSame(oldItem: Goods.ReviewInfo.Review, newItem: Goods.ReviewInfo.Review) = oldItem == newItem
-        override fun areContentsTheSame(oldItem: Goods.ReviewInfo.Review, newItem: Goods.ReviewInfo.Review) =
+    class PhotoReviewAdapter : ListAdapter<Goods.Review, RecyclerView.ViewHolder>(object :
+        DiffUtil.ItemCallback<Goods.Review>() {
+        override fun areItemsTheSame(oldItem: Goods.Review, newItem: Goods.Review) = oldItem == newItem
+        override fun areContentsTheSame(oldItem: Goods.Review, newItem: Goods.Review) =
             oldItem.imageUrl == newItem.imageUrl
 
     }) {
@@ -73,7 +73,7 @@ class GoodsReviewPhotoHolder(val binding: ViewGoodsReviewPhotoBinding) : GoodsBa
     }
 
     class PhotoReviewHolder(private val binding: ViewGoodsReviewPhotoItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Goods.ReviewInfo.Review) = with(binding) {
+        fun onBind(data: Goods.Review) = with(binding) {
             Glide.with(root.context)
                 .load("http:" + data.imageUrl)
                 .into(reviewImg)

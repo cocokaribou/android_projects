@@ -30,7 +30,6 @@ class GoodsDetailWebHolder(val binding: ViewGoodsDetailWebBinding) : GoodsBaseVi
     override fun onBind(item: Any?) {
         (item as? Map<*, *>)?.let {
             isExpand = it["isExand"] as? Boolean ?: false
-            Logger.v("onBind! isExpand $isExpand")
             toggleListener = it["toggle"] as? (Boolean) -> Unit
 
             val data = it["data"] as? String ?: ""
@@ -63,7 +62,6 @@ class GoodsDetailWebHolder(val binding: ViewGoodsDetailWebBinding) : GoodsBaseVi
             toggleListener?.invoke(isExpand)
 
             if (isExpand) {
-                Logger.v("타시죠?")
                 webview.layoutParams.height = WRAP_CONTENT
                 webview.requestLayout()
 

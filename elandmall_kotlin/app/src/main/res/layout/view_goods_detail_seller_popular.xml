@@ -9,16 +9,18 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:header_title="이 상품은 어때요?"
+        app:header_title="@string/goods_detail_popular"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:paddingBottom="10dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/header"
-        tools:listitem="@layout/view_goods_detail_item" />
+        app:spanCount="3"
+        tools:layout_height="410dp"
+        tools:listitem="@layout/view_goods_detail_seller_popular_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

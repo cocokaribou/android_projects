@@ -5,9 +5,4 @@
     android:orientation="vertical"
     android:layout_height="wrap_content">
 
-    <View
-        android:id="@+id/divider"
-        style="@style/divider_shadow_6"
-        android:layout_width="match_parent" />
-
 </LinearLayout>

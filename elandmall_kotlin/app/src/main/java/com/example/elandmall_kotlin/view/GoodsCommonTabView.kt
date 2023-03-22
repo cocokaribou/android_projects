@@ -8,19 +8,26 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.elandmall_kotlin.R
 import com.example.elandmall_kotlin.databinding.ViewGoodsCommonTabBinding
 import com.example.elandmall_kotlin.databinding.ViewGoodsTabBinding
+import com.example.elandmall_kotlin.util.Logger
 import com.google.android.material.tabs.TabLayout
 import kotlin.reflect.KFunction1
-
+interface TabListener {
+    fun onTabSelect(index: Int)
+}
 class GoodsCommonTabView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     def: Int = 0,
-    val tabListener: ((Int) -> Unit)? = {},
-    val updateListener: KFunction1<Int, Unit>?
 ) : ConstraintLayout(context, attrs, def) {
 
     private var binding: ViewGoodsCommonTabBinding
     private var tabList: List<TabLayout.Tab>
+
+    private var tabListener: TabListener? = null
+    fun setCallback(listener: TabListener) {
+        tabListener = listener
+        initTabSelectedListener()
+    }
 
     init {
         val view = inflate(context, R.layout.view_goods_common_tab, this)
@@ -35,10 +42,12 @@ class GoodsCommonTabView @JvmOverloads constructor(
         tabList.forEach {
             binding.tabs.addTab(it)
         }
+    }
 
+    private fun initTabSelectedListener() {
         binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                tabListener?.invoke(tab?.position ?: 0)
+                tabListener?.onTabSelect(tab?.position ?: 0)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -51,8 +60,7 @@ class GoodsCommonTabView @JvmOverloads constructor(
         binding.tabs.getTabAt(2)?.apply { text = "Q&A($qnaCount)" }
     }
 
-    fun updateTab(index: Int) {
-        updateListener?.invoke(index)
+    fun selectTab(index: Int) {
         binding.tabs.selectTab(tabList[index])
     }
 }
