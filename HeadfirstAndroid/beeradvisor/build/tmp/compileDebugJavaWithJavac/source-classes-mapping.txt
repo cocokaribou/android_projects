@@ -1,4 +1,0 @@
-com/example/beeradvisor/BuildConfig.java
- com.example.beeradvisor.BuildConfig
-com/example/beeradvisor/FindBeerActivity.java
- com.example.beeradvisor.FindBeerActivity
