@@ -2,7 +2,7 @@ package com.example.elandmall_kotlin.model
 
 import com.google.gson.annotations.SerializedName
 
-class LeftMenuModule(
+data class LeftMenuModule(
     val type: LeftMenuModuleType,
     val data: Any? = null
 )

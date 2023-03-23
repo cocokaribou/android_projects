@@ -74,29 +74,35 @@ class GoodsViewModel : ViewModel() {
         )
 
         // outer sticky view
-        stickyData.postValue(mapOf("currentIndex" to currentIndex, "reviewCount" to reviewCount, "qnaCount" to qnaCount))
+        stickyData.postValue(
+            mapOf(
+                "currentIndex" to currentIndex,
+                "reviewCount" to reviewCount,
+                "qnaCount" to qnaCount
+            )
+        )
 
         uiList.postValue(moduleList)
     }
 
     fun updateTabInner(index: Int) {
         currentIndex.value = index
-        Logger.v("뷰모델을 탄답니다 $index")
-        tabList = moduleList.toMutableList()
+
+        tabList = moduleList.map { it.copy() }.toMutableList()
 
         val reviewCount = goodsData?.goodsInfo?.goodsReviewInfo?.reviewCount
         val qnaCount = goodsData?.goodsInfo?.goodsQuestionInfo?.questionCount
+
         tabList.map {
             if (it.type == GoodsModuleType.GOODS_TAB) {
                 it.data = mapOf(
                     "currentIndex" to currentIndex.value,
                     "reviewCount" to reviewCount,
                     "qnaCount" to qnaCount,
-                    "update_listener" to ::updateTabInner
+                    "updateTabInner" to ::updateTabInner
                 )
             }
         }
-        Logger.e("리스트 제대로 업데이트? ${moduleList.joinToString { it.data.toString() } != tabList.joinToString { it.data.toString() }}")
 
         when (index) {
             0 -> {

@@ -1,11 +1,16 @@
 package com.example.elandmall_kotlin.model
 
 import com.google.gson.annotations.SerializedName
+import java.util.Collections.copy
 
-class GoodsModule(
+data class GoodsModule(
     val type: GoodsModuleType,
     var data: Any? = null
-)
+) {
+    fun clone(): GoodsModule {
+        return copy()
+    }
+}
 
 enum class GoodsModuleType {
     GOODS_HEADER,
@@ -31,7 +36,7 @@ enum class GoodsModuleType {
 
 data class GoodsResponse(
     @SerializedName("data") val data: Data?,
-):BaseResponse() {
+) : BaseResponse() {
     data class Data(
         @SerializedName("top_image_list") val topImageList: List<TopImage>?,
         @SerializedName("goods_info") val goodsInfo: Goods?,
@@ -47,14 +52,15 @@ data class GoodsResponse(
     ) {
         data class TopImage(
             @SerializedName("image_url") private val imageUrl: String?
-        ){
-            val imgUrl: String get() {
-                return if (!imageUrl.isNullOrEmpty() && imageUrl.startsWith("http")) {
-                    imageUrl
-                } else {
-                    "http:$imageUrl"
+        ) {
+            val imgUrl: String
+                get() {
+                    return if (!imageUrl.isNullOrEmpty() && imageUrl.startsWith("http")) {
+                        imageUrl
+                    } else {
+                        "http:$imageUrl"
+                    }
                 }
-            }
         }
 
         data class Share(
