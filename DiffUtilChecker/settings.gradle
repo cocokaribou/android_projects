@@ -13,4 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "DiffUtilChecker"
-include ':app'
+include ':diffUtil1'
+include ':diffUtil2'
