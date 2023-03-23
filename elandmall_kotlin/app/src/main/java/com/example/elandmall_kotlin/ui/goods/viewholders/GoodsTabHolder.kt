@@ -32,13 +32,10 @@ class GoodsTabHolder(val binding: ViewGoodsTabBinding) : GoodsBaseViewHolder(bin
         goodsTab.apply {
             updateCount(reviewCount, qnaCount)
             selectTab(currentIndex)
-            Logger.v("홀더에서 따라감 $currentIndex")
         }
-        updateTabInner?.invoke(currentIndex)
     }
 
     override fun onTabSelect(index: Int) {
-        Logger.v("홀더에서 누름!")
         updateTabInner?.invoke(index)
     }
 }

@@ -14,6 +14,7 @@ class GoodsViewModel : ViewModel() {
     private var isExpand = false
     private val toggleListener: (Boolean) -> Unit = {
         isExpand = it
+        expandWebViewHolder()
     }
 
     val currentIndex = MutableLiveData<Int>()
@@ -82,7 +83,26 @@ class GoodsViewModel : ViewModel() {
             )
         )
 
-        uiList.postValue(moduleList)
+        // default tab [0]
+        tabList = moduleList.map { it.copy() }.toMutableList()
+        tabList.add(
+            GoodsModule(
+                GoodsModuleType.GOODS_DETAIL_WEB,
+                mapOf(
+                    "data" to (goodsData?.goodsDetail ?: ""),
+                    "isExpand" to isExpand,
+                    "toggleListener" to toggleListener
+                )
+            )
+        )
+        tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_TAG, goodsData?.tagList))
+        tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_SELLER_RECOM, goodsData?.sellerRecommendGoods))
+        tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_SELLER_POPULAR, goodsData?.sellerPopularGoods))
+        tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_RECOM, goodsData?.recommendGoods))
+        tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_POPULAR, goodsData?.popularGoods))
+        tabList.add(GoodsModule(GoodsModuleType.GOODS_BOTTOM_MARGIN))
+
+        uiList.postValue(tabList)
     }
 
     fun updateTabInner(index: Int) {
@@ -110,7 +130,11 @@ class GoodsViewModel : ViewModel() {
                 tabList.add(
                     GoodsModule(
                         GoodsModuleType.GOODS_DETAIL_WEB,
-                        mapOf("data" to (goodsData?.goodsDetail ?: ""), "isExpand" to isExpand, "toggle" to toggleListener)
+                        mapOf(
+                            "data" to (goodsData?.goodsDetail ?: ""),
+                            "isExpand" to isExpand,
+                            "toggleListener" to toggleListener
+                        )
                     )
                 )
                 tabList.add(GoodsModule(GoodsModuleType.GOODS_DETAIL_TAG, goodsData?.tagList))
@@ -158,6 +182,18 @@ class GoodsViewModel : ViewModel() {
             }
         }
 
+        uiList.postValue(tabList)
+    }
+    private fun expandWebViewHolder() {
+        tabList.map {
+            if (it.type == GoodsModuleType.GOODS_DETAIL_WEB) {
+                it.data = mapOf(
+                    "data" to (goodsData?.goodsDetail ?: ""),
+                    "isExpand" to isExpand,
+                    "toggleListener" to toggleListener
+                )
+            }
+        }
         uiList.postValue(tabList)
     }
 }

@@ -98,7 +98,6 @@ class GoodsActivity : BaseActivity(), TabListener {
         }
 
         currentIndex.observe(this@GoodsActivity) { index ->
-            Logger.v("액티비티에서 따라감")
             goodsTab.selectTab(index)
         }
     }
@@ -109,7 +108,6 @@ class GoodsActivity : BaseActivity(), TabListener {
     }
 
     override fun onTabSelect(index: Int) {
-        Logger.v("액티비티에서 누름! $index")
         viewModel.updateTabInner(index)
     }
 }
