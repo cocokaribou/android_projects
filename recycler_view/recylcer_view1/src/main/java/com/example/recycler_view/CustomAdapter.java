@@ -14,7 +14,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-//RecyclerView.Adapter를 상속받을 때 ViewHolder Type을 지정해야한다
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
@@ -23,17 +22,15 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         protected TextView english;
 
         public CustomViewHolder(View view) {
-            super(view); //ViewHolder 생성자를 부르는 거겠지..
-            this.id = (TextView) view.findViewById(R.id.id_listitem);
-            this.english = (TextView) view.findViewById(R.id.english_listitem);
-            this.korean = (TextView) view.findViewById(R.id.korean_listitem);
+            super(view);
+            this.id = view.findViewById(R.id.id_listitem);
+            this.english = view.findViewById(R.id.english_listitem);
+            this.korean =  view.findViewById(R.id.korean_listitem);
         }
     }
 
     private ArrayList<Dictionary> mList;
 
-    //CustomAdapter 생성자
-    //CustomAdapter 객체를 생성할 때 Dictionary 클래스 객체가 담긴 어레이리스트를 CustomAdapter 필드에 넣어주는군_
     public CustomAdapter(ArrayList<Dictionary> list) {
         this.mList = list;
     }
@@ -54,18 +51,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder viewHolder, int position) {
-
-        //setTextSize
         viewHolder.id.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
         viewHolder.english.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
         viewHolder.korean.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
 
-        //setGravity
         viewHolder.id.setGravity(Gravity.CENTER);
         viewHolder.english.setGravity(Gravity.CENTER);
         viewHolder.korean.setGravity(Gravity.CENTER);
 
-        //setText
         viewHolder.id.setText(mList.get(position).getId());
         viewHolder.english.setText(mList.get(position).getEnglish());
         viewHolder.korean.setText(mList.get(position).getKorean());
@@ -77,6 +70,4 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     public int getItemCount() {
         return (null != mList ? mList.size() : 0);
     }
-
-
 }

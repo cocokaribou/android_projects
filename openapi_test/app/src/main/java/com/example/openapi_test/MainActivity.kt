@@ -1,40 +1,24 @@
 package com.example.openapi_test
 
-import android.net.Uri
-import android.os.AsyncTask
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.NetworkOnMainThreadException
 import android.util.Log
-import android.widget.AbsListView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.openapi_test.Data.DataVO
 //import com.example.openapi_test.Data.Bakery
 import com.example.openapi_test.databinding.ActivityMainBinding
-import com.google.gson.Gson
-import okhttp3.Interceptor
-import okhttp3.OkHttp
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import org.json.JSONException
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.io.*
-import java.net.MalformedURLException
-import java.net.URL
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    private var bakeryList = arrayListOf<DataVO.VoObject.Bakery>()
-    private val myAdapter = mAdapter()
+    private val myAdapter = MainAdapter()
 
-    private var lastScrollY = 0
     private var mTotalScrolled = 0
     private var page = 0
 
@@ -46,8 +30,6 @@ class MainActivity : AppCompatActivity() {
             if(mTotalScrolled<0){
                 mTotalScrolled = 0
             }
-            Log.e("늘어나나 봅세", "$mTotalScrolled")
-            Log.e("dy", "$dy")
         }
 
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -81,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun requestBakery(scrollY: Int) {
         val bakeryApi = BakeryAPI.create()
-        bakeryApi.getBakery(page = scrollY.toString(), total = "100")
+        bakeryApi.getBakery(page = scrollY.toString(), total = "10")
             .enqueue(object : Callback<DataVO> {
                 override fun onFailure(call: Call<DataVO>, t: Throwable) {
                     Log.e("Fail!", "Fail")
@@ -90,10 +72,8 @@ class MainActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<DataVO>, response: Response<DataVO>) {
                     Log.e("Success!", "${response.code()}")
 
-                    response.body()!!.voObject.bakeries.forEach {
-                        bakeryList.add(it)
-                        myAdapter.submitList(bakeryList)
-                    }
+                    val dataList = response.body()!!.voObject.bakeries.filterNot { it.storeState.contains("폐업", true) }
+                    myAdapter.submitList(dataList)
                 }
             })
     }
