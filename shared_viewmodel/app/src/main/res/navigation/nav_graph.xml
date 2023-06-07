@@ -28,11 +28,7 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_home_to_leftMenu"
-            app:destination="@id/leftMenuFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_enter_anim"
-            app:popExitAnim="@anim/nav_default_exit_anim" />
+            app:destination="@id/leftMenuFragment" />
 
         <action
             android:id="@+id/action_home_to_cameraSearch"
@@ -60,9 +56,7 @@
 
         <action
             android:id="@+id/action_leftMenu_to_web"
-            app:destination="@id/webViewFragment"
-            app:popUpTo="@id/leftMenuFragment"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/webViewFragment" />
 
         <action
             android:id="@+id/action_leftMenu_to_notify"
