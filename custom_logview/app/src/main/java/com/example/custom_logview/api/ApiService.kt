@@ -21,6 +21,14 @@ interface ApiService {
 
     @GET("albums")
     suspend fun mockData2(): List<Data>
+    @GET("photos")
+    suspend fun mockData3(): List<Data>
+    @GET("todos")
+    suspend fun mockData4(): List<Data>
+    @GET("users")
+    suspend fun mockData5(): List<Data>
+
+
 
     companion object {
         private val logging: HttpLoggingInterceptor = HttpLoggingInterceptor()

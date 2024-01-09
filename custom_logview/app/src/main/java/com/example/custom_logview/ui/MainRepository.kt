@@ -40,4 +40,37 @@ class MainRepository {
             emit(Result.failure(Throwable("mockData2")))
         }.flowOn(Dispatchers.IO)
     }
+
+    suspend fun requestMockData3(): Flow<Result<List<Data>>> {
+        return flow {
+            val data = service.mockData3()
+            emit(Result.success(data))
+        }.retryWhen { cause, attempt ->
+            return@retryWhen attempt < 2 && cause is java.lang.Exception
+        }.catch {
+            emit(Result.failure(Throwable("mockData2")))
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun requestMockData4(): Flow<Result<List<Data>>> {
+        return flow {
+            val data = service.mockData4()
+            emit(Result.success(data))
+        }.retryWhen { cause, attempt ->
+            return@retryWhen attempt < 2 && cause is java.lang.Exception
+        }.catch {
+            emit(Result.failure(Throwable("mockData2")))
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun requestMockData5(): Flow<Result<List<Data>>> {
+        return flow {
+            val data = service.mockData5()
+            emit(Result.success(data))
+        }.retryWhen { cause, attempt ->
+            return@retryWhen attempt < 2 && cause is java.lang.Exception
+        }.catch {
+            emit(Result.failure(Throwable("mockData2")))
+        }.flowOn(Dispatchers.IO)
+    }
 }

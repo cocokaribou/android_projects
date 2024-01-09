@@ -14,7 +14,7 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             with(repository) {
                 merge(
-                    requestMockData1(),requestFailingData(), requestMockData2()
+                    requestMockData1(),requestFailingData(), requestMockData2(), requestMockData3(), requestMockData4(), requestMockData5()
                 )
                     .catch {}
                     .onEach {
