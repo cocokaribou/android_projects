@@ -1,24 +1,15 @@
 package com.example.custom_logview.ui
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewbinding.ViewBinding
-import com.example.custom_logview.R
 import com.example.custom_logview.databinding.ViewLogBinding
 import com.example.custom_logview.util.EnterListener
 import com.example.custom_logview.util.TextFocusListener
@@ -97,14 +88,15 @@ class CustomLogView @JvmOverloads constructor(
         }
 
         clear.setOnClickListener {
-            val constraints = ConstraintSet()
-            constraints.clone(binding.root.context, R.layout.view_log2)
-            constraints.applyTo(binding.root)
+            CustomLog.clear()
         }
 
         save.setOnClickListener {
-            toast("save log to internal storage")
-            TODO ("save log")
+            if (CustomLog.save(context)) {
+                toast("log saved to the internal storage")
+            } else {
+                toast("error occurred!")
+            }
         }
 
         search.apply {

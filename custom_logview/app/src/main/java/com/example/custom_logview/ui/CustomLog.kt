@@ -1,16 +1,17 @@
 package com.example.custom_logview.ui
 
+import android.content.Context
 import android.graphics.Color
-import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser.parseString
-import okhttp3.Headers
 import okhttp3.HttpUrl
 import okhttp3.Request
 import okhttp3.Response
 import okio.Buffer
+import java.io.File
+import java.io.FileWriter
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -165,8 +166,27 @@ object CustomLog {
         logLiveData.postValue(list.reversed())
     }
 
-    fun save() {
-        TODO("save log")
+    fun save(context: Context): Boolean {
+        val formatter = SimpleDateFormat("yyyyMMddHHmmssSSS", Locale.getDefault())
+        val dateString = formatter.format(Date())
+
+        val logString = logList.joinToString("") { it.msg+"\n\n" }
+
+        val dir = File(context.filesDir, "logs")
+        if (!dir.exists()) {
+            dir.mkdir()
+        }
+
+        return try {
+            val file = File(dir, dateString)
+            val writer = FileWriter(file)
+            writer.append(logString)
+            writer.flush()
+            writer.close()
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
 
     fun clear() {

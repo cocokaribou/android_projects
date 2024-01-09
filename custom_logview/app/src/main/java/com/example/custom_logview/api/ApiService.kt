@@ -1,30 +1,26 @@
 package com.example.custom_logview.api
 
 import com.example.custom_logview.BuildConfig
-import com.example.custom_logview.model.BaseResponse
+import com.example.custom_logview.model.Data
 import com.example.custom_logview.ui.CustomLog
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.POST
 import java.util.concurrent.TimeUnit
 
 val service by lazy { ApiService.service() }
 interface ApiService {
-    @GET("/api/main/mainTabJsonNew.action")
-    suspend fun getNewGnbMenu(): BaseResponse
 
-    @GET("/failingApi")
-    suspend fun getFooterData(): BaseResponse
+    @GET("posts")
+    suspend fun mockData1(): List<Data>
+    @GET("failingApi")
+    suspend fun failingData(): List<Data>
 
-    @GET("/api/shop/initPlanShopMainJson.action")
-    suspend fun getPlanShopList(): BaseResponse
-
-    @GET("/api/shop/initPlanShopMainJson.action?list_only_yn=Y")
-    suspend fun getPlanShopListMore(@Query("page_idx") page_idx: String?): BaseResponse
+    @GET("albums")
+    suspend fun mockData2(): List<Data>
 
     companion object {
         private val logging: HttpLoggingInterceptor = HttpLoggingInterceptor()
@@ -61,7 +57,7 @@ interface ApiService {
                 .build()
 
             return Retrofit.Builder()
-                .baseUrl("http://m.elandmall.com")
+                .baseUrl("https://jsonplaceholder.typicode.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
