@@ -1,93 +1,74 @@
 package com.pionnet.new_webview_test
 
-import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
-import android.os.Build
 import android.os.Message
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.webkit.JsResult
 import android.webkit.PermissionRequest
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.widget.FrameLayout
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.RelativeLayout
+import androidx.activity.OnBackPressedDispatcher
+import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 
-open class MyWebChromeClient(private val mContext: Context, val subWebView: ConstraintLayout) : WebChromeClient() {
-    override fun onPermissionRequest(request: PermissionRequest) {
+var COUNTER = 10
 
-        val requestedResources = request.resources
+open class MyWebChromeClient(private val mContext: Context, private val onBackCallback: OnBackPressedDispatcher) : WebChromeClient() {
+    private val subBaseView: RelativeLayout by lazy { (mContext as AppCompatActivity).findViewById(R.id.sub_webview) }
+    private val mainWebView: BaseWebView by lazy { (mContext as AppCompatActivity).findViewById(R.id.webview) }
 
-        for (r in requestedResources) {
-            if (r == PermissionRequest.RESOURCE_VIDEO_CAPTURE || r == PermissionRequest.RESOURCE_AUDIO_CAPTURE) {
-                request.grant(
-                    arrayOf(
-                        PermissionRequest.RESOURCE_VIDEO_CAPTURE, PermissionRequest.RESOURCE_AUDIO_CAPTURE
-                    )
-                )
-
-                break
+    init {
+        onBackCallback.addCallback {
+            if (subBaseView.isVisible) {
+                val lastWebView = subBaseView.getChildAt(subBaseView.childCount - 1) as? BaseWebView
+                lastWebView?.let {
+                    if (it.canGoBack()) {
+                        it.goBack()
+                    } else {
+                        subBaseView.removeView(lastWebView)
+                        COUNTER -= 10
+                        val secondLastWebView = subBaseView.getChildAt(subBaseView.childCount - 1) as? BaseWebView
+                        secondLastWebView?.let {
+                            secondLastWebView.evaluateJavascript("revealed();", null);
+                        } ?: run {
+                            COUNTER = 10
+                            subBaseView.removeAllViews()
+                            subBaseView.isVisible = false
+                            mainWebView.evaluateJavascript("revealed();", null);
+                        }
+                    }
+                }
             }
         }
     }
 
-    override fun onShowCustomView(view: View, callback: WebChromeClient.CustomViewCallback) {
-        Log.e("youngin", "여기?")
-
-        super.onShowCustomView(view, callback)
-    }
-
-    override fun onShowCustomView(view: View, requestedOrientation: Int, callback: WebChromeClient.CustomViewCallback) {
-        this.onShowCustomView(view, callback)
-    }
-
-    override fun onHideCustomView() {
-    }
-
-    private fun setFullscreen(enabled: Boolean) {
-        val win = (mContext as Activity).window
-        val winParams = win.attributes
-        val bits = WindowManager.LayoutParams.FLAG_FULLSCREEN
-
-        if (enabled) {
-            winParams.flags = winParams.flags or bits
-        } else {
-            winParams.flags = winParams.flags and bits.inv()
-        }
-
-        win.attributes = winParams
-    }
-
-    private class FullscreenHolder(ctx: Context) : FrameLayout(ctx) {
-        init {
-            setBackgroundColor(ContextCompat.getColor(ctx, android.R.color.black))
-        }
-
-        override fun onTouchEvent(evt: MotionEvent): Boolean {
-            return true
-        }
-    }
-
-    override fun onJsAlert(view: WebView, url: String, message: String, result: JsResult): Boolean {
-        return jsAlert(message, result, false)
-    }
-
-    override fun onJsConfirm(view: WebView, url: String, message: String, result: JsResult): Boolean {
-
-
-        return jsAlert(message, result, true)
-    }
-
     override fun onCreateWindow(view: WebView, isDialog: Boolean, isUserGesture: Boolean, resultMsg: Message): Boolean {
-        subWebView.isVisible = true
-        val webview = subWebView.findViewById<BaseWebView>(R.id.base_webview)
+        subBaseView.isVisible = true
 
-        webview.loadUrl(view.url ?: "")
+        val subWebView = BaseWebView(mContext).apply {
+            webChromeClient = this@MyWebChromeClient
+            webViewClient = object : MyWebViewClient() {} // shouldOverrideUrlLoading = false by default!
+            layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                setMargins(COUNTER, COUNTER, COUNTER, COUNTER)
+            }
+        }
+
+        val transport = resultMsg.obj as WebView.WebViewTransport
+        transport.webView = subWebView
+        resultMsg.sendToTarget()
+
+        subBaseView.addView(subWebView)
+        COUNTER += 10
+
         return true
     }
 
@@ -95,23 +76,20 @@ open class MyWebChromeClient(private val mContext: Context, val subWebView: Cons
         super.onCloseWindow(window)
     }
 
-    override fun onProgressChanged(view: WebView, newProgress: Int) {
-        super.onProgressChanged(view, newProgress)
+    override fun onJsAlert(view: WebView, url: String, message: String, result: JsResult): Boolean {
+        return jsAlert(message, result)
     }
 
-    /**
-     * Js alert.
-     *
-     * @param message        the message
-     * @param result         the result
-     * @param hasNegativeBtn the has negative btn
-     * @return true, if successful
-     */
-    private fun jsAlert(message: String, result: JsResult, hasNegativeBtn: Boolean): Boolean {
-        if ((mContext as Activity).isFinishing) {
-            return false
-        }
-        Log.e("youngin", "js alert")
+    override fun onJsConfirm(view: WebView, url: String, message: String, result: JsResult): Boolean {
+        return jsAlert(message, result)
+    }
+
+    private fun jsAlert(message: String, result: JsResult, hasNegativeBtn: Boolean = false): Boolean {
+        AlertDialog.Builder(mContext).apply {
+            setMessage(message)
+            setCancelable(false)
+            setPositiveButton(android.R.string.ok) { _, _ -> result.confirm() }
+        }.create().show()
         return true
     }
 }

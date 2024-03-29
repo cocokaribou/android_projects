@@ -11,11 +11,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <include
+    <RelativeLayout
         android:id="@+id/sub_webview"
-        layout="@layout/view_sub"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="@drawable/border"
+        tools:visibility="visible"
         android:visibility="gone" />
+
+    <!--    <com.pionnet.new_webview_test.CustomNewWebViewLayer-->
+    <!--        android:id="@+id/sub_webview"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:visibility="gone"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
