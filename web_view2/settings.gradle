@@ -1,3 +1,0 @@
-include ':fingerpush_3.5.4'
-include ':app', ':util', ':fingerpush_3.5.4'
-rootProject.name = "web_view2"
