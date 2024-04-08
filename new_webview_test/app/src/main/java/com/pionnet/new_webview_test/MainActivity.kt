@@ -1,12 +1,8 @@
 package com.pionnet.new_webview_test
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.RelativeLayout
-import androidx.activity.addCallback
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isVisible
+import android.webkit.WebViewClient
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     private val webview: BaseWebView by lazy { findViewById(R.id.webview) }
@@ -15,14 +11,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        webview.webViewClient = MyWebViewClient()
+        webview.webViewClient = WebViewClient()
         webview.webChromeClient = MyWebChromeClient(this, onBackPressedDispatcher)
         webview.loadUrl(Config.SITE_URL)
-        initBackKey()
-    }
-
-    private fun initBackKey() {
-        onBackPressedDispatcher.addCallback {
-        }
     }
 }

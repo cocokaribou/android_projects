@@ -3,23 +3,19 @@ package com.pionnet.new_webview_test
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Message
-import android.view.MotionEvent
-import android.view.View
 import android.view.ViewGroup
 import android.webkit.JsResult
-import android.webkit.PermissionRequest
 import android.webkit.WebChromeClient
 import android.webkit.WebView
-import android.widget.FrameLayout
+import android.webkit.WebViewClient
 import android.widget.RelativeLayout
 import androidx.activity.OnBackPressedDispatcher
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 
-var COUNTER = 10
+var counter = 10
 
 open class MyWebChromeClient(private val mContext: Context, private val onBackCallback: OnBackPressedDispatcher) : WebChromeClient() {
     private val subBaseView: RelativeLayout by lazy { (mContext as AppCompatActivity).findViewById(R.id.sub_webview) }
@@ -34,12 +30,12 @@ open class MyWebChromeClient(private val mContext: Context, private val onBackCa
                         it.goBack()
                     } else {
                         subBaseView.removeView(lastWebView)
-                        COUNTER -= 10
+                        counter -= 10
                         val secondLastWebView = subBaseView.getChildAt(subBaseView.childCount - 1) as? BaseWebView
                         secondLastWebView?.let {
                             secondLastWebView.evaluateJavascript("revealed();", null);
                         } ?: run {
-                            COUNTER = 10
+                            counter = 10
                             subBaseView.removeAllViews()
                             subBaseView.isVisible = false
                             mainWebView.evaluateJavascript("revealed();", null);
@@ -55,10 +51,10 @@ open class MyWebChromeClient(private val mContext: Context, private val onBackCa
 
         val subWebView = BaseWebView(mContext).apply {
             webChromeClient = this@MyWebChromeClient
-            webViewClient = object : MyWebViewClient() {} // shouldOverrideUrlLoading = false by default!
+            webViewClient = WebViewClient() // shouldOverrideUrlLoading = false by default!
             layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                setMargins(COUNTER, COUNTER, COUNTER, COUNTER)
+                setMargins(counter, counter, counter, counter)
             }
         }
 
@@ -67,7 +63,7 @@ open class MyWebChromeClient(private val mContext: Context, private val onBackCa
         resultMsg.sendToTarget()
 
         subBaseView.addView(subWebView)
-        COUNTER += 10
+        counter += 10
 
         return true
     }
