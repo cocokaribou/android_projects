@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.seekbar1.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                binding.tvSeekbar.text = "진행률 : $progress%"
+                binding.tvSeekbar.text = "progress : $progress%"
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {

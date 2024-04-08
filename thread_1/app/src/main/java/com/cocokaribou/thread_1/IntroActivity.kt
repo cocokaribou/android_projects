@@ -33,11 +33,9 @@ class IntroActivity : AppCompatActivity() {
                     Intent(this, MainActivity2::class.java)
                 }
                 binding.btn3.id -> {
-                    Log.e("youngin", "clicked")
                     Intent(this, MainActivity3::class.java)
                 }
                 binding.btn4.id -> {
-                    Log.e("youngin", "clicked")
                     Intent(this, CoroutineActivity::class.java)
                 }
                 else -> {

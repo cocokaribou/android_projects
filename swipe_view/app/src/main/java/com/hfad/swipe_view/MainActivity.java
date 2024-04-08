@@ -21,12 +21,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.e("로그 찍히긴 하지?", "당근이지머..");
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        view = (View) findViewById(R.id.click_view);
+        viewPager = findViewById(R.id.viewPager);
+        view = findViewById(R.id.click_view);
         myPagerAdapter = new MyPagerAdapter(this);
         viewPager.setAdapter(myPagerAdapter);
-//        viewPager.setCurrentItem(1); //시작점 설정 가능
+        viewPager.setCurrentItem(1); //시작점
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -38,14 +37,10 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 if (position == myPagerAdapter.getCount() - 1) {
                     view.setVisibility(View.VISIBLE);
-                    view.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            CustomDialog dialog = new CustomDialog(MainActivity.this);
-                            dialog.start();
-                        }
+                    view.setOnClickListener(view -> {
+                        CustomDialog dialog = new CustomDialog(MainActivity.this);
+                        dialog.start();
                     });
-                    Log.e("youngin", "⚠️");
                 } else {
                     view.setVisibility(View.GONE);
                 }

@@ -15,12 +15,11 @@ import java.util.List;
 public class MyPagerAdapter extends PagerAdapter {
 
     private static int ITEM_NUM = 3;
-    private Context mContext = null;
+    private Context mContext;
     private List<View> ViewList = new ArrayList<>();
-    //ArrayList로 바꾸는게 나을까 -> 바꿈
 
     //Context를 전달받아 mContext에 저장하는 생성자 추가.
-    public MyPagerAdapter(Context context){
+    public MyPagerAdapter(Context context) {
         mContext = context;
     }
 
@@ -28,12 +27,12 @@ public class MyPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View constraint_view = null;
-        View dialog_view = null;
-        View intro_view = null;
+        View constraint_view;
+        View dialog_view;
+        View intro_view;
 
-        if(mContext!=null){
-            LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if (mContext != null) {
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             constraint_view = inflater.inflate(R.layout.constraint_layout, container, false);
             dialog_view = inflater.inflate(R.layout.dialog_intro, container, false);
             intro_view = inflater.inflate(R.layout.intro, container, false);
@@ -66,6 +65,6 @@ public class MyPagerAdapter extends PagerAdapter {
     //메서드의 구현코드 결정됨
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return (view==(View)object);
+        return (view == object);
     }
 }

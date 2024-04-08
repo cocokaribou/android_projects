@@ -32,16 +32,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        webView = (WebView) findViewById(R.id.webview);
+        webView = findViewById(R.id.webview);
 
-        webView.getSettings().setJavaScriptEnabled(true);
         //자바스크립트 실행 사용 여부
-        webView.getSettings().setSupportMultipleWindows(true);
+        webView.getSettings().setJavaScriptEnabled(true);
         //새창 띄우기 허용 여부
-        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webView.getSettings().setSupportMultipleWindows(true);
         //자바스크립트 새 창 띄우기 허용 여부
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.loadUrl(url);
-        Log.e("⚠️", url);
 //        webView.loadUrl("javascript:closeWin()");
 
         WebViewClientClass webViewClient = new WebViewClientClass();
@@ -100,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
             webViewPopup = new WebView(MainActivity.this);
-            Log.e("hi️", "hi~");
 
             webViewPopup.getSettings().setJavaScriptEnabled(true);
             webViewPopup.setWebChromeClient(new WebChromeClient() {
@@ -108,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onCloseWindow(WebView window) {
                     super.onCloseWindow(window);
-                    Log.e("hi", "hi~2");
                     window.setVisibility(View.GONE);
                     //window.destroy();
                 }
