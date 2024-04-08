@@ -10,7 +10,6 @@ class MainRepository {
     suspend fun requestMockData1(): Flow<Result<List<Data>>> {
         return flow {
             val data = service.mockData1()
-            Log.e("youngin", "$data")
             emit(Result.success(data))
         }.retryWhen { cause, attempt ->
             return@retryWhen attempt < 2 && cause is java.lang.Exception
